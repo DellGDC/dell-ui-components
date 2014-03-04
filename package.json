@@ -520,7 +520,10 @@
       },
       "requirejs-text": {
         "file": "text.js",
-        "deps": [],
+        "deps": [{
+          "framework": "requirejs-2.1.11",
+          "module": "requirejs"
+        }],
         "type": "js",
         "depsOptions": []
       }
@@ -536,11 +539,76 @@
         "file": "r.js",
         "deps": [
           {
-            "framework": "jquery-1.10.2",
-            "module": "jquery"
+            "framework": "requirejs-2.1.11",
+            "module": "requirejs"
           }
         ],
         "type": "js",
+        "depsOptions": []
+      }
+    },
+    "requirejs-2.1.11": {
+      "copyFolder": [],
+      "site": "http://requirejs.org/",
+      "gitUrl": {
+        "url": "http://github.com/jrburke/requirejs",
+        "version": "2.1.11"
+      },
+      "requirejs": {
+        "file": "require.js",
+        "deps": [],
+        "type": "js",
+        "depsOptions": []
+      }
+    },
+    "requirejs-domready-2.0.1": {
+      "copyFolder": [],
+      "site": "http://requirejs.org/",
+      "gitUrl": {
+        "url": "https://github.com/requirejs/domReady.git",
+        "version": "2.1.11"
+      },
+      "requirejs-domready": {
+        "file": "require.js",
+        "deps": [{
+          "framework": "requirejs-2.1.11",
+          "module": "requirejs"
+        }],
+        "type": "js",
+        "depsOptions": []
+      }
+    },
+    "requirejs-i18n-2.0.4": {
+      "copyFolder": [],
+      "site": "http://requirejs.org/",
+      "gitUrl": {
+        "url": "http://github.com/requirejs/i18n",
+        "version": "2.0.4"
+      },
+      "requirejs-i18n": {
+        "file": "i18n.js",
+        "deps": [{
+          "framework": "requirejs-2.1.11",
+          "module": "requirejs"
+        }],
+        "type": "js",
+        "depsOptions": []
+      }
+    },
+    "require-css-0.1.2": {
+      "copyFolder": [],
+      "site": "http://requirejs.org/",
+      "gitUrl": {
+        "url": "http://github.com/requirejs/i18n",
+        "version": "2.0.4"
+      },
+      "require-css": {
+        "file": "css.min.js",
+        "deps": [{
+          "framework": "requirejs-2.1.11",
+          "module": "requirejs"
+        }],
+        "type": "css",
         "depsOptions": []
       }
     }
