@@ -1,682 +1,755 @@
 {
   "meta": {
     "type": "library",
-    "name": "Dell Design Library"
+    "name": "Dell Design Library",
+    "id":"dellDesignLibary"
   },
-
   "frameworks": {
     "dell": {},
     "angular-1.2.14": {
-      "gitUrl": {
-        "url": "https://github.com/angular/angular.js.git",
-        "version": "v1.2.14"
+      "meta":{
+        "gitUrl": {
+          "url": "https://github.com/angular/angular.js.git",
+          "version": "v1.2.14"
+        },
+        "site": "http://angularjs.org/",
+        "name":"Angular JS"
       },
-      "angular-animate": {
-        "file": "angular-animate.min.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular-cookies": {
-        "file": "angular-cookies.min.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular-csp": {
-        "file": "angular-csp.css",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "css"
-      },
-      "angular-loader": {
-        "file": "angular-loader.min.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular-mocks": {
-        "file": "angular-mocks.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular-resource": {
-        "file": "angular-resource.min.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular-route": {
-        "file": "angular-route.min.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular-sanitize": {
-        "file": "angular-sanitize.min.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular-scenario": {
-        "file": "angular-scenario.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular-touch": {
-        "file": "angular-touch.min.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js"
-      },
-      "angular": {
-        "file": "angular.min.js",
-        "deps": [],
-        "type": "js"
-      },
-      "site": "http://angularjs.org/"
+      "modules" :{
+        "angular-animate": {
+          "file": "angular-animate.min.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular-cookies": {
+          "file": "angular-cookies.min.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular-csp": {
+          "file": "angular-csp.css",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "css"
+        },
+        "angular-loader": {
+          "file": "angular-loader.min.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular-mocks": {
+          "file": "angular-mocks.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular-resource": {
+          "file": "angular-resource.min.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular-route": {
+          "file": "angular-route.min.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular-sanitize": {
+          "file": "angular-sanitize.min.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular-scenario": {
+          "file": "angular-scenario.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular-touch": {
+          "file": "angular-touch.min.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js"
+        },
+        "angular": {
+          "file": "angular.min.js",
+          "deps": [],
+          "type": "js"
+        }
+      }
     },
     "bootstrap-2.3.2": {
-      "copyFolder": [
-        "fonts"
-      ],
-      "gitUrl": {
-        "url": "https://github.com/twbs/bootstrap.git",
-        "version": "v2.3.2"
-      },
-      "bootstrap-responsive": {
-        "file": "css/bootstrap-responsive.min.css",
-        "deps": [
-          {
-            "framework": "bootstrap-2.3.2",
-            "module": "bootstrapcss"
-          }
+      "meta":{
+        "gitUrl": {
+          "url": "https://github.com/twbs/bootstrap.git",
+          "version": "v2.3.2"
+        },
+        "copyFolder": [
+          "fonts"
         ],
-        "type": "css"
+        "site": "http://getbootstrap.com/",
+        "name":"Bootstrap 2.3.2"
       },
-      "bootstrapcss": {
-        "file": "css/bootstrap.min.css",
-        "deps": [],
-        "type": "css"
-      },
-      "bootstrapjs": {
-        "file": "js/bootstrap.min.js",
-        "deps": [
-          {
-            "framework": "jquery-1.11.0",
-            "module": "jquery"
-          }
-        ],
-        "type": "js"
-      },
-      "site": "http://getbootstrap.com/"
+      "modules" :{
+        "bootstrap-responsive": {
+          "file": "css/bootstrap-responsive.min.css",
+          "deps": [
+            {
+              "framework": "bootstrap-2.3.2",
+              "module": "bootstrapcss"
+            }
+          ],
+          "type": "css"
+        },
+        "bootstrapcss": {
+          "file": "css/bootstrap.min.css",
+          "deps": [],
+          "type": "css"
+        },
+        "bootstrapjs": {
+          "file": "js/bootstrap.min.js",
+          "deps": [
+            {
+              "framework": "jquery-1.11.0",
+              "module": "jquery"
+            }
+          ],
+          "type": "js"
+        }
+      }
     },
     "bootstrap-3.1.1": {
-      "copyFolders": [
-        "fonts"
-      ],
-      "gitUrl": {
-        "url": "https://github.com/twbs/bootstrap.git",
-        "version": "v3.1.1"
-      },
-      "bootstrap-theme": {
-        "file": "css/bootstrap-theme.min.css",
-        "deps": [
-          {
-            "framework": "bootstrap-3.1.1",
-            "module": "bootstrapcss"
-          }
+      "meta":{
+        "copyFolders": [
+          "fonts"
         ],
-        "type": "css"
+        "gitUrl": {
+          "url": "https://github.com/twbs/bootstrap.git",
+          "version": "v3.1.1"
+        },
+        "site": "http://getbootstrap.com/",
+        "name":"Bootstrap 3.1.1"
       },
-      "bootstrapcss": {
-        "file": "css/bootstrap.min.css",
-        "deps": [],
-        "type": "css"
-      },
-      "bootstrapjs": {
-        "file": "js/bootstrap.min.js",
-        "deps": [
-          {
-            "framework": "jquery-1.10.2",
-            "module": "jquery"
-          }
-        ],
-        "type": "js"
-      },
-      "site": "http://getbootstrap.com/"
+      "modules" :{
+        "bootstrap-theme": {
+          "file": "css/bootstrap-theme.min.css",
+          "deps": [
+            {
+              "framework": "bootstrap-3.1.1",
+              "module": "bootstrapcss"
+            }
+          ],
+          "type": "css"
+        },
+        "bootstrapcss": {
+          "file": "css/bootstrap.min.css",
+          "deps": [],
+          "type": "css"
+        },
+        "bootstrapjs": {
+          "file": "js/bootstrap.min.js",
+          "deps": [
+            {
+              "framework": "jquery-1.10.2",
+              "module": "jquery"
+            }
+          ],
+          "type": "js"
+        }
+      }
     },
     "greensock-1.11.5": {
-      "copyFolder": [],
-      "site": "https://www.greensock.com/",
-      "gitUrl": {
-        "url": "https://github.com/greensock/GreenSock-JS",
-        "version": "1.11.5"
+      "meta":{
+        "copyFolder": [],
+        "name":"Greensock JS",
+        "site": "https://www.greensock.com/",
+        "gitUrl": {
+          "url": "https://github.com/greensock/GreenSock-JS",
+          "version": "1.11.5"
+        }
       },
-      "EasePack": {
-        "file": "easing/EasePack.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "AttrPlugin": {
-        "file": "plugins/AttrPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "BezierPlugin": {
-        "file": "plugins/BezierPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "ColorPropsPlugin": {
-        "file": "plugins/ColorPropsPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "CSSPlugin": {
-        "file": "plugins/CSSPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "CSSRulePlugin": {
-        "file": "plugins/CSSRulePlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "DirectionalRotationPlugin": {
-        "file": "plugins/DirectionalRotationPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "KineticPlugin": {
-        "file": "plugins/KineticPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "RaphaelPlugin": {
-        "file": "plugins/RaphaelPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "RoundPropsPlugin": {
-        "file": "plugins/RoundPropsPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "ScrollToPlugin": {
-        "file": "plugins/ScrollToPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "TextPlugin": {
-        "file": "plugins/TextPlugin.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": [
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TimelineMax"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenLite"
-          },
-          {
-            "framework": "greensock-1.11.5",
-            "module": "TweenMax"
-          }
-        ]
-      },
-      "TimelineLite": {
-        "file": "TimelineLite.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
-      },
-      "TimelineMax": {
-        "file": "TimelineMax.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
-      },
-      "TweenLite": {
-        "file": "TweenLite.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
-      },
-      "TweenMax": {
-        "file": "TweenMax.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
-      },
-      "Draggable": {
-        "file": "utils/Draggable.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
-      },
-      "jquery.gsap": {
-        "file": "jquery.gsap.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
+      "modules" :{
+        "EasePack": {
+          "file": "easing/EasePack.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "AttrPlugin": {
+          "file": "plugins/AttrPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "BezierPlugin": {
+          "file": "plugins/BezierPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "ColorPropsPlugin": {
+          "file": "plugins/ColorPropsPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "CSSPlugin": {
+          "file": "plugins/CSSPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "CSSRulePlugin": {
+          "file": "plugins/CSSRulePlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "DirectionalRotationPlugin": {
+          "file": "plugins/DirectionalRotationPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "KineticPlugin": {
+          "file": "plugins/KineticPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "RaphaelPlugin": {
+          "file": "plugins/RaphaelPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "RoundPropsPlugin": {
+          "file": "plugins/RoundPropsPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "ScrollToPlugin": {
+          "file": "plugins/ScrollToPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "TextPlugin": {
+          "file": "plugins/TextPlugin.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": [
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TimelineMax"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenLite"
+            },
+            {
+              "framework": "greensock-1.11.5",
+              "module": "TweenMax"
+            }
+          ]
+        },
+        "TimelineLite": {
+          "file": "TimelineLite.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        },
+        "TimelineMax": {
+          "file": "TimelineMax.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        },
+        "TweenLite": {
+          "file": "TweenLite.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        },
+        "TweenMax": {
+          "file": "TweenMax.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        },
+        "Draggable": {
+          "file": "utils/Draggable.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        },
+        "jquery.gsap": {
+          "file": "jquery.gsap.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        }
       }
     },
     "jquery-1.11.0": {
-      "copyFolder": [],
-      "site": "http://jquery.com/",
-      "gitUrl": {
-        "url": "https://github.com/jquery/jquery.git",
-        "version": "1.11.0"
+      "meta":{
+        "name":"JQuery",
+        "copyFolder": [],
+        "site": "http://jquery.com/",
+        "gitUrl": {
+          "url": "https://github.com/jquery/jquery.git",
+          "version": "1.11.0"
+        }
       },
-      "jquery": {
-        "file": "jquery.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
+      "modules" :{
+        "jquery": {
+          "file": "jquery.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        }
       }
     },
     "jquery-2.1.0": {
-      "copyFolder": [],
-      "site": "http://jquery.com/",
-      "gitUrl": {
-        "url": "https://github.com/jquery/jquery.git",
-        "version": "2.1.0"
+      "meta":{
+        "name":"JQuery",
+        "copyFolder": [],
+        "site": "http://jquery.com/",
+        "gitUrl": {
+          "url": "https://github.com/jquery/jquery.git",
+          "version": "2.1.0"
+        }
       },
-      "jquery": {
-        "file": "jquery.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
+      "modules" :{
+        "jquery": {
+          "file": "jquery.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        }
       }
     },
     "d3-3.4.3": {
-      "copyFolder": [],
-      "site": "http://d3js.org/",
-      "gitUrl": {
-        "url": "https://github.com/mbostock/d3.git",
-        "version": "3.4.3"
+      "meta":{
+        "name":"Data Driven Documents (D3)",
+        "copyFolder": [],
+        "site": "http://d3js.org/",
+        "gitUrl": {
+          "url": "https://github.com/mbostock/d3.git",
+          "version": "3.4.3"
+        }
       },
-      "d3": {
-        "file": "d3.min.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
-      }
-    },
-    "requirejs-text-2.0.10": {
-      "copyFolder": [],
-      "site": "http://requirejs.org/",
-      "gitUrl": {
-        "url": "http://github.com/requirejs/text",
-        "version": "2.0.10"
-      },
-      "requirejs-text": {
-        "file": "text.js",
-        "deps": [
-          {
-            "framework": "requirejs-2.1.11",
-            "module": "requirejs"
-          }
-        ],
-        "type": "js",
-        "depsOptions": []
-      }
-    },
-    "requirejs-optimizer-2.1.11": {
-      "copyFolder": [],
-      "site": "http://requirejs.org/",
-      "gitUrl": {
-        "url": "http://github.com/jrburke/requirejs",
-        "version": "2.1.11"
-      },
-      "requirejs-optimizer": {
-        "file": "r.js",
-        "deps": [
-          {
-            "framework": "requirejs-2.1.11",
-            "module": "requirejs"
-          }
-        ],
-        "type": "js",
-        "depsOptions": []
+      "modules" :{
+        "d3": {
+          "file": "d3.min.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        }
       }
     },
     "requirejs-2.1.11": {
-      "copyFolder": [],
-      "site": "http://requirejs.org/",
-      "gitUrl": {
-        "url": "http://github.com/jrburke/requirejs",
-        "version": "2.1.11"
+      "meta":{
+        "name":"Require JS",
+        "copyFolder": [],
+        "site": "http://requirejs.org/",
+        "gitUrl": {
+          "url": "http://github.com/jrburke/requirejs",
+          "version": "2.1.11"
+        }
       },
-      "requirejs": {
-        "file": "require.js",
-        "deps": [],
-        "type": "js",
-        "depsOptions": []
+      "modules" :{
+        "requirejs": {
+          "file": "require.js",
+          "deps": [],
+          "type": "js",
+          "depsOptions": []
+        }
       }
+
     },
     "requirejs-domready-2.0.1": {
-      "copyFolder": [],
-      "site": "http://requirejs.org/",
-      "gitUrl": {
-        "url": "https://github.com/requirejs/domReady.git",
-        "version": "2.1.11"
+      "meta":{
+        "name":"Require JS DomReady!",
+        "copyFolder": [],
+        "site": "http://requirejs.org/",
+        "gitUrl": {
+          "url": "https://github.com/requirejs/domReady.git",
+          "version": "2.1.11"
+        }
       },
-      "requirejs-domready": {
-        "file": "require.js",
-        "deps": [
-          {
-            "framework": "requirejs-2.1.11",
-            "module": "requirejs"
-          }
-        ],
-        "type": "js",
-        "depsOptions": []
+      "modules" :{
+        "requirejs-domready": {
+          "file": "require.js",
+          "deps": [
+            {
+              "framework": "requirejs-2.1.11",
+              "module": "requirejs"
+            }
+          ],
+          "type": "js",
+          "depsOptions": []
+        }
       }
     },
-    "requirejs-i18n-2.0.4": {
-      "copyFolder": [],
-      "site": "http://requirejs.org/",
-      "gitUrl": {
-        "url": "http://github.com/requirejs/i18n",
-        "version": "2.0.4"
+    "requirejs-optimizer-2.1.11": {
+      "meta":{
+        "name":"Require JS Optimizer",
+        "copyFolder": [],
+        "site": "http://requirejs.org/",
+        "gitUrl": {
+          "url": "http://github.com/jrburke/requirejs",
+          "version": "2.1.11"
+        }
       },
-      "requirejs-i18n": {
-        "file": "i18n.js",
-        "deps": [
-          {
-            "framework": "requirejs-2.1.11",
-            "module": "requirejs"
-          }
-        ],
-        "type": "js",
-        "depsOptions": []
+      "modules" :{
+        "requirejs-optimizer": {
+          "file": "r.js",
+          "deps": [
+            {
+              "framework": "requirejs-2.1.11",
+              "module": "requirejs"
+            }
+          ],
+          "type": "js",
+          "depsOptions": []
+        }
       }
     },
     "require-css-0.1.2": {
-      "copyFolder": [],
-      "site": "http://requirejs.org/",
-      "gitUrl": {
-        "url": "http://github.com/requirejs/i18n",
-        "version": "2.0.4"
+      "meta":{
+        "name":"Require CSS Plugin",
+        "copyFolder": [],
+        "site": "http://requirejs.org/",
+        "gitUrl": {
+          "url": "http://github.com/requirejs/i18n",
+          "version": "2.0.4"
+        }
       },
-      "require-css": {
-        "file": "css.min.js",
-        "deps": [
-          {
-            "framework": "requirejs-2.1.11",
-            "module": "requirejs"
-          }
-        ],
-        "type": "css",
-        "depsOptions": []
+      "modules" :{
+        "require-css": {
+          "file": "css.min.js",
+          "deps": [
+            {
+              "framework": "requirejs-2.1.11",
+              "module": "requirejs"
+            }
+          ],
+          "type": "css",
+          "depsOptions": []
+        }
+      }
+    },
+    "requirejs-text-2.0.10": {
+      "meta":{
+        "name":"Require JS",
+        "copyFolder": [],
+        "site": "http://requirejs.org/",
+        "gitUrl": {
+          "url": "http://github.com/requirejs/text",
+          "version": "2.0.10"
+        }
+      },
+      "modules" :{
+        "requirejs-text": {
+          "file": "text.js",
+          "deps": [
+            {
+              "framework": "requirejs-2.1.11",
+              "module": "requirejs"
+            }
+          ],
+          "type": "js",
+          "depsOptions": []
+        }
+      }
+    },
+    "requirejs-i18n-2.0.4": {
+      "meta":{
+        "name":"Require JS i18n",
+        "copyFolder": [],
+        "site": "http://requirejs.org/",
+        "gitUrl": {
+          "url": "http://github.com/requirejs/i18n",
+          "version": "2.0.4"
+        }
+      },
+      "modules" :{
+        "requirejs-i18n": {
+          "file": "i18n.js",
+          "deps": [
+            {
+              "framework": "requirejs-2.1.11",
+              "module": "requirejs"
+            }
+          ],
+          "type": "js",
+          "depsOptions": []
+        }
       }
     },
     "uirouter-0.2.8": {
-      "copyFolder": [],
-      "site": "http://angular-ui.github.io/ui-router/",
-      "gitUrl": {
-        "url": "https://github.com/angular-ui/ui-router.git",
-        "version": "0.2.8"
+      "meta":{
+        "name":"UI Router",
+        "copyFolder": [],
+        "site": "http://angular-ui.github.io/ui-router/",
+        "gitUrl": {
+          "url": "https://github.com/angular-ui/ui-router.git",
+          "version": "0.2.8"
+        }
       },
-      "ui-router": {
-        "file": "angular-ui-router.min.js",
-        "deps": [
-          {
-            "framework": "angular-1.2.14",
-            "module": "angular"
-          }
-        ],
-        "type": "js",
-        "depsOptions": []
+      "modules" :{
+        "ui-router": {
+          "file": "angular-ui-router.min.js",
+          "deps": [
+            {
+              "framework": "angular-1.2.14",
+              "module": "angular"
+            }
+          ],
+          "type": "js",
+          "depsOptions": []
+        }
       }
+
+
     }
   }
 }
