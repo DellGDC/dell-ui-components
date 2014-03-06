@@ -1,0 +1,390 @@
+
+//
+// Dell Magnum 308 Custom Variables
+// --------------------------------------------------
+//
+// Global values
+// --------------------------------------------------
+
+
+// Grays
+// -------------------------
+@dellGrayDark:              #444;
+@dellGray:           		#aaa;
+@dellGrayStroke:            #ccc;
+@dellGrayMedium:            #737373;
+@dellGrayLight:             #eee;
+@dellGrayVeryLight:         #f9f9f9;
+
+
+// Accent colors
+// -------------------------
+@dellBlue:                  #007db8;
+@dellGreen:                 #7ab800;
+@dellRed:                   #dc5034;
+@dellRedDark:               #ce1126;
+@dellYellow:                #f2af00;
+@dellOrange:                #ff7700;
+@dellPurple:                #6e2585;
+@dellBerry:					#b7295a;
+@dellTeal:                  #71c6c1;
+@dellNavy:					#003758;
+@dellAlertYellow: 			#FFFFC9;
+@dellHighlightBlue: 		#CCE7F3;
+@alertBackground:			@dellAlertYellow;
+
+
+// Alienware related colors
+// -------------------------
+@alienBackground:              #010101;
+@alienGreen:				   #00f000;
+@alienOrange: 				   #f05000;
+@alienTeal:					   #25E9EB;
+@alienGray:					   #c5c0b4;
+@alienRed:					   #f00000;
+@alienGrayDark: 			   #88847b;
+@alienPrimary:  			   rgb(30, 187, 180);
+@alienPrimaryBckg:  		   rgb(38, 97, 101);
+@alienBtn:  			       #b2ada2; 
+@alienBtnHighlight:  		   #88847b;
+@alienBtnDark:  			   #322D27; 
+@alienBtnDarkHighlight:  	   #14120e;
+@alienTableStripe:			   #404040;
+@alienGrayDarker:			   #404040;
+
+
+
+//TODO need to add color variables used today for backward compatability
+
+// Custom Aside Colors
+// -------------------------
+@asideNavBackground: 		@dellGrayDark;
+@asideNavBackgroundActive: 	@dellBlue;
+
+
+// Typography
+// -------------------------
+
+@themeSansFontFamily:        'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei','微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+@themeSerifFontFamily:       'museo-for-dell-100', 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+
+@themeSerifFontFamilyBold:       'museo-for-dell-300', @themeSansFontFamily;
+
+@themeMonoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
+
+@desktopMaxWidth:			1140px;
+@desktopMinWidth:			979px;
+@tabletMaxWidth:			980px;
+@mobileMaxWidth:			767px;
+@tabletMinWidth:			768px;
+
+@defaultStroke:		2px;
+@thinStroke:		1px;
+
+
+
+
+//
+// Bootstrap 2.3.2 Variables
+// --------------------------------------------------
+
+
+// Global values
+// --------------------------------------------------
+
+
+// Grays
+// -------------------------
+@black:                 #000;
+@grayDarker:            @dellGrayDark; // dell-308 override
+@grayDark:              @dellGrayMedium;  // dell-308 override
+@gray:                  @dellGray; // dell-308 override
+@grayLight:             @dellGrayLight; // dell-308 override
+@grayLighter:           @dellGrayVeryLight; // dell-308 override
+@white:                 #fff;
+
+
+// Accent colors
+// -------------------------
+@blue:                  @dellBlue; // dell-308 override
+@blueDark:              @dellNavy; // dell-308 override
+@green:                 @dellGreen; // dell-308 override
+@red:                   @dellRed; // dell-308 override
+@yellow:                @dellYellow; // dell-308 override
+@orange:                @dellOrange; // dell-308 override
+@pink:                  pink; 
+@purple:                @dellPurple; // dell-308 override
+
+
+// Scaffolding
+// -------------------------
+@bodyBackground:        @white;
+@textColor:             @grayDarker; // dell-308 override
+
+
+// Links
+// -------------------------
+@linkColor:             @blue; // dell-308 override
+@linkColorHover:        @blue; // dell-308 override
+
+
+// Typography
+// -------------------------
+@sansFontFamily:        @themeSansFontFamily; // dell-308 override
+@serifFontFamily:       @themeSerifFontFamily; // dell-308 override
+@monoFontFamily:        @themeMonoFontFamily; // dell-308 override
+
+@baseFontSize:          14px;
+@baseFontFamily:        @sansFontFamily;
+@baseLineHeight:        20px;
+@altFontFamily:         @serifFontFamily;
+
+@headingsFontFamily:    @themeSerifFontFamilyBold; // dell-308 override
+@headingsFontWeight:    normal;    // instead of browser default, bold
+@headingsColor:         inherit; // empty to use BS default, @textColor
+
+
+// Component sizing
+// -------------------------
+// Based on 14px font-size and 20px line-height
+
+@fontSizeLarge:         @baseFontSize * 1.25; // ~18px
+@fontSizeSmall:         @baseFontSize * 0.85; // ~12px
+@fontSizeMini:          @baseFontSize * 0.75; // ~11px
+
+@paddingLarge:          11px 19px; // 44px
+@paddingSmall:          2px 10px;  // 26px
+@paddingMini:           0 6px;   // 22px
+
+@baseBorderRadius:      5px;
+@borderRadiusLarge:     10px;
+@borderRadiusSmall:     2px;
+
+
+// Tables
+// -------------------------
+@tableBackground:                   transparent; // overall background-color
+@tableBackgroundAccent:             @grayLight; // for striping
+@tableBackgroundHover:              @dellHighlightBlue; // for hover
+@tableBorder:                       @dellGrayStroke; // table and cell border
+
+// Buttons
+// -------------------------
+@btnBackground:                     #fefefe;
+@btnBackgroundHighlight:            #edf1f3;
+//@btnBackground:                     #eee;
+//@btnBackgroundHighlight:            #f9f9f9;
+@btnBorder:                         #ddd;
+
+@btnPrimaryBackground:              #118FD6;
+@btnPrimaryBackgroundHighlight:     #0F6ECA;
+
+@btnInfoBackground:                 @blue;
+@btnInfoBackgroundHighlight:        spin(@btnPrimaryBackground, 20%);
+
+@btnSuccessBackground:              @green;
+@btnSuccessBackgroundHighlight:     #499B1E;
+
+@btnWarningBackground:              lighten(@orange, 15%);
+@btnWarningBackgroundHighlight:     @orange;
+
+@btnDangerBackground:               #ee5f5b;
+@btnDangerBackgroundHighlight:      #bd362f;
+
+@btnInverseBackground:              #444;
+@btnInverseBackgroundHighlight:     @grayDarker;
+
+
+// Forms
+// -------------------------
+@inputBackground:               @white;
+@inputBorder:                   @dellGrayStroke;
+@inputBorderRadius:             @borderRadiusSmall;
+@inputDisabledBackground:       @grayLighter;
+@formActionsBackground:         @dellGrayVeryLight;
+@inputHeight:                   @baseLineHeight * 1.7; // ~34px
+
+
+// Dropdowns
+// -------------------------
+@dropdownBackground:            @white;
+@dropdownBorder:                rgba(0,0,0,.2);
+@dropdownDividerTop:            #e5e5e5;
+@dropdownDividerBottom:         @white;
+
+@dropdownLinkColor:             @grayDark;
+@dropdownLinkColorHover:        @grayDark;
+@dropdownLinkColorActive:       @grayDark;
+
+@dropdownLinkBackgroundActive:  @dellHighlightBlue;
+@dropdownLinkBackgroundHover:   @dellHighlightBlue;
+
+
+
+// COMPONENT VARIABLES
+// --------------------------------------------------
+
+
+// Z-index master list
+// -------------------------
+// Used for a bird's eye view of components dependent on the z-axis
+// Try to avoid customizing these :)
+@zindexDropdown:          1000;
+@zindexPopover:           1010;
+@zindexTooltip:           1030;
+@zindexFixedNavbar:       1030;
+@zindexModalBackdrop:     1040;
+@zindexModal:             9000;
+
+
+// Sprite icons path
+// -------------------------
+@iconSpritePath:          "../img/glyphicons-halflings.png";
+@iconWhiteSpritePath:     "../img/glyphicons-halflings-white.png";
+
+
+// Input placeholder text color
+// -------------------------
+@placeholderText:         @grayDark; //TODO need to check if this is right
+
+
+// Hr border color
+// -------------------------
+@hrBorder:                @dellGrayStroke;
+
+
+// Horizontal forms & lists
+// -------------------------
+@horizontalComponentOffset:       180px;
+
+
+// Wells
+// -------------------------
+@wellBackground:                  @grayLight;
+
+
+// Navbar
+// -------------------------
+@navbarCollapseWidth:             979px;
+@navbarCollapseDesktopWidth:      @navbarCollapseWidth + 1;
+
+@navbarHeight:                    40px;
+@navbarBackgroundHighlight:       @white;
+@navbarBackground:                darken(@navbarBackgroundHighlight, 5%);
+@navbarBorder:                    darken(@navbarBackground, 12%);
+
+@navbarText:                      @blue;
+@navbarLinkColor:                 @blue;
+@navbarLinkColorHover:            @blue;
+@navbarLinkColorActive:           @blue;
+@navbarLinkBackgroundHover:       transparent;
+@navbarLinkBackgroundActive:      darken(@navbarBackground, 5%);
+
+@navbarBrandColor:                @navbarLinkColor;
+
+// Inverted navbar
+@navbarInverseBackground:                @blue;
+@navbarInverseBackgroundHighlight:       @blue;
+@navbarInverseBorder:                    transparent;
+
+@navbarInverseText:                      @white;
+@navbarInverseLinkColor:                 @white;
+@navbarInverseLinkColorHover:            @dellHighlightBlue;
+@navbarInverseLinkColorActive:           @dellHighlightBlue;
+@navbarInverseLinkBackgroundHover:       transparent;
+@navbarInverseLinkBackgroundActive:      @navbarInverseBackground;
+
+@navbarInverseSearchBackground:          @white;
+@navbarInverseSearchBackgroundFocus:     @white;
+@navbarInverseSearchBorder:              @navbarInverseBackground;
+@navbarInverseSearchPlaceholderColor:    @gray;
+
+@navbarInverseBrandColor:                @navbarInverseLinkColor;
+
+
+// Pagination
+// -------------------------
+@paginationBackground:                #fff;
+@paginationBorder:                    #ddd;
+@paginationActiveBackground:          #f5f5f5;
+
+
+// Hero unit
+// -------------------------
+@heroUnitBackground:              @grayLighter;
+@heroUnitHeadingColor:            inherit;
+@heroUnitLeadColor:               inherit;
+
+
+// Form states and alerts
+// -------------------------
+// TODO: These do not adhere to Dell-308 - They are not allowable so what should we do with these.
+@warningText:             #c09853;
+@warningBackground:       #fcf8e3;
+@warningBorder:           darken(spin(@warningBackground, -10), 3%);
+
+@errorText:               #b94a48;
+@errorBackground:         #f2dede;
+@errorBorder:             darken(spin(@errorBackground, -10), 3%);
+
+@successText:             #468847;
+@successBackground:       #dff0d8;
+@successBorder:           darken(spin(@successBackground, -10), 5%);
+
+@infoText:                #3a87ad;
+@infoBackground:          #d9edf7;
+@infoBorder:              darken(spin(@infoBackground, -10), 7%);
+
+
+// Tooltips and popovers
+// -------------------------
+@tooltipColor:            @white;
+@tooltipBackground:       @grayDarker;
+@tooltipArrowWidth:       5px;
+@tooltipArrowColor:       @tooltipBackground;
+
+@popoverBackground:       @white;
+@popoverArrowWidth:       10px;
+@popoverArrowColor:       @white;
+@popoverTitleBackground:  @blue;
+
+// Special enhancement for popovers
+@popoverArrowOuterWidth:  @popoverArrowWidth + 1;
+@popoverArrowOuterColor:  rgba(0,0,0,.25);
+
+
+
+// GRID
+// --------------------------------------------------
+
+
+// Default 940px grid
+// -------------------------
+@gridColumns:             12;
+@gridColumnWidth:         58.33px;
+@gridGutterWidth:         40px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+// 1200px min
+@gridColumnWidth1200:     58.33px;
+@gridGutterWidth1200:     40px;
+@gridRowWidth1200:        (@gridColumns * @gridColumnWidth1200) + (@gridGutterWidth1200 * (@gridColumns - 1));
+
+// 768px-979px
+@gridColumnWidth768:      46.75px;
+@gridGutterWidth768:      38px;
+@gridRowWidth768:         (@gridColumns * @gridColumnWidth768) + (@gridGutterWidth768 * (@gridColumns - 1));
+
+
+// Fluid grid
+// -------------------------
+@fluidGridColumnWidth:    percentage(@gridColumnWidth/@gridRowWidth);
+@fluidGridGutterWidth:    percentage(@gridGutterWidth/@gridRowWidth);
+
+// 1200px min
+@fluidGridColumnWidth1200:     percentage(@gridColumnWidth1200/@gridRowWidth1200);
+@fluidGridGutterWidth1200:     percentage(@gridGutterWidth1200/@gridRowWidth1200);
+
+// 768px-979px
+@fluidGridColumnWidth768:      percentage(@gridColumnWidth768/@gridRowWidth768);
+@fluidGridGutterWidth768:      percentage(@gridGutterWidth768/@gridRowWidth768);

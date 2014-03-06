@@ -1,0 +1,21 @@
+	<div class="da-clear ta-clear ma-clear top-offset-small" ng-controller="cssOverviewController">
+		<div class="wrapper">	
+			<div class="tabbable ">
+				<div class="da1-da3 ta1-ta3 ma-all">
+		          <ul class="nav nav-list css-overview-aside bottom-offset-small" data-offset-top="-140" ng-init="initAside()">
+		            <li ng-repeat="section in sections" ng-class="{active:section.id == section_id || (!section_id && $first) }" ng-click="scrollToTop()">
+		            	<a href="#/css-overview/{{section.id}}">{{section.label}}</a>
+		            </li>
+		          </ul>
+				</div>
+				<div class="da4-da12 ta4-ta9 ma-all" data-ng-init="prettyPrint()">
+					<div class="tab-content" style="overflow:visible">
+						<div class="tab-pane fade active in"
+							id="{{section_id}}" 
+							ng-include="activeTabContent.templateUrl">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

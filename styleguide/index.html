@@ -1,0 +1,26 @@
+<section id="project-css-theme-styleguide" class="theme-styleguide">
+	<header ng-include="'lib/sherpa/design_library/styleguide/partials/shared/masthead.html'"></header>
+	<div class="container">
+		<div class="row top-offset-small">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+	          <div class="list-group">
+	            <a ui-sref="{{section.name}}" class="list-group-item" ng-repeat="section in sections" ui-sref-active="active">{{section.label}}</a>
+	          </div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+				<div class="tab-content">
+					<div class="tab-pane fade active in"
+						id="{{$state.current.id}}" 
+						ui-view="tab-pane" autoscroll='$anchorScroll()'>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer ng-include="'lib/sherpa/design_library/styleguide/partials//shared/footer.html'"></footer>
+</section>
+
+
+	<div class="container">
+
+	</div>

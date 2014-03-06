@@ -1,0 +1,195 @@
+<div class="da-clear ta-clear ma-clear">
+   <div class="">
+      <h2>Pagination</h2>
+      <hr/>
+   </div>
+   <div id="pagination-example-HTML">
+      <div id="pagination-HTML-code-1">
+         <div class="pagination">
+            <ul>
+               <li class="disabled"><a href="#"><span aria-hidden="true" class="icon-ui-arrowleft"></span></a></li>
+               <li class="active"><a href="#">1</a></li>
+               <li><a href="#">2</a></li>
+               <li><a href="#">3</a></li>
+               <li class="disabled"><a href="#">...</a></li>
+               <li><a href="#">20</a></li>
+               <li><a href="#"><span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+            </ul>
+         </div>
+      </div>
+      <div  id="pagination-HTML-code-2">
+         <div class="pagination">
+            <ul>
+               <li class=""><a href="#"><span aria-hidden="true" class="icon-ui-arrowleft"></span></a></li>
+               <li><a href="#">1</a></li>
+               <li class="disabled"><a href="#">...</a></li>
+               <li class="active"><a href="#">45</a></li>
+               <li class="disabled"><a href="#">...</a></li>
+               <li><a href="#">200</a></li>
+               <li><a href="#"><span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+            </ul>
+         </div>
+      </div>
+      <h3>Centered Pagination</h3>
+      <div  id="pagination-HTML-code-3">
+         <div class="pagination pagination-centered">
+            <ul>
+               <li class="active"><a href="#">1</a></li>
+               <li><a href="#">2</a></li>
+               <li><a href="#">3</a></li>
+               <li><a href="#">4</a></li>
+               <li><a href="#">5</a></li>
+            </ul>
+         </div>
+      </div>
+      <h3 id="pagination-unnumbered">Unnumbered Pagination with zoom controls <span class="label">(not in Bootstrap)</span></h3>
+      <div id="pagination-HTML-code-4">
+         <div class="pagination pagination-centered pagination-unnumbered">
+            <ul>
+               <li class="active"><a href="#"></a></li>
+               <li><a href="#"></a></li>
+               <li><a href="#"></a></li>
+               <li><a href="#"></a></li>
+               <li><a href="#"></a></li>
+            </ul>
+            <div class="zoom-controls"><span aria-hidden="true" class="icon-small-zoomin"></span> <span aria-hidden="true" class="icon-small-zoomout"></span></div>
+         </div>
+      </div>
+   </div>
+   <div class="alert alert-info top-offset-small">
+      <a class="close"><span aria-hidden="true" class="icon-ui-closecircle"></span></a>
+      <strong>Dell 308 Style Guidelines:</strong> Maximum number of items for this style should be 5.
+   </div>
+   <p>
+      <button class="btn btn-mini collapsed" data-toggle="collapse" data-target="#pagination-HTML">
+      <span class="show-collapsed">See HTML</span><span class="hide-expanded">Hide HTML</span>
+      </button>
+   </p>
+   <div class="collapse" id="pagination-HTML">
+      <ul class="unstyled">
+         <li>
+            <button class="btn btn-mini" data-copy="2-clipboard" data-clipboard-text='<div class="pagination">
+            <ul>
+               <li class="disabled"><a href="#"><span aria-hidden="true" class="icon-ui-arrowleft"></span></a></li>
+               <li class="active"><a href="#">1</a></li>
+               <li><a href="#">2</a></li>
+               <li><a href="#">3</a></li>
+               <li class="disabled"><a href="#">...</a></li>
+               <li><a href="#">20</a></li>
+               <li><a href="#"><span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+            </ul>
+         </div>'>
+            Copy HTML
+            </button>
+            <button class="btn btn-mini fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).parent().attr('id')}">Fiddle</button>
+            <pre class="prettyprint linenums">
+&lt;div class="pagination">
+   &lt;ul>
+      &lt;li class="disabled">&lt;a href="#">&lt;span aria-hidden="true" class="icon-ui-arrowleft">&lt;/span>&lt;/a>&lt;/li>
+      &lt;li class="active">&lt;a href="#">1&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">2&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">3&lt;/a>&lt;/li>
+      &lt;li class="disabled">&lt;a href="#">...&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">20&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">&lt;span aria-hidden="true" class="icon-ui-arrowright">&lt;/span>&lt;/a>&lt;/li>
+   &lt;/ul>
+&lt;/div>
+            </pre>
+         </li>
+
+         <li>
+            <button class="btn btn-mini" data-copy="2-clipboard" data-clipboard-text='<div class="pagination">
+            <ul>
+               <li class=""><a href="#"><span aria-hidden="true" class="icon-ui-arrowleft"></span></a></li>
+               <li><a href="#">1</a></li>
+               <li class="disabled"><a href="#">...</a></li>
+               <li class="active"><a href="#">45</a></li>
+               <li class="disabled"><a href="#">...</a></li>
+               <li><a href="#">200</a></li>
+               <li><a href="#"><span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+            </ul>
+         </div>'>
+            Copy HTML
+            </button>
+            <button class="btn btn-mini fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).parent().attr('id')}">Fiddle</button>
+            <pre class="prettyprint linenums">
+&lt;div class="pagination">
+   &lt;ul>
+      &lt;li class="">&lt;a href="#">&lt;span aria-hidden="true" class="icon-ui-arrowleft">&lt;/span>&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">1&lt;/a>&lt;/li>
+      &lt;li class="disabled">&lt;a href="#">...&lt;/a>&lt;/li>
+      &lt;li class="active">&lt;a href="#">45&lt;/a>&lt;/li>
+      &lt;li class="disabled">&lt;a href="#">...&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">200&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">&lt;span aria-hidden="true" class="icon-ui-arrowright">&lt;/span>&lt;/a>&lt;/li>
+   &lt;/ul>
+&lt;/div>
+            </pre>
+         </li>
+
+
+                  <li>
+            <button class="btn btn-mini" data-copy="2-clipboard" data-clipboard-text='<div class="pagination pagination-centered">
+            <ul>
+               <li class="active"><a href="#">1</a></li>
+               <li><a href="#">2</a></li>
+               <li><a href="#">3</a></li>
+               <li><a href="#">4</a></li>
+               <li><a href="#">5</a></li>
+            </ul>
+         </div>'>
+            Copy HTML
+            </button>
+            <button class="btn btn-mini fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).parent().attr('id')}">Fiddle</button>
+            <pre class="prettyprint linenums">
+&lt;div class="pagination pagination-centered">
+   &lt;ul>
+      &lt;li class="active">&lt;a href="#">1&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">2&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">3&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">4&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">5&lt;/a>&lt;/li>
+   &lt;/ul>
+&lt;/div>
+            </pre>
+         </li>
+
+
+
+                  <li>
+            <button class="btn btn-mini" data-copy="2-clipboard" data-clipboard-text='<div class="pagination pagination-centered pagination-unnumbered">
+            <ul>
+               <li class="active"><a href="#"></a></li>
+               <li><a href="#"></a></li>
+               <li><a href="#"></a></li>
+               <li><a href="#"></a></li>
+               <li><a href="#"></a></li>
+            </ul>
+            <div class="zoom-controls"><span aria-hidden="true" class="icon-small-zoomin"></span> <span aria-hidden="true" class="icon-small-zoomout"></span></div>
+         </div>'>
+            Copy HTML
+            </button>
+            <button class="btn btn-mini fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).parent().attr('id')}">Fiddle</button>
+            <pre class="prettyprint linenums">
+&lt;div class="pagination pagination-centered pagination-unnumbered">
+   &lt;ul>
+      &lt;li class="active">&lt;a href="#">&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">&lt;/a>&lt;/li>
+      &lt;li>&lt;a href="#">&lt;/a>&lt;/li>
+   &lt;/ul>
+   &lt;div class="zoom-controls">&lt;span aria-hidden="true" class="icon-small-zoomin">&lt;/span> &lt;span aria-hidden="true" class="icon-small-zoomout">&lt;/span>&lt;/div>
+&lt;/div>
+            </pre>
+         </li>
+
+
+         
+
+
+      </ul>
+   </div>
+   <hr/>
+</div>
+            

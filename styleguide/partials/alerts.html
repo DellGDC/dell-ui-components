@@ -1,0 +1,61 @@
+    
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h2>Alerts</h2>
+        </div> 
+      </div>
+
+      <div id="alerts-example-HTML">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="alerts-HTML-code-1">
+          <div class="alert alert-block">
+            <a class="close" data-dismiss="alert"><i aria-hidden="true" class="icon-ui-closecircle"></i></a>
+            <h4 class="alert-heading">Alert block with title</h4>
+            <p>Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="alerts-HTML-code-2">
+          <div class="alert alert-error">
+            <a class="close" data-dismiss="alert"><i aria-hidden="true" class="icon-ui-closecircle"></i></a>
+            <strong>Error:</strong> Change a few things up and try submitting again.
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="alerts-HTML-code-3">
+          <div class="alert alert-success">
+            <a class="close" data-dismiss="alert"><i aria-hidden="true" class="icon-ui-closecircle"></i></a>
+            <strong>Success:</strong> You successfully read this important alert message. Please note in the html of this alert an icon was inserted but is not displayed. This is because Dell 308 css overrides any icon here.
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="alerts-HTML-code-4">
+          <div class="alert alert-info">
+            <a class="close" data-dismiss="alert"><i aria-hidden="true" class="icon-ui-closecircle"></i></a>
+            <strong>Information:</strong> This alert needs your attention, but it's not super important.
+          </div>
+        </div>
+      </div>
+
+       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="alert alert-info">
+            <a class="close" data-dismiss="alert"><i aria-hidden="true" class="icon-ui-closecircle"></i></a>
+            <h4 class="alert-heading">Dell 308 Style Guidelines:</h4>
+            <p>Any icon placed inside the alerts block will be automatically hidden.</p>
+          </div>
+
+          <button class="btn btn-mini collapsed" data-toggle="collapse" data-target="#alerts-HTML">
+            <span class="show-collapsed">See HTML</span><span class="hide-expanded">Hide HTML</span>
+          </button>
+          <p>&nbsp;</p>
+
+          <div class="collapse" id="alerts-HTML">
+            <ul class="unstyled">
+              <li ng-repeat="alert in alerts" >
+                <button class="btn btn-mini" data-copy="2-clipboard" data-clipboard-text="{{alert.html}}">
+                  Copy HTML
+                </button>
+                <button class="btn btn-mini fiddle-button" data-target="{{alert.id}}">Fiddle</button>
+                <pre class="prettyprint linenums">{{alert.html_sample}}</pre>
+              </li>
+            </ul>
+          </div>
+        </div>
+   <hr/>

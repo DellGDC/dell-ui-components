@@ -1,0 +1,20 @@
+<!-- Right rail + secondary content Layout http://www.delldesignlibrary.com/blank-templates/right-rail-secondary-content.html -->
+<header class="masthead-container" id="masthead">
+    <div class="container">
+        <div ui-view="masthead"></div>
+    </div>
+</header>
+<div class="row">
+	<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+		<section ui-view="main-content-area" id="main-content-area"></section>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+		<section ui-view="right-rail-area" id="right-rail-area"></section>
+	</div>
+</div>
+<section ui-view="secondary-content-area" id="secondary-content-area"></section>
+<footer class="footer-container" id="footer">
+    <div class="container">
+        <div ui-view="footer"></div>
+    </div>
+</footer>

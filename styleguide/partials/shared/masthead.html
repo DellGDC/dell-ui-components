@@ -1,0 +1,24 @@
+	<a id="top"></a>
+	<div ng-controller="docsMastheadController" class="styleguide-masthead">
+		<nav class="navbar navbar-default nav-utility" role="navigation">
+			<div class="container">
+				<div class="utility-nav">
+					<div class="pull-left">
+						Bootstrap 3.1.1 Theme: {{projectConfigs.theme}}
+					</div>
+      				<div class="pull-right">
+						Sherpa v: <span app-version/>
+      					<i aria-hidden="true" class="icon-small-alertinfo" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="This is not the latest Sherpa prototyping version because this is still based BS2.3.2"></i>
+      				</div>
+				</div>
+			</div>
+		</nav>
+		<nav class="navbar navbar-inverse nav-main" role="navigation">
+			<div class="container">
+			    <a class="brand" href="#/">
+					<i aria-hidden="true" class="icon-ui-dell"></i>
+					<h2><span project-name></span> Styleguide: {{$state.current.label}}</h2>
+			    </a>
+			</div>
+		</nav>	
+	</div>
