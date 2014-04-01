@@ -1,20 +1,18 @@
-Sherpa.styleguideRoutes= [
+Sherpa.routes.styleguide= [
      {
-          "id": "styleguide",
+       "id": "styleguide",
           "url": "/styleguide",
           "name": "Styleguide",
           "label": "Overview",
           "views": {
                "@": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/index.html",
+                    "templateUrl": "lib/design-library/styleguide/index.html",
                     "controller": "styleguideController",
                },
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/overview.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/overview.html"
                }
-          },
-          "defaultRoute": true
-
+          }
      },
      {
           "id": "styleguide.alerts",
@@ -24,7 +22,7 @@ Sherpa.styleguideRoutes= [
           "label": "Alerts",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/alerts.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/alerts.html"
                }
           }          
      },
@@ -35,7 +33,7 @@ Sherpa.styleguideRoutes= [
           "label": "Breadcrumbs",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/breadcrumbs.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/breadcrumbs.html"
                }
           }
      },
@@ -46,7 +44,7 @@ Sherpa.styleguideRoutes= [
           "label": "Buttons",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/buttons.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/buttons.html"
                }
           },
           "controller": "styleguideController"
@@ -58,7 +56,7 @@ Sherpa.styleguideRoutes= [
           "label": "Collapsible Items",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/collapsible-items.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/collapsible-items.html"
                }
           },
           "controller": "styleguideController"
@@ -70,7 +68,7 @@ Sherpa.styleguideRoutes= [
           "label": "Forms",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/forms.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/forms.html"
                }
           },
           "controller": "styleguideController"
@@ -82,7 +80,7 @@ Sherpa.styleguideRoutes= [
           "label": "Icons",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/icons.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/icons.html"
                }
           },
           "controller": "styleguideController"
@@ -94,7 +92,7 @@ Sherpa.styleguideRoutes= [
           "label": "Labels and Badges",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/labels-and-badges.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/labels-and-badges.html"
                }
           },
           "controller": "styleguideController"
@@ -106,7 +104,7 @@ Sherpa.styleguideRoutes= [
           "label": "Modals",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/modals.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/modals.html"
                }
           },
           "controller": "styleguideController"
@@ -118,7 +116,7 @@ Sherpa.styleguideRoutes= [
           "label": "Navigation Bars",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/navbar.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/navbar.html"
                }
           },
           "controller": "styleguideController"
@@ -130,7 +128,7 @@ Sherpa.styleguideRoutes= [
           "label": "Pagers",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/pagers.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/pagers.html"
                }
           },
           "controller": "styleguideController"
@@ -142,7 +140,7 @@ Sherpa.styleguideRoutes= [
           "label": "Pagination",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/pagination.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/pagination.html"
                }
           },
           "controller": "styleguideController"
@@ -154,7 +152,7 @@ Sherpa.styleguideRoutes= [
           "label": "Popovers",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/popovers.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/popovers.html"
                }
           },
           "controller": "styleguideController"
@@ -166,7 +164,7 @@ Sherpa.styleguideRoutes= [
           "label": "Progress Bars",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/progress-bars.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/progress-bars.html"
                }
           },
           "controller": "styleguideController"
@@ -178,7 +176,7 @@ Sherpa.styleguideRoutes= [
           "label": "Responsive Classes",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/responsive-classes.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/responsive-classes.html"
                }
           },
           "controller": "styleguideController"
@@ -190,7 +188,7 @@ Sherpa.styleguideRoutes= [
           "label": "Tables",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/tables.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/tables.html"
                }
           },
           "controller": "styleguideController"
@@ -202,7 +200,7 @@ Sherpa.styleguideRoutes= [
           "label": "Tabs",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/tabs.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/tabs.html"
                }
           },
           "controller": "styleguideController"
@@ -214,7 +212,7 @@ Sherpa.styleguideRoutes= [
           "label": "Tooltips",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/tooltips.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/tooltips.html"
                }
           },
           "controller": "styleguideController"
@@ -226,7 +224,7 @@ Sherpa.styleguideRoutes= [
           "label": "Typography",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/typography.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/typography.html"
                }
           },
           "controller": "styleguideController"
@@ -238,7 +236,7 @@ Sherpa.styleguideRoutes= [
           "label": "Wells and Containers",
           "views": {
                "tab-pane@styleguide": {
-                    "templateUrl": "lib/sherpa/design_library/styleguide/partials/wells-and-containers.html"
+                    "templateUrl": "lib/design-library/styleguide/partials/wells-and-containers.html"
                }
           },
           "controller": "styleguideController"

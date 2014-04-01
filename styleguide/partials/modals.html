@@ -1,40 +1,27 @@
-    <div class="da-clear ta-clear ma-clear">
       <div class="">
         <h2>Modals</h2>
       </div>     
-
-      <div class="da-all ta-all ma-all">
-<div id="modal-example-HTML" class="alienware-background">
-    <div class="modal">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h3>Modal header</h3>
+      <div id="modal-example-HTML">
+          <div class="modal">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+              <h3>Modal header</h3>
+            </div>
+            <div class="modal-body">
+              <p>One fine body…</p>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn" data-dismiss="modal">Close</a>
+              <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+            </div>
+          </div>
       </div>
-      <div class="modal-body">
-        <p>One fine body…</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Close</a>
-        <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-      </div>
-    </div>
-</div>
-        <button class="btn btn-mini collapsed" global-modal="{{example_modal}}">
-          Launch Demo Modal
-        </button>
-        <button class="btn btn-mini collapsed" data-toggle="collapse" data-target="#modal-HTML">
-          <span class="show-collapsed">See HTML</span><span class="hide-expanded">Hide HTML</span>
-        </button>
-        <p>&nbsp;</p>
-
-        <div class="collapse" id="modal-HTML">
-          <button class="btn btn-mini" data-copy="2-clipboard" loadclipboardtext="#modal-example-HTML">
-            Copy HTML
-          </button>
-          <pre class="prettyprint linenums" copysample="#modal-example-HTML"></pre>
-        </div>
-        <hr/>
-
-      </div>
-      <p>&nbsp;</p>
-    </div>
+      <button class="btn btn-default" ng-click="sherpa.modal.show()">
+        Launch Demo Modal
+      </button>
+      <style>
+        #modal-example-HTML .modal {
+          display:block;
+          position:relative;
+        }
+      </style>
