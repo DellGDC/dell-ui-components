@@ -1777,7 +1777,7 @@ li.dropdown .dropdown-menu {
 
 .gray-stroke,
 .well-gray-stroke {
-    border: @default-stroke solid @gray-darker !important;
+    border: @default-stroke solid @gray !important;
     .well-colors (@white, @gray-darker, @gray-darker, @blue)
     }
 
@@ -1914,8 +1914,8 @@ li.dropdown .dropdown-menu {
     }
 
 /* Modify all stroke classes with "thin"*/
-[class$=-stroke].thin {
-    border-width: @thin-stroke;
+[class*=-stroke].thin {
+    border-width: @thin-stroke !important;
     }
 
 // Base styles
