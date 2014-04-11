@@ -12,7 +12,7 @@
           proident, sunt in culpa qui  deserunt mollit anim id est laborum.
         </p>
 
-        <button class="btn btn-mini collapsed" data-toggle="collapse" data-target="#tooltip-HTML">
+        <button class="btn btn-xs collapsed" data-toggle="collapse" data-target="#tooltip-HTML">
           <span class="show-collapsed">See HTML</span><span class="hide-expanded">Hide HTML</span>
         </button>
         <p>&nbsp;</p>
@@ -20,10 +20,10 @@
         <div class="collapse" id="tooltip-HTML">
           <ul data-bind="foreach: $('#tooltip-example-HTML a')" class="unstyled">
               <li>
-                <button class="btn btn-mini" data-copy="2-clipboard" data-bind="attr: {'data-clipboard-text':$($data)[0].outerHTML}">
+                <button class="btn btn-xs" data-copy="2-clipboard" data-bind="attr: {'data-clipboard-text':$($data)[0].outerHTML}">
                   Copy HTML
                 </button>
-                <button class="btn btn-mini fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).attr('id')}">Fiddle</button>
+                <button class="btn btn-xs fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).attr('id')}">Fiddle</button>
                 <pre class="prettyprint linenums" data-bind="text: $($data)[0].outerHTML.replace(/</g,'&lt;')"></pre>
               </li>
           </ul>

@@ -24,7 +24,7 @@
               <td id="button-sample-code-4">
                 <div class="btn-group">
                   <a class="btn btn-primary" href="#">Primary</a>
-                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"></a>
+                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><i class="caret"></i></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -36,7 +36,7 @@
               </td>
               <td id="button-sample-code-5">
                 <div class="btn-group">
-                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Primary</a>
+                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Primary <i class="caret"></i></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -48,13 +48,13 @@
               </td>
             </tr>
             <tr>
-              <td id="button-sample-code-1"><a class="btn btn-secondary" href="#">Secondary</a></td>
-              <td id="button-sample-code-2"><a class="btn btn-secondary disabled" href="#">Secondary</a></td>
-              <td id="button-sample-code-3"><a class="btn btn-secondary" href="#">Secondary <span aria-hidden="true" class="icon-small-searchright"></span></a></td>
+              <td id="button-sample-code-1"><a class="btn btn-success" href="#">Success</a></td>
+              <td id="button-sample-code-2"><a class="btn btn-success disabled" href="#">Success</a></td>
+              <td id="button-sample-code-3"><a class="btn btn-success" href="#">Success <span aria-hidden="true" class="icon-small-searchright"></span></a></td>
               <td id="button-sample-code-4">
                 <div class="btn-group">
-                  <a class="btn btn-secondary" href="#">Secondary</a>
-                  <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#"></a>
+                  <a class="btn btn-success" href="#">Success</a>
+                  <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"> <i class="caret"></i></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -66,7 +66,7 @@
               </td>
               <td id="button-sample-code-5">
                 <div class="btn-group">
-                  <a class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" href="#">Secondary</a>
+                  <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">Success <i class="caret"></i></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -78,13 +78,13 @@
               </td>
             </tr>
             <tr>
-              <td id="button-sample-code-1"><a class="btn btn-tertiary" href="#">Tertiary</a></td>
-              <td id="button-sample-code-2"><a class="btn btn-tertiary disabled" href="#">Tertiary</a></td>
-              <td id="button-sample-code-3"><a class="btn btn-tertiary" href="#">Tertiary <span aria-hidden="true" class="icon-small-searchright"></span></a></td>
+              <td id="button-sample-code-1"><a class="btn btn-default" href="#">Default</a></td>
+              <td id="button-sample-code-2"><a class="btn btn-default disabled" href="#">Default</a></td>
+              <td id="button-sample-code-3"><a class="btn btn-default" href="#">Default <span aria-hidden="true" class="icon-small-searchright"></span></a></td>
               <td id="button-sample-code-4">
                 <div class="btn-group">
-                  <a class="btn btn-tertiary" href="#">Tertiary</a>
-                  <a class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown" href="#"></a>
+                  <a class="btn btn-default" href="#">Default</a>
+                  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"> <i class="caret"></i></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -96,7 +96,7 @@
               </td>
               <td id="button-sample-code-5">
                 <div class="btn-group">
-                  <a class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown" href="#">Tertiary</a>
+                  <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">Default <i class="caret"></i></a>
                   <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -119,8 +119,8 @@
             <p>NOTE: Dell 308 button class names deviated greatly from Bootstrap. They are now normalized using standard BS class names.</p>
             <ul>
               <!-- <li><code>.btn-primary</code> should be changed to <code>.btn-success</code></li>
-              <li><code>.btn-secondary</code> should be changed to <code>.btn-primary</code></li> -->
-              <li><code>.btn-tertiary</code> should be deprecated default <code>.btn</code> should be used instead.</li>
+              <li><code>.btn-success</code> should be changed to <code>.btn-primary</code></li> -->
+              <li><code>.btn-default</code> should be deprecated default <code>.btn</code> should be used instead.</li>
               <li><code>.btn-info</code>, <code>.btn-warning</code>, <code>.btn-danger</code> and <code>.btn-inverse</code> are not to be used and will display same as default.</li>
               <li>Use class <code>no-arrow</code> with a <code>dropdown-toggle</code> to suppress the dropdown arrow in a button or link</li>
             </ul>
@@ -130,7 +130,7 @@
         </div>  
       </div>
 
-      <button class="btn btn-mini collapsed" data-toggle="collapse" data-target="#buttons-HTML">
+      <button class="btn btn-xs collapsed" data-toggle="collapse" data-target="#buttons-HTML">
         <span class="show-collapsed">See HTML</span><span class="hide-expanded">Hide HTML</span>
       </button>
 
@@ -211,11 +211,11 @@
       </div>
 
 
-      <button class="btn btn-mini " data-toggle="collapse" data-target="#blocked-buttons-HTML">
+      <button class="btn btn-xs " data-toggle="collapse" data-target="#blocked-buttons-HTML">
         <span class="show-collapsed">See HTML</span><span class="hide-expanded">Hide HTML</span>
       </button>
       <div class="collapse top-offset-small" id="blocked-buttons-HTML">
-        <button class="btn btn-mini" data-copy="2-clipboard" data-clipboard-text='
+        <button class="btn btn-xs" data-copy="2-clipboard" data-clipboard-text='
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="well">
               <p>Inside col-xs-12 col-sm-12 col-md-12 col-lg-12</p>
