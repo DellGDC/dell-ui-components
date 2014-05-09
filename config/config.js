@@ -18,6 +18,10 @@ Sherpa.config.designLibrary = {
       "layouts": "layouts/templates/"
     },
     "libraries": [
+      "lib/design-library/js/services.js",
+      "lib/design-library/js/directives.js",
+      "lib/design-library/js/controllers.js",
+      "lib/design-library/js/filters.js",
       "lib/design-library/styleguide/assets/js/styleguide.js",
       "lib/design-library/styleguide/config/routes.js",
       "lib/design-library/layouts/assets/js/layouts.js",
@@ -32,6 +36,10 @@ Sherpa.config.designLibrary = {
   },
   "angular": {
     "modules": [
+      "sherpaApp.desLibServices",
+      "sherpaApp.desLibDirectives",
+      "sherpaApp.desLibControllers",
+      "sherpaApp.desLibFilters",
       "sherpaApp.styleguide"
     ]
   },
