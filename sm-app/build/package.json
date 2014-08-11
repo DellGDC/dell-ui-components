@@ -1,0 +1,30 @@
+{
+  "name": "SherpaManager",
+  "main":"index.html",
+  "version": "1.2.0",
+  "description": "1.2 rebuild of Sherpa Manager",
+  "keywords": [],
+  "homepage": "http://inside-ux.dell.com/version-control/Sherpa_Future_State/",
+  "bugs": "http://inside-ux.dell.com/traq/Sherpa_Future_State/",
+  "window": {
+    "show": true,
+    "frame":false,
+    "toolbar":false,
+    "position": "center",
+    "width": 600,
+    "height": 500
+  },
+  "author": {
+    "name": "Bo Lora",
+    "email": "bo_lora@dell.com",
+    "url": "https://github.com/bolora"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://inside-ux.dell.com/git/Sherpa_Future_State.git"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
