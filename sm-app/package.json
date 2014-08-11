@@ -7,12 +7,12 @@
   "homepage": "http://inside-ux.dell.com/version-control/Sherpa_Future_State/",
   "bugs": "http://inside-ux.dell.com/traq/Sherpa_Future_State/",
   "window": {
-    "show": true,
-    "frame":false,
-    "toolbar":false,
-    "position": "center",
-    "width": 600,
-    "height": 500
+      "frame": false,
+      "show": true,
+      "icon": "dell-ui/img/dell-blue.png",
+      "toolbar": true,
+      "width": 600,
+      "height": 467
   },
   "author": {
     "name": "Bo Lora",

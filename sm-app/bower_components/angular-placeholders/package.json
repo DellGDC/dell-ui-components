@@ -1,0 +1,16 @@
+{
+  "author": "Josh David Miller",
+  "name": "angular-placeholders",
+  "version": "0.0.1-SNAPSHOT",
+  "dependencies": {},
+  "devDependencies": {
+    "node-markdown": "*",
+    "grunt": "~0.4",
+    "grunt-karma": "~0.4",
+    "grunt-contrib-concat": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-copy": "~0.4.1"
+  }
+}
