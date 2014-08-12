@@ -1,11 +1,8 @@
-angular.module('DellDesignLibrary', ['ui.bootstrap','ui.utils','ui.router','ngAnimate']);
+angular.module('DellDesignLibrary', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'DellUI', 'DellUISite']);
 
 angular.module('DellDesignLibrary').config(function($stateProvider, $urlRouterProvider) {
 
-    $stateProvider.state('welcome', {
-        url: '/welcome',
-        templateUrl: 'site_files/welcome/welcome.html'
-    });
+
     /* Add New States Above */
     $urlRouterProvider.otherwise('/welcome');
 

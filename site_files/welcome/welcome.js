@@ -1,4 +1,4 @@
-angular.module('DellDesignLibrary').controller('WelcomeCtrl',function($scope){
+angular.module('DellUISite').controller('WelcomeCtrl',function($scope){
 
 
 });

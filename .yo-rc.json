@@ -17,6 +17,16 @@
         "marker": "/* Add Component LESS Above */",
         "template": "@import \"<%= filename %>\";"
       }
-    }
+    },
+    "modules": [
+      {
+        "name": "DellUIComponents",
+        "file": "components\\DellUIComponents.js"
+      },
+      {
+        "name": "DellUISite",
+        "file": "site_files\\DellUISite.js"
+      }
+    ]
   }
 }

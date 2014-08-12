@@ -1,6 +1,6 @@
 describe('WelcomeCtrl', function() {
 
-	beforeEach(module('DellDesignLibrary'));
+	beforeEach(module('DellUISite'));
 
 	var scope,ctrl;
 

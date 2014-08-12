@@ -1,6 +1,6 @@
 describe('messages', function() {
 
-  beforeEach(module('DellDesignLibrary'));
+  beforeEach(module('DellUISite'));
 
   it('should ...', inject(function(messages) {
 
