@@ -1,0 +1,91 @@
+<div class="da-clear ta-clear ma-clear">
+  <div class="">
+    <h2>Progress bars</h2>
+  </div>     
+
+  <div class="da-all ta-all ma-all" id="progress-bars-HTML">
+      <h4>Default</h4>
+      <p>Default progress bar color.</p>
+      <div class="progress">
+        <div class="bar" style="width: 60%;"></div>
+      </div>
+    <h4>Green bar</h4>
+    <p><code>.bar-success</code></p>
+    <div class="progress">
+      <div class="bar bar-success" style="width: 60%;"></div>
+    </div>
+    <div class="alert alert-info">
+      <a class="close"><span aria-hidden="true" class="icon-ui-closecircle"></span></a>
+      <h4 class="alert-heading">Dell 308 Style Guidelines:</h4>
+      <p>Do not use animanted, striped bars or any other colors other than default and green.</p>
+      <p><strong class="label">NOTE:</strong> Progress status bar is custom to Dell 308 and requires slightly different markup and custom classes.</p>
+    </div>
+
+    <h4><p>Progress Status  <span class="label">(not in Bootstrap)</span></p></h4>
+    <div class="progress progress-status">
+      <a href="#shipping" class="bar bar-complete" style="width: 25%"><span>Shipping</span></a>
+      <a href="#payment" class="bar bar-complete" style="width: 25%"><span>Payment</span></a>
+      <div class="bar bar-progress" style="width: 25%"><span>Verify & Submit Order</span></div>
+      <div class="bar bar-incomplete" style="width: 25%"><span>Order Submitted</span></div>
+    </div>
+
+    <div class="alert alert-info">
+      <a class="close"><span aria-hidden="true" class="icon-ui-closecircle"></span></a>
+      <p><strong class="label">NOTE:</strong> <code>div</code> tags can be replaced with <code>a</code> tags to provide links in the taskflow to go back.</p>
+    </div>
+
+  </div>
+  <div class="da-all ta-all ma-all">
+
+
+    <button class="btn btn-xs collapsed" data-toggle="collapse" data-target="#progress-bars-HTML-code">
+      <span class="show-collapsed">See HTML</span><span class="hide-expanded">Hide HTML</span>
+    </button>
+
+    <p>&nbsp;</p>
+
+    <div class="collapse" id="progress-bars-HTML-code">
+
+      <ul class="unstyled">
+          <li>
+            <button class="btn btn-xs" data-copy="2-clipboard" data-clipboard-text='<div class="progress">
+  <div class="bar" style="width: 60%;"></div>
+</div>'>
+            Copy HTML
+            </button>
+            <button class="btn btn-xs fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).parent().attr('id')}">Fiddle</button>
+            <pre class="prettyprint linenums">&lt;div class="progress">
+  &lt;div class="bar" style="width: 60%;">&lt;/div>
+&lt;/div></pre>
+         </li>
+         <li>
+            <button class="btn btn-xs" data-copy="2-clipboard" data-clipboard-text='<div class="progress">
+  <div class="bar" style="width: 60%;"></div>
+</div>'>
+            Copy HTML
+            </button>
+            <button class="btn btn-xs fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).parent().attr('id')}">Fiddle</button>
+            <pre class="prettyprint linenums">&lt;div class="progress">
+  &lt;div class="bar bar-success" style="width: 60%;">&lt;/div>
+&lt;/div></pre>
+         </li>
+         <li>
+            <button class="btn btn-xs" data-copy="2-clipboard" data-clipboard-text='<div class="progress">
+  <div class="bar" style="width: 60%;"></div>
+</div>'>
+            Copy HTML
+            </button>
+            <button class="btn btn-xs fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).parent().attr('id')}">Fiddle</button>
+            <pre class="prettyprint linenums">&lt;div class="progress progress-status">
+  &lt;a href="#shipping" class="bar bar-complete" style="width: 25%">&lt;span>Shipping&lt;/span>&lt;/a>
+  &lt;a href="#payment" class="bar bar-complete" style="width: 25%">&lt;span>Payment&lt;/span>&lt;/a>
+  &lt;div class="bar bar-progress" style="width: 25%">&lt;span>Verify & Submit Order&lt;/span>&lt;/div>
+  &lt;div class="bar bar-incomplete" style="width: 25%">&lt;span>Order Submitted&lt;/span>&lt;/div>
+&lt;/div></pre>
+         </li>
+         
+      </ul>
+
+    </div>
+    <hr/>
+  </div>

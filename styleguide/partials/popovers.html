@@ -1,0 +1,90 @@
+    <div class="da-clear ta-clear ma-clear">
+    <div class="">
+      <h2>Popovers</h2>
+    </div>     
+      <div class="da-all ta-all ma-all" ng-init="initPopovers()">
+        <div id="popover-example-HTML">
+          <ul class="unstyled">
+            <li><a href="#" class="btn" data-html="true" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title='Popover on top<i class="close icon-ui-close pull-right visible-phone" data-dismiss="popover"></i>'>Popover on top</a></li>
+            <li><a href="#" class="btn" data-html="true" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title='Popover on right<i class="close icon-ui-close pull-right visible-phone" data-dismiss="popover"></i>'>Popover on right</a></li>
+            <li><a href="#" class="btn" data-html="true" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title='Popover on bottom<i class="close icon-ui-close pull-right visible-phone" data-dismiss="popover"></i>'>Popover on bottom</a></li>
+            <li><a href="#" class="btn" data-html="true" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title='Popover on left<i class="close icon-ui-close pull-right visible-phone" data-dismiss="popover"></i>'>Popover on left</a></li>
+          </ul>
+          <ul class="unstyled da-clear ta-clear ma-clear top-offset-large">
+            <li><a href="#" class="btn" data-html="true" data-toggle="popover" data-placement="right" data-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.' title="" data-original-title='Popover on hover<i class="close icon-ui-close pull-right visible-phone" data-dismiss="popover"></i>' data-trigger="hover">Popover on hover</a></li>
+            <li><a href="#" class="btn" id="custom-popover" data-toggle="popover" data-original-title='Popover with custom content<i class="close icon-ui-close" data-dismiss="popover"></i>' data-trigger="manual" data-placement="right" data-html="true" data-content='<p>This is a sample custom popover with lots of cool stuff inside.</p><p class="pull-right"><button class="btn btn-primary" data-dismiss="popover">Ok</button></p>'>Popover with custom content</a></li>
+            <li><a href="#" class="btn" id="popover-no-title" data-toggle="popover" data-trigger="manual" data-placement="top" data-html="true" data-content='<i class="close icon-ui-close pull-right" data-dismiss="popover"></i><p>This is a sample popover with lots of cool stuff inside and no title.</p>'>Popover no title with dismiss</a></li>      
+          </ul>
+
+          
+        </div>
+        <div class="alert alert-info" id="popover-308-rules">
+          <h4>Dell 308 Styleguide Rules:</h4>
+          <p>No two popovers should display at the same time.  Default bootstrap behavior is to allow multiple popovers to display therefore they should be manually triggered to hide all other instances before displayed.  <button class="btn btn-xs collapsed" data-toggle="collapse" data-target="#popover-JS"><span class="show-collapsed">See JavaScript below</span><span class="hide-expanded">Hide JavaScript below</span></button>
+          </p>
+        </div>
+        <button class="btn btn-xs collapsed" data-toggle="collapse" data-target="#popover-HTML">
+          <span class="show-collapsed">See HTML</span><span class="hide-expanded">Hide HTML</span>
+        </button>
+        <p>&nbsp;</p>
+
+
+        <div class="collapse" id="popover-HTML">
+          <h4>HTML code to activate popovers</h4>
+          <ul class="unstyled">
+              <li ng-repeat="popover in popoversHTML">
+                <button class="btn btn-xs" data-copy="2-clipboard" data-clipboard-text="{{popover.clipboardText}}">
+                  Copy HTML
+                </button>
+                <button class="btn btn-xs fiddle-button" data-bind="attr: {'data-target':$($($data)[0]).attr('id')}">Fiddle</button>
+                <pre class="prettyprint linenums">{{popover.exampleHTML}}</pre>
+              </li>
+          </ul>
+        </div>
+
+        <div class="collapse" id="popover-JS">
+          <h4>Javascript code to activate popovers</h4>
+          <button class="btn btn-xs" data-copy="2-clipboard" loadclipboardtext="#popover-JS-code">
+            Copy HTML
+          </button>
+          <pre class="prettyprint linenums" id="popover-JS-code">     $('[data-toggle="popover"]').popover({trigger:'manual'});
+$('[data-toggle="popover"]').click(function(event){
+  event.preventDefault();
+  $('[data-toggle="popover"]').popover('destroy');
+  $(this).popover('show');
+  $('[data-dismiss="popover"]').click(function(event){
+    event.preventDefault();
+    $(this).parents('.popover').prev().popover('hide');
+  });
+});
+$('[data-toggle="popover"][data-trigger="hover"]').mouseover(function(event){
+  event.preventDefault();
+  $('[data-toggle="popover"]').popover('destroy');
+  $(this).popover('show');
+});
+$('[data-toggle="popover"][data-trigger="hover"]').mouseout(function(event){
+  $(this).popover('destroy');
+});
+$('[data-toggle="popover"][data-trigger="hover"]').focus(function(event){
+  $('[data-toggle="popover"]').popover('destroy');
+  $(this).popover('show');
+});
+
+$('#custom-popover').click(function(event){
+  event.preventDefault();
+  $(this).popover('show');
+  $('[data-dismiss="popover"]').click(function(event){
+    event.preventDefault();
+    $(this).parents('.popover').prev().popover('hide');
+  });
+});</pre>
+
+        </div>
+        <hr/>
+
+
+
+
+        </div>
+      </div>
+    </div>

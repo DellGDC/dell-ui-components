@@ -1,0 +1,686 @@
+//
+// Dell Magnum 308 and Alienware Custom Variables
+// --------------------------------------------------
+//
+// Global values
+// --------------------------------------------------
+// Grays
+// -------------------------
+@dell-gray-dark: #444444;
+@dell-gray: #aaaaaa;
+@dell-gray-stroke: #cccccc;
+@dell-gray-medium: #737373;
+@dell-gray-light: #eeeeee;
+@dell-gray-very-light: #f9f9f9;
+
+// Accent colors
+// -------------------------
+@dell-blue: #007db8;
+@dell-green: #7ab800;
+@dell-red: #dc5034;
+@dell-red-dark: #ce1126;
+@dell-yellow: #f2af00;
+@dell-orange: #ff7700;
+@dell-purple: #6e2585;
+@dell-berry: #b7295a;
+@dell-teal: #71c6c1;
+
+@dell-alert-yellow: #FFFFC9;
+@dell-highlight-blue: #CCE7F3;
+@alert-bg: @dell-alert-yellow;
+
+//TODO need to add color variables used today for backward compatability
+
+// Alienware related colors
+// -------------------------
+@alien-background: #010101;
+@alien-light-background: #333333;
+@alien-stroke-dark: #28231b;
+@alien-green: #00f000;
+@alien-orange: #f05000;
+@alien-teal: #25E9EB;
+@alien-gray: #c5c0b4;
+@alien-red: #f00000;
+@alien-gray-dark: #88847b;
+@alien-primary: #1ebbb4;
+@alien-primary-bckg: #266165;
+@alien-btn: #b2ada2;
+@alien-btn-highlight: #88847b;
+@alien-btn-dark: #322D27;
+@alien-btn-dark-highlight: #14120e;
+@alien-table-stripe: #404040;
+@alien-gray-darker: #404040;
+
+// Custom Aside Colors
+// -------------------------
+@aside-nav-bg: @dell-gray-dark;
+@aside-nav-bg-active: @dell-blue;
+
+// Typography
+// -------------------------
+
+@theme-sans-font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+@theme-serif-font-family: 'museo-for-dell-100', 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+@theme-serif-font-family-bold: 'museo-for-dell-300', @theme-sans-font-family;
+@theme-mono-font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+//
+
+@default-stroke: 2px;
+@thin-stroke: 1px;
+
+// Bootstrap 3.0 Variables
+// --------------------------------------------------
+
+// Global values
+// --------------------------------------------------
+
+// Grays
+// -------------------------
+@black: #000000;
+@gray-darker: @dell-gray-dark;
+// dell-308 override
+@gray-dark: @dell-gray-medium;
+// dell-308 override
+@gray: @dell-gray;
+// dell-308 override
+@gray-light: @dell-gray-light;
+// dell-308 override
+@gray-lighter: @dell-gray-very-light;
+// dell-308 override
+@white: #ffffff;
+
+// Brand colors
+// -------------------------
+
+@brand-primary: @dell-blue;
+@brand-success: @dell-green;
+@brand-warning: @dell-orange;
+@brand-danger: @dell-red;
+@brand-info: @dell-teal;
+
+// Accent colors
+// -------------------------
+@blue: @dell-blue;
+// dell-308 override
+
+@green: @dell-green;
+// dell-308 override
+@red: @dell-red;
+// dell-308 override
+@yellow: @dell-yellow;
+// dell-308 override
+@orange: @dell-orange;
+// dell-308 override
+@pink: pink;
+@purple: @dell-purple;
+// dell-308 override
+
+// Scaffolding
+// -------------------------
+@body-bg: @white;
+@text-color: @gray-darker;
+// dell-308 override
+
+// Media queries breakpoints
+// --------------------------------------------------
+
+// Extra small screen / phone
+@screen-xs: 480px;
+@screen-phone: @screen-xs;
+
+// Small screen / tablet
+@screen-sm: 768px;
+@screen-tablet: @screen-sm;
+
+// Medium screen / desktop
+@screen-md: 992px;
+@screen-desktop: @screen-md;
+
+// Large screen / wide desktop
+@screen-lg: 1200px;
+@screen-lg-desktop: @screen-lg;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max: (@screen-sm - 1);
+@screen-sm-max: (@screen-md - 1);
+@screen-md-max: (@screen-lg - 1);
+
+// Grid system
+// --------------------------------------------------
+
+// Number of columns in the grid system
+@grid-columns: 12;
+// Padding, to be divided by two and applied to the left and right of all columns
+@grid-gutter-width: 30px;
+// Point at which the navbar stops collapsing
+@grid-float-breakpoint: @screen-tablet;
+
+// Container sizes
+// --------------------------------------------------
+
+// Small screen / tablet
+@container-tablet: ((720px + @grid-gutter-width));
+
+// Medium screen / desktop
+@container-desktop: ((940px + @grid-gutter-width));
+
+// Large screen / wide desktop
+@container-lg-desktop: ((1140px + @grid-gutter-width));
+
+
+// Links
+// -------------------------
+@link-color: @blue;
+// dell-308 override
+@link-hover-color: @blue;
+// dell-308 override
+
+// Typography
+// -------------------------
+@font-family-sans-serif: @theme-sans-font-family;
+// dell-308 override
+@font-family-serif: @theme-serif-font-family;
+// dell-308 override
+@font-family-monospace: @theme-mono-font-family;
+// dell-308 override
+
+@font-size-base: 14px;
+@font-family-base: @font-family-sans-serif;
+@line-height-base: 1.428571429;
+// 20/14
+@line-height-computed: (@font-size-base * @line-height-base);
+// ~20px
+@alt-font-family: @font-family-serif;
+
+@headings-font-family: @theme-serif-font-family-bold;
+// dell-308 override
+@headings-font-weight: normal;
+// instead of browser default, bold
+@headings-color: inherit;
+// empty to use BS default, @text-color
+@headings-line-height: 1.1;
+
+// Iconography
+// -------------------------
+@icon-font-path: "../fonts/";
+//TODO need to check if this is right
+@icon-font-name: "glyphicons-halflings-regular";
+//TODO need to check if this is right
+
+// Component sizing
+// -------------------------
+// Based on 14px font-size and 20px line-height
+
+@font-size-large: @font-size-base * 1.25;
+// ~18px
+@font-size-small: @font-size-base * 0.85;
+// ~12px
+@font-size-mini: @font-size-base * 0.75;
+// ~11px
+
+@padding-base-vertical: 6px;
+@padding-base-horizontal: 12px;
+
+@padding-large-vertical: 10px;
+@padding-large-horizontal: 16px;
+
+@padding-small-vertical: 5px;
+@padding-small-horizontal: 10px;
+
+@line-height-large: 20px;
+@line-height-small: 18px;
+
+@border-radius-base: 5px;
+@border-radius-large: 10px;
+@border-radius-small: 2px;
+
+@component-active-bg: @brand-primary;
+
+@caret-width-base: 4px;
+@caret-width-large: 5px;
+
+// Tables
+// -------------------------
+@table-cell-padding: 8px;
+@table-condensed-cell-padding: 5px;
+@table-bg: transparent;
+// overall background-color
+@table-bg-accent: @dell-gray-light;
+// for striping
+@table-bg-hover: @dell-highlight-blue;
+// for hover
+@table-border-color: @dell-gray-stroke;
+// table and cell border
+
+// Buttons
+// -------------------------
+@btn-font-weight: normal;
+
+@btn-default-color: @dell-gray-dark;
+@btn-default-bg: #fefefe;
+@btn-default-bg-highlight: #edf1f3;
+@btn-default-border: #cccccc;
+
+@btn-primary-color: @white;
+@btn-primary-bg: #118FD6;
+@btn-primary-bg-highlight: #0F6ECA;
+@btn-primary-border: #0f6eca;
+
+@btn-success-color: @white;
+@btn-success-bg: @green;
+@btn-success-bg-highlight: #499B1E;
+@btn-success-border: #499b1e;
+
+@btn-info-color: @white;
+@btn-info-bg: @dell-teal;
+@btn-info-bg-highlight: spin(@dell-teal, 20%);
+@btn-info-border: #269abc;
+
+@btn-warning-color: @white;
+@btn-warning-bg: lighten(@orange, 15%);
+@btn-warning-bg-highlight: @orange;
+@btn-warning-border: #d58512;
+
+@btn-danger-color: @white;
+@btn-danger-bg: #ee5f5b;
+@btn-danger-bg-highlight: #bd362f;
+@btn-danger-border: #d43f3a;
+
+@btn-inverse-background: @dell-gray-dark;
+@btn-inverse-background-highlight: @gray-darker;
+@btn-link-disabled-color: @gray-light;
+
+// Forms
+// -------------------------
+@input-bg: @white;
+@input-border: @dell-gray-stroke;
+@input-border-radius: @border-radius-small + 1;
+@input-disabled-bg: @gray-lighter;
+@form-actions-bg: @dell-gray-very-light;
+@input-height-base: 34px;
+@input-height-large: @input-height-base + 6;
+@input-height-small: @input-height-base - 14;
+
+// Input placeholder text color
+// -------------------------
+@input-color-placeholder: @dell-gray-medium;
+@legend-color: @gray-dark;
+@legend-border-color: @dell-gray-light;
+@input-group-addon-bg: @gray-lighter;
+@input-group-addon-border-color: @input-border;
+
+// Dropdowns
+// -------------------------
+@dropdown-bg: @white;
+@dropdown-border: rgba(0, 0, 0, .2);
+@dropdown-divider-top: @dell-gray-light;
+@dropdown-dvider-bottom: @white;
+@dropdown-fallback-border: #cccccc;
+@dropdown-divider-bg: @dell-gray-light;
+@dropdown-link-color: @gray-dark;
+@dropdown-link-hover-color: @gray-dark;
+@dropdown-link-active-color: @gray-dark;
+@dropdown-link-active-bg: @dell-highlight-blue;
+@dropdown-link-hover-bg: @dell-highlight-blue;
+
+// COMPONENT VARIABLES
+// --------------------------------------------------
+
+// Z-index master list
+// -------------------------
+// Used for a bird's eye view of components dependent on the z-axis
+// Try to avoid customizing these :)
+@zindex-navbar: 1000;
+@zindex-dropdown: 1000;
+@zindex-popover: 1010;
+@zindex-tooltip: 1030;
+@zindex-navbar-fixed: 1030;
+@zindex-modal-background: 1040;
+@zindex-modal: 9000;
+
+// Sprite icons path
+// -------------------------
+@icon-sprite-path: "../img/glyphicons-halflings.png";
+//TODO need to check if this is right
+@icon-white-sprite-path: "../img/glyphicons-halflings-white.png";
+//TODO need to check if this is right
+
+// Navbar
+// -------------------------
+@navbar-collapse-width: 979px;
+//TODO need to check if this is right
+@navbar-collapse-desktop-width: @navbar-collapse-width + 1;
+//TODO need to check if this is right
+
+// Basics of a navbar
+// -------------------------
+@navbar-height: 40px;
+@navbar-text: @blue;
+@navbar-margin-bottom: @line-height-computed;
+@navbar-default-color: #777777;
+@navbar-default-bg-highlight: @white;
+@navbar-default-bg: darken(@navbar-default-bg-highlight, 5%);
+
+//This could be wrong
+@navbar-default-border: darken(@navbar-default-bg, 12%);
+@navbar-border-radius: @border-radius-base;
+@navbar-padding-horizontal: floor(@grid-gutter-width / 2);
+@navbar-padding-vertical: ((@navbar-height - @line-height-computed) / 2);
+
+// Navbar links
+// -------------------------
+@navbar-default-link-color: @blue;
+@navbar-default-link-hover-color: @blue;
+@navbar-default-link-hover-bg: transparent;
+
+@navbar-default-link-active-color: @blue;
+@navbar-default-link-active-bg: darken(@navbar-default-bg, 5%);
+@navbar-default-link-disabled-color: #cccccc;
+@navbar-default-link-disabled-bg: transparent;
+
+// Navbar brand label
+// -------------------------
+@navbar-default-brand-color: @navbar-default-link-color;
+@navbar-default-brand-hover-color: darken(@navbar-default-link-color, 10%);
+@navbar-default-brand-hover-bg: transparent;
+
+// Navbar toggle
+// -------------------------
+@navbar-default-toggle-hover-bg: #dddddd;
+@navbar-default-toggle-icon-bar-bg: #cccccc;
+@navbar-default-toggle-border-color: #dddddd;
+
+// Inverted navbar
+// -------------------------
+@navbar-inverse-color: @white;
+@navbar-inverse-bg: @blue;
+@navbar-inverse-bg-highlight: @blue;
+@navbar-inverse-border: transparent;
+@navbar-inverse-link-color: @white;
+@navbar-inverse-link-hover-color: darken(@dell-highlight-blue, 5%);
+@navbar-inverse-link-active-color: @dell-highlight-blue;
+@navbar-inverse-link-disabled-color: #444444;
+@navbar-inverse-link-hover-bg: transparent;
+@navbar-inverse-link-active-bg: @navbar-inverse-bg;
+@navbar-inverse-link-disabled-bg: transparent;
+
+// Inverted navbar brand label
+// -------------------------
+@navbar-inverse-brand-color: @navbar-inverse-link-color;
+@navbar-inverse-brand-hover-color: @white;
+@navbar-inverse-brand-hover-bg: transparent;
+
+// Inverted navbar search
+// Normal navbar needs no special styles or vars
+// -------------------------
+@navbar-inverse-search-bg: @white;
+@navbar-inverse-search-bg-focus: @white;
+@navbar-inverse-search-border: @navbar-inverse-bg;
+@navbar-inverse-search-placeholder-color: @gray;
+
+// Inverted navbar toggle
+// -------------------------
+@navbar-inverse-toggle-hover-bg: #333333;
+@navbar-inverse-toggle-icon-bar-bg: @white;
+@navbar-inverse-toggle-border-color: #333333;
+
+// Navs
+// -------------------------
+@nav-link-padding: 10px 15px;
+@nav-link-hover-bg: @gray-lighter;
+
+@nav-disabled-link-color: @gray-light;
+@nav-disabled-link-hover-color: @gray-light;
+
+@nav-open-link-hover-color: @white;
+@nav-open-caret-border-color: @white;
+
+// Tabs
+// -------------------------
+@nav-tabs-border-color: #dddddd;
+
+@nav-tabs-link-hover-border-color: @gray-lighter;
+
+@nav-tabs-active-link-hover-bg: @body-bg;
+@nav-tabs-active-link-hover-color: @gray;
+@nav-tabs-active-link-hover-border-color: #dddddd;
+
+@nav-tabs-justified-link-border-color: #dddddd;
+@nav-tabs-justified-active-link-border-color: @body-bg;
+
+// Pills
+// -------------------------
+@nav-pills-active-link-hover-bg: @component-active-bg;
+@nav-pills-active-link-hover-color: @white;
+
+// Pagination
+// -------------------------
+@pagination-bg: @white;
+@pagination-border: #dddddd;
+@pagination-active-bg: #f5f5f5;
+@pagination-active-color: @white;
+@pagination-disabled-color: @gray-light;
+
+// Pager
+// -------------------------
+@pager-border-radius: 15px;
+@pager-disabled-color: @gray-light;
+
+// Jumbotron
+// -------------------------
+@jumbotron-padding: 30px;
+@jumbotron-bg: @gray-lighter;
+@jumbotron-heading-color: inherit;
+@jumbotron-color: inherit;
+
+// Form states and alerts
+// -------------------------
+// TODO: These do not adhere to Dell-308 - They are not allowable so what should we do with these.
+@state-warning-text: #c09853;
+@state-warning-bg: #ffffc9;
+@state-warning-border: darken(spin(@state-warning-bg, -10), 3%);
+
+@state-danger-text: #b94a48;
+@state-danger-bg: #f2dede;
+@state-danger-border: darken(spin(@state-danger-bg, -10), 3%);
+
+@state-success-text: #468847;
+@state-success-bg: #dff0d8;
+@state-success-border: darken(spin(@state-success-bg, -10), 5%);
+
+@state-info-text: #3a87ad;
+@state-info-bg: #ffffc9;
+@state-info-border: darken(spin(@state-info-bg, -10), 7%);
+
+// Tooltips
+// -------------------------
+@tooltip-max-width: 200px;
+@tooltip-color: @white;
+@tooltip-bg: @gray-darker;
+@tooltip-arrow-width: 5px;
+@tooltip-arrow-color: @tooltip-bg;
+
+// Popovers
+// -------------------------
+@popover-bg: @white;
+@popover-max-width: 276px;
+@popover-border-color: rgba(0, 0, 0, .2);
+@popover-fallback-border-color: #cccccc;
+@popover-title-bg: @blue;
+@popover-arrow-width: 10px;
+@popover-arrow-color: @white;
+@popover-arrow-outer-width: @popover-arrow-width + 1;
+@popover-arrow-outer-color: rgba(0, 0, 0, .25);
+
+// Labels
+// -------------------------
+
+@label-default-bg: @gray-light;
+@label-primary-bg: @brand-primary;
+@label-success-bg: @brand-success;
+@label-info-bg: @brand-info;
+@label-warning-bg: @brand-warning;
+@label-danger-bg: @brand-danger;
+@label-color: @white;
+@label-link-hover-color: @white;
+
+// Modals
+// -------------------------
+@modal-inner-padding: 20px;
+
+@modal-title-padding: 15px;
+@modal-title-line-height: @line-height-base;
+
+@modal-content-bg: @white;
+@modal-content-border-color: rgba(0, 0, 0, .2);
+@modal-content-fallback-border-color: #999999;
+
+@modal-backdrop-bg: #000000;
+@modal-header-border-color: @dell-gray-light;
+@modal-footer-border-color: @modal-header-border-color;
+
+// Alerts
+// -------------------------
+@alert-padding: 15px;
+@alert-border-radius: @border-radius-base;
+@alert-link-font-weight: bold;
+
+@alert-success-bg: @state-success-bg;
+@alert-success-text: @state-success-text;
+@alert-success-border: @state-success-border;
+
+@alert-info-bg: @state-info-bg;
+@alert-info-text: @state-info-text;
+@alert-info-border: @state-info-border;
+
+@alert-warning-bg: @state-warning-bg;
+@alert-warning-text: @state-warning-text;
+@alert-warning-border: @state-warning-border;
+
+@alert-danger-bg: @state-danger-bg;
+@alert-danger-text: @state-danger-text;
+@alert-danger-border: @state-danger-border;
+
+// Progress bars
+// -------------------------
+@progress-bg: #f5f5f5;
+@progress-bar-color: @white;
+@progress-bar-bg: @brand-primary;
+@progress-bar-success-bg: @brand-success;
+@progress-bar-warning-bg: @brand-warning;
+@progress-bar-danger-bg: @brand-danger;
+@progress-bar-info-bg: @brand-info;
+
+// List group
+// -------------------------
+@list-group-bg: @white;
+@list-group-border: #dddddd;
+@list-group-border-radius: @border-radius-base;
+
+@list-group-hover-bg: #f5f5f5;
+@list-group-active-color: @white;
+@list-group-active-bg: @component-active-bg;
+@list-group-active-border: @list-group-active-bg;
+
+@list-group-link-color: #555555;
+@list-group-link-heading-color: #333333;
+
+// Panels
+// -------------------------
+@panel-bg: @white;
+@panel-inner-border: #dddddd;
+@panel-border-radius: @border-radius-large;
+@panel-footer-bg: #f5f5f5;
+
+@panel-default-text: @gray-dark;
+@panel-default-border: #dddddd;
+@panel-default-heading-bg: #f5f5f5;
+
+@panel-primary-text: @white;
+@panel-primary-border: @brand-primary;
+@panel-primary-heading-bg: @brand-primary;
+
+@panel-success-text: @state-success-text;
+@panel-success-border: @state-success-border;
+@panel-success-heading-bg: @state-success-bg;
+
+@panel-warning-text: @state-warning-text;
+@panel-warning-border: @state-warning-border;
+@panel-warning-heading-bg: @state-warning-bg;
+
+@panel-danger-text: @state-danger-text;
+@panel-danger-border: @state-danger-border;
+@panel-danger-heading-bg: @state-danger-bg;
+
+@panel-info-text: @state-info-text;
+@panel-info-border: @state-info-border;
+@panel-info-heading-bg: @state-info-bg;
+
+// Thumbnails
+// -------------------------
+@thumbnail-padding: 4px;
+@thumbnail-bg: @body-bg;
+@thumbnail-border: #dddddd;
+@thumbnail-border-radius: @border-radius-base;
+
+@thumbnail-caption-color: @text-color;
+@thumbnail-caption-padding: 9px;
+
+// Wells
+// -------------------------
+@well-bg: @gray-light;
+
+// Badges
+// -------------------------
+@badge-color: @white;
+@badge-link-hover-color: @white;
+@badge-bg: @gray-light;
+
+@badge-active-color: @link-color;
+@badge-active-bg: @white;
+
+@badge-font-weight: bold;
+@badge-line-height: 1;
+@badge-border-radius: 10px;
+
+// Breadcrumbs
+// -------------------------
+@breadcrumb-bg: #f5f5f5;
+@breadcrumb-color: #cccccc;
+@breadcrumb-active-color: @gray-light;
+
+// Carousel
+// ------------------------
+
+@carousel-text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+@carousel-control-color: @white;
+@carousel-control-width: 15%;
+@carousel-control-opacity: .5;
+@carousel-control-font-size: 20px;
+@carousel-indicator-active-bg: @white;
+@carousel-indicator-border-color: @white;
+@carousel-caption-color: @white;
+
+// Close
+// ------------------------
+@close-color: @dell-gray-dark;
+@close-font-weight: bold;
+@close-text-shadow: 0 1px 0 @white;
+
+// Type
+// ------------------------
+@text-muted: @gray-light;
+@abbr-border-color: @gray-light;
+@headings-small-color: @gray-light;
+@blockquote-small-color: @gray-light;
+@blockquote-border-color: @gray-lighter;
+@page-header-border-color: @gray-lighter;
+
+// Hr border color
+// -------------------------
+@hr-border: @dell-gray-stroke;
+
+// Horizontal forms & lists
+// -------------------------
+@component-offset-horizontal: 180px;
+

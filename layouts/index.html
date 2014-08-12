@@ -1,0 +1,45 @@
+
+<header ng-include="'lib/design-library/partials/shared/masthead.html'"></header>
+<div ng-controller="layoutsController">
+	<div class="container">
+		<div class="dropdown pull-left">
+		  <p><strong>Choose layout:</strong> </p>
+		  <button class="btn dropdown-toggle btn-default" type="button" id="choose-layout" data-toggle="dropdown">
+		    <span ng-if="current_layout.label">{{current_layout.label}}</span>
+		    <span ng-if="!current_layout.label">All</span>
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu" aria-labelledby="choose-layout">
+		  	<li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-click="switchLayout(null)">All</a></li>
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" ng-repeat="layout in layouts" ng-click="switchLayout(layout)" ng-if="current_layout != layout.id">{{layout.label}}</a></li>
+		  </ul>
+		</div>
+	</div>
+	<div ng-if="!current_layout.label" class="container">
+		<div class="row layout-thumbnails">
+			<div class="col-lg-3 col-md-3 col-sm-3" ng-repeat="layout in layouts">
+				<div class="well text-center">
+					<h4>{{layout.label}}</h4>
+					<a href="#" ng-click="switchLayout(layout)">
+						<img ng-src="{{layout.thumnail_url}}"/>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ui-view="layouts">
+		
+	</div>
+
+
+	
+</div>
+<header ng-include="'lib/design-library/partials/shared/footer.html'"></header>
+<style>
+	.layout-thumbnails h4{
+		height:40px;
+	}
+	.nav-utility {
+		margin-bottom:0;
+	}
+</style>

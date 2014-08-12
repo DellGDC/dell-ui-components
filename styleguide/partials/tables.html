@@ -1,0 +1,192 @@
+<div class="da-clear ta-clear ma-clear">
+   <div class="">
+      <h2>Tables</h2>
+      <hr/>
+   </div>
+   <h3>Table with everything - table-striped table-bordered table-hover</h3>
+   <code>&lt;table class="table table-striped table-bordered table-hover"> ... &lt;/table></code>
+   <button class="btn btn-xs" data-copy="2-clipboard" title="Click me to copy html to clipboard" loadclipboardtext="#table-sample-code-1">copy HTML</button> <button class="btn btn-xs fiddle-button" data-target="table-sample-code-1">Fiddle</button>
+   <div id="table-sample-code-1">
+      <table class="table table-striped table-bordered table-hover">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th>Column heading</th>
+               <th>Column heading</th>
+               <th>Column heading</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>1</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+            <tr>
+               <td>2</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+            <tr>
+               <td>3</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <h3>Plain bordered table</h3>
+   <code>&lt;table class="table table-bordered"> ... &lt;/table></code> <button class="btn btn-xs" data-copy="2-clipboard" title="Click me to copy html to clipboard" loadclipboardtext="#table-sample-code-2">copy HTML</button> <button class="btn btn-xs fiddle-button">Fiddle</button>
+   <div id="table-sample-code-2">
+      <table class="table table-bordered">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th>Column heading</th>
+               <th>Column heading</th>
+               <th>Column heading</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>1</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+            <tr>
+               <td>2</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+            <tr>
+               <td>3</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <h3>Borderless table with Zebra stripes</h3>
+   <code>&lt;table class="table table-striped"> ... &lt;/table></code>
+   <button class="btn btn-xs" data-copy="2-clipboard" title="Click me to copy html to clipboard" loadclipboardtext="#table-sample-code-3">copy HTML</button> <button class="btn btn-xs fiddle-button" data-target="table-sample-code-3">Fiddle</button>
+   <div id="table-sample-code-3">
+      <table class="table table-striped">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th>Column heading</th>
+               <th>Column heading</th>
+               <th>Column heading</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td>1</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+            <tr>
+               <td>2</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+            <tr>
+               <td>3</td>
+               <td>Column content</td>
+               <td>Column content</td>
+               <td>Column content</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <h3>Bordered Tables</h3>
+   <div class=" pull-right">
+     <div class="btn-group dropup">
+       <button class="btn btn-xs dropdown-toggle" data-toggle="dropdown">View other colors</button>
+       <ul class="dropdown-menu pull-right">
+         <li ng-repeat="item in colors"><a href="#" ng-click="switchTableColor(item)" class="{{item.color}} {{item.labelColor}}">{{item.label}}</a></li>
+       </ul>
+     </div>
+   </div>
+   <code>&lt;div class="table-bordered {{selectedTableColor.color}}-stroke">&lt;table class="table table-bordered"> ... &lt;/table>&lt;/div></code> <span class="label">(not in Bootstrap)</span>
+   <button class="btn btn-xs" data-copy="2-clipboard" title="Click me to copy html to clipboard" data-clipboard-text=" &lt;div&gt;
+      &lt;!-- table-sample-code-4
+         Options:
+      --&gt;
+      &lt;div class=&quot;table-bordered {{selectedTableColor.color}}-stroke&quot;&gt;
+         &lt;table class=&quot;table table-bordered&quot;&gt;
+            &lt;thead&gt;
+               &lt;tr&gt;
+                  &lt;th&gt;#&lt;/th&gt;
+                  &lt;th&gt;Column heading&lt;/th&gt;
+                  &lt;th&gt;Column heading&lt;/th&gt;
+                  &lt;th&gt;Column heading&lt;/th&gt;
+               &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;1&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;2&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+               &lt;/tr&gt;
+               &lt;tr&gt;
+                  &lt;td&gt;3&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+                  &lt;td&gt;Column content&lt;/td&gt;
+               &lt;/tr&gt;
+            &lt;/tbody&gt;
+         &lt;/table&gt;
+      &lt;/div&gt;
+   &lt;/div&gt;">copy HTML</button> <button class="btn btn-xs fiddle-button" data-target="table-sample-code-4">Fiddle</button>
+   <div id="table-sample-code-4">
+      <div class="table-bordered {{selectedTableColor.color}}-stroke">
+         <table class="table table-bordered">
+            <thead>
+               <tr>
+                  <th>#</th>
+                  <th>Column heading</th>
+                  <th>Column heading</th>
+                  <th>Column heading</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>1</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+               </tr>
+               <tr>
+                  <td>2</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+               </tr>
+               <tr>
+                  <td>3</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+                  <td>Column content</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <hr/>
+</div>
