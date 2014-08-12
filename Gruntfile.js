@@ -1,275 +1,228 @@
-/*jshint camelcase: false*/
+/*jslint node: true */
+'use strict';
+
+var pkg = require('./package.json');
+
+//Using exclusion patterns slows down Grunt significantly
+//instead of creating a set of patterns like '**/*.js' and '!**/node_modules/**'
+//this method is used to create a set of inclusive patterns for all subdirectories
+//skipping node_modules, bower_components, build, and any .dirs
+//This enables users to create any directory structure they desire.
+var createFolderGlobs = function(fileTypePatterns) {
+  fileTypePatterns = Array.isArray(fileTypePatterns) ? fileTypePatterns : [fileTypePatterns];
+  var ignore = ['node_modules','bower_components','build','temp'];
+  var fs = require('fs');
+  return fs.readdirSync(process.cwd())
+          .map(function(file){
+            if (ignore.indexOf(file) !== -1 ||
+                file.indexOf('.') === 0 ||
+                !fs.lstatSync(file).isDirectory()) {
+              return null;
+            } else {
+              return fileTypePatterns.map(function(pattern) {
+                return file + '/**/' + pattern;
+              });
+            }
+          })
+          .filter(function(patterns){
+            return patterns;
+          })
+          .concat(fileTypePatterns);
+};
 
 module.exports = function (grunt) {
-  'use strict';
 
   // load all grunt tasks
-  require('time-grunt')(grunt);
   require('load-grunt-tasks')(grunt);
 
-  // configurable paths
-  var config = {
-    app: 'sm-app/build',
-    dist: 'dist',
-    tmp: 'tmp',
-    resources: 'resources'
-  };
-
+  // Project configuration.
   grunt.initConfig({
-    config: config,
-    clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '<%= config.dist %>/*',
-            '<%= config.tmp %>/*'
-          ]
-        }]
+    connect: {
+      main: {
+        options: {
+          port: 9001
+        }
+      }
+    },
+    watch: {
+      main: {
+        options: {
+            livereload: true,
+            livereloadOnError: false,
+            spawn: false
+        },
+        files: [createFolderGlobs(['*.js','*.less','*.html']),'!_SpecRunner.html','!.grunt'],
+        tasks: [] //all the tasks are run dynamically during the watch event handler
       }
     },
     jshint: {
-      options: {
-        jshintrc: '.jshintrc'
+      main: {
+        options: {
+            jshintrc: '.jshintrc'
+        },
+        src: createFolderGlobs('*.js')
+      }
+    },
+    clean: {
+      before:{
+        src:['build','temp']
       },
-      files: '<%= config.app %>/js/*.js'
+      after: {
+        src:['temp']
+      }
+    },
+    less: {
+      production: {
+        options: {
+        },
+        files: {
+          'temp/app.css': 'app.less'
+        }
+      }
+    },
+    ngtemplates: {
+      main: {
+        options: {
+            module: pkg.name,
+            htmlmin:'<%= htmlmin.main.options %>'
+        },
+        src: [createFolderGlobs('*.html'),'!index.html','!_SpecRunner.html'],
+        dest: 'temp/templates.js'
+      }
     },
     copy: {
-      appLinux: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>',
-          dest: '<%= config.dist %>/app.nw',
-          src: '**'
-        }]
-      },
-      appMacos: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>',
-          dest: '<%= config.dist %>/node-webkit.app/Contents/Resources/app.nw',
-          src: '**'
-        }, {
-          expand: true,
-          cwd: '<%= config.resources %>/mac/',
-          dest: '<%= config.dist %>/node-webkit.app/Contents/',
-          filter: 'isFile',
-          src: '*.plist'
-        }, {
-          expand: true,
-          cwd: '<%= config.resources %>/mac/',
-          dest: '<%= config.dist %>/node-webkit.app/Contents/Resources/',
-          filter: 'isFile',
-          src: '*.icns'
-        }, {
-          expand: true,
-          cwd: '/../node_modules/',
-          dest: '/node-webkit.app/Contents/Resources/app.nw/node_modules/',
-          src: '**'
-        }]
-      },
-      webkit: {
-        files: [{
-          expand: true,
-          cwd: '<%=config.resources %>/node-webkit/MacOS',
-          dest: '<%= config.dist %>/',
-          src: '**'
-        }]
-      },
-      copyWinToTmp: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.resources %>/node-webkit/Windows/',
-          dest: '<%= config.tmp %>/',
-          src: '**'
-        }]
+      main: {
+        files: [
+          {src: ['img/**'], dest: 'build/'},
+          {src: ['bower_components/font-awesome/fonts/**'], dest: 'build/',filter:'isFile',expand:true}
+          //{src: ['bower_components/angular-ui-utils/ui-utils-ieshiv.min.js'], dest: 'build/'},
+          //{src: ['bower_components/select2/*.png','bower_components/select2/*.gif'], dest:'build/css/',flatten:true,expand:true},
+          //{src: ['bower_components/angular-mocks/angular-mocks.js'], dest: 'build/'}
+        ]
       }
     },
-    compress: {
-      appToTmp: {
+    dom_munger:{
+      read: {
         options: {
-          archive: '<%= config.tmp %>/app.zip'
+          read:[
+            {selector:'script[data-concat!="false"]',attribute:'src',writeto:'appjs'},
+            {selector:'link[rel="stylesheet"][data-concat!="false"]',attribute:'href',writeto:'appcss'}
+          ]
         },
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>',
-          src: ['**']
-        }]
+        src: 'index.html'
       },
-      finalWindowsApp: {
+      update: {
         options: {
-          archive: '<%= config.dist %>/SherpaManager.zip'
+          remove: ['script[data-remove!="false"]','link[data-remove!="false"]'],
+          append: [
+            {selector:'body',html:'<script src="app.full.min.js"></script>'},
+            {selector:'head',html:'<link rel="stylesheet" href="app.full.min.css">'}
+          ]
         },
-        files: [{
-          expand: true,
-          cwd: '<%= config.tmp %>',
-          src: ['**']
-        }]
+        src:'index.html',
+        dest: 'build/index.html'
       }
     },
-    rename: {
-      app: {
-        files: [{
-          src: '<%= config.dist %>/node-webkit.app',
-          dest: '<%= config.dist %>/SherpaManager.app'
-        }]
-      },
-      zipToApp: {
-        files: [{
-          src: '<%= config.tmp %>/app.zip',
-          dest: '<%= config.tmp %>/app.nw'
-        }]
+    cssmin: {
+      main: {
+        src:['temp/app.css','<%= dom_munger.data.appcss %>'],
+        dest:'build/app.full.min.css'
       }
+    },
+    concat: {
+      main: {
+        src: ['<%= dom_munger.data.appjs %>','<%= ngtemplates.main.dest %>'],
+        dest: 'temp/app.full.js'
+      }
+    },
+    ngmin: {
+      main: {
+        src:'temp/app.full.js',
+        dest: 'temp/app.full.js'
+      }
+    },
+    uglify: {
+      main: {
+        src: 'temp/app.full.js',
+        dest:'build/app.full.min.js'
+      }
+    },
+    htmlmin: {
+      main: {
+        options: {
+          collapseBooleanAttributes: true,
+          collapseWhitespace: true,
+          removeAttributeQuotes: true,
+          removeComments: true,
+          removeEmptyAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true
+        },
+        files: {
+          'build/index.html': 'build/index.html'
+        }
+      }
+    },
+    karma: {
+      options: {
+        frameworks: ['jasmine'],
+        files: [  //this files data is also updated in the watch handler, if updated change there too
+          '<%= dom_munger.data.appjs %>',
+          'bower_components/angular-mocks/angular-mocks.js',
+          createFolderGlobs('*-spec.js')
+        ],
+        logLevel:'ERROR',
+        reporters:['mocha'],
+        autoWatch: false, //watching is handled by grunt-contrib-watch
+        singleRun: true
+      },
+      all_tests: {
+        browsers: ['PhantomJS','Chrome','Firefox']
+      },
+      during_watch: {
+        browsers: ['PhantomJS']
+      },
     }
   });
 
-  grunt.registerTask('chmod', 'Add lost Permissions.', function () {
-    var fs = require('fs');
-    fs.chmodSync('dist/SherpaManager.app/Contents/Frameworks/node-webkit Helper EH.app/Contents/MacOS/node-webkit Helper EH', '555');
-    fs.chmodSync('dist/SherpaManager.app/Contents/Frameworks/node-webkit Helper NP.app/Contents/MacOS/node-webkit Helper NP', '555');
-    fs.chmodSync('dist/SherpaManager.app/Contents/Frameworks/node-webkit Helper.app/Contents/MacOS/node-webkit Helper', '555');
-    fs.chmodSync('dist/SherpaManager.app/Contents/MacOS/node-webkit', '555');
+  grunt.registerTask('build',['jshint','clean:before','less','dom_munger','ngtemplates','cssmin','concat','ngmin','uglify','copy','htmlmin','clean:after']);
+  grunt.registerTask('serve', ['dom_munger:read','jshint','connect', 'watch']);
+  grunt.registerTask('test',['dom_munger:read','karma:all_tests']);
+
+  grunt.event.on('watch', function(action, filepath) {
+    //https://github.com/gruntjs/grunt-contrib-watch/issues/156
+
+    var tasksToRun = [];
+
+    if (filepath.lastIndexOf('.js') !== -1 && filepath.lastIndexOf('.js') === filepath.length - 3) {
+
+      //lint the changed js file
+      grunt.config('jshint.main.src', filepath);
+      tasksToRun.push('jshint');
+
+      //find the appropriate unit test for the changed file
+      var spec = filepath;
+      if (filepath.lastIndexOf('-spec.js') === -1 || filepath.lastIndexOf('-spec.js') !== filepath.length - 8) {
+        spec = filepath.substring(0,filepath.length - 3) + '-spec.js';
+      }
+
+      //if the spec exists then lets run it
+      if (grunt.file.exists(spec)) {
+        var files = [].concat(grunt.config('dom_munger.data.appjs'));
+        files.push('bower_components/angular-mocks/angular-mocks.js');
+        files.push(spec);
+        grunt.config('karma.options.files', files);
+        tasksToRun.push('karma:during_watch');
+      }
+    }
+
+    //if index.html changed, we need to reread the <script> tags so our next run of karma
+    //will have the correct environment
+    if (filepath === 'index.html') {
+      tasksToRun.push('dom_munger:read');
+    }
+
+    grunt.config('watch.main.tasks',tasksToRun);
+
   });
-
-  grunt.registerTask('createLinuxApp', 'Create linux distribution.', function (version) {
-    var done = this.async();
-    var childProcess = require('child_process');
-    var exec = childProcess.exec;
-    exec('mkdir -p ./dist; cp resources/node-webkit/'+ version +'/nw.pak dist/ && cp resources/node-webkit/'+ version +'/nw dist/node-webkit', function (error, stdout, stderr) {
-      var result = true;
-      if (stdout) {
-        grunt.log.write(stdout);
-      }
-      if (stderr) {
-        grunt.log.write(stderr);
-      }
-      if (error !== null) {
-        grunt.log.error(error);
-        result = false;
-      }
-      done(result);
-    });
-  });
-
-  grunt.registerTask('createWindowsApp', 'Create windows distribution.', function () {
-    var done = this.async();
-    var concat = require('concat-files');
-    concat([
-      'tmp/nw.exe',
-      'tmp/app.nw'
-    ], 'tmp/SherpaManager.exe', function () {
-      var fs = require('fs');
-      fs.unlink('tmp/app.nw', function (error, stdout, stderr) {
-        if (stdout) {
-          grunt.log.write(stdout);
-        }
-        if (stderr) {
-          grunt.log.write(stderr);
-        }
-        if (error !== null) {
-          grunt.log.error(error);
-          done(false);
-        } else {
-          fs.unlink('tmp/nw.exe', function (error, stdout, stderr) {
-            var result = true;
-            if (stdout) {
-              grunt.log.write(stdout);
-            }
-            if (stderr) {
-              grunt.log.write(stderr);
-            }
-            if (error !== null) {
-              grunt.log.error(error);
-              result = false;
-            }
-            done(result);
-          });
-        }
-      });
-    });
-  });
-
-  grunt.registerTask('setVersion', 'Set version to all needed files', function (version) {
-    var config = grunt.config.get(['config']);
-    var appPath = config.app;
-    var resourcesPath = config.resources;
-    var mainPackageJSON = grunt.file.readJSON('package.json');
-    var appPackageJSON = grunt.file.readJSON(appPath + '/package.json');
-    var infoPlistTmp = grunt.file.read(resourcesPath + '/mac/Info.plist.tmp', {
-      encoding: 'UTF8'
-    });
-    var infoPlist = grunt.template.process(infoPlistTmp, {
-      data: {
-        version: version
-      }
-    });
-    mainPackageJSON.version = version;
-    appPackageJSON.version = version;
-    grunt.file.write('package.json', JSON.stringify(mainPackageJSON, null, 2), {
-      encoding: 'UTF8'
-    });
-    grunt.file.write(appPath + '/package.json', JSON.stringify(appPackageJSON, null, 2), {
-      encoding: 'UTF8'
-    });
-    grunt.file.write(resourcesPath + '/mac/Info.plist', infoPlist, {
-      encoding: 'UTF8'
-    });
-  });
-
-  grunt.registerTask('dist-linux', [
-    'jshint',
-    'clean:dist',
-    'copy:appLinux',
-    'createLinuxApp:Linux64'
-  ]);
-
-  grunt.registerTask('dist-linux32', [
-    'jshint',
-    'clean:dist',
-    'copy:appLinux',
-    'createLinuxApp:Linux32'
-  ]);
-
-  grunt.registerTask('dist-win', [
-    'jshint',
-    'clean:dist',
-    'copy:copyWinToTmp',
-    'compress:appToTmp',
-    'rename:zipToApp',
-    'createWindowsApp',
-    'compress:finalWindowsApp'
-  ]);
-
-  grunt.registerTask('dist-mac', [
-    'jshint',
-    'clean:dist',
-    'copy:webkit',
-    'copy:appMacos',
-    'rename:app',
-    'chmod'
-  ]);
-
-  grunt.registerTask('check', [
-    'jshint'
-  ]);
-
-  grunt.registerTask('dmg', 'Create dmg from previously created app folder in dist.', function () {
-    var done = this.async();
-    var createDmgCommand = 'resources/mac/package.sh "SherpaManager"';
-    require('child_process').exec(createDmgCommand, function (error, stdout, stderr) {
-      var result = true;
-      if (stdout) {
-        grunt.log.write(stdout);
-      }
-      if (stderr) {
-        grunt.log.write(stderr);
-      }
-      if (error !== null) {
-        grunt.log.error(error);
-        result = false;
-      }
-      done(result);
-    });
-  });
-
 };
