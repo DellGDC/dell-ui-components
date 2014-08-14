@@ -16,7 +16,6 @@
 
   <!-- JS from Bower Components -->
   <script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>
-  <script src="bower_components/json2/json2.js"></script>
   <script src="bower_components/jquery/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/lodash/dist/lodash.min.js"></script>
@@ -72,11 +71,18 @@
   <script src="app/demo-components/tooltips/tooltips.js"></script>
   <script src="app/demo-components/pagination/pagination.js"></script>
   <script src="app/services/utils.js"></script>
+  <script src="app/shared/side-bar/side-bar.js"></script>
   <!-- Add New Component JS Above -->
 
   <div id="dell-ui-site">
     <div dell-ui-site-masthead></div>
-    <div ui-view>
+    <div class="container">
+      <div class="row">
+        <div ui-view class="" id="content" ng-class="{'col-xs-9':$state.current.name !== 'test-page','col-xs-12':$state.current.name === 'test-page'}"></div>
+        <div class="col-xs-3" id="sidebar" ng-if="$state.current.name !== 'test-page'">
+          <div dell-ui-site-side-bar></div>
+        </div>
+      </div>
     </div>
   </div>
 

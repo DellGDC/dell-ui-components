@@ -1,4 +1,4 @@
-<section id="tooltips" class="container" ng-controller="TooltipsCtrl">
+<section id="tooltips" ng-controller="TooltipsCtrl">
 
 <div class="page-header">
     <h2>
@@ -7,8 +7,8 @@
 </div>
 
     <!-- copy html description and dropdown-->
-    <div class="row bottom-offset-40 html-copy">
-        <div class="col-md-9">{{copyHtmlNote}}</div>
+    <div class="row bottom-offset-40" ng-if="$state.current.name !== 'test-page'">
+        <div class="col-md-9">{{messages.copyHtmlNote}}</div>
         <div class="col-md-3">
             <div class="btn-group pull-right">
                 <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>

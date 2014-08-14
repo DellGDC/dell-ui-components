@@ -1,4 +1,4 @@
-<section id="modals" class="container" ng-controller="ModalsCtrl">
+<section id="modals" ng-controller="ModalsCtrl">
 
     <div class="page-header">
         <h2>
@@ -6,8 +6,8 @@
         </h2>
     </div>
     <!-- copy html description and dropdown-->
-    <div class="row bottom-offset-20 html-copy">
-        <div class="col-md-9">{{copyHtmlNote}}</div>
+    <div class="row bottom-offset-20" ng-if="$state.current.name !== 'test-page'">
+        <div class="col-md-9">{{messages.copyHtmlNote}}</div>
         <div class="col-md-3">
             <div class="btn-group pull-right">
                 <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>

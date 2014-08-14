@@ -1,12 +1,12 @@
-<section id="carousel" class="container" ng-controller="CarouselCtrl">
+<section id="carousel" ng-controller="CarouselCtrl">
 
 	<div class="page-header">
 	    <h2>Carousel</h2>
 	</div>
 
 	<!-- copy html description and dropdown-->
-	<div class="row bottom-offset-20 html-copy">
-	    <div class="col-md-9">{{copyHtmlNote}}</div>
+	<div class="row bottom-offset-20" ng-if="$state.current.name !== 'test-page'">
+	    <div class="col-md-9">{{messages.copyHtmlNote}}</div>
 	    <div class="col-md-3">
 	        <div class="btn-group pull-right">
 	            <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>

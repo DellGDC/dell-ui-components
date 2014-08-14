@@ -8,7 +8,7 @@ angular.module('dellUi').config(function($stateProvider, $urlRouterProvider) {
 
 });
 
-angular.module('dellUi').run(function($rootScope,utils) {
+angular.module('dellUi').run(function($rootScope, utils, $state) {
 
     $rootScope.safeApply = function(fn) {
         var phase = $rootScope.$$phase;
@@ -20,6 +20,7 @@ angular.module('dellUi').run(function($rootScope,utils) {
             this.$apply(fn);
         }
     };
+    $rootScope.$state = $state;
     $rootScope.messages = {};
     utils.getJSON("app/data/messages.json", function(data){
         $rootScope.messages = data;

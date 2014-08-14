@@ -58,9 +58,9 @@ angular.module('dellUiSite').config(function($stateProvider) {
         url: '/demo/progress-bars',
         templateUrl: 'app/demo-components/progress-bars/progress-bars.html'
     });
-    $stateProvider.state('responsive-classes', {
-        url: '/demo/responsive-classes',
-        templateUrl: 'app/demo-components/responsive-classes/responsive-classes.html'
+    $stateProvider.state('responsive-utilities', {
+        url: '/demo/responsive-utilities',
+        templateUrl: 'app/demo-components/responsive-utilities/responsive-utilities.html'
     });
     $stateProvider.state('tables', {
         url: '/demo/tables',

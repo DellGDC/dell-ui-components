@@ -1,4 +1,4 @@
-<section id="colors" class="container" ng-controller="ColorsCtrl">
+<section id="colors" ng-controller="ColorsCtrl">
 
     <div class="page-header">
         <h2>Colors</h2>
@@ -8,7 +8,7 @@
         <h4>Approved Web-safe Colors</h4>
 
 
-        <div class="bottom-offset-40 html-copy">
+        <div class="bottom-offset-40" ng-if="$state.current.name !== 'test-page'">
             <p>
                 <span class="label label-info">Copy HTML</span> Click on the color and HTML will be copied to your clipboard.
             </p>
