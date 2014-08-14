@@ -1,6 +1,6 @@
 {
-  "name": "DellDesignLibrary",
-  "version": "1.2.0",
+  "name": "dellUi",
+  "version": "1.0.0",
   "main": "index.html",
   "ignore": [
     "**/.*",

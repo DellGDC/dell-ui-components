@@ -1,0 +1,180 @@
+<section id="progress-bars" class="container" ng-controller="ProgressBarsCtrl">
+
+	<div class="page-header">
+	    <h2>
+	        Progress Bars
+	    </h2>
+	</div>
+
+	    <!-- copy html description and dropdown-->
+	    <div class="row bottom-offset-40">
+	        <div class="col-md-9">{{copyHtmlNote}}</div>
+	        <div class="col-md-3">
+	            <div class="btn-group pull-right">
+	                <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>
+	                <ul class="dropdown-menu">
+	                    <li><a class="disabled"><strong>Progress bar</strong></a></li>
+	                    <li><a href="javascript:;" to-clipboard clipboard-target="#default-progress" class="text-blue">Default progress</a></li>
+	                    <li><a href="javascript:;" to-clipboard clipboard-target="#default-with-percentage" class="text-blue">Default with percentage</a></li>
+	                    <li><a href="javascript:;" to-clipboard clipboard-target="#progress-status-example" class="text-blue">Progress status</a></li>
+	                    <li><a href="javascript:;" to-clipboard clipboard-target="#disabled-responsive" class="text-blue">Progress status: Disabled & responsive</a></li>
+	                    <li><a href="javascript:;" to-clipboard clipboard-target="#2-step-minimum" class="text-blue">Progress status 2-step minimum</a></li>
+	                    <li><a href="javascript:;" to-clipboard clipboard-target="#6-step-maximum" class="text-blue">Progress Status 6-Step maximum</a></li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+
+	<div class="bottom-offset-40">
+	    <div class="alert alert-info">
+	        <h4 class="alert-heading">
+	            Usage guidance:
+	        </h4>
+	        <p>
+	            Do not alter or animate the progress bars. Please see the DCX Standards and Governance team if additional use cases are needed.
+	        </p>
+	        <p>
+	            <strong class="label label-default">Dev guidance:</strong>&nbsp;Progress status bar is custom to Dell and requires slightly different markup and custom classes
+	        </p>
+	    </div>
+	</div>
+
+
+	<div class="row">
+	    <div class="col-md-6 bottom-offset-20">
+	        <h4>
+	            Default
+	        </h4>
+	        <p>
+	            Default progress bar color.
+	        </p>
+	        <div id="default-progress">
+	            <div class="progress">
+	                <div class="bar" style="width: 60%;"></div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+	<div class="row">
+	    <div class="col-md-6 bottom-offset-40">
+	        <h4>
+	            Default with percentage
+	        </h4>
+	        <p>
+	            Default progress bar color with percentage.
+	        </p>
+	        <div id="default-with-percentage">
+	            <div class="progress">
+	                <div class="bar" style="width: 60%;">60%</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+	<div class="bottom-offset-40">
+	    <h4>
+	        Default progress status <small>( not in Bootstrap )</small>
+	    </h4>
+	    <div id="progress-status-example">
+	        <div class="progress progress-status">
+	            <a href="javascript:;" class="bar bar-complete" style="width: 33.3%">
+	                <span class="hidden-xs hidden-sm">Payment</span>
+	            </a>
+	            <div class="bar bar-progress" style="width: 33.3%">
+	                <span class="hidden-xs hidden-sm">Verify &amp; submit order</span>
+	            </div>
+	            <div class="bar bar-incomplete" style="width: 33.4%">
+	                <span class="hidden-xs hidden-sm">Order submitted</span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<p>&nbsp;</p>
+	<div class="bottom-offset-60">
+	    <hr/>
+	</div>
+
+	<div class="bottom-offset-60">
+	    <h4>
+	        Progress Status: Disabled & Responsive <small>( not in Bootstrap )</small>
+	    </h4>
+	    <div id="disabled-responsive">
+	        <div class="progress progress-status">
+	            <div href="javascript:;" class="bar bar-disabled" style="width: 33.3%">
+	                <span class="hidden-xs hidden-sm">Payment</span>
+	            </div>
+	            <div class="bar bar-incomplete" style="width: 33.3%">
+	                <span class="hidden-xs hidden-sm">Verify &amp; submit order</span>
+	            </div>
+	            <div class="bar bar-incomplete" style="width: 33.4%">
+	                <span class="hidden-xs hidden-sm">Order submitted</span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<p>&nbsp;</p>
+
+	<div class="bottom-offset-60">
+	    <h4>
+	        Progress Status 2-Step minimum <small>( not in Bootstrap )</small>
+	    </h4>
+	    <div id="2-step-minimum">
+	        <div class="progress progress-status">
+	            <a href="javascript:;" class="bar bar-complete" style="width: 50%">
+	                <span class="hidden-xs hidden-sm">Payment</span>
+	            </a>
+	            <div class="bar bar-incomplete" style="width: 50%">
+	                <span class="hidden-xs hidden-sm">Verify &amp; submit order</span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	    <p>&nbsp;</p>
+
+	<div class="bottom-offset-60">
+	    <h4>
+	        Progress status 6-Step maximum <small>( not in Bootstrap )</small>
+	    </h4>
+	    <div id="6-step-maximum">
+	        <div class="progress progress-status">
+	            <a href="javascript:;" class="bar bar-complete" style="width: 16.666%">
+	                <span class="hidden-xs hidden-sm">Step 1</span>
+	            </a>
+	            <a href="javascript:;" class="bar bar-complete" style="width: 16.666%">
+	                <span class="hidden-xs hidden-sm">Step 2</span>
+	            </a>
+	            <a href="javascript:;" class="bar bar-complete" style="width: 16.666%">
+	                <span class="hidden-xs hidden-sm">Step 3</span>
+	            </a>
+	            <div class="bar bar-progress" style="width: 16.666%">
+	                <span class="hidden-xs hidden-sm">Step 4</span>
+	            </div>
+	            <div class="bar bar-incomplete" style="width: 16.666%">
+	                <span class="hidden-xs hidden-sm">Step 5</span>
+	            </div>
+	            <div class="bar bar-incomplete" style="width: 16.666%">
+	                <span class="hidden-xs hidden-sm">Step 6</span>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<p>&nbsp;</p>
+	<div class="bottom-offset-60">
+	    <hr/>
+	</div>
+
+	<div class="bottom-offset-60">
+	    <div class="alert alert-info">
+	        <p>
+	            <strong class="label label-default">Dev guidance:</strong> <code>div</code> tags can be replaced with <code>a</code>
+	            tags to provide links in the taskflow to go back.
+	        </p>
+	    </div>
+	</div>
+
+</section>

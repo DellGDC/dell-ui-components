@@ -1,0 +1,68 @@
+<section id="modals" class="container" ng-controller="ModalsCtrl">
+
+    <div class="page-header">
+        <h2>
+            Modals
+        </h2>
+    </div>
+    <!-- copy html description and dropdown-->
+    <div class="row bottom-offset-20 html-copy">
+        <div class="col-md-9">{{copyHtmlNote}}</div>
+        <div class="col-md-3">
+            <div class="btn-group pull-right">
+                <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>
+                <ul class="dropdown-menu">
+                    <li><a class="disabled"><strong>Modals</strong></a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#modal-example-HTML" class="text-blue">Modal</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-example-HTML">
+        <button class="btn btn-default" data-toggle="modal" data-target="#example-modal">
+            Launch demo modal
+        </button>
+        <div class="modal fade" id="example-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close hidden-xs" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">Modal title</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>One fine body&hellip;</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+	<div>
+	    <div class="modal">
+	        <div class="modal-dialog">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <button type="button" class="close hidden-xs" data-dismiss="modal" aria-hidden="true">×</button>
+	                    <h3 class="modal-title">Modal title</h3>
+	                </div>
+	                <div class="modal-body">
+	                    <p>One fine body…</p>
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                    <button type="button" class="btn btn-primary">Save changes</button>
+	                </div>
+	            </div><!-- /.modal-content -->
+	        </div><!-- /.modal-dialog -->
+	    </div><!-- /.modal -->
+	</div>
+
+</section>
+
+
+

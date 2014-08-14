@@ -1,14 +1,14 @@
-angular.module('DellDesignLibrary', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'DellUI', 'DellUISite']);
+angular.module('dellUi', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'dellUiSite', 'dellUiTheme', 'dellUiTest']);
 
-angular.module('DellDesignLibrary').config(function($stateProvider, $urlRouterProvider) {
+angular.module('dellUi').config(function($stateProvider, $urlRouterProvider) {
 
 
     /* Add New States Above */
-    $urlRouterProvider.otherwise('/welcome');
+    $urlRouterProvider.otherwise('/demo');
 
 });
 
-angular.module('DellDesignLibrary').run(function($rootScope) {
+angular.module('dellUi').run(function($rootScope) {
 
     $rootScope.safeApply = function(fn) {
         var phase = $rootScope.$$phase;

@@ -1,5 +1,5 @@
 {
-  "name": "DellDesignLibrary",
+  "name": "dellUi",
   "main":"index.html",
   "version": "1.0.0",
   "description": "Dell UI Development Environment",
@@ -11,6 +11,13 @@
     "email": "bo_lora@dell.com",
     "url": "https://github.com/bolora"
   },
+  "contributors": [
+    {
+      "name": "Clint Batte",
+      "email": "clint_batte@dell.com",
+      "url": "https://github.com/clintbatte"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "http://inside-ux.dell.com/git/Dell_Design_Library.git"

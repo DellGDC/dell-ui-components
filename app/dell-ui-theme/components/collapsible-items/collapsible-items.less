@@ -1,0 +1,208 @@
+// Collapsible Items (Dell 308 only)
+//------------------------------------------------------------------------------------------
+// When uising triangles inside of a collapse scenario the size is reduced
+
+[data-toggle="collapse"] .icon-ui-triangledown, [data-toggle="collapse"] .icon-ui-triangleup {
+    font-size: 14px;
+    }
+
+a[data-toggle="collapse"] {
+    text-decoration: none;
+    }
+
+.hide-expanded,
+.collapsed .show-collapsed {
+    display: block;
+
+    &:focus {
+        outline: none;
+        }
+    }
+
+.collapsed .hide-expanded, .show-collapsed {
+    display: none;
+
+    &:focus {
+        outline: none;
+        }
+    }
+
+// (AKA accordion)
+// Parent container
+.accordion {
+
+    > .accordiona-group:first-child > .accordion-heading.well {
+        border-top: none;
+        margin-top: 3px;
+        }
+    }
+
+// Group == heading + body
+.accordion-group {
+    border:        none;
+    .panel-body {
+        padding: 0 15px 0 35px;
+        margin-top: -3px;
+        }
+    .panel-body-well {
+        padding: 0 15px 0 15px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        }
+    }
+
+
+// accordion-group for Extra small devices (phones, less than 768px)
+@media (max-width: @screen-xs-max) {
+    .accordion-group {
+        border-bottom: 1px solid @dell-gray-stroke;
+        }
+    }
+
+.accordion-heading {
+    border-bottom: 0;
+    font-size:     ceil((@font-size-base * 1.14)); // ~16px
+    position:      relative;
+    padding-left:  20px;
+
+    .accordion-toggle {
+        display: block;
+        padding: 8px 15px;
+        }
+
+    &.well {
+
+        -webkit-border-radius: 0;
+        -moz-border-radius:    0;
+        border-radius:         0;
+        margin-bottom:         -1px;
+        margin-top:            -3px;
+        border-top:            1px solid @dell-gray-stroke;
+        padding:               0;
+
+        .accordion-toggle:after {
+            font-family:            'icon-ui';
+            speak:                  none;
+            font-style:             normal;
+            font-weight:            normal;
+            font-variant:           normal;
+            text-transform:         none;
+            line-height:            1;
+            -webkit-font-smoothing: antialiased;
+            color:                  inherit;
+            content:                "\26";
+            font-size:              12px;
+            position:               absolute;
+            right:                  20px;
+            margin-top:             5px;
+            }
+
+        .accordion-toggle.collapsed:after {
+            content: "\25";
+            }
+
+        .accordion-toggle.collapsed:before {
+            content: "\28";
+            }
+
+        .accordion-toggle:before {
+            display: none;
+            }
+        }
+    }
+
+// General toggle styles
+.accordion-toggle {
+    cursor: pointer;
+
+    &:before {
+        font-family:            'icon-ui';
+        font-size:              20px;
+        speak:                  none;
+        font-style:             normal;
+        font-weight:            normal;
+        font-variant:           normal;
+        text-transform:         none;
+        line-height:            1;
+        -webkit-font-smoothing: antialiased;
+        content:                "\2a";
+        color:                  @dell-blue;
+        position:               absolute;
+        top:                    9px;
+        left:                   0;
+        }
+
+    &.collapsed:before {
+        content: "\28";
+        }
+    }
+
+.panel {
+    &.accordion-group {
+        margin-bottom:0px;
+        }
+    }
+
+// Inner needs the styles because you can't animate properly with any styles on the element
+.accordion-toggle {
+    padding:    9px 15px;
+    //    border-top: 1px solid @dell-gray-stroke;
+    }
+
+.collapse {
+    position:           relative;
+    height:             0;
+    overflow:           hidden;
+    -webkit-transition: height .35s ease;
+    -moz-transition:    height .35s ease;
+    -o-transition:      height .35s ease;
+    transition:         height .35s ease;
+    }
+
+
+
+
+//data-toggle
+//------------------------------------------------------------------------------------------
+[data-toggle="collapse"] {
+    &.collapsed {
+        .when-expanded {
+            display:none;
+            }
+        .when-collapsed {
+            display:inherit;
+            }
+        //fixes to caret when used in a collapsible toggle
+        .caret {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+            }
+        }
+    .when-expanded {
+        display:inherit;
+        }
+    .when-collapsed {
+        display:none;
+        }
+    //fixes to caret when used in a collapsible toggle
+    .caret {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+        }
+    }
+
+//fixes to dropdown caret
+.open .dropdown-toggle .caret {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    }
+

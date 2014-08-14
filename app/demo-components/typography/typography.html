@@ -1,0 +1,258 @@
+<section id="typography" class="container" ng-controller="TypographyCtrl">
+
+	<div class="page-header">
+	    <h2>
+	        Typography: Headings
+	    </h2>
+	</div>
+
+	<!-- copy html description and dropdown-->
+	<div class="row bottom-offset-40">
+	    <div class="col-md-9">{{copyHtmlNote}}</div>
+	    <div class="col-md-3">
+	        <div class="btn-group pull-right">
+	            <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your Headings HTML</button>
+	            <ul class="dropdown-menu">
+	                <li><a class="disabled"><strong>Headings styles</strong></a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#page-title-h1" class="text-blue">Page title H1</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#h1-example" class="text-blue">Heading 1</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#h2-example" class="text-blue">Heading 2</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#heading-3-feature" class="text-blue">Heading 3 "feature"</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#h3-example" class="text-blue">Heading 3</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#h4-example" class="text-blue">Heading 4</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#h5-example" class="text-blue">Heading 5</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#h5-strong-example" class="text-blue">Heading 5 bold</a></li>
+
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+
+	<!-- Headings & Paragraph Copy -->
+	<div id="page-title-h1">
+	    <div class="title">
+	        <h1>Page title H1</h1>
+	    </div>
+	</div>
+
+	<div class="well">
+	    <table class="table bottom-offset-0">
+	        <tr>
+	            <td id="h1-example">
+	                <h1>Heading 1</h1>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td id="h2-example">
+	                <h2>Heading 2</h2>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td id="heading-3-feature">
+	                <h3 class="feature">Heading 3 "feature"</h3>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td id="h3-example">
+	                <h3>Heading 3</h3>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td id="h4-example">
+	                <h4>Heading 4</h4>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td id="h5-example">
+	                <h5>Heading 5</h5>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td id="h5-strong-example">
+	                <h5><strong>Heading 5 bold</strong></h5>
+	            </td>
+	        </tr>
+	    </table>
+	</div>
+
+	<div class="alert alert-info bottom-offset-60">
+	    <p><strong>Heading modification: </strong>H5 desktop and h5 tablet may take a bold styling if page hierarchy requires it. All other headings may not be modified. For example, if a heading is set in Museo Sans for Dell 300, do not change it to Museo Sans for Dell 700.</p>
+	    <p class="top-offset-mini"><strong>Usage guidance: </strong>For additional usage guidelines around typography, please see the Typography Guidelines at <span> http://www.delldesignlibrary.com/guides/typography.html. </span></p>
+	</div>
+
+
+
+	<div class="page-header">
+	    <h2>
+	        Typography: Styles
+	    </h2>
+	</div>
+
+	<!-- copy html description and dropdown-->
+	<div class="row bottom-offset-40">
+	    <div class="col-md-9">{{copyHtmlNote}}</div>
+	    <div class="col-md-3">
+	        <div class="btn-group pull-right">
+	            <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your typography HTML</button>
+	            <ul class="dropdown-menu">
+
+	                <li><a class="disabled"><strong>Typography styles</strong></a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#example-body-text" class="text-blue">Example body text</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#example-small-body-text" class="text-blue">Example small body text</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#blockquote-left" class="text-blue">Block quote: Left</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#blockquote-right" class="text-blue">Block quote: Right</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#example-address" class="text-blue">Example address</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#strong-text" class="text-blue">Example strong text</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#italic-text" class="text-blue">Example italic text</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#text-color-sample" class="text-blue">Text color selector</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#italic-text" class="text-blue">Example italic text</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#left-aligned-text" class="text-blue">Left aligned text</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#center-aligned-text" class="text-blue">Center aligned text</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#right-aligned-text" class="text-blue">Right aligned text</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#strikethrough-text" class="text-blue">Strikethrough text</a></li>
+
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="row">
+	    <div class="col-xs-12 col-sm-6">
+	        <div>
+	            <h3>Example body text <span style="font-size:14px">(default)</span></h3>
+	            <div id="example-body-text">
+	                <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis
+	                    parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+	                <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo
+	                    luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p>
+	            </div>
+	        </div>
+	        <div class="top-offset-20">
+	            <h3>Example small text <span style="font-size:14px">(fine print)</span></h3>
+	            <div id="example-small-body-text">
+	                <p>
+	                    <small>This copy is meant to be treated as fine print. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis
+	                        parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+	                    </small>
+	                </p>
+	                <p>
+	                    <small>This copy is meant to be treated as fine print. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non
+	                        commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.
+	                    </small>
+	                </p>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="col-xs-12 col-sm-6">
+	        <h3>
+	            Block Quotes
+	        </h3>
+	        <div id="blockquote-left">
+	            <div>
+	                <blockquote>
+	                    <p>
+	                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+	                    </p>
+	                    <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+	                </blockquote>
+	            </div>
+
+	        </div>
+	        <div id="blockquote-right">
+	            <div class="clearfix">
+	                <blockquote class="pull-right">
+	                    <p>
+	                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+	                    </p>
+	                    <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+	                </blockquote>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class="col-xs-12 col-sm-6">
+	        <div class="alert alert-info">
+	            <p><strong>Usage guidance: </strong>The usage of Block Quotes is only approved for eSupport announcement banners. Please see the DCX Standards and Governance team if additional use cases are needed.</p>
+	        </div>
+	    </div>
+	</div>
+
+	<hr/>
+
+	<div class="bottom-offset-40">
+	    <h3>Example addresses</h3>
+	    <div id="example-address">
+	        <address>
+	            <strong>Dell, Inc.</strong><br>
+	            1 Dell Way<br>
+	            Round Rock, TX 78682<br>
+	            <abbr title="Phone">P:</abbr> (512) 338-4400
+	        </address>
+	        <address>
+	            <strong>Full Name</strong><br>
+	            <a href="mailto:#">first.last@dell.com</a>
+	        </address>
+	    </div>
+	    <hr/>
+	</div>
+
+
+	<div class="bottom-offset-40">
+
+	    <h3>Example bold copy</h3>
+	    <div class="well well-small bottom-offset-40" id="strong-text">
+	        <div>
+	            <strong>Text rendered as bold text</strong>
+	        </div>
+	    </div>
+	    <h3>Example italicized copy</h3>
+	    <div class="well well-small bottom-offset-40" id="italic-text">
+	        <div>
+	            <em>Text rendered as italicized text</em>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="bottom-offset-40">
+	    <div class="pull-right">
+	        <div class="btn-group">
+	            <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Select your text color</button>
+	            <ul class="dropdown-menu pull-right">
+	                <li ng-repeat="textColor in textColors" >
+	                    <a href="javascript:;" class="{{textColor.label_color}}" ng-click="change_text_color()">{{textColor.label}}</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	    <h3>Example colored text</h3>
+
+	    <div class="well well-small" id="text-color-sample" data-copy="2-clipboard"
+	         title="Click me to copy blockquote html to clipboard"><p class="{{active_color_text}}">This text is
+	        <strong>{{active_color_text}}</strong>.</p>
+	    </div>
+	    <h3>Example text alignment</h3>
+	    <div class="well well-small">
+	        <div id="left-aligned-text">
+	            <p class="text-left">Left aligned text.</p>
+	        </div>
+	        <hr/>
+	        <div id="center-aligned-text">
+	            <p class="text-center">Center aligned text.</p>
+	        </div>
+	        <hr/>
+	        <div id="right-aligned-text">
+	            <p class="text-right">Right aligned text.</p>
+	        </div>
+	    </div>
+
+	</div>
+	<h3>Example strikethrough</h3>
+	<div class="well well-small bottom-offset-40">
+	    <div id="strikethrough-text">
+	        <p class="strike-through">This is an example of strikethrough text.</p>
+	    </div>
+	</div>
+
+</section>

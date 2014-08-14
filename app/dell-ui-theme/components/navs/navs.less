@@ -1,0 +1,283 @@
+
+
+//navs
+//------------------------------------------------------------------------------------------
+
+
+
+
+
+
+.nav-header {
+    display:        block;
+    padding:        3px 15px;
+    font-size:      11px;
+    font-weight:    bold;
+    line-height:    20px;
+    color:          #999999;
+    text-shadow:    0 1px 0 rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    }
+
+.nav li + .nav-header {
+    margin-top: 9px;
+    }
+
+.aside-nav() {
+    h2 {
+        margin: 5px 0 5px 0;
+        }
+
+    li a {
+        text-shadow:      none;
+        color:            @white;
+        background-color: @aside-nav-bg;
+        .box-shadow(inset -10px 0px 10px -9px rgba(0, 0, 0, .8));
+        border-bottom:    #666666 1px solid;
+        padding-top:      @line-height-base * 13.999999995800000001259999999622px;
+        }
+
+    > li a:hover {
+        background-color: @dell-highlight-blue;
+        color:            @aside-nav-bg;
+        .box-shadow(inset -10px 0px 10px -10px rgba(0, 0, 0, .35));
+        border-bottom:    1px solid @dell-highlight-blue;
+        }
+
+    > li.active a {
+        background:    @aside-nav-bg-active;
+        border-bottom: none;
+        position:      relative;
+        &:hover {
+            color: @white;
+            }
+
+        &:after {
+            content:     "\23"; //left arrow
+            font-family: 'icon-ui';
+            font-size:   28px;
+            position:    absolute;
+            top:         24%;
+            right:       -12px;
+            text-shadow: -10px 0px 10px -9px rgba(0, 0, 0, .8);
+            }
+        }
+
+    > li:last-child a,
+    > li:last-child a:hover {
+        .border-radius(0);
+        .border-bottom-left-radius(@border-radius-large * 2);
+        }
+
+    > li:first-child a,
+    > li:first-child a:hover {
+        .border-radius(0);
+        .border-top-left-radius(@border-radius-large * 2);
+        }
+    }
+
+
+.nav {
+    margin-bottom: 10px;
+
+    > li {
+        > a {
+            position: relative;
+            display: block;
+            padding: @nav-link-padding;
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                background-color: @nav-link-hover-bg;
+                }
+            }
+
+        // Disabled state sets text to gray and nukes hover/tab effects
+        &.disabled > a {
+            color: @nav-disabled-link-color;
+
+            &:hover,
+            &:focus {
+                color: @nav-disabled-link-hover-color;
+                text-decoration: none;
+                background-color: transparent;
+                cursor: not-allowed;
+                }
+            }
+        }
+
+    // Open dropdowns
+    .open > a {
+        &,
+        &:hover,
+        &:focus {
+            background-color: @nav-link-hover-bg;
+            border-color: @link-color;
+            }
+        }
+
+    // Nav dividers (deprecated with v3.0.1)
+    //
+    // This should have been removed in v3 with the dropping of `.nav-list`, but
+    // we missed it. We don't currently support this anywhere, but in the interest
+    // of maintaining backward compatibility in case you use it, it's deprecated.
+    .nav-divider {
+        .nav-divider();
+        }
+
+    // Prevent IE8 from misplacing imgs
+    //
+    // See https://github.com/h5bp/html5-boilerplate/issues/984#issuecomment-3985989
+    > li > a > img {
+        max-width: none;
+        }
+    }
+
+.nav-list {
+    background: @gray-light;
+    .divider {
+        height:           1px;
+        margin:           9px 15px;
+        overflow:         hidden;
+        background-color: @dell-gray-light;
+        border-bottom:    1px solid @white;
+        }
+
+    .nav-header {
+        color: @dell-gray-dark;
+        }
+
+    > .active > a,
+    > .active > a:hover,
+    > .active > a:focus {
+        color:            @white;
+        text-shadow:      0 -1px 0 rgba(0, 0, 0, 0.2);
+        background-color: @dell-blue;
+        }
+
+    > li > a {
+        padding: 3px 15px;
+        }
+
+    .border-radius(@border-radius-base);
+    > li:last-child a:hover {
+        .border-bottom-radius(@border-radius-base);
+        }
+
+    > li:first-child a:hover {
+        .border-top-radius(@border-radius-base);
+        }
+
+    &.nav-aside {
+        .nav-header,
+        .divider {
+            display: none;
+            }
+        background: none;
+        .aside-nav();
+        h2 {
+            margin: 0px 0 10px 0;
+            }
+        }
+
+    + .back-to-top {
+        //This is not part of Bootstrap
+        background:  @gray;
+        color:       @white;
+        .border-left-radius(@border-radius-large * 2);
+        margin-top:  @line-height-computed;
+        margin-left: 25%;
+        padding:     @line-height-computed / 2;
+        position:    relative;
+        z-index:     0;
+        cursor:      pointer;
+        [class^=icon] {
+            font-size:      18px;
+            position:       relative;
+            vertical-align: middle;
+            }
+
+        > span {
+            vertical-align: middle;
+            }
+
+        &:hover {
+            color: @gray-darker;
+            }
+        }
+    }
+
+.nav-tabs {
+    border-bottom: 1px solid @nav-tabs-border-color;
+    > li {
+        float: left;
+        // Make the list-items overlay the bottom border
+        margin-bottom: -1px;
+        margin-left: -1px;
+        background: #ffffff; /* Old browsers */
+        background: -moz-linear-gradient(top,  #ffffff 8%, #efefef 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(8%,#ffffff), color-stop(100%,#efefef)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  #ffffff 8%,#efefef 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  #ffffff 8%,#efefef 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  #ffffff 8%,#efefef 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  #ffffff 8%,#efefef 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#efefef',GradientType=0 ); /* IE6-9 */
+        border-bottom: 1px solid @nav-tabs-border-color;
+        border-left: 1px solid @dell-gray-light-stroke;
+        border-right: 1px solid @dell-gray-light-stroke;
+        border-top: 1px solid @dell-gray-light-stroke;
+        height: auto;
+        webkit-padding-start: 0px;
+
+        &.active{
+            border-bottom: 1px solid @white;
+            border-left: 1px solid @dell-gray-stroke;
+            border-right: 1px solid @dell-gray-stroke;
+            border-top: 1px solid @dell-gray-stroke;
+            margin-right: 1px;
+
+            .img-tab > p{
+                color:@dell-gray-dark;
+                }
+            }
+
+        // Actual tabs (as links)
+        > a {
+            margin-right: 0px;
+            line-height: @line-height-base;
+            border-radius: 0 0 0 0;
+            border: none;
+            border-top: 4px solid @white;
+            &:hover {
+                border-top: 4px solid @dell-blue;
+                }
+            &:active {
+                background: @white;
+                .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+                }
+            }
+
+        // Active state, and its :hover to override normal :hover
+        &.active > a {
+            background-color: @white;
+            border-top: 4px solid @dell-blue;
+
+            &,
+            &:hover,
+            &:focus {
+                color: @nav-tabs-active-link-hover-color;
+                border: none;
+                border-top: 4px solid @dell-blue;
+                cursor: default;
+                }
+            }
+        }
+    // pulling this in mainly for less shorthand
+    &.nav-justified {
+        .nav-justified();
+        .nav-tabs-justified();
+        }
+    }
+
+
+

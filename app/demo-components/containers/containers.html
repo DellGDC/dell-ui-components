@@ -1,0 +1,171 @@
+<section id="containers" class="container" ng-controller="ContainersCtrl">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h2>Wells, Containers and Panels</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- copy html description and dropdown-->
+    <div class="row bottom-offset-40 html-copy">
+        <div class="col-md-9">{{copyHtmlNote}}</div>
+        <div class="col-md-3">
+            <div class="btn-group pull-right">
+                <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>
+                <ul class="dropdown-menu">
+
+                    <li><a class="disabled"><strong>Wells</strong></a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#example-well" class="text-blue">Example well</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#example-colored-well" class="text-blue">Example colored wells</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#example-colored-stroked-well" class="text-blue">Example colored stroked wells</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#example-colored-stroked-well-title" class="text-blue">Example colored stroked wells with title</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#color-stroked-panels" class="text-blue">Example colored stroked panels</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-offset-40">
+        <h4>Well example</h4>
+        <div id="example-well">
+            <div class="well">
+                <p>This is a default Well...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 bottom-offset-40">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Select your Colored Well</button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:;" class="blue text-white" ng-click="active_color='blue'">Modified Dell Blue</a></li>
+                        <li><a href="javascript:;" class="dark-blue text-white" ng-click="active_color='dark-blue'">Dell Dark Blue</a></li>
+                        <li><a href="javascript:;" class="purple text-white" ng-click="active_color='purple'">Dell Purple</a></li>
+                        <li><a href="javascript:;" class="berry text-white" ng-click="active_color='berry'">Dell Berry</a></li>
+                        <li><a href="javascript:;" class="red text-white" ng-click="active_color='red'">Modified Dell Red</a></li>
+                        <li><a href="javascript:;" class="red-dark text-white" ng-click="active_color='red-dark'">Dell Dark Red</a></li>
+                        <li><a href="javascript:;" class="gray-medium text-white" ng-click="active_color='gray-medium'">GDC Medium Gray</a></li>
+                        <li><a href="javascript:;" class="gray-dark text-white" ng-click="active_color='gray-dark'">Dell Gray Dark</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4>Solid colored wells &amp; containers</h4>
+            <div id="example-colored-well">
+                <div class="well well-large well-{{active_color}}">
+                    <h2>Headline</h2>
+                    <p>Content placed in a Well...
+                    </p>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>NOTICE:</strong> The use of <code>&lt;div class="blue rounded-large"&gt; ... &lt;/div&gt;</code> still works
+                in this release of Dell 308 CSS but the native Bootstrap "well" classes should be used and have been augmented with
+                Dell 308 colors.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 bottom-offset-40">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Select your colored stroked well</button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:;" class="blue text-white" ng-click="active_color='blue'">Modified Dell Blue</a></li>
+                        <li><a href="javascript:;" class="dark-blue text-white" ng-click="active_color='dark-blue'">Dell Dark Blue</a></li>
+                        <li><a href="javascript:;" class="purple text-white" ng-click="active_color='purple'">Dell Purple</a></li>
+                        <li><a href="javascript:;" class="berry text-white" ng-click="active_color='berry'">Dell Berry</a></li>
+                        <li><a href="javascript:;" class="red text-white" ng-click="active_color='red'">Modified Dell Red</a></li>
+                        <li><a href="javascript:;" class="red-dark text-white" ng-click="active_color='red-dark'">Dell Dark Red</a></li>
+                        <li><a href="javascript:;" class="gray-medium text-white" ng-click="active_color='gray-medium'">GDC Medium Gray</a></li>
+                        <li><a href="javascript:;" class="gray-dark text-white" ng-click="active_color='gray-dark'">Dell Dark Gray</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h4>Color stroked wells &amp; containers</h4>
+            <div id="example-colored-stroked-well">
+                <div class="well well-large well-{{active_color}}-stroke">
+                    <h2>Headline</h2>
+                    <p>Content placed in a Well..
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 bottom-offset-20">
+            <div class=" pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Select your colored stroked well with title</button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="javascript:;" class="blue text-white" ng-click="active_color='blue'">Modified Dell Blue</a></li>
+                        <li><a href="javascript:;" class="dark-blue text-white" ng-click="active_color='dark-blue'">Dell Dark Blue</a></li>
+                        <li><a href="javascript:;" class="purple text-white" ng-click="active_color='purple'">Dell Purple</a></li>
+                        <li><a href="javascript:;" class="berry text-white" ng-click="active_color='berry'">Dell Berry</a></li>
+                        <li><a href="javascript:;" class="red text-white" ng-click="active_color='red'">Modified Dell Red</a></li>
+                        <li><a href="javascript:;" class="red-dark text-white" ng-click="active_color='red-dark'">Dell Dark Red</a></li>
+                        <li><a href="javascript:;" class="gray-medium text-white" ng-click="active_color='gray-medium'">GDC Medium Gray</a></li>
+                        <li><a href="javascript:;" class="gray-dark text-white" ng-click="active_color='gray-dark'">Dell Dark Gray</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h4>Color stroked wells &amp; containers with title</h4>
+            <div id="example-colored-stroked-well-title">
+                <div class="well well-large well-{{active_color}}-stroke">
+                    <h4 class="container-title">A really long title goes here</h4>
+                    <p>Content placed in a Well..
+                    </p>
+                </div>
+            </div>
+
+            <div class="alert alert-info bottom-offset-40">
+                <strong>NOTICE:</strong> <code>&lt;h4 class="well-title"&gt; ... &lt;/h4&gt;</code> is not a Bootstrap class. Use
+                this class to create a label inside a well-color-stroke or color-stroke container. Note that the container must have
+                a 20px top padding for the title to be properly placed. The title will also automatically inherit the color of the
+                container stroke.
+            </div>
+        </div>
+
+        <div class="bottom-offset-40">
+            <div class="col-xs-12 bottom-offset-40">
+                <div class=" pull-right">
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Select your colored stroked panel</button>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:;" class="blue text-white" ng-click="active_color='blue'">Modified Dell Blue</a></li>
+                            <li><a href="javascript:;" class="dark-blue text-white" ng-click="active_color='dark-blue'">Dell Dark Blue</a></li>
+                            <li><a href="javascript:;" class="purple text-white" ng-click="active_color='purple'">Dell Purple</a></li>
+                            <li><a href="javascript:;" class="berry text-white" ng-click="active_color='berry'">Dell Berry</a></li>
+                            <li><a href="javascript:;" class="red text-white" ng-click="active_color='red'">Modified Dell Red</a></li>
+                            <li><a href="javascript:;" class="red-dark text-white" ng-click="active_color='red-dark'">Dell Dark Red</a></li>
+                            <li><a href="javascript:;" class="gray-medium text-white" ng-click="active_color='gray-medium'">GDC Medium Gray</a></li>
+                            <li><a href="javascript:;" class="gray-dark text-white" ng-click="active_color='gray-dark'">Dell Dark Gray</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>Color stroked panels</h4>
+                <div id="color-stroked-panels">
+                    <div class="panel well-{{active_color}}-stroke">
+                        <div class="panel-heading">
+                            <h3>A really long title goes here</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>Content placed in a Well..
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

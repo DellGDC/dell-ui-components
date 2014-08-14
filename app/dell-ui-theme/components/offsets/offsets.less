@@ -1,0 +1,133 @@
+
+
+// offsets
+//------------------------------------------------------------------------------------------
+
+.offset-example > .well {
+    height: 100px;
+    }
+
+.top-offset {
+    &-none {
+        margin-top: 0px;
+        }
+
+    &-mini {
+        margin-top: 10px;
+        }
+
+    &-small {
+        margin-top: 20px;
+        }
+
+    &-medium {
+        margin-top: 40px;
+        }
+
+    &-large {
+        margin-top: 60px;
+        }
+    }
+
+.offset-example hr{
+    clear:         both;
+    border-top:    none;
+    border-bottom: 1px solid @dell-red;
+    margin-top:        0px;
+    margin-bottom: 0px;
+    }
+
+.bottom-offset {
+    &-none{
+        margin-bottom: 0px;
+        }
+
+    &-mini {
+        margin-bottom: 10px;
+        }
+
+    &-small {
+        margin-bottom: 20px;
+        }
+
+    &-medium {
+        margin-bottom: 40px;
+        }
+
+    &-large {
+        margin-bottom: 60px;
+        }
+    }
+.offset-examples .well:not([class*=offset]) {
+    margin-top:    0;
+    margin-bottom: 0;
+    color:         @dell-red;
+    }
+
+.offset-examples .well > .well {
+    color:  @white;
+    height: auto;
+    width: auto;
+    }
+//------------------------------------
+//new semantic offset approach
+
+.top-offset {
+    &-0 {
+        margin-top: 0px;
+        }
+
+    &-5 {
+        margin-top: 5px;
+        }
+
+    &-10 {
+        margin-top: 10px;
+        }
+
+    &-20 {
+        margin-top: 20px;
+        }
+
+    &-30 {
+        margin-top: 30px;
+        }
+
+    &-40 {
+        margin-top: 40px;
+        }
+
+    &-60 {
+        margin-top: 60px;
+        }
+    }
+
+.bottom-offset {
+    &-0 {
+        margin-bottom: 0px;
+        }
+
+    &-5 {
+        margin-bottom: 5px;
+        }
+
+    &-10 {
+        margin-bottom: 10px;
+        }
+
+    &-20 {
+        margin-bottom: 20px;
+        }
+
+    &-30 {
+        margin-bottom: 30px;
+        }
+
+    &-40 {
+        margin-bottom: 40px;
+        }
+
+    &-60 {
+        margin-bottom: 60px;
+        }
+    }

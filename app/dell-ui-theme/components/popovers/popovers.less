@@ -1,0 +1,102 @@
+
+
+//popovers
+//------------------------------------------------------------------------------------------
+.popover {
+    .close {
+        opacity:      .4;
+        font-size:    10px;
+        text-shadow:  none;
+        margin-right: -4px;
+        padding-left: 5px;
+        color:        @gray-darker;
+        &:hover {
+            opacity: 1;
+            }
+        }
+
+    .popover-title {
+        color:      @white;
+        background: @dell-blue;
+        > .close {
+            opacity:      1;
+            color:        @white;
+            float:        right;
+            font-size:    10px;
+            text-shadow:  none;
+            margin-top:   4px;
+            margin-right: -4px;
+            }
+
+        &:empty {
+            display: none;
+            }
+        }
+    }
+
+.popover.bottom .popover-title:before {
+    bottom:              100%;
+    content:             " ";
+    height:              0;
+    width:               0;
+    position:            absolute;
+    pointer-events:      none;
+    border-color:        transparent;
+    border-bottom-color: @dell-blue;
+    border-width:        10px;
+    left:                50%;
+    margin-left:         -10px;
+    top:                 -18px;
+    }
+
+.control-group.error .popover,
+.error .popover,
+.error + .popover,
+:not(form).ng-dirty.ng-invalid + .popover {
+    background-color: @dell-alert-yellow;
+    &.right .arrow:after {
+        border-right-color: @dell-alert-yellow;
+        }
+    &.top .arrow:after {
+        border-top-color: @dell-alert-yellow;
+        }
+    &.left .arrow:after {
+        border-left-color: @dell-alert-yellow;
+        }
+    &.bottom .arrow:after {
+        border-bottom-color: @dell-alert-yellow;
+        }
+    }
+
+//popovers for mobile
+@media only screen and (max-width: @screen-xs-max) {
+    .popover {
+        .arrow,
+        &.bottom .popover-title:before {
+            display: none;
+            }
+        .box-shadow(0px 10px 54px rgba(0, 0, 0, 0.4));
+        left:      5%;
+        width:     90%;
+        max-width: @screen-xs-max;
+        &.right,
+        &.left {
+            margin-left: 0;
+            }
+        }
+
+    .control-group.error .popover,
+    .error .popover,
+    .error + .popover {
+        top: 0;
+        .box-shadow(0 5px 10px rgba(0, 0, 0, .2));
+        .arrow,
+        &.bottom .popover-title:before {
+            display: block;
+            }
+        }
+    }
+
+[data-trigger=hover]+ .popover .close {
+    display:none;
+    }

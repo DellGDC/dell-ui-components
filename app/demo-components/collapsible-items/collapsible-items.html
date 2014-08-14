@@ -1,0 +1,293 @@
+<section id="collapsible-items" class="container" ng-controller="CollapsibleItemsCtrl">
+
+	<div class="page-header">
+	    <h2>Collapsible Items</h2>
+	</div>
+
+	<!-- copy html description and dropdown-->
+	<div class="row bottom-offset-20 html-copy">
+	    <div class="col-md-9">{{copyHtmlNote}}</div>
+	    <div class="col-md-3">
+	        <div class="btn-group pull-right">
+	            <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>
+	            <ul class="dropdown-menu">
+	                <li><a class="disabled"><strong>Collapsible Items</strong></a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#typical-accordion" class="text-blue">Typical accordion</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#accordion-independent-panels" class="text-blue">Accordion with independent panels</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#accordion-colored-background" class="text-blue">Accordion with colored background</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#collapsible-link" class="text-blue">Collapsible link</a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="bottom-offset-40">
+	    <h3>Typical accordion</h3>
+	    <div id="typical-accordion">
+	        <div id="collapsible-example-HTML-1">
+	            <div class="accordion" id="accordion1">
+	                <div class="accordion-group">
+	                    <div class="accordion-heading">
+	                            Collapsible group item #1
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+	                            Bags and carrying cases
+	                        </a>
+	                    </div>
+	                    <div id="collapseOne" class="panel-collapse collapse">
+	                        <div class="panel-body bottom-offset-15">
+	                            Cras vulputate metus quis sollicitudin volutpat. Maecenas egestas scelerisque porttitor. Suspendisse in convallis nibh. Proin dignissim tellus nisi, et varius lectus viverra quis. Quisque sit amet mauris dapibus, viverra tellus ac, imperdiet mi. Donec hendrerit tortor lectus, ac luctus nibh iaculis non.
+
+	                            <div class="top-offset-10">
+	                                <div class="bottom-offset-5">
+	                                   <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-show-hide-bags">
+	                                       <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangledown"></i>&nbsp;&nbsp;Show more</span>
+	                                       <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangleup"></i>&nbsp;&nbsp;Show less</span>
+	                                   </a>
+	                                </div>
+	                                <div id="collapsible-show-hide-bags" class="collapse">
+	                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+	                                </div>
+	                            </div>
+
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="accordion-group">
+	                    <div class="accordion-heading">
+	                            Collapsible group item #2
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+	                            Tax essentials
+	                        </a>
+	                    </div>
+	                    <div id="collapseTwo" class="panel-collapse collapse">
+	                        <div class="panel-body bottom-offset-15">
+	                            Ut quis hendrerit nisi. Nulla cursus adipiscing odio, a condimentum justo dapibus ut. Vestibulum in bibendum velit, eget commodo leo. Donec accumsan, lorem ut sodales faucibus, nisi libero fermentum velit, eu lobortis odio metus ac augue. Nullam semper, diam dignissim pharetra rutrum, sem purus volutpat neque, non bibendum tortor arcu nec enim. Sed iaculis eros eget turpis varius volutpat. Phasellus eget nunc velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam quis justo arcu. Sed at nisl lorem. Maecenas et libero velit.
+	                            <div class="top-offset-10">
+	                                <div class="bottom-offset-5">
+	                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-show-hide-essentials">
+	                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangledown"></i>&nbsp;&nbsp;Show more </span>
+	                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangleup"></i>&nbsp;&nbsp;Show less</span>
+	                                    </a>
+	                                </div>
+	                                <div id="collapsible-show-hide-essentials" class="collapse">
+	                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="accordion-group">
+	                    <div class="accordion-heading">
+	                            Collapsible group item #3
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree">
+	                            Home solutions
+	                        </a>
+	                    </div>
+	                    <div id="collapseThree" class="panel-collapse collapse">
+	                        <div class="panel-body bottom-offset-15">
+	                            Vivamus blandit vel mauris et rutrum. Donec ac tincidunt turpis. Aenean consequat pulvinar tortor id rhoncus. Curabitur non faucibus eros, id dictum neque. Sed at neque quam. Curabitur vel viverra sem, in dapibus lectus. Phasellus vehicula, augue a consequat vestibulum, libero erat blandit velit, sed fringilla velit magna non nulla. Vestibulum fermentum urna vel leo tristique, condimentum mollis elit vehicula. Pellentesque sodales viverra hendrerit. Curabitur eget lorem justo. Proin nibh augue, adipiscing at facilisis vel, tempor et lorem. Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor.
+	                            <div class="top-offset-10">
+	                                <div class="bottom-offset-5">
+	                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-show-hide-solutions">
+	                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangledown"></i>&nbsp;&nbsp;Show more </span>
+	                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangleup"></i>&nbsp;&nbsp;Show less</span>
+	                                    </a>
+	                                </div>
+	                                <div id="collapsible-show-hide-solutions" class="collapse">
+	                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
+	<div class="bottom-offset-50">
+	    <h3>Accordion with independent panels</h3>
+	    <p>By removing <code>data-parent</code> all panels will act independently</p>
+	    <div id="accordion-independent-panels">
+	        <div id="collapsible-example-HTML-2">
+	            <div class="accordion" id="accordion2">
+	                <div class="accordion-group">
+	                    <div class="accordion-heading">
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapse-1">
+	                            Collapsible group item #1
+	                            Cables, adapters & power
+	                        </a>
+	                    </div>
+	                    <div id="collapse-1" class="panel-collapse collapse">
+	                        <div class="panel-body bottom-offset-15">
+	                            Ut quis hendrerit nisi. Nulla cursus adipiscing odio, a condimentum justo dapibus ut. Vestibulum in bibendum velit, eget commodo leo. Donec accumsan, lorem ut sodales faucibus, nisi libero fermentum velit, eu lobortis odio metus ac augue. Nullam semper, diam dignissim pharetra rutrum, sem purus volutpat neque, non bibendum tortor arcu nec enim. Sed iaculis eros eget turpis varius volutpat. Phasellus eget nunc velit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam quis justo arcu. Sed at nisl lorem. Maecenas et libero velit.
+	                            <div class="top-offset-10">
+	                                <div class="bottom-offset-5">
+	                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-show-hide-cables">
+	                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangledown"></i>&nbsp;&nbsp;Show more </span>
+	                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangleup"></i>&nbsp;&nbsp;Show less</span>
+	                                    </a>
+	                                </div>
+	                                <div id="collapsible-show-hide-cables" class="collapse">
+	                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="accordion-group">
+	                    <div class="accordion-heading">
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapse-2">
+	                            Audio & entertainment
+	                        </a>
+	                    </div>
+	                    <div id="collapse-2" class="panel-collapse collapse">
+	                        <div class="panel-body bottom-offset-15">
+	                            Mauris eu tincidunt erat. Sed eget pellentesque erat, in dictum lectus. Nunc sit amet risus purus. Maecenas tincidunt bibendum nibh a convallis. Pellentesque varius mauris tortor, eu commodo sem convallis non. Ut tempor nulla in metus varius commodo. Aenean quis justo eget ante tempus ullamcorper. Proin dolor dolor, molestie in vehicula non, sodales eu tortor. In id nisl ut eros ullamcorper rhoncus a at lorem. Aenean mollis nisl non libero molestie, at vehicula est vulputate. Vestibulum iaculis malesuada dapibus.
+	                            <div class="top-offset-10">
+	                                <div class="bottom-offset-5">
+	                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-show-hide-audio">
+	                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangledown"></i>&nbsp;&nbsp;Show more </span>
+	                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangleup"></i>&nbsp;&nbsp;Show less</span>
+	                                    </a>
+	                                </div>
+	                                <div id="collapsible-show-hide-audio" class="collapse">
+	                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="accordion-group">
+	                    <div class="accordion-heading">
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapse-3">
+	                            Monitors & peripherals
+	                        </a>
+	                    </div>
+	                    <div id="collapse-3" class="panel-collapse collapse">
+	                        <div class="panel-body bottom-offset-15">
+	                            Mauris eu tincidunt erat. Sed eget pellentesque erat, in dictum lectus. Nunc sit amet risus purus. Maecenas tincidunt bibendum nibh a convallis. Pellentesque varius mauris tortor, eu commodo sem convallis non. Ut tempor nulla in metus varius commodo. Aenean quis justo eget ante tempus ullamcorper. Proin dolor dolor, molestie in vehicula non, sodales eu tortor. In id nisl ut eros ullamcorper rhoncus a at lorem. Aenean mollis nisl non libero molestie, at vehicula est vulputate. Vestibulum iaculis malesuada dapibus.
+	                            <div class="top-offset-10">
+	                                <div class="bottom-offset-5">
+	                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-show-hide-monitors">
+	                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangledown"></i>&nbsp;&nbsp;Show more </span>
+	                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangleup"></i>&nbsp;&nbsp;Show less</span>
+	                                    </a>
+	                                </div>
+	                                <div id="collapsible-show-hide-monitors" class="collapse">
+	                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<hr/>
+
+	<div class="bottom-offset-medium">
+
+	    <div class="row">
+	        <div class="col-xs-12">
+	            <div class="pull-right">
+	                <div class="btn-group">
+	                    <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">View other colors</button>
+	                    <ul class="dropdown-menu pull-right">
+	                        <li><a href="javascript:;" class="blue text-white" ng-click="active_color_limited_set='blue'">Modified Dell Blue</a></li>
+	                        <li><a href="javascript:;" class="gray-light text-gray-medium" ng-click="active_color_limited_set='gray-light'">Dell Light Gray</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+
+	            <div>
+	                <h3>Accordion with colored background triggers and independent panels</h3>
+	                <p>By adding <code>well</code> classes to <code>accordion-heading</code> you can create a colored header with
+	                    plus/minus collapse/expand icons on the right.
+	                </p>
+	            </div>
+	        </div>
+	    </div>
+	    <div>
+	        <div class="alert alert-warning alert-dismissable bottom-offset-40">
+	            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	            <p>
+	                <strong class="alert-title">Usage guidance: </strong> <span class="alert-message">Accordions with color backgrounds are limited to Dell-blue and Dell-gray-light</span>
+	            </p>
+	        </div>
+	    </div>
+	    <div id="accordion-colored-background">
+	        <div class="bottom-offset-small" id="collapsible-example-HTML-3">
+	            <div class="accordion" id="accordion3">
+	                <div class="accordion-group">
+	                    <div class="accordion-heading well well-{{active_color_limited_set}}">
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapseOne-3">
+	                            Bags and carrying cases
+	                        </a>
+	                    </div>
+	                    <div id="collapseOne-3" class="panel-collapse collapse">
+	                        <div class="panel-body-well">
+	                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis fermentum diam. Suspendisse enim libero, vestibulum a nulla a, mollis ullamcorper tortor. Sed purus libero, pharetra sed urna eleifend, tristique porttitor felis. In libero ante, tristique nec lobortis lacinia, pulvinar quis lectus. Nam quis turpis a urna egestas aliquet ac et nulla. Sed sapien nunc, sollicitudin ac aliquam et, luctus quis nisi. Integer vitae rutrum mauris.
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="accordion-group">
+	                    <div class="accordion-heading well well-{{active_color_limited_set}}">
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapseTwo-3">
+	                            Audio & entertainment
+	                        </a>
+	                    </div>
+	                    <div id="collapseTwo-3" class="panel-collapse collapse">
+	                        <div class="panel-body-well">
+	                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis fermentum diam. Suspendisse enim libero, vestibulum a nulla a, mollis ullamcorper tortor. Sed purus libero, pharetra sed urna eleifend, tristique porttitor felis. In libero ante, tristique nec lobortis lacinia, pulvinar quis lectus. Nam quis turpis a urna egestas aliquet ac et nulla. Sed sapien nunc, sollicitudin ac aliquam et, luctus quis nisi. Integer vitae rutrum mauris.
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="accordion-group">
+	                    <div class="accordion-heading well well-{{active_color_limited_set}}">
+	                        <a class="accordion-toggle collapsed" data-toggle="collapse" href="#collapseThree-3">
+	                            Monitors & peripherals
+	                        </a>
+	                    </div>
+	                    <div id="collapseThree-3" class="panel-collapse collapse">
+	                        <div class="panel-body-well">
+	                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis fermentum diam. Suspendisse enim libero, vestibulum a nulla a, mollis ullamcorper tortor. Sed purus libero, pharetra sed urna eleifend, tristique porttitor felis. In libero ante, tristique nec lobortis lacinia, pulvinar quis lectus. Nam quis turpis a urna egestas aliquet ac et nulla. Sed sapien nunc, sollicitudin ac aliquam et, luctus quis nisi. Integer vitae rutrum mauris.
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<hr/>
+
+	<div>
+	    <h4>From a link</h4>
+	    <div id="collapsible-link" class="bottom-offset-40">
+	        <div id="collapsible-example-HTML-5" class="bottom-offset-small">
+	            <p><a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-example-area-5">
+	                <span class="show-collapsed">Show stuff <i aria-hidden="true" class="icon-ui-triangledown"></i></span>
+	                <span class="hide-expanded">Hide stuff <i aria-hidden="true" class="icon-ui-triangleup"></i></span>
+	            </a>
+	            </p>
+	            <p id="collapsible-example-area-5" class="collapse">
+	                Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.
+	            </p>
+	        </div>
+	    </div>
+
+	    <div class="alert alert-warning alert-dismissable" id="collapsible-markup-warning">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	        <h4>Warning:</h4>
+	        <p><strong>Check your markup:</strong> If <code>show-collapsed </code> and <code>hide-expanded </code> classes are
+	            not behaving correctly it is possible that you added another class along with these. <br>
+	            For example: <code>&lt;span class="show-collapsed col-md-6"&gt; Show Stuff <i aria-hidden="true" class="icon-ui-triangledown"></i>&lt;/span&gt;</code> will fail because <code>col-md-6</code> overrides <code>show-collapsed</code> display settings. In this case, <code>col-md-6</code> should be a
+	            div parent to the <code>show-collapsed</code>.</p>
+	    </div>
+	</div>
+
+</section>

@@ -1,0 +1,193 @@
+<section class="container" ng-controller="AlertsCtrl" id="alerts">
+
+
+	<div class="page-header">
+	    <h2>
+	        Alerts
+	    </h2>
+	</div>
+
+	<!-- copy html description and dropdown-->
+	<div class="row bottom-offset-40 html-copy">
+	    <div class="col-md-9">{{copyHtmlNote}}</div>
+	    <div class="col-md-3">
+	        <div class="btn-group pull-right">
+	            <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>
+	            <ul class="dropdown-menu">
+	                <li><a class="disabled"><strong>Alerts (with close "X")</strong></a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#alert-warning" class="text-blue">Alert warning with close "X"</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#alert-error" class="text-blue">Alert error with close "X"</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#alert-success" class="text-blue">Alert success with close "X"</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#alert-info" class="text-blue">Alert info with close "X"</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#mixed-errors" class="text-blue">Mixed Errors & Notifications with close "X"</a></li>
+
+	                <li><a class="disabled"><strong>Alerts (without close "X")</strong></a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#alert-warning-no-close" class="text-blue">Alert warning</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#alert-error-no-close" class="text-blue">Alert error</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#alert-success-no-close" class="text-blue">Alert success</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#alert-info-no-close" class="text-blue">Alert info</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#mixed-errors-no-close" class="text-blue">Mixed Errors & Notifications</a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+	<h3 class="bottom-offset-20">Alerts with close "X"</h3>
+	<div id="alert-warning">
+	    <div class="alert alert-warning alert-dismissable">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	        <p>
+	           <strong>Warning:</strong> dolor sit amet, con Maecenas egestas scelerisque porttitor.
+	        </p>
+	    </div>
+	</div>
+
+	<div class="row bottom-offset-20">
+	    <div class="col-xs-12 col-md-4" id="alert-error">
+	        <div class="alert alert-error alert-dismissable">
+	            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	            <h4><strong>Error example with title</strong></h4>
+	            <p>Change a few things up and try submitting again. </p>
+	        </div>
+	    </div>
+	    <div class="col-xs-12 col-md-4" id="alert-success">
+	        <div class="alert alert-success alert-dismissable">
+	            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	            <strong>Success:</strong> You successfully read this important alert message. Please note in the html of this alert an icon was inserted but is not displayed. This is because Dell 308 css overrides any icon here.
+	        </div>
+	    </div>
+	    <div class="col-xs-12 col-md-4" id="alert-info">
+	        <div class="alert alert-info alert-dismissable">
+	            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	            <strong>Information:</strong> This alert needs your attention, but it's not super important.
+	        </div>
+	    </div>
+	</div>
+
+	<h3 class="bottom-offset-20">Mixed Errors and Notifications with close "X"</h3>
+	    <div id="mixed-errors" class="bottom-offset-60">
+	        <div class="alert alert-dismissable">
+
+	            <div class="" data-toggle="collapse" data-target="#alert-example-1">
+	                <span class="close hide-expanded">×</span>
+	                <span class="show-collapsed text-blue">see alert block example title 1 </span>
+	            </div>
+
+	            <div class="alert-warning fade in" id="alert-example-1">
+	                <p>
+	                    <strong>Warning:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vulputate metus quis sollicitudin volutpat. Maecenas egestas scelerisque porttitor.
+	                </p>
+	            </div>
+
+	            <div class="" data-toggle="collapse" data-target="#alert-example-2">
+	                <span class="close hide-expanded">×</span>
+	                <span class="show-collapsed text-blue">see alert block example title 2</span>
+	            </div>
+
+	            <div class="alert-info fade in" id="alert-example-2">
+	                 <h4><strong>Alert block example with title 2</strong></h4>
+	                <p>
+	                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vulputate metus quis sollicitudin volutpat. Maecenas egestas scelerisque porttitor. Suspendisse in convallis nibh.
+	                </p>
+	            </div>
+
+	            <div class="" data-toggle="collapse" data-target="#alert-example-3">
+	                <span class="close hide-expanded">×</span>
+	                <span class="show-collapsed text-blue">see alert block example title 3</span>
+	            </div>
+
+	            <div class="alert-success fade in" id="alert-example-3">
+	                 <h4><strong>Alert block example with title 3</strong></h4>
+	                <p>
+	                    Cras vulputate metus quis sollicitudin volutpat. Maecenas egestas scelerisque porttitor. Suspendisse in convallis nibh. Proin dignissim tellus nisi, et varius lectus viverra quis. Quisque sit amet mauris dapibus, viverra tellus ac, imperdiet mi.
+	                </p>
+	            </div>
+
+	            <div class="" data-toggle="collapse" data-target="#alert-example-4">
+	                <span class="close hide-expanded">×</span>
+	                <span class="show-collapsed text-blue">see alert block example title 4</span>
+	            </div>
+
+	            <div class="alert-error fade in" id="alert-example-4">
+	                <h4><strong>Alert block example with title 4</strong></h4>
+	                <p>
+	                    Sollicitudin volutpat egestas scelerisque porttitor. Suspendisse in convallis nibh. Proin dignissim tellus nisi, et varius lectus viverra quis. Quisque sit amet mauris dapibus, viverra tellus ac, imperdiet mi.
+	                </p>
+	            </div>
+	        </div>
+	    </div>
+
+	<hr/>
+
+	<h3 class="bottom-offset-20">Alerts <strong>without</strong> close "X"</h3>
+	<div id="alert-warning-no-close">
+	    <div class="alert alert-warning alert-dismissable">
+	        <p>
+	            <strong>Warning:</strong> dolor sit amet, con Maecenas egestas scelerisque porttitor.
+	        </p>
+	    </div>
+	</div>
+
+	<div class="row bottom-offset-20">
+	    <div class="col-xs-12 col-md-4" id="alert-error-no-close">
+	        <div class="alert alert-error alert-dismissable">
+	            <h4><strong>Error example with title</strong></h4>
+	            <p>Change a few things up and try submitting again. </p>
+	        </div>
+	    </div>
+	    <div class="col-xs-12 col-md-4" id="alert-success-no-close">
+	        <div class="alert alert-success alert-dismissable">
+	            <strong>Success:</strong> You successfully read this important alert message. Please note in the html of this alert an icon was inserted but is not displayed. This is because Dell 308 css overrides any icon here.
+	        </div>
+	    </div>
+	    <div class="col-xs-12 col-md-4" id="alert-info-no-close">
+	        <div class="alert alert-info alert-dismissable">
+	            <strong>Information:</strong> This alert needs your attention, but it's not super important.
+	        </div>
+	    </div>
+	</div>
+
+	<h3 class="bottom-offset-20">Mixed Errors and Notifications <strong>without</strong> close "X"</h3>
+	<div id="mixed-errors-no-close">
+	    <div class="alert alert-dismissable">
+
+	        <div class="alert-warning fade in">
+	            <p>
+	                <strong>Warning:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vulputate metus quis sollicitudin volutpat. Maecenas egestas scelerisque porttitor.
+	            </p>
+	        </div>
+
+	        <div class="alert-info fade in">
+	            <h4><strong>Alert block example with title 2</strong></h4>
+	            <p>
+	                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vulputate metus quis sollicitudin volutpat. Maecenas egestas scelerisque porttitor. Suspendisse in convallis nibh.
+	            </p>
+	        </div>
+
+	        <div class="alert-success fade in">
+	            <h4><strong>Alert block example with title 3</strong></h4>
+	            <p>
+	                Cras vulputate metus quis sollicitudin volutpat. Maecenas egestas scelerisque porttitor. Suspendisse in convallis nibh. Proin dignissim tellus nisi, et varius lectus viverra quis. Quisque sit amet mauris dapibus, viverra tellus ac, imperdiet mi.
+	            </p>
+	        </div>
+
+	        <div class="alert-error fade in">
+	            <h4><strong>Alert block example with title 4</strong></h4>
+	            <p>
+	                Sollicitudin volutpat egestas scelerisque porttitor. Suspendisse in convallis nibh. Proin dignissim tellus nisi, et varius lectus viverra quis. Quisque sit amet mauris dapibus, viverra tellus ac, imperdiet mi.
+	            </p>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="top-offset-large">
+	    <hr/>
+	</div>
+
+	<div class="alert alert-info alert-dismissable">
+	    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	     <h4>Dev guidance:</h4>
+	    <p>Any icon placed inside the alerts block will be automatically hidden.</p>
+	</div>
+
+</section>

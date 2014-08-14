@@ -1,0 +1,263 @@
+
+
+//carousel
+//------------------------------------------------------------------------------------------
+
+.pull-caption() {
+    max-width:  50%;
+    .border-radius(@border-radius-base);
+    background: rgba(255, 255, 255, 0.8);
+    position:   absolute;
+    color:      @dell-gray-dark;
+    a {
+        color: @dell-blue;
+        }
+
+    .btn-primary,
+    .btn-secondary {
+        color: @white;
+        }
+    }
+
+.carousel {
+    padding: 0 40px 30px 40px;
+    .carousel-control {
+        position:    absolute;
+        top:         31%;
+        width:       40px;
+        height:      50px;
+        margin-top:  0;
+        font-size:   60px;
+        font-weight: normal;
+        line-height: 30px;
+        color:       @dell-blue;
+        text-align:  center;
+        background:  none;
+        border:      none;
+        .border-radius(0);
+        opacity:     1;
+        filter:      alpha(opacity=100);
+        text-shadow: none;
+        &.left {
+            left: 0;
+            &:before {
+                content:                "\2e";
+                font-family:            'icon-ui';
+                font-size:              60px;
+                speak:                  none;
+                font-style:             normal;
+                font-weight:            normal;
+                font-variant:           normal;
+                text-transform:         none;
+                line-height:            1;
+                -webkit-font-smoothing: antialiased;
+                margin-left:            -20px;
+                }
+
+            &:hover {
+                color: @dell-highlight-blue;
+                }
+            }
+
+        &.right {
+            right: 0;
+            &:after {
+                content:                "\2d";
+                font-family:            'icon-ui';
+                font-size:              60px;
+                speak:                  none;
+                font-style:             normal;
+                font-weight:            normal;
+                font-variant:           normal;
+                text-transform:         none;
+                line-height:            1;
+                -webkit-font-smoothing: antialiased;
+                margin-left:            -17px;
+                }
+
+            &:hover {
+                color: @dell-highlight-blue;
+                }
+            }
+        }
+
+    .carousel-indicators {
+        margin-right: 0;
+        left:         50%;
+        position:     relative;
+        &-4 {
+            margin-left: -21px;
+            }
+
+        &-5 {
+            margin-left: -37px;
+            }
+
+        li {
+            width:         30px;
+            height:        10px;
+            margin:        0px 8px;
+            border-radius: 3px;
+            background:    @dell-gray-stroke;
+            &:hover:not(.active) {
+                background: @dell-highlight-blue;
+                cursor:     pointer;
+                }
+            }
+
+        .active {
+            background: @dell-gray-dark;
+            }
+        }
+
+    &.carousel-gallery {
+        padding:  0 0 30px;
+        position: relative;
+        .carousel-control {
+            @media only screen and (max-width: @screen-xs) {
+                top:                           20%;
+                }
+            @media only screen and (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+                top:                           24%;
+                }
+            @media only screen and (min-width: @screen-md) and (max-width: @screen-md-max) {
+                top:                           28%;
+                }
+            @media only screen and (min-width: @screen-md-max) and (max-width: @screen-lg) {
+                top:                           31%;
+                }
+            background: rgba(255, 255, 255, 0.4);
+            padding:    20px 10px;
+            height:     100px;
+            width:      60px;
+            z-index:    15;
+            &.left {
+                .border-right-radius(@border-radius-small);
+                &:hover {
+                    background: rgba(255, 255, 255, 0.8);
+                    color:      @dell-blue;
+                    }
+                }
+
+            &.right {
+                .border-left-radius(@border-radius-small);
+                &:hover {
+                    background: rgba(255, 255, 255, 0.8);
+                    color:      @dell-blue;
+                    }
+                }
+
+            &.with-captions {
+                @media only screen and (max-width: @screen-xs) {
+                    top:                           20%;
+                    }
+                @media only screen and (min-width: @screen-sm) and (max-width: @screen-sm-max) {
+                    top:                           32%;
+                    }
+                @media only screen and (min-width: @screen-md) and (max-width: @screen-md-max) {
+                    top:                           28%;
+                    }
+                @media only screen and (min-width: @screen-md-max) and (max-width: @screen-lg) {
+                    top:                           31%;
+                    }
+                }
+            }
+
+        .item.active {
+            .border-radius(@border-radius-base);
+            overflow: hidden;
+            }
+
+        // Caption for text below images
+        .carousel-caption {
+            position:   relative;
+            left:       auto;
+            right:      auto;
+            bottom:     auto;
+            padding:    20px;
+            text-align: left;
+            background: inherit;
+            overflow:   hidden;
+            &.pull-top-left {
+                .pull-caption();
+                top:  20px;
+                left: 20px;
+                }
+
+            &.pull-top-right {
+                .pull-caption();
+                top:   20px;
+                right: 20px;
+                }
+
+            &.pull-bottom-left {
+                .pull-caption();
+                bottom: 20px;
+                left:   20px;
+                }
+
+            &.pull-bottom-right {
+                .pull-caption();
+                bottom: 20px;
+                right:  20px;
+                }
+            }
+
+        .carousel-caption h4,
+        .carousel-caption p {
+            text-shadow: none;
+            color:       inherit;
+            line-height: inherit;
+            }
+
+        .carousel-caption .lead {
+            margin-bottom: 0px;
+            }
+
+        .well {
+            margin-bottom: 0;
+            padding: 0px;
+            .carousel-caption h4,
+            .carousel-caption h2,
+            .carousel-caption p {
+                text-shadow: none;
+                color:       @dell-gray-dark;
+                }
+            }
+        }
+    }
+
+img {
+    vertical-align: middle;
+    }
+
+@media only screen and (max-width: @screen-xs-max) {
+    .carousel-control {
+        display: none;
+        }
+
+    .carousel .carousel-indicators {
+        left:       50%;
+        margin-top: 20px;
+        }
+
+    .carousel.carousel-gallery {
+        width:       105%;
+        margin-left: -2%;
+        .item.active {
+            .border-radius(0);
+            .well {
+                .border-radius(0);
+                }
+            }
+        }
+    }
+
+@media (min-width: @screen-sm) {
+    .carousel-indicators {
+        margin-top: 10px;
+        bottom:     0px;
+        }
+    }
+
+

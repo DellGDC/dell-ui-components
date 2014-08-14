@@ -1,0 +1,200 @@
+<section id="lists" class="container" ng-controller="ListsCtrl">
+
+	<div class="page-header">
+	    <h2>
+	        Lists
+	    </h2>
+	</div>
+
+    <!-- copy html description and dropdown-->
+    <div class="row bottom-offset-40 html-copy">
+        <div class="col-md-9">{{copyHtmlNote}}</div>
+        <div class="col-md-3">
+            <div class="btn-group pull-right">
+                <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>
+                <ul class="dropdown-menu">
+                    <li><a class="disabled"><strong>Lists</strong></a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#nav-list" class="text-blue">Nav List</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#unordered-list" class="text-blue">Unordered list</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#order-list" class="text-blue">Ordered list</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#unstyled-list" class="text-blue">Unstyled list</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#inline-list" class="text-blue">Inline list</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#description-lists" class="text-blue">Description lists</a></li>
+                    <li><a href="javascript:;" to-clipboard clipboard-target="#horizontal-description" class="text-blue">Horizontal description</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+	<div class="bottom-offset-20">
+	    <h3>Standard nav list</h3>
+	</div>
+
+	<div class="row">
+	    <div class="bottom-offset-40">
+	        <div class="col-md-4" id="nav-list">
+	            <ul class="nav nav-list">
+	                <li class="nav-header">List header
+	                </li>
+	                <li class="active">
+	                    <a href="javascript:;">Home</a>
+	                </li>
+	                <li>
+	                    <a href="javascript:;">Library</a>
+	                </li>
+	                <li>
+	                    <a href="javascript:;">Applications</a>
+	                </li>
+	                <li class="nav-header">Another list header
+	                </li>
+	                <li>
+	                    <a href="javascript:;">Profile</a>
+	                </li>
+	                <li>
+	                    <a href="javascript:;">Settings</a>
+	                </li>
+	                <li class="divider"></li>
+	                <li>
+	                    <a href="javascript:;">Help</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+	<hr/>
+
+	<!-- Lists -->
+	<div class="bottom-offset-20">
+	    <h3>Unordered lists</h3>
+	    <p>A list of items in which the order does <em>not</em> explicitly matter.</p>
+	</div>
+
+	    <div id="unordered-list">
+	        <ul>
+	            <li>Lorem ipsum dolor sit amet</li>
+	            <li>Consectetur adipiscing elit</li>
+	            <li>Integer molestie lorem at massa</li>
+	            <li>Facilisis in pretium nisl aliquet</li>
+	            <li>Nulla volutpat aliquam velit
+	                <ul>
+	                    <li>Phasellus iaculis neque</li>
+	                    <li>Purus sodales ultricies</li>
+	                    <li>Vestibulum laoreet porttitor sem</li>
+	                    <li>Ac tristique libero volutpat at</li>
+	                </ul>
+	            </li>
+	            <li>Faucibus porta lacus fringilla vel</li>
+	            <li>Aenean sit amet erat nunc</li>
+	            <li>Eget porttitor lorem</li>
+	        </ul>
+	    </div>
+
+	    <hr/>
+
+	    <div class="bottom-offset-20">
+	        <h3>Ordered</h3>
+	        <p>A list of items in which the order <em>does</em> explicitly matter.</p>
+	    </div>
+
+	    <div id="order-list">
+	        <ol>
+	            <li>Lorem ipsum dolor sit amet</li>
+	            <li>Consectetur adipiscing elit</li>
+	            <li>Integer molestie lorem at massa</li>
+	            <li>Facilisis in pretium nisl aliquet</li>
+	            <li>Nulla volutpat aliquam velit</li>
+	            <li>Faucibus porta lacus fringilla vel</li>
+	            <li>Aenean sit amet erat nunc</li>
+	            <li>Eget porttitor lorem</li>
+	        </ol>
+	    </div>
+
+	    <hr/>
+
+	<div class="bottom-offset-20">
+	    <h3>Unstyled</h3>
+	    <p>Remove the default <code>list-style</code> and left margin on list items (immediate children only). <strong>This only applies to immediate children list items</strong>, meaning you will need to add the class for any nested lists as well.</p>
+	</div>
+	   <div id="unstyled-list">
+	        <ul class="list-unstyled">
+	            <li>Lorem ipsum dolor sit amet</li>
+	            <li>Consectetur adipiscing elit</li>
+	            <li>Integer molestie lorem at massa</li>
+	            <li>Facilisis in pretium nisl aliquet</li>
+	            <li>Nulla volutpat aliquam velit
+	                <ul>
+	                    <li>Phasellus iaculis neque</li>
+	                    <li>Purus sodales ultricies</li>
+	                    <li>Vestibulum laoreet porttitor sem</li>
+	                    <li>Ac tristique libero volutpat at</li>
+	                </ul>
+	            </li>
+	            <li>Faucibus porta lacus fringilla vel</li>
+	            <li>Aenean sit amet erat nunc</li>
+	            <li>Eget porttitor lorem</li>
+	        </ul>
+	    </div>
+
+	<hr/>
+
+	<div class="bottom-offset-20">
+	    <h3>Inline</h3>
+	    <p>Place all list items on a single line with <code>display: inline-block;</code> and some light padding.</p>
+	</div>
+	    <div id="inline-list">
+	        <ul class="list-inline">
+	            <li>Lorem ipsum</li>
+	            <li>Phasellus iaculis</li>
+	            <li>Nulla volutpat</li>
+	            <li>Happy</li>
+	            <li>Trees</li>
+	        </ul>
+	    </div>
+
+	<hr/>
+
+	<div class="bottom-offset-20">
+	    <h3>Description</h3>
+	    <p>A list of terms with their associated descriptions.</p>
+	</div>
+	    <div id="description-lists">
+	        <dl>
+	            <dt>Description lists</dt>
+	            <dd>A description list is perfect for defining terms.</dd>
+	            <dt>Euismod</dt>
+	            <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+	            <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+	            <dt>Malesuada porta</dt>
+	            <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+	        </dl>
+	    </div>
+
+	<hr/>
+
+	<div class="bottom-offset-20">
+	    <h4>Horizontal description</h4>
+	    <p>Make terms and descriptions in <code>&lt;dl&gt;</code> line up side-by-side. Starts off stacked like default <code>&lt;dl&gt;</code>s, but when the navbar expands, so do these.</p>
+	</div>
+
+    <div id="horizontal-description">
+        <dl class="dl-horizontal">
+            <dt>Description lists</dt>
+            <dd>A description list is perfect for defining terms.</dd>
+            <dt>Euismod</dt>
+            <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+            <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+            <dt>Malesuada porta</dt>
+            <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+            <dt>Felis euismod semper eget lacinia</dt>
+            <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+        </dl>
+    </div>
+
+    <div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4>Auto-truncating</h4>
+        <p>Horizontal description lists will truncate terms that are too long to fit in the left column with <code>text-overflow</code>. In narrower viewports, they will change to the default stacked layout.</p>
+    </div>
+
+</section>

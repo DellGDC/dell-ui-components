@@ -1,0 +1,50 @@
+<section class="container" ng-controller="BreadcrumbsCtrl" id="breadcrumb">
+
+	<div class="page-header">
+	    <h2>
+	        Breadcrumbs
+	    </h2>
+	</div>
+
+	<!-- copy html description and dropdown-->
+	<div class="row bottom-offset-40 html-copy">
+	    <div class="col-md-9">{{copyHtmlNote}}</div>
+	    <div class="col-md-3">
+	        <div class="btn-group pull-right">
+	            <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>
+	            <ul class="dropdown-menu">
+	                <li><a class="disabled"><strong>Breadcrumbs</strong></a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#breadcrumb-example" class="text-blue">breadcrumb</a></li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="bottom-offset-mini">
+	    <h3>Standard breadcrumb</h3>
+	</div>
+
+	<div class="bottom-offset-40" id="breadcrumb-example">
+	    <div>
+	        <ul class="breadcrumb">
+	            <li><a href="#">Home</a><span class="divider"></span></li>
+	            <li><a href="#">Shop for Dell PCs & Accessories</a><span class="divider"></span></li>
+	            <li class="active">Laptops, Ultrabooks & Notebooks</li>
+	        </ul>
+	    </div>
+	</div>
+
+	<div id="breadcrumbs-HTML">
+	    <div class="alert alert-info alert-dismissable">
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	        <h4>Please note the Bootstrap code difference:</h4>
+	        <ul>
+	            <li>Notice that / or any other contnet is not used inside the divider span tag. The CSS automatically
+	                inserts the proper divider icon.
+	            </li>
+	            <li>Notice the first link which has Home as text but it is hidden and replaced with the house icon</li>
+	        </ul>
+	    </div>
+	    <hr/>
+	</div>
+</section>

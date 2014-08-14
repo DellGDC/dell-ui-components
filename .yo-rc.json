@@ -1,10 +1,10 @@
 {
   "generator-cg-angular": {
     "uirouter": true,
-    "partialDirectory": "components/",
-    "directiveDirectory": "directives/",
-    "filterDirectory": "filters/",
-    "serviceDirectory": "services/",
+    "partialDirectory": "demo-components/",
+    "directiveDirectory": "app/directives/",
+    "filterDirectory": "app/filters/",
+    "serviceDirectory": "app/services/",
     "inject": {
       "js": {
         "file": "index.html",
@@ -20,12 +20,16 @@
     },
     "modules": [
       {
-        "name": "DellUIComponents",
-        "file": "components\\DellUIComponents.js"
+        "name": "dellUiSite",
+        "file": "app\\dell-ui-site.js"
       },
       {
-        "name": "DellUISite",
-        "file": "site_files\\DellUISite.js"
+        "name": "dellUiTheme",
+        "file": "app\\dell-ui-theme\\theme.js"
+      },
+      {
+        "name": "dellUiTest",
+        "file": "app\\dell-ui-test\\dell-ui-test.js"
       }
     ]
   }

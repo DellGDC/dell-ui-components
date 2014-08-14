@@ -1,0 +1,225 @@
+<section id="carousel" class="container" ng-controller="CarouselCtrl">
+
+	<div class="page-header">
+	    <h2>Carousel</h2>
+	</div>
+
+	<!-- copy html description and dropdown-->
+	<div class="row bottom-offset-20 html-copy">
+	    <div class="col-md-9">{{copyHtmlNote}}</div>
+	    <div class="col-md-3">
+	        <div class="btn-group pull-right">
+	            <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">Copy your HTML</button>
+	            <ul class="dropdown-menu">
+	                <li><a class="disabled"><strong>Carousel</strong></a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#carousel-gallery-copy" class="text-blue">Carousel gallery</a></li>
+	                <li><a href="javascript:;" to-clipboard clipboard-target="#carousel-gallery-captions-copy" class="text-blue">Carousel gallery with captions</a></li>
+
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+	<div>
+	    <h4 class="top-offset-40">Carousel Gallery</h4>
+	    <p>1 picture at a time full width and automatic slide</p>
+	    <p><span class="label label-default">Note:</span> if images are different heights it will cause an undesired jump
+	        between slide transitions.</p>
+	</div>
+
+
+
+	<div id="carousel-gallery">
+	    <div id="carousel-example-generic" class="carousel slide carousel-gallery" data-ride="carousel">
+	        <div class="carousel-inner">
+	            <div class="item">
+	                <img alt="First slide" src="http://placehold.it/1140x430">
+	            </div>
+	            <div class="item active">
+	                <img alt="Second slide" src="http://placehold.it/1140x430">
+	            </div>
+	            <div class="item">
+	                <img alt="Third slide" src="http://placehold.it/1140x430">
+	            </div>
+	        </div>
+	        <ol class="carousel-indicators">
+	            <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+	            <li data-target="#carousel-example-generic" data-slide-to="1" class="active"></li>
+	            <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+	        </ol>
+	        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+	        </a>
+	        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+	        </a>
+	    </div>
+	</div>
+
+
+	<div id="carousel-gallery-copy" class="hide">
+	    &lt;div id="carousel-example-generic" class="carousel slide carousel-gallery" data-ride="carousel"&gt;
+	        &lt;div class="carousel-inner"&gt;
+	            &lt;div class="item"&gt;
+	                &lt;img alt="First slide" src="http://placehold.it/1140x430"&gt;
+	            &lt;/div&gt;
+	            &lt;div class="item active"&gt;
+	                &lt;img alt="Second slide" src="http://placehold.it/1140x430"&gt;
+	            &lt;/div&gt;
+	            &lt;div class="item"&gt;
+	                &lt;img alt="Third slide" src="http://placehold.it/1140x430"&gt;
+	            &lt;/div&gt;
+	        &lt;/div&gt;
+	        &lt;ol class="carousel-indicators"&gt;
+	            &lt;li data-target="#carousel-example-generic" data-slide-to="0" class=""&gt;&lt;/li&gt;
+	            &lt;li data-target="#carousel-example-generic" data-slide-to="1" class="active"&gt;&lt;/li&gt;
+	            &lt;li data-target="#carousel-example-generic" data-slide-to="2" class=""&gt;&lt;/li&gt;
+	        &lt;/ol&gt;
+	        &lt;a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"&gt;
+	        &lt;/a&gt;
+	        &lt;a class="right carousel-control" href="#carousel-example-generic" data-slide="next"&gt;
+	        &lt;/a&gt;
+	    &lt;/div&gt;
+	</div>
+
+	<hr/>
+
+
+	<div>
+	    <h4>Carousel Gallery with Captions</h4>
+	    <p>1 full width picture at a time with caption and automatic slide</p>
+	    <p><span class="label label-default">Note:</span> You can mix captioned and non captioned images</p>
+	</div>
+
+
+    <div id="carousel-gallery-captions">
+        <div id="carousel-example-with-caption" class="carousel slide carousel-gallery" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="well well-bleed">
+                        <img alt="First slide" src="http://placehold.it/1140x360" alt="Image" class="image">
+                        <div class="carousel-caption pull-top-left">
+                            <h2 class="hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            </h2>
+                            <p>
+                                Mauris in ultricies leo, fermentum consectetur ligula. Sed placerat dui lorem, vel mattis est scelerisque ut.
+                            </p>
+                            <p>
+                                <a href="#" class="btn btn-primary pull-left hidden-xs">Buy Now!</a>
+                                <a href="#" class="pull-left visible-xs lead">Buy Now!</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="well well-bleed">
+                        <img alt="First slide" src="http://placehold.it/1140x360" alt="Image" class="image">
+                        <div class="carousel-caption">
+                            <h2 class="hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt.
+                            </h2>
+                            <p>
+                                Ut enim ad minim veniam, laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.
+                            </p>
+                            <p>
+                                <a href="#" class="btn btn-primary pull-left hidden-xs">Buy Now!</a>
+                                <a href="#" class="pull-left visible-xs lead">Buy Now!</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="well well-bleed">
+                        <img alt="Third slide" src="http://placehold.it/1140x360" alt="Image" class="image">
+                        <div class="carousel-caption">
+                            <h2 class="hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt.
+                            </h2>
+                            <p>
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex. Duis aute irure dolor in reprehenderit.
+                            </p>
+                            <p>
+                                <a href="#" class="btn btn-primary pull-left hidden-xs">Buy Now!</a>
+                                <a href="#" class="pull-left visible-xs lead">Buy Now!</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-with-caption" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-with-caption" data-slide-to="1" class=""></li>
+                <li data-target="#carousel-example-with-caption" data-slide-to="2" class=""></li>
+            </ol>
+            <a class="left carousel-control" href="#carousel-example-with-caption" data-slide="prev">
+            </a>
+            <a class="right carousel-control" href="#carousel-example-with-caption" data-slide="next">
+            </a>
+        </div>
+    </div>
+    <div id="carousel-gallery-captions-copy" class="hide">
+        &lt;div id="carousel-example-with-caption" class="carousel slide carousel-gallery" data-ride="carousel">
+            &lt;div class="carousel-inner">
+                &lt;div class="item active">
+                    &lt;div class="well well-bleed">
+                        &lt;img alt="First slide" src="http://placehold.it/1140x360" alt="Image" class="image">
+                        &lt;div class="carousel-caption pull-top-left">
+                            &lt;h2 class="hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            &lt;/h2>
+                            &lt;p>
+                                Mauris in ultricies leo, fermentum consectetur ligula. Sed placerat dui lorem, vel mattis est scelerisque ut.
+                            &lt;/p>
+                            &lt;p>
+                                &lt;a href="#" class="btn btn-primary pull-left hidden-xs">Buy Now!&lt;/a>
+                                &lt;a href="#" class="pull-left visible-xs lead">Buy Now!&lt;/a>
+                            &lt;/p>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div class="item">
+                    &lt;div class="well well-bleed">
+                        &lt;img alt="First slide" src="http://placehold.it/1140x360" alt="Image" class="image">
+                        &lt;div class="carousel-caption">
+                            &lt;h2 class="hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt.
+                            &lt;/h2>
+                            &lt;p>
+                                Ut enim ad minim veniam, laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.
+                            &lt;/p>
+                            &lt;p>
+                                &lt;a href="#" class="btn btn-primary pull-left hidden-xs">Buy Now!&lt;/a>
+                                &lt;a href="#" class="pull-left visible-xs lead">Buy Now!&lt;/a>
+                            &lt;/p>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+                &lt;div class="item">
+                    &lt;div class="well well-bleed">
+                        &lt;img alt="Third slide" src="http://placehold.it/1140x360" alt="Image" class="image">
+                        &lt;div class="carousel-caption">
+                            &lt;h2 class="hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt.
+                            &lt;/h2>
+                            &lt;p>
+                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex. Duis aute irure dolor in reprehenderit.
+                            &lt;/p>
+                            &lt;p>
+                                &lt;a href="#" class="btn btn-primary pull-left hidden-xs">Buy Now!&lt;/a>
+                                &lt;a href="#" class="pull-left visible-xs lead">Buy Now!&lt;/a>
+                            &lt;/p>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+            &lt;ol class="carousel-indicators">
+                &lt;li data-target="#carousel-example-with-caption" data-slide-to="0" class="active">&lt;/li>
+                &lt;li data-target="#carousel-example-with-caption" data-slide-to="1" class="">&lt;/li>
+                &lt;li data-target="#carousel-example-with-caption" data-slide-to="2" class="">&lt;/li>
+            &lt;/ol>
+            &lt;a class="left carousel-control" href="#carousel-example-with-caption" data-slide="prev">
+            &lt;/a>
+            &lt;a class="right carousel-control" href="#carousel-example-with-caption" data-slide="next">
+            &lt;/a>
+        &lt;/div>
+    </div>
+
+</section>
+

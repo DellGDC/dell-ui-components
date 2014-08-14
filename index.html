@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="DellDesignLibrary">
+<html ng-app="dellUi">
 <head>
   <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
-  <link href="dell-ui/theme.less" type="text/css" rel="stylesheet/less">
   <link href="app.less" type="text/css" rel="stylesheet/less">
-  <link href="site_files/welcome/welcome.less" type="text/css" rel="stylesheet/less">
+  <link href="app/dell-ui-test/test-page/test-page.less" type="text/css" rel="stylesheet/less">
   <link href="bower_components/angular-json-human/dist/angular-json-human.min.css" type="text/css" rel="stylesheet">
   <link href="bower_components/angular-loading-bar/build/loading-bar.min.css" type="text/css" rel="stylesheet">
 </head>
@@ -41,19 +40,46 @@
 
 
   <!-- Main App JS -->
-  <script src="dell-ui/DellUI.js"></script>
-  <script src="site_files/DellUISite.js"></script>
+  <script src="app/dell-ui-theme/dell-ui-theme.js"></script>
+  <script src="app/dell-ui-test/dell-ui-test.js"></script>
+  <script src="app/dell-ui-site.js"></script>
   <script src="app.js"></script>
-  <script src="site_files/welcome/welcome.js"></script>
-  <script src="site_files/shared/masthead/masthead.js"></script>
-  <script src="site_files/services/messages.js"></script>
+  <script src="app/welcome/welcome.js"></script>
+  <script src="app/shared/masthead/masthead.js"></script>
+  <script src="app/services/messages.js"></script>
+  <script src="app/demo-components/alerts/alerts.js"></script>
+  <script src="app/demo-components/breadcrumbs/breadcrumbs.js"></script>
+  <script src="app/dell-ui-test/test-page/test-page.js"></script>
+  <script src="app/services/components.js"></script>
+  <script src="app/filters/_.str.js"></script>
+  <script src="app/demo/demo.js"></script>
+  <script src="app/demo-components/buttons/buttons.js"></script>
+  <script src="app/demo-components/carousel/carousel.js"></script>
+  <script src="app/demo-components/collapsible-items/collapsible-items.js"></script>
+  <script src="app/demo-components/colors/colors.js"></script>
+  <script src="app/demo-components/containers/containers.js"></script>
+  <script src="app/demo-components/forms/forms.js"></script>
+  <script src="app/demo-components/icons/icons.js"></script>
+  <script src="app/demo-components/labels-and-badges/labels-and-badges.js"></script>
+  <script src="app/demo-components/lists/lists.js"></script>
+  <script src="app/demo-components/modals/modals.js"></script>
+  <script src="app/demo-components/offsets/offsets.js"></script>
+  <script src="app/demo-components/pagers/pagers.js"></script>
+  <script src="app/demo-components/popovers/popovers.js"></script>
+  <script src="app/demo-components/progress-bars/progress-bars.js"></script>
+  <script src="app/demo-components/responsive-utilities/responsive-utilities.js"></script>
+  <script src="app/demo-components/tables/tables.js"></script>
+  <script src="app/demo-components/tabs/tabs.js"></script>
+  <script src="app/demo-components/typography/typography.js"></script>
+
+  <script src="app/demo-components/tooltips/tooltips.js"></script>
+  <script src="app/demo-components/pagination/pagination.js"></script>
+  <script src="app/services/utils.js"></script>
   <!-- Add New Component JS Above -->
 
-  <div>
-    <div id="content">
-      <div masthead></div>
-      <div ui-view>
-      </div>
+  <div id="dell-ui-site">
+    <div dell-ui-site-masthead></div>
+    <div ui-view>
     </div>
   </div>
 

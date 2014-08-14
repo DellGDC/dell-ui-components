@@ -1,0 +1,120 @@
+<section class="container" ng-controller="IconsCtrl">
+
+    <div class="page-header">
+        <h2>
+            Icons
+        </h2>
+    </div>
+    <div class="alert alert-info" markdown="app/ng/modules/design-library/components/icons-guidance.md"></div>
+
+    <div class="bottom-offset-40">
+        <p>
+            <span class="label label-info">Copy HTML</span> Click on the icon and HTML will be copied to your clipboard.
+        </p>
+    </div>
+    <hr/>
+
+	<div class="row">
+	    <div class="col-xs-12 bottom-offset-20 top-offset-20">
+	        <div class="icons-gallery">
+	            <div class="pull-right">
+	                <div class="btn-group">
+	                    <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">View other colors</button>
+	                    <ul class="dropdown-menu pull-right">
+	                        <li ng-repeat="textColor in textColors" >
+	                            <a href="javascript:;" class="{{textColor.label_color}}" ng-click="change_icon_color('ui')">{{textColor.label}}</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+
+	            <h3>UI icons</h3>
+	            <ul class="icons-gallery-list">
+	                <li ng-repeat="icon in icons['icon-ui']" to-clipboard="&lt;i class=&#34;icon-ui-{{icon}} {{active_icon_ui_color}}&#34;&gt;&lt;/i&gt;">
+	                    <i class="icon-ui-{{icon}} {{active_icon_ui_color}}"></i>
+	                    <span class="icons-gallery-class">icon-ui-{{icon}}</span>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	    <hr/>
+
+	<div class="row">
+	    <div class="col-xs-12 bottom-offset-20 top-offset-20">
+	        <div class="icons-gallery">
+	            <div class="pull-right">
+	                <div class="btn-group">
+	                    <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">View other colors</button>
+	                    <ul class="dropdown-menu pull-right">
+	                        <li ng-repeat="textColor in textColors" >
+	                            <a href="javascript:;" class="{{textColor.label_color}}" ng-click="change_icon_color('small')">{{textColor.label}}</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+
+	            <h3>Small icons</h3>
+	            <p>
+	                The small icons have less detail and are intended to be used at the default font size of 16px. Please use the small icons for task based communications. For crisper small icons use the following sizes: 16px, 28px and 42px.
+	            </p>
+	            <ul class="icons-gallery-list">
+	                <li ng-repeat="icon in icons['icon-small']" to-clipboard="&lt;i class=&#34;icon-small-{{icon}} {{active_icon_small_color}}&#34;&gt;&lt;/i&gt;">
+	                    <i class="icon-small-{{icon}} {{active_icon_small_color}}"></i>
+	                    <span class="icons-gallery-class">icon-small-{{icon}}</span>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	    <hr/>
+
+	<div class="row">
+	    <div class="col-xs-12 bottom-offset-20 top-offset-20">
+	        <div class="icons-gallery">
+	            <h3>Ratings icons</h3>
+	            <p>
+	                The rating icons have been broken down to 10% increments. These small changes are demonstrated on the last star of the examples below.
+	            </p>
+	            <ul class="icons-gallery-list">
+	                <li ng-repeat="icon in icons['icon-small-favorite']" to-clipboard="&lt;i class=&#34;icon-small-favorite-{{icon}}&#34;&gt;&lt;/i&gt;">
+	                    <i class="icon-small-favorite-{{icon}}"></i>
+	                    <span class="icons-gallery-class">icon-small-favorite-{{icon}}</span>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	    <hr/>
+
+	<div class="row">
+	    <div class="col-xs-12 bottom-offset-20 top-offset-20">
+	        <div class="icons-gallery">
+	            <div class="pull-right">
+	                <div class="btn-group">
+	                    <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">View other colors</button>
+	                    <ul class="dropdown-menu pull-right">
+	                        <li ng-repeat="textColor in textColors" >
+	                            <a href="javascript:;" class="{{textColor.label_color}}" ng-click="change_icon_color('large')">{{textColor.label}}</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </div>
+
+	            <h3>Large icons</h3>
+	            <p>
+	                The large icons have more detail then the small icons. These should be used to support content only. For crisper large icons use the following sizes: 36px, 72px and 108px.
+	            </p>
+	            <ul class="icons-gallery-list large">
+	                <li ng-repeat="icon in icons['icon-large']" to-clipboard="&lt;i class=&#34;icon-large-{{icon}} {{active_icon_large_color}}&#34;&gt;&lt;/i&gt;">
+	                    <i class="icon-large-{{icon}} {{active_icon_large_color}}"></i>
+	                    <span class="icons-gallery-class">icon-large-{{icon}}</span>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+
+</section>
+
+
