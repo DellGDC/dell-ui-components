@@ -1,4 +1,4 @@
-angular.module('dellUiSite').factory('utils',function($http,$q) {
+angular.module('dellUi').factory('utils',function($http,$q) {
 
 	var utils = {
 		getJSON: function(url, callback){

@@ -100,9 +100,5 @@ angular.module('dellUiSite').config(function($stateProvider) {
 });
 
 angular.module('dellUiSite').run(function($rootScope, utils) {
-    $rootScope.messages = {};
-    utils.getJSON("app/data/messages.json", function(data){
-        $rootScope.messages = data;
-    });
 
 });
