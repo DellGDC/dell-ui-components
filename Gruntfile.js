@@ -36,12 +36,14 @@ module.exports = function (grunt) {
     // load all grunt tasks
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('grunt-prompt');
+    grunt.loadNpmTasks('grunt-string-replace');
+
     // Project configuration.
     grunt.initConfig({
         connect: {
             main: {
                 options: {
-                    port: 9001
+                    port: 9002
                 }
             }
         },
@@ -77,34 +79,43 @@ module.exports = function (grunt) {
                 options: {
                 },
                 files: {
-                    'temp/dell-ui-components.css': 'dell-ui-components.less'
+                    'temp/dell-ui-components.css': 'components/dell-ui-components.less'
                 }
             },
             demo: {
                 options: {
                 },
                 files: {
-                    'temp/demo.css': 'demo.less'
+                    'temp/demo.css': 'app.less'
                 }
             }
         },
         ngtemplates: {
-            main: {
+            production: {
                 options: {
                     module: pkg.name,
                     htmlmin: '<%= htmlmin.main.options %>'
                 },
-                src: [createFolderGlobs('*.html'), '!index.html', '!_SpecRunner.html'],
-                dest: 'temp/templates.js'
+                src: [createFolderGlobs('directive-*.html'), '!index.html', '!_SpecRunner.html'],
+                dest: 'temp/dell-ui-templates.js'
+            },
+            demo: {
+                options: {
+                    module: pkg.name,
+                    htmlmin: '<%= htmlmin.main.options %>'
+                },
+                src: [createFolderGlobs('*.html'), '!index.html','!directive-*.html', '!_SpecRunner.html'],
+                dest: 'temp/demo-templates.js'
             }
         },
         copy: {
             main: {
                 files: [
-                    {src: ['bower_components/bootstrap/dist/js/bootstrap.min.js'], dest: 'dist/bootstrap/bootstrap.min.js', filter: 'isFile', expand: true},
-                    {src: ['temp/dell-ui-components.js'], dest: 'dist/dell-ui-components.js'},
-                    {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components.css'},
-                    {src: ['bower_components/dell-ui-bootstrap/dist/**'], dest: 'dist/dell-ui-bootstrap/', filter: 'isFile', expand: true}
+                    {src: ['components/components-list.json'], dest: 'dist/components-list.json'},
+                    {src: ['temp/dell-ui-components.js'], dest: 'dist/dell-ui-components/dell-ui-components.js'},
+                    {src: ['temp/demo.js'], dest: 'dist/demo.js'},
+                    {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components/dell-ui-components.css'},
+                    {cwd: 'bower_components/dell-ui-bootstrap/dist/', src: ['**'], dest: 'dist/dell-ui-bootstrap/', expand:true}
                 ]
             }
         },
@@ -112,10 +123,9 @@ module.exports = function (grunt) {
             read: {
                 options: {
                     read: [
+                        {selector: 'script[data-concat="libsJs"]', attribute: 'src', writeto: 'libsJs'},
                         {selector: 'script[data-concat="demoJs"]', attribute: 'src', writeto: 'demoJs'},
-                        {selector: 'script[data-concat="dellUiComponentsJs"]', attribute: 'src', writeto: 'dellUiComponentsJs'},
-                        {selector: 'link[rel="stylesheet"][data-concat="demoCss"]', attribute: 'href', writeto: 'demoCss'},
-                        {selector: 'link[rel="stylesheet"][data-concat="dellUiComponentsCss"]', attribute: 'href', writeto: 'demoCss'}
+                        {selector: 'script[data-concat="dellUiComponentsJs"]', attribute: 'src', writeto: 'dellUiComponentsJs'}
                     ]
                 },
                 src: 'index.html'
@@ -124,11 +134,9 @@ module.exports = function (grunt) {
                 options: {
                     remove: ['script[data-remove!="false"]', 'link[data-remove!="false"]'],
                     append: [
-                        {selector: 'body', html: '<script src="bootstrap/bootstrap.min.js"></script>'},
-                        {selector: 'body', html: '<script src="dell-ui-components.min.js"></script>'},
                         {selector: 'body', html: '<script src="demo.min.js"></script>'},
                         {selector: 'head', html: '<link rel="stylesheet" href="dell-ui-bootstrap/dell-ui-bootstrap.min.css">'},
-                        {selector: 'head', html: '<link rel="stylesheet" href="dell-ui-components.min.css">'},
+                        {selector: 'head', html: '<link rel="stylesheet" href="dell-ui-components/dell-ui-components.min.css">'},
                         {selector: 'head', html: '<link rel="stylesheet" href="demo.min.css">'}
                     ]
                 },
@@ -138,21 +146,21 @@ module.exports = function (grunt) {
         },
         cssmin: {
             main: {
-                src: ['temp/dell-ui-components.css', '<%= dom_munger.data.dellUiComponentsCss %>'],
-                dest: 'dist/dell-ui-components.min.css'
+                src: ['temp/dell-ui-components.css'],
+                dest: 'dist/dell-ui-components/dell-ui-components.min.css'
             },
             demo: {
-                src: ['temp/demoCss.css', '<%= dom_munger.data.demoCss %>'],
+                src: ['temp/demo.css'],
                 dest: 'dist/demo.min.css'
             }
         },
         concat: {
             main: {
-                src: ['<%= dom_munger.data.dellUiComponentsJs %>', '<%= ngtemplates.main.dest %>'],
+                src: ['<%= dom_munger.data.dellUiComponentsJs %>', '<%= ngtemplates.production.dest %>'],
                 dest: 'temp/dell-ui-components.js'
             },
             demo: {
-                src: ['<%= dom_munger.data.demoJs %>', '<%= ngtemplates.main.dest %>'],
+                src: ['<%= dom_munger.data.libsJs %>','<%= dom_munger.data.dellUiComponentsJs %>','<%= dom_munger.data.demoJs %>', '<%= ngtemplates.demo.dest %>'],
                 dest: 'temp/demo.js'
             }
         },
@@ -169,7 +177,7 @@ module.exports = function (grunt) {
         uglify: {
             main: {
                 src: 'temp/dell-ui-components.js',
-                dest: 'dist/dell-ui-components.min.js'
+                dest: 'dist/dell-ui-components/dell-ui-components.min.js'
             },
             demo: {
                 src: 'temp/demo.js',
@@ -192,20 +200,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        //Imagemin has issues on Windows.
-        //To enable imagemin:
-        // - "npm install grunt-contrib-imagemin"
-        // - Comment in this section
-        // - Add the "imagemin" task after the "htmlmin" task in the build task alias
-        // imagemin: {
-        //   main:{
-        //     files: [{
-        //       expand: true, cwd:'dist/',
-        //       src:['**/{*.png,*.jpg}'],
-        //       dest: 'dist/'
-        //     }]
-        //   }
-        // },
         karma: {
             options: {
                 frameworks: ['jasmine'],
@@ -253,12 +247,38 @@ module.exports = function (grunt) {
                     ]
                 }
 
-            },
+            }
+        },
+        'string-replace': {
+            dist: {
+                files: {
+                    'temp/demo.js': 'temp/demo.js',
+                    'temp/dell-ui-components.css': 'temp/dell-ui-components.css',
+                    'temp/demo.css': 'temp/demo.css'
+                },
+                options: {
+                    replacements: [
+                        {
+                            pattern: /components\/components-list.json/ig,
+                            replacement: 'components-list.json'
+                        },
+                        {
+                            pattern: /\/* Component LESS *\//ig,
+                            replacement: ''
+                        },
+                        {
+                            pattern: /\/* Add Component LESS Above *\//ig,
+                            replacement: ''
+                        }
+
+
+                    ]
+                }
+            }
         }
     });
 
-
-    grunt.registerTask('build', ['jshint', 'clean:before', 'less', 'dom_munger', 'ngtemplates', 'cssmin', 'concat', 'ngmin', 'uglify', 'copy', 'htmlmin', 'clean:after']);
+    grunt.registerTask('build', ['jshint', 'clean:before', 'less', 'dom_munger', 'ngtemplates', 'cssmin', 'concat', 'ngmin','string-replace', 'uglify', 'copy', 'htmlmin', 'clean:after']);
     grunt.registerTask('serve', ['dom_munger:read', 'jshint', 'connect', 'watch']);
     grunt.registerTask('test', ['dom_munger:read', 'karma:all_tests']);
     grunt.registerTask('component', 'Builds a Dell-UI-Component componentt and demo files', function () {
@@ -268,7 +288,7 @@ module.exports = function (grunt) {
             componentsTemplates = "templates/component/",
             indexFile = "index.html",
             demoLessFile = "app.less",
-            componentsLessFile = "dell-ui-components.less",
+            componentsLessFile = "components/dell-ui-components.less",
             targetPath = "components/",
             LESS_PATTERN = "/* Add Component LESS Above */",
             JS_PATTERN = "<!-- Add New Component JS Above -->",
@@ -336,7 +356,7 @@ module.exports = function (grunt) {
                     injectReference(demoLessFile, injectContent, LESS_PATTERN);
 
                     //inject component less file reference
-                    injectContent = '@import "components/' + dashedId + '/' + dashedId + '.less";';
+                    injectContent = '@import "'+ dashedId + '/' + dashedId + '.less";';
                     injectReference(componentsLessFile, injectContent, LESS_PATTERN);
 
                     //inject demo script references
@@ -359,17 +379,16 @@ module.exports = function (grunt) {
     });
 
 
-    var directiveId;
+    var directiveId, hasErrors = false;
     grunt.registerTask('directive', 'Builds a Dell-UI-Component directive', function () {
 
-        var hasErrors = false,
-            args = this.args;
+        var args = this.args;
 
         if (args.length === 0) {
             grunt.log.error("We are sorry, you need to provide an argument to build a directive. \nExample: grunt directive:my-custom-alert");
             hasErrors = true;
         } else {
-            directiveId = args[0]
+            directiveId = args[0];
 
             grunt.task.run([
                 'prompt:directive',
@@ -399,9 +418,9 @@ module.exports = function (grunt) {
 
         _.str = require('underscore.string');
         dashedId = _.str.dasherize(directiveId);
-        camelId = _.str.camelize(directiveId),
-            name = _.str.titleize(directiveId),
-            targetJSFilename = targetPath + component + "/directive-" + dashedId + ".js";
+        camelId = _.str.camelize(directiveId);
+        name = _.str.titleize(directiveId);
+        targetJSFilename = targetPath + component + "/directive-" + dashedId + ".js";
 
         if (grunt.file.exists(targetJSFilename)) {
             grunt.log.error("We are sorry, the directive you requested (" + dashedId + ") already exists.");

@@ -1,3 +1,4 @@
+/* globals s */
 angular.module('demo', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'dellUiComponents']);
 
 angular.module('demo').config(function ($stateProvider, $urlRouterProvider) {

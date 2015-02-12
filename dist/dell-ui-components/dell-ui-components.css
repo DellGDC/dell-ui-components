@@ -1,0 +1,157 @@
+/*
+ * Basic theme colors are handled in dell-ui-bootstrap
+ * The changes below extend basic Boostrap elements to create Dell specific components.
+ */
+/* Component LESS */
+/*
+ * Alerts component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+.alert {
+  /* Embedded alerts */
+}
+.alert > .alert-danger,
+.alert > .alert-error {
+  background: transparent;
+  color: #444444;
+  margin-bottom: 20px;
+}
+.alert > .alert-info {
+  background: transparent;
+  color: #444444;
+  margin-bottom: 20px;
+}
+.alert > .alert-success {
+  background: transparent;
+  color: #444444;
+  margin-bottom: 20px;
+}
+.alert > .alert-warning {
+  background: transparent;
+  color: #444444;
+  margin-bottom: 20px;
+}
+.alert-block {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.alert-block > p,
+.alert-block > ul {
+  margin-bottom: 0;
+}
+.alert-block p + p {
+  margin-top: 5px;
+}
+/*
+ * Announcements component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Breadcrumbs component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Buttons component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Standard-Buttons component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Block-Buttons component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Dropdown-Buttons component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Mini-Buttons component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Carousel component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Collapsible-Items component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Colors component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Containers component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Dividers component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Footer component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Forms component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Icons component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Lists component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Labels-And-Badges component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Modals component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Offsets component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Pagers component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Pagination component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Popovers component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Responsive-Utilities component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Progress-Bars component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Tables component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Tabs component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Tooltips component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/*
+ * Typography component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+/* Add Component LESS Above */
