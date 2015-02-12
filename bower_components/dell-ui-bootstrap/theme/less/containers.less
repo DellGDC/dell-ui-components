@@ -1,0 +1,75 @@
+
+//panels
+//------------------------------------------------------------------------------------------
+// Base class
+.panel {
+    border-radius: @panel-border-radius;
+    form {
+        margin-top: 20px;
+        }
+    .form-actions {
+        margin-bottom: -10px;
+        }
+    legend {
+        padding-left: 20px;
+        }
+    .panel-heading {
+        h2, h3, h4, h5, h6 {
+            margin: 0;
+            }
+        }
+    > .table {
+        > thead > tr > th:first-child,
+        > tbody > tr > td:first-child,
+        > tr > th:first-child,
+        > tr > td:first-child {
+            border-left: none;
+            }
+
+        }
+    }
+
+
+
+    //wells
+    //------------------------------------------------------------------------------------------
+    //NOTE: (Not part of Standard Bootstrap) - dell-ui-only
+
+    .well-colors (@body-bg, @text-color, @headings-color, @link-color) {
+        background-color: @body-bg;
+        color:            @text-color;
+//        border:           none;
+        h2, h3, h4, h5, h6 {
+            color: @headings-color;
+            }
+        .panel-heading {
+            h2, h3, h4, h5, h6 {
+                color: @white;
+                padding-left: 10px;
+                }
+            background: @headings-color;
+            .border-top-radius(0px);
+            }
+        h4.well-title, h4.container-title {
+            //container-title for backward compatibility but should be deprecated
+            display:          inline-block;
+            top:              -20px;
+            margin-bottom:    -20px;
+            padding:          5px 15px;
+            position:         relative;
+            color:            @white;
+            background-color: @headings-color;
+            vertical-align:   baseline;
+            white-space:      nowrap;
+            .border-bottom-right-radius(@border-radius-large);
+            .border-bottom-left-radius(@border-radius-large);
+            }
+        }
+
+    .well,
+    .panel-body {
+        > p:last-child,
+        > ul:last-child {
+            margin-bottom:0;
+        }
+    }

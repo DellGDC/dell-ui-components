@@ -1,0 +1,62 @@
+
+//tables
+//------------------------------------------------------------------------------------------
+
+// Default zebra-stripe styles (alternating gray and transparent backgrounds)
+.table-striped {
+    td, th {
+        border-left: 0;
+        border-top:  0;
+        }
+    tbody {
+        > tr:nth-child(odd) > td,
+        > tr:nth-child(odd) > th {
+            background-color: @table-bg-accent;
+            border-top:       none;
+            }
+        }
+    tbody {
+        tr th:first-child, tr td:first-child {
+            .border-left-radius(@border-radius-base);
+            }
+        tr th:last-child, tr td:last-child {
+            .border-right-radius(@border-radius-base);
+            }
+        }
+    > thead > tr > th,
+    > tbody > tr > th,
+    > tfoot > tr > th,
+    > thead > tr > td,
+    > tbody > tr > td,
+    > tfoot > tr > td {
+        border: none;
+        }
+    }
+
+.table-bordered {
+    > thead > tr > th,
+    > thead > tr > td {
+        border-bottom-width: 1px;}
+    }
+
+
+.table > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: none;
+    }
+
+// HOVER EFFECT: Placed here since it has to come after the potential zebra striping
+.table-hover {
+    tbody {
+        tr:hover > td,
+        tr:hover > th {
+            background-color: @table-bg-hover;
+            }
+        }
+    }
+
+.table  {
+    h1, h2, h3, h4, h5 {
+        margin: 5px 0px;
+        }
+    }

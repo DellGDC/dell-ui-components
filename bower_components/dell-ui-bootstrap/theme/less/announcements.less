@@ -1,0 +1,83 @@
+//announcements (blockquotes)
+//------------------------------------------------------------------------------------------
+
+blockquote {
+    min-height: 20px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background-color: @well-bg;
+    border-left: 10px solid @dell-gray;
+    position:relative;
+    h4 {
+        margin: 10px 0;
+        line-height: floor((@font-size-base * @line-height-base / 2));
+        + p {
+            margin-bottom: 10px;
+            //line-height: floor((@font-size-base * @line-height-base / 2));            
+        }
+    }
+    font-size:inherit;
+    &.pull-right {
+        border-left: none;
+        border-right: 10px solid @dell-gray;
+        width:100%;
+    }
+    &.blockquote {
+        &-blue {
+            border-color:@dell-blue;
+        }
+        &-green {
+            border-color:@dell-green;
+        }
+        &-purple {
+            border-color:@dell-purple;
+        }
+        &-orange {
+            border-color:@dell-orange;
+        }
+        &-berry {
+            border-color:@dell-berry;
+        }
+        &-red {
+            border-color:@dell-red;
+        }
+        &-red-dark {
+            border-color:@dell-red-dark;
+        }
+        &-dark-blue {
+            border-color:@dell-dark-blue;
+        }
+        &-gray-dark {
+            border-color:@dell-gray-dark;
+        }
+        &-icon {
+            border:none;
+            padding-left:55px;
+            [class*="icon"]{
+                display:none;
+            }
+            .icon-large-dell-dpa-card, 
+            .icon-large-dell-advantage-star {
+                display:block;
+                position:absolute;
+                top:15px;
+                left:15px;
+                max-width:30px;
+            }
+
+            &.pull-right {
+                padding-left:15px;
+                padding-right:55px;
+                .icon-large-dell-dpa-card, 
+                .icon-large-dell-advantage-star {
+                    position:absolute;
+                    top:15px;
+                    right:15px;
+                    left:auto;
+                }                
+            }
+        }
+    }
+
+
+}

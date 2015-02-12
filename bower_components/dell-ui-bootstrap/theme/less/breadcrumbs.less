@@ -1,0 +1,43 @@
+
+//breadcrumb
+//------------------------------------------------------------------------------------------
+.breadcrumb {
+    padding:          8px 0px;
+    background:       none;
+    color:            @dell-gray-medium;
+    font-size:        12px;
+    position:         relative;
+    border-radius:    none;
+    > li {
+        text-shadow: none;
+        &:first-child {
+            cursor: pointer;
+            a {
+                display: none;
+                }
+
+            &:before {
+                font-size:   14px;
+                content:     "\e62b";
+                font-family: "icon-small";
+                vertical-align: bottom;
+                }
+            }
+        a {
+            color: @dell-gray-medium;
+            }
+        + li:before {
+            font-family: 'icon-ui';
+            content:     "\e601";
+            color: @dell-gray-medium;
+            vertical-align: bottom;
+            }
+        + li:last-child:before {
+            color: @dell-gray;
+            }
+        }
+
+    > .active {
+        color: @dell-gray;
+        }
+    }

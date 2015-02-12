@@ -1,0 +1,12 @@
+<div  ng-controller="AllComponentsCtrl">
+
+    <h2>All components</h2>
+    <ul>
+        <li ng-repeat="item in components">
+            <a href="/#/demo/{{item.id}}">{{item.label}} demo</a> |
+            <a href="/#/play/{{item.id}}">play</a>
+        </li>
+    </ul>
+
+
+</div>
