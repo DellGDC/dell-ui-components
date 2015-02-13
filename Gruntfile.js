@@ -5,6 +5,7 @@ var pkg = require('./package.json'),
     components = require('./components/components-list.json'),
     currentVersion = pkg.version;
 
+
 //Using exclusion patterns slows down Grunt significantly
 //instead of creating a set of patterns like '**/*.js' and '!**/node_modules/**'
 //this method is used to create a set of inclusive patterns for all subdirectories
@@ -50,7 +51,7 @@ module.exports = function (grunt) {
         watch: {
             main: {
                 options: {
-                    livereload: true,
+                    livereload: 35728,
                     livereloadOnError: false,
                     spawn: false
                 },
