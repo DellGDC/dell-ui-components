@@ -27,10 +27,13 @@ angular.module('demo').controller('HomeCtrl',function($scope,$rootScope,$http,$s
                 $timeout(function(){
                     $rootScope.pageType = $state.params.typeId;
                 });
-
             };
             init($state.params.componentId);
-
         });
+
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+        init(toParams.componentId); 
+    });
 
 });
