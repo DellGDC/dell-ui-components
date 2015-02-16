@@ -18,18 +18,41 @@
                 a,
                 a:hover {
                     border-top: none;
+                    width: 100%;
                 }
             }
             > a {
                 text-align: left !important;
             }
-            &:hover{
-                background: @dell-highlight-blue;
+
+            &.active > a:before,
+            &.active > a:after,
+            a:before, a:after {
+                border-right: 1px solid;
+                content: '';
+                display: block;
+                height: 10px;
+                margin-top: -8px;
+                position: absolute;
+                -moz-transform: rotate(135deg);
+                -o-transform: rotate(135deg);
+                -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
+                right: 15px;
+                top: 50%;
+                width: 0;
+            }
+            &.active > a:after,
+            a:after {
+                margin-top: -1px;
+                -moz-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
             }
         }
         &.nav-justified {
             > li {
-
                 a,
                 a:hover {
                     margin-bottom: 0;
@@ -40,15 +63,39 @@
                     border: none;
                     margin-left: 0;
                     padding: 10px 15px;
+                    width: 100%;
 
                     &:hover {
                         border: none;
                         margin-left: 0;
                         padding: 10px 15px;
+                        width: 100%;
                     }
                 }
-                &:hover{
-                    background: @dell-highlight-blue;
+                &.active > a:before,
+                &.active > a:after,
+                a:before, a:after {
+                    border-right: 1px solid;
+                    content: '';
+                    display: block;
+                    height: 10px;
+                    margin-top: -8px;
+                    position: absolute;
+                    -moz-transform: rotate(135deg);
+                    -o-transform: rotate(135deg);
+                    -webkit-transform: rotate(135deg);
+                    transform: rotate(135deg);
+                    right: 15px;
+                    top: 50%;
+                    width: 0;
+                }
+                &.active > a:after,
+                a:after {
+                    margin-top: -1px;
+                    -moz-transform: rotate(45deg);
+                    -o-transform: rotate(45deg);
+                    -webkit-transform: rotate(45deg);
+                    transform: rotate(45deg);
                 }
             }
         }
