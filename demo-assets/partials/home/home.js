@@ -17,15 +17,12 @@ angular.module('demo').controller('HomeCtrl',function($scope,$rootScope,$http,$s
                 }
             });
             init = function (componentId) {
-                console.log("activeComponent>>>",componentId);
                 if (componentId) {
                     $rootScope.componentDemoUrl = "components/" + componentId + "/demo-" + componentId + ".html";
                     $rootScope.componentPlayUrl = "components/" + componentId + "/demo-play-" + componentId + ".html";
-                    console.log("componentId>>>",componentId);
                     $rootScope.activeComponent = _.find($rootScope.components, function (c) {
                         return c.id === componentId;
                     });
-
                 }
                 $timeout(function(){
                     $rootScope.pageType = $state.params.typeId;
@@ -35,14 +32,5 @@ angular.module('demo').controller('HomeCtrl',function($scope,$rootScope,$http,$s
             init($state.params.componentId);
 
         });
-
-
-
-
-
-    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-        init(toParams.componentId);
-    });
-
 
 });
