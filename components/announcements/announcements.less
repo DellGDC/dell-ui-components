@@ -3,3 +3,63 @@
  *------------------------------------------------------------------------------------------
  */
 
+blockquote {
+  &.blockquote {
+    &-blue {
+      border-color: @dell-blue;
+    }
+    &-green {
+      border-color: @dell-green;
+    }
+    &-purple {
+      border-color: @dell-purple;
+    }
+    &-orange {
+      border-color: @dell-orange;
+    }
+    &-berry {
+      border-color: @dell-berry;
+    }
+    &-red {
+      border-color: @dell-red;
+    }
+    &-red-dark {
+      border-color: @dell-red-dark;
+    }
+    &-dark-blue {
+      border-color: @dell-dark-blue;
+    }
+    &-gray-dark {
+      border-color: @dell-gray-dark;
+    }
+    &-icon {
+      border: none;
+      padding-left: 55px;
+      [class*="icon"] {
+        display: none;
+      }
+      //TODO these icons do not exist in dell-ui-bootstrap and need to be added - probably images?
+      .icon-large-dell-dpa-card,
+      .icon-large-dell-advantage-star {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        max-width: 30px;
+      }
+
+      &.pull-right {
+        padding-left: 15px;
+        padding-right: 55px;
+        .icon-large-dell-dpa-card,
+        .icon-large-dell-advantage-star {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          left: auto;
+        }
+      }
+    }
+  }
+
+}

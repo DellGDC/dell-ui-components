@@ -4,6 +4,139 @@
         <h2>Announcements Builder</h2>
         <div>
             <!-- PLay html for Announcements component -->
+	
+		    <h4>Rendered Example</h4>
+		    <div id="announcement-play-code" ng-bind-html="renderingHTML"></div>
+		    <h4>Rendered HTML Code</h4>
+		    <div class="play-code">
+		        <button to-clipboard clipboard-target="#announcement-play-code" class="btn btn-xs btn-default copy-play-code">copy html</button>
+		        <pre><code>{{playHtmlCode}}</code></pre>       
+		    </div>
+		    <hr/>
+			<div class="row">
+				<div class="col-sm-5">
+		            <h4>Customize</h4>
+
+			        <div class="form-group">
+			            <label for="text-label-input">ID</label>
+			            <div>
+			                <input type="text" class="form-control" id="sample-announcement-id" placeholder="optional" ng-model="sampleAnnouncementConfig.id">
+			            </div>
+			        </div>
+
+		            <div class="form-group">
+		                <label for="sample-announcement-type">Type</label>
+		                <select class="form-control" id="sample-announcement-type" ng-model="sampleAnnouncementConfig.type">
+		                    <option value="blue">
+		                        Blue (Default)
+		                    </option>
+		                    <option value="purple">
+		                        Purple
+		                    </option>
+		                    <option value="green">
+		                        Green
+		                    </option>
+		                    <option value="orange">
+		                        Orange
+		                    </option>
+		                    <option value="berry">
+		                        Berry
+		                    </option>
+		                    <option value="dark-blue">
+		                        Dark blue
+		                    </option>
+		                    <option value="red">
+		                        Red
+		                    </option>
+		                    <option value="red-dark">
+		                        Dark red
+		                    </option>
+		                    <option value="gray">
+		                        Gray
+		                    </option>
+		                    <option value="gray-dark">
+		                        Dark gray
+		                    </option>
+		                    <option value="icon">
+		                        Icon
+		                    </option>
+		                </select>
+		            </div>
+		            
+		            <div class="form-group" ng-if="sampleAnnouncementConfig.type==='icon'">
+		                <label for="sample-announcement-icon">Icon</label>
+		                <select class="form-control" id="sample-announcement-icon" ng-model="sampleAnnouncementConfig.icon">
+		                    <option value="dell-advantage-star">
+		                        Star (Default)
+		                    </option>
+		                    <option value="dpa-card">
+		                        Dell Prefered Card
+		                    </option>
+		                </select>
+		            </div>
+		 
+		            <div class="form-group">
+		                <label for="text-label-input">Title</label>
+		                <div>
+		                    <input type="text" class="form-control" id="sample-announcement-title" placeholder="optional" ng-model="sampleAnnouncementConfig.title">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label for="textarea">Body text</label>
+		                <textarea id="sample-announcement-body" class="form-control" rows="5" ng-model="sampleAnnouncementConfig.body"></textarea>
+		            </div>
+		            <div class="form-group">
+		                <label for="text-label-input">First Link</label>
+		                <div>
+		                    <input type="text" class="form-control bottom-offset-10" placeholder="label" ng-model="sampleAnnouncementConfig.cta_0.label">
+		                    <input type="text" class="form-control" placeholder="url" ng-model="sampleAnnouncementConfig.cta_0.url">
+		                </div>
+		            </div>
+		            <div class="form-group">
+		                <label for="text-label-input">Second Link</label>
+		                <div>
+		                    <input type="text" class="form-control bottom-offset-10" placeholder="label" ng-model="sampleAnnouncementConfig.cta_1.label">
+		                    <input type="text" class="form-control" placeholder="url" ng-model="sampleAnnouncementConfig.cta_1.url">
+		                </div>
+		            </div>
+
+		        </div>
+		        <div class="col-sm-7">
+
+		            <prototype-code-title></prototype-code-title>
+		            <div ng-if="sampleAnnouncementConfig.id">
+		                <h5>HTML code</h5>
+		                <div class="play-code">
+		                    <button to-clipboard clipboard-target="#announcement-sherpa-code" class="btn btn-xs btn-default copy-play-code">copy html</button>
+		                    <pre><code id="announcement-sherpa-code">&lt;blockquote id="{{sampleSherpaConfig.id | _.str: 'dasherize'}}" class="blockquote-{{sampleSherpaConfig.type}}"&gt;
+	&lt;h4 msg="title_{{sampleSherpaConfig.id | _.str: 'underscored'}}"&gt;&lt;/h4&gt;
+	&lt;p msg="text_{{sampleSherpaConfig.id | _.str: 'underscored'}}"&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</code></pre>
+		                </div>
+		<!--                 <h5>Configuration object in controller</h5>
+		                <div class="play-code">
+		                    <button to-clipboard clipboard-target="#announcement-sherpa-config" class="btn btn-xs btn-default copy-play-code">copy config</button>
+		                    <pre><code id="announcement-sherpa-config">$scope.{{sampleSherpaConfig.id | _.str: 'camelize'}} = {{sampleSherpaConfig|json}}</code></pre>
+		                </div> -->
+		                <h5>Textkeys to add to messages file</h5>
+		                <div class="play-code" ng-if="textkeysToAdd">
+		                    <button to-clipboard clipboard-target="#announcement-sherpa-keys" class="btn btn-xs btn-default copy-play-code">copy keys</button>
+		                    <pre><code id="announcement-sherpa-keys">{{textkeysToAdd}}</code></pre>
+		                </div>
+		                <pre ng-if="!textkeysToAdd">None specified until custom body or title is entered.</pre>
+		                <h5>Resource keys to add to resources file</h5>
+		                <div class="play-code" ng-if="resourcesToAdd">
+		                    <button to-clipboard clipboard-target="#announcement-sherpa-resource-keys" class="btn btn-xs btn-default copy-play-code">copy keys</button>
+		                    <pre><code id="announcement-sherpa-resource-keys">{{resourcesToAdd}}</code></pre>
+		                </div>
+		                <pre ng-if="!resourcesToAdd">None specified until cta is specified.</pre>
+		            </div>
+		            <p ng-if="!sampleAnnouncementConfig.id">Must enter id to see Sherpa code</p>
+
+		        </div>        
+			</div>
+
+
         </div>
     </div>
 
