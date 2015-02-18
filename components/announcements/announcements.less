@@ -3,7 +3,20 @@
  *------------------------------------------------------------------------------------------
  */
 
+
 blockquote {
+
+    //TODO  blockquote h4 margin adjustment
+    h4{
+        margin: 5px 0;
+    }
+
+    //TODO  blockquote h4 margin adjustment
+    &.blockquote-icon {
+        border: none;
+        padding-left: 56px !important;
+    }
+
     &.blockquote {
         &-blue {
             border-color: @dell-blue;
@@ -97,29 +110,45 @@ blockquote {
 
 .blockquote-dell-advantage {
     display: block;
-    width: 30px;
-    height: 30px;
-    margin-left: -45px;
-    margin-right: 15px;
-    //border just to visually define the edges
-    border: 1px solid #000000;
-    background: url(dell-advantage-star.svg);
-//    background-image: url('../../components/announcements/test.png');
-//    background-repeat: no-repeat;
-    background-size: 75px 75px;
+    width: 40px;
+    height: 40px;
+    margin-left: -42px;
+    margin-top: 2px;
+    background: url('announcements/dell-advantage-star.svg') no-repeat;
+    background-size: 30px 30px;
     float: left;
+
+    &.pull-right {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin-right: -51px;
+        margin-top: 2px;
+        background-size: 30px 30px;
+        float: right;
+    }
 }
 
 .blockquote-dell-dpa {
     display: block;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     margin-left: -45px;
-    margin-right: 15px;
-    //border just to visually define the edges
-    border: 1px solid #000000;
-    background-image: url('../../components/announcements/dell-preferred-account.svg');
-//    background-repeat: no-repeat;
-    background-size: 75px 75px;
+    margin-top: -5px;
+    background: url('announcements/dell-preferred-account.svg') no-repeat;
+    background-size: 35px 35px;
     float: left;
+
+    &.pull-right {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin-right: -50px;
+        margin-top: -5px;
+        background: url('announcements/dell-preferred-account.svg') no-repeat;
+        background-size: 35px 35px;
+        float: left;
+    }
 }
+
+

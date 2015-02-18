@@ -17,7 +17,7 @@
                 display:block;
                 a,
                 a:hover {
-                    border-top: none;
+                    border-top: none !important;
                     width: 100%;
                 }
             }
@@ -56,7 +56,7 @@
                 a,
                 a:hover {
                     margin-bottom: 0;
-                    border-top:    none;
+                    border-top:    none !important
                 }
 
                 &.active > a {
@@ -99,6 +99,52 @@
                 }
             }
         }
+    }
+}
+
+/*
+ * Tab Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+    .tab-tab-offcanvas {
+        position: relative;
+        -webkit-transition: all .25s ease-out;
+        -o-transition: all .25s ease-out;
+        transition: all .25s ease-out;
+    }
+
+    .tab-offcanvas-right {
+        right: 0;
+    }
+
+    .tab-offcanvas-left {
+        left: 0;
+    }
+
+    .tab-offcanvas-right
+    .sidebar-offcanvas {
+        right: -50%; /* 6 columns */
+    }
+
+    .tab-offcanvas-left
+    .sidebar-offcanvas {
+        left: -50%; /* 6 columns */
+    }
+
+    .tab-offcanvas-right.active {
+        right: 50%; /* 6 columns */
+    }
+
+    .tab-offcanvas-left.active {
+        left: 50%; /* 6 columns */
+    }
+
+    .tab-pane-offcanvas {
+        position: absolute;
+//        top: 0;
+        width: 100%; /* 6 columns */
+        background: red;
     }
 }
 
