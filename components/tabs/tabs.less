@@ -106,15 +106,11 @@
             }
         }
 
-
-
-
-
-
-
-
         &.nav-justified {
             > li {
+                 a {
+                     border: none;
+                 }
                 a,
                 a:hover {
                     margin-bottom: 0;
@@ -127,11 +123,13 @@
                     padding: 10px 15px;
                     width: 100%;
 
-                    &:hover {
+                    &a:hover,
+                    &a:focus{
                         border: none;
                         margin-left: 0;
                         padding: 10px 15px;
                         width: 100%;
+//                        margin-left: -2%;
                     }
                 }
                 &.active > a:before,
