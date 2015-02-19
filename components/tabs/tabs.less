@@ -110,29 +110,37 @@
             > li {
                  a {
                      border: none;
+                     width: 100%;
+                     margin-left: -1px;
                  }
                 a,
                 a:hover {
-                    margin-bottom: 0;
-                    border-top:    none !important
+                    margin-bottom: -1px;
+                    border-top:    none !important;
+                    margin-left: -1px;
                 }
 
                 &.active > a {
                     border: none;
-                    margin-left: 0;
+                    margin-left: -1px;
                     padding: 10px 15px;
                     width: 100%;
 
                     &:hover,
                     &:focus{
-//                        border: none;
-                        margin-left: 0;
+                        border: none;
                         padding: 10px 15px;
                         width: 100%;
-//                        margin-bottom: -1px !important;
-                        border-top: none;
-                        margin-left: 0;
+                        margin-left: -1px;
                     }
+                }
+                &:first-child {
+                    margin-left: -1px;
+                    border-top: 1px solid @nav-tabs-border-color;
+                }
+                &:last-child {
+                    margin-left: -1px;
+                    border-bottom: 1px solid @nav-tabs-border-color;
                 }
 
                 &.active > a:before,
