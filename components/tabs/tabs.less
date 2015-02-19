@@ -3,15 +3,14 @@
 // *------------------------------------------------------------------------------------------
 // */
 
-
 @media (max-width: @screen-xs-max) {
     .nav-tabs {
-        display:block;
-        width:100%;
+        display: block;
+        width: 100%;
         > li {
             background: @white;
-            width:102%;
-//            margin-left: 0;
+            width: 102%;
+            //            margin-left: 0;
             border: 1px solid @nav-tabs-border-color;
             margin-bottom: -1px;
             margin-left: -1px;
@@ -22,16 +21,16 @@
             }
             &:last-child {
                 margin-left: -1px;
-//                margin-bottom: 0;
+                //                margin-bottom: 0;
                 border-bottom: 1px solid @nav-tabs-border-color;
-//                margin-bottom: 0px;
+                //                margin-bottom: 0px;
             }
             &:hover {
                 background: @dell-highlight-blue;
                 color: @dell-blue;
             }
             &.active {
-//                color: @dell-blue !important;
+                //                color: @dell-blue !important;
                 background: @white;
                 border-bottom-color: transparent;
                 overflow: hidden;
@@ -44,16 +43,13 @@
                     margin-bottom: -1px !important;
                     border-top: none;
                     padding: 10px 15px;
-//                    padding-bottom: 10px;
                     color: @dell-blue;
-//                    border-bottom: 1px solid transparent;
                 }
                 a:hover {
                     background: @dell-highlight-blue;
                 }
                 &:last-child {
                     margin-left: -1px;
-//                    border-bottom: 1px solid @nav-tabs-border-color;
                     margin-bottom: 0px;
                 }
             }
@@ -68,16 +64,6 @@
                     color: @dell-blue;
                 }
             }
-
-//            &.active {
-//                display:block;
-//                a,
-//                a:hover {
-//                    border-top: none !important;
-//                    width: 100%;
-//                }
-//            }
-
 
             &.active > a:before,
             &.active > a:after,
@@ -108,15 +94,15 @@
 
         &.nav-justified {
             > li {
-                 a {
-                     border: none;
-                     width: 100%;
-                     margin-left: -1px;
-                 }
+                a {
+                    border: none;
+                    width: 100%;
+                    margin-left: -1px;
+                }
                 a,
                 a:hover {
                     margin-bottom: -1px;
-                    border-top:    none !important;
+                    border-top: none !important;
                     margin-left: -1px;
                 }
 
@@ -127,7 +113,7 @@
                     width: 100%;
 
                     &:hover,
-                    &:focus{
+                    &:focus {
                         border: none;
                         padding: 10px 15px;
                         width: 100%;
@@ -173,112 +159,6 @@
     }
 }
 
-//================== backup =================
-//@media (max-width: @screen-xs-max) {
-//    .nav-tabs {
-//        display:block;
-//        width:100%;
-//        > li {
-//            background: #ffffff;
-//            width:100%;
-//            margin-left: 0;
-//
-//            &.active {
-//                display:block;
-//                a,
-//                a:hover {
-//                    border-top: none !important;
-//                    width: 100%;
-//                }
-//            }
-//            > a {
-//                text-align: left !important;
-//            }
-//
-//            &.active > a:before,
-//            &.active > a:after,
-//            a:before, a:after {
-//                border-right: 1px solid;
-//                content: '';
-//                display: block;
-//                height: 10px;
-//                margin-top: -8px;
-//                position: absolute;
-//                -moz-transform: rotate(135deg);
-//                -o-transform: rotate(135deg);
-//                -webkit-transform: rotate(135deg);
-//                transform: rotate(135deg);
-//                right: 15px;
-//                top: 50%;
-//                width: 0;
-//            }
-//            &.active > a:after,
-//            a:after {
-//                margin-top: -1px;
-//                -moz-transform: rotate(45deg);
-//                -o-transform: rotate(45deg);
-//                -webkit-transform: rotate(45deg);
-//                transform: rotate(45deg);
-//            }
-//        }
-//        &.nav-justified {
-//            > li {
-//                a,
-//                a:hover {
-//                    margin-bottom: 0;
-//                    border-top:    none !important
-//                }
-//
-//                &.active > a {
-//                    border: none;
-//                    margin-left: 0;
-//                    padding: 10px 15px;
-//                    width: 100%;
-//
-//                    &:hover {
-//                        border: none;
-//                        margin-left: 0;
-//                        padding: 10px 15px;
-//                        width: 100%;
-//                    }
-//                }
-//                &.active > a:before,
-//                &.active > a:after,
-//                a:before, a:after {
-//                    border-right: 1px solid;
-//                    content: '';
-//                    display: block;
-//                    height: 10px;
-//                    margin-top: -8px;
-//                    position: absolute;
-//                    -moz-transform: rotate(135deg);
-//                    -o-transform: rotate(135deg);
-//                    -webkit-transform: rotate(135deg);
-//                    transform: rotate(135deg);
-//                    right: 15px;
-//                    top: 50%;
-//                    width: 0;
-//                }
-//                &.active > a:after,
-//                a:after {
-//                    margin-top: -1px;
-//                    -moz-transform: rotate(45deg);
-//                    -o-transform: rotate(45deg);
-//                    -webkit-transform: rotate(45deg);
-//                    transform: rotate(45deg);
-//                }
-//            }
-//        }
-//    }
-//}
-//
-
-
-//================== backup =================
-
-
-
-
 /*
  * Tab Off Canvas
  * --------------------------------------------------
@@ -319,9 +199,44 @@
 
     .tab-pane-offcanvas {
         position: absolute;
-//        top: 0;
+        //        top: 0;
         width: 100%; /* 6 columns */
         background: red;
+    }
+
+    .offcanvas-back {
+        &.well {
+            height: 50px;
+            background: yellow !important;
+            margin-top: -10px;
+            padding: 10px 20px 10px 40px;
+        }
+        &:before,
+        &:after {
+            color: @dell-blue;
+
+            border-right: 1px solid;
+            content: '';
+            display: block;
+            height: 10px;
+            margin-top: -10px;
+            position: absolute;
+            -moz-transform: rotate(135deg);
+            -o-transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+            left: 30px;
+            top: 50%;
+            width: 0;
+        }
+
+        &:after {
+            margin-top: -20px;
+            -moz-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
     }
 }
 
