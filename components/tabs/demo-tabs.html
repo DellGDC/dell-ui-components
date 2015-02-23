@@ -7,7 +7,7 @@
 
             <h3>Tabs <small>(default)</small></h3>
             <div class="bottom-offset-60">
-                <div class="row row-offcanvas row-offcanvas-left">
+                <div class="row row-offcanvas row-offcanvas-right">
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
                         <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
@@ -33,7 +33,7 @@
             <!-- Nav tabs justify -->
             <h3>Tabs <small>(justified)</small></h3>
             <div class="bottom-offset-60">
-                <div class="row row-offcanvas row-offcanvas-left">
+                <div class="row row-offcanvas row-offcanvas-right">
                     <ul class="nav nav-tabs nav-justified" role="tablist">
                         <li role="presentation" class="active"><a href="#trains" aria-controls="home" role="tab" data-toggle="tab">Trains</a></li>
                         <li role="presentation"><a href="#automobile" role="tab" data-toggle="tab">Automobile</a></li>
@@ -43,14 +43,23 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade tab-pane-offcanvas active in" id="trains">
-                            <div class="offcanvas-back well"><a class="" href="javascript:;">Back</a></div>
+                        <div role="tabpanel" class="tab-pane fade active in" id="trains" style="height: 3000px;">
+                            <div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle="offcanvas">Back</button></div>
                             <div>I like trains</div>
 
                         </div>
-                        <div role="tabpanel" class="tab-pane fade " id="automobile">Cars go fast</div>
-                        <div role="tabpanel" class="tab-pane fade " id="boats">Boats are fun in summer</div>
-                        <div role="tabpanel" class="tab-pane fade " id="planes">Planes take me places fast</div>
+                        <div role="tabpanel" class="tab-pane fade " id="automobile">
+                            <div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle="offcanvas">Back</button></div>
+                            <div>Cars go fast</div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade " id="boats">
+                            <div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle="offcanvas">Back</button></div>
+                            <div>Boats are fun in summer</div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade " id="planes">
+                            <div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle="offcanvas">Back</button></div>
+                            <div>Planes take me places fast</div>
+                        </div>
                     </div>
                 </div>
             </div>

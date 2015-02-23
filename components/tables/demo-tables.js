@@ -35,7 +35,7 @@ angular.module('demo').controller('tablesCtrl',function($scope,$rootScope,uiGrid
                         if( b === 'male' ) {
                             return -1;
                         }
-                        if( a == 'female' ) {
+                        if( a === 'female' ) {
                             return 1;
                         }
                         if( b === 'female' ) {
