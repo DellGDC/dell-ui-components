@@ -2,51 +2,122 @@
 
     <div class="container">
         <h2>Tabs Demo</h2>
-        <div>
-            <!-- Nav tabs -->
+        <!-- Nav tabs -->
+        <h3>Tabs
+            <small>(default)</small>
+        </h3>
+        <div class="bottom-offset-60">
+            <div class="row row-offcanvas row-offcanvas-right">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                </ul>
 
-            <h3>Tabs <small>(default)</small></h3>
-            <div class="bottom-offset-60">
-                <div class="row row-offcanvas row-offcanvas-left">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade  active in" id="home">home is the best place</div>
-                        <div role="tabpanel" class="tab-pane fade " id="profile">what is this</div>
-                        <div role="tabpanel" class="tab-pane fade " id="messages">You've got mail</div>
-                        <div role="tabpanel" class="tab-pane fade " id="settings">default settings or custom</div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home">
+                        <div class="offcanvas-back-btn well visible-xs-block">
+                            <button class="btn btn-link" data-toggle="offcanvas">Back</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Your content goes here. Home is the best place!
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade " id="profile">
+                        <div class="offcanvas-back-btn well visible-xs-block">
+                            <button class="btn btn-link" data-toggle="offcanvas">Back</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Your content goes here. What is this?
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade " id="messages">
+                        <div class="offcanvas-back-btn well visible-xs-block">
+                            <button class="btn btn-link" data-toggle="offcanvas">Back</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Your content goes here. You've got mail!
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade " id="settings">
+                        <div class="offcanvas-back-btn well visible-xs-block">
+                            <button class="btn btn-link" data-toggle="offcanvas">Back</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Your content goes here. Default settings or custom!
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- Nav tabs justify -->
+        <h3>Tabs
+            <small>(justified)</small>
+        </h3>
+        <div class="bottom-offset-60">
+            <div class="row row-offcanvas row-offcanvas-right">
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                    <li role="presentation" class="active"><a href="#trains" aria-controls="home" role="tab" data-toggle="tab">Trains</a></li>
+                    <li role="presentation"><a href="#automobile" role="tab" data-toggle="tab">Automobile</a></li>
+                    <li role="presentation"><a href="#boats" role="tab" data-toggle="tab">Boats</a></li>
+                    <li role="presentation"><a href="#planes" role="tab" data-toggle="tab">Planes</a></li>
+                </ul>
 
-            <!-- Nav tabs justify -->
-            <h3>Tabs <small>(justified)</small></h3>
-            <div class="bottom-offset-60">
-                <div class="row row-offcanvas row-offcanvas-left">
-                    <ul class="nav nav-tabs nav-justified" role="tablist">
-                        <li role="presentation" class="active"><a href="#trains" aria-controls="home" role="tab" data-toggle="tab">Trains</a></li>
-                        <li role="presentation"><a href="#automobile" role="tab" data-toggle="tab">Automobile</a></li>
-                        <li role="presentation"><a href="#boats" role="tab" data-toggle="tab">Boats</a></li>
-                        <li role="presentation"><a href="#planes" role="tab" data-toggle="tab">Planes</a></li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade tab-pane-offcanvas active in" id="trains">I like trains</div>
-                        <div role="tabpanel" class="tab-pane fade " id="automobile">Cars go fast</div>
-                        <div role="tabpanel" class="tab-pane fade " id="boats">Boats are fun in summer</div>
-                        <div role="tabpanel" class="tab-pane fade " id="planes">Planes take me places fast</div>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="trains">
+                        <div class="offcanvas-back-btn well visible-xs-block">
+                            <button class="btn btn-link" data-toggle="offcanvas">Back</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Your content goes here. I like trains
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade " id="automobile">
+                        <div class="offcanvas-back-btn well visible-xs-block">
+                            <button class="btn btn-link" data-toggle="offcanvas">Back</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Your content goes here. Cars go fast
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade " id="boats">
+                        <div class="offcanvas-back-btn well visible-xs-block">
+                            <button class="btn btn-link" data-toggle="offcanvas">Back</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Your content goes here. Boats are fun in summer
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade " id="planes">
+                        <div class="offcanvas-back-btn well visible-xs-block">
+                            <button class="btn btn-link" data-toggle="offcanvas">Back</button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Your content goes here. Planes take me places fast
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
