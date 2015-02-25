@@ -8,8 +8,15 @@
 //------------------------------------------------------------------------------------------
 .progress {
     overflow:      hidden;
-//    #gradient > .vertical(@dell-gray-light, @dell-gray-light);
-//    .box-shadow(inset 0 1px 2px rgba(0, 0, 0, .3));
+    background: #eeeeee; /* Old browsers */
+    background: -moz-linear-gradient(top,  #eeeeee 0%, #ffffff 30%, #ffffff 51%, #ffffff 88%, #eeeeee 98%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(30%,#ffffff), color-stop(51%,#ffffff), color-stop(88%,#ffffff), color-stop(98%,#eeeeee)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #eeeeee 0%,#ffffff 30%,#ffffff 51%,#ffffff 88%,#eeeeee 98%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #eeeeee 0%,#ffffff 30%,#ffffff 51%,#ffffff 88%,#eeeeee 98%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #eeeeee 0%,#ffffff 30%,#ffffff 51%,#ffffff 88%,#eeeeee 98%); /* IE10+ */
+    background: linear-gradient(to bottom,  #eeeeee 0%,#ffffff 30%,#ffffff 51%,#ffffff 88%,#eeeeee 98%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+
 
     .bar {
         width:              0;
@@ -31,8 +38,9 @@
         -moz-transition:    width .6s ease;
         -o-transition:      width .6s ease;
         transition:         width .6s ease;
+
         &-disabled{
-            background-color: @dell-gray;
+            background-color: @dell-gray-dark;
         }
     }
 
@@ -53,7 +61,8 @@
             }
             &-disabled {
                 span {
-                    color:       @dell-gray;
+                    font-weight: bold;
+                    color:       @dell-gray-dark;
                 }
             }
 
@@ -89,16 +98,26 @@
                 span {
                     color: @dell-gray;
                 }
+                background: #eeeeee; /* Old browsers */
+                background: -moz-linear-gradient(top,  #eeeeee 0%, #ffffff 30%, #ffffff 51%, #ffffff 88%, #eeeeee 98%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(30%,#ffffff), color-stop(51%,#ffffff), color-stop(88%,#ffffff), color-stop(98%,#eeeeee)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #eeeeee 0%,#ffffff 30%,#ffffff 51%,#ffffff 88%,#eeeeee 98%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #eeeeee 0%,#ffffff 30%,#ffffff 51%,#ffffff 88%,#eeeeee 98%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #eeeeee 0%,#ffffff 30%,#ffffff 51%,#ffffff 88%,#eeeeee 98%); /* IE10+ */
+                background: linear-gradient(to bottom,  #eeeeee 0%,#ffffff 30%,#ffffff 51%,#ffffff 88%,#eeeeee 98%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
 
-//                #gradient > .vertical(@dell-gray-light, @dell-gray-light);
             }
 
             &:first-child {
 //                .border-left-radius(@border-radius-base);
+                // New style does not have this rounding corner radius
             }
 
             &:last-child {
 //                .border-right-radius(@border-radius-base);
+                // New style does not have this rounding corner radius
+
             }
 
             &:hover {
@@ -113,7 +132,7 @@
 
 
 .progress-counter {
-    margin-left: 5px;
+    margin-left: 15px;
     width: 4%;
 }
 
