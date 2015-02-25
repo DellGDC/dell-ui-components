@@ -69,6 +69,12 @@ blockquote {
             color: @dell-blue;
         }
     }
+
+    //TODO this Text-RTL needs to be pulled into styling for more than just the Blockquote
+    .text-rtl {
+        direction:rtl;
+        unicode-bidi:bidi-override;
+    }
 }
 
 @media (max-width: @screen-xs-max) {
