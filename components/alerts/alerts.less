@@ -3,53 +3,62 @@
  *------------------------------------------------------------------------------------------
  */
 
-
-
-
 .alert {
 
+    /* Embedded alerts */
+    > .alert-danger,
+    > .alert-error {
+        background: transparent;
+        color: @dell-gray-dark;
+        margin-bottom: floor((@line-height-base * 14px /2)); // ~20px
 
-  /* Embedded alerts */
-  > .alert-danger,
-  > .alert-error {
-    background: transparent;
-    color: @dell-gray-dark;
-    margin-bottom: floor((@line-height-base * 14px)); // ~20px
+    }
 
-  }
+    > .alert-info {
+        background: transparent;
+        color: @dell-gray-dark;
+        margin-bottom: floor((@line-height-base * 14px / 2 )); // ~20px
 
-  > .alert-info {
-    background: transparent;
-    color: @dell-gray-dark;
-    margin-bottom: floor((@line-height-base * 14px)); // ~20px
+    }
+    > .alert-success {
+        background: transparent;
+        color: @dell-gray-dark;
+        margin-bottom: floor((@line-height-base * 14px / 2)); // ~20px
 
-  }
-  > .alert-success {
-    background: transparent;
-    color: @dell-gray-dark;
-    margin-bottom: floor((@line-height-base * 14px)); // ~20px
+    }
+    > .alert-warning {
+        background: transparent;
+        color: @dell-gray-dark;
+        margin-bottom: floor((@line-height-base * 14px / 2)); // ~20px
 
-  }
-  > .alert-warning {
-    background: transparent;
-    color: @dell-gray-dark;
-    margin-bottom: floor((@line-height-base * 14px)); // ~20px
+    }
+    > ul {
+        padding-left: 15px;
+        padding-top: 5px;
+    }
 
-  }
+    > .alert-dismissable .close,
+    > .alert-dismissible .close {
+        position: relative;
+        top: -2px;
+        color: inherit;
+        right: 0;
+        margin-right: -55px;
+    }
+
 }
-
 
 // Block dell-alerts
 .alert-block {
-  padding-top: 14px;
-  padding-bottom: 14px;
+    padding-top: 14px;
+    padding-bottom: 14px;
 
-  > p,
-  > ul {
-    margin-bottom: 0;
-  }
+    > p,
+    > ul {
+        margin-bottom: 0;
+    }
 
-  p + p {
-    margin-top: 5px;
-  }
+    p + p {
+        margin-top: 5px;
+    }
 }

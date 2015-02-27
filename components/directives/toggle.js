@@ -46,12 +46,11 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         $(this).parents('.row-offcanvas').find('.tab-content').addClass('active');
                     });
                     break;
-                case "collapse":
 
+                case "collapse":
                     $(element).on('click', function (event) {
                         event.preventDefault();
                     });
-
                     break;
             }
         }

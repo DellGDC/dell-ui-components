@@ -2,10 +2,6 @@
  * Progress-Bars component theme overrides
  *------------------------------------------------------------------------------------------
  */
-
-
-//progress-bars
-//------------------------------------------------------------------------------------------
 .progress {
     overflow:      hidden;
     background: #eeeeee; /* Old browsers */
@@ -40,18 +36,16 @@
         transition:         width .6s ease;
 
         &-disabled{
-            background-color: @dell-gray-dark;
+            background-color: @dell-gray-medium;
         }
     }
 
-    //progress-status dell 308 only
     &.progress-status {
         overflow:      visible;
         position:      relative;
         margin-bottom: 40px;
         .bar {
             position: relative;
-//            .box-shadow(inset 0 1px 2px rgba(0, 0, 0, .3));
             span {
                 position:    relative;
                 color:       @dell-gray-dark;
@@ -92,11 +86,17 @@
 //                #gradient > .vertical(@dell-gray, @dell-gray);
                 // TODO: need to remove the #gradient with .vertical to background: @dell-highlight-blue;
                 background: @dell-highlight-blue;
+
+                &-disabled {
+                    background: @dell-gray;
+                    font-weight: bold;
+                }
             }
+
 
             &-incomplete {
                 span {
-                    color: @dell-gray;
+                    color: @dell-gray-dark;
                 }
                 background: #eeeeee; /* Old browsers */
                 background: -moz-linear-gradient(top,  #eeeeee 0%, #ffffff 30%, #ffffff 51%, #ffffff 88%, #eeeeee 98%); /* FF3.6+ */
