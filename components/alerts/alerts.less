@@ -11,30 +11,21 @@
         background: transparent;
         color: @dell-gray-dark;
         margin-bottom: floor((@line-height-base * 14px /2)); // ~20px
-
     }
-
     > .alert-info {
         background: transparent;
         color: @dell-gray-dark;
         margin-bottom: floor((@line-height-base * 14px / 2 )); // ~20px
-
     }
     > .alert-success {
         background: transparent;
         color: @dell-gray-dark;
         margin-bottom: floor((@line-height-base * 14px / 2)); // ~20px
-
     }
     > .alert-warning {
         background: transparent;
         color: @dell-gray-dark;
         margin-bottom: floor((@line-height-base * 14px / 2)); // ~20px
-
-    }
-    > ul {
-        padding-left: 15px;
-        padding-top: 5px;
     }
 
     > .alert-dismissable .close,
@@ -45,8 +36,25 @@
         right: 0;
         margin-right: -55px;
     }
-
+    div:nth-of-type(2n+1) {
+        margin-bottom: 0;
+    }
+    div:nth-of-type(2n) {
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+    :last-child {
+        margin-bottom: 0;
+    }
+    > ul,
+    ul {
+        padding-left: 15px;
+        padding-top: 5px;
+    }
+    // TODO this is a Dell-ui change
+    padding: 10px 35px 10px 40px;
 }
+
 
 // Block dell-alerts
 .alert-block {
@@ -61,4 +69,5 @@
     p + p {
         margin-top: 5px;
     }
+
 }

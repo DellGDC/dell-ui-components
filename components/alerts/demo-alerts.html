@@ -3,144 +3,206 @@
     <div class="container">
         <h2>Alerts Demo</h2>
 
-        <div>
             <!-- example html for Alerts component -->
 
             <h3 class="bottom-offset-20">Alert badges </h3>
 
-            <div id="alert-warning">
-                <div class="alert alert-warning alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <p><strong>Warning Badge: </strong>Dolor sit amet, con Maecenas egestas scelerisque porttitor.</p>
+                <!---------Warning Badge:---------->
+                <div class="alert">
+                    <div class="alert-warning alert-dismissible cssDataTargetDismiss-1 fade in">
+                        <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-1">×</button>
+                        <p><strong>Warning Badge: </strong>Warning errors are dismissible and recoverable.</p>
+                    </div>
+                    <span class="cssDataTargetDismiss-1 collapse fade bottom-offset-10" data-toggle="collapse"
+                          data-target=".cssDataTargetDismiss-1">
+                        <a href="javascript:;" class="text-blue">Re-open dismissed warning error</a>
+                    </span>
                 </div>
-            </div>
+
 
             <div class="row bottom-offset-20">
-                <div class="col-xs-12 col-md-4">
-                    <div class="alert alert-error alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <p><strong>Catastrophic Error Badge: </strong>Dolor sit amet, con Maecenas egestas scelerisque
-                            porttitor.</p>
-                    </div>
-                </div>
+                <!---------Success Badge:---------->
                 <div class="col-xs-12 col-md-4">
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <p><strong>Success Badge: </strong>Dolor sit amet, con Maecenas egestas scelerisque porttitor.
+                        <p><strong>Success Badge: </strong>Are dismissible but not recoverable.
                         </p>
                     </div>
                 </div>
+
+
+                <!---------Information Badge:---------->
                 <div class="col-xs-12 col-md-4">
-                    <div class="alert alert-info alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <p><strong>Information Badge: </strong>Dolor sit amet, con Maecenas egestas scelerisque
-                            porttitor.</p>
+                    <div class="alert">
+                        <div class="alert-info alert-dismissible cssDataTargetDismiss-2 fade in">
+                            <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-2">×</button>
+                            <p><strong>Information Badge: </strong>Informational errors are dismissible and recoverable.</p>
+                        </div>
+                        <span class="cssDataTargetDismiss-2 collapse fade bottom-offset-10" data-toggle="collapse"
+                              data-target=".cssDataTargetDismiss-2">
+                            <a href="javascript:;" class="text-blue">Re-open dismissed info alert</a>
+                        </span>
                     </div>
                 </div>
-            </div>
+
+
+                <!---------Catastrophic Error Badge:---------->
+                <div class="col-xs-12 col-md-4">
+                    <div class="alert alert-error alert-dismissible">
+                        <p><strong>Catastrophic Error Badge: </strong>Catastrophic errors are not dismissible and non-recoverable.</p>
+                    </div>
+                </div>
+
+            </div>  <!-- row close -->
+
 
             <!--Informational Alerts-->
             <h3 class="top-offset-40 bottom-offset-20">Informational alerts</h3>
 
-            <div class="alert alert-info">
-                <p><strong>Informational alert: </strong>Informational alert without close "x". Non-dismissible.</p>
+            <!--------informational alert no title----------->
+            <div class="alert">
+                <div class="alert-info alert-dismissible cssDataTargetDismiss-3 fade in">
+                    <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-3">×</button>
+                    <p><strong>Informational alert: </strong>Informational alert with close "x" and able to be recover the alert.</p>
+                </div>
+                <span class="cssDataTargetDismiss-3 collapse fade bottom-offset-10" data-toggle="collapse"
+                     data-target=".cssDataTargetDismiss-3">
+                    <a href="javascript:;" class="text-blue">Re-open dismissed alert</a>
+                </span>
             </div>
 
-            <div class="alert alert-info">
-                <h4><strong>Informational alert: example with title and non-dismissible.</strong></h4>
-
-                <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
-                    scelerisque porttitor.</p>
+            <!--------informational alert WITH title----------->
+            <div class="alert">
+                <div class="alert-info alert-dismissible cssDataTargetDismiss-4 fade in">
+                    <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-4 ">×</button>
+                    <h4>Informational alert with an example of a title.</h4>
+                    <p>Informational alert with close "x" and able to be recover the alert.</p>
+                </div>
+                <span class="cssDataTargetDismiss-4 collapse fade bottom-offset-10" data-toggle="collapse"
+                   data-target=".cssDataTargetDismiss-4">
+                    <a href="javascript:;" class="text-blue">Re-open dismissed alert with title</a>
+                </span>
             </div>
 
-            <div class="alert alert-info alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h4><strong>Informational alert: example with title and dismissible close "x".</strong></h4>
+            <!--------informational alert WITH title and multiple links----------->
+            <div class="alert">
+                <div class="alert-info alert-dismissible cssDataTargetDismiss-5 fade in">
+                    <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-5">×</button>
+                    <h4>Informational alert with an example of a title and multiple links.</h4>
+                    <p class="bottom-offset-0">Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
+                        scelerisque porttitor.</p>
+                    <ul>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                    </ul>
+                </div>
+                <span class="cssDataTargetDismiss-5 collapse fade bottom-offset-5" data-toggle="collapse"
+                   data-target=".cssDataTargetDismiss-5">
+                    <a href="javascript:;" class="text-blue">Re-open <strong>first</strong> dismissed alert with links</a>
+                </span>
 
-                <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
-                    scelerisque porttitor.</p>
-                <ul class="">
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                </ul>
+                <div class="alert-info alert-dismissible cssDataTargetDismiss-6 fade in">
+                    <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-6">×</button>
+                    <h4>Additional informational alert example.</h4>
+                    <p class="bottom-offset-0">Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
+                        scelerisque porttitor.</p>
+                    <ul>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                    </ul>
+                </div>
+                <span class="cssDataTargetDismiss-6 collapse fade bottom-offset-5" data-toggle="collapse"
+                   data-target=".cssDataTargetDismiss-6">
+                    <a href="javascript:;" class="text-blue">Re-open <strong>second</strong> dismissed alert with links</a>
+                </span>
             </div>
+
 
             <!--Success Alerts-->
             <h3 class="top-offset-40 bottom-offset-20">Success alerts</h3>
 
-            <div class="alert alert-success">
-                <p><strong>Success alert: </strong>Informational alert without close "x". Non-dismissible.</p>
-            </div>
+            <!--------success alert no title----------->
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <p><strong>Success alert: </strong>Are dismissible but not recoverable.</p>
+                    </div>
 
-            <div class="alert alert-success">
-                <h4><strong>Success alert: Example with title and non-dismissible.</strong></h4>
+            <!--------success alert with title----------->
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>Success alert with title.</h4>
+                    <p><strong>Success alert: </strong>Are dismissible but not recoverable.</p>
+                </div>
 
-                <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
-                    scelerisque porttitor.</p>
-                <ul class="">
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                </ul>
-            </div>
+        <!--------success alert WITH title and multiple links----------->
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>Success alert with title.</h4>
+                    <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
+                        scelerisque porttitor.</p>
+                    <ul>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                    </ul>
+                </div>
 
-            <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h4><strong>Success alert: Example with title and dismissible close "x".</strong></h4>
 
-                <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
-                    scelerisque porttitor.</p>
-            </div>
 
 
             <!--user error -->
             <h3 class="top-offset-40 bottom-offset-20">User Error</h3>
 
-            <div class="alert alert-warning  alert-dismissible">
-                <p><strong>Error alert: </strong>Informational alert without close "x". Non-dismissible.</p>
-            </div>
-
-            <div class="alert alert-warning  alert-dismissible">
-                <h4><strong>Error alert: Example with title and non-dismissible.</strong></h4>
-
-                <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
-                    scelerisque porttitor.</p>
-                <ul class="">
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                    <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
-                </ul>
-            </div>
-
-
+            <!--------user error alert no title----------->
             <div class="alert">
-                <div class="alert-warning alert-dismissible alertExample-1 fade in">
-                    <button type="button" class="close" data-toggle="collapse" data-target=".alertExample-1">×</button>
-                    <h4><strong>Error alert: Example with title and dismissible close "x".</strong></h4>
-
-                    <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
-                        scelerisque porttitor.</p>
+                <div class="alert-warning alert-dismissible cssDataTargetDismiss-7 fade in">
+                    <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-7">×</button>
+                    <p><strong>Error alert: </strong>User alert with close "x" and able to be recover the alert.</p>
                 </div>
-                <div class="alertExample-1 collapse fade  bottom-offset-10" data-toggle="collapse"
-                     data-target=".alertExample-1">
-                    <a href="javascript:;" class="text-blue" data-toggle="hideRecoverable">View dismissed error
-                        notification 1</a>
-                </div>
-
-                <div class="alert-success alert-dismissible alertExample-2 fade in">
-                    <button type="button" class="close" data-toggle="collapse" data-target=".alertExample-2">×</button>
-                    <h4><strong>Success Badge: Example with title and dismissible close "x".</strong></h4>
-
-                    <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
-                        scelerisque porttitor.</p>
-                </div>
-                <div class="alertExample-2 collapse fade bottom-offset-10" data-toggle="collapse"
-                     data-target=".alertExample-2">
-                    <a href="javascript:;" class="text-blue" data-toggle="hideRecoverable">View dismissed error
-                        notification 2</a>
-                </div>
+                <span class="cssDataTargetDismiss-7 collapse fade bottom-offset-10" data-toggle="collapse"
+                      data-target=".cssDataTargetDismiss-7">
+                    <a href="javascript:;" class="text-blue">Re-open dismissed alert</a>
+                </span>
             </div>
+
+
+            <!--------User alert WITH title and multiple links----------->
+            <div class="alert">
+                <div class="alert-warning alert-dismissible cssDataTargetDismiss-5 fade in">
+                    <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-5">×</button>
+                    <h4>User error with an example of a title and multiple links.</h4>
+                    <p class="bottom-offset-0">Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
+                        scelerisque porttitor.</p>
+                    <ul>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                    </ul>
+                </div>
+                    <span class="cssDataTargetDismiss-5 collapse fade bottom-offset-5" data-toggle="collapse"
+                          data-target=".cssDataTargetDismiss-5">
+                        <a href="javascript:;" class="text-blue">Re-open <strong>first</strong> dismissed alert with links</a>
+                    </span>
+
+                <div class="alert-info alert-dismissible cssDataTargetDismiss-6 fade in">
+                    <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-6">×</button>
+                    <h4>Mixed alert example with title.</h4>
+                    <p class="bottom-offset-0">Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
+                        scelerisque porttitor.</p>
+                    <ul>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                    </ul>
+                </div>
+                    <span class="cssDataTargetDismiss-6 collapse fade bottom-offset-5" data-toggle="collapse"
+                          data-target=".cssDataTargetDismiss-6">
+                        <a href="javascript:;" class="text-blue">Re-open <strong>second</strong> dismissed alert with links</a>
+                    </span>
+            </div>
+
 
 
             <!--Catastrophic error -->
@@ -153,14 +215,11 @@
             </div>
 
             <div class="alert alert-error">
-                <h4><strong>Catastrophic Error alert header here. <br>These are and not dismissible and not recoverable.</strong>
-                </h4>
-
+                <h4>Catastrophic Error alert header here. <br>These are and not dismissible and not recoverable.</h4>
                 <p>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
                     scelerisque porttitor.</p>
             </div>
 
-        </div>
 
     </div>
 
