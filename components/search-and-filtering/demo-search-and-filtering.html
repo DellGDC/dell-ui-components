@@ -4,6 +4,56 @@
         <h2>Search-And-Filtering Demo</h2>
         <div>
             <!-- example html for Search-And-Filtering component -->
+
+            <!-- CheckBox Filter Example -->
+			<div data-ng-app data-ng-controller="myCheckboxCtrl">
+				<div class="row"><h2>Filtering</h2></div>
+				<div class="row"><h3>Filter by checkbox</h3></div>
+			    <div class="row" id="filter-checkbox">
+			    	<div class="pull-left col-sm-3">
+			    		<p>Narrow your search by screen size</p>
+					    <label class="pull-left" ng-repeat="c in classes">
+					        <input type="checkbox"  ng-model="selected[c]" />
+					        <span>{{c}}</span>
+					    </label>
+					</div>
+					<div class="col-sm-9">
+					    <div class="pull-right searchCard" ng-repeat="card in cards | filter:showCards"><center>
+					        <h3>{{card.name}}</h3><img ng-src="{{card.link}}"/>
+					        <p><em>{{card.price}}</em></p></center>
+					    </div>
+				    </div>
+			    </div>
+			</div>
+			<hr>
+
+			<!-- Drop Down Filter Example -->
+			<div data-ng-app data-ng-controller="myDDCtrl">
+				<div class="row"><h3>Filter by dropdown</h3></div>
+				<div class="row" id="filter-drop">
+			    	<div class="pull-left col-sm-3">
+			    		<p class="text-left top-padding-5">Screen size:</p>
+					    <select ng-model="screenSize"
+			            	ng-options="item.size for item in filterOptions.sizes">
+			            	<option value="" selected>-- Select your Size --</option>
+			    		</select>
+			    		<div>
+				    		<p class="text-left top-padding-5">Price:</p>
+						    <select ng-model="priceRange"
+				            	ng-options="item.pricerange for item in filterOptions.prices">
+				            	<option value="" selected>-- Select your Range --</option>
+				    		</select>
+				    	</div>
+					</div>
+					<div class="col-sm-9">
+					    <div class="pull-right searchCard text-center" ng-repeat="item in data | filter:screenSize | filter:priceRange">
+					        <h3>{{item.name}}</h3><img ng-src="{{item.link}}"/>
+					        <p><em>{{item.price}}</em></p>
+					    </div>
+				    </div>
+			    </div>
+			</div>
+
         </div>
     </div>
 
