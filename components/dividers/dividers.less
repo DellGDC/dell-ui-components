@@ -3,6 +3,13 @@
  *------------------------------------------------------------------------------------------
  */
 
-.shadow-separator:before {
-    box-shadow: 0 0 11px rgba(0,0,0,.2);
+.shadow-separator {
+    border-top: 1px solid @dell-gray-light;
+    &:before {
+        box-shadow: 0 0 11px rgba(0,0,0,.2);
+    }
+}
+
+.separator-default {
+    border-top: 1px solid @dell-gray-light;
 }
