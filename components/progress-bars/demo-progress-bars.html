@@ -4,24 +4,25 @@
         <h2>Progress-Bars Demo</h2>
         <div class="row">
             <div class="col-md-6 bottom-offset-20">
-                <h4>
-                    Default
-                </h4>
-                <p>
-                    Default progress bar color.
-                </p>
-                <div id="default-progress">
-                    <div class="progress">
-                        <div class="bar" style="width: 60%;"></div>
-                    </div>
+
+                <h4>Default</h4>
+                <!--default-->
+                <div class="progress">
+                    <div class="bar" style="width: 60%;"></div>
                 </div>
+
+                <h4>Default with percentage</h4>
+                <!--with percentage-->
+                <div class="progress">
+                    <div class="bar" style="width: 60%;">60%</div>
+                </div>
+
             </div>
         </div>
 
         <div class="bottom-offset-60">
-            <h4>
-                Default progress status
-            </h4>
+
+            <h4>Default progress status</h4>
             <div class="progress progress-status">
                 <a href="javascript:;" class="bar bar-complete" style="width: 33.3%">
                     <span class="hidden-xs hidden-sm">Shipping</span>
@@ -33,12 +34,12 @@
                     <span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span>
                 </div>
             </div>
+
         </div>
 
         <div class="bottom-offset-60">
-            <h4>
-                Progress Status: Disabled
-            </h4>
+
+            <h4>Progress Status: Disabled</h4>
             <div class="progress progress-status">
                 <div href="javascript:;" class="bar bar-disabled" style="width: 33.3%">
                     <span class="hidden-xs hidden-sm">Shipping</span>
@@ -50,12 +51,12 @@
                     <span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span>
                 </div>
             </div>
+
         </div>
 
         <div class="bottom-offset-60">
-            <h4>
-                Progress Status 2-Step minimum
-            </h4>
+            <h4>Progress Status 2-Step minimum</h4>
+
             <div class="progress progress-status">
                 <a href="javascript:;" class="bar bar-complete" style="width: 50%">
                     <span class="hidden-xs hidden-sm">Payment</span>
@@ -64,12 +65,12 @@
                     <span class="hidden-xs hidden-sm">Verify &amp; submit order</span>
                 </div>
             </div>
+
         </div>
 
         <div class="bottom-offset-60">
-            <h4>
-                Progress status 6-Step maximum
-            </h4>
+            <h4>Progress status 6-Step maximum</h4>
+
             <div class="progress progress-status">
                 <a href="javascript:;" class="bar bar-complete" style="width: 16.666%">
                     <span class="hidden-xs hidden-sm">Step 1</span>
@@ -90,55 +91,41 @@
                     <span class="hidden-xs hidden-sm">Step 6</span>
                 </div>
             </div>
+
         </div>
 
 
         <div class="bottom-offset-60">
-            <h4>
-                Animated Striped
-            </h4>
+            <h4>Animated Striped</h4>
             <p>Add <code>.active</code> to <code>.progress-bar-striped</code> to animate the stripes right to left. Not available in IE9 and below.</p>
-            <div id="animated-striped">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                        <span class="sr-only">45% Complete</span>
-                    </div>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                    <span class="sr-only">45% Complete</span>
                 </div>
             </div>
         </div>
 
         <div class="bottom-offset-60">
-            <h4>
-                Striped progress
-            </h4>
-            <div id="striped" ng-init="fakeAnimation()">
-                <div class="">
-                    <div class="">
-                        <div class="pull-right progress-counter hidden-xs">
-                            <h3 class="pull-right">{{fakeAnimationValue}}%</h3>
-                        </div>
-                        <div class="progress bottom-offset-5">
-                            <div ng-class="stripeAnimate" class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="{{fakeAnimationValue}}" aria-valuemin="0" aria-valuemax="100" style="width: {{fakeAnimationValue}}%">
-                            </div>
-                        </div>
-                        <div>
-                            <p class="pull-left">Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p>
-                            <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-click="pauseFakeAnimation()" ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button>
-                            <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-click="fakeAnimation()" ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button>
-                            <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-if="fakeAnimationValue === 100" ng-click="resetFakeAnimation()" >Ok</button>
+            <h4>Striped progress</h4>
 
-                            <button type="reset" class="btn btn-default btn-margin-left-5 pull-right" ng-click="resetFakeAnimation()" ng-if="fakeAnimationValue !== 100">Cancel</button>
-                        </div>
-
+            <div ng-init="fakeAnimation()">
+                <div class="pull-right progress-counter hidden-xs">
+                    <h3 class="pull-right">{{fakeAnimationValue}}%</h3>
+                </div>
+                <div class="progress bottom-offset-5">
+                    <div ng-class="stripeAnimate" class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="{{fakeAnimationValue}}" aria-valuemin="0" aria-valuemax="100" style="width: {{fakeAnimationValue}}%">
                     </div>
-                    <!--<div class=" pull-left hidden-xs">-->
-                        <!--<h3 class="">{{fakeAnimationValue}}%</h3>-->
-                    <!--</div>-->
+                </div>
+                <div>
+                    <p class="pull-left">Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p>
+                    <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-click="pauseFakeAnimation()" ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button>
+                    <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-click="fakeAnimation()" ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button>
+                    <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-if="fakeAnimationValue === 100" ng-click="resetFakeAnimation()" >Ok</button>
+                    <button type="reset" class="btn btn-default btn-margin-left-5 pull-right" ng-click="resetFakeAnimation()" ng-if="fakeAnimationValue !== 100">Cancel</button>
                 </div>
             </div>
+
         </div>
-
-
 
     </div>
 </section>
