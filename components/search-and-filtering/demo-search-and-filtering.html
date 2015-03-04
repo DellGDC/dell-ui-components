@@ -10,15 +10,15 @@
 				<div class="row"><h2>Filtering</h2></div>
 				<div class="row"><h3>Filter by checkbox</h3></div>
 			    <div class="row" id="filter-checkbox">
-			    	<div class="pull-left col-sm-3">
+			    	<div class="pull-left col-sm-3 col-xs-12">
 			    		<p>Narrow your search by screen size</p>
 					    <label class="pull-left" ng-repeat="c in classes">
 					        <input type="checkbox"  ng-model="selected[c]" />
 					        <span>{{c}}</span>
 					    </label>
 					</div>
-					<div class="col-sm-9">
-					    <div class="pull-right searchCard" ng-repeat="card in cards | filter:showCards"><center>
+					<div class="col-sm-9 col-xs-12">
+					    <div class="pull-left searchCard" ng-repeat="card in cards | filter:showCards"><center>
 					        <h3>{{card.name}}</h3><img ng-src="{{card.link}}"/>
 					        <p><em>{{card.price}}</em></p></center>
 					    </div>
@@ -31,7 +31,7 @@
 			<div data-ng-app data-ng-controller="myDDCtrl">
 				<div class="row"><h3>Filter by dropdown</h3></div>
 				<div class="row" id="filter-drop">
-			    	<div class="pull-left col-sm-3">
+			    	<div class="pull-left col-sm-3 col-xs-12">
 			    		<p class="text-left top-padding-5">Screen size:</p>
 					    <select ng-model="screenSize"
 			            	ng-options="item.size for item in filterOptions.sizes">
@@ -45,8 +45,8 @@
 				    		</select>
 				    	</div>
 					</div>
-					<div class="col-sm-9">
-					    <div class="pull-right searchCard text-center" ng-repeat="item in data | filter:screenSize | filter:priceRange">
+					<div class="col-sm-9 col-xs-12">
+					    <div class="pull-left searchCard text-center" ng-repeat="item in data | filter:screenSize | filter:priceRange">
 					        <h3>{{item.name}}</h3><img ng-src="{{item.link}}"/>
 					        <p><em>{{item.price}}</em></p>
 					    </div>
