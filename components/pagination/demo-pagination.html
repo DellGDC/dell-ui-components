@@ -2,8 +2,94 @@
 
     <div class="container">
         <h2>Pagination Demo</h2>
+
+
         <div>
-            <!-- example html for Pagination component -->
+            <h3 class="bottom-offset-40">Centered with page reference</h3>
+            <div class="pagination center-block">
+                <ul class="pager">
+                    <li><a href="#" data-action="previous"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
+                    <span class="pager-span">page</span><input class="pagination-input" type="text" readonly="readonly" data-max-page="40"/><span class="pager-span">of 40</span>
+                    <li> <a href="#" data-action="next">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                </ul>
+            </div>
+
+
+            <div class="">
+                <div class="pagination col-xs-12">
+                    <ul class="pager">
+                        <li class="previous"><a href="#" data-action="previous"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
+                        <span class="pager-span">page</span><input class="pagination-input" type="text" readonly="readonly" data-max-page="40"/><span class="pager-span">of 40</span>
+                        <li class="next"> <a href="#" data-action="next">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <h3 class="bottom-offset-40">Justified with page reference</h3>
+            <div class="bottom-offset-40">
+            <div id="justified-with-page-reference">
+                <ul class="pager">
+                    <li class="previous disabled"><a href="javascript:;"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
+                    <li><span class="btn disabled">1 of 9</span></li>
+                    <li class="next"><a href="javascript:;">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+            <h3 class="bottom-offset-40">Centered with page reference and filters</h3>
+            <div id="centered-with-page-reference-and-filters">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 text-center bottom-offset-small">
+                        <ul class="pager">
+                            <li class="previous"><a href="javascript:;"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
+                            <li>page&nbsp;<span class="btn disabled">3</span>&nbsp;of 9</li>
+                            <li class="next"><a href="javascript:;">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-md-3 text-center">
+                        <div class="control-group">
+                            <select class="form-control">
+                                <option class="text-blue" value="Items per page">Items per page</option>
+                                <option class="text-gray-medium" value="20 per page">20 per page</option>
+                                <option class="text-gray-medium" value="30 per page">30 per page</option>
+                                <option class="text-gray-medium" value="40 per page">40 per page</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3 text-center">
+                        <div class="control-group">
+                            <select class="form-control">
+                                <option class="text-blue" value="By Relevance">By Relevance</option>
+                                <option class="text-gray-medium" value="low-to-high">Low-to-high</option>
+                                <option class="text-gray-medium" value="high-to-low">High-to-low</option>
+                                <option class="text-gray-medium" value="Ratings">Ratings</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="bottom-offset-40">
+                <h3 class="bottom-offset-40">Tap-to-Load Button <small>( Lazy Load )</small></h3>
+                <div id="tap-to-load-button">
+                    <button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn tap-to-load form-control btn-lg btn-block"
+                            ng-init="loadingButtonInit()">
+                        Load more results
+                    </button>
+                    <div class="tap-to-load-rule top-offset-small visible-xs visible-sm">
+                        <p>1 of 9</p>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 
