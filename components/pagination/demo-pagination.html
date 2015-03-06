@@ -5,52 +5,39 @@
 
 
         <div>
-            <h3 class="bottom-offset-40">Centered with page reference</h3>
+            <h3 class="bottom-offset-40">Centered pagination</h3>
+            <!--centered pagination-->
             <div class="pagination center-block">
                 <ul class="pager">
                     <li><a href="#" data-action="previous"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
-                    <span class="pager-span">page</span><input class="pagination-input" type="text" readonly="readonly" data-max-page="40"/><span class="pager-span">of 40</span>
-                    <li> <a href="#" data-action="next">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                    <li><span class="pager-span hidden-xs">page</span><input class="pagination-input" type="text" readonly="readonly" data-max-page="40"/><span class="pager-span hidden-xs">of 40</span></li>
+                    <li><a href="#" data-action="next">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
                 </ul>
             </div>
 
-
-            <div class="">
+            <h3 class="bottom-offset-40">Justified pagination</h3>
+            <!--Justified pagination-->
+            <div class="row">
                 <div class="pagination col-xs-12">
                     <ul class="pager">
                         <li class="previous"><a href="#" data-action="previous"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
-                        <span class="pager-span">page</span><input class="pagination-input" type="text" readonly="readonly" data-max-page="40"/><span class="pager-span">of 40</span>
+                        <li><span class="pager-span hidden-xs">page</span><input class="pagination-input" type="text" readonly="readonly" data-max-page="40"/><span class="pager-span hidden-xs">of 40</span></li>
                         <li class="next"> <a href="#" data-action="next">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
                     </ul>
                 </div>
             </div>
 
 
-
-            <h3 class="bottom-offset-40">Justified with page reference</h3>
-            <div class="bottom-offset-40">
-            <div id="justified-with-page-reference">
-                <ul class="pager">
-                    <li class="previous disabled"><a href="javascript:;"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
-                    <li><span class="btn disabled">1 of 9</span></li>
-                    <li class="next"><a href="javascript:;">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
-                </ul>
-            </div>
-        </div>
-
-
-
-            <h3 class="bottom-offset-40">Centered with page reference and filters</h3>
-            <div id="centered-with-page-reference-and-filters">
+            <h3 class="bottom-offset-40">Centered pagination with filters</h3>
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 text-center bottom-offset-small">
+                    <div class="pagination col-xs-12 col-md-6 text-center bottom-offset-20">
                         <ul class="pager">
-                            <li class="previous"><a href="javascript:;"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
-                            <li>page&nbsp;<span class="btn disabled">3</span>&nbsp;of 9</li>
-                            <li class="next"><a href="javascript:;">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                            <li class="previous"><a href="#" data-action="previous"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
+                            <li><span class="pager-span hidden-xs">page</span><input class="pagination-input" type="text" readonly="readonly" data-max-page="40"/><span class="pager-span hidden-xs">of 40</span></li>
+                            <li class="next"> <a href="#" data-action="next">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
                         </ul>
                     </div>
-                    <div class="col-xs-12 col-md-3 text-center">
+                    <div class="col-xs-12 col-md-3 text-center bottom-offset-20">
                         <div class="control-group">
                             <select class="form-control">
                                 <option class="text-blue" value="Items per page">Items per page</option>
@@ -60,7 +47,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-3 text-center">
+                    <div class="col-xs-12 col-md-3 text-center bottom-offset-20">
                         <div class="control-group">
                             <select class="form-control">
                                 <option class="text-blue" value="By Relevance">By Relevance</option>
@@ -71,7 +58,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
 
 
