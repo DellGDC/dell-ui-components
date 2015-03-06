@@ -60,15 +60,16 @@ function myCheckboxCtrl($scope){
     function isChecked(obj){
         var checked = [];
         for(var key in obj){
-            if(obj[key])
+            if(obj[key]) {
                 checked.push(key);
+            }
         }
         return checked;
-    };
+    }
     $scope.showCards = function(card){
         var checked = isChecked($scope.selected);
         if(checked.length < 1) {
-        	checked = $scope.classes;
+			checked = $scope.classes;
         }
         return checked.indexOf(card.size) > -1;
     };
@@ -190,9 +191,7 @@ function myDDCtrl($scope){
     }];
     
     //Mapped to the model to filter
-	$scope.filterItem = {
-	    store: $scope.filterOptions.sizes[0]
-	}
+	$scope.filterItem = {store: $scope.filterOptions.sizes[0]};
 
     //Custom filter - filter based on the rating selected
 	$scope.customFilter = function (data) {
