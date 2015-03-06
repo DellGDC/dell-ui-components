@@ -15,10 +15,10 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 	 		ratingAverage = ((s[0]+(s[1]*2)+(s[2]*3)+(s[3]*4)+(s[4]*5))/totalRatings).toFixed(1);// get average and store it
 	 		//inject content on the page
 	 		$(this).html( "<div class='starbox pull-left yesRatings'>☆☆☆☆☆</div><div class='pull-left reviewText'>([<a href='#' class='linkStyle'>"+totalRatings+"</a>]<a href='#' class='linkStyle'> Ratings</a>)</div><div class='pull-left reviewText'><a href='#' class='linkStyle'>Write your review</a></div>" );
-	 		// $(this).children('.starbox').html( "Whoop!" );
+
 	 	}	else {
 	 		//nope, no data... just render the blank stars
-			$(this).html( "<div class='starbox pull-left' width='120px' height='20px'></div><div class='pull-left reviewText'>(<a href='#' class='linkStyle'>Write your review</a>)</div>" );
+			$(this).html( "<div class='starbox pull-left'>☆☆☆☆☆</div><div class='pull-left reviewText'>(<a href='#' class='linkStyle'>Write your review</a>)</div>" );
 		} 
 	})
 
