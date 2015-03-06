@@ -1,0 +1,22 @@
+<section ng-controller="ratingsAndReviewsCtrl" id="ratings-and-reviews-html-example">
+
+    <div class="container">
+    <div class='starbox pull-left'><svg width='120px' height='20px'><text x='10' y='20' stroke='gold'>☆☆☆☆☆</text></svg></div><div class='pull-left reviewText'>(<a href='#' class='linkStyle'>Write your review</a>)</div>
+        <h2>Ratings-And-Reviews Demo</h2>
+        <div>
+            <!-- example html for Ratings-And-Reviews component -->
+            <!-- data-user-rating is for the current user and accepts a whole number   -->
+            <!-- data-review-stars is for historical rating and an empty string ("[]") -->
+            <!-- for no ratings or a comma separated list ("[4,12,32,45,56]") used to  -->
+            <!-- calculate the rating and fill the histogram. Order is 1star to 5star  -->
+            <!-- data-histogram turns the histogram on ("yes") or off ("no")           -->
+            <div class="ratingBlock" data-user-rating="" data-review-stars='' data-histogram="no"></div>
+
+            <div class="ratingBlock" data-user-rating="" data-review-stars='[2,6,12,34,7]' data-histogram="no"></div>
+
+            <div class="ratingBlock" data-user-rating="" data-review-stars='[12,12,23,54,107]' data-histogram="yes"></div>
+
+        </div>
+    </div>
+
+</section>
