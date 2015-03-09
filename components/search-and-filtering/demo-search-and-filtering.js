@@ -13,47 +13,43 @@ angular.module('demo').controller('searchAndFilteringPLayDemoCtrl',function($sco
 
 function myCheckboxCtrl($scope){
     $scope.selected = {};
-    $scope.classes = ['19"', '20"', '24"', '25"', '27"', '34"'];
+    $scope.classes = ['size1', 'size2', 'size3'];
     $scope.cards = [{
-        name: "Dell UltraSharp 24 Monitor - U2412M",
-        size: '24"',
-        price: "Dell Price		$289.99",
-        link: "http://snpi.dell.com/snp/images/products/en-us~320-2676/320-2676.jpg"
+        name: "Result1",
+        size: 'size1',
+        price: "price1"
     },{
-        name: "Dell UltraSharp 24 Monitor – U2414H",
-        size: '24"',
-        price: "Dell Price		$289.99",
-        link: "http://snpi.dell.com/snp/images/products/en-us~860-BBCG/860-BBCGr1.jpg"
+        name: "Result2",
+        size: 'size1',
+        price: "price2"
     },{
-        name: "Dell 20 Touch Monitor - E2014T",
-        size: '20"',
-        price: "Dell Price		$209.99",
-        link: "http://snpi.dell.com/snp/images/products/en-us~858-BBBE/858-BBBEr1.jpg"
+        name: "Result3",
+        size: 'size1',
+        price: "price3"
     },{
-        name: "Dell 19 Monitor - P1914S",
-        size: '19"',
-        price: "Dell Price		$249.99",
-        link: "http://snpi.dell.com/snp/images/products/en-us~857-BBBE/857-BBBEr2.jpg"
+        name: "Result4",
+        size: 'size2',
+        price: "price1"
     },{
-        name: "Dell 19 Monitor - E1914H",
-        size: '19"',
-        price: "Dell Price		$119.99",
-        link: "http://snpi.dell.com/snp/images/products/en-us~320-9774/320-9774r2.jpg"
+        name: "Result5",
+        size: 'size2',
+        price: "price2"
     },{
-        name: "Dell UltraSharp 27 Monitor - U2715H",
-        size: '27"',
-        price: "Dell Price		$599.99",
-        link: "http://snpi.dell.com/snp/images/products/en-us~210-ADKB/210-ADKBr3.jpg"
+        name: "Result6",
+        size: 'size2',
+        price: "price3"
     },{
-        name: "Dell UltraSharp 34 Curved Monitor - U3415W",
-        size: '34"',
-        price: "Dell Price		$1,199.99",
-        link: "http://snpi.dell.com/snp/images/products/en-us~210-ADTR/210-ADTRr1.jpg"
+        name: "Result7",
+        size: 'size3',
+        price: "price1"
     },{
-        name: "Dell 25 Monitor - U2515H",
-        size: '25"',
-        price: "Dell Price		$499.99",
-        link: "http://snpi.dell.com/snp/images/products/en-us~480-ACRZ/480-ACRZ.jpg"
+        name: "Result8",
+        size: 'size3',
+        price: "price2"
+    },{
+        name: "Result9",
+        size: 'size3',
+        price: "price3"
     }];
 
     
@@ -82,112 +78,79 @@ function myDDCtrl($scope){
 	$scope.selected = {};
 	$scope.filterOptions = {
 		sizes: [
-		{size:'19"'},
-		{size:'20"'},
-		{size:'24"'},
-		{size:'25"'},
-		{size:'27"'},
-		{size:'34"'}
+		{size:'size1'},
+		{size:'size2'},
+		{size:'size3'},
+		{size:'size4'}
 		], 
 		prices: [
-		{pricerange:"$0 - $199"},
-		{pricerange:"$200 - $349"},
-		{pricerange:"$350 - $499"},
-		{pricerange:"$500 - $749"},
-		{pricerange:"$750 and above"}
+		{pricerange:"price1"},
+		{pricerange:"price2"},
+		{pricerange:"price3"},
+		{pricerange:"price4"}
 		]
 	};
 
     $scope.data = [{
-        name: "Dell UltraSharp 24 Monitor - U2412M",
-        size: '24"',
-        price: "Dell Price		$289.99",
-        pricerange: "$200 - $349",
-        link: "http://snpi.dell.com/snp/images/products/en-us~320-2676/320-2676.jpg"
+        name: "Result1",
+        size: 'size1',
+        pricerange: "price1"
     },{
-        name: "Dell UltraSharp 24 Monitor – U2414H",
-        size: '24"',
-        price: "Dell Price		$289.99",
-        pricerange: "$200 - $349",
-        link: "http://snpi.dell.com/snp/images/products/en-us~860-BBCG/860-BBCGr1.jpg"
+        name: "Result2",
+        size: 'size1',
+        pricerange: "price2"
     },{
-        name: "Dell 20 Touch Monitor - E2014T",
-        size: '20"',
-        price: "Dell Price		$209.99",
-        pricerange: "$200 - $349",
-        link: "http://snpi.dell.com/snp/images/products/en-us~858-BBBE/858-BBBEr1.jpg"
+        name: "Result3",
+        size: 'size1',
+        pricerange: "price3"
     },{
-        name: "Dell 19 Monitor - P1914S",
-        size: '19"',
-        price: "Dell Price		$249.99",
-        pricerange: "$200 - $349",
-        link: "http://snpi.dell.com/snp/images/products/en-us~857-BBBE/857-BBBEr2.jpg"
+        name: "Result4",
+        size: 'size1',
+        pricerange: "price4"
     },{
-        name: "Dell 19 Monitor - E1914H",
-        size: '19"',
-        price: "Dell Price		$119.99",
-        pricerange: "$0 - $200",
-        link: "http://snpi.dell.com/snp/images/products/en-us~320-9774/320-9774r2.jpg"
+        name: "Result5",
+        size: 'size2',
+        pricerange: "price2"
     },{
-        name: "Dell UltraSharp 27 Monitor - U2715H",
-        size: '27"',
-        price: "Dell Price		$599.99",
-        pricerange: "$500 - $749",
-        link: "http://snpi.dell.com/snp/images/products/en-us~210-ADKB/210-ADKBr3.jpg"
+        name: "Result6",
+        size: 'size2',
+        pricerange: "price3"
     },{
-        name: "Dell UltraSharp 34 Curved - U3415W",
-        size: '34"',
-        price: "Dell Price		$1,199.99",
-        pricerange: "$750 and above",
-        link: "http://snpi.dell.com/snp/images/products/en-us~210-ADTR/210-ADTRr1.jpg"
+        name: "Result7",
+        size: 'size2',
+        pricerange: "price4"
     },{
-        name: "Dell 25 Monitor - U2515H",
-        size: '25"',
-        price: "Dell Price		$499.99",
-        pricerange: "$350 - $499",
-        link: "http://snpi.dell.com/snp/images/products/en-us~480-ACRZ/480-ACRZ.jpg"
+        name: "Result8",
+        size: 'size2',
+        pricerange: "price1"
     },{
-        name: "Dell UltraSharp 24 Monitor – U2414H",
-        size: '24"',
-        price: "Dell Price		$289.99",
-        pricerange: "$200 - $349",
-        link: "http://snpi.dell.com/snp/images/products/en-us~860-BBCG/860-BBCGr1.jpg"
+        name: "Result9",
+        size: 'size3',
+        pricerange: "price2"
     },{
-        name: "Dell 20 Touch Monitor - E2014T",
-        size: '20"',
-        price: "Dell Price		$209.99",
-        pricerange: "$200 - $349",
-        link: "http://snpi.dell.com/snp/images/products/en-us~858-BBBE/858-BBBEr1.jpg"
+        name: "Result10",
+        size: 'size3',
+        pricerange: "price3"
     },{
-        name: "Dell 19 Monitor - P1914S",
-        size: '19"',
-        price: "Dell Price		$249.99",
-        pricerange: "$200 - $349",
-        link: "http://snpi.dell.com/snp/images/products/en-us~857-BBBE/857-BBBEr2.jpg"
+        name: "Result11",
+        size: 'size3',
+        pricerange: "price4"
     },{
-        name: "Dell 19 Monitor - E1914H",
-        size: '19"',
-        price: "Dell Price		$119.99",
-        pricerange: "$0 - $200",
-        link: "http://snpi.dell.com/snp/images/products/en-us~320-9774/320-9774r2.jpg"
+        name: "Result12",
+        size: 'size3',
+        pricerange: "price1"
     },{
-        name: "Dell UltraSharp 27 Monitor - U2715H",
-        size: '27"',
-        price: "Dell Price		$599.99",
-        pricerange: "$500 - $749",
-        link: "http://snpi.dell.com/snp/images/products/en-us~210-ADKB/210-ADKBr3.jpg"
+        name: "Result13",
+        size: 'size4',
+        pricerange: "price2"
     },{
-        name: "Dell UltraSharp 34 Curved - U3415W",
-        size: '34"',
-        price: "Dell Price		$1,199.99",
-        pricerange: "$750 and above",
-        link: "http://snpi.dell.com/snp/images/products/en-us~210-ADTR/210-ADTRr1.jpg"
+        name: "Result14",
+        size: 'size4',
+        pricerange: "price3"
     },{
-        name: "Dell 25 Monitor - U2515H",
-        size: "25",
-        price: "Dell Price		$499.99",
-        pricerange: "$350 - $499",
-        link: "http://snpi.dell.com/snp/images/products/en-us~480-ACRZ/480-ACRZ.jpg"
+        name: "Result15",
+        size: "size4",
+        pricerange: "price4"
     }];
     
     //Mapped to the model to filter
