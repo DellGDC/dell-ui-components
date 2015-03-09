@@ -1,5 +1,5 @@
 
-angular.module('demo').controller('paginationCtrl',function($scope,$rootScope) {
+angular.module('demo').controller('paginationCtrl',function($scope, $rootScope, $timeout) {
 	//this is for functionality related to demo code
     $('.pagination').jqPagination({
         paged: function(page) {
@@ -7,16 +7,16 @@ angular.module('demo').controller('paginationCtrl',function($scope,$rootScope) {
         }
     });
 
-    //
-    //$scope.loadingButtonInit = function () {
-    //    $('#loading-example-btn').click(function () {
-    //        var btn = $(this);
-    //        btn.button('loading');
-    //        window.setTimeout(function () {
-    //            btn.button('reset');
-    //        }, 2000);
-    //    });
-    //};
+
+    $scope.loadingButtonInit = function () {
+        $('#loading-example-btn').click(function () {
+            var btn = $(this);
+            btn.button('loading');
+            window.setTimeout(function () {
+                btn.button('reset');
+            }, 2000);
+        });
+    };
 
     $scope.loadingButtonAction = function () {
         event.preventDefault();
