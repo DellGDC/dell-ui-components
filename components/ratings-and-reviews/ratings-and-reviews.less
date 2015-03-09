@@ -4,15 +4,19 @@
  */
 
 .ratingBlock {
-	width: 450px;
+	width: 400px;
 	height: 40px;
-	border: 1px solid #000;
+}
+
+.histogramBlock {
+	width: 400px;
+	height: 200px;
 }
 
 .starbox {
 	font-size: 1.8em;
-	font-weight: bold;
-	background-image: url("<svg width='120px' height='20px'><text x='10' y='20'>☆☆☆☆☆</text></svg>");
+	background: url("data:image/svg+xml;utf8,<svg width='30' height='30'><text x='250' y='150' font-family='Verdana' font-size='55' fill='blue' >Hello, out there</text></svg>")  no-repeat;
+	cursor: pointer;
 }
 
 .yesRatings {
@@ -32,4 +36,18 @@
 	text-decoration: none !important;
 	text-decoration: underline !important;
 	color: #000;
+}
+
+.barG {
+	background-color: #aaa;
+}
+
+.histBar {
+	background-color: #f2af00;
+	height: 100%;
+}
+
+table, th, td {
+    border: 3px solid white;
+    border-collapse: collapse;
 }

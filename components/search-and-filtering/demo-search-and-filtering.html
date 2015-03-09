@@ -18,9 +18,10 @@
 					    </label>
 					</div>
 					<div class="col-sm-9 col-xs-12">
-					    <div class="pull-left searchCard" ng-repeat="card in cards | filter:showCards"><center>
-					        <h3>{{card.name}}</h3><img ng-src="{{card.link}}"/>
-					        <p><em>{{card.price}}</em></p></center>
+					    <div class="pull-left searchCard text-center" ng-repeat="card in cards | filter:showCards">
+					        <h3>{{card.name}}</h3>
+					        <em>{{card.size}}</em><br>
+					        <em>{{card.price}}</em>
 					    </div>
 				    </div>
 			    </div>
@@ -47,8 +48,9 @@
 					</div>
 					<div class="col-sm-9 col-xs-12">
 					    <div class="pull-left searchCard text-center" ng-repeat="item in data | filter:screenSize | filter:priceRange">
-					        <h3>{{item.name}}</h3><img ng-src="{{item.link}}"/>
-					        <p><em>{{item.price}}</em></p>
+					        <h3>{{item.name}}</h3>
+					        <em>{{item.size}}</em><br>
+					        <em>{{item.pricerange}}</em>
 					    </div>
 				    </div>
 			    </div>
