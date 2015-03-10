@@ -6,11 +6,32 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 	var totalRatings = 0;
 	var ratingAverage = 0;
 	var a = 0;
+	var thisVar = 0;
+	var perCent = 0;
+	var recs = 0;
+	var totalUsers = 0;
+
+	function renderStars(contextPath, thisVar, perCent) {
+		//render stars
+	    $( contextPath, thisVar ).prevAll().andSelf().addClass( 'yesRatings');
+		$( contextPath, thisVar ).prevAll().andSelf().removeClass( 'noRatings');
+		$( contextPath, thisVar ).prevAll().andSelf().html( '<i class="icon-small-favorite-100"></i>');
+		$( contextPath, thisVar ).nextAll().addClass( 'noRatings');
+		$( contextPath, thisVar ).nextAll().removeClass( 'yesRatings');
+		$( contextPath, thisVar ).nextAll().html( '<i class="icon-small-favorite-0"></i>');
+		$( contextPath, thisVar ).next().html( '<i class="icon-small-favorite-'+(perCent*10) % 10+'0"></i>');
+		console.log((perCent*10) % 10);
+	}
+
+	// iterate through recomends divs on the page
+	$(".recoRatio").each(function() {
+		$(this).html( "<strong style='font-size:15px;'>"+$( this ).data('recs')+"</strong> out of <strong style='font-size:15px;'>"+$( this ).data('total')+"</strong> ("+Math.floor((parseInt($( this ).data('recs'))/parseInt($( this ).data('total')))*100)+"%) people would recommend this product to a friend" );
+	});
+
 	// iterate through rating divs on the page
 	$(".ratingBlock").each(function() {
 		// grab the data
-		var block = $(this).data('reviewStars');//document.querySelector('.ratingBlock');
-		console.log(block);
+		var block = $(this).data('reviewStars');
 		// check if there are any star ratings
 		if (block.length > 1) {
 			//there is rating data
@@ -23,81 +44,57 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 			//set current user rating stars
 			a = "span:nth-child("+Math.floor(parseInt($( this ).data('userRating')))+")"; 
 			//render stars
-			$( a, $(this) ).prevAll().andSelf().addClass( 'yesRatings');
-			$( a, $(this) ).prevAll().andSelf().removeClass( 'noRatings');
-			$( a, $(this) ).prevAll().andSelf().html( '<i class="icon-small-favorite-100"></i>');
-			$( a, $(this) ).nextAll().addClass( 'noRatings');
-			$( a, $(this) ).nextAll().removeClass( 'yesRatings');
-			$( a, $(this) ).nextAll().html( '<i class="icon-small-favorite-0"></i>');
+			renderStars(a, $(this), $( this ).data('userRating'));
 		}	else {
 			//nope, no data... just render the blank stars
 			$(this).html( '<div style="width:100%;" class="pull-left"><div class="starbox pull-left"><span data-rate="1"><i class="icon-small-favorite-0"></i></span><span data-rate="2"><i class="icon-small-favorite-0"></i></span><span data-rate="3"><i class="icon-small-favorite-0"></i></span><span data-rate="4"><i class="icon-small-favorite-0"></i></span><span data-rate="5"><i class="icon-small-favorite-0"></i></span></div><div class="pull-left reviewText"><div class="linkStyle text-blue">Write your review</div></div>' );
 			a = "span:nth-child("+Math.floor(parseInt($( this ).data('userRating')))+")"; 
 			//render stars
-		    $( a, $(this) ).prevAll().andSelf().addClass( 'yesRatings');
-			$( a, $(this) ).prevAll().andSelf().removeClass( 'noRatings');
-			$( a, $(this) ).prevAll().andSelf().html( '<i class="icon-small-favorite-100"></i>' );
-			$( a, $(this) ).nextAll().addClass( 'noRatings');
-			$( a, $(this) ).nextAll().removeClass( 'yesRatings');
-			$( a, $(this) ).nextAll().html( '<i class="icon-small-favorite-0"></i>');
+			renderStars(a, $(this), $( this ).data('userRating'));
 		}
 		if ($(this).data('histogram') === "yes") {
 			$( this ).addClass( 'histogramBlock');
 			$( this ).removeClass( 'ratingBlock');
-			console.log(totalRatings, ratingAverage);
 			$(this).append( "<div style='width:100%;' class='pull-left'><p>"+ratingAverage+" out of 5</p></div><div style='width:100%;' class='pull-left'><table width='100%'><tr height='24px'><td width='15%'>5 Stars</td><td width='70%'><div class='barG'><div class='histBar well-blue' style='width:"+Math.floor((s[4]/totalRatings)*217)+"px;'>&nbsp;</div></div></td><td width='15%'>&nbsp;&nbsp;"+s[4]+"</td></tr><tr><td>4 Stars</td><td><div class='barG'><div class='histBar well-blue' style='width:"+Math.floor((s[3]/totalRatings)*217)+"px;'>&nbsp;</div></div></td><td>&nbsp;&nbsp;"+s[3]+"</td></tr><tr><td>3 Stars</td><td><div class='barG'><div class='histBar well-blue' style='width:"+Math.floor((s[2]/totalRatings)*217)+"px;'>&nbsp;</div></div></td><td>&nbsp;&nbsp;"+s[2]+"</td></tr><tr><td>2 Stars</td><td><div class='barG'><div class='histBar well-blue' style='width:"+Math.floor((s[1]/totalRatings)*217)+"px;'>&nbsp;</div></div></td><td>&nbsp;&nbsp;"+s[1]+"</td></tr><tr><td>1 Star</td><td><div class='barG'><div class='histBar well-blue' style='width:"+Math.floor((s[0]/totalRatings)*217)+"px;'>&nbsp;</div></div></td><td>&nbsp;&nbsp;"+s[0]+"</td></tr></table></div>" );
 		}
 	});
 
 	//star rating hover function
-	$( ".starbox > span" ).hover( function() {
-		$(this).prevAll().andSelf().addClass( 'yesRatings');
-		$(this).prevAll().andSelf().removeClass( 'noRatings');
-		$(this).prevAll().andSelf().html( '<i class="icon-small-favorite-100"></i>');
-		$(this).nextAll().addClass( 'noRatings');
-		$(this).nextAll().removeClass( 'yesRatings');
-		$(this).nextAll().html( '<i class="icon-small-favorite-0"></i>');
+	$( ".starbox > span" )
+		.mouseenter( function() {
+			$(this).prevAll().andSelf().addClass( 'yesRatings');
+			$(this).prevAll().andSelf().removeClass( 'noRatings');
+			$(this).prevAll().andSelf().html( '<i class="icon-small-favorite-100"></i>');
+			$(this).nextAll().addClass( 'noRatings');
+			$(this).nextAll().removeClass( 'yesRatings');
+			$(this).nextAll().html( '<i class="icon-small-favorite-0"></i>');
+			console.log("Hover!");
+		})
+		.click(function() {
+			//set user rating
+			$( this ).parent().parent().data('userRating', Math.floor(parseInt($( this ).data('rate'))));
+			console.log("Click!");
 	});
 
 	//click to set user rating
-	$( ".starbox > span" ).click(function() {
-			//set user rating
-		    $( this ).parent().parent().data('userRating', Math.floor(parseInt($( this ).data('rate'))));
-		});
+	$( ".starbox > span" ).on("click", function(){
+		//set user rating
+		$( this ).parent().parent().data('userRating', Math.floor(parseInt($( this ).data('rate'))));
+		console.log("Click!");
+	});
 
-	$( ".starbox" )
-		.mouseout(function() {
-			//set current user rating stars
-			a = "span:nth-child("+Math.floor(parseInt($( this ).parent().parent().data('userRating')))+")"; 
-			console.log("mouseOut  "+Math.floor(parseInt($( this ).parent().parent().data('userRating'))));
-			console.log("mouseOut  "+parseInt($( this ).parent().parent().data('userRating')));
-			console.log("mouseOut  "+$( this ).parent().parent().data('userRating'));
-			console.log("mouseOut  "+$( this ).parent().parent().html());
-			console.log("mouseOut  "+a);
-			//render stars
-			if ($( this ).parent().parent().data('userRating')===0) {
-				$( "span:nth-child(5)", $(this) ).prevAll().andSelf().addClass( 'noRatings');
-				$( "span:nth-child(5)", $(this) ).prevAll().andSelf().removeClass( 'yesRatings');
-				$( "span:nth-child(5)", $(this) ).prevAll().andSelf().html( '<i class="icon-small-favorite-0"></i>');
-			}	else	{
-				$( a, $(this) ).prevAll().andSelf().addClass( 'yesRatings');
-				$( a, $(this) ).prevAll().andSelf().removeClass( 'noRatings');
-				$( a, $(this) ).prevAll().andSelf().html( '<i class="icon-small-favorite-100"></i>');
-				$( a, $(this) ).nextAll().addClass( 'noRatings');
-				$( a, $(this) ).nextAll().removeClass( 'yesRatings');
-				$( a, $(this) ).nextAll().html( '<i class="icon-small-favorite-0"></i>');
-			}
-		});
-
-	function renderStars(contextPath) {
+	$( ".starbox" ).mouseout(function() {
+		//set current user rating stars
+		a = "span:nth-child("+Math.floor(parseInt($( this ).parent().parent().data('userRating')))+")"; 
 		//render stars
-	    $( contextPath, $(this) ).prevAll().andSelf().addClass( 'yesRatings');
-		$( contextPath, $(this) ).prevAll().andSelf().removeClass( 'noRatings');
-		$( contextPath, $(this) ).prevAll().andSelf().html( '<i class="icon-small-favorite-100"></i>');
-		$( contextPath, $(this) ).nextAll().addClass( 'noRatings');
-		$( contextPath, $(this) ).nextAll().removeClass( 'yesRatings');
-		$( contextPath, $(this) ).nextAll().html( '<i class="icon-small-favorite-0"></i>');
-	}
+		if ($( this ).parent().parent().data('userRating')===0) {
+			$( "span:nth-child(5)", $(this) ).prevAll().andSelf().addClass('noRatings');
+			$( "span:nth-child(5)", $(this) ).prevAll().andSelf().removeClass('yesRatings');
+			$( "span:nth-child(5)", $(this) ).prevAll().andSelf().html('<i class="icon-small-favorite-0"></i>');
+		}	else	{
+			renderStars(a, $(this), $( this ).parent().parent().data('userRating'));
+		}
+	});
 
 });
 
@@ -106,3 +103,5 @@ angular.module('demo').controller('ratingsAndReviewsPLayDemoCtrl',function($scop
 
 });
 
+
+	
