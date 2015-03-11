@@ -94,8 +94,10 @@ module.exports = function (grunt) {
       main: {
         files: [
           {src: ['theme/fonts/*.*'], dest:'dist/fonts/',flatten:true,expand:true},
+          {src: ['bower_components/bootstrap/dist/fonts/*.*'], dest:'dist/fonts/',flatten:true,expand:true},
           {src: ['theme/img/*.*'], dest:'dist/img/',flatten:true,expand:true},
-          {src: ['temp/dell-ui-bootstrap.css'], dest: 'dist/dell-ui-bootstrap.css'}
+          {src: ['temp/dell-ui-bootstrap.css'], dest: 'dist/dell-ui-bootstrap.css'},
+          {src: ['demo.html'], dest: 'dist/demo.html'}          
           //{src: ['bower_components/font-awesome/fonts/**'], dest: 'dist/',filter:'isFile',expand:true}
           //{src: ['bower_components/angular-ui-utils/ui-utils-ieshiv.min.js'], dest: 'dist/'},
           //{src: ['bower_components/select2/*.png','bower_components/select2/*.gif'], dest:'dist/css/',flatten:true,expand:true},
@@ -175,10 +177,25 @@ module.exports = function (grunt) {
           'dist/dell-ui-bootstrap-ie.min.css': 'dist/dell-ui-bootstrap.min.css'
         }
       }
+    },
+    'string-replace': {
+        "bsFonts": {
+            files: {
+                'temp/dell-ui-bootstrap.css': 'temp/dell-ui-bootstrap.css'
+            },
+            options: {
+                replacements: [
+                    {
+                        pattern: /..\/bower_components\/bootstrap\/dist\/fonts\//ig,
+                        replacement: 'fonts\/'
+                    }
+                ]
+            }
+        }
     }
   });
 
-  grunt.registerTask('build',['jshint','clean:before','less','dom_munger','cssmin','concat','uglify','copy','bless','clean:after']);
+  grunt.registerTask('build',['jshint','clean:before','less','string-replace:bsFonts','dom_munger','cssmin','concat','uglify','copy','bless','clean:after']);
   grunt.registerTask('serve', ['dom_munger:read','jshint','connect', 'watch']);
   grunt.registerTask('test',['dom_munger:read','karma:all_tests']);
 

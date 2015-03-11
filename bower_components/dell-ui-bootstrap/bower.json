@@ -1,7 +1,7 @@
 {
   "name": "dell-ui-bootstrap",
   "description":"Dell Inc's implementation of Twitter Bootstrap for dell.com",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "index.html",
   "keywords": [
     "twitter bootstrap",

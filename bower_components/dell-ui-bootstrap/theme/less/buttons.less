@@ -1,156 +1,155 @@
 //button-groups
 //------------------------------------------------------------------------------------------
 
-
-
 //buttons
 //------------------------------------------------------------------------------------------
 
 // button sizes
 // dell-ui does not allow large so these will be forced into normal size
-.btn{
-    border-radius: 0px;
-    outline: none !important;
-    //!important necessary to remove the focus outline in browsers
-    }
+.btn {
+  border-radius: 0px;
+  outline: none !important;
+  //!important necessary to remove the focus outline in browsers
+}
 
 .btn-default {
-    .button-variant(@dell-blue; @dell-default-gray; @btn-default-border);
-    &:hover,
-    &:focus
-    &:active,
-    &.active {
-        background: @dell-default-gray-hover;
-        }
-    }
+  .button-variant(@dell-blue; @dell-default-gray; @btn-default-border);
+  &:hover,
+  &:focus
+  &:active,
+  &.active {
+    background: @dell-default-gray-hover;
+  }
+}
+
 .btn-primary {
-    .button-variant(@btn-primary-color;@dell-primary-blue; @dell-primary-blue);
-    &:hover,
-    &:focus
-    &:active,
-    &.active {
-        background: @dell-primary-blue-hover;
-        }
-    }
+  .button-variant(@btn-primary-color; @dell-primary-blue; @dell-primary-blue);
+  &:hover,
+  &:focus
+  &:active,
+  &.active {
+    background: @dell-primary-blue-hover;
+  }
+}
+
 // Success appears as green
 .btn-success {
-    .button-variant(@btn-success-color; @dell-success-green; @dell-success-green);
-    &:hover,
-    &:focus
-    &:active,
-    &.active {
-        background: @dell-success-green-hover;
-        }
-    }
+  .button-variant(@btn-success-color; @dell-success-green; @dell-success-green);
+  &:hover,
+  &:focus
+  &:active,
+  &.active {
+    background: @dell-success-green-hover;
+  }
+}
 
 // Info appears as blue-green
 .btn-info {
-    .button-variant(@btn-info-color; @btn-info-bg; @btn-info-border);
-    }
+  .button-variant(@btn-info-color; @btn-info-bg; @btn-info-border);
+}
+
 // Warning appears as orange
 .btn-warning {
-    .button-variant(@btn-warning-color; @btn-warning-bg; @btn-warning-border);
-    }
+  .button-variant(@btn-warning-color; @btn-warning-bg; @btn-warning-border);
+}
+
 // Danger and error appear as red
 .btn-danger {
-    .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
-    }
-
-
+  .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
+}
 
 .btn-lg {
-    .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-base; @line-height-large; @border-radius-small);
-    }
+  .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-base; @line-height-large; @border-radius-small);
+}
 
 .btn-lg [class^="icon-"],
 .btn-lg [class*=" icon-"] {
-    margin-top: 4px;
-    }
+  margin-top: 4px;
+}
 
 .btn-small [class^="icon-"],
 .btn-small [class*=" icon-"] {
-    margin-top: 0;
-    }
+  margin-top: 0;
+}
 
 .btn-xs {
-    padding: 1px 5px;
-    }
+  padding: 1px 5px;
+}
 
 .tap-to-load {
-    height: 34px;
-    color: @dell-blue;
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
-    border-radius: 1px;
-    border: 1px solid @dell-gray-stroke;
-    padding: 6px 12px;
-    background:@btn-default-bg;
-    &:hover,
-    &:focus {
-        color: darken(@dell-blue, 10%);
-        outline: none;
-        border:1px solid transparent;
-        background:@dell-gray-very-light;
-        }
-    }
+  height: 34px;
+  color: @dell-blue;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+  border: 1px solid @dell-gray-stroke;
+  padding: 6px 12px;
+  background: @btn-default-bg;
+  &:hover,
+  &:focus {
+    color: darken(@dell-blue, 10%);
+    outline: none;
+    border: 1px solid transparent;
+    background: @dell-gray-very-light;
+  }
+}
 
 /* tap-to-load-rule NOTE: not part of Bootstrap*/
-.tap-to-load-rule{
-    text-align:          center;
-    background:          url(app/dell-ui-bootstrap/img/gray-dark-dot-line.png) repeat-x;
-    background-position: 50% 30%;
-    margin-bottom:       20px;
-    display:             block;
-    }
+.tap-to-load-rule {
+  text-align: center;
+  background: url(app/dell-ui-bootstrap/img/gray-dark-dot-line.png) repeat-x;
+  background-position: 50% 30%;
+  margin-bottom: 20px;
+  display: block;
+}
 
 .tap-to-load-rule p {
-    display: inline-block;
-    background: #ffffff;
-    padding: 0px 10px;
-    max-width: 80%;
-    }
-
-
+  display: inline-block;
+  background: #ffffff;
+  padding: 0px 10px;
+  max-width: 80%;
+}
 
 // link buttons
 // -------------------------
 // disable text decoration with a dropdown toggle
-.btn-link.dropdown-toggle{
-    &:focus,
-    &:active,
-    &:hover{
-        text-decoration: none;
-        }
-    }
+.btn-link.dropdown-toggle {
+  &:focus,
+  &:active,
+  &:hover {
+    text-decoration: none;
+  }
+}
 
 .btn[data-loading-text][disabled] {
-    color: @dell-blue;
-    padding-left: 20px;
-    position: relative;
-    background: @dell-highlight-blue;
-    }
+  color: @dell-blue;
+  padding-left: 20px;
+  position: relative;
+  background: @dell-highlight-blue;
+}
+
 .btn[data-loading-text][disabled]:focus {
-    outline: none;
-    }
+  outline: none;
+}
+
 .btn[data-loading-text][disabled]:before {
-    content: "\00a0\00a0\00a0\00a0\00a0";
-    background: url("img/loading-animation-square.gif") no-repeat 0 -1px;
-    background-size: contain;
-    position: relative;
-    left: -6px;
-    top: 0;
-    }
+  content: "\00a0\00a0\00a0\00a0\00a0";
+  background: url("img/loading-animation-square.gif") no-repeat 0 -1px;
+  background-size: contain;
+  position: relative;
+  left: -6px;
+  top: 0;
+}
 
-.btn-margin-right-5{
-    margin-right: 5px;
-    margin-top: 5px;
-    }
+.btn-margin-right-5 {
+  margin-right: 5px;
+  margin-top: 5px;
+}
 
-.btn-margin-left-5{
-    margin-left: 5px;
-    margin-top: 5px;
-    }
-
+.btn-margin-left-5 {
+  margin-left: 5px;
+  margin-top: 5px;
+}
 
 // CUSTOM CHECKBOXES & RADIOS for compare buttons
 //===================================================================================
@@ -160,125 +159,134 @@
 :root .css3-checkboxes label,
 :root .css3-checkboxes input[type="checkbox"] + span,
 :root .css3-checkboxes input[type="checkbox"] + span::before {
-    display: inline-block;
-    vertical-align: middle;
-    }
+  display: inline-block;
+  vertical-align: middle;
+}
+
 :root .css3-radios,
 :root .css3-checkboxes {
-    position: relative;
-    }
+  position: relative;
+}
+
 :root .css3-radios label *,
 :root .css3-checkboxes label * {
-    cursor: pointer;
-    }
+  cursor: pointer;
+}
+
 :root .css3-radios input[type="radio"],
 :root .css3-checkboxes input[type="checkbox"] {
-    opacity: 0;
-    position: absolute;
-    }
+  opacity: 0;
+  position: absolute;
+}
+
 :root .css3-radios input[type="radio"] + span,
 :root .css3-checkboxes input[type="checkbox"] + span {
 
-    }
+}
+
 :root .css3-radios label:hover span::before,
 :root .css3-checkboxes label:hover span::before {
-    -moz-box-shadow: 0 0 2px #ccc;
-    -webkit-box-shadow: 0 0 2px #ccc;
-    box-shadow: 0 0 2px #ccc;
-    }
+  -moz-box-shadow: 0 0 2px #ccc;
+  -webkit-box-shadow: 0 0 2px #ccc;
+  box-shadow: 0 0 2px #ccc;
+}
+
 :root .css3-radios label:hover span,
 :root .css3-checkboxes label:hover span {
-    color: #000;
-    }
+  color: #000;
+}
+
 :root .css3-radios input[type="radio"] + span::before,
 :root .css3-checkboxes input[type="checkbox"] + span::before {
-    content: "";
-    width: 22px;
-    height: 22px;
-    margin: 0 4px 0 0;
-    border: solid 1px @dell-blue;
-    line-height: 14px;
-    text-align: center;
-    background: @dell-gray-very-light;
-    }
+  content: "";
+  width: 22px;
+  height: 22px;
+  margin: 0 4px 0 0;
+  border: solid 1px @dell-blue;
+  line-height: 14px;
+  text-align: center;
+  background: @dell-gray-very-light;
+}
+
 :root .css3-radios input[type="radio"]:checked + span::before,
 :root .css3-checkboxes input[type="checkbox"]:checked + span::before {
-    color: @dell-gray-dark;
-    }
+  color: @dell-gray-dark;
+}
+
 :root .css3-radios input[type="radio"]:disabled + span,
 :root .css3-checkboxes input[type="checkbox"]:disabled + span {
-    cursor: default;
-    -moz-opacity: .4;
-    -webkit-opacity: .4;
-    opacity: .4;
-    }
+  cursor: default;
+  -moz-opacity: .4;
+  -webkit-opacity: .4;
+  opacity: .4;
+}
+
 :root {
-    .css3-checkboxes {
-        input[type="checkbox"] {
-            & + span {
-                &::before {
-                    -moz-border-radius: 1px;
-                    -webkit-border-radius: 1px;
-                    border-radius: 1px;
-                    }
-                }
-            }
-        input[type="checkbox"]:checked {
-            & + span {
-                &::before {
-                    font-family:            'icon-small';
-                    content: "\e611";
-                    font-size: 14px;
-                    color: @dell-blue;
-                    padding: 3px;
-                    }
-                }
-            }
+  .css3-checkboxes {
+    input[type="checkbox"] {
+      & + span {
+        &::before {
+          -moz-border-radius: 1px;
+          -webkit-border-radius: 1px;
+          border-radius: 1px;
         }
-    .css3-radios {
-        input[type="radio"]:checked {
-            & + span {
-                &::before {
-                    content: "\2022";
-                    font-size: 24px;
-                    }
-                }
-            }
-        }
+      }
     }
+    input[type="checkbox"]:checked {
+      & + span {
+        &::before {
+          font-family: 'icon-small';
+          content: "\e611";
+          font-size: 14px;
+          color: @dell-blue;
+          padding: 3px;
+        }
+      }
+    }
+  }
+  .css3-radios {
+    input[type="radio"]:checked {
+      & + span {
+        &::before {
+          content: "\2022";
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}
 
 //------- video buttons --------------
 
 .btn-video {
-    font-size: 60px !important;
-    vertical-align: middle;
-    text-align: center;
-    background: @white;
-    &:hover,
-    &:focus
-    &:active,
-    &.active {
-        background: @dell-default-gray-dark-hover;
-        border: 0px;
-        outline:    none !important;
-        }
-        //!important necessary to remove the focus outline in browsers
-    }
-
+  font-size: 60px !important;
+  vertical-align: middle;
+  text-align: center;
+  background: @white;
+  &:hover,
+  &:focus
+  &:active,
+  &.active {
+    background: @dell-default-gray-dark-hover;
+    border: 0px;
+    outline: none !important;
+  }
+  //!important necessary to remove the focus outline in browsers
+}
 
 // Split button dropdowns
 // ----------------------
 
 // Give the line between buttons some depth
 .btn-group > .btn + .dropdown-toggle {
-    padding-left: 5px;
-    padding-right: 8px;
-    }
-.btn-group > .btn-lg + .dropdown-toggle {
-    padding-left: 12px;
-    padding-right: 12px;
-    }
+  padding-left: 5px;
+  padding-right: 8px;
+}
 
+.btn-group > .btn-lg + .dropdown-toggle {
+  padding-left: 12px;
+  padding-right: 12px;
+}
 
 // TODO need to move this to dell-ui-components
 
@@ -287,108 +295,106 @@
 
 // Give the list-view-tabs / grid-view-tabs something to sit on
 .nav-icons {
-    //places rule underneath the grid-view/list-view button toggle if required... commented out by default
-//        border-bottom: 1px solid @nav-tabs-border-color;
-    > li {
-        float:         left;
-        // Make the list-items overlay the bottom border
-        margin-bottom: -1px;
+  //places rule underneath the grid-view/list-view button toggle if required... commented out by default
+  //        border-bottom: 1px solid @nav-tabs-border-color;
+  > li {
+    float: left;
+    // Make the list-items overlay the bottom border
+    margin-bottom: -1px;
 
-        // Actual tabs (as links)
-        > a {
-            margin-right:  0px;
-            line-height:   @line-height-base;
-            border:        1px solid transparent;
-            border-radius: @border-radius-base @border-radius-base 0 0;
-            }
-
-        // Active state, and its :hover to override normal :hover
-        &.active > a {
-            &,
-            &:hover,
-            &:focus {
-                color:               @nav-tabs-active-link-hover-color;
-                background-color:    @nav-tabs-active-link-hover-bg;
-                //                border-right: 1px solid @nav-tabs-active-link-hover-border-color;
-                //                border-bottom: 1px solid @nav-tabs-border-color;
-                cursor:              default;
-                }
-            }
-        &:first-of-type {
-            border-right: 1px solid @dell-gray-light-stroke;
-            }
-        }
-
-    &.nav-right {
-         margin-top: 30px;
-         float: none !important;
-         > li {
-             float: right;
-             &:first-of-type {
-                 border-left: 1px solid @dell-gray-light-stroke;
-                 border-right: none;
-                 }
-             }
-         }
+    // Actual tabs (as links)
+    > a {
+      margin-right: 0px;
+      line-height: @line-height-base;
+      border: 1px solid transparent;
+      border-radius: @border-radius-base @border-radius-base 0 0;
     }
 
+    // Active state, and its :hover to override normal :hover
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        color: @nav-tabs-active-link-hover-color;
+        background-color: @nav-tabs-active-link-hover-bg;
+        //                border-right: 1px solid @nav-tabs-active-link-hover-border-color;
+        //                border-bottom: 1px solid @nav-tabs-border-color;
+        cursor: default;
+      }
+    }
+    &:first-of-type {
+      border-right: 1px solid @dell-gray-light-stroke;
+    }
+  }
+
+  &.nav-right {
+    margin-top: 30px;
+    float: none !important;
+    > li {
+      float: right;
+      &:first-of-type {
+        border-left: 1px solid @dell-gray-light-stroke;
+        border-right: none;
+      }
+    }
+  }
+}
 
 //help-icon btn
 //----------------------------------------------------
 
 a {
-    &.btn {
-        &.btn-help {
-            vertical-align: middle;
-            text-align: center;
-            padding: 5px 5px 2px 5px;
-            &:hover,
-            &:focus
-            &:active,
-            &.active {
-//                background-color:     @dell-highlight-blue !important;
-                outline:        none !important;
-                box-shadow:     none !important;
-                i {
-                    color: @dell-primary-blue-hover !important;
-                    }
-                }
-            }
+  &.btn {
+    &.btn-help {
+      vertical-align: middle;
+      text-align: center;
+      padding: 5px 5px 2px 5px;
+      &:hover,
+      &:focus
+      &:active,
+      &.active {
+        //                background-color:     @dell-highlight-blue !important;
+        outline: none !important;
+        box-shadow: none !important;
+        i {
+          color: @dell-primary-blue-hover !important;
         }
+      }
     }
-
+  }
+}
 
 //hotspot btn
 //-----------------------------------------------------
 
 a {
-    &.btn {
-        &.btn-hotspot {
-            vertical-align: middle;
-            text-align: center;
-            border: 2px solid @white;
-            background: @dell-blue;
-            padding: 3px 8px 4px 9px;
-            border-radius: 20px;
-            -webkit-box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.65);
-            -moz-box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.65);
-            box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.65);
-            &:hover,
-            &:focus
-            &:active,
-            &.active {
-                background:    @dell-primary-blue-hover;
-                border: 2px solid @dell-highlight-blue;
-                -webkit-box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.65);
-                -moz-box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.65);
-                box-shadow: 2px 2px 7px 0px rgba(0,0,0,0.65);
-                }
-            i {
-                font-size: 10px;
-                }
-            }
-        }
+  &.btn {
+    &.btn-hotspot {
+      vertical-align: middle;
+      text-align: center;
+      border: 2px solid @white;
+      background: @dell-blue;
+      padding: 3px 8px 4px 9px;
+      border-radius: 20px;
+      -webkit-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.65);
+      -moz-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.65);
+      box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.65);
+      &:hover,
+      &:focus
+      &:active,
+      &.active {
+        background: @dell-primary-blue-hover;
+        border: 2px solid @dell-highlight-blue;
+        -webkit-box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.65);
+        -moz-box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.65);
+        box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.65);
+      }
+      i {
+        font-size: 10px;
+      }
     }
+  }
+}
 
 
 
