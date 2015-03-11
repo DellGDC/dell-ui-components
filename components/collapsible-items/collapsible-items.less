@@ -3,3 +3,238 @@
  *------------------------------------------------------------------------------------------
  */
 
+// Collapsible Items
+//------------------------------------------------------------------------------------------
+// When uising triangles inside of a collapse scenario the size is reduced
+
+
+a[data-toggle="collapse"] {
+    text-decoration: none;
+}
+
+.hide-expanded,
+.collapsed .show-collapsed {
+    display: block;
+    -webkit-transition: height .3.5s ease;
+    -moz-transition:    height .3.5s ease;
+    -o-transition:      height .3.5s ease;
+    transition:         height .3.5s ease;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.collapsed .hide-expanded, .show-collapsed {
+    display: none;
+    -webkit-transition: height .3.5s ease;
+    -moz-transition:    height .3.5s ease;
+    -o-transition:      height .3.5s ease;
+    transition:         height .3.5s ease;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.collapse {
+    overflow:           hidden;
+    -webkit-transition: height .3.5s ease;
+    -moz-transition:    height .3.5s ease;
+    -o-transition:      height .3.5s ease;
+    transition:         height .3.5s ease;
+}
+
+
+
+
+//data-toggle
+//------------------------------------------------------------------------------------------
+[data-toggle="collapse"] {
+    &.collapsed {
+        .when-expanded {
+            display:none;
+        }
+        .when-collapsed {
+            display:inherit;
+        }
+        //fixes to caret when used in a collapsible toggle
+        .caret {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -o-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+    }
+    .when-expanded {
+        display:inherit;
+    }
+    .when-collapsed {
+        display:none;
+    }
+    //fixes to caret when used in a collapsible toggle
+    .caret {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+}
+
+//fixes to dropdown caret
+.open .dropdown-toggle .caret {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+
+
+
+
+
+
+//-------------- new------------------
+
+
+
+//todo need to add this to Dell-ui-theme
+[data-toggle="collapse"] .icon-ui-triangledown,
+[data-toggle="collapse"] .icon-ui-triangleup,
+[data-toggle="collapse"] .icon-ui-triangleright {
+    font-size: 14px;
+    top: 2px;
+    position: relative;
+    margin-right: -2px;
+    margin-left: -3px;
+}
+
+
+.panel-default {
+    border-color:       transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow:    none;
+    box-shadow:         none;
+
+    > .panel-heading {
+        color:            @dell-blue;
+        background-color: @white;
+        border-color:     transparent;
+    }
+}
+
+.panel-heading {
+    padding: 10px 0 7px 0;
+    border-bottom: 0;
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    border-top-right-radius: 0;
+    -webkit-border-top-left-radius: 0;
+    -moz-border-radius-topleft: 0;
+    border-top-left-radius: 0;
+}
+
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size:          ceil((@font-size-base * 1.14)); // ~16px
+    color: @dell-blue;
+    a {
+        &:before {
+            font-family:            'Glyphicons Halflings';
+            font-size:              14px;
+            -webkit-font-smoothing: antialiased;
+            content:                "\e114";
+            color:                  @dell-blue;
+            position:               relative;
+            vertical-align:         -2px;
+            padding-right:          2px;
+        }
+
+        &.collapsed:before {
+            font-family:            'Glyphicons Halflings';
+            content:                "\e080";
+            vertical-align:          -2px;
+        }
+    }
+}
+
+.panel-group .panel-heading + .panel-collapse .panel-body {
+    border-top: none;
+}
+
+.panel-group .panel + .panel {
+    margin-top: 0;
+}
+
+.panel-group .panel-heading {
+    border-top: 1px solid @dell-gray;
+}
+
+
+.btn-block [data-toggle="collapse"] .icon-ui-expand,
+.btn-block [data-toggle="collapse"] .icon-ui-collapse {
+    font-size:22px;
+    vertical-align:-4px;
+}
+
+.panel-group .panel-body {
+    padding: 15px;
+    padding-top: 0px;
+    padding-left: 30px;
+    padding-bottom: 10px;
+}
+
+//------------ XS small devices (phones, less than 768px) -------------------
+
+@media (max-width: @screen-xs-max) {
+
+    .panel-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size:          ceil((@font-size-base * 1.14)); // ~16px
+        color: @dell-blue;
+        a {
+            &:before {
+                font-family:            'Glyphicons Halflings';
+                font-size:              12px;
+                -webkit-font-smoothing: antialiased;
+                content:                "\e114";
+                color:                  @dell-blue;
+                position:               relative;
+                top:                    0;
+                right:                  0;
+                float:                  left !important;
+                padding-right:          7px;
+            }
+
+
+            &.collapsed:before {
+                font-family:            'Glyphicons Halflings';
+                font-size:              12px;
+                -webkit-font-smoothing: antialiased;
+                content:                "\e080";
+                color:                  @dell-blue;
+                position:               relative;
+                top:                    -1px;
+                right:                  0;
+                float:                  left !important;
+                padding-right:          7px;
+            }
+        }
+    }
+
+    .panel-default > .panel-heading + .panel-collapse .panel-body {
+        border-top-color: transparent;
+        margin-bottom: 10px;
+    }
+
+    .panel-group .panel-body {
+        padding-left: 20px;
+    }
+}
+
