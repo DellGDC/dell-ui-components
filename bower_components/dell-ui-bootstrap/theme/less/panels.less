@@ -5,100 +5,99 @@
 //Accordion (panel-group) changes
 
 .panel-group {
-	border-bottom: 1px solid @dell-gray-stroke;
-	.panel-default {
-	    border-color:       transparent;
-	    border-top: 1px solid @dell-gray-stroke;
-	    -webkit-box-shadow: none;
-	    -moz-box-shadow:    none;
-	    box-shadow:         none;
+  border-bottom: 1px solid @dell-gray-stroke;
+  .panel-default {
+    border-color: transparent;
+    border-top: 1px solid @dell-gray-stroke;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 
-	    > .panel-heading {
-	        color:            @dell-blue;
-	        background-color: @white;
-	        border-bottom: 1px solid @dell-gray-stroke;
-	        border-radius: 0;
-	        padding: 7px 0px;
-	        margin-bottom:-2px;
-        
+    > .panel-heading {
+      color: @dell-blue;
+      background-color: @white;
+      border-bottom: 1px solid @dell-gray-stroke;
+      border-radius: 0;
+      padding: 7px 0px;
+      margin-bottom: -2px;
+
+    }
+  }
+
+  .panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: ceil((@font-size-base * 1.14)); // ~16px
+    color: @dell-blue;
+    a {
+      text-decoration: none;
+      &:before {
+        font-family: 'icon-ui';
+        font-size: 22px;
+        -webkit-font-smoothing: antialiased;
+        content: "\e604";
+        color: @dell-blue;
+        position: relative;
+        vertical-align: -4px;
+      }
+
+      &.collapsed:before {
+        content: "\e606";
+        vertical-align: -4px;
+      }
+    }
+  }
+
+  .panel-heading + .panel-collapse .panel-body {
+    border-top: none;
+  }
+
+  .panel + .panel {
+    margin-top: 0px;
+  }
+
+  .btn-block [data-toggle="collapse"] .icon-ui-expand,
+  .btn-block [data-toggle="collapse"] .icon-ui-collapse {
+    font-size: 22px;
+    vertical-align: -4px;
+  }
+  //------------ XS small devices (phones, less than 768px) -------------------
+
+  @media (max-width: @screen-xs-max) {
+
+    .panel-title {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: ceil((@font-size-base * 1.14)); // ~16px
+      color: @dell-blue;
+      a {
+        &:before {
+          content: "";
         }
+
+        &:after {
+          font-family: 'icon-ui';
+          font-size: 12px;
+          -webkit-font-smoothing: antialiased;
+          content: "\e60a";
+          color: @dell-blue;
+          position: relative;
+          top: 2px;
+          right: 5px;
+          float: right !important;
+        }
+
+        &.collapsed:before {
+          content: "";
+        }
+      }
     }
 
-	.panel-title {
-	    margin-top: 0;
-	    margin-bottom: 0;
-	    font-size:          ceil((@font-size-base * 1.14)); // ~16px
-	    color: @dell-blue;
-	    a {
-	    	text-decoration:none;
-	        &:before {
-	            font-family:            'icon-ui';
-	            font-size:              22px;
-	            -webkit-font-smoothing: antialiased;
-	            content:                "\e604";
-	            color:                  @dell-blue;
-	            position:               relative;
-	            vertical-align:         -4px;
-	        }
-
-	        &.collapsed:before {
-	            content: "\e606";
-	            vertical-align: -4px;
-            }
-        }
+    .panel-default > .panel-heading + .panel-collapse .panel-body {
+      border-top-color: transparent;
+      margin-bottom: 10px;
     }
 
-
-	.panel-heading + .panel-collapse .panel-body {
-	    border-top: none;
-	}
-
-	.panel + .panel {
-	    margin-top: 0px;
-	}
-
-	.btn-block [data-toggle="collapse"] .icon-ui-expand,
-	.btn-block [data-toggle="collapse"] .icon-ui-collapse {
-	    font-size:22px;
-	    vertical-align:-4px;
-	}
-	//------------ XS small devices (phones, less than 768px) -------------------
-
-	@media (max-width: @screen-xs-max) {
-
-	    .panel-title {
-	        margin-top: 0;
-	        margin-bottom: 0;
-	        font-size:          ceil((@font-size-base * 1.14)); // ~16px
-	        color: @dell-blue;
-	        a {
-	            &:before {
-	                content:                "";
-	                }
-
-	            &:after {
-	                font-family:            'icon-ui';
-	                font-size:              12px;
-	                -webkit-font-smoothing: antialiased;
-	                content:                "\e60a";
-	                color:                  @dell-blue;
-	                position:               relative;
-	                top:                    2px;
-	                right:                  5px;
-	                float:                  right !important;
-	                }
-
-	            &.collapsed:before {
-	                content: "";
-	                }
-	            }
-	        }
-
-	    .panel-default > .panel-heading + .panel-collapse .panel-body {
-	        border-top-color: transparent;
-	        margin-bottom: 10px;
-	        }
-
-	    }
+  }
 
 }
