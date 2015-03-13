@@ -185,48 +185,53 @@ a[data-toggle="collapse"] {
 
 @media (max-width: @screen-xs-max) {
 
-    .panel-title {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size:          ceil((@font-size-base * 1.14)); // ~16px
-        color: @dell-blue;
-        a {
-            &:before {
-                font-family:            'Glyphicons Halflings';
-                font-size:              12px;
-                -webkit-font-smoothing: antialiased;
-                content:                "\e114";
-                color:                  @dell-blue;
-                position:               relative;
-                top:                    0;
-                right:                  0;
-                float:                  left !important;
-                padding-right:          7px;
-            }
+    .panel-group {
+        .panel-title {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size:          ceil((@font-size-base * 1.14)); // ~16px
+            color: @dell-blue;
+            a {
+                &:before {
+                    font-family:            'Glyphicons Halflings';
+                    font-size:              12px;
+                    -webkit-font-smoothing: antialiased;
+                    content:                "\e114";
+                    color:                  @dell-blue;
+                    position:               relative;
+                    top:                    0;
+                    right:                  0;
+                    float:                  left !important;
+                    padding-right:          7px;
+                }
+                &:after {
+                    font-family: none;
+                    content: "";
+                }
 
-
-            &.collapsed:before {
-                font-family:            'Glyphicons Halflings';
-                font-size:              12px;
-                -webkit-font-smoothing: antialiased;
-                content:                "\e080";
-                color:                  @dell-blue;
-                position:               relative;
-                top:                    -1px;
-                right:                  0;
-                float:                  left !important;
-                padding-right:          7px;
+                &.collapsed:before {
+                    font-family:            'Glyphicons Halflings';
+                    font-size:              12px;
+                    -webkit-font-smoothing: antialiased;
+                    content:                "\e080";
+                    color:                  @dell-blue;
+                    position:               relative;
+                    top:                    -1px;
+                    right:                  0;
+                    float:                  left !important;
+                    padding-right:          7px;
+                }
             }
         }
-    }
 
-    .panel-default > .panel-heading + .panel-collapse .panel-body {
-        border-top-color: transparent;
-        margin-bottom: 10px;
-    }
+        .panel-default > .panel-heading + .panel-collapse .panel-body {
+            border-top-color: transparent;
+            margin-bottom: 10px;
+        }
 
-    .panel-group .panel-body {
-        padding-left: 20px;
+        .panel-body {
+            padding-left: 20px;
+        }
     }
 }
 
