@@ -1,0 +1,25 @@
+<section ng-controller="dataElementsCtrl" id="data-elements-html-example">
+
+    <div class="container">
+        <h2>Data-Elements Demo</h2>
+        <div>
+            <!-- example html for Data-Elements component -->
+            <div ng-controller="DatepickerDemoCtrl">
+
+			    <h4>Select date</h4>
+			    <div class="row">
+			        <div class="col-md-6">
+			            <p class="input-group">
+			              <input type="text" class="form-control" datepicker-popup="MM-dd-yyyy" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" show-button-bar="false" show-weeks="false"/>
+			              <span class="input-group-btn">
+			                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
+			            <p>MM/DD/YYYY</p>
+			        </div>
+			    </div>
+			</div>
+        </div>
+    </div>
+
+</section>
