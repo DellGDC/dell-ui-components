@@ -1,35 +1,34 @@
 // Animation adjustment on collapse
 
-
-
 //data-toggle
 //------------------------------------------------------------------------------------------
 [data-toggle="collapse"] {
-    //fixes to caret when used in a collapsible toggle
-    .caret {
-        -webkit-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -o-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        transform: rotate(180deg);
-        }
-    }
-    &.collapsed {
-        //fixes to caret when used in a collapsible toggle
-        .caret {
-            -webkit-transform: rotate(0deg);
-            -moz-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-    }
-
-//fixes to dropdown caret (flips is up when dropdown open)
-.open .dropdown-toggle .caret {
+  //fixes to caret when used in a collapsible toggle
+  .caret {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -o-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
     transform: rotate(180deg);
-    }
+  }
+}
+
+&.collapsed {
+  //fixes to caret when used in a collapsible toggle
+  .caret {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+//fixes to dropdown caret (flips is up when dropdown open)
+.open .dropdown-toggle .caret {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}

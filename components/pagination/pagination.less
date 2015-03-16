@@ -3,8 +3,9 @@
  *------------------------------------------------------------------------------------------
  */
 //TODO this needs to be overridden in dell-bootstrap-ui
+
 .pager li {
-    vertical-align: 0px;
+    vertical-align: 0;
 }
 
 .pagination-input {
@@ -18,14 +19,64 @@
     padding-left: 15px;
     padding-right: 15px;
     margin: 0;
-
 }
 
-.pager .pager-span {
-    padding-left: 10px;
-    padding-right: 10px;
+.pager {
+    input[type=text] {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .pager-span {
+         padding-left: 5px;
+         padding-right: 5px;
+         display: inline-block;
+         background: none;
+         border: 0;
+         border-radius: 0;
+     }
+}
+
+.dashed-text-rule {
+    overflow: hidden;
+    text-align: center;
+    margin-top: 5px;
+    input[type=text] {
+        border: none;
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+}
+
+.dashed-text-rule:before,
+.dashed-text-rule:after {
+    content: "";
     display: inline-block;
-    background: none;
-    border: 0;
-    border-radius: 0;
+    position: relative;
+    border-top: 1px dashed @dell-gray;
+    vertical-align: middle;
+    width: 50%;
+}
+.dashed-text-rule:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+.dashed-text-rule:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.tap-to-load {
+    height: 34px;
+    color: #007db8;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    background: #eee;
+
+    &.disabled{
+        color: @dell-gray;
+        border: 1px solid @dell-gray-light-stroke;
+    }
 }

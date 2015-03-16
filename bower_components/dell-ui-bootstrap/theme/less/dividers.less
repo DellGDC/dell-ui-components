@@ -1,258 +1,252 @@
 //---------- styled dividers ----------------
 
 .shadow-separator {
-    position:    relative;
-    z-index:     0;
-    min-height:  20px;
-    overflow:    hidden;
-    border-top:  1px solid @dell-gray-stroke;
-    width:       110%;
-    margin-left: -5%;
-    &:before {
-        content:       "";
-        position:      absolute;
-        z-index:       1;
-        width:         90%;
-        top:           -3px;
-        height:        3px;
-        left:          5%;
-        border-radius: 50%;
-        box-shadow:    0 0 18px rgba(0, 0, 0, 0.6);
-        }
-    }
+  position: relative;
+  z-index: 0;
+  min-height: 20px;
+  overflow: hidden;
+  border-top: 1px solid @dell-gray-stroke;
+  width: 110%;
+  margin-left: -5%;
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 90%;
+    top: -3px;
+    height: 3px;
+    left: 5%;
+    border-radius: 50%;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.6);
+  }
+}
 
 .separator-default {
-    position:    relative;
-    z-index:     0;
-    min-height:  20px;
-    overflow:    hidden;
-    border-top:  1px solid @dell-gray-stroke;
-    width:       110%;
-    margin-left: -5%;
-    }
+  position: relative;
+  z-index: 0;
+  min-height: 20px;
+  overflow: hidden;
+  border-top: 1px solid @dell-gray-stroke;
+  width: 110%;
+  margin-left: -5%;
+}
 
 .border-left {
-    height:auto;
-    &-white {
-        border-left: 1px solid @white;
-        }
-    &-gray-dark {
-        border-left: 1px solid @dell-gray-dark;
-        }
-    &-gray-medium {
-        border-left: 1px solid @dell-gray-medium;
-        }
-    &-gray {
-        border-left: 1px solid @dell-gray;
-        }
-    &-gray-light {
-        border-left: 1px solid @dell-gray-light;
-        }
-    &-gray-very-light {
-        border-left: 1px solid @dell-gray-very-light;
-        }
-    &-blue {
-        border-left: 1px solid @dell-blue;
-        }
-    &-dark-blue {
-        border-left: 1px solid @dell-dark-blue;
-        }
-    &-yellow {
-        border-left: 1px solid @dell-yellow
-        }
-    &-teal {
-        border-left: 1px solid @dell-teal;
-        }
-    &-green {
-        border-left: 1px solid @dell-green;
-        }
-    &-light-green {
-        border-left: 1px solid @dell-green-light;
-        }
-    &-orange {
-        border-left: 1px solid @dell-orange;
-        }
-    &-red {
-        border-left: 1px solid @dell-red;
-        }
-    &-red-dark {
-        border-left: 1px solid @dell-red-dark;
-        }
-    &-berry {
-        border-left: 1px solid @dell-berry;
-        }
-    &-purple {
-        border-left: 1px solid @dell-purple;
-        }
-    }
-
-
+  height: auto;
+  &-white {
+    border-left: 1px solid @white;
+  }
+  &-gray-dark {
+    border-left: 1px solid @dell-gray-dark;
+  }
+  &-gray-medium {
+    border-left: 1px solid @dell-gray-medium;
+  }
+  &-gray {
+    border-left: 1px solid @dell-gray;
+  }
+  &-gray-light {
+    border-left: 1px solid @dell-gray-light;
+  }
+  &-gray-very-light {
+    border-left: 1px solid @dell-gray-very-light;
+  }
+  &-blue {
+    border-left: 1px solid @dell-blue;
+  }
+  &-dark-blue {
+    border-left: 1px solid @dell-dark-blue;
+  }
+  &-yellow {
+    border-left: 1px solid @dell-yellow
+  }
+  &-teal {
+    border-left: 1px solid @dell-teal;
+  }
+  &-green {
+    border-left: 1px solid @dell-green;
+  }
+  &-light-green {
+    border-left: 1px solid @dell-green-light;
+  }
+  &-orange {
+    border-left: 1px solid @dell-orange;
+  }
+  &-red {
+    border-left: 1px solid @dell-red;
+  }
+  &-red-dark {
+    border-left: 1px solid @dell-red-dark;
+  }
+  &-berry {
+    border-left: 1px solid @dell-berry;
+  }
+  &-purple {
+    border-left: 1px solid @dell-purple;
+  }
+}
 
 .border-right {
-    height:auto;
-    &-white {
-        border-right: 1px solid @white;
-        }
-    &-gray-dark {
-        border-right: 1px solid @dell-gray-dark;
-        }
-    &-gray-medium {
-        border-right: 1px solid @dell-gray-medium;
-        }
-    &-gray {
-        border-right: 1px solid @dell-gray;
-        }
-    &-gray-light {
-        border-right: 1px solid @dell-gray-light;
-        }
-    &-gray-very-light {
-        border-right: 1px solid @dell-gray-very-light;
-        }
-    &-blue {
-        border-right: 1px solid @dell-blue;
-        }
-    &-dark-blue {
-        border-right: 1px solid @dell-dark-blue;
-        }
-    &-yellow {
-        border-right: 1px solid @dell-yellow
-        }
-    &-teal {
-        border-right: 1px solid @dell-teal;
-        }
-    &-green {
-        border-right: 1px solid @dell-green;
-        }
-    &-light-green {
-        border-right: 1px solid @dell-green-light;
-        }
-    &-orange {
-        border-right: 1px solid @dell-orange;
-        }
-    &-red {
-        border-right: 1px solid @dell-red;
-        }
-    &-red-dark {
-        border-right: 1px solid @dell-red-dark;
-        }
-    &-berry {
-        border-right: 1px solid @dell-berry;
-        }
-    &-purple {
-        border-right: 1px solid @dell-purple;
-        }
-    }
-
-
+  height: auto;
+  &-white {
+    border-right: 1px solid @white;
+  }
+  &-gray-dark {
+    border-right: 1px solid @dell-gray-dark;
+  }
+  &-gray-medium {
+    border-right: 1px solid @dell-gray-medium;
+  }
+  &-gray {
+    border-right: 1px solid @dell-gray;
+  }
+  &-gray-light {
+    border-right: 1px solid @dell-gray-light;
+  }
+  &-gray-very-light {
+    border-right: 1px solid @dell-gray-very-light;
+  }
+  &-blue {
+    border-right: 1px solid @dell-blue;
+  }
+  &-dark-blue {
+    border-right: 1px solid @dell-dark-blue;
+  }
+  &-yellow {
+    border-right: 1px solid @dell-yellow
+  }
+  &-teal {
+    border-right: 1px solid @dell-teal;
+  }
+  &-green {
+    border-right: 1px solid @dell-green;
+  }
+  &-light-green {
+    border-right: 1px solid @dell-green-light;
+  }
+  &-orange {
+    border-right: 1px solid @dell-orange;
+  }
+  &-red {
+    border-right: 1px solid @dell-red;
+  }
+  &-red-dark {
+    border-right: 1px solid @dell-red-dark;
+  }
+  &-berry {
+    border-right: 1px solid @dell-berry;
+  }
+  &-purple {
+    border-right: 1px solid @dell-purple;
+  }
+}
 
 .border-left-thick {
-    height:auto;
-    &-white {
-        border-left: 2px solid @white;
-        }
-    &-gray-dark {
-        border-left: 2px solid @dell-gray-dark;
-        }
-    &-gray-medium {
-        border-left: 2px solid @dell-gray-medium;
-        }
-    &-gray {
-        border-left: 2px solid @dell-gray;
-        }
-    &-gray-light {
-        border-left: 2px solid @dell-gray-light;
-        }
-    &-gray-very-light {
-        border-left: 2px solid @dell-gray-very-light;
-        }
-    &-blue {
-        border-left: 2px solid @dell-blue;
-        }
-    &-dark-blue {
-        border-left: 2px solid @dell-dark-blue;
-        }
-    &-yellow {
-        border-left: 2px solid @dell-yellow
-        }
-    &-teal {
-        border-left: 2px solid @dell-teal;
-        }
-    &-green {
-        border-left: 2px solid @dell-green;
-        }
-    &-light-green {
-        border-left: 2px solid @dell-green-light;
-        }
-    &-orange {
-        border-left: 2px solid @dell-orange;
-        }
-    &-red {
-        border-left: 2px solid @dell-red;
-        }
-    &-red-dark {
-        border-left: 2px solid @dell-red-dark;
-        }
-    &-berry {
-        border-left: 2px solid @dell-berry;
-        }
-    &-purple {
-        border-left: 2px solid @dell-purple;
-        }
-    }
-
-
+  height: auto;
+  &-white {
+    border-left: 2px solid @white;
+  }
+  &-gray-dark {
+    border-left: 2px solid @dell-gray-dark;
+  }
+  &-gray-medium {
+    border-left: 2px solid @dell-gray-medium;
+  }
+  &-gray {
+    border-left: 2px solid @dell-gray;
+  }
+  &-gray-light {
+    border-left: 2px solid @dell-gray-light;
+  }
+  &-gray-very-light {
+    border-left: 2px solid @dell-gray-very-light;
+  }
+  &-blue {
+    border-left: 2px solid @dell-blue;
+  }
+  &-dark-blue {
+    border-left: 2px solid @dell-dark-blue;
+  }
+  &-yellow {
+    border-left: 2px solid @dell-yellow
+  }
+  &-teal {
+    border-left: 2px solid @dell-teal;
+  }
+  &-green {
+    border-left: 2px solid @dell-green;
+  }
+  &-light-green {
+    border-left: 2px solid @dell-green-light;
+  }
+  &-orange {
+    border-left: 2px solid @dell-orange;
+  }
+  &-red {
+    border-left: 2px solid @dell-red;
+  }
+  &-red-dark {
+    border-left: 2px solid @dell-red-dark;
+  }
+  &-berry {
+    border-left: 2px solid @dell-berry;
+  }
+  &-purple {
+    border-left: 2px solid @dell-purple;
+  }
+}
 
 .border-right-thick {
-    height:auto;
-    &-white {
-        border-right: 2px solid @white;
-        }
-    &-gray-dark {
-        border-right: 2px solid @dell-gray-dark;
-        }
-    &-gray-medium {
-        border-right: 2px solid @dell-gray-medium;
-        }
-    &-gray {
-        border-right: 2px solid @dell-gray;
-        }
-    &-gray-light {
-        border-right: 2px solid @dell-gray-light;
-        }
-    &-gray-very-light {
-        border-right: 2px solid @dell-gray-very-light;
-        }
-    &-blue {
-        border-right: 2px solid @dell-blue;
-        }
-    &-dark-blue {
-        border-right: 2px solid @dell-dark-blue;
-        }
-    &-yellow {
-        border-right: 2px solid @dell-yellow
-        }
-    &-teal {
-        border-right: 2px solid @dell-teal;
-        }
-    &-green {
-        border-right: 2px solid @dell-green;
-        }
-    &-light-green {
-        border-right: 2px solid @dell-green-light;
-        }
-    &-orange {
-        border-right: 2px solid @dell-orange;
-        }
-    &-red {
-        border-right: 2px solid @dell-red;
-        }
-    &-red-dark {
-        border-right: 2px solid @dell-red-dark;
-        }
-    &-berry {
-        border-right: 2px solid @dell-berry;
-        }
-    &-purple {
-        border-right: 2px solid @dell-purple;
-        }
-    }
+  height: auto;
+  &-white {
+    border-right: 2px solid @white;
+  }
+  &-gray-dark {
+    border-right: 2px solid @dell-gray-dark;
+  }
+  &-gray-medium {
+    border-right: 2px solid @dell-gray-medium;
+  }
+  &-gray {
+    border-right: 2px solid @dell-gray;
+  }
+  &-gray-light {
+    border-right: 2px solid @dell-gray-light;
+  }
+  &-gray-very-light {
+    border-right: 2px solid @dell-gray-very-light;
+  }
+  &-blue {
+    border-right: 2px solid @dell-blue;
+  }
+  &-dark-blue {
+    border-right: 2px solid @dell-dark-blue;
+  }
+  &-yellow {
+    border-right: 2px solid @dell-yellow
+  }
+  &-teal {
+    border-right: 2px solid @dell-teal;
+  }
+  &-green {
+    border-right: 2px solid @dell-green;
+  }
+  &-light-green {
+    border-right: 2px solid @dell-green-light;
+  }
+  &-orange {
+    border-right: 2px solid @dell-orange;
+  }
+  &-red {
+    border-right: 2px solid @dell-red;
+  }
+  &-red-dark {
+    border-right: 2px solid @dell-red-dark;
+  }
+  &-berry {
+    border-right: 2px solid @dell-berry;
+  }
+  &-purple {
+    border-right: 2px solid @dell-purple;
+  }
+}
