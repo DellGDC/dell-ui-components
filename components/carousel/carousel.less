@@ -3,3 +3,44 @@
  *------------------------------------------------------------------------------------------
  */
 
+.carousel .carousel-control.right:after,
+.carousel .carousel-control.left:before {
+    font-size: 40px;
+}
+
+.carousel .carousel-control {
+
+    top: 39%;
+}
+
+
+.carousel-caption {
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    bottom: 20px;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: left;
+    text-shadow: none;
+}
+
+
+.carousel .carousel-indicators li {
+    width: 15px;
+    height: 5px;
+    margin: 0 5px;
+    border-radius: 2px;
+    border: none;
+    background: @dell-gray-stroke;
+}
+
+
+@media (max-width: @screen-xs-max){
+    .carousel.carousel-gallery {
+        width: 105%;
+        margin-left: -2%;
+    }
+}

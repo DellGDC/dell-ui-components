@@ -35,7 +35,7 @@ angular.module('demo').controller('dataElementsCtrl',function($scope,$rootScope)
 			startingDay: 1
 		};
 
-		$("thead > tr > th").addClass("theader")
+		$("thead > tr > th").addClass("theader");
 	});
 
 angular.module('demo').controller('dataElementsPLayDemoCtrl',function($scope,$rootScope,$sce) {
