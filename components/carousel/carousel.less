@@ -3,13 +3,47 @@
  *------------------------------------------------------------------------------------------
  */
 
-.carousel .carousel-control.right:after,
-.carousel .carousel-control.left:before {
-    font-size: 40px;
+.carousel {
+    padding: 0 40px 30px 40px;
+    > .carousel-control.right:after,
+    > .carousel-control.left:before {
+        font-size: 40px;
+    }
+    &.carousel-filmstrip {
+        .carousel-control {
+            top:34%;
+            &.carousel-control.right:after {
+                right: -10px;
+                position: relative;
+            }
+            &.carousel-control.left:before {
+                left: -10px;
+                position: relative;
+            }
+        }
+    }
+    &.carousel-filmstrip-content {
+        .carousel-control {
+            top:13%;
+            &.carousel-control.right:after {
+                right: -10px;
+                position: relative;
+            }
+            &.carousel-control.left:before {
+                left: -10px;
+                position: relative;
+            }
+        }
+    }
+}
+
+.carousel.carousel-gallery {
+    padding: 0 0 30px;
+    position: relative;
 }
 
 .carousel .carousel-control {
-    top: 43%;
+    top: 40%;
     &.left{
         left: 14px;
     }
@@ -83,6 +117,60 @@
     padding-right: 20px;
     min-height: 430px;
 }
+
+
+
+@media (max-width: @screen-md-max) {
+
+    .carousel {
+        &.carousel-filmstrip {
+            .carousel-control {
+                top:30%;
+            }
+        }
+        &.carousel-filmstrip-content {
+            .carousel-control {
+                top:12%;
+            }
+        }
+    }
+
+    .carousel .carousel-control {
+        top: 38%;
+    }
+
+    .carousel > .carousel-control.right:after,
+    .carousel > .carousel-control.left:before {
+        font-size: 35px;
+    }
+}
+
+
+@media (max-width: @screen-sm-max) {
+
+    .carousel {
+        &.carousel-filmstrip {
+            .carousel-control {
+                top:23%;
+            }
+        }
+        &.carousel-filmstrip-content {
+            .carousel-control {
+                top:10%;
+            }
+        }
+    }
+
+    .carousel .carousel-control {
+        top: 33%;
+    }
+
+    .carousel > .carousel-control.right:after,
+    .carousel > .carousel-control.left:before {
+        font-size: 30px;
+    }
+}
+
 
 @media (max-width: @screen-xs-max) {
     .carousel.carousel-gallery {
