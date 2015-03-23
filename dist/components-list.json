@@ -27,5 +27,8 @@
      "tables",
      "tabs",
      "tooltips",
-     "typography"
+     "typography",
+     "search-and-filtering",
+     "ratings-and-reviews",
+     "data-elements"
 ]
