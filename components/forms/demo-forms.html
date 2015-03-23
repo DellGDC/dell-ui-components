@@ -3,7 +3,83 @@
     <div class="container">
         <h2>Forms Demo</h2>
         <div>
-            <!-- example html for Forms component -->
+
+            <div class="bottom-offset-20">
+                <!-- input fields -->
+                <div class="row">
+                    <form class="form-compressed" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="text-label-input">Text input label</label>
+                            <div class="col-xs-12 col-sm-6">
+                                <input type="text" class="form-control" id="text-label-input">
+                                <p class="help-block">
+                                    In addition to freeform text, any HTML5 text-based input appears like so.
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /input fields -->
+            </div>
+
+
+            <div class="bottom-offset-20">
+                <!-- uneditable input fields -->
+                <div class="row">
+                    <form class="form-compressed" role="form">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="uneditable">Uneditable input</label>
+                            <div class="col-xs-12 col-sm-6">
+                                <span id="uneditable" class="uneditable-input form-control">Some value here</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /uneditable input fields -->
+            </div>
+
+
+
+            <div class="bottom-offset-20">
+                <!-- disabled input fields -->
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="disabledInput">Disabled input</label>
+                        <input class="disabled form-control" id="disabledInput" type="text" placeholder="Disabled input here…" disabled>
+                    </div>
+                </div>
+                <!-- /disabled input fields -->
+            </div>
+
+            <div class="bottom-offset-20">
+                <!-- text area -->
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        <label for="textarea">Textarea input label</label>
+                        <textarea id="textarea" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+                <!-- /text area -->
+            </div>
+
+
+            <!-- inline checkboxes -->
+            <div class="col-xs-12 col-sm-6">
+                <h4>Inline Checkboxes</h4>
+
+                <div>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1">1
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox2" value="option2">2
+                    </label>
+                    <label class="checkbox-inline ">
+                        <input type="checkbox" id="inlineCheckbox3" value="option3">3
+                    </label>
+                </div>
+            </div>
+
         </div>
     </div>
 
