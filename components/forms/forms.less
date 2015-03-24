@@ -4,6 +4,62 @@
  */
 
 .form-horizontal .control-label,
-.form-compressed .control-label{
+.form-compressed .control-label {
     padding-right: 10px;
+}
+
+
+
+// tree view
+.tree {
+    min-height:20px;
+    padding:20px 20px 10px 0;
+    margin-bottom:20px;
+}
+.tree li {
+    list-style-type:none;
+    margin:0;
+    padding:10px 5px 0 5px;
+    position:relative;
+    .parent_li {
+//        padding-bottom: 5px;
+    }
+}
+.tree li::before, .tree li::after {
+    content:'';
+    left:-20px;
+    position:absolute;
+    right:auto
+}
+
+.tree>ul>li::before, .tree>ul>li::after {
+    border:0
+}
+.tree li:last-child::before {
+    height:30px
+}
+
+
+
+
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: @screen-xs-max) {
+    .form-compressed [class^=col-] {
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 10px;
+    }
+
+    .form-group {
+        margin-right: 0;
+    }
+    .control-label {
+        float: left;
+        width: 160px;
+        padding-top: 5px;
+        margin-bottom: -5px;
+        text-align: left;
+    }
 }
