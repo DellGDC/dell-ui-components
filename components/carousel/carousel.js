@@ -1,8 +1,8 @@
 //asumes that angular-ui-bootstrap is loaded
 angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
     .controller('CarouselController', function ($scope, $timeout, $transition, $q) {})
-    .directive('carousel', function() { return {}})
-    .directive('slide', function() { return {}});
+    .directive('carousel', function() { return {};})
+    .directive('slide', function() { return {};});
 
 
 angular.module('dellUiComponents')
@@ -13,7 +13,7 @@ angular.module('dellUiComponents')
 		link: function($scope, $element, iAttrs, controller) {
 			$element.carousel();
 		}
-	}
+	};
 })
 .directive('slide', function($timeout){
 	// Runs during compile
@@ -22,8 +22,8 @@ angular.module('dellUiComponents')
 		link: function($scope, $element, $attr, controller) {
 			$element.on('click', function(event) {
 				event.preventDefault();
-			})
+			});
 			$element.carousel($attr.slide);
 		}
-	}
+	};
 });

@@ -15,30 +15,35 @@
     min-height:20px;
     padding:20px 20px 10px 0;
     margin-bottom:20px;
+    margin-left: -40px;
 }
-.tree li {
+
+.tree li, {
     list-style-type:none;
     margin:0;
-    padding:10px 5px 0 5px;
+    padding:10px 10px 5px 5px;
     position:relative;
-    .parent_li {
-//        padding-bottom: 5px;
-    }
 }
-.tree li::before, .tree li::after {
+
+.tree li::before,
+.tree li::after {
     content:'';
     left:-20px;
     position:absolute;
     right:auto
 }
 
-.tree>ul>li::before, .tree>ul>li::after {
+.tree>ul>li::before,
+.tree>ul>li::after {
     border:0
 }
 .tree li:last-child::before {
     height:30px
 }
 
+.tree li.parent_li > label{
+    min-height: 20px;
+}
 
 
 
