@@ -14,6 +14,7 @@
 
 .list-tree {
     list-style-type: none;
+    margin-left: -20px;
     li {
         > ul {
             list-style-type: none;
@@ -25,6 +26,19 @@
     }
 }
 
+
+//TODO need to add this adjustmet for the checkbox/radio buttons
+
+.checkbox input[type=checkbox],
+.checkbox-inline input[type=checkbox],
+.radio input[type=radio],
+.radio-inline input[type=radio] {
+    margin-left: -20px;
+    margin-right: 5px;
+    vertical-align: text-bottom;
+    position: relative;
+    margin-top: 4px \9;
+}
 
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: @screen-xs-max) {
