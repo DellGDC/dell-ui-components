@@ -2,14 +2,13 @@
 
     <div class="container">
         <h2>Forms Demo</h2>
-        <div>
 
-            <div class="bottom-offset-20">
+            <div class="bottom-offset-40">
                 <!-- input fields -->
                     <form class="form-compressed" role="form">
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label" for="text-label-input">Text input label</label>
+                                <label class="col-xs-12 col-sm-2 control-label" for="text-label-input">Text input label</label>
                                 <div class="col-xs-12 col-sm-6">
                                     <input type="text" class="form-control" id="text-label-input">
                                     <p class="help-block">
@@ -22,13 +21,12 @@
                 <!-- /input fields -->
             </div>
 
-
-            <div class="bottom-offset-20">
+            <div class="bottom-offset-40">
                 <!-- uneditable input fields -->
                 <form class="form-compressed" role="form">
                     <div class="row">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="uneditable">Uneditable input</label>
+                            <label class="col-xs-12 col-sm-2 control-label" for="uneditable">Uneditable input</label>
                             <div class="col-xs-12 col-sm-6">
                                 <span id="uneditable" class="uneditable-input form-control">Some value here</span>
                             </div>
@@ -38,13 +36,12 @@
                 <!-- /uneditable input fields -->
             </div>
 
-
-            <div class="bottom-offset-20">
+            <div class="bottom-offset-40">
                 <!-- disabled input fields -->
                 <form class="form-compressed" role="form">
                     <div class="row">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="disabledInput">Disabled input</label>
+                            <label class="col-xs-12 col-sm-2 control-label" for="disabledInput">Disabled input</label>
                             <div class="col-xs-12 col-sm-6">
                                 <input class="disabled form-control" id="disabledInput" type="text" placeholder="Disabled input here…" disabled>
                             </div>
@@ -54,12 +51,12 @@
                 <!-- /disabled input fields -->
             </div>
 
-            <div class="bottom-offset-20">
+            <div class="bottom-offset-40">
                 <!-- text area -->
                 <form class="form-compressed" role="form">
                     <div class="row">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="textarea">Textarea input label</label>
+                            <label class="col-xs-12 col-sm-2 control-label" for="textarea">Textarea input label</label>
                             <div class="col-xs-12 col-sm-6">
                                 <textarea id="textarea" class="form-control" rows="5"></textarea>
                             </div>
@@ -69,97 +66,91 @@
                 <!-- /text area -->
             </div>
 
+        <hr/>
+
             <div class="row">
-                <div class="bottom-offset-20">
-                    <div class="col-xs-12 col-sm-6">
-                        <h4>Checkboxes</h4>
-                        <!-- checkboxes -->
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="option 1">
-                                Checkbox one
-                            </label>
-                        </div>
-                        <div class="checkbox disabled bottom-offset-20">
-                            <label>
-                                <input type="checkbox" value="value option 2" disabled>
-                                Checkbox two is disabled
-                            </label>
-                        </div>
-                        <!-- /checkboxes -->
+                <div class="col-xs-12 col-sm-6 bottom-offset-40">
+                    <h4>Checkboxes</h4>
+                    <!-- checkboxes -->
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="option 1">
+                            Checkbox one
+                        </label>
                     </div>
+                    <div class="checkbox disabled bottom-offset-20">
+                        <label>
+                            <input type="checkbox" value="value option 2" disabled>
+                            Checkbox two is disabled
+                        </label>
+                    </div>
+                    <!-- /checkboxes -->
                 </div>
 
-                <div class="bottom-offset-20">
-                    <div class="col-xs-12 col-sm-6">
-                        <h4>Inline checkboxes</h4>
-                        <!-- inline checkboxes -->
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox1" value="option1">1
-                        </label>
-                        <label class="checkbox-inline">
-                            <input type="checkbox" id="inlineCheckbox2" value="option2">2
-                        </label>
-                        <label class="checkbox-inline ">
-                            <input type="checkbox" id="inlineCheckbox3" value="option3">3
-                        </label>
-                        <!-- /inline checkboxes -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="row bottom-offset-20">
-                <div class="bottom-offset-20">
-                    <div class="col-xs-12 col-sm-6">
-                        <h4>Radio Buttons</h4>
-                        <!-- radio buttons -->
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="options-radio-1" value="option1" checked>
-                                Option one radio button
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="options-radio-2" value="option2">
-                                Option two radio button
-                            </label>
-                        </div>
-                        <div class="radio disabled">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="options-radio-3" value="option3" disabled>
-                                Option three is disabled
-                            </label>
-                        </div>
-                        <!-- /radio buttons -->
-                    </div>
-                </div>
-
-                <div class="bottom-offset-20">
-                    <div class="col-xs-12 col-sm-6">
-                        <h4>Inline Radio Buttons</h4>
-                        <!-- inline radio buttons -->
-                        <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
-                        </label>
-                        <!-- /inline radio buttons -->
-                    </div>
+                <div class="col-xs-12 col-sm-6 bottom-offset-40">
+                    <h4>Inline checkboxes</h4>
+                    <!-- inline checkboxes -->
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1">1
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox2" value="option2">2
+                    </label>
+                    <label class="checkbox-inline ">
+                        <input type="checkbox" id="inlineCheckbox3" value="option3">3
+                    </label>
+                    <!-- /inline checkboxes -->
                 </div>
             </div>
 
 
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 bottom-offset-40">
+                    <h4>Radio Buttons</h4>
+                    <!-- radio buttons -->
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="options-radio-1" value="option1" checked>
+                            Option one radio button
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="options-radio-2" value="option2">
+                            Option two radio button
+                        </label>
+                    </div>
+                    <div class="radio disabled">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="options-radio-3" value="option3" disabled>
+                            Option three is disabled
+                        </label>
+                    </div>
+                    <!-- /radio buttons -->
+                </div>
+
+                <div class="col-xs-12 col-sm-6 bottom-offset-40">
+                    <h4>Inline Radio Buttons</h4>
+                    <!-- inline radio buttons -->
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+                    </label>
+                    <!-- /inline radio buttons -->
+                </div>
+            </div>
+
 
             <div class="row">
-                <div class="col-xs-12 col-sm-8 bottom-offset-20">
-                <h4>Tree Checkboxes</h4>
-                <!-- tree checkboxes -->
-                <ul class="list-tree">
+                <div class="col-xs-12 col-sm-8 bottom-offset-40">
+                    <h4>Tree Checkboxes</h4>
+                    <!-- tree checkboxes -->
+                    <ul class="list-tree">
                         <li>
                             <label class="checkbox">
                                 <input type="checkbox" value="option1-parent1"> Checkbox value (parent 1)
@@ -172,7 +163,7 @@
                                     <ul>
                                         <li>
                                             <label class="checkbox">
-                                            <input type="checkbox" value="option1-parent1-grandchild1"> Checkbox value (grand child 1)</label>
+                                                <input type="checkbox" value="option1-parent1-grandchild1"> Checkbox value (grand child 1)</label>
                                         </li>
                                     </ul>
                                 </li>
@@ -186,12 +177,12 @@
                                                 <input type="checkbox" value="option1-parent1-grandchild3"> Checkbox value (grand child 3)
                                             </label>
                                         </li>
-                                         <li>
+                                        <li>
                                             <label class="checkbox">
                                                 <input type="checkbox" value="option1-parent1-grandchild4"> Checkbox value (grand child 4)
                                             </label>
                                         </li>
-                                         <li>
+                                        <li>
                                             <label class="checkbox">
                                                 <input type="checkbox" value="option1-parent1-grandchild5"> Checkbox value (grand child 5)
                                             </label>
@@ -206,49 +197,194 @@
                                                         <input type="checkbox" value="option1-parent1-greatgrandchild2"> Checkbox value (great grand child 2)
                                                     </label>
                                                 </li>
-                                                 <li>
+                                                <li>
                                                     <label class="checkbox">
                                                         <input type="checkbox" value="option1-parent1-greatgrandchild3"> Checkbox value (great grand child 3)
                                                     </label>
                                                 </li>
-                                             </ul>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
                         <li>
-                        <label class="checkbox">
-                            <input type="checkbox" value="option1-parent2"> Checkbox value (parent 2)
-                        </label>
-                        <ul>
-                            <li>
-                                <label class="checkbox">
-                                    <input type="checkbox" value="option1-parent2-child1"> Checkbox value (child 1)
-                                </label>
-                                <ul>
-                                    <li>
-                                        <label class="checkbox">
-                                            <input type="checkbox" value="option1-parent2-grandchild1"> Checkbox value (grand child 1)</label>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                            <label class="checkbox">
+                                <input type="checkbox" value="option1-parent2"> Checkbox value (parent 2)
+                            </label>
+                            <ul>
+                                <li>
+                                    <label class="checkbox">
+                                        <input type="checkbox" value="option1-parent2-child1"> Checkbox value (child 1)
+                                    </label>
+                                    <ul>
+                                        <li>
+                                            <label class="checkbox">
+                                                <input type="checkbox" value="option1-parent2-grandchild1"> Checkbox value (grand child 1)</label>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                     </ul>
                     <!-- /tree checkboxes -->
                 </div>
             </div>
 
+        <hr/>
 
-
-            <!--file input-->
-
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 bottom-offset-20">
-                    <h4>File Input</h4>
-                </div>
+            <div class="bottom-offset-40">
+                <!--file input-->
+                <form class="form-compressed" role="form">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-2 control-label" for="exampleInputFile">File input label</label>
+                            <div class="col-xs-6 col-sm-6">
+                                <input type="file" id="exampleInputFile">
+                                <p class="help-block">Example block-level help text here.</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- /file input-->
             </div>
 
-        </div>
-    </div>
 
+            <div class="bottom-offset-40">
+                <!--input with error-->
+                <form class="form-compressed" role="form">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-2 control-label" for="inputError">Input with error label</label>
+                            <div class="col-xs-6 col-sm-6">
+                                <input type="text" id="inputError"
+                                       class="form-control alert alert-warning"
+                                       data-html="true"
+                                       data-toggle="popover"
+                                       data-placement="top"
+                                       data-content="&lt;i class='icon-small-alertnotice text-red pull-left'&gt;&lt;/i&gt; &nbsp;<strong>'First Name'</strong> popover content should not be empty."
+                                       data-trigger="hover" data-original-title="" title=""
+                                       placeholder="*First Name">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- /input with error-->
+            </div>
+
+
+
+        <div class="bottom-offset-40">
+            <!--password-->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group show-password">
+                        <label class="col-xs-12 col-sm-2 control-label" for="password">Password</label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input id="password" type="password" class="form-control" ng-model="password">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="col-xs-12 col-sm-2 checkbox">
+                            <input type="checkbox" id="optionsCheckbox" value="option1" ng-model="showPassword" ng-click="togglePassword()">
+                            <span ng-if="!showPassword">{{text_show_password}}</span>
+                            <span ng-if="showPassword">{{text_hide_password}}</span>
+                        </label>
+                    </div>
+
+                </div>
+            </form>
+            <!--/password-->
+        </div>
+
+        <div class="bottom-offset-40">
+        <!-- phone number -->
+            <form class="form-compressed bottom-offset-10" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2 control-label" for="phone">Phone number</label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input id="phone" type="text" class="form-control phone-number" placeholder="(555) 111-2222">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /phone number -->
+            <!--Add an extension-->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#add-phone-extension">
+                            <span><label class="col-xs-12 col-sm-2 control-label show-collapsed" for="phone-extension">&nbsp;Add extension</label></span>
+                            <span><label class="col-xs-12 col-sm-2 control-label hide-expanded" for="phone-extension">&nbsp;Remove extension</label></span>
+                        </a>
+                        <div id="add-phone-extension" class="collapse col-xs-6 col-sm-6">
+                            <input id="phone-extension" type="text" class="form-control phone-extension" placeholder="ext: (2222)">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--Add an extension-->
+        </div>
+
+
+        <div class="bottom-offset-40">
+            <!-- email address -->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2 control-label" for="input-email">Email address</label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="email" class="form-control" id="input-email" placeholder="*Enter email">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- email address -->
+        </div>
+
+        <div class="bottom-offset-40">
+            <!-- spin box vertical-->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2 control-label" for="input-email">Spin box vertical</label>
+                        <div class="spinbox"
+                             data-orient="vertical"
+                             data-spinmin="0"
+                             data-spindefault="0"
+                             data-spinmax="30"
+                             data-spinstep="2"
+                             data-spinincrease="+"
+                             data-spindecrease="-"
+                             data-spinname="">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /spin box vertical-->
+        </div>
+
+        <div class="bottom-offset-40">
+            <!-- spin box horizontal-->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2 control-label" for="input-email">Spin box horizontal</label>
+                        <div class="spinbox"
+                             data-orient="horizontal"
+                             data-spinmin="0"
+                             data-spindefault="0"
+                             data-spinmax="30"
+                             data-spinstep="2"
+                             data-spinincrease="&lt;i class='icon-ui-plus'&gt;&lt;/i&gt;"
+                             data-spindecrease="&lt;i class='icon-ui-minus'&gt;&lt;/i&gt;"
+                             data-spinname="">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /spin box horizontal-->
+        </div>
+
+
+    </div>
 </section>
