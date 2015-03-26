@@ -277,19 +277,18 @@
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group show-password">
-                        <label class="col-xs-12 col-sm-2 control-label" for="password">Password</label>
+                        <label class="col-xs-12 col-sm-2 control-label">Password</label>
                         <div class="col-xs-6 col-sm-6">
-                            <input id="password" type="password" class="form-control" ng-model="password">
+                            <input type="password" class="form-control" ng-model="password">
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-md-offset-2">
+                            <label class="checkbox">
+                                <input type="checkbox"  value="option1" ng-model="showPassword" ng-click="togglePassword()">
+                                <span ng-if="!showPassword">Show password</span>
+                                <span ng-if="showPassword">Hide password</span>
+                            </label>
                         </div>
                     </div>
-                    <div>
-                        <label class="col-xs-12 col-sm-2 checkbox">
-                            <input type="checkbox" id="optionsCheckbox" value="option1" ng-model="showPassword" ng-click="togglePassword()">
-                            <span ng-if="!showPassword">{{text_show_password}}</span>
-                            <span ng-if="showPassword">{{text_hide_password}}</span>
-                        </label>
-                    </div>
-
                 </div>
             </form>
             <!--/password-->
@@ -353,8 +352,8 @@
                              data-spindefault="0"
                              data-spinmax="30"
                              data-spinstep="2"
-                             data-spinincrease="+"
-                             data-spindecrease="-"
+                             data-spinincrease="&lt;i class='icon-ui-plus'&gt;&lt;/i&gt;"
+                             data-spindecrease="&lt;i class='icon-ui-minus'&gt;&lt;/i&gt;"
                              data-spinname="">
                         </div>
                     </div>

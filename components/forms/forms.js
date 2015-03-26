@@ -20,25 +20,9 @@ angular.module('dellUiComponents')
 
 .directive('showPassword', function() {
 
-    /* TODO Can't really use a message here because dellUiBootstrap is production directive so content will have to be in the UI code */
-
-    //var template = '<div ng-transclude></div><label class="checkbox">' +
-    //    '<input type="checkbox" id="optionsCheckbox" value="option1" ng-model="showPassword" ng-click="togglePassword()">' +
-    //    '<span ng-if="!showPassword">{{text_show_password}}</span>' +
-    //    '<span ng-if="showPassword">{{text_hide_password}}</span>' +
-    //    '</label>';
     return {
-        scope: true, // {} = isolate, true = child, false/undefined = no change
-        controller: function($scope, $element, $attrs, $transclude, utils, $locale) {
-            utils.getJSON("data/messages_en.json", function(data) {
-                $scope.text_show_password = data.text_show_password;
-                $scope.text_hide_password = data.text_hide_password;
-            });
-        },
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-        template: template,
-        replace: false,
-        transclude: true,
+
         link: function($scope, $element, $attrs, controller) {
             $scope.togglePassword = function() {
                 $scope.showPassword = !$scope.showPassword;
@@ -52,34 +36,34 @@ angular.module('dellUiComponents')
     };
 })
 
-    .directive('phoneNumber', function() {
-        // Runs during compile
-        return {
-            restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-            link: function($scope, element, attributes, controller) {
-                //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
-                //TODO use $locale to create mask
-                if ($(element).is('input')) {
-                    $(element).attr('data-inputmask', "'mask': '(999)-999-9999'");
-                    $(element).inputmask();
-                }
+.directive('phoneNumber', function() {
+    // Runs during compile
+    return {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, element, attributes, controller) {
+            //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
+            //TODO use $locale to create mask
+            if ($(element).is('input')) {
+                $(element).attr('data-inputmask', "'mask': '(999)-999-9999'");
+                $(element).inputmask();
             }
-        };
-    })
+        }
+    };
+})
 
 
-    .directive('phoneExtension', function() {
-        return {
-            restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-            link: function($scope, element, attributes, controller) {
+.directive('phoneExtension', function() {
+    return {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, element, attributes, controller) {
 
-                if ($(element).is('input')) {
-                    $(element).attr('data-inputmask', "'mask': 'ext: (9999)'");
-                    $(element).inputmask();
-                }
+            if ($(element).is('input')) {
+                $(element).attr('data-inputmask', "'mask': 'ext: (9999)'");
+                $(element).inputmask();
             }
-        };
-    })
+        }
+    };
+})
 
 
 
