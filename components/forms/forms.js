@@ -3,6 +3,19 @@
  */
 angular.module('dellUiComponents')
 
+.directive('msCheckbox', function() {
+    return {
+        restrict: 'C',
+        link: function () {
+            $('.ms-checkbox').multipleSelect({
+                placeholder: "Select title"
+            })
+
+        }
+    };
+
+})
+
 .directive('listTree', function () {
     return {
         restrict: 'C',
@@ -51,7 +64,6 @@ angular.module('dellUiComponents')
     };
 })
 
-
 .directive('phoneExtension', function() {
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
@@ -64,8 +76,6 @@ angular.module('dellUiComponents')
         }
     };
 })
-
-
 
 .directive('spinbox', function() {
     // Inject html code
@@ -121,4 +131,303 @@ angular.module('dellUiComponents')
             }
         });
     });
+})
+
+.directive('selectState', function(utils) {
+    // Runs during compile
+    var template = '<option value="">{{ emptyName }}</option>' +
+        '<option ng-repeat="state in states" value="{{state.code}}">' +
+        '   {{state[label]}}' +
+        '</option>';
+    return {
+        scope: true, // {} = isolate, true = child, false/undefined = no change
+        controller: function($scope, $element, $attrs, $transclude) {
+
+            $scope.selectedState = '';
+            $scope.format = $attrs.format;
+            $scope.states = [
+                {
+                    "code": "AL",
+                    "label": "Alabama",
+                    "long_label": "AL - Alabama"
+                },
+                {
+                    "code": "AK",
+                    "label": "Alaska",
+                    "long_label": "AK - Alaska"
+                },
+                {
+                    "code": "AZ",
+                    "label": "Arizona",
+                    "long_label": "AZ - Arizona"
+                },
+                {
+                    "code": "AR",
+                    "label": "Arkansas",
+                    "long_label": "AR - Arkansas"
+                },
+                {
+                    "code": "CA",
+                    "label": "California",
+                    "long_label": "CA - California"
+                },
+                {
+                    "code": "CO",
+                    "label": "Colorado",
+                    "long_label": "CO - Colorado"
+                },
+                {
+                    "code": "CT",
+                    "label": "Connecticut",
+                    "long_label": "CT - Connecticut"
+                },
+                {
+                    "code": "DE",
+                    "label": "Delaware",
+                    "long_label": "DE - Delaware"
+                },
+                {
+                    "code": "DC",
+                    "label": "District of Columbia",
+                    "long_label": "DC - District of Columbia"
+                },
+                {
+                    "code": "FL",
+                    "label": "Florida",
+                    "long_label": "FL - Florida"
+                },
+                {
+                    "code": "GA",
+                    "label": "Georgia",
+                    "long_label": "GA - Georgia"
+                },
+                {
+                    "code": "HI",
+                    "label": "Hawaii",
+                    "long_label": "HI - Hawaii"
+                },
+                {
+                    "code": "ID",
+                    "label": "Idaho",
+                    "long_label": "ID - Idaho"
+                },
+                {
+                    "code": "IL",
+                    "label": "Illinois",
+                    "long_label": "IL - Illinois"
+                },
+                {
+                    "code": "IN",
+                    "label": "Indiana",
+                    "long_label": "IN - Indiana"
+                },
+                {
+                    "code": "IA",
+                    "label": "Iowa",
+                    "long_label": "IA - Iowa"
+                },
+                {
+                    "code": "KS",
+                    "label": "Kansas",
+                    "long_label": "KS - Kansas"
+                },
+                {
+                    "code": "KY",
+                    "label": "Kentucky",
+                    "long_label": "KY - Kentucky"
+                },
+                {
+                    "code": "LA",
+                    "label": "Louisiana",
+                    "long_label": "LA - Louisiana"
+                },
+                {
+                    "code": "ME",
+                    "label": "Maine",
+                    "long_label": "ME - Maine"
+                },
+                {
+                    "code": "MD",
+                    "label": "Maryland",
+                    "long_label": "MD - Maryland"
+                },
+                {
+                    "code": "MA",
+                    "label": "Massachusetts",
+                    "long_label": "MA - Massachusetts"
+                },
+                {
+                    "code": "MI",
+                    "label": "Michigan",
+                    "long_label": "MI - Michigan"
+                },
+                {
+                    "code": "MN",
+                    "label": "Minnesota",
+                    "long_label": "MN - Minnesota"
+                },
+                {
+                    "code": "MS",
+                    "label": "Mississippi",
+                    "long_label": "MS - Mississippi"
+                },
+                {
+                    "code": "MO",
+                    "label": "Missouri",
+                    "long_label": "MO - Missouri"
+                },
+                {
+                    "code": "MT",
+                    "label": "Montana",
+                    "long_label": "MT - Montana"
+                },
+                {
+                    "code": "NE",
+                    "label": "Nebraska",
+                    "long_label": "NE - Nebraska"
+                },
+                {
+                    "code": "NV",
+                    "label": "Nevada",
+                    "long_label": "NV - Nevada"
+                },
+                {
+                    "code": "NH",
+                    "label": "New Hampshire",
+                    "long_label": "NH - New Hampshire"
+                },
+                {
+                    "code": "NJ",
+                    "label": "New Jersey",
+                    "long_label": "NJ - New Jersey"
+                },
+                {
+                    "code": "NM",
+                    "label": "New Mexico",
+                    "long_label": "NM - New Mexico"
+                },
+                {
+                    "code": "NY",
+                    "label": "New York",
+                    "long_label": "NY - New York"
+                },
+                {
+                    "code": "NC",
+                    "label": "North Carolina",
+                    "long_label": "NC - North Carolina"
+                },
+                {
+                    "code": "ND",
+                    "label": "North Dakota",
+                    "long_label": "ND - North Dakota"
+                },
+                {
+                    "code": "OH",
+                    "label": "Ohio",
+                    "long_label": "OH - Ohio"
+                },
+                {
+                    "code": "OK",
+                    "label": "Oklahoma",
+                    "long_label": "OK - Oklahoma"
+                },
+                {
+                    "code": "OR",
+                    "label": "Oregon",
+                    "long_label": "OR - Oregon"
+                },
+                {
+                    "code": "PA",
+                    "label": "Pennsylvania",
+                    "long_label": "PA - Pennsylvania"
+                },
+                {
+                    "code": "RI",
+                    "label": "Rhode Island",
+                    "long_label": "RI - Rhode Island"
+                },
+                {
+                    "code": "SC",
+                    "label": "South Carolina",
+                    "long_label": "SC - South Carolina"
+                },
+                {
+                    "code": "SD",
+                    "label": "South Dakota",
+                    "long_label": "SD - South Dakota"
+                },
+                {
+                    "code": "TN",
+                    "label": "Tennessee",
+                    "long_label": "TN - Tennessee"
+                },
+                {
+                    "code": "TX",
+                    "label": "Texas",
+                    "long_label": "TX - Texas"
+                },
+                {
+                    "code": "UT",
+                    "label": "Utah",
+                    "long_label": "UT - Utah"
+                },
+                {
+                    "code": "VA",
+                    "label": "Virginia",
+                    "long_label": "VA - Virginia"
+                },
+                {
+                    "code": "WA",
+                    "label": "Washington",
+                    "long_label": "WA - Washington"
+                },
+                {
+                    "code": "WV",
+                    "label": "West Virginia",
+                    "long_label": "WV - West Virginia"
+                },
+                {
+                    "code": "WI",
+                    "label": "Wisconsin",
+                    "long_label": "WI - Wisconsin"
+                },
+                {
+                    "code": "WY",
+                    "label": "Wyoming",
+                    "long_label": "WY - Wyoming"
+                },
+                {
+                    "code": "AA",
+                    "label": "Armed Forces-Americas",
+                    "long_label": "AA - Armed Forces-Americas"
+                },
+                {
+                    "code": "AE",
+                    "label": "Armed Forces-Europe",
+                    "long_label": "AE - Armed Forces-Europe"
+                },
+                {
+                    "code": "AP",
+                    "label": "Armed Forces-Pacific",
+                    "long_label": "AP - Armed Forces-Pacific"
+                }
+            ];
+            switch ($attrs.format) {
+                case 'short':
+                    $scope.label = "code";
+                    break;
+                case 'both':
+                    $scope.label = "long_label";
+                    break;
+                default:
+                    $scope.label = "label";
+            }
+        },
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        template: template,
+        link: function($scope, element, attributes, controller) {
+            $scope.emptyName = attributes.emptyName || '*State';
+        }
+    };
 });
+

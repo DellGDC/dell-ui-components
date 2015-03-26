@@ -3,6 +3,10 @@
     <div class="container">
         <h2>Forms Demo</h2>
 
+
+        <h3 class="top-offset-20">individual form controls</h3>
+        <hr/>
+
             <div class="bottom-offset-40">
                 <!-- input fields -->
                     <form class="form-compressed" role="form">
@@ -66,7 +70,6 @@
                 <!-- /text area -->
             </div>
 
-        <hr/>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 bottom-offset-40">
@@ -229,7 +232,6 @@
                 </div>
             </div>
 
-        <hr/>
 
             <div class="bottom-offset-40">
                 <!--file input-->
@@ -351,7 +353,7 @@
                              data-spinmin="0"
                              data-spindefault="0"
                              data-spinmax="30"
-                             data-spinstep="2"
+                             data-spinstep="1"
                              data-spinincrease="&lt;i class='icon-ui-plus'&gt;&lt;/i&gt;"
                              data-spindecrease="&lt;i class='icon-ui-minus'&gt;&lt;/i&gt;"
                              data-spinname="">
@@ -373,7 +375,7 @@
                              data-spinmin="0"
                              data-spindefault="0"
                              data-spinmax="30"
-                             data-spinstep="2"
+                             data-spinstep="1"
                              data-spinincrease="&lt;i class='icon-ui-plus'&gt;&lt;/i&gt;"
                              data-spindecrease="&lt;i class='icon-ui-minus'&gt;&lt;/i&gt;"
                              data-spinname="">
@@ -382,6 +384,136 @@
                 </div>
             </form>
             <!-- /spin box horizontal-->
+        </div>
+
+
+
+
+        <h3 class="top-offset-40">select form controls</h3>
+
+        <hr/>
+
+        <div class="bottom-offset-40">
+            <!-- select list -->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-6">
+                            <label for="select01">Select list</label>
+                            <select class="form-control" id="select01">
+                                <option> something </option>
+                                <option> 2 </option>
+                                <option> 3 </option>
+                                <option> 4 </option>
+                                <option> 5 </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /select list -->
+        </div>
+
+        <div class="bottom-offset-40">
+            <!-- tiered select  -->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-6">
+                            <label for="select-01">Tiered select list</label>
+                            <select class="form-control" id="select-01">
+                                <option class="text-gray-dark" value="all">All</option>
+                                <optgroup class="text-gray-dark" label="Original Release Date">
+                                    <option class="text-gray-dark" value="0-30 days">0-30 days</option>
+                                    <option class="text-gray-dark" value="0-90 days">0-90 days</option>
+                                    <option class="text-gray-dark" value="older">older</option>
+                                </optgroup>
+                                <optgroup class="text-gray-dark" label="Last updated date">
+                                    <option class="text-gray-dark" value="0-30 days">0-30 days</option>
+                                    <option class="text-gray-dark" value="0-90 days">0-90 days</option>
+                                    <option class="text-gray-dark" value="older">older</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /tiered select  -->
+        </div>
+
+
+        <div class="bottom-offset-40">
+            <!-- multi-select -->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-6">
+                            <label for="multiSelect">multi-select</label>
+                            <select multiple="multiple" id="multiSelect">
+                                <option> 1 </option>
+                                <option> 2 </option>
+                                <option> 3 </option>
+                                <option> 4  </option>
+                                <option> 5 </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- multi-select -->
+        </div>
+
+        <div class="bottom-offset-40">
+            <!-- multi-select with checkboxes -->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Multi-select with checkboxes</label>
+                                <select class="ms-checkbox" id="ms" multiple="multiple">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+
+        <h3 class="top-offset-40">Selects with pre-populated states (U.S. only)</h3>
+
+        <hr/>
+
+
+        <div class="bottom-offset-40">
+            <!-- multi-select -->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            <label for="default-select-state">Default</label>
+                            <select class="form-control select-state" id="default-select-state" ng-model="stateDefault"></select>
+
+                            <p class="help-block">class="form-control select-state"</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
 
 
