@@ -9,7 +9,7 @@ angular.module('dellUiComponents')
         link: function () {
             $('.ms-checkbox').multipleSelect({
                 placeholder: "Select title"
-            })
+            });
 
         }
     };
@@ -77,63 +77,75 @@ angular.module('dellUiComponents')
     };
 })
 
+//----------- spin box -------------------------------------------------------
+
 .directive('spinbox', function() {
-    // Inject html code
-    $( ".spinbox" ).each(function( index ) {
+    return {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, element, attributes, controller) {
 
-        var el = $( this );
+    
+            // Inject html code
+            $( ".spinbox" ).each(function( index ) {
 
-        if(el.data("orient")==="vertical"){
-            $(el).addClass("dpui-numberPicker spinbox-vert").html("<button class='spinbox-increase'>"+el.data("spinincrease")+"</button><input type='text' class='spinbox-input spinbox-input-vert' style='border-top: 0px solid #cfcfcf; border-bottom: 0px solid #cfcfcf;' value='"+el.data("spindefault")+"' name='"+el.data("spinname")+"'/><button class='spinbox-decrease'>"+el.data("spindecrease")+"</button>");
-        } else {
-            $(el).addClass("dpui-numberPicker").html("<button class='spinbox-decrease'>"+el.data("spindecrease")+"</button><input type='text' class='spinbox-input' style='border-left: 0px solid #cfcfcf; border-right: 0px solid #cfcfcf;' value='"+el.data("spindefault")+"' name='"+el.data("spinname")+"'/><button class='spinbox-increase'>"+el.data("spinincrease")+"</button>");
+                var el = $( this );
+
+                if(el.data("orient")==="vertical"){
+                    $(el).addClass("dpui-numberPicker spinbox-vert").html("<button class='spinbox-increase'>"+el.data("spinincrease")+"</button><input type='text' class='spinbox-input spinbox-input-vert' style='border-top: 0px solid #cfcfcf; border-bottom: 0px solid #cfcfcf;' value='"+el.data("spindefault")+"' name='"+el.data("spinname")+"'/><button class='spinbox-decrease'>"+el.data("spindecrease")+"</button>");
+                } else {
+                    $(el).addClass("dpui-numberPicker").html("<button class='spinbox-decrease'>"+el.data("spindecrease")+"</button><input type='text' class='spinbox-input' style='border-left: 0px solid #cfcfcf; border-right: 0px solid #cfcfcf;' value='"+el.data("spindefault")+"' name='"+el.data("spinname")+"'/><button class='spinbox-increase'>"+el.data("spinincrease")+"</button>");
+                }
+
+            });
+
+            // Increase Button code
+            $( ".spinbox-increase" ).click(function() {
+                var em = $( this );
+                if(em.parent().data("orient")==="vertical" &&
+                    parseInt($(this).siblings('input').val()) < em.parent().data("spinmax")){
+                    $( em ).next().val( parseInt($( em ).next().val()) + em.parent().data("spinstep") );
+                } else if(parseInt($(this).siblings('input').val()) < em.parent().data("spinmax")){
+                    $( em ).prev().val( parseInt($( em ).prev().val()) + em.parent().data("spinstep") );
+                }
+            });
+
+            // Decrease Button code
+            $( ".spinbox-decrease" ).click(function() {
+                var el = $( this );
+                if(el.parent().data("orient")==="vertical" &&
+                    parseInt($(this).siblings('input').val()) > el.parent().data("spinmin")){
+                    $( el ).prev().val( parseInt($( el ).prev().val()) - el.parent().data("spinstep") );
+                } else if(parseInt($(this).siblings('input').val()) > el.parent().data("spinmin")){
+                    $( el ).next().val( parseInt($( el ).next().val()) - el.parent().data("spinstep") );
+                }
+            });
+
+            //Checks to see if the manual input is outside the range of the min-max and changes it to bring it back in range.
+            $( ".spinbox-input" ).blur(function() {
+                var em = $( this );
+                if(parseInt($(this).val()) > em.parent().data("spinmax")){
+                    $(this).val( em.parent().data("spinmax") );
+                } else if(parseInt($(this).val()) < em.parent().data("spinmin")){
+                    $(this).val( em.parent().data("spinmin") );
+                }
+            });
+
+            // Limits keyboard input to alphanumeric
+            $(document).ready(function() {
+                $('.spinbox-input').keypress(function(key) {
+                    if(key.charCode < 48 || key.charCode > 57) {
+                        return false;
+                    }
+                });
+            });
+
         }
-
-    });
-
-    // Increase Button code
-    $( ".spinbox-increase" ).click(function() {
-        var em = $( this );
-        if(em.parent().data("orient")==="vertical" &&
-            parseInt($(this).siblings('input').val()) < em.parent().data("spinmax")){
-            $( em ).next().val( parseInt($( em ).next().val()) + em.parent().data("spinstep") );
-        } else if(parseInt($(this).siblings('input').val()) < em.parent().data("spinmax")){
-            $( em ).prev().val( parseInt($( em ).prev().val()) + em.parent().data("spinstep") );
-        }
-    });
-
-    // Decrease Button code
-    $( ".spinbox-decrease" ).click(function() {
-        var el = $( this );
-        if(el.parent().data("orient")==="vertical" &&
-            parseInt($(this).siblings('input').val()) > el.parent().data("spinmin")){
-            $( el ).prev().val( parseInt($( el ).prev().val()) - el.parent().data("spinstep") );
-        } else if(parseInt($(this).siblings('input').val()) > el.parent().data("spinmin")){
-            $( el ).next().val( parseInt($( el ).next().val()) - el.parent().data("spinstep") );
-        }
-    });
-
-    // Checks to see if the manual input is outside the range of the min-max and changes it to bring it back in range.
-    $( ".spinbox-input" ).blur(function() {
-        var em = $( this );
-        if(parseInt($(this).val()) > em.parent().data("spinmax")){
-            $(this).val( em.parent().data("spinmax") );
-        } else if(parseInt($(this).val()) < em.parent().data("spinmin")){
-            $(this).val( em.parent().data("spinmin") );
-        }
-    });
-
-    // Limits keyboard input to alphanumeric
-    $(document).ready(function() {
-        $('.spinbox-input').keypress(function(key) {
-            if(key.charCode < 48 || key.charCode > 57) {
-                return false;
-            }
-        });
-    });
+    };
 })
 
-.directive('selectState', function(utils) {
+//----------- /spin box -------------------------------------------------------
+
+.directive('selectState', function() {
     // Runs during compile
     var template = '<option value="">{{ emptyName }}</option>' +
         '<option ng-repeat="state in states" value="{{state.code}}">' +
@@ -429,5 +441,5 @@ angular.module('dellUiComponents')
             $scope.emptyName = attributes.emptyName || '*State';
         }
     };
-});
+})
 

@@ -12,7 +12,7 @@
     "underscore": "~1.5",
     "bootstrap": "~3.1",
     "dell-ui-bootstrap": "~1",
-    "angular": "~1.2",
+    "angular": "~1.2.15",
     "angular-ui-router": "~0.2",
     "angular-animate": "~1.2",
     "angular-resource": "~1.2",
