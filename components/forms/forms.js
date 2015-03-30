@@ -31,10 +31,45 @@ angular.module('dellUiComponents')
     };
 })
 
-.directive('showPassword', function() {
 
+.directive('emailAddress', function() {
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, element, attributes, controller) {
+            $('form input[name="email"]').blur(function () {
+                var email = $(this).val();
+                var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+                if (re.test(email)) {
+                    $(element).addClass('hide');
+                } else {
+                    //$(this).addClass('alert alert-warning');
+                }
+
+            });
+
+
+
+            //$('input').blur(function() {
+            //    var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+            //    if (testEmail.test(this.value)) {
+            //        alert('passed');
+            //    } else {
+            //        alert('failed');
+            //    }
+            //});
+
+            //if ($(element).is('input')) {
+            //    $(element).attr('data-inputmask', "'mask': 'ext: (9999)'");
+            //    $(element).inputmask();
+            //}
+        }
+    };
+})
+
+
+.directive('showPassword', function() {
+return {
+    restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
 
         link: function($scope, $element, $attrs, controller) {
             $scope.togglePassword = function() {
@@ -77,6 +112,7 @@ angular.module('dellUiComponents')
     };
 })
 
+
 //----------- spin box -------------------------------------------------------
 
 .directive('spinbox', function() {
@@ -84,7 +120,7 @@ angular.module('dellUiComponents')
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
         link: function($scope, element, attributes, controller) {
 
-    
+
             // Inject html code
             $( ".spinbox" ).each(function( index ) {
 
@@ -435,11 +471,11 @@ angular.module('dellUiComponents')
                     $scope.label = "label";
             }
         },
-        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        restrict: 'AC', // E = Element, A = Attribute, C = Class, M = Comment
         template: template,
-        link: function($scope, element, attributes, controller) {
-            $scope.emptyName = attributes.emptyName || '*State';
+        link: function($scope, $element, $attributes, controller) {
+            $scope.emptyName = $attributes.emptyName || '*State';
         }
     };
-})
+});
 

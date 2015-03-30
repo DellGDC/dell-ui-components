@@ -31,9 +31,21 @@
     }
 }
 
+.form-label {
+    float: left;
+    padding-top: 8px;
+    text-align: right;
+}
 
-//TODO need to add this adjustment for the checkbox/radio buttons
 
+.help-ext {
+    float: left;
+    margin-top: -10px;
+    text-align: left;
+    margin-bottom: -20px;
+}
+
+//TODO probably need to re-integrate this checkbox change to dell-ui-bootstrap BUT check to see if this does not break anything before finalizing-------------------
 .checkbox input[type=checkbox],
 .checkbox-inline input[type=checkbox],
 .radio input[type=radio],
@@ -42,8 +54,29 @@
     margin-right: 5px;
     vertical-align: text-bottom;
     position: relative;
-    margin-top: 4px \9;
+    margin-top: 5px \9;
 }
+
+input[type=file], select {
+    margin-top: 5px;
+}
+
+.control-label {
+// need to kill the with
+//width:160px;
+
+}
+
+.input-append+.help-block,
+.input-prepend+.help-block,
+.uneditable-input+.help-block,
+input+.help-block,
+select+.help-block,
+textarea+.help-block {
+    margin-top: 5px;
+}
+
+//TODO --------------------------------------------------------------------------------------
 
 // spinbox
 .dpui-numberPicker i {
