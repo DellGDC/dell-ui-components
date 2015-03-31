@@ -1,10 +1,35 @@
 <section ng-controller="breadcrumbsCtrl" id="breadcrumbs-html-example">
 
     <div class="container">
-        <h2>Breadcrumbs Demo</h2>
-        <div>
-            <!-- example html for Breadcrumbs component -->
+        <h2 class="bottom-offset-20">Breadcrumbs Demo</h2>
+
+        <div class="bottom-offset-30">
+            <h4>Generic Breadcrumb</h4>
+            <!--Generic Breadcrumb-->
+            <ul class="breadcrumb">
+                <li><a href="#"></a><span class="divider"></span></li>
+                <li><a href="#">Shop for home</a><span class="divider"></span></li>
+                <li class="active">Laptops & Ultrabooks</li>
+            </ul>
+            <!--/Generic Breadcrumb-->
         </div>
+
+
+        <div class="bottom-offset-30">
+            <h4>Deep-path Breadcrumb</h4>
+            <!--Deep-path Breadcrumb-->
+            <ul class="breadcrumb">
+                <li><a href="#"></a><span class="divider"></span></li>
+                <li><a href="#">Level 1</a><span class="divider"></span></li>
+                <li><a href="#">Level 2</a><span class="divider"></span></li>
+                <li><a href="#">Level 3</a><span class="divider"></span></li>
+                <li><a href="#">Level 4</a><span class="divider"></span></li>
+                <li><a href="#">Level 5</a><span class="divider"></span></li>
+                <li class="active">Level 6</li>
+            </ul>
+            <!--/Deep-path Breadcrumb-->
+        </div>
+
     </div>
 
 </section>
