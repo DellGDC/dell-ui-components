@@ -59,6 +59,11 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 		}
 	});
 
+	// iterate through Customer Quote divs on the page
+	$(".revQuote").each(function() {
+		$(this).html( '<p style="font-size:15px;">"'+$( this ).data('quote')+'"</p><span style="font-size:12px;">- '+$( this ).data('attribution')+"</span>");
+	});
+
 	//star rating hover function
 	$( ".starbox > span" )
 		.mouseenter( function() {
