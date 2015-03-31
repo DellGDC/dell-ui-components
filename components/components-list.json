@@ -31,5 +31,8 @@
      "search-and-filtering",
      "ratings-and-reviews",
      "data-elements",
-     "teasers"
+     "teasers",
+     "content-teaser",
+     "date-selector",
+     "search-and-navigation"
 ]
