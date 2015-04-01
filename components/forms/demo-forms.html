@@ -61,7 +61,7 @@
                 <form class="form-compressed" role="form">
                     <div class="row">
                         <div class="form-group">
-                            <label class="col-xs-12 col-sm-2 form-label" for="textarea">Textarea input label</label>
+                            <label class="col-xs-12 col-sm-2 form-label" for="textarea">Textarea input</label>
                             <div class="col-xs-12 col-sm-5">
                                 <textarea id="textarea" class="form-control" rows="5"></textarea>
                             </div>
@@ -256,7 +256,7 @@
                 <form class="form-compressed" role="form">
                     <div class="row">
                         <div class="form-group">
-                            <label class="col-xs-12 col-sm-2 form-label" for="inputError">Input with error label</label>
+                            <label class="col-xs-12 col-sm-2 form-label" for="inputError">Input with error</label>
                             <div class="col-xs-6 col-sm-6">
                                 <input type="text" id="inputError"
                                        class="form-control alert alert-warning"
@@ -320,7 +320,7 @@
                             <span><label class="hide-expanded" for="ph-ext"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove extension</label></span>
                         </a>
                     </div>
-                    <div id="phone-extension" class="collapse col-xs-12 col-md-3 col-md-offset-2">
+                    <div id="phone-extension" class="collapse col-xs-6 col-md-3 col-md-offset-2">
                         <input type="text" class="form-control phone-extension" placeholder="ext: (2222)">
                     </div>
                 </div>
@@ -583,47 +583,68 @@
             <!-- Grouped Address Form -->
             <form class="form-compressed" role="form">
                 <div class="row">
-                    <h4>Ship to</h4>
+                    <h4 class="col-xs-12 col-sm-9">Ship to</h4>
                 </div>
                  <div class="row">
-                    <label class="col-xs-9 col-sm-2 form-label" for="first-name">Text input label</label>
-                    <div class="col-xs-9 col-sm-3">
-                        <input type="text" class="form-control" id="first-name" placeholder="*First Name">
+                     <div class="col-xs-11 col-sm-5 col-md-6">
+                         <label class="col-xs-8 col-sm-3 form-label" for="first-name">First Name</label>
+                         <div class="col-xs-12 col-sm-9">
+                             <input type="text" class="form-control" id="first-name" placeholder="*First Name">
+                         </div>
+                     </div>
+
+                     <div class="col-xs-1 col-sm-1 col-md-1">
+                         <label class="col-xs-12 col-sm-4 col-md-3 form-label" for="middle-initial">MI</label>
+                         <div class="col-xs-12 col-sm-8 col-md-9">
+                             <input type="text" class="form-control" id="middle-initial" placeholder="MI">
+                         </div>
+                     </div>
+
+                     <div class="col-xs-12 col-sm-6 col-md-4">
+                         <label class="col-xs-12 col-sm-1 col-md-3 hidden-sm form-label"for="last-name">Last Name</label>
+                         <label class="col-xs-12 col-sm-1 col-md-1 visible-sm-block form-label"for="last-name">Last</label>
+                         <div class="col-xs-12 col-sm-10 col-md-9">
+                             <input type="text" class="form-control" id="last-name" placeholder="*Last Name">
+                         </div>
+                     </div>
+                 </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-5 col-md-6">
+                        <label class="col-xs-8 col-sm-3 form-label" for="phone-number">Phone #</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" class="form-control phone-number" id="phone-number" placeholder="(555) 111-2222">
+                        </div>
                     </div>
 
-                    <label class="col-xs-3 col-sm-1 form-label" for="middle-initial">Middle Init.</label>
-                    <div class="col-xs-1 col-sm-1">
-                        <input type="text" class="form-control" id="middle-initial" placeholder="MI">
-                    </div>
-
-                    <label class="col-xs-3 col-sm-1 form-label"for="last-name">Last Name</label>
-                    <div class="col-xs-3 col-sm-3">
-                        <input type="text" class="form-control" id="last-name" placeholder="*Last Name">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <label class="col-xs-8 col-sm-2 col-md-2 form-label" for="email-address">Email&nbsp;</label>
+                        <div class="col-xs-12 col-sm-10 col-md-8">
+                            <input type="text" class="form-control email-address" id="email-address" placeholder="*Email Address">
+                        </div>
                     </div>
                 </div>
 
-
-
                 <div class="row">
-                    <label class="col-xs-3 col-sm-2 form-label" for="phone-number">Phone Number</label>
-                    <div class="col-xs-9 col-sm-3">
-                        <input type="text" class="form-control phone-number" id="phone-number" placeholder="(555) 111-2222">
-                    </div>
-
-                    <label class="col-xs-1 col-sm-1 form-label" for="email-address">Email</label>
-                    <div class="col-xs-1 col-sm-5">
-                        <input type="text" class="form-control email-address" id="email-address" placeholder="*Email Address">
+                    <div class="col-xs-6 col-sm-7 col-md-6">
+                        <div class="col-xs-12 col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-3 help-ext">
+                            <a href="javascript:;" class="collapsed " data-toggle="collapse" data-target="#phone-ext">
+                                <span><label class="show-collapsed" for="ph-ext"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add extension</label></span>
+                                <span><label class="hide-expanded" for="ph-ext"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove extension</label></span>
+                            </a>
+                        </div>
+                        <div id="phone-ext" class="collapse col-xs-12 col-sm-4 col-sm-offset-2 col-md-9 col-md-offset-3">
+                            <input type="text" class="form-control phone-extension" placeholder="ext: (2222)">
+                        </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 col-md-offset-2 help-ext">
-                        <a href="javascript:;" class="collapsed " data-toggle="collapse" data-target="#phone-ext">
-                            <span><label class="show-collapsed" for="ph-ext"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add extension</label></span>
-                            <span><label class="hide-expanded" for="ph-ext"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove extension</label></span>
-                        </a>
-                    </div>
-                    <div id="phone-ext" class="collapse col-xs-12 col-md-3 col-md-offset-2">
-                        <input type="text" class="form-control phone-extension" placeholder="ext: (2222)">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <label class="col-xs-8 col-sm-6 col-md-6 form-label" for="street">Street Address</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" class="form-control" id="street" placeholder="*Street Address">
+                        </div>
                     </div>
                 </div>
 
