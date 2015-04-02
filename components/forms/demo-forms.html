@@ -3,8 +3,6 @@
     <div class="container">
         <h2>Forms Demo</h2>
 
-<div class=""><!-- temp hide-->
-
         <h3 class="top-offset-20">individual form controls</h3>
         <hr/>
 
@@ -281,9 +279,9 @@
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group show-password">
-                        <label class="col-xs-12 col-sm-2 form-label">Password</label>
+                        <label for="passwordShowHide" class="col-xs-12 col-sm-2 form-label">Password</label>
                         <div class="col-xs-6 col-sm-6">
-                            <input type="password" class="form-control" ng-model="password">
+                            <input id="passwordShowHide" type="password" class="form-control" ng-model="password">
                         </div>
                         <div class="col-xs-12 col-md-6 col-md-offset-2">
                             <label class="checkbox help-block">
@@ -300,7 +298,7 @@
 
         <div class="bottom-offset-20">
         <!-- phone number -->
-            <form class="form-compressed bottom-offset-10" role="form">
+            <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group">
                         <label class="col-xs-12 col-sm-2 form-label" for="phone">Phone number</label>
@@ -314,14 +312,16 @@
             <!--Add an extension-->
             <form class="form-compressed" role="form">
                 <div class="row">
-                    <div class="col-xs-12 col-md-6 col-md-offset-2 help-ext">
-                        <a href="javascript:;" class="collapsed " data-toggle="collapse" data-target="#phone-extension">
-                            <span><label class="show-collapsed" for="ph-ext"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add extension</label></span>
-                            <span><label class="hide-expanded" for="ph-ext"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove extension</label></span>
-                        </a>
-                    </div>
-                    <div id="phone-extension" class="collapse col-xs-6 col-md-3 col-md-offset-2">
-                        <input type="text" class="form-control phone-extension" placeholder="ext: (2222)">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-4 col-md-6 col-md-offset-4 help-ext">
+                            <a href="javascript:;" class="collapsed " data-toggle="collapse" data-target="#phone-ext">
+                                <span><label class="show-collapsed  bottom-offset-10" for="ph-ext"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add extension</label></span>
+                                <span><label class="hide-expanded  bottom-offset-10" for="ph-ext"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove extension</label></span>
+                            </a>
+                        </div>
+                        <div id="phone-ext" class="collapse col-xs-6 col-sm-10 col-sm-offset-4 col-md-10 col-md-offset-4">
+                            <input type="text" class="form-control phone-extension" placeholder="ext: (2222)">
+                        </div>
                     </div>
                 </div>
             </form>
@@ -344,10 +344,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-6 col-md-offset-2 help-ext has-success has-feedback">
-
-                            <span><label class="email-success hide">Your email address is valid</label></span>
-                            <span><label class="email-error hide">Your email address is NOT valid</label></span>
-
+                        <span><label class="email-success hide">Your email address is valid</label></span>
+                        <span><label class="email-error hide">Your email address is NOT valid</label></span>
                     </div>
                 </div>
             </form>
@@ -359,7 +357,7 @@
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-xs-12 col-sm-2 form-label" for="input-email">Spin box vertical</label>
+                        <label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label>
                         <div class="spinbox"
                              data-orient="vertical"
                              data-spinmin="0"
@@ -381,7 +379,7 @@
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-xs-12 col-sm-2 form-label" for="input-email">Spin box horizontal</label>
+                        <label class="col-xs-12 col-sm-2 form-label">Spin box horizontal</label>
                         <div class="spinbox"
                              data-orient="horizontal"
                              data-spinmin="0"
@@ -482,7 +480,7 @@
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label>Multi-select with checkboxes</label>
+                                <label for="ms">Multi-select with checkboxes</label>
                                 <select class="ms-checkbox" id="ms" multiple="multiple">
                                     <option value="1">January</option>
                                     <option value="2">February</option>
@@ -573,7 +571,6 @@
             <!-- /Select U.S. States with Custom Select Text -->
         </div>
 
-</div><!-- temp hide-->
 
         <h3 class="top-offset-40">Common Forms</h3>
 
@@ -627,14 +624,14 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 bottom-offset-0">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2 help-ext">
                             <a href="javascript:;" class="collapsed " data-toggle="collapse" data-target="#phone-ext">
-                                <span><label class="show-collapsed  bottom-offset-0" for="ph-ext"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add extension</label></span>
+                                <span><label class="show-collapsed bottom-offset-10" for="ph-ext"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add extension</label></span>
                                 <span><label class="hide-expanded  bottom-offset-10" for="ph-ext"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove extension</label></span>
                             </a>
                         </div>
-                        <div id="phone-ext" class="collapse col-xs-12col-sm-6 col-sm-offset-2 col-md-10 col-md-offset-2">
+                        <div id="phone-ext" class="collapse col-xs-12 col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2">
                             <input type="text" class="form-control phone-extension" placeholder="ext: (2222)">
                         </div>
                     </div>
@@ -658,10 +655,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-6 col-sm-12 col-md-12 bottom-offset-0">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext">
                             <a href="javascript:;" class="collapsed " data-toggle="collapse" data-target="#additional-address">
-                                <span><label class="show-collapsed  bottom-offset-0" for="ph-ext"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add additional address</label></span>
+                                <span><label class="show-collapsed  bottom-offset-10" for="ph-ext"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Additional address</label></span>
                                 <span><label class="hide-expanded  bottom-offset-10" for="ph-ext"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove address</label></span>
                             </a>
                         </div>
@@ -670,26 +667,28 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-                    <div class="row">
-
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                            <label class="sr-only" for="city">City</label>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <label class="col-xs-8 col-sm-2 form-label" for="city">City</label>
+                        <div class="col-xs-12 col-sm-10">
                             <input type="text" class="form-control" id="city" placeholder="*City">
                         </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <label class="sr-only" for="state">State</label>
-                            <select class="form-control select-state" data-format="short" id="state" data-emptyname="select a state" required ng-model="state"></select>
-                        </div>
-                        <div class="col-xs-6 col-sm-3">
-                            <label class="sr-only" for="zip-code">Zip code</label>
-                            <input type="text" class="form-control" id="zip-code" placeholder="*Zip code">
+                    </div>
+                    <div class="col-xs-6 col-sm-3">
+                        <label class="col-xs-8 col-sm-2 form-label visible-xs-block" for="default-state">&nbsp;</label>
+                        <div class="">
+
+                            <select class="form-control select-state" id="default-state" ng-model="stateDefault"></select>
                         </div>
                     </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3">
+                        <label class="col-xs-8 col-sm-2 form-label" for="zip">Zip</label>
+                        <div class="col-xs-12 col-sm-10">
+                            <input type="text" class="form-control" id="zip" placeholder="*Zip Code">
+                        </div>
+                    </div>
+                </div>
+
 
             </form>
             <!-- /Grouped Address Form -->
