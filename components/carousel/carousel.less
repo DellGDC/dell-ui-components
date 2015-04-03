@@ -119,6 +119,41 @@
 }
 
 
+.carousel.carousel-gallery .carousel-caption.no-arrows.pull-left {
+    max-width: 40%;
+    max-height: 65%;
+    min-height: 0;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 10px;
+    position: absolute;
+    text-align: left;
+    top: 20px;
+    left: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.well-banner {
+    max-height: 65%;
+    max-width: 40%;
+    min-height: 50%;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 0 solid transparent;
+    border-radius: 15px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+
 @media (max-width: @screen-md-max) {
 
     .carousel {
@@ -171,9 +206,106 @@
 }
 
 
-@media (max-width: @screen-xs-max) {
-    .carousel.carousel-gallery {
-        width: 105%;
-        margin-left: -2%;
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .well-banner {
+        //max-height: 65%;
+        //min-width: 110%;
+        //min-height: 40%;
+        //padding-left: 30px;
+        //padding-right: 30px;
+        //padding-top: 20px;
+        //padding-bottom: 20px;
+        //margin-bottom: 0px;
+        //background: #eeeeee;
+        //border: 0 solid transparent;
+        //border-radius: 0;
+        //-webkit-box-shadow: none;
+        //box-shadow: none;
+        //top: 0;
+        //left: 0;
+        //position: relative;
+
+        max-height: 65%;
+        max-width: 40%;
+        min-height: 50%;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 0 solid transparent;
+        border-radius: 15px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        top: 30px;
+        left: 30px;
+        position: absolute;
     }
+
+
+    .carousel-inner {
+        position: relative;
+        overflow: hidden;
+        width: 110%;
+        margin-left: -5%;
+        margin-right: -5%;
+    }
+
+
 }
+
+
+
+
+@media (max-width: @screen-xs-max) {
+    .well-banner {
+        max-height: 65%;
+        min-width: 105%;
+        min-height: 40%;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 0px;
+        background: @dell-gray-light;
+        border: 0 solid transparent;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        top: 0;
+        left: 0;
+        position: relative;
+
+    }
+
+    .carousel-inner {
+        position: relative;
+        overflow: hidden;
+        width: 110%;
+        margin-left: -5%;
+        margin-right: -5%;
+    }
+
+}
+
+    @media (min-width: 580px) and (max-width: @screen-sm-min) {
+        .well-banner {
+            max-height: 65%;
+            min-width: 105%;
+            min-height: 40%;
+            padding-left: 35px;
+            padding-right: 35px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 0;
+            background: @dell-gray-light;
+            border: 0 solid transparent;
+            border-radius: 15px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            top: 0;
+            left: 0;
+            position: relative;
+        }
+
+    }
+
+
