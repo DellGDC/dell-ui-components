@@ -25,8 +25,19 @@ angular.module('dellUiComponents')
                 dots: true,
                 speed: 500
             });
+
+            $('.variable-width').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                centerMode: true,
+                variableWidth: true
+            })
         }
     };
+
+
 })
 
 .directive('slide', function($timeout){

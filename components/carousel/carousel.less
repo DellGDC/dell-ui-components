@@ -37,6 +37,7 @@
     }
 }
 
+
 .carousel.carousel-gallery {
     padding: 0 0 30px;
     position: relative;
@@ -408,4 +409,23 @@
     height: auto;
 
     border: 1px solid transparent;
+}
+
+
+.carousel {
+    .filmstrip-carousel {
+
+        > .carousel-control.right:after {
+            font-size: 30px;
+            top: 4%;
+            position: absolute;
+            right: -44px;
+        }
+        > .carousel-control.left:before {
+            font-size: 30px;
+            top: 4%;
+            position: absolute;
+            left: -44px;
+        }
+    }
 }
