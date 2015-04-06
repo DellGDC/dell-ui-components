@@ -44,24 +44,7 @@ angular.module('dellUiComponents')
                 } else {
                     //$(this).addClass('alert alert-warning');
                 }
-
             });
-
-
-
-            //$('input').blur(function() {
-            //    var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-            //    if (testEmail.test(this.value)) {
-            //        alert('passed');
-            //    } else {
-            //        alert('failed');
-            //    }
-            //});
-
-            //if ($(element).is('input')) {
-            //    $(element).attr('data-inputmask', "'mask': 'ext: (9999)'");
-            //    $(element).inputmask();
-            //}
         }
     };
 })

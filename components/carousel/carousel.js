@@ -15,6 +15,20 @@ angular.module('dellUiComponents')
 		}
 	};
 })
+
+.directive('filmstripCarousel', function($timeout){
+    // Runs during compile
+    return {
+        restrict: 'AC',
+        link: function($scope, $element, iAttrs, controller) {
+            $($element).slick({
+                dots: true,
+                speed: 500
+            });
+        }
+    };
+})
+
 .directive('slide', function($timeout){
 	// Runs during compile
 	return {
