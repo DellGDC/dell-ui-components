@@ -52,11 +52,16 @@
                 centerMode: false,
                 centerPadding: '50px',
                 cssEase: 'ease',
+                //customPaging: function(slider, i) {
+                //    return '';
+                //},
+                //dots: true,
+                //dotsClass: 'carousel-indicators',
                 customPaging: function(slider, i) {
-                    return '';
+                    return '<button type="button" data-role="none">' + (i + 1) + '</button>';
                 },
                 dots: false,
-                dotsClass: 'carousel-indicators',
+                dotsClass: 'slick-dots',
                 //need a way to set the side as active
                 active:'active',
                 draggable: true,

@@ -155,30 +155,34 @@
 }
 
 
-@media (max-width: @screen-md-max) {
 
-    .carousel {
-        &.carousel-filmstrip {
-            .carousel-control {
-                top:30%;
-            }
-        }
-        &.carousel-filmstrip-content {
-            .carousel-control {
-                top:12%;
-            }
-        }
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .well-banner {
+        max-height: 65%;
+        max-width: 40%;
+        min-height: 50%;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 0 solid transparent;
+        border-radius: 15px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        top: 30px;
+        left: 30px;
+        position: absolute;
     }
 
-    .carousel .carousel-control {
-        top: 38%;
-    }
-
-    .carousel > .carousel-control.right:after,
-    .carousel > .carousel-control.left:before {
-        font-size: 35px;
+    .carousel-inner {
+        position: relative;
+        overflow: hidden;
+        width: 110%;
+        margin-left: -5%;
+        margin-right: -5%;
     }
 }
+
 
 
 @media (max-width: @screen-sm-max) {
@@ -207,35 +211,141 @@
 }
 
 
-@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-    .well-banner {
-        max-height: 65%;
-        max-width: 40%;
-        min-height: 50%;
-        padding: 20px;
-        margin-bottom: 20px;
-        background: rgba(255, 255, 255, 0.6);
-        border: 0 solid transparent;
-        border-radius: 15px;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        top: 30px;
-        left: 30px;
-        position: absolute;
+@media (max-width: @screen-sm-max) {
+    .carousel {
+        .filmstrip-carousel {
+
+            > .carousel-control.right:after {
+                font-size: 28px;
+                top: -45%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 28px;
+                top: -45%;
+                position: absolute;
+                left: -44px;
+            }
+        }
     }
-
-
-    .carousel-inner {
-        position: relative;
-        overflow: hidden;
-        width: 110%;
-        margin-left: -5%;
-        margin-right: -5%;
-    }
-
-
 }
 
+
+
+@media (max-width: @screen-xs-max) {
+    .carousel {
+        .filmstrip-carousel {
+
+            > .carousel-control.right:after {
+                font-size: 25px;
+                top: -18%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 25px;
+                top: -18%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 480px) {
+    .carousel {
+        .filmstrip-carousel {
+            text-align: center;
+            > .carousel-control.right:after {
+                //font-size: 25px;
+                //top: -18%;
+                //position: absolute;
+                //right: -44px;
+                display: none;
+            }
+            > .carousel-control.left:before {
+                //font-size: 25px;
+                //top: -18%;
+                //position: absolute;
+                //left: -44px;
+                display: none;
+            }
+        }
+    }
+}
+
+
+
+@media (min-width: @screen-md-min) {
+    .carousel {
+        .filmstrip-carousel {
+
+            > .carousel-control.right:after {
+                font-size: 30px;
+                top: -30%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 30px;
+                top: -30%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+    }
+}
+
+
+@media (min-width: @screen-md-max) {
+    .carousel {
+        .filmstrip-carousel {
+
+            > .carousel-control.right:after {
+                font-size: 30px;
+                top: -14%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 30px;
+                top: -14%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+    }
+}
+
+
+
+
+@media (max-width: @screen-md-max) {
+
+    .carousel {
+        &.carousel-filmstrip {
+            .carousel-control {
+                top:30%;
+            }
+        }
+        &.carousel-filmstrip-content {
+            .carousel-control {
+                top:12%;
+            }
+        }
+    }
+
+    .carousel .carousel-control {
+        top: 38%;
+    }
+
+    .carousel > .carousel-control.right:after,
+    .carousel > .carousel-control.left:before {
+        font-size: 35px;
+    }
+}
 
 
 
@@ -412,20 +522,20 @@
 }
 
 
-.carousel {
-    .filmstrip-carousel {
-
-        > .carousel-control.right:after {
-            font-size: 30px;
-            top: 4%;
-            position: absolute;
-            right: -44px;
-        }
-        > .carousel-control.left:before {
-            font-size: 30px;
-            top: 4%;
-            position: absolute;
-            left: -44px;
-        }
-    }
-}
+//.carousel {
+//    .filmstrip-carousel {
+//
+//        > .carousel-control.right:after {
+//            font-size: 30px;
+//            top: 4%;
+//            position: absolute;
+//            right: -44px;
+//        }
+//        > .carousel-control.left:before {
+//            font-size: 30px;
+//            top: 4%;
+//            position: absolute;
+//            left: -44px;
+//        }
+//    }
+//}
