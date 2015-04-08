@@ -53,6 +53,20 @@
     }
 }
 
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .carousel .carousel-control {
+        top: 40%;
+        &.left{
+            left: -20px;
+        }
+        &.right{
+            right:-30px;
+        }
+    }
+}
+
+
+
 .carousel-caption {
     position: absolute;
     left: 15%;
@@ -171,6 +185,22 @@
                 left: -44px;
             }
         }
+        //.carousel {
+        //    .filmstrip-content {
+        //        > .carousel-control.right:after {
+        //            font-size: 28px;
+        //            top: -160%;
+        //            position: absolute;
+        //            right: -44px;
+        //        }
+        //        > .carousel-control.left:before {
+        //            font-size: 28px;
+        //            top: -160%;
+        //            position: absolute;
+        //            left: -44px;
+        //        }
+        //    }
+        //}
         .slick-dots {
             position: relative;
             bottom: -10px;
@@ -220,6 +250,23 @@
                 left: -44px;
             }
         }
+
+        //.carousel {
+        //    .filmstrip-content {
+        //        > .carousel-control.right:after {
+        //            font-size: 28px;
+        //            top: -320%;
+        //            position: absolute;
+        //            right: -44px;
+        //        }
+        //        > .carousel-control.left:before {
+        //            font-size: 28px;
+        //            top: -320%;
+        //            position: absolute;
+        //            left: -44px;
+        //        }
+        //    }
+        //}
         .slick-dots {
             position: relative;
             bottom: -10px;
@@ -295,6 +342,22 @@
             }
         }
     }
+    //.carousel {
+    //    .filmstrip-content {
+    //        > .carousel-control.right:after {
+    //            font-size: 28px;
+    //            top: -250%;
+    //            position: absolute;
+    //            right: -44px;
+    //        }
+    //        > .carousel-control.left:before {
+    //            font-size: 28px;
+    //            top: -250%;
+    //            position: absolute;
+    //            left: -44px;
+    //        }
+    //    }
+    //}
     .slick-dots {
         position: relative;
         bottom: -10px;
@@ -343,6 +406,7 @@
                 left: -44px;
             }
         }
+
         .slick-dots {
             position: relative;
             bottom: -10px;
@@ -374,6 +438,41 @@
     }
 }
 
+@media (min-width: 601px) and (max-width: 767px) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                font-size: 28px;
+                top: -40%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 28px;
+                top: -40%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+    }
+    //.carousel {
+    //    .filmstrip-content {
+    //        > .carousel-control.right:after {
+    //            font-size: 28px;
+    //            top: -200%;
+    //            position: absolute;
+    //            right: -44px;
+    //        }
+    //        > .carousel-control.left:before {
+    //            font-size: 28px;
+    //            top: -200%;
+    //            position: absolute;
+    //            left: -44px;
+    //        }
+    //    }
+    //}
+}
+
 
 @media (min-width: 480px) and (max-width: 600px) {
     .carousel {
@@ -392,11 +491,27 @@
             }
         }
     }
+    //.carousel {
+    //    .filmstrip-content {
+    //        > .carousel-control.right:after {
+    //            font-size: 28px;
+    //            top: -325%;
+    //            position: absolute;
+    //            right: -44px;
+    //        }
+    //        > .carousel-control.left:before {
+    //            font-size: 28px;
+    //            top: -325%;
+    //            position: absolute;
+    //            left: -44px;
+    //        }
+    //    }
+    //}
 }
 
 
 
-@media (min-width: 320px) and (max-width: 374px) {
+@media (min-width: 421px) and (max-width: 479px) {
     .carousel {
         .filmstrip-carousel {
             > .carousel-control.right:after {
@@ -411,7 +526,48 @@
         position: relative;
         bottom: -10px;
         left: 50%;
-        margin-left: -60%;
+        margin-left: -45%;
+        z-index: 15;
+        list-style: none;
+        text-align: center;
+        display: inline-flex !important;
+        button {
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            background: #cccccc;
+
+        }
+        > .slick-active > button{
+            background: #444444;
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            outline: none;
+        }
+    }
+}
+
+@media (min-width: 375px) and (max-width: 420px) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                display: none;
+            }
+            > .carousel-control.left:before {
+                display: none;
+            }
+        }
+    }
+    .slick-dots {
+        position: relative;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -45%;
         z-index: 15;
         list-style: none;
         text-align: center;
@@ -439,7 +595,7 @@
 
 
 
-@media (min-width: 375px) and (max-width: 420px) {
+@media (min-width: 320px) and (max-width: 374px) {
     .carousel {
         .filmstrip-carousel {
             > .carousel-control.right:after {
@@ -454,7 +610,7 @@
         position: relative;
         bottom: -10px;
         left: 50%;
-        margin-left: -45%;
+        margin-left: -60%;
         z-index: 15;
         list-style: none;
         text-align: center;
@@ -559,7 +715,6 @@
         left: 0;
         position: relative;
     }
-
 }
 
 
@@ -653,9 +808,3 @@
     height: auto;
     border: 1px solid transparent;
 }
-//
-//.slick-initialized .slick-slide {
-//    display: block;
-//    padding-left: 10px;
-//    padding-right: 10px;
-//}
