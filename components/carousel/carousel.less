@@ -9,155 +9,157 @@
     > .carousel-control.left:before {
         font-size: 40px;
     }
+
+    .carousel-control {
+        top: 40%;
+        &.left{
+            left: 14px;
+        }
+        &.right{
+            right:2px;
+        }
+    }
+
     &.carousel-filmstrip {
+        padding: 0 0 30px 0;
+        .carousel-inner {
+            padding: 0 40px;
+        }
         .carousel-control {
             top:34%;
-            &.carousel-control.right:after {
-                right: -10px;
-                position: relative;
+            
+            &.left {
+                left: 0;
+                &:before {
+                    font-size: 40px;
+                }
             }
-            &.carousel-control.left:before {
-                left: -10px;
-                position: relative;
-            }
-        }
-    }
-    &.carousel-filmstrip-content {
-        .carousel-control {
-            top:13%;
-            &.carousel-control.right:after {
-                right: -10px;
-                position: relative;
-            }
-            &.carousel-control.left:before {
-                left: -10px;
-                position: relative;
+            &.right {
+                right:0;
+                 &:after {
+                    font-size: 40px;
+                }
             }
         }
+
+        > .item,
+        .carousel-inner > .item {
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
     }
-}
 
-
-.carousel.carousel-gallery {
-    padding: 0 0 30px;
-    position: relative;
-}
-
-.carousel .carousel-control {
-    top: 40%;
-    &.left{
-        left: 14px;
+    .carousel-caption {
+        position: absolute;
+        left: 15%;
+        right: 15%;
+        bottom: 20px;
+        z-index: 10;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        color: #fff;
+        text-align: left;
+        text-shadow: none;
     }
-    &.right{
-        right:2px;
+
+    .carousel-indicators li {
+        width: 14px;
+        height: 6px;
+        margin: 0 5px;
+        border-radius: 2px;
+        border: none;
+        background: @dell-gray-stroke;
     }
-}
 
-.carousel-caption {
-    position: absolute;
-    left: 15%;
-    right: 15%;
-    bottom: 20px;
-    z-index: 10;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    color: #fff;
-    text-align: left;
-    text-shadow: none;
-}
+    &.carousel-gallery {
+        padding: 0 0 30px;
+        position: relative;
+        .carousel-caption {
+            position: absolute;
+            left: auto;
+            right: auto;
+            bottom: 0;
+            padding: 20px 60px;
+            background: inherit;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.6);
+            width: 100%;
+            color: #444444;
+            text-align: left;
+            &.pull-right {
+                max-width: 40%;
+                -webkit-border-radius: 1px;
+                -moz-border-radius: 1px;
+                border-radius: 1px;
+                position: absolute;
+                text-align: left;
+                top: 0;
+                right: 0;
+                padding-right: 60px;
+                padding-left: 20px;
+                min-height: 430px;
+            }
+            &.pull-left {
+                max-width: 40%;
+                -webkit-border-radius: 1px;
+                -moz-border-radius: 1px;
+                border-radius: 1px;
+                position: absolute;
+                padding-right: 60px;
+                text-align: left;
+                top: 0;
+                left: 0;
+                padding-top: 40px;
+                padding-left: 60px;
+                padding-right: 20px;
+                min-height: 430px;
+            }
+            &.no-arrows.pull-left {
+                max-width: 40%;
+                max-height: 65%;
+                min-height: 0;
+                -webkit-border-radius: 1px;
+                -moz-border-radius: 1px;
+                border-radius: 10px;
+                position: absolute;
+                text-align: left;
+                top: 20px;
+                left: 20px;
+                padding-top: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
 
-.carousel .carousel-indicators li {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: @dell-gray-stroke;
-}
+        }
+    }
 
-.carousel.carousel-gallery .carousel-caption {
-    position: absolute;
-    left: auto;
-    right: auto;
-    bottom: 0;
-    padding: 20px 60px;
-    background: inherit;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.6);
-    width: 100%;
-    color: #444444;
-    text-align: left;
-}
-
-.carousel.carousel-gallery .carousel-caption.pull-right {
-    max-width: 40%;
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
-    border-radius: 1px;
-    position: absolute;
-    text-align: left;
-    top: 0;
-    right: 0;
-    padding-right: 60px;
-    padding-left: 20px;
-    min-height: 430px;
-}
-
-.carousel.carousel-gallery .carousel-caption.pull-left {
-    max-width: 40%;
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
-    border-radius: 1px;
-    position: absolute;
-    padding-right: 60px;
-    text-align: left;
-    top: 0;
-    left: 0;
-    padding-top: 40px;
-    padding-left: 60px;
-    padding-right: 20px;
-    min-height: 430px;
-}
-
-
-.carousel.carousel-gallery .carousel-caption.no-arrows.pull-left {
-    max-width: 40%;
-    max-height: 65%;
-    min-height: 0;
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
-    border-radius: 10px;
-    position: absolute;
-    text-align: left;
-    top: 20px;
-    left: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    .well-banner {
+        max-height: 65%;
+        max-width: 40%;
+        min-height: 50%;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 0 solid transparent;
+        border-radius: 15px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        top: 20px;
+        left: 20px;
+        position: absolute;
+    }
 
 }
 
 
-.well-banner {
-    max-height: 65%;
-    max-width: 40%;
-    min-height: 50%;
-    padding: 20px;
-    margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.6);
-    border: 0 solid transparent;
-    border-radius: 15px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    top: 20px;
-    left: 20px;
-    position: absolute;
-}
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: @screen-lg-min) {
     .carousel {
-        .filmstrip-carousel {
+        .carousel-filmstrip {
             > .carousel-control.right:after {
                 font-size: 25px;
                 top: -11%;
@@ -206,7 +208,7 @@
 
 @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
     .carousel {
-        .filmstrip-carousel {
+        .carousel-filmstrip {
             > .carousel-control.right:after {
                 font-size: 25px;
                 top: -18%;
@@ -280,7 +282,7 @@
     }
 
     .carousel {
-        .filmstrip-carousel {
+        .carousel-filmstrip {
             > .carousel-control.right:after {
                 font-size: 28px;
                 top: -28%;
@@ -329,7 +331,7 @@
 
 @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
     .carousel {
-        .filmstrip-carousel {
+        .carousel-filmstrip {
             > .carousel-control.right:after {
                 font-size: 25px;
                 top: -5%;
@@ -377,7 +379,7 @@
 
 @media (min-width: 480px) and (max-width: 600px) {
     .carousel {
-        .filmstrip-carousel {
+        .carousel-filmstrip {
             > .carousel-control.right:after {
                 font-size: 25px;
                 top: -5%;
@@ -398,7 +400,7 @@
 
 @media (min-width: 320px) and (max-width: 374px) {
     .carousel {
-        .filmstrip-carousel {
+        .carousel-filmstrip {
             > .carousel-control.right:after {
                 display: none;
             }
@@ -441,7 +443,7 @@
 
 @media (min-width: 375px) and (max-width: 420px) {
     .carousel {
-        .filmstrip-carousel {
+        .carousel-filmstrip {
             > .carousel-control.right:after {
                 display: none;
             }
