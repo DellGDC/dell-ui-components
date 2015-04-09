@@ -3,6 +3,41 @@
     Adds Dell brand specific colors to wells panels, text, rules and blockquotes.
 */
 
+.well-colors (@body-bg, @text-color, @headings-color, @link-color) {
+  background-color: @body-bg;
+  color: @text-color;
+  border-radius: 0;
+  h2, h3, h4, h5, h6 {
+    color: @headings-color;
+  }
+  .panel-heading {
+    h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding-left: 10px;
+    }
+    background: @headings-color;
+    .border-top-radius(0px);
+    color: @white !important;
+  }
+  h4.well-title, h4.container-title {
+    //container-title for backward compatibility but should be deprecated
+    display: inline-block;
+    top: -25px;
+    margin-bottom: -20px;
+    padding: 5px 15px;
+    position: relative;
+    color: @white;
+    background-color: @headings-color;
+    vertical-align: baseline;
+    white-space: nowrap;
+    .border-bottom-right-radius(@border-radius-large);
+    .border-bottom-left-radius(@border-radius-large);
+  }
+}
+
+
+
+
 /* Grays */
 .gray-dark,
 .well-gray-dark {
@@ -244,6 +279,7 @@
 [class$=-stroke].thin {
   border-width: @thin-stroke;
 }
+
 
 // Typographic Colors
 // NOTE: (These colors are not part of standard bootstrap)
