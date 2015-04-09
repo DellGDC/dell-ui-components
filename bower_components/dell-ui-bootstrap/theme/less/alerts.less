@@ -12,7 +12,7 @@
 
 .alert {
   color: @gray-darker;
-  padding: 10px 35px 10px 45px;
+  padding: 10px 35px 10px 40px;
   margin-bottom: floor((@line-height-base * 14px)); // ~20px
   text-shadow: none;
   background: @dell-alert-yellow;
@@ -59,7 +59,29 @@
     color: @dell-gray-dark;
     margin-bottom: floor((@line-height-base * 14px)); // ~20px
   }
+
 }
+
+
+// Dismissible alerts
+//
+// Expand the right padding and account for the close button's positioning.
+
+.alert-dismissable, // The misspelled .alert-dismissable was deprecated in 3.2.0.
+.alert-dismissible {
+  padding-right: (@alert-padding + 20);
+
+  // Adjust close link position
+  .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+  }
+}
+
+
+
 
 .alert-danger,
 .alert-error {
@@ -105,6 +127,10 @@
     margin-top: -5px;
   }
 }
+
+
+
+
 
 // Block alerts
 .alert-block {

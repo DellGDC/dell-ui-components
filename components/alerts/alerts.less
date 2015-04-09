@@ -28,13 +28,11 @@
         margin-bottom: floor((@line-height-base * 14px / 2)); // ~20px
     }
 
-    > .alert-dismissable .close,
-    > .alert-dismissible .close {
-        position: relative;
-        top: -8px;
-        color: inherit;
-        right: 0;
-        margin-right: -62px;
+    .alert-dismissable .close,
+    > .alert-dismissible .close,
+    [data-dismiss="alert"] {
+        display:none;
+        // prevents default bootstrap function for dismissing alert
     }
     div:nth-of-type(2n+1) {
         margin-bottom: 0;
@@ -51,32 +49,67 @@
         padding-left: 15px;
         padding-top: 5px;
     }
-    // TODO this is a Dell-ui change for padding in alerts
-    padding: 10px 35px 10px 40px;
+    
 }
 
-.alert-dismissable .close,
-.alert-dismissible .close {
-    position: relative;
-    top: -8px;
-    color: inherit;
-    right: 0;
-    margin-right: -27px;
-}
-
-
-// Block dell-alerts
-.alert-block {
-    padding-top: 14px;
-    padding-bottom: 14px;
-
-    > p,
-    > ul {
-        margin-bottom: 0;
+// added new alert-collapsible class to address different style of "dismissible alert" that is dell specific
+.alert-collapsible {
+    .close {
+        position: relative;
+        top: -8px;
+        right: -27px;
+        color: inherit;        
+    }
+    &.alert-error,
+    &.alert-warning {
+        .close {
+            display:none;
+        }
     }
 
-    p + p {
-        margin-top: 5px;
+    .show-collapsed {
+          opacity: 0;
+          -webkit-transition: visibility 0s linear 0.15s,opacity 0.15s linear;
+          transition: visibility 0s linear 0.15s,opacity 0.15s linear;
+          visibility:hidden;
+    }
+
+    &:before,
+    .show-expanded,
+    .close {
+        opacity: 1;
+        -webkit-transition: visibility 0s linear 0.15s,opacity 0.15s linear;
+        transition: visibility 0s linear 0.15s,opacity 0.15s linear;
+        visibility:visible;
+    }
+    .close {
+        opacity: 0.55;
+    }
+
+    &.collapsed {
+        &:before,
+        .close,
+        .show-expanded {
+            opacity: 0;
+            visibility:hidden;
+            height:0;
+        }
+        > .show-collapsed {
+            opacity: 1;
+            visibility:visible;
+            color:@dell-blue;
+            cursor:pointer;
+            &:hover {
+                color:@dell-dark-blue;
+            }
+        }
     }
 
 }
+
+
+// removed .alert-dismissable .close because it is no differnet that native bootstrap - bo - 4/9/2015
+
+
+// removed block dell-alerts because it is no differnet that native bootstrap - bo - 4/9/2015
+
