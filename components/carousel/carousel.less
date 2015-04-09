@@ -37,6 +37,7 @@
     }
 }
 
+
 .carousel.carousel-gallery {
     padding: 0 0 30px;
     position: relative;
@@ -51,6 +52,20 @@
         right:2px;
     }
 }
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .carousel .carousel-control {
+        top: 40%;
+        &.left{
+            left: -20px;
+        }
+        &.right{
+            right:-30px;
+        }
+    }
+}
+
+
 
 .carousel-caption {
     position: absolute;
@@ -119,6 +134,510 @@
 }
 
 
+.carousel.carousel-gallery .carousel-caption.no-arrows.pull-left {
+    max-width: 40%;
+    max-height: 65%;
+    min-height: 0;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 10px;
+    position: absolute;
+    text-align: left;
+    top: 20px;
+    left: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.well-banner {
+    max-height: 65%;
+    max-width: 40%;
+    min-height: 50%;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 0 solid transparent;
+    border-radius: 15px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    top: 20px;
+    left: 20px;
+    position: absolute;
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                font-size: 25px;
+                top: -11%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 25px;
+                top: -11%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+        //.carousel {
+        //    .filmstrip-content {
+        //        > .carousel-control.right:after {
+        //            font-size: 28px;
+        //            top: -160%;
+        //            position: absolute;
+        //            right: -44px;
+        //        }
+        //        > .carousel-control.left:before {
+        //            font-size: 28px;
+        //            top: -160%;
+        //            position: absolute;
+        //            left: -44px;
+        //        }
+        //    }
+        //}
+        .slick-dots {
+            position: relative;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -8%;
+            z-index: 15;
+            list-style: none;
+            text-align: center;
+            display: inline-flex !important;
+            button {
+                width: 14px;
+                height: 6px;
+                margin: 0 5px;
+                border-radius: 2px;
+                border: none;
+                background: #cccccc;
+
+            }
+            > .slick-active > button {
+                background: #444444;
+                width: 14px;
+                height: 6px;
+                margin: 0 5px;
+                border-radius: 2px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
+
+
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                font-size: 25px;
+                top: -18%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 25px;
+                top: -18%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+
+        //.carousel {
+        //    .filmstrip-content {
+        //        > .carousel-control.right:after {
+        //            font-size: 28px;
+        //            top: -320%;
+        //            position: absolute;
+        //            right: -44px;
+        //        }
+        //        > .carousel-control.left:before {
+        //            font-size: 28px;
+        //            top: -320%;
+        //            position: absolute;
+        //            left: -44px;
+        //        }
+        //    }
+        //}
+        .slick-dots {
+            position: relative;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -10%;
+            z-index: 15;
+            list-style: none;
+            text-align: center;
+            display: inline-flex !important;
+            button {
+                width: 14px;
+                height: 6px;
+                margin: 0 5px;
+                border-radius: 2px;
+                border: none;
+                background: #cccccc;
+
+            }
+            > .slick-active > button {
+                background: #444444;
+                width: 14px;
+                height: 6px;
+                margin: 0 5px;
+                border-radius: 2px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
+
+
+
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .well-banner {
+        max-height: 65%;
+        max-width: 40%;
+        min-height: 50%;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 0 solid transparent;
+        border-radius: 15px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        top: 30px;
+        left: 30px;
+        position: absolute;
+    }
+
+    .carousel-inner {
+        position: relative;
+        overflow: hidden;
+        width: 110%;
+        margin-left: -5%;
+        margin-right: -5%;
+    }
+
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                font-size: 28px;
+                top: -28%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 28px;
+                top: -28%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+    }
+    //.carousel {
+    //    .filmstrip-content {
+    //        > .carousel-control.right:after {
+    //            font-size: 28px;
+    //            top: -250%;
+    //            position: absolute;
+    //            right: -44px;
+    //        }
+    //        > .carousel-control.left:before {
+    //            font-size: 28px;
+    //            top: -250%;
+    //            position: absolute;
+    //            left: -44px;
+    //        }
+    //    }
+    //}
+    .slick-dots {
+        position: relative;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -19%;
+        z-index: 15;
+        list-style: none;
+        text-align: center;
+        display: inline-flex !important;
+        button {
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            background: #cccccc;
+
+        }
+        > .slick-active > button {
+            background: #444444;
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            outline: none;
+        }
+    }
+}
+
+
+
+@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                font-size: 25px;
+                top: -5%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 25px;
+                top: -5%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+
+        .slick-dots {
+            position: relative;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -24%;
+            z-index: 15;
+            list-style: none;
+            text-align: center;
+            display: inline-flex !important;
+            button {
+                width: 14px;
+                height: 6px;
+                margin: 0 5px;
+                border-radius: 2px;
+                border: none;
+                background: #cccccc;
+
+            }
+            > .slick-active > button {
+                background: #444444;
+                width: 14px;
+                height: 6px;
+                margin: 0 5px;
+                border-radius: 2px;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+}
+
+@media (min-width: 601px) and (max-width: 767px) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                font-size: 28px;
+                top: -40%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 28px;
+                top: -40%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+    }
+    //.carousel {
+    //    .filmstrip-content {
+    //        > .carousel-control.right:after {
+    //            font-size: 28px;
+    //            top: -200%;
+    //            position: absolute;
+    //            right: -44px;
+    //        }
+    //        > .carousel-control.left:before {
+    //            font-size: 28px;
+    //            top: -200%;
+    //            position: absolute;
+    //            left: -44px;
+    //        }
+    //    }
+    //}
+}
+
+
+@media (min-width: 480px) and (max-width: 600px) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                font-size: 25px;
+                top: -5%;
+                position: absolute;
+                right: -44px;
+            }
+            > .carousel-control.left:before {
+                font-size: 25px;
+                top: -5%;
+                position: absolute;
+                left: -44px;
+            }
+        }
+    }
+    //.carousel {
+    //    .filmstrip-content {
+    //        > .carousel-control.right:after {
+    //            font-size: 28px;
+    //            top: -325%;
+    //            position: absolute;
+    //            right: -44px;
+    //        }
+    //        > .carousel-control.left:before {
+    //            font-size: 28px;
+    //            top: -325%;
+    //            position: absolute;
+    //            left: -44px;
+    //        }
+    //    }
+    //}
+}
+
+
+
+@media (min-width: 421px) and (max-width: 479px) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                display: none;
+            }
+            > .carousel-control.left:before {
+                display: none;
+            }
+        }
+    }
+    .slick-dots {
+        position: relative;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -45%;
+        z-index: 15;
+        list-style: none;
+        text-align: center;
+        display: inline-flex !important;
+        button {
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            background: #cccccc;
+
+        }
+        > .slick-active > button{
+            background: #444444;
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            outline: none;
+        }
+    }
+}
+
+@media (min-width: 375px) and (max-width: 420px) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                display: none;
+            }
+            > .carousel-control.left:before {
+                display: none;
+            }
+        }
+    }
+    .slick-dots {
+        position: relative;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -45%;
+        z-index: 15;
+        list-style: none;
+        text-align: center;
+        display: inline-flex !important;
+        button {
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            background: #cccccc;
+
+        }
+        > .slick-active > button{
+            background: #444444;
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            outline: none;
+        }
+    }
+}
+
+
+
+@media (min-width: 320px) and (max-width: 374px) {
+    .carousel {
+        .filmstrip-carousel {
+            > .carousel-control.right:after {
+                display: none;
+            }
+            > .carousel-control.left:before {
+                display: none;
+            }
+        }
+    }
+    .slick-dots {
+        position: relative;
+        bottom: -10px;
+        left: 50%;
+        margin-left: -60%;
+        z-index: 15;
+        list-style: none;
+        text-align: center;
+        display: inline-flex !important;
+        button {
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            background: #cccccc;
+
+        }
+        > .slick-active > button{
+            background: #444444;
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            outline: none;
+        }
+    }
+}
+
+
+
 @media (max-width: @screen-md-max) {
 
     .carousel {
@@ -145,35 +664,147 @@
 }
 
 
-@media (max-width: @screen-sm-max) {
 
-    .carousel {
-        &.carousel-filmstrip {
-            .carousel-control {
-                top:23%;
-            }
-        }
-        &.carousel-filmstrip-content {
-            .carousel-control {
-                top:10%;
-            }
-        }
+@media (max-width: @screen-xs-max) {
+    .well-banner {
+        max-height: 65%;
+        min-width: 105%;
+        min-height: 40%;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 0px;
+        background: @dell-gray-light;
+        border: 0 solid transparent;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        top: 0;
+        left: 0;
+        position: relative;
+
     }
 
-    .carousel .carousel-control {
-        top: 33%;
+    .carousel-inner {
+        position: relative;
+        overflow: hidden;
+        width: 110%;
+        margin-left: -5%;
+        margin-right: -5%;
     }
 
-    .carousel > .carousel-control.right:after,
-    .carousel > .carousel-control.left:before {
-        font-size: 30px;
+}
+
+@media (min-width: 580px) and (max-width: @screen-sm-min) {
+    .well-banner {
+        max-height: 65%;
+        min-width: 105%;
+        min-height: 40%;
+        padding-left: 35px;
+        padding-right: 35px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 0;
+        background: @dell-gray-light;
+        border: 0 solid transparent;
+        border-radius: 15px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        top: 0;
+        left: 0;
+        position: relative;
     }
 }
 
 
-@media (max-width: @screen-xs-max) {
-    .carousel.carousel-gallery {
-        width: 105%;
-        margin-left: -2%;
-    }
+// Slick CSS
+/* Slider */
+.slick-slider {
+    position: relative;
+    display: block;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus {
+    outline: none;
+}
+.slick-list.dragging {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+}
+.slick-track:before,
+.slick-track:after {
+    display: table;
+    content: '';
+}
+.slick-track:after {
+    clear: both;
+}
+.slick-loading .slick-track {
+    visibility: hidden;
+}
+
+.slick-slide {
+    display: none;
+    float: left;
+
+    height: 100%;
+    min-height: 1px;
+}
+[dir='rtl'] .slick-slide {
+    float: right;
+}
+.slick-slide img {
+    display: block;
+}
+.slick-slide.slick-loading img {
+    display: none;
+}
+.slick-slide.dragging img {
+    pointer-events: none;
+}
+.slick-initialized .slick-slide {
+    display: block;
+}
+.slick-loading .slick-slide {
+    visibility: hidden;
+}
+.slick-vertical .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
 }
