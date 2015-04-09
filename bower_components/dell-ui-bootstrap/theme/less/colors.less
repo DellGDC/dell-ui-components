@@ -1,6 +1,6 @@
 /*
     Colors (non Twitter Bootstrap)
-    Adds Dell brand specific colors to wells panels and text
+    Adds Dell brand specific colors to wells panels, text, rules and blockquotes.
 */
 
 /* Grays */
@@ -367,6 +367,41 @@
   }
   &-purple {
     border-top: 1px solid @dell-purple;
+  }
+}
+
+// blockquotes
+// NOTE: (These colors are not part of standard bootstrap)
+
+blockquote {
+  &.blockquote {
+      &-blue {
+          border-color: @dell-blue;
+      }
+      &-green {
+          border-color: @dell-green;
+      }
+      &-purple {
+          border-color: @dell-purple;
+      }
+      &-orange {
+          border-color: @dell-orange;
+      }
+      &-berry {
+          border-color: @dell-berry;
+      }
+      &-red {
+          border-color: @dell-red;
+      }
+      &-red-dark {
+          border-color: @dell-red-dark;
+      }
+      &-dark-blue {
+          border-color: @dell-dark-blue;
+      }
+      &-gray-dark {
+          border-color: @dell-gray-dark;
+      }
   }
 }
 

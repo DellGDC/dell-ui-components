@@ -6,16 +6,6 @@
 
 blockquote {
 
-    //TODO  blockquote h4 margin adjustment
-    h4{
-        margin: 5px 0;
-        + p {
-            margin-bottom: 5px;
-        }
-    }
-    p{
-        margin-bottom: 5px;
-    }
 
     //TODO  blockquote h4 margin adjustment
     &.blockquote-icon {
@@ -30,45 +20,9 @@ blockquote {
         }
     }
 
-    &.blockquote {
-        &-blue {
-            border-color: @dell-blue;
-        }
-        &-green {
-            border-color: @dell-green;
-        }
-        &-purple {
-            border-color: @dell-purple;
-        }
-        &-orange {
-            border-color: @dell-orange;
-        }
-        &-berry {
-            border-color: @dell-berry;
-        }
-        &-red {
-            border-color: @dell-red;
-        }
-        &-red-dark {
-            border-color: @dell-red-dark;
-        }
-        &-dark-blue {
-            border-color: @dell-dark-blue;
-        }
-        &-gray-dark {
-            border-color: @dell-gray-dark;
-        }
-    }
+    //moved colors to dell-ui-bootstrap
 
-    li {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        a {
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-    }
-
+    //moved li padding/margins to dell-ui-bootstrap
     .blockquote-links {
         li + li::before {
             content: " | ";
@@ -77,11 +31,8 @@ blockquote {
         }
     }
 
-    //TODO this Text-RTL needs to be pulled into styling for more than just the Blockquote
-    .text-rtl {
-        direction:rtl;
-        unicode-bidi:bidi-override;
-    }
+    //move Text-RTL to typography
+    
 }
 
 @media (max-width: @screen-xs-max) {
