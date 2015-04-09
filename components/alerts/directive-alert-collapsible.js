@@ -11,4 +11,4 @@ angular.module('dellUiComponents').directive('alertCollapsible', function () {
             });
         }
     };
-})
+});
