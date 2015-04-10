@@ -2,17 +2,24 @@
  * Pagers component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.pager .icon-ui-arrowright,
-.pager .icon-ui-arrowleft {
-    text-align: center;
-    vertical-align: middle;
+
+.pager {
+	.icon-ui-arrowright,
+	.icon-ui-arrowleft {
+	    text-align: center;
+	    vertical-align: middle;
+	}
+    input[type=text] {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .pager-span {
+        //Why is there a class for this.. there is styling on a <span> tag
+         padding-left: 5px;
+         padding-right: 5px;
+         display: inline-block;
+         background: none;
+         border: 0;
+         border-radius: 0;
+    }
 }
-
-.pager li > a,
-.pager li > span {
-    padding: 6px 12px;
-    height: 35px;
-}
-
-
-
