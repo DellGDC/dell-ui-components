@@ -3,10 +3,7 @@
  *------------------------------------------------------------------------------------------
  */
 
-.form-horizontal .control-label,
-.form-compressed .control-label {
-    padding-right: 10px;
-}
+
 
 .show-password .checkbox,
 .show-password .radio {
@@ -32,6 +29,7 @@
 }
 
 .form-label {
+    //TODO this does not exist in bootstrap... what is the difference between this and control-label
     float: left;
     text-align: right;
     top: 5px;
@@ -41,44 +39,15 @@
 
 
 .help-ext {
+    //TODO this does not exist in bootstrap... What is it for? could be a typo?
     float: left;
     margin-top: -20px;
     text-align: left;
     margin-bottom: -20px;
 }
 
-.form-compressed .icon-ui-plus,
-.form-compressed .icon-ui-minus {
-    font-size: 10px;
-    vertical-align: 1px;
-}
-
-//TODO probably need to re-integrate this checkbox change to dell-ui-bootstrap BUT check to see if this does not break anything before finalizing-------------------
-.checkbox input[type=checkbox],
-.checkbox-inline input[type=checkbox],
-.radio input[type=radio],
-.radio-inline input[type=radio] {
-    margin-left: -20px;
-    margin-right: 5px;
-    vertical-align: text-bottom;
-    position: relative;
-    margin-top: 5px \9;
-}
 
 
-.input-append+.help-block,
-.input-prepend+.help-block,
-.uneditable-input+.help-block,
-input+.help-block,
-select+.help-block,
-textarea+.help-block {
-    margin-top: 5px;
-}
-
-
-.form-compressed [class^=col-] {
-    padding-bottom: 8px;
-}
 
 
 //TODO --------------------------------------------------------------------------------------
