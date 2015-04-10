@@ -2,7 +2,6 @@
      "alerts",
      "announcements",
      "breadcrumbs",
-     "buttons",
      "standard-buttons",
      "block-buttons",
      "dropdown-buttons",
@@ -28,7 +27,8 @@
      "tabs",
      "tooltips",
      "typography",
-     "search-and-filtering",
      "ratings-and-reviews",
-     "data-elements"
+     "content-teaser",
+     "date-selector",
+     "search-and-navigation"
 ]

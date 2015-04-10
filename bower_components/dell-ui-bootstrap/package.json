@@ -1,6 +1,6 @@
 {
   "name": "dell-ui-bootstrap",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "devDependencies": {
     "bin-build": "^0.1.0",
     "bin-wrapper": "^0.3.0",

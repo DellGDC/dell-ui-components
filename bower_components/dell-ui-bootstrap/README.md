@@ -16,5 +16,6 @@ You can install a specific version with 'bower install dell-ui-bootstrap#&lt;ver
 #1.0.1 - Upgraded to Bootstrap 3.3.1 and had minor fix on tooltip
 #1.0.2 - Added grunt-bless to split css for IE consumption to defeat IE selector limit issue
 #1.0.3 - Fixed issues with popovers.
+#1.0.4 - Made edits to demo and removed most non-bootstrap elements (except colors). Made adjustments to alerts, blockquotes, colors, buttons, component-animations, containers, form checkboxes and radios, pager, lists, pagination, panels, popovers, progress-bars, typography
 ...
 ```

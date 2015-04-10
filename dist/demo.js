@@ -34334,3054 +34334,6 @@ if (typeof jQuery === 'undefined') {
     });
   });
 }(jQuery);
-/*
- * angular-ui-bootstrap
- * http://angular-ui.github.io/bootstrap/
-
- * Version: 0.10.0 - 2014-01-13
- * License: MIT
- */
-angular.module('ui.bootstrap', [
-  'ui.bootstrap.tpls',
-  'ui.bootstrap.transition',
-  'ui.bootstrap.collapse',
-  'ui.bootstrap.accordion',
-  'ui.bootstrap.alert',
-  'ui.bootstrap.bindHtml',
-  'ui.bootstrap.buttons',
-  'ui.bootstrap.carousel',
-  'ui.bootstrap.position',
-  'ui.bootstrap.datepicker',
-  'ui.bootstrap.dropdownToggle',
-  'ui.bootstrap.modal',
-  'ui.bootstrap.pagination',
-  'ui.bootstrap.tooltip',
-  'ui.bootstrap.popover',
-  'ui.bootstrap.progressbar',
-  'ui.bootstrap.rating',
-  'ui.bootstrap.tabs',
-  'ui.bootstrap.timepicker',
-  'ui.bootstrap.typeahead'
-]);
-angular.module('ui.bootstrap.tpls', [
-  'template/accordion/accordion-group.html',
-  'template/accordion/accordion.html',
-  'template/alert/alert.html',
-  'template/carousel/carousel.html',
-  'template/carousel/slide.html',
-  'template/datepicker/datepicker.html',
-  'template/datepicker/popup.html',
-  'template/modal/backdrop.html',
-  'template/modal/window.html',
-  'template/pagination/pager.html',
-  'template/pagination/pagination.html',
-  'template/tooltip/tooltip-html-unsafe-popup.html',
-  'template/tooltip/tooltip-popup.html',
-  'template/popover/popover.html',
-  'template/progressbar/bar.html',
-  'template/progressbar/progress.html',
-  'template/progressbar/progressbar.html',
-  'template/rating/rating.html',
-  'template/tabs/tab.html',
-  'template/tabs/tabset.html',
-  'template/timepicker/timepicker.html',
-  'template/typeahead/typeahead-match.html',
-  'template/typeahead/typeahead-popup.html'
-]);
-angular.module('ui.bootstrap.transition', []).factory('$transition', [
-  '$q',
-  '$timeout',
-  '$rootScope',
-  function ($q, $timeout, $rootScope) {
-    var $transition = function (element, trigger, options) {
-      options = options || {};
-      var deferred = $q.defer();
-      var endEventName = $transition[options.animation ? 'animationEndEventName' : 'transitionEndEventName'];
-      var transitionEndHandler = function (event) {
-        $rootScope.$apply(function () {
-          element.unbind(endEventName, transitionEndHandler);
-          deferred.resolve(element);
-        });
-      };
-      if (endEventName) {
-        element.bind(endEventName, transitionEndHandler);
-      }
-      // Wrap in a timeout to allow the browser time to update the DOM before the transition is to occur
-      $timeout(function () {
-        if (angular.isString(trigger)) {
-          element.addClass(trigger);
-        } else if (angular.isFunction(trigger)) {
-          trigger(element);
-        } else if (angular.isObject(trigger)) {
-          element.css(trigger);
-        }
-        //If browser does not support transitions, instantly resolve
-        if (!endEventName) {
-          deferred.resolve(element);
-        }
-      });
-      // Add our custom cancel function to the promise that is returned
-      // We can call this if we are about to run a new transition, which we know will prevent this transition from ending,
-      // i.e. it will therefore never raise a transitionEnd event for that transition
-      deferred.promise.cancel = function () {
-        if (endEventName) {
-          element.unbind(endEventName, transitionEndHandler);
-        }
-        deferred.reject('Transition cancelled');
-      };
-      return deferred.promise;
-    };
-    // Work out the name of the transitionEnd event
-    var transElement = document.createElement('trans');
-    var transitionEndEventNames = {
-        'WebkitTransition': 'webkitTransitionEnd',
-        'MozTransition': 'transitionend',
-        'OTransition': 'oTransitionEnd',
-        'transition': 'transitionend'
-      };
-    var animationEndEventNames = {
-        'WebkitTransition': 'webkitAnimationEnd',
-        'MozTransition': 'animationend',
-        'OTransition': 'oAnimationEnd',
-        'transition': 'animationend'
-      };
-    function findEndEventName(endEventNames) {
-      for (var name in endEventNames) {
-        if (transElement.style[name] !== undefined) {
-          return endEventNames[name];
-        }
-      }
-    }
-    $transition.transitionEndEventName = findEndEventName(transitionEndEventNames);
-    $transition.animationEndEventName = findEndEventName(animationEndEventNames);
-    return $transition;
-  }
-]);
-angular.module('ui.bootstrap.collapse', ['ui.bootstrap.transition']).directive('collapse', [
-  '$transition',
-  function ($transition, $timeout) {
-    return {
-      link: function (scope, element, attrs) {
-        var initialAnimSkip = true;
-        var currentTransition;
-        function doTransition(change) {
-          var newTransition = $transition(element, change);
-          if (currentTransition) {
-            currentTransition.cancel();
-          }
-          currentTransition = newTransition;
-          newTransition.then(newTransitionDone, newTransitionDone);
-          return newTransition;
-          function newTransitionDone() {
-            // Make sure it's this transition, otherwise, leave it alone.
-            if (currentTransition === newTransition) {
-              currentTransition = undefined;
-            }
-          }
-        }
-        function expand() {
-          if (initialAnimSkip) {
-            initialAnimSkip = false;
-            expandDone();
-          } else {
-            element.removeClass('collapse').addClass('collapsing');
-            doTransition({ height: element[0].scrollHeight + 'px' }).then(expandDone);
-          }
-        }
-        function expandDone() {
-          element.removeClass('collapsing');
-          element.addClass('collapse in');
-          element.css({ height: 'auto' });
-        }
-        function collapse() {
-          if (initialAnimSkip) {
-            initialAnimSkip = false;
-            collapseDone();
-            element.css({ height: 0 });
-          } else {
-            // CSS transitions don't work with height: auto, so we have to manually change the height to a specific value
-            element.css({ height: element[0].scrollHeight + 'px' });
-            //trigger reflow so a browser realizes that height was updated from auto to a specific value
-            var x = element[0].offsetWidth;
-            element.removeClass('collapse in').addClass('collapsing');
-            doTransition({ height: 0 }).then(collapseDone);
-          }
-        }
-        function collapseDone() {
-          element.removeClass('collapsing');
-          element.addClass('collapse');
-        }
-        scope.$watch(attrs.collapse, function (shouldCollapse) {
-          if (shouldCollapse) {
-            collapse();
-          } else {
-            expand();
-          }
-        });
-      }
-    };
-  }
-]);
-angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse']).constant('accordionConfig', { closeOthers: true }).controller('AccordionController', [
-  '$scope',
-  '$attrs',
-  'accordionConfig',
-  function ($scope, $attrs, accordionConfig) {
-    // This array keeps track of the accordion groups
-    this.groups = [];
-    // Ensure that all the groups in this accordion are closed, unless close-others explicitly says not to
-    this.closeOthers = function (openGroup) {
-      var closeOthers = angular.isDefined($attrs.closeOthers) ? $scope.$eval($attrs.closeOthers) : accordionConfig.closeOthers;
-      if (closeOthers) {
-        angular.forEach(this.groups, function (group) {
-          if (group !== openGroup) {
-            group.isOpen = false;
-          }
-        });
-      }
-    };
-    // This is called from the accordion-group directive to add itself to the accordion
-    this.addGroup = function (groupScope) {
-      var that = this;
-      this.groups.push(groupScope);
-      groupScope.$on('$destroy', function (event) {
-        that.removeGroup(groupScope);
-      });
-    };
-    // This is called from the accordion-group directive when to remove itself
-    this.removeGroup = function (group) {
-      var index = this.groups.indexOf(group);
-      if (index !== -1) {
-        this.groups.splice(this.groups.indexOf(group), 1);
-      }
-    };
-  }
-]).directive('accordion', function () {
-  return {
-    restrict: 'EA',
-    controller: 'AccordionController',
-    transclude: true,
-    replace: false,
-    templateUrl: 'template/accordion/accordion.html'
-  };
-}).directive('accordionGroup', [
-  '$parse',
-  function ($parse) {
-    return {
-      require: '^accordion',
-      restrict: 'EA',
-      transclude: true,
-      replace: true,
-      templateUrl: 'template/accordion/accordion-group.html',
-      scope: { heading: '@' },
-      controller: function () {
-        this.setHeading = function (element) {
-          this.heading = element;
-        };
-      },
-      link: function (scope, element, attrs, accordionCtrl) {
-        var getIsOpen, setIsOpen;
-        accordionCtrl.addGroup(scope);
-        scope.isOpen = false;
-        if (attrs.isOpen) {
-          getIsOpen = $parse(attrs.isOpen);
-          setIsOpen = getIsOpen.assign;
-          scope.$parent.$watch(getIsOpen, function (value) {
-            scope.isOpen = !!value;
-          });
-        }
-        scope.$watch('isOpen', function (value) {
-          if (value) {
-            accordionCtrl.closeOthers(scope);
-          }
-          if (setIsOpen) {
-            setIsOpen(scope.$parent, value);
-          }
-        });
-      }
-    };
-  }
-]).directive('accordionHeading', function () {
-  return {
-    restrict: 'EA',
-    transclude: true,
-    template: '',
-    replace: true,
-    require: '^accordionGroup',
-    compile: function (element, attr, transclude) {
-      return function link(scope, element, attr, accordionGroupCtrl) {
-        // Pass the heading to the accordion-group controller
-        // so that it can be transcluded into the right place in the template
-        // [The second parameter to transclude causes the elements to be cloned so that they work in ng-repeat]
-        accordionGroupCtrl.setHeading(transclude(scope, function () {
-        }));
-      };
-    }
-  };
-}).directive('accordionTransclude', function () {
-  return {
-    require: '^accordionGroup',
-    link: function (scope, element, attr, controller) {
-      scope.$watch(function () {
-        return controller[attr.accordionTransclude];
-      }, function (heading) {
-        if (heading) {
-          element.html('');
-          element.append(heading);
-        }
-      });
-    }
-  };
-});
-angular.module('ui.bootstrap.alert', []).controller('AlertController', [
-  '$scope',
-  '$attrs',
-  function ($scope, $attrs) {
-    $scope.closeable = 'close' in $attrs;
-  }
-]).directive('alert', function () {
-  return {
-    restrict: 'EA',
-    controller: 'AlertController',
-    templateUrl: 'template/alert/alert.html',
-    transclude: true,
-    replace: true,
-    scope: {
-      type: '=',
-      close: '&'
-    }
-  };
-});
-angular.module('ui.bootstrap.bindHtml', []).directive('bindHtmlUnsafe', function () {
-  return function (scope, element, attr) {
-    element.addClass('ng-binding').data('$binding', attr.bindHtmlUnsafe);
-    scope.$watch(attr.bindHtmlUnsafe, function bindHtmlUnsafeWatchAction(value) {
-      element.html(value || '');
-    });
-  };
-});
-angular.module('ui.bootstrap.buttons', []).constant('buttonConfig', {
-  activeClass: 'active',
-  toggleEvent: 'click'
-}).controller('ButtonsController', [
-  'buttonConfig',
-  function (buttonConfig) {
-    this.activeClass = buttonConfig.activeClass || 'active';
-    this.toggleEvent = buttonConfig.toggleEvent || 'click';
-  }
-]).directive('btnRadio', function () {
-  return {
-    require: [
-      'btnRadio',
-      'ngModel'
-    ],
-    controller: 'ButtonsController',
-    link: function (scope, element, attrs, ctrls) {
-      var buttonsCtrl = ctrls[0], ngModelCtrl = ctrls[1];
-      //model -> UI
-      ngModelCtrl.$render = function () {
-        element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, scope.$eval(attrs.btnRadio)));
-      };
-      //ui->model
-      element.bind(buttonsCtrl.toggleEvent, function () {
-        if (!element.hasClass(buttonsCtrl.activeClass)) {
-          scope.$apply(function () {
-            ngModelCtrl.$setViewValue(scope.$eval(attrs.btnRadio));
-            ngModelCtrl.$render();
-          });
-        }
-      });
-    }
-  };
-}).directive('btnCheckbox', function () {
-  return {
-    require: [
-      'btnCheckbox',
-      'ngModel'
-    ],
-    controller: 'ButtonsController',
-    link: function (scope, element, attrs, ctrls) {
-      var buttonsCtrl = ctrls[0], ngModelCtrl = ctrls[1];
-      function getTrueValue() {
-        return getCheckboxValue(attrs.btnCheckboxTrue, true);
-      }
-      function getFalseValue() {
-        return getCheckboxValue(attrs.btnCheckboxFalse, false);
-      }
-      function getCheckboxValue(attributeValue, defaultValue) {
-        var val = scope.$eval(attributeValue);
-        return angular.isDefined(val) ? val : defaultValue;
-      }
-      //model -> UI
-      ngModelCtrl.$render = function () {
-        element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, getTrueValue()));
-      };
-      //ui->model
-      element.bind(buttonsCtrl.toggleEvent, function () {
-        scope.$apply(function () {
-          ngModelCtrl.$setViewValue(element.hasClass(buttonsCtrl.activeClass) ? getFalseValue() : getTrueValue());
-          ngModelCtrl.$render();
-        });
-      });
-    }
-  };
-});
-/**
-* @ngdoc overview
-* @name ui.bootstrap.carousel
-*
-* @description
-* AngularJS version of an image carousel.
-*
-*/
-angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition']).controller('CarouselController', [
-  '$scope',
-  '$timeout',
-  '$transition',
-  '$q',
-  function ($scope, $timeout, $transition, $q) {
-    var self = this, slides = self.slides = [], currentIndex = -1, currentTimeout, isPlaying;
-    self.currentSlide = null;
-    var destroyed = false;
-    /* direction: "prev" or "next" */
-    self.select = function (nextSlide, direction) {
-      var nextIndex = slides.indexOf(nextSlide);
-      //Decide direction if it's not given
-      if (direction === undefined) {
-        direction = nextIndex > currentIndex ? 'next' : 'prev';
-      }
-      if (nextSlide && nextSlide !== self.currentSlide) {
-        if ($scope.$currentTransition) {
-          $scope.$currentTransition.cancel();
-          //Timeout so ng-class in template has time to fix classes for finished slide
-          $timeout(goNext);
-        } else {
-          goNext();
-        }
-      }
-      function goNext() {
-        // Scope has been destroyed, stop here.
-        if (destroyed) {
-          return;
-        }
-        //If we have a slide to transition from and we have a transition type and we're allowed, go
-        if (self.currentSlide && angular.isString(direction) && !$scope.noTransition && nextSlide.$element) {
-          //We shouldn't do class manip in here, but it's the same weird thing bootstrap does. need to fix sometime
-          nextSlide.$element.addClass(direction);
-          var reflow = nextSlide.$element[0].offsetWidth;
-          //force reflow
-          //Set all other slides to stop doing their stuff for the new transition
-          angular.forEach(slides, function (slide) {
-            angular.extend(slide, {
-              direction: '',
-              entering: false,
-              leaving: false,
-              active: false
-            });
-          });
-          angular.extend(nextSlide, {
-            direction: direction,
-            active: true,
-            entering: true
-          });
-          angular.extend(self.currentSlide || {}, {
-            direction: direction,
-            leaving: true
-          });
-          $scope.$currentTransition = $transition(nextSlide.$element, {});
-          //We have to create new pointers inside a closure since next & current will change
-          (function (next, current) {
-            $scope.$currentTransition.then(function () {
-              transitionDone(next, current);
-            }, function () {
-              transitionDone(next, current);
-            });
-          }(nextSlide, self.currentSlide));
-        } else {
-          transitionDone(nextSlide, self.currentSlide);
-        }
-        self.currentSlide = nextSlide;
-        currentIndex = nextIndex;
-        //every time you change slides, reset the timer
-        restartTimer();
-      }
-      function transitionDone(next, current) {
-        angular.extend(next, {
-          direction: '',
-          active: true,
-          leaving: false,
-          entering: false
-        });
-        angular.extend(current || {}, {
-          direction: '',
-          active: false,
-          leaving: false,
-          entering: false
-        });
-        $scope.$currentTransition = null;
-      }
-    };
-    $scope.$on('$destroy', function () {
-      destroyed = true;
-    });
-    /* Allow outside people to call indexOf on slides array */
-    self.indexOfSlide = function (slide) {
-      return slides.indexOf(slide);
-    };
-    $scope.next = function () {
-      var newIndex = (currentIndex + 1) % slides.length;
-      //Prevent this user-triggered transition from occurring if there is already one in progress
-      if (!$scope.$currentTransition) {
-        return self.select(slides[newIndex], 'next');
-      }
-    };
-    $scope.prev = function () {
-      var newIndex = currentIndex - 1 < 0 ? slides.length - 1 : currentIndex - 1;
-      //Prevent this user-triggered transition from occurring if there is already one in progress
-      if (!$scope.$currentTransition) {
-        return self.select(slides[newIndex], 'prev');
-      }
-    };
-    $scope.select = function (slide) {
-      self.select(slide);
-    };
-    $scope.isActive = function (slide) {
-      return self.currentSlide === slide;
-    };
-    $scope.slides = function () {
-      return slides;
-    };
-    $scope.$watch('interval', restartTimer);
-    $scope.$on('$destroy', resetTimer);
-    function restartTimer() {
-      resetTimer();
-      var interval = +$scope.interval;
-      if (!isNaN(interval) && interval >= 0) {
-        currentTimeout = $timeout(timerFn, interval);
-      }
-    }
-    function resetTimer() {
-      if (currentTimeout) {
-        $timeout.cancel(currentTimeout);
-        currentTimeout = null;
-      }
-    }
-    function timerFn() {
-      if (isPlaying) {
-        $scope.next();
-        restartTimer();
-      } else {
-        $scope.pause();
-      }
-    }
-    $scope.play = function () {
-      if (!isPlaying) {
-        isPlaying = true;
-        restartTimer();
-      }
-    };
-    $scope.pause = function () {
-      if (!$scope.noPause) {
-        isPlaying = false;
-        resetTimer();
-      }
-    };
-    self.addSlide = function (slide, element) {
-      slide.$element = element;
-      slides.push(slide);
-      //if this is the first slide or the slide is set to active, select it
-      if (slides.length === 1 || slide.active) {
-        self.select(slides[slides.length - 1]);
-        if (slides.length == 1) {
-          $scope.play();
-        }
-      } else {
-        slide.active = false;
-      }
-    };
-    self.removeSlide = function (slide) {
-      //get the index of the slide inside the carousel
-      var index = slides.indexOf(slide);
-      slides.splice(index, 1);
-      if (slides.length > 0 && slide.active) {
-        if (index >= slides.length) {
-          self.select(slides[index - 1]);
-        } else {
-          self.select(slides[index]);
-        }
-      } else if (currentIndex > index) {
-        currentIndex--;
-      }
-    };
-  }
-]).directive('carousel', [function () {
-    return {
-      restrict: 'EA',
-      transclude: true,
-      replace: true,
-      controller: 'CarouselController',
-      require: 'carousel',
-      templateUrl: 'template/carousel/carousel.html',
-      scope: {
-        interval: '=',
-        noTransition: '=',
-        noPause: '='
-      }
-    };
-  }]).directive('slide', [
-  '$parse',
-  function ($parse) {
-    return {
-      require: '^carousel',
-      restrict: 'EA',
-      transclude: true,
-      replace: true,
-      templateUrl: 'template/carousel/slide.html',
-      scope: {},
-      link: function (scope, element, attrs, carouselCtrl) {
-        //Set up optional 'active' = binding
-        if (attrs.active) {
-          var getActive = $parse(attrs.active);
-          var setActive = getActive.assign;
-          var lastValue = scope.active = getActive(scope.$parent);
-          scope.$watch(function parentActiveWatch() {
-            var parentActive = getActive(scope.$parent);
-            if (parentActive !== scope.active) {
-              // we are out of sync and need to copy
-              if (parentActive !== lastValue) {
-                // parent changed and it has precedence
-                lastValue = scope.active = parentActive;
-              } else {
-                // if the parent can be assigned then do so
-                setActive(scope.$parent, parentActive = lastValue = scope.active);
-              }
-            }
-            return parentActive;
-          });
-        }
-        carouselCtrl.addSlide(scope, element);
-        //when the scope is destroyed then remove the slide from the current slides array
-        scope.$on('$destroy', function () {
-          carouselCtrl.removeSlide(scope);
-        });
-        scope.$watch('active', function (active) {
-          if (active) {
-            carouselCtrl.select(scope);
-          }
-        });
-      }
-    };
-  }
-]);
-angular.module('ui.bootstrap.position', []).factory('$position', [
-  '$document',
-  '$window',
-  function ($document, $window) {
-    function getStyle(el, cssprop) {
-      if (el.currentStyle) {
-        //IE
-        return el.currentStyle[cssprop];
-      } else if ($window.getComputedStyle) {
-        return $window.getComputedStyle(el)[cssprop];
-      }
-      // finally try and get inline style
-      return el.style[cssprop];
-    }
-    /**
-     * Checks if a given element is statically positioned
-     * @param element - raw DOM element
-     */
-    function isStaticPositioned(element) {
-      return (getStyle(element, 'position') || 'static') === 'static';
-    }
-    /**
-     * returns the closest, non-statically positioned parentOffset of a given element
-     * @param element
-     */
-    var parentOffsetEl = function (element) {
-      var docDomEl = $document[0];
-      var offsetParent = element.offsetParent || docDomEl;
-      while (offsetParent && offsetParent !== docDomEl && isStaticPositioned(offsetParent)) {
-        offsetParent = offsetParent.offsetParent;
-      }
-      return offsetParent || docDomEl;
-    };
-    return {
-      position: function (element) {
-        var elBCR = this.offset(element);
-        var offsetParentBCR = {
-            top: 0,
-            left: 0
-          };
-        var offsetParentEl = parentOffsetEl(element[0]);
-        if (offsetParentEl != $document[0]) {
-          offsetParentBCR = this.offset(angular.element(offsetParentEl));
-          offsetParentBCR.top += offsetParentEl.clientTop - offsetParentEl.scrollTop;
-          offsetParentBCR.left += offsetParentEl.clientLeft - offsetParentEl.scrollLeft;
-        }
-        var boundingClientRect = element[0].getBoundingClientRect();
-        return {
-          width: boundingClientRect.width || element.prop('offsetWidth'),
-          height: boundingClientRect.height || element.prop('offsetHeight'),
-          top: elBCR.top - offsetParentBCR.top,
-          left: elBCR.left - offsetParentBCR.left
-        };
-      },
-      offset: function (element) {
-        var boundingClientRect = element[0].getBoundingClientRect();
-        return {
-          width: boundingClientRect.width || element.prop('offsetWidth'),
-          height: boundingClientRect.height || element.prop('offsetHeight'),
-          top: boundingClientRect.top + ($window.pageYOffset || $document[0].body.scrollTop || $document[0].documentElement.scrollTop),
-          left: boundingClientRect.left + ($window.pageXOffset || $document[0].body.scrollLeft || $document[0].documentElement.scrollLeft)
-        };
-      }
-    };
-  }
-]);
-angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.position']).constant('datepickerConfig', {
-  dayFormat: 'dd',
-  monthFormat: 'MMMM',
-  yearFormat: 'yyyy',
-  dayHeaderFormat: 'EEE',
-  dayTitleFormat: 'MMMM yyyy',
-  monthTitleFormat: 'yyyy',
-  showWeeks: true,
-  startingDay: 0,
-  yearRange: 20,
-  minDate: null,
-  maxDate: null
-}).controller('DatepickerController', [
-  '$scope',
-  '$attrs',
-  'dateFilter',
-  'datepickerConfig',
-  function ($scope, $attrs, dateFilter, dtConfig) {
-    var format = {
-        day: getValue($attrs.dayFormat, dtConfig.dayFormat),
-        month: getValue($attrs.monthFormat, dtConfig.monthFormat),
-        year: getValue($attrs.yearFormat, dtConfig.yearFormat),
-        dayHeader: getValue($attrs.dayHeaderFormat, dtConfig.dayHeaderFormat),
-        dayTitle: getValue($attrs.dayTitleFormat, dtConfig.dayTitleFormat),
-        monthTitle: getValue($attrs.monthTitleFormat, dtConfig.monthTitleFormat)
-      }, startingDay = getValue($attrs.startingDay, dtConfig.startingDay), yearRange = getValue($attrs.yearRange, dtConfig.yearRange);
-    this.minDate = dtConfig.minDate ? new Date(dtConfig.minDate) : null;
-    this.maxDate = dtConfig.maxDate ? new Date(dtConfig.maxDate) : null;
-    function getValue(value, defaultValue) {
-      return angular.isDefined(value) ? $scope.$parent.$eval(value) : defaultValue;
-    }
-    function getDaysInMonth(year, month) {
-      return new Date(year, month, 0).getDate();
-    }
-    function getDates(startDate, n) {
-      var dates = new Array(n);
-      var current = startDate, i = 0;
-      while (i < n) {
-        dates[i++] = new Date(current);
-        current.setDate(current.getDate() + 1);
-      }
-      return dates;
-    }
-    function makeDate(date, format, isSelected, isSecondary) {
-      return {
-        date: date,
-        label: dateFilter(date, format),
-        selected: !!isSelected,
-        secondary: !!isSecondary
-      };
-    }
-    this.modes = [
-      {
-        name: 'day',
-        getVisibleDates: function (date, selected) {
-          var year = date.getFullYear(), month = date.getMonth(), firstDayOfMonth = new Date(year, month, 1);
-          var difference = startingDay - firstDayOfMonth.getDay(), numDisplayedFromPreviousMonth = difference > 0 ? 7 - difference : -difference, firstDate = new Date(firstDayOfMonth), numDates = 0;
-          if (numDisplayedFromPreviousMonth > 0) {
-            firstDate.setDate(-numDisplayedFromPreviousMonth + 1);
-            numDates += numDisplayedFromPreviousMonth;  // Previous
-          }
-          numDates += getDaysInMonth(year, month + 1);
-          // Current
-          numDates += (7 - numDates % 7) % 7;
-          // Next
-          var days = getDates(firstDate, numDates), labels = new Array(7);
-          for (var i = 0; i < numDates; i++) {
-            var dt = new Date(days[i]);
-            days[i] = makeDate(dt, format.day, selected && selected.getDate() === dt.getDate() && selected.getMonth() === dt.getMonth() && selected.getFullYear() === dt.getFullYear(), dt.getMonth() !== month);
-          }
-          for (var j = 0; j < 7; j++) {
-            labels[j] = dateFilter(days[j].date, format.dayHeader);
-          }
-          return {
-            objects: days,
-            title: dateFilter(date, format.dayTitle),
-            labels: labels
-          };
-        },
-        compare: function (date1, date2) {
-          return new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate());
-        },
-        split: 7,
-        step: { months: 1 }
-      },
-      {
-        name: 'month',
-        getVisibleDates: function (date, selected) {
-          var months = new Array(12), year = date.getFullYear();
-          for (var i = 0; i < 12; i++) {
-            var dt = new Date(year, i, 1);
-            months[i] = makeDate(dt, format.month, selected && selected.getMonth() === i && selected.getFullYear() === year);
-          }
-          return {
-            objects: months,
-            title: dateFilter(date, format.monthTitle)
-          };
-        },
-        compare: function (date1, date2) {
-          return new Date(date1.getFullYear(), date1.getMonth()) - new Date(date2.getFullYear(), date2.getMonth());
-        },
-        split: 3,
-        step: { years: 1 }
-      },
-      {
-        name: 'year',
-        getVisibleDates: function (date, selected) {
-          var years = new Array(yearRange), year = date.getFullYear(), startYear = parseInt((year - 1) / yearRange, 10) * yearRange + 1;
-          for (var i = 0; i < yearRange; i++) {
-            var dt = new Date(startYear + i, 0, 1);
-            years[i] = makeDate(dt, format.year, selected && selected.getFullYear() === dt.getFullYear());
-          }
-          return {
-            objects: years,
-            title: [
-              years[0].label,
-              years[yearRange - 1].label
-            ].join(' - ')
-          };
-        },
-        compare: function (date1, date2) {
-          return date1.getFullYear() - date2.getFullYear();
-        },
-        split: 5,
-        step: { years: yearRange }
-      }
-    ];
-    this.isDisabled = function (date, mode) {
-      var currentMode = this.modes[mode || 0];
-      return this.minDate && currentMode.compare(date, this.minDate) < 0 || this.maxDate && currentMode.compare(date, this.maxDate) > 0 || $scope.dateDisabled && $scope.dateDisabled({
-        date: date,
-        mode: currentMode.name
-      });
-    };
-  }
-]).directive('datepicker', [
-  'dateFilter',
-  '$parse',
-  'datepickerConfig',
-  '$log',
-  function (dateFilter, $parse, datepickerConfig, $log) {
-    return {
-      restrict: 'EA',
-      replace: true,
-      templateUrl: 'template/datepicker/datepicker.html',
-      scope: { dateDisabled: '&' },
-      require: [
-        'datepicker',
-        '?^ngModel'
-      ],
-      controller: 'DatepickerController',
-      link: function (scope, element, attrs, ctrls) {
-        var datepickerCtrl = ctrls[0], ngModel = ctrls[1];
-        if (!ngModel) {
-          return;  // do nothing if no ng-model
-        }
-        // Configuration parameters
-        var mode = 0, selected = new Date(), showWeeks = datepickerConfig.showWeeks;
-        if (attrs.showWeeks) {
-          scope.$parent.$watch($parse(attrs.showWeeks), function (value) {
-            showWeeks = !!value;
-            updateShowWeekNumbers();
-          });
-        } else {
-          updateShowWeekNumbers();
-        }
-        if (attrs.min) {
-          scope.$parent.$watch($parse(attrs.min), function (value) {
-            datepickerCtrl.minDate = value ? new Date(value) : null;
-            refill();
-          });
-        }
-        if (attrs.max) {
-          scope.$parent.$watch($parse(attrs.max), function (value) {
-            datepickerCtrl.maxDate = value ? new Date(value) : null;
-            refill();
-          });
-        }
-        function updateShowWeekNumbers() {
-          scope.showWeekNumbers = mode === 0 && showWeeks;
-        }
-        // Split array into smaller arrays
-        function split(arr, size) {
-          var arrays = [];
-          while (arr.length > 0) {
-            arrays.push(arr.splice(0, size));
-          }
-          return arrays;
-        }
-        function refill(updateSelected) {
-          var date = null, valid = true;
-          if (ngModel.$modelValue) {
-            date = new Date(ngModel.$modelValue);
-            if (isNaN(date)) {
-              valid = false;
-              $log.error('Datepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.');
-            } else if (updateSelected) {
-              selected = date;
-            }
-          }
-          ngModel.$setValidity('date', valid);
-          var currentMode = datepickerCtrl.modes[mode], data = currentMode.getVisibleDates(selected, date);
-          angular.forEach(data.objects, function (obj) {
-            obj.disabled = datepickerCtrl.isDisabled(obj.date, mode);
-          });
-          ngModel.$setValidity('date-disabled', !date || !datepickerCtrl.isDisabled(date));
-          scope.rows = split(data.objects, currentMode.split);
-          scope.labels = data.labels || [];
-          scope.title = data.title;
-        }
-        function setMode(value) {
-          mode = value;
-          updateShowWeekNumbers();
-          refill();
-        }
-        ngModel.$render = function () {
-          refill(true);
-        };
-        scope.select = function (date) {
-          if (mode === 0) {
-            var dt = ngModel.$modelValue ? new Date(ngModel.$modelValue) : new Date(0, 0, 0, 0, 0, 0, 0);
-            dt.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-            ngModel.$setViewValue(dt);
-            refill(true);
-          } else {
-            selected = date;
-            setMode(mode - 1);
-          }
-        };
-        scope.move = function (direction) {
-          var step = datepickerCtrl.modes[mode].step;
-          selected.setMonth(selected.getMonth() + direction * (step.months || 0));
-          selected.setFullYear(selected.getFullYear() + direction * (step.years || 0));
-          refill();
-        };
-        scope.toggleMode = function () {
-          setMode((mode + 1) % datepickerCtrl.modes.length);
-        };
-        scope.getWeekNumber = function (row) {
-          return mode === 0 && scope.showWeekNumbers && row.length === 7 ? getISO8601WeekNumber(row[0].date) : null;
-        };
-        function getISO8601WeekNumber(date) {
-          var checkDate = new Date(date);
-          checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7));
-          // Thursday
-          var time = checkDate.getTime();
-          checkDate.setMonth(0);
-          // Compare with Jan 1
-          checkDate.setDate(1);
-          return Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
-        }
-      }
-    };
-  }
-]).constant('datepickerPopupConfig', {
-  dateFormat: 'yyyy-MM-dd',
-  currentText: 'Today',
-  toggleWeeksText: 'Weeks',
-  clearText: 'Clear',
-  closeText: 'Done',
-  closeOnDateSelection: true,
-  appendToBody: false,
-  showButtonBar: true
-}).directive('datepickerPopup', [
-  '$compile',
-  '$parse',
-  '$document',
-  '$position',
-  'dateFilter',
-  'datepickerPopupConfig',
-  'datepickerConfig',
-  function ($compile, $parse, $document, $position, dateFilter, datepickerPopupConfig, datepickerConfig) {
-    return {
-      restrict: 'EA',
-      require: 'ngModel',
-      link: function (originalScope, element, attrs, ngModel) {
-        var scope = originalScope.$new(),
-          // create a child scope so we are not polluting original one
-          dateFormat, closeOnDateSelection = angular.isDefined(attrs.closeOnDateSelection) ? originalScope.$eval(attrs.closeOnDateSelection) : datepickerPopupConfig.closeOnDateSelection, appendToBody = angular.isDefined(attrs.datepickerAppendToBody) ? originalScope.$eval(attrs.datepickerAppendToBody) : datepickerPopupConfig.appendToBody;
-        attrs.$observe('datepickerPopup', function (value) {
-          dateFormat = value || datepickerPopupConfig.dateFormat;
-          ngModel.$render();
-        });
-        scope.showButtonBar = angular.isDefined(attrs.showButtonBar) ? originalScope.$eval(attrs.showButtonBar) : datepickerPopupConfig.showButtonBar;
-        originalScope.$on('$destroy', function () {
-          $popup.remove();
-          scope.$destroy();
-        });
-        attrs.$observe('currentText', function (text) {
-          scope.currentText = angular.isDefined(text) ? text : datepickerPopupConfig.currentText;
-        });
-        attrs.$observe('toggleWeeksText', function (text) {
-          scope.toggleWeeksText = angular.isDefined(text) ? text : datepickerPopupConfig.toggleWeeksText;
-        });
-        attrs.$observe('clearText', function (text) {
-          scope.clearText = angular.isDefined(text) ? text : datepickerPopupConfig.clearText;
-        });
-        attrs.$observe('closeText', function (text) {
-          scope.closeText = angular.isDefined(text) ? text : datepickerPopupConfig.closeText;
-        });
-        var getIsOpen, setIsOpen;
-        if (attrs.isOpen) {
-          getIsOpen = $parse(attrs.isOpen);
-          setIsOpen = getIsOpen.assign;
-          originalScope.$watch(getIsOpen, function updateOpen(value) {
-            scope.isOpen = !!value;
-          });
-        }
-        scope.isOpen = getIsOpen ? getIsOpen(originalScope) : false;
-        // Initial state
-        function setOpen(value) {
-          if (setIsOpen) {
-            setIsOpen(originalScope, !!value);
-          } else {
-            scope.isOpen = !!value;
-          }
-        }
-        var documentClickBind = function (event) {
-          if (scope.isOpen && event.target !== element[0]) {
-            scope.$apply(function () {
-              setOpen(false);
-            });
-          }
-        };
-        var elementFocusBind = function () {
-          scope.$apply(function () {
-            setOpen(true);
-          });
-        };
-        // popup element used to display calendar
-        var popupEl = angular.element('<div datepicker-popup-wrap><div datepicker></div></div>');
-        popupEl.attr({
-          'ng-model': 'date',
-          'ng-change': 'dateSelection()'
-        });
-        var datepickerEl = angular.element(popupEl.children()[0]), datepickerOptions = {};
-        if (attrs.datepickerOptions) {
-          datepickerOptions = originalScope.$eval(attrs.datepickerOptions);
-          datepickerEl.attr(angular.extend({}, datepickerOptions));
-        }
-        // TODO: reverse from dateFilter string to Date object
-        function parseDate(viewValue) {
-          if (!viewValue) {
-            ngModel.$setValidity('date', true);
-            return null;
-          } else if (angular.isDate(viewValue)) {
-            ngModel.$setValidity('date', true);
-            return viewValue;
-          } else if (angular.isString(viewValue)) {
-            var date = new Date(viewValue);
-            if (isNaN(date)) {
-              ngModel.$setValidity('date', false);
-              return undefined;
-            } else {
-              ngModel.$setValidity('date', true);
-              return date;
-            }
-          } else {
-            ngModel.$setValidity('date', false);
-            return undefined;
-          }
-        }
-        ngModel.$parsers.unshift(parseDate);
-        // Inner change
-        scope.dateSelection = function (dt) {
-          if (angular.isDefined(dt)) {
-            scope.date = dt;
-          }
-          ngModel.$setViewValue(scope.date);
-          ngModel.$render();
-          if (closeOnDateSelection) {
-            setOpen(false);
-          }
-        };
-        element.bind('input change keyup', function () {
-          scope.$apply(function () {
-            scope.date = ngModel.$modelValue;
-          });
-        });
-        // Outter change
-        ngModel.$render = function () {
-          var date = ngModel.$viewValue ? dateFilter(ngModel.$viewValue, dateFormat) : '';
-          element.val(date);
-          scope.date = ngModel.$modelValue;
-        };
-        function addWatchableAttribute(attribute, scopeProperty, datepickerAttribute) {
-          if (attribute) {
-            originalScope.$watch($parse(attribute), function (value) {
-              scope[scopeProperty] = value;
-            });
-            datepickerEl.attr(datepickerAttribute || scopeProperty, scopeProperty);
-          }
-        }
-        addWatchableAttribute(attrs.min, 'min');
-        addWatchableAttribute(attrs.max, 'max');
-        if (attrs.showWeeks) {
-          addWatchableAttribute(attrs.showWeeks, 'showWeeks', 'show-weeks');
-        } else {
-          scope.showWeeks = 'show-weeks' in datepickerOptions ? datepickerOptions['show-weeks'] : datepickerConfig.showWeeks;
-          datepickerEl.attr('show-weeks', 'showWeeks');
-        }
-        if (attrs.dateDisabled) {
-          datepickerEl.attr('date-disabled', attrs.dateDisabled);
-        }
-        function updatePosition() {
-          scope.position = appendToBody ? $position.offset(element) : $position.position(element);
-          scope.position.top = scope.position.top + element.prop('offsetHeight');
-        }
-        var documentBindingInitialized = false, elementFocusInitialized = false;
-        scope.$watch('isOpen', function (value) {
-          if (value) {
-            updatePosition();
-            $document.bind('click', documentClickBind);
-            if (elementFocusInitialized) {
-              element.unbind('focus', elementFocusBind);
-            }
-            element[0].focus();
-            documentBindingInitialized = true;
-          } else {
-            if (documentBindingInitialized) {
-              $document.unbind('click', documentClickBind);
-            }
-            element.bind('focus', elementFocusBind);
-            elementFocusInitialized = true;
-          }
-          if (setIsOpen) {
-            setIsOpen(originalScope, value);
-          }
-        });
-        scope.today = function () {
-          scope.dateSelection(new Date());
-        };
-        scope.clear = function () {
-          scope.dateSelection(null);
-        };
-        var $popup = $compile(popupEl)(scope);
-        if (appendToBody) {
-          $document.find('body').append($popup);
-        } else {
-          element.after($popup);
-        }
-      }
-    };
-  }
-]).directive('datepickerPopupWrap', function () {
-  return {
-    restrict: 'EA',
-    replace: true,
-    transclude: true,
-    templateUrl: 'template/datepicker/popup.html',
-    link: function (scope, element, attrs) {
-      element.bind('click', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      });
-    }
-  };
-});
-/*
- * dropdownToggle - Provides dropdown menu functionality in place of bootstrap js
- * @restrict class or attribute
- * @example:
-   <li class="dropdown">
-     <a class="dropdown-toggle">My Dropdown Menu</a>
-     <ul class="dropdown-menu">
-       <li ng-repeat="choice in dropChoices">
-         <a ng-href="{{choice.href}}">{{choice.text}}</a>
-       </li>
-     </ul>
-   </li>
- */
-angular.module('ui.bootstrap.dropdownToggle', []).directive('dropdownToggle', [
-  '$document',
-  '$location',
-  function ($document, $location) {
-    var openElement = null, closeMenu = angular.noop;
-    return {
-      restrict: 'CA',
-      link: function (scope, element, attrs) {
-        scope.$watch('$location.path', function () {
-          closeMenu();
-        });
-        element.parent().bind('click', function () {
-          closeMenu();
-        });
-        element.bind('click', function (event) {
-          var elementWasOpen = element === openElement;
-          event.preventDefault();
-          event.stopPropagation();
-          if (!!openElement) {
-            closeMenu();
-          }
-          if (!elementWasOpen && !element.hasClass('disabled') && !element.prop('disabled')) {
-            element.parent().addClass('open');
-            openElement = element;
-            closeMenu = function (event) {
-              if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              $document.unbind('click', closeMenu);
-              element.parent().removeClass('open');
-              closeMenu = angular.noop;
-              openElement = null;
-            };
-            $document.bind('click', closeMenu);
-          }
-        });
-      }
-    };
-  }
-]);
-angular.module('ui.bootstrap.modal', ['ui.bootstrap.transition']).factory('$$stackedMap', function () {
-  return {
-    createNew: function () {
-      var stack = [];
-      return {
-        add: function (key, value) {
-          stack.push({
-            key: key,
-            value: value
-          });
-        },
-        get: function (key) {
-          for (var i = 0; i < stack.length; i++) {
-            if (key == stack[i].key) {
-              return stack[i];
-            }
-          }
-        },
-        keys: function () {
-          var keys = [];
-          for (var i = 0; i < stack.length; i++) {
-            keys.push(stack[i].key);
-          }
-          return keys;
-        },
-        top: function () {
-          return stack[stack.length - 1];
-        },
-        remove: function (key) {
-          var idx = -1;
-          for (var i = 0; i < stack.length; i++) {
-            if (key == stack[i].key) {
-              idx = i;
-              break;
-            }
-          }
-          return stack.splice(idx, 1)[0];
-        },
-        removeTop: function () {
-          return stack.splice(stack.length - 1, 1)[0];
-        },
-        length: function () {
-          return stack.length;
-        }
-      };
-    }
-  };
-}).directive('modalBackdrop', [
-  '$timeout',
-  function ($timeout) {
-    return {
-      restrict: 'EA',
-      replace: true,
-      templateUrl: 'template/modal/backdrop.html',
-      link: function (scope) {
-        scope.animate = false;
-        //trigger CSS transitions
-        $timeout(function () {
-          scope.animate = true;
-        });
-      }
-    };
-  }
-]).directive('modalWindow', [
-  '$modalStack',
-  '$timeout',
-  function ($modalStack, $timeout) {
-    return {
-      restrict: 'EA',
-      scope: {
-        index: '@',
-        animate: '='
-      },
-      replace: true,
-      transclude: true,
-      templateUrl: 'template/modal/window.html',
-      link: function (scope, element, attrs) {
-        scope.windowClass = attrs.windowClass || '';
-        $timeout(function () {
-          // trigger CSS transitions
-          scope.animate = true;
-          // focus a freshly-opened modal
-          element[0].focus();
-        });
-        scope.close = function (evt) {
-          var modal = $modalStack.getTop();
-          if (modal && modal.value.backdrop && modal.value.backdrop != 'static' && evt.target === evt.currentTarget) {
-            evt.preventDefault();
-            evt.stopPropagation();
-            $modalStack.dismiss(modal.key, 'backdrop click');
-          }
-        };
-      }
-    };
-  }
-]).factory('$modalStack', [
-  '$transition',
-  '$timeout',
-  '$document',
-  '$compile',
-  '$rootScope',
-  '$$stackedMap',
-  function ($transition, $timeout, $document, $compile, $rootScope, $$stackedMap) {
-    var OPENED_MODAL_CLASS = 'modal-open';
-    var backdropDomEl, backdropScope;
-    var openedWindows = $$stackedMap.createNew();
-    var $modalStack = {};
-    function backdropIndex() {
-      var topBackdropIndex = -1;
-      var opened = openedWindows.keys();
-      for (var i = 0; i < opened.length; i++) {
-        if (openedWindows.get(opened[i]).value.backdrop) {
-          topBackdropIndex = i;
-        }
-      }
-      return topBackdropIndex;
-    }
-    $rootScope.$watch(backdropIndex, function (newBackdropIndex) {
-      if (backdropScope) {
-        backdropScope.index = newBackdropIndex;
-      }
-    });
-    function removeModalWindow(modalInstance) {
-      var body = $document.find('body').eq(0);
-      var modalWindow = openedWindows.get(modalInstance).value;
-      //clean up the stack
-      openedWindows.remove(modalInstance);
-      //remove window DOM element
-      removeAfterAnimate(modalWindow.modalDomEl, modalWindow.modalScope, 300, checkRemoveBackdrop);
-      body.toggleClass(OPENED_MODAL_CLASS, openedWindows.length() > 0);
-    }
-    function checkRemoveBackdrop() {
-      //remove backdrop if no longer needed
-      if (backdropDomEl && backdropIndex() == -1) {
-        var backdropScopeRef = backdropScope;
-        removeAfterAnimate(backdropDomEl, backdropScope, 150, function () {
-          backdropScopeRef.$destroy();
-          backdropScopeRef = null;
-        });
-        backdropDomEl = undefined;
-        backdropScope = undefined;
-      }
-    }
-    function removeAfterAnimate(domEl, scope, emulateTime, done) {
-      // Closing animation
-      scope.animate = false;
-      var transitionEndEventName = $transition.transitionEndEventName;
-      if (transitionEndEventName) {
-        // transition out
-        var timeout = $timeout(afterAnimating, emulateTime);
-        domEl.bind(transitionEndEventName, function () {
-          $timeout.cancel(timeout);
-          afterAnimating();
-          scope.$apply();
-        });
-      } else {
-        // Ensure this call is async
-        $timeout(afterAnimating, 0);
-      }
-      function afterAnimating() {
-        if (afterAnimating.done) {
-          return;
-        }
-        afterAnimating.done = true;
-        domEl.remove();
-        if (done) {
-          done();
-        }
-      }
-    }
-    $document.bind('keydown', function (evt) {
-      var modal;
-      if (evt.which === 27) {
-        modal = openedWindows.top();
-        if (modal && modal.value.keyboard) {
-          $rootScope.$apply(function () {
-            $modalStack.dismiss(modal.key);
-          });
-        }
-      }
-    });
-    $modalStack.open = function (modalInstance, modal) {
-      openedWindows.add(modalInstance, {
-        deferred: modal.deferred,
-        modalScope: modal.scope,
-        backdrop: modal.backdrop,
-        keyboard: modal.keyboard
-      });
-      var body = $document.find('body').eq(0), currBackdropIndex = backdropIndex();
-      if (currBackdropIndex >= 0 && !backdropDomEl) {
-        backdropScope = $rootScope.$new(true);
-        backdropScope.index = currBackdropIndex;
-        backdropDomEl = $compile('<div modal-backdrop></div>')(backdropScope);
-        body.append(backdropDomEl);
-      }
-      var angularDomEl = angular.element('<div modal-window></div>');
-      angularDomEl.attr('window-class', modal.windowClass);
-      angularDomEl.attr('index', openedWindows.length() - 1);
-      angularDomEl.attr('animate', 'animate');
-      angularDomEl.html(modal.content);
-      var modalDomEl = $compile(angularDomEl)(modal.scope);
-      openedWindows.top().value.modalDomEl = modalDomEl;
-      body.append(modalDomEl);
-      body.addClass(OPENED_MODAL_CLASS);
-    };
-    $modalStack.close = function (modalInstance, result) {
-      var modalWindow = openedWindows.get(modalInstance).value;
-      if (modalWindow) {
-        modalWindow.deferred.resolve(result);
-        removeModalWindow(modalInstance);
-      }
-    };
-    $modalStack.dismiss = function (modalInstance, reason) {
-      var modalWindow = openedWindows.get(modalInstance).value;
-      if (modalWindow) {
-        modalWindow.deferred.reject(reason);
-        removeModalWindow(modalInstance);
-      }
-    };
-    $modalStack.dismissAll = function (reason) {
-      var topModal = this.getTop();
-      while (topModal) {
-        this.dismiss(topModal.key, reason);
-        topModal = this.getTop();
-      }
-    };
-    $modalStack.getTop = function () {
-      return openedWindows.top();
-    };
-    return $modalStack;
-  }
-]).provider('$modal', function () {
-  var $modalProvider = {
-      options: {
-        backdrop: true,
-        keyboard: true
-      },
-      $get: [
-        '$injector',
-        '$rootScope',
-        '$q',
-        '$http',
-        '$templateCache',
-        '$controller',
-        '$modalStack',
-        function ($injector, $rootScope, $q, $http, $templateCache, $controller, $modalStack) {
-          var $modal = {};
-          function getTemplatePromise(options) {
-            return options.template ? $q.when(options.template) : $http.get(options.templateUrl, { cache: $templateCache }).then(function (result) {
-              return result.data;
-            });
-          }
-          function getResolvePromises(resolves) {
-            var promisesArr = [];
-            angular.forEach(resolves, function (value, key) {
-              if (angular.isFunction(value) || angular.isArray(value)) {
-                promisesArr.push($q.when($injector.invoke(value)));
-              }
-            });
-            return promisesArr;
-          }
-          $modal.open = function (modalOptions) {
-            var modalResultDeferred = $q.defer();
-            var modalOpenedDeferred = $q.defer();
-            //prepare an instance of a modal to be injected into controllers and returned to a caller
-            var modalInstance = {
-                result: modalResultDeferred.promise,
-                opened: modalOpenedDeferred.promise,
-                close: function (result) {
-                  $modalStack.close(modalInstance, result);
-                },
-                dismiss: function (reason) {
-                  $modalStack.dismiss(modalInstance, reason);
-                }
-              };
-            //merge and clean up options
-            modalOptions = angular.extend({}, $modalProvider.options, modalOptions);
-            modalOptions.resolve = modalOptions.resolve || {};
-            //verify options
-            if (!modalOptions.template && !modalOptions.templateUrl) {
-              throw new Error('One of template or templateUrl options is required.');
-            }
-            var templateAndResolvePromise = $q.all([getTemplatePromise(modalOptions)].concat(getResolvePromises(modalOptions.resolve)));
-            templateAndResolvePromise.then(function resolveSuccess(tplAndVars) {
-              var modalScope = (modalOptions.scope || $rootScope).$new();
-              modalScope.$close = modalInstance.close;
-              modalScope.$dismiss = modalInstance.dismiss;
-              var ctrlInstance, ctrlLocals = {};
-              var resolveIter = 1;
-              //controllers
-              if (modalOptions.controller) {
-                ctrlLocals.$scope = modalScope;
-                ctrlLocals.$modalInstance = modalInstance;
-                angular.forEach(modalOptions.resolve, function (value, key) {
-                  ctrlLocals[key] = tplAndVars[resolveIter++];
-                });
-                ctrlInstance = $controller(modalOptions.controller, ctrlLocals);
-              }
-              $modalStack.open(modalInstance, {
-                scope: modalScope,
-                deferred: modalResultDeferred,
-                content: tplAndVars[0],
-                backdrop: modalOptions.backdrop,
-                keyboard: modalOptions.keyboard,
-                windowClass: modalOptions.windowClass
-              });
-            }, function resolveError(reason) {
-              modalResultDeferred.reject(reason);
-            });
-            templateAndResolvePromise.then(function () {
-              modalOpenedDeferred.resolve(true);
-            }, function () {
-              modalOpenedDeferred.reject(false);
-            });
-            return modalInstance;
-          };
-          return $modal;
-        }
-      ]
-    };
-  return $modalProvider;
-});
-angular.module('ui.bootstrap.pagination', []).controller('PaginationController', [
-  '$scope',
-  '$attrs',
-  '$parse',
-  '$interpolate',
-  function ($scope, $attrs, $parse, $interpolate) {
-    var self = this, setNumPages = $attrs.numPages ? $parse($attrs.numPages).assign : angular.noop;
-    this.init = function (defaultItemsPerPage) {
-      if ($attrs.itemsPerPage) {
-        $scope.$parent.$watch($parse($attrs.itemsPerPage), function (value) {
-          self.itemsPerPage = parseInt(value, 10);
-          $scope.totalPages = self.calculateTotalPages();
-        });
-      } else {
-        this.itemsPerPage = defaultItemsPerPage;
-      }
-    };
-    this.noPrevious = function () {
-      return this.page === 1;
-    };
-    this.noNext = function () {
-      return this.page === $scope.totalPages;
-    };
-    this.isActive = function (page) {
-      return this.page === page;
-    };
-    this.calculateTotalPages = function () {
-      var totalPages = this.itemsPerPage < 1 ? 1 : Math.ceil($scope.totalItems / this.itemsPerPage);
-      return Math.max(totalPages || 0, 1);
-    };
-    this.getAttributeValue = function (attribute, defaultValue, interpolate) {
-      return angular.isDefined(attribute) ? interpolate ? $interpolate(attribute)($scope.$parent) : $scope.$parent.$eval(attribute) : defaultValue;
-    };
-    this.render = function () {
-      this.page = parseInt($scope.page, 10) || 1;
-      if (this.page > 0 && this.page <= $scope.totalPages) {
-        $scope.pages = this.getPages(this.page, $scope.totalPages);
-      }
-    };
-    $scope.selectPage = function (page) {
-      if (!self.isActive(page) && page > 0 && page <= $scope.totalPages) {
-        $scope.page = page;
-        $scope.onSelectPage({ page: page });
-      }
-    };
-    $scope.$watch('page', function () {
-      self.render();
-    });
-    $scope.$watch('totalItems', function () {
-      $scope.totalPages = self.calculateTotalPages();
-    });
-    $scope.$watch('totalPages', function (value) {
-      setNumPages($scope.$parent, value);
-      // Readonly variable
-      if (self.page > value) {
-        $scope.selectPage(value);
-      } else {
-        self.render();
-      }
-    });
-  }
-]).constant('paginationConfig', {
-  itemsPerPage: 10,
-  boundaryLinks: false,
-  directionLinks: true,
-  firstText: 'First',
-  previousText: 'Previous',
-  nextText: 'Next',
-  lastText: 'Last',
-  rotate: true
-}).directive('pagination', [
-  '$parse',
-  'paginationConfig',
-  function ($parse, config) {
-    return {
-      restrict: 'EA',
-      scope: {
-        page: '=',
-        totalItems: '=',
-        onSelectPage: ' &'
-      },
-      controller: 'PaginationController',
-      templateUrl: 'template/pagination/pagination.html',
-      replace: true,
-      link: function (scope, element, attrs, paginationCtrl) {
-        // Setup configuration parameters
-        var maxSize, boundaryLinks = paginationCtrl.getAttributeValue(attrs.boundaryLinks, config.boundaryLinks), directionLinks = paginationCtrl.getAttributeValue(attrs.directionLinks, config.directionLinks), firstText = paginationCtrl.getAttributeValue(attrs.firstText, config.firstText, true), previousText = paginationCtrl.getAttributeValue(attrs.previousText, config.previousText, true), nextText = paginationCtrl.getAttributeValue(attrs.nextText, config.nextText, true), lastText = paginationCtrl.getAttributeValue(attrs.lastText, config.lastText, true), rotate = paginationCtrl.getAttributeValue(attrs.rotate, config.rotate);
-        paginationCtrl.init(config.itemsPerPage);
-        if (attrs.maxSize) {
-          scope.$parent.$watch($parse(attrs.maxSize), function (value) {
-            maxSize = parseInt(value, 10);
-            paginationCtrl.render();
-          });
-        }
-        // Create page object used in template
-        function makePage(number, text, isActive, isDisabled) {
-          return {
-            number: number,
-            text: text,
-            active: isActive,
-            disabled: isDisabled
-          };
-        }
-        paginationCtrl.getPages = function (currentPage, totalPages) {
-          var pages = [];
-          // Default page limits
-          var startPage = 1, endPage = totalPages;
-          var isMaxSized = angular.isDefined(maxSize) && maxSize < totalPages;
-          // recompute if maxSize
-          if (isMaxSized) {
-            if (rotate) {
-              // Current page is displayed in the middle of the visible ones
-              startPage = Math.max(currentPage - Math.floor(maxSize / 2), 1);
-              endPage = startPage + maxSize - 1;
-              // Adjust if limit is exceeded
-              if (endPage > totalPages) {
-                endPage = totalPages;
-                startPage = endPage - maxSize + 1;
-              }
-            } else {
-              // Visible pages are paginated with maxSize
-              startPage = (Math.ceil(currentPage / maxSize) - 1) * maxSize + 1;
-              // Adjust last page if limit is exceeded
-              endPage = Math.min(startPage + maxSize - 1, totalPages);
-            }
-          }
-          // Add page number links
-          for (var number = startPage; number <= endPage; number++) {
-            var page = makePage(number, number, paginationCtrl.isActive(number), false);
-            pages.push(page);
-          }
-          // Add links to move between page sets
-          if (isMaxSized && !rotate) {
-            if (startPage > 1) {
-              var previousPageSet = makePage(startPage - 1, '...', false, false);
-              pages.unshift(previousPageSet);
-            }
-            if (endPage < totalPages) {
-              var nextPageSet = makePage(endPage + 1, '...', false, false);
-              pages.push(nextPageSet);
-            }
-          }
-          // Add previous & next links
-          if (directionLinks) {
-            var previousPage = makePage(currentPage - 1, previousText, false, paginationCtrl.noPrevious());
-            pages.unshift(previousPage);
-            var nextPage = makePage(currentPage + 1, nextText, false, paginationCtrl.noNext());
-            pages.push(nextPage);
-          }
-          // Add first & last links
-          if (boundaryLinks) {
-            var firstPage = makePage(1, firstText, false, paginationCtrl.noPrevious());
-            pages.unshift(firstPage);
-            var lastPage = makePage(totalPages, lastText, false, paginationCtrl.noNext());
-            pages.push(lastPage);
-          }
-          return pages;
-        };
-      }
-    };
-  }
-]).constant('pagerConfig', {
-  itemsPerPage: 10,
-  previousText: '\xab Previous',
-  nextText: 'Next \xbb',
-  align: true
-}).directive('pager', [
-  'pagerConfig',
-  function (config) {
-    return {
-      restrict: 'EA',
-      scope: {
-        page: '=',
-        totalItems: '=',
-        onSelectPage: ' &'
-      },
-      controller: 'PaginationController',
-      templateUrl: 'template/pagination/pager.html',
-      replace: true,
-      link: function (scope, element, attrs, paginationCtrl) {
-        // Setup configuration parameters
-        var previousText = paginationCtrl.getAttributeValue(attrs.previousText, config.previousText, true), nextText = paginationCtrl.getAttributeValue(attrs.nextText, config.nextText, true), align = paginationCtrl.getAttributeValue(attrs.align, config.align);
-        paginationCtrl.init(config.itemsPerPage);
-        // Create page object used in template
-        function makePage(number, text, isDisabled, isPrevious, isNext) {
-          return {
-            number: number,
-            text: text,
-            disabled: isDisabled,
-            previous: align && isPrevious,
-            next: align && isNext
-          };
-        }
-        paginationCtrl.getPages = function (currentPage) {
-          return [
-            makePage(currentPage - 1, previousText, paginationCtrl.noPrevious(), true, false),
-            makePage(currentPage + 1, nextText, paginationCtrl.noNext(), false, true)
-          ];
-        };
-      }
-    };
-  }
-]);
-/**
- * The following features are still outstanding: animation as a
- * function, placement as a function, inside, support for more triggers than
- * just mouse enter/leave, html tooltips, and selector delegation.
- */
-angular.module('ui.bootstrap.tooltip', [
-  'ui.bootstrap.position',
-  'ui.bootstrap.bindHtml'
-]).provider('$tooltip', function () {
-  // The default options tooltip and popover.
-  var defaultOptions = {
-      placement: 'top',
-      animation: true,
-      popupDelay: 0
-    };
-  // Default hide triggers for each show trigger
-  var triggerMap = {
-      'mouseenter': 'mouseleave',
-      'click': 'click',
-      'focus': 'blur'
-    };
-  // The options specified to the provider globally.
-  var globalOptions = {};
-  /**
-   * `options({})` allows global configuration of all tooltips in the
-   * application.
-   *
-   *   var app = angular.module( 'App', ['ui.bootstrap.tooltip'], function( $tooltipProvider ) {
-   *     // place tooltips left instead of top by default
-   *     $tooltipProvider.options( { placement: 'left' } );
-   *   });
-   */
-  this.options = function (value) {
-    angular.extend(globalOptions, value);
-  };
-  /**
-   * This allows you to extend the set of trigger mappings available. E.g.:
-   *
-   *   $tooltipProvider.setTriggers( 'openTrigger': 'closeTrigger' );
-   */
-  this.setTriggers = function setTriggers(triggers) {
-    angular.extend(triggerMap, triggers);
-  };
-  /**
-   * This is a helper function for translating camel-case to snake-case.
-   */
-  function snake_case(name) {
-    var regexp = /[A-Z]/g;
-    var separator = '-';
-    return name.replace(regexp, function (letter, pos) {
-      return (pos ? separator : '') + letter.toLowerCase();
-    });
-  }
-  /**
-   * Returns the actual instance of the $tooltip service.
-   * TODO support multiple triggers
-   */
-  this.$get = [
-    '$window',
-    '$compile',
-    '$timeout',
-    '$parse',
-    '$document',
-    '$position',
-    '$interpolate',
-    function ($window, $compile, $timeout, $parse, $document, $position, $interpolate) {
-      return function $tooltip(type, prefix, defaultTriggerShow) {
-        var options = angular.extend({}, defaultOptions, globalOptions);
-        /**
-       * Returns an object of show and hide triggers.
-       *
-       * If a trigger is supplied,
-       * it is used to show the tooltip; otherwise, it will use the `trigger`
-       * option passed to the `$tooltipProvider.options` method; else it will
-       * default to the trigger supplied to this directive factory.
-       *
-       * The hide trigger is based on the show trigger. If the `trigger` option
-       * was passed to the `$tooltipProvider.options` method, it will use the
-       * mapped trigger from `triggerMap` or the passed trigger if the map is
-       * undefined; otherwise, it uses the `triggerMap` value of the show
-       * trigger; else it will just use the show trigger.
-       */
-        function getTriggers(trigger) {
-          var show = trigger || options.trigger || defaultTriggerShow;
-          var hide = triggerMap[show] || show;
-          return {
-            show: show,
-            hide: hide
-          };
-        }
-        var directiveName = snake_case(type);
-        var startSym = $interpolate.startSymbol();
-        var endSym = $interpolate.endSymbol();
-        var template = '<div ' + directiveName + '-popup ' + 'title="' + startSym + 'tt_title' + endSym + '" ' + 'content="' + startSym + 'tt_content' + endSym + '" ' + 'placement="' + startSym + 'tt_placement' + endSym + '" ' + 'animation="tt_animation" ' + 'is-open="tt_isOpen"' + '>' + '</div>';
-        return {
-          restrict: 'EA',
-          scope: true,
-          compile: function (tElem, tAttrs) {
-            var tooltipLinker = $compile(template);
-            return function link(scope, element, attrs) {
-              var tooltip;
-              var transitionTimeout;
-              var popupTimeout;
-              var appendToBody = angular.isDefined(options.appendToBody) ? options.appendToBody : false;
-              var triggers = getTriggers(undefined);
-              var hasRegisteredTriggers = false;
-              var hasEnableExp = angular.isDefined(attrs[prefix + 'Enable']);
-              var positionTooltip = function () {
-                var position, ttWidth, ttHeight, ttPosition;
-                // Get the position of the directive element.
-                position = appendToBody ? $position.offset(element) : $position.position(element);
-                // Get the height and width of the tooltip so we can center it.
-                ttWidth = tooltip.prop('offsetWidth');
-                ttHeight = tooltip.prop('offsetHeight');
-                // Calculate the tooltip's top and left coordinates to center it with
-                // this directive.
-                switch (scope.tt_placement) {
-                case 'right':
-                  ttPosition = {
-                    top: position.top + position.height / 2 - ttHeight / 2,
-                    left: position.left + position.width
-                  };
-                  break;
-                case 'bottom':
-                  ttPosition = {
-                    top: position.top + position.height,
-                    left: position.left + position.width / 2 - ttWidth / 2
-                  };
-                  break;
-                case 'left':
-                  ttPosition = {
-                    top: position.top + position.height / 2 - ttHeight / 2,
-                    left: position.left - ttWidth
-                  };
-                  break;
-                default:
-                  ttPosition = {
-                    top: position.top - ttHeight,
-                    left: position.left + position.width / 2 - ttWidth / 2
-                  };
-                  break;
-                }
-                ttPosition.top += 'px';
-                ttPosition.left += 'px';
-                // Now set the calculated positioning.
-                tooltip.css(ttPosition);
-              };
-              // By default, the tooltip is not open.
-              // TODO add ability to start tooltip opened
-              scope.tt_isOpen = false;
-              function toggleTooltipBind() {
-                if (!scope.tt_isOpen) {
-                  showTooltipBind();
-                } else {
-                  hideTooltipBind();
-                }
-              }
-              // Show the tooltip with delay if specified, otherwise show it immediately
-              function showTooltipBind() {
-                if (hasEnableExp && !scope.$eval(attrs[prefix + 'Enable'])) {
-                  return;
-                }
-                if (scope.tt_popupDelay) {
-                  popupTimeout = $timeout(show, scope.tt_popupDelay, false);
-                  popupTimeout.then(function (reposition) {
-                    reposition();
-                  });
-                } else {
-                  show()();
-                }
-              }
-              function hideTooltipBind() {
-                scope.$apply(function () {
-                  hide();
-                });
-              }
-              // Show the tooltip popup element.
-              function show() {
-                // Don't show empty tooltips.
-                if (!scope.tt_content) {
-                  return angular.noop;
-                }
-                createTooltip();
-                // If there is a pending remove transition, we must cancel it, lest the
-                // tooltip be mysteriously removed.
-                if (transitionTimeout) {
-                  $timeout.cancel(transitionTimeout);
-                }
-                // Set the initial positioning.
-                tooltip.css({
-                  top: 0,
-                  left: 0,
-                  display: 'block'
-                });
-                // Now we add it to the DOM because need some info about it. But it's not 
-                // visible yet anyway.
-                if (appendToBody) {
-                  $document.find('body').append(tooltip);
-                } else {
-                  element.after(tooltip);
-                }
-                positionTooltip();
-                // And show the tooltip.
-                scope.tt_isOpen = true;
-                scope.$digest();
-                // digest required as $apply is not called
-                // Return positioning function as promise callback for correct
-                // positioning after draw.
-                return positionTooltip;
-              }
-              // Hide the tooltip popup element.
-              function hide() {
-                // First things first: we don't show it anymore.
-                scope.tt_isOpen = false;
-                //if tooltip is going to be shown after delay, we must cancel this
-                $timeout.cancel(popupTimeout);
-                // And now we remove it from the DOM. However, if we have animation, we 
-                // need to wait for it to expire beforehand.
-                // FIXME: this is a placeholder for a port of the transitions library.
-                if (scope.tt_animation) {
-                  transitionTimeout = $timeout(removeTooltip, 500);
-                } else {
-                  removeTooltip();
-                }
-              }
-              function createTooltip() {
-                // There can only be one tooltip element per directive shown at once.
-                if (tooltip) {
-                  removeTooltip();
-                }
-                tooltip = tooltipLinker(scope, function () {
-                });
-                // Get contents rendered into the tooltip
-                scope.$digest();
-              }
-              function removeTooltip() {
-                if (tooltip) {
-                  tooltip.remove();
-                  tooltip = null;
-                }
-              }
-              /**
-             * Observe the relevant attributes.
-             */
-              attrs.$observe(type, function (val) {
-                scope.tt_content = val;
-                if (!val && scope.tt_isOpen) {
-                  hide();
-                }
-              });
-              attrs.$observe(prefix + 'Title', function (val) {
-                scope.tt_title = val;
-              });
-              attrs.$observe(prefix + 'Placement', function (val) {
-                scope.tt_placement = angular.isDefined(val) ? val : options.placement;
-              });
-              attrs.$observe(prefix + 'PopupDelay', function (val) {
-                var delay = parseInt(val, 10);
-                scope.tt_popupDelay = !isNaN(delay) ? delay : options.popupDelay;
-              });
-              var unregisterTriggers = function () {
-                if (hasRegisteredTriggers) {
-                  element.unbind(triggers.show, showTooltipBind);
-                  element.unbind(triggers.hide, hideTooltipBind);
-                }
-              };
-              attrs.$observe(prefix + 'Trigger', function (val) {
-                unregisterTriggers();
-                triggers = getTriggers(val);
-                if (triggers.show === triggers.hide) {
-                  element.bind(triggers.show, toggleTooltipBind);
-                } else {
-                  element.bind(triggers.show, showTooltipBind);
-                  element.bind(triggers.hide, hideTooltipBind);
-                }
-                hasRegisteredTriggers = true;
-              });
-              var animation = scope.$eval(attrs[prefix + 'Animation']);
-              scope.tt_animation = angular.isDefined(animation) ? !!animation : options.animation;
-              attrs.$observe(prefix + 'AppendToBody', function (val) {
-                appendToBody = angular.isDefined(val) ? $parse(val)(scope) : appendToBody;
-              });
-              // if a tooltip is attached to <body> we need to remove it on
-              // location change as its parent scope will probably not be destroyed
-              // by the change.
-              if (appendToBody) {
-                scope.$on('$locationChangeSuccess', function closeTooltipOnLocationChangeSuccess() {
-                  if (scope.tt_isOpen) {
-                    hide();
-                  }
-                });
-              }
-              // Make sure tooltip is destroyed and removed.
-              scope.$on('$destroy', function onDestroyTooltip() {
-                $timeout.cancel(transitionTimeout);
-                $timeout.cancel(popupTimeout);
-                unregisterTriggers();
-                removeTooltip();
-              });
-            };
-          }
-        };
-      };
-    }
-  ];
-}).directive('tooltipPopup', function () {
-  return {
-    restrict: 'EA',
-    replace: true,
-    scope: {
-      content: '@',
-      placement: '@',
-      animation: '&',
-      isOpen: '&'
-    },
-    templateUrl: 'template/tooltip/tooltip-popup.html'
-  };
-}).directive('tooltip', [
-  '$tooltip',
-  function ($tooltip) {
-    return $tooltip('tooltip', 'tooltip', 'mouseenter');
-  }
-]).directive('tooltipHtmlUnsafePopup', function () {
-  return {
-    restrict: 'EA',
-    replace: true,
-    scope: {
-      content: '@',
-      placement: '@',
-      animation: '&',
-      isOpen: '&'
-    },
-    templateUrl: 'template/tooltip/tooltip-html-unsafe-popup.html'
-  };
-}).directive('tooltipHtmlUnsafe', [
-  '$tooltip',
-  function ($tooltip) {
-    return $tooltip('tooltipHtmlUnsafe', 'tooltip', 'mouseenter');
-  }
-]);
-/**
- * The following features are still outstanding: popup delay, animation as a
- * function, placement as a function, inside, support for more triggers than
- * just mouse enter/leave, html popovers, and selector delegatation.
- */
-angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip']).directive('popoverPopup', function () {
-  return {
-    restrict: 'EA',
-    replace: true,
-    scope: {
-      title: '@',
-      content: '@',
-      placement: '@',
-      animation: '&',
-      isOpen: '&'
-    },
-    templateUrl: 'template/popover/popover.html'
-  };
-}).directive('popover', [
-  '$tooltip',
-  function ($tooltip) {
-    return $tooltip('popover', 'popover', 'click');
-  }
-]);
-angular.module('ui.bootstrap.progressbar', ['ui.bootstrap.transition']).constant('progressConfig', {
-  animate: true,
-  max: 100
-}).controller('ProgressController', [
-  '$scope',
-  '$attrs',
-  'progressConfig',
-  '$transition',
-  function ($scope, $attrs, progressConfig, $transition) {
-    var self = this, bars = [], max = angular.isDefined($attrs.max) ? $scope.$parent.$eval($attrs.max) : progressConfig.max, animate = angular.isDefined($attrs.animate) ? $scope.$parent.$eval($attrs.animate) : progressConfig.animate;
-    this.addBar = function (bar, element) {
-      var oldValue = 0, index = bar.$parent.$index;
-      if (angular.isDefined(index) && bars[index]) {
-        oldValue = bars[index].value;
-      }
-      bars.push(bar);
-      this.update(element, bar.value, oldValue);
-      bar.$watch('value', function (value, oldValue) {
-        if (value !== oldValue) {
-          self.update(element, value, oldValue);
-        }
-      });
-      bar.$on('$destroy', function () {
-        self.removeBar(bar);
-      });
-    };
-    // Update bar element width
-    this.update = function (element, newValue, oldValue) {
-      var percent = this.getPercentage(newValue);
-      if (animate) {
-        element.css('width', this.getPercentage(oldValue) + '%');
-        $transition(element, { width: percent + '%' });
-      } else {
-        element.css({
-          'transition': 'none',
-          'width': percent + '%'
-        });
-      }
-    };
-    this.removeBar = function (bar) {
-      bars.splice(bars.indexOf(bar), 1);
-    };
-    this.getPercentage = function (value) {
-      return Math.round(100 * value / max);
-    };
-  }
-]).directive('progress', function () {
-  return {
-    restrict: 'EA',
-    replace: true,
-    transclude: true,
-    controller: 'ProgressController',
-    require: 'progress',
-    scope: {},
-    template: '<div class="progress" ng-transclude></div>'
-  };
-}).directive('bar', function () {
-  return {
-    restrict: 'EA',
-    replace: true,
-    transclude: true,
-    require: '^progress',
-    scope: {
-      value: '=',
-      type: '@'
-    },
-    templateUrl: 'template/progressbar/bar.html',
-    link: function (scope, element, attrs, progressCtrl) {
-      progressCtrl.addBar(scope, element);
-    }
-  };
-}).directive('progressbar', function () {
-  return {
-    restrict: 'EA',
-    replace: true,
-    transclude: true,
-    controller: 'ProgressController',
-    scope: {
-      value: '=',
-      type: '@'
-    },
-    templateUrl: 'template/progressbar/progressbar.html',
-    link: function (scope, element, attrs, progressCtrl) {
-      progressCtrl.addBar(scope, angular.element(element.children()[0]));
-    }
-  };
-});
-angular.module('ui.bootstrap.rating', []).constant('ratingConfig', {
-  max: 5,
-  stateOn: null,
-  stateOff: null
-}).controller('RatingController', [
-  '$scope',
-  '$attrs',
-  '$parse',
-  'ratingConfig',
-  function ($scope, $attrs, $parse, ratingConfig) {
-    this.maxRange = angular.isDefined($attrs.max) ? $scope.$parent.$eval($attrs.max) : ratingConfig.max;
-    this.stateOn = angular.isDefined($attrs.stateOn) ? $scope.$parent.$eval($attrs.stateOn) : ratingConfig.stateOn;
-    this.stateOff = angular.isDefined($attrs.stateOff) ? $scope.$parent.$eval($attrs.stateOff) : ratingConfig.stateOff;
-    this.createRateObjects = function (states) {
-      var defaultOptions = {
-          stateOn: this.stateOn,
-          stateOff: this.stateOff
-        };
-      for (var i = 0, n = states.length; i < n; i++) {
-        states[i] = angular.extend({ index: i }, defaultOptions, states[i]);
-      }
-      return states;
-    };
-    // Get objects used in template
-    $scope.range = angular.isDefined($attrs.ratingStates) ? this.createRateObjects(angular.copy($scope.$parent.$eval($attrs.ratingStates))) : this.createRateObjects(new Array(this.maxRange));
-    $scope.rate = function (value) {
-      if ($scope.value !== value && !$scope.readonly) {
-        $scope.value = value;
-      }
-    };
-    $scope.enter = function (value) {
-      if (!$scope.readonly) {
-        $scope.val = value;
-      }
-      $scope.onHover({ value: value });
-    };
-    $scope.reset = function () {
-      $scope.val = angular.copy($scope.value);
-      $scope.onLeave();
-    };
-    $scope.$watch('value', function (value) {
-      $scope.val = value;
-    });
-    $scope.readonly = false;
-    if ($attrs.readonly) {
-      $scope.$parent.$watch($parse($attrs.readonly), function (value) {
-        $scope.readonly = !!value;
-      });
-    }
-  }
-]).directive('rating', function () {
-  return {
-    restrict: 'EA',
-    scope: {
-      value: '=',
-      onHover: '&',
-      onLeave: '&'
-    },
-    controller: 'RatingController',
-    templateUrl: 'template/rating/rating.html',
-    replace: true
-  };
-});
-/**
- * @ngdoc overview
- * @name ui.bootstrap.tabs
- *
- * @description
- * AngularJS version of the tabs directive.
- */
-angular.module('ui.bootstrap.tabs', []).controller('TabsetController', [
-  '$scope',
-  function TabsetCtrl($scope) {
-    var ctrl = this, tabs = ctrl.tabs = $scope.tabs = [];
-    ctrl.select = function (tab) {
-      angular.forEach(tabs, function (tab) {
-        tab.active = false;
-      });
-      tab.active = true;
-    };
-    ctrl.addTab = function addTab(tab) {
-      tabs.push(tab);
-      if (tabs.length === 1 || tab.active) {
-        ctrl.select(tab);
-      }
-    };
-    ctrl.removeTab = function removeTab(tab) {
-      var index = tabs.indexOf(tab);
-      //Select a new tab if the tab to be removed is selected
-      if (tab.active && tabs.length > 1) {
-        //If this is the last tab, select the previous tab. else, the next tab.
-        var newActiveIndex = index == tabs.length - 1 ? index - 1 : index + 1;
-        ctrl.select(tabs[newActiveIndex]);
-      }
-      tabs.splice(index, 1);
-    };
-  }
-]).directive('tabset', function () {
-  return {
-    restrict: 'EA',
-    transclude: true,
-    replace: true,
-    scope: {},
-    controller: 'TabsetController',
-    templateUrl: 'template/tabs/tabset.html',
-    link: function (scope, element, attrs) {
-      scope.vertical = angular.isDefined(attrs.vertical) ? scope.$parent.$eval(attrs.vertical) : false;
-      scope.justified = angular.isDefined(attrs.justified) ? scope.$parent.$eval(attrs.justified) : false;
-      scope.type = angular.isDefined(attrs.type) ? scope.$parent.$eval(attrs.type) : 'tabs';
-    }
-  };
-}).directive('tab', [
-  '$parse',
-  function ($parse) {
-    return {
-      require: '^tabset',
-      restrict: 'EA',
-      replace: true,
-      templateUrl: 'template/tabs/tab.html',
-      transclude: true,
-      scope: {
-        heading: '@',
-        onSelect: '&select',
-        onDeselect: '&deselect'
-      },
-      controller: function () {
-      },
-      compile: function (elm, attrs, transclude) {
-        return function postLink(scope, elm, attrs, tabsetCtrl) {
-          var getActive, setActive;
-          if (attrs.active) {
-            getActive = $parse(attrs.active);
-            setActive = getActive.assign;
-            scope.$parent.$watch(getActive, function updateActive(value, oldVal) {
-              // Avoid re-initializing scope.active as it is already initialized
-              // below. (watcher is called async during init with value ===
-              // oldVal)
-              if (value !== oldVal) {
-                scope.active = !!value;
-              }
-            });
-            scope.active = getActive(scope.$parent);
-          } else {
-            setActive = getActive = angular.noop;
-          }
-          scope.$watch('active', function (active) {
-            // Note this watcher also initializes and assigns scope.active to the
-            // attrs.active expression.
-            setActive(scope.$parent, active);
-            if (active) {
-              tabsetCtrl.select(scope);
-              scope.onSelect();
-            } else {
-              scope.onDeselect();
-            }
-          });
-          scope.disabled = false;
-          if (attrs.disabled) {
-            scope.$parent.$watch($parse(attrs.disabled), function (value) {
-              scope.disabled = !!value;
-            });
-          }
-          scope.select = function () {
-            if (!scope.disabled) {
-              scope.active = true;
-            }
-          };
-          tabsetCtrl.addTab(scope);
-          scope.$on('$destroy', function () {
-            tabsetCtrl.removeTab(scope);
-          });
-          //We need to transclude later, once the content container is ready.
-          //when this link happens, we're inside a tab heading.
-          scope.$transcludeFn = transclude;
-        };
-      }
-    };
-  }
-]).directive('tabHeadingTransclude', [function () {
-    return {
-      restrict: 'A',
-      require: '^tab',
-      link: function (scope, elm, attrs, tabCtrl) {
-        scope.$watch('headingElement', function updateHeadingElement(heading) {
-          if (heading) {
-            elm.html('');
-            elm.append(heading);
-          }
-        });
-      }
-    };
-  }]).directive('tabContentTransclude', function () {
-  return {
-    restrict: 'A',
-    require: '^tabset',
-    link: function (scope, elm, attrs) {
-      var tab = scope.$eval(attrs.tabContentTransclude);
-      //Now our tab is ready to be transcluded: both the tab heading area
-      //and the tab content area are loaded.  Transclude 'em both.
-      tab.$transcludeFn(tab.$parent, function (contents) {
-        angular.forEach(contents, function (node) {
-          if (isTabHeading(node)) {
-            //Let tabHeadingTransclude know.
-            tab.headingElement = node;
-          } else {
-            elm.append(node);
-          }
-        });
-      });
-    }
-  };
-  function isTabHeading(node) {
-    return node.tagName && (node.hasAttribute('tab-heading') || node.hasAttribute('data-tab-heading') || node.tagName.toLowerCase() === 'tab-heading' || node.tagName.toLowerCase() === 'data-tab-heading');
-  }
-});
-;
-angular.module('ui.bootstrap.timepicker', []).constant('timepickerConfig', {
-  hourStep: 1,
-  minuteStep: 1,
-  showMeridian: true,
-  meridians: null,
-  readonlyInput: false,
-  mousewheel: true
-}).directive('timepicker', [
-  '$parse',
-  '$log',
-  'timepickerConfig',
-  '$locale',
-  function ($parse, $log, timepickerConfig, $locale) {
-    return {
-      restrict: 'EA',
-      require: '?^ngModel',
-      replace: true,
-      scope: {},
-      templateUrl: 'template/timepicker/timepicker.html',
-      link: function (scope, element, attrs, ngModel) {
-        if (!ngModel) {
-          return;  // do nothing if no ng-model
-        }
-        var selected = new Date(), meridians = angular.isDefined(attrs.meridians) ? scope.$parent.$eval(attrs.meridians) : timepickerConfig.meridians || $locale.DATETIME_FORMATS.AMPMS;
-        var hourStep = timepickerConfig.hourStep;
-        if (attrs.hourStep) {
-          scope.$parent.$watch($parse(attrs.hourStep), function (value) {
-            hourStep = parseInt(value, 10);
-          });
-        }
-        var minuteStep = timepickerConfig.minuteStep;
-        if (attrs.minuteStep) {
-          scope.$parent.$watch($parse(attrs.minuteStep), function (value) {
-            minuteStep = parseInt(value, 10);
-          });
-        }
-        // 12H / 24H mode
-        scope.showMeridian = timepickerConfig.showMeridian;
-        if (attrs.showMeridian) {
-          scope.$parent.$watch($parse(attrs.showMeridian), function (value) {
-            scope.showMeridian = !!value;
-            if (ngModel.$error.time) {
-              // Evaluate from template
-              var hours = getHoursFromTemplate(), minutes = getMinutesFromTemplate();
-              if (angular.isDefined(hours) && angular.isDefined(minutes)) {
-                selected.setHours(hours);
-                refresh();
-              }
-            } else {
-              updateTemplate();
-            }
-          });
-        }
-        // Get scope.hours in 24H mode if valid
-        function getHoursFromTemplate() {
-          var hours = parseInt(scope.hours, 10);
-          var valid = scope.showMeridian ? hours > 0 && hours < 13 : hours >= 0 && hours < 24;
-          if (!valid) {
-            return undefined;
-          }
-          if (scope.showMeridian) {
-            if (hours === 12) {
-              hours = 0;
-            }
-            if (scope.meridian === meridians[1]) {
-              hours = hours + 12;
-            }
-          }
-          return hours;
-        }
-        function getMinutesFromTemplate() {
-          var minutes = parseInt(scope.minutes, 10);
-          return minutes >= 0 && minutes < 60 ? minutes : undefined;
-        }
-        function pad(value) {
-          return angular.isDefined(value) && value.toString().length < 2 ? '0' + value : value;
-        }
-        // Input elements
-        var inputs = element.find('input'), hoursInputEl = inputs.eq(0), minutesInputEl = inputs.eq(1);
-        // Respond on mousewheel spin
-        var mousewheel = angular.isDefined(attrs.mousewheel) ? scope.$eval(attrs.mousewheel) : timepickerConfig.mousewheel;
-        if (mousewheel) {
-          var isScrollingUp = function (e) {
-            if (e.originalEvent) {
-              e = e.originalEvent;
-            }
-            //pick correct delta variable depending on event
-            var delta = e.wheelDelta ? e.wheelDelta : -e.deltaY;
-            return e.detail || delta > 0;
-          };
-          hoursInputEl.bind('mousewheel wheel', function (e) {
-            scope.$apply(isScrollingUp(e) ? scope.incrementHours() : scope.decrementHours());
-            e.preventDefault();
-          });
-          minutesInputEl.bind('mousewheel wheel', function (e) {
-            scope.$apply(isScrollingUp(e) ? scope.incrementMinutes() : scope.decrementMinutes());
-            e.preventDefault();
-          });
-        }
-        scope.readonlyInput = angular.isDefined(attrs.readonlyInput) ? scope.$eval(attrs.readonlyInput) : timepickerConfig.readonlyInput;
-        if (!scope.readonlyInput) {
-          var invalidate = function (invalidHours, invalidMinutes) {
-            ngModel.$setViewValue(null);
-            ngModel.$setValidity('time', false);
-            if (angular.isDefined(invalidHours)) {
-              scope.invalidHours = invalidHours;
-            }
-            if (angular.isDefined(invalidMinutes)) {
-              scope.invalidMinutes = invalidMinutes;
-            }
-          };
-          scope.updateHours = function () {
-            var hours = getHoursFromTemplate();
-            if (angular.isDefined(hours)) {
-              selected.setHours(hours);
-              refresh('h');
-            } else {
-              invalidate(true);
-            }
-          };
-          hoursInputEl.bind('blur', function (e) {
-            if (!scope.validHours && scope.hours < 10) {
-              scope.$apply(function () {
-                scope.hours = pad(scope.hours);
-              });
-            }
-          });
-          scope.updateMinutes = function () {
-            var minutes = getMinutesFromTemplate();
-            if (angular.isDefined(minutes)) {
-              selected.setMinutes(minutes);
-              refresh('m');
-            } else {
-              invalidate(undefined, true);
-            }
-          };
-          minutesInputEl.bind('blur', function (e) {
-            if (!scope.invalidMinutes && scope.minutes < 10) {
-              scope.$apply(function () {
-                scope.minutes = pad(scope.minutes);
-              });
-            }
-          });
-        } else {
-          scope.updateHours = angular.noop;
-          scope.updateMinutes = angular.noop;
-        }
-        ngModel.$render = function () {
-          var date = ngModel.$modelValue ? new Date(ngModel.$modelValue) : null;
-          if (isNaN(date)) {
-            ngModel.$setValidity('time', false);
-            $log.error('Timepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.');
-          } else {
-            if (date) {
-              selected = date;
-            }
-            makeValid();
-            updateTemplate();
-          }
-        };
-        // Call internally when we know that model is valid.
-        function refresh(keyboardChange) {
-          makeValid();
-          ngModel.$setViewValue(new Date(selected));
-          updateTemplate(keyboardChange);
-        }
-        function makeValid() {
-          ngModel.$setValidity('time', true);
-          scope.invalidHours = false;
-          scope.invalidMinutes = false;
-        }
-        function updateTemplate(keyboardChange) {
-          var hours = selected.getHours(), minutes = selected.getMinutes();
-          if (scope.showMeridian) {
-            hours = hours === 0 || hours === 12 ? 12 : hours % 12;  // Convert 24 to 12 hour system
-          }
-          scope.hours = keyboardChange === 'h' ? hours : pad(hours);
-          scope.minutes = keyboardChange === 'm' ? minutes : pad(minutes);
-          scope.meridian = selected.getHours() < 12 ? meridians[0] : meridians[1];
-        }
-        function addMinutes(minutes) {
-          var dt = new Date(selected.getTime() + minutes * 60000);
-          selected.setHours(dt.getHours(), dt.getMinutes());
-          refresh();
-        }
-        scope.incrementHours = function () {
-          addMinutes(hourStep * 60);
-        };
-        scope.decrementHours = function () {
-          addMinutes(-hourStep * 60);
-        };
-        scope.incrementMinutes = function () {
-          addMinutes(minuteStep);
-        };
-        scope.decrementMinutes = function () {
-          addMinutes(-minuteStep);
-        };
-        scope.toggleMeridian = function () {
-          addMinutes(12 * 60 * (selected.getHours() < 12 ? 1 : -1));
-        };
-      }
-    };
-  }
-]);
-angular.module('ui.bootstrap.typeahead', [
-  'ui.bootstrap.position',
-  'ui.bootstrap.bindHtml'
-]).factory('typeaheadParser', [
-  '$parse',
-  function ($parse) {
-    //                      00000111000000000000022200000000000000003333333333333330000000000044000
-    var TYPEAHEAD_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+(.*)$/;
-    return {
-      parse: function (input) {
-        var match = input.match(TYPEAHEAD_REGEXP), modelMapper, viewMapper, source;
-        if (!match) {
-          throw new Error('Expected typeahead specification in form of \'_modelValue_ (as _label_)? for _item_ in _collection_\'' + ' but got \'' + input + '\'.');
-        }
-        return {
-          itemName: match[3],
-          source: $parse(match[4]),
-          viewMapper: $parse(match[2] || match[1]),
-          modelMapper: $parse(match[1])
-        };
-      }
-    };
-  }
-]).directive('typeahead', [
-  '$compile',
-  '$parse',
-  '$q',
-  '$timeout',
-  '$document',
-  '$position',
-  'typeaheadParser',
-  function ($compile, $parse, $q, $timeout, $document, $position, typeaheadParser) {
-    var HOT_KEYS = [
-        9,
-        13,
-        27,
-        38,
-        40
-      ];
-    return {
-      require: 'ngModel',
-      link: function (originalScope, element, attrs, modelCtrl) {
-        //SUPPORTED ATTRIBUTES (OPTIONS)
-        //minimal no of characters that needs to be entered before typeahead kicks-in
-        var minSearch = originalScope.$eval(attrs.typeaheadMinLength) || 1;
-        //minimal wait time after last character typed before typehead kicks-in
-        var waitTime = originalScope.$eval(attrs.typeaheadWaitMs) || 0;
-        //should it restrict model values to the ones selected from the popup only?
-        var isEditable = originalScope.$eval(attrs.typeaheadEditable) !== false;
-        //binding to a variable that indicates if matches are being retrieved asynchronously
-        var isLoadingSetter = $parse(attrs.typeaheadLoading).assign || angular.noop;
-        //a callback executed when a match is selected
-        var onSelectCallback = $parse(attrs.typeaheadOnSelect);
-        var inputFormatter = attrs.typeaheadInputFormatter ? $parse(attrs.typeaheadInputFormatter) : undefined;
-        var appendToBody = attrs.typeaheadAppendToBody ? $parse(attrs.typeaheadAppendToBody) : false;
-        //INTERNAL VARIABLES
-        //model setter executed upon match selection
-        var $setModelValue = $parse(attrs.ngModel).assign;
-        //expressions used by typeahead
-        var parserResult = typeaheadParser.parse(attrs.typeahead);
-        var hasFocus;
-        //pop-up element used to display matches
-        var popUpEl = angular.element('<div typeahead-popup></div>');
-        popUpEl.attr({
-          matches: 'matches',
-          active: 'activeIdx',
-          select: 'select(activeIdx)',
-          query: 'query',
-          position: 'position'
-        });
-        //custom item template
-        if (angular.isDefined(attrs.typeaheadTemplateUrl)) {
-          popUpEl.attr('template-url', attrs.typeaheadTemplateUrl);
-        }
-        //create a child scope for the typeahead directive so we are not polluting original scope
-        //with typeahead-specific data (matches, query etc.)
-        var scope = originalScope.$new();
-        originalScope.$on('$destroy', function () {
-          scope.$destroy();
-        });
-        var resetMatches = function () {
-          scope.matches = [];
-          scope.activeIdx = -1;
-        };
-        var getMatchesAsync = function (inputValue) {
-          var locals = { $viewValue: inputValue };
-          isLoadingSetter(originalScope, true);
-          $q.when(parserResult.source(originalScope, locals)).then(function (matches) {
-            //it might happen that several async queries were in progress if a user were typing fast
-            //but we are interested only in responses that correspond to the current view value
-            if (inputValue === modelCtrl.$viewValue && hasFocus) {
-              if (matches.length > 0) {
-                scope.activeIdx = 0;
-                scope.matches.length = 0;
-                //transform labels
-                for (var i = 0; i < matches.length; i++) {
-                  locals[parserResult.itemName] = matches[i];
-                  scope.matches.push({
-                    label: parserResult.viewMapper(scope, locals),
-                    model: matches[i]
-                  });
-                }
-                scope.query = inputValue;
-                //position pop-up with matches - we need to re-calculate its position each time we are opening a window
-                //with matches as a pop-up might be absolute-positioned and position of an input might have changed on a page
-                //due to other elements being rendered
-                scope.position = appendToBody ? $position.offset(element) : $position.position(element);
-                scope.position.top = scope.position.top + element.prop('offsetHeight');
-              } else {
-                resetMatches();
-              }
-              isLoadingSetter(originalScope, false);
-            }
-          }, function () {
-            resetMatches();
-            isLoadingSetter(originalScope, false);
-          });
-        };
-        resetMatches();
-        //we need to propagate user's query so we can higlight matches
-        scope.query = undefined;
-        //Declare the timeout promise var outside the function scope so that stacked calls can be cancelled later 
-        var timeoutPromise;
-        //plug into $parsers pipeline to open a typeahead on view changes initiated from DOM
-        //$parsers kick-in on all the changes coming from the view as well as manually triggered by $setViewValue
-        modelCtrl.$parsers.unshift(function (inputValue) {
-          hasFocus = true;
-          if (inputValue && inputValue.length >= minSearch) {
-            if (waitTime > 0) {
-              if (timeoutPromise) {
-                $timeout.cancel(timeoutPromise);  //cancel previous timeout
-              }
-              timeoutPromise = $timeout(function () {
-                getMatchesAsync(inputValue);
-              }, waitTime);
-            } else {
-              getMatchesAsync(inputValue);
-            }
-          } else {
-            isLoadingSetter(originalScope, false);
-            resetMatches();
-          }
-          if (isEditable) {
-            return inputValue;
-          } else {
-            if (!inputValue) {
-              // Reset in case user had typed something previously.
-              modelCtrl.$setValidity('editable', true);
-              return inputValue;
-            } else {
-              modelCtrl.$setValidity('editable', false);
-              return undefined;
-            }
-          }
-        });
-        modelCtrl.$formatters.push(function (modelValue) {
-          var candidateViewValue, emptyViewValue;
-          var locals = {};
-          if (inputFormatter) {
-            locals['$model'] = modelValue;
-            return inputFormatter(originalScope, locals);
-          } else {
-            //it might happen that we don't have enough info to properly render input value
-            //we need to check for this situation and simply return model value if we can't apply custom formatting
-            locals[parserResult.itemName] = modelValue;
-            candidateViewValue = parserResult.viewMapper(originalScope, locals);
-            locals[parserResult.itemName] = undefined;
-            emptyViewValue = parserResult.viewMapper(originalScope, locals);
-            return candidateViewValue !== emptyViewValue ? candidateViewValue : modelValue;
-          }
-        });
-        scope.select = function (activeIdx) {
-          //called from within the $digest() cycle
-          var locals = {};
-          var model, item;
-          locals[parserResult.itemName] = item = scope.matches[activeIdx].model;
-          model = parserResult.modelMapper(originalScope, locals);
-          $setModelValue(originalScope, model);
-          modelCtrl.$setValidity('editable', true);
-          onSelectCallback(originalScope, {
-            $item: item,
-            $model: model,
-            $label: parserResult.viewMapper(originalScope, locals)
-          });
-          resetMatches();
-          //return focus to the input element if a mach was selected via a mouse click event
-          element[0].focus();
-        };
-        //bind keyboard events: arrows up(38) / down(40), enter(13) and tab(9), esc(27)
-        element.bind('keydown', function (evt) {
-          //typeahead is open and an "interesting" key was pressed
-          if (scope.matches.length === 0 || HOT_KEYS.indexOf(evt.which) === -1) {
-            return;
-          }
-          evt.preventDefault();
-          if (evt.which === 40) {
-            scope.activeIdx = (scope.activeIdx + 1) % scope.matches.length;
-            scope.$digest();
-          } else if (evt.which === 38) {
-            scope.activeIdx = (scope.activeIdx ? scope.activeIdx : scope.matches.length) - 1;
-            scope.$digest();
-          } else if (evt.which === 13 || evt.which === 9) {
-            scope.$apply(function () {
-              scope.select(scope.activeIdx);
-            });
-          } else if (evt.which === 27) {
-            evt.stopPropagation();
-            resetMatches();
-            scope.$digest();
-          }
-        });
-        element.bind('blur', function (evt) {
-          hasFocus = false;
-        });
-        // Keep reference to click handler to unbind it.
-        var dismissClickHandler = function (evt) {
-          if (element[0] !== evt.target) {
-            resetMatches();
-            scope.$digest();
-          }
-        };
-        $document.bind('click', dismissClickHandler);
-        originalScope.$on('$destroy', function () {
-          $document.unbind('click', dismissClickHandler);
-        });
-        var $popup = $compile(popUpEl)(scope);
-        if (appendToBody) {
-          $document.find('body').append($popup);
-        } else {
-          element.after($popup);
-        }
-      }
-    };
-  }
-]).directive('typeaheadPopup', function () {
-  return {
-    restrict: 'EA',
-    scope: {
-      matches: '=',
-      query: '=',
-      active: '=',
-      position: '=',
-      select: '&'
-    },
-    replace: true,
-    templateUrl: 'template/typeahead/typeahead-popup.html',
-    link: function (scope, element, attrs) {
-      scope.templateUrl = attrs.templateUrl;
-      scope.isOpen = function () {
-        return scope.matches.length > 0;
-      };
-      scope.isActive = function (matchIdx) {
-        return scope.active == matchIdx;
-      };
-      scope.selectActive = function (matchIdx) {
-        scope.active = matchIdx;
-      };
-      scope.selectMatch = function (activeIdx) {
-        scope.select({ activeIdx: activeIdx });
-      };
-    }
-  };
-}).directive('typeaheadMatch', [
-  '$http',
-  '$templateCache',
-  '$compile',
-  '$parse',
-  function ($http, $templateCache, $compile, $parse) {
-    return {
-      restrict: 'EA',
-      scope: {
-        index: '=',
-        match: '=',
-        query: '='
-      },
-      link: function (scope, element, attrs) {
-        var tplUrl = $parse(attrs.templateUrl)(scope.$parent) || 'template/typeahead/typeahead-match.html';
-        $http.get(tplUrl, { cache: $templateCache }).success(function (tplContent) {
-          element.replaceWith($compile(tplContent.trim())(scope));
-        });
-      }
-    };
-  }
-]).filter('typeaheadHighlight', function () {
-  function escapeRegexp(queryToEscape) {
-    return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
-  }
-  return function (matchItem, query) {
-    return query ? matchItem.replace(new RegExp(escapeRegexp(query), 'gi'), '<strong>$&</strong>') : matchItem;
-  };
-});
-angular.module('template/accordion/accordion-group.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/accordion/accordion-group.html', '<div class="panel panel-default">\n' + '  <div class="panel-heading">\n' + '    <h4 class="panel-title">\n' + '      <a class="accordion-toggle" ng-click="isOpen = !isOpen" accordion-transclude="heading">{{heading}}</a>\n' + '    </h4>\n' + '  </div>\n' + '  <div class="panel-collapse" collapse="!isOpen">\n' + '\t  <div class="panel-body" ng-transclude></div>\n' + '  </div>\n' + '</div>');
-  }
-]);
-angular.module('template/accordion/accordion.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/accordion/accordion.html', '<div class="panel-group" ng-transclude></div>');
-  }
-]);
-angular.module('template/alert/alert.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/alert/alert.html', '<div class=\'alert\' ng-class=\'"alert-" + (type || "warning")\'>\n' + '    <button ng-show=\'closeable\' type=\'button\' class=\'close\' ng-click=\'close()\'>&times;</button>\n' + '    <div ng-transclude></div>\n' + '</div>\n' + '');
-  }
-]);
-angular.module('template/carousel/carousel.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/carousel/carousel.html', '<div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel">\n' + '    <ol class="carousel-indicators" ng-show="slides().length > 1">\n' + '        <li ng-repeat="slide in slides()" ng-class="{active: isActive(slide)}" ng-click="select(slide)"></li>\n' + '    </ol>\n' + '    <div class="carousel-inner" ng-transclude></div>\n' + '    <a class="left carousel-control" ng-click="prev()" ng-show="slides().length > 1"><span class="icon-prev"></span></a>\n' + '    <a class="right carousel-control" ng-click="next()" ng-show="slides().length > 1"><span class="icon-next"></span></a>\n' + '</div>\n' + '');
-  }
-]);
-angular.module('template/carousel/slide.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/carousel/slide.html', '<div ng-class="{\n' + '    \'active\': leaving || (active && !entering),\n' + '    \'prev\': (next || active) && direction==\'prev\',\n' + '    \'next\': (next || active) && direction==\'next\',\n' + '    \'right\': direction==\'prev\',\n' + '    \'left\': direction==\'next\'\n' + '  }" class="item text-center" ng-transclude></div>\n' + '');
-  }
-]);
-angular.module('template/datepicker/datepicker.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/datepicker/datepicker.html', '<table>\n' + '  <thead>\n' + '    <tr>\n' + '      <th><button type="button" class="btn btn-default btn-sm pull-left" ng-click="move(-1)"><i class="glyphicon glyphicon-chevron-left"></i></button></th>\n' + '      <th colspan="{{rows[0].length - 2 + showWeekNumbers}}"><button type="button" class="btn btn-default btn-sm btn-block" ng-click="toggleMode()"><strong>{{title}}</strong></button></th>\n' + '      <th><button type="button" class="btn btn-default btn-sm pull-right" ng-click="move(1)"><i class="glyphicon glyphicon-chevron-right"></i></button></th>\n' + '    </tr>\n' + '    <tr ng-show="labels.length > 0" class="h6">\n' + '      <th ng-show="showWeekNumbers" class="text-center">#</th>\n' + '      <th ng-repeat="label in labels" class="text-center">{{label}}</th>\n' + '    </tr>\n' + '  </thead>\n' + '  <tbody>\n' + '    <tr ng-repeat="row in rows">\n' + '      <td ng-show="showWeekNumbers" class="text-center"><em>{{ getWeekNumber(row) }}</em></td>\n' + '      <td ng-repeat="dt in row" class="text-center">\n' + '        <button type="button" style="width:100%;" class="btn btn-default btn-sm" ng-class="{\'btn-info\': dt.selected}" ng-click="select(dt.date)" ng-disabled="dt.disabled"><span ng-class="{\'text-muted\': dt.secondary}">{{dt.label}}</span></button>\n' + '      </td>\n' + '    </tr>\n' + '  </tbody>\n' + '</table>\n' + '');
-  }
-]);
-angular.module('template/datepicker/popup.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/datepicker/popup.html', '<ul class="dropdown-menu" ng-style="{display: (isOpen && \'block\') || \'none\', top: position.top+\'px\', left: position.left+\'px\'}">\n' + '\t<li ng-transclude></li>\n' + '\t<li ng-show="showButtonBar" style="padding:10px 9px 2px">\n' + '\t\t<span class="btn-group">\n' + '\t\t\t<button type="button" class="btn btn-sm btn-info" ng-click="today()">{{currentText}}</button>\n' + '\t\t\t<button type="button" class="btn btn-sm btn-default" ng-click="showWeeks = ! showWeeks" ng-class="{active: showWeeks}">{{toggleWeeksText}}</button>\n' + '\t\t\t<button type="button" class="btn btn-sm btn-danger" ng-click="clear()">{{clearText}}</button>\n' + '\t\t</span>\n' + '\t\t<button type="button" class="btn btn-sm btn-success pull-right" ng-click="isOpen = false">{{closeText}}</button>\n' + '\t</li>\n' + '</ul>\n' + '');
-  }
-]);
-angular.module('template/modal/backdrop.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/modal/backdrop.html', '<div class="modal-backdrop fade" ng-class="{in: animate}" ng-style="{\'z-index\': 1040 + index*10}"></div>');
-  }
-]);
-angular.module('template/modal/window.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/modal/window.html', '<div tabindex="-1" class="modal fade {{ windowClass }}" ng-class="{in: animate}" ng-style="{\'z-index\': 1050 + index*10, display: \'block\'}" ng-click="close($event)">\n' + '    <div class="modal-dialog"><div class="modal-content" ng-transclude></div></div>\n' + '</div>');
-  }
-]);
-angular.module('template/pagination/pager.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/pagination/pager.html', '<ul class="pager">\n' + '  <li ng-repeat="page in pages" ng-class="{disabled: page.disabled, previous: page.previous, next: page.next}"><a ng-click="selectPage(page.number)">{{page.text}}</a></li>\n' + '</ul>');
-  }
-]);
-angular.module('template/pagination/pagination.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/pagination/pagination.html', '<ul class="pagination">\n' + '  <li ng-repeat="page in pages" ng-class="{active: page.active, disabled: page.disabled}"><a ng-click="selectPage(page.number)">{{page.text}}</a></li>\n' + '</ul>');
-  }
-]);
-angular.module('template/tooltip/tooltip-html-unsafe-popup.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/tooltip/tooltip-html-unsafe-popup.html', '<div class="tooltip {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">\n' + '  <div class="tooltip-arrow"></div>\n' + '  <div class="tooltip-inner" bind-html-unsafe="content"></div>\n' + '</div>\n' + '');
-  }
-]);
-angular.module('template/tooltip/tooltip-popup.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/tooltip/tooltip-popup.html', '<div class="tooltip {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">\n' + '  <div class="tooltip-arrow"></div>\n' + '  <div class="tooltip-inner" ng-bind="content"></div>\n' + '</div>\n' + '');
-  }
-]);
-angular.module('template/popover/popover.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/popover/popover.html', '<div class="popover {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">\n' + '  <div class="arrow"></div>\n' + '\n' + '  <div class="popover-inner">\n' + '      <h3 class="popover-title" ng-bind="title" ng-show="title"></h3>\n' + '      <div class="popover-content" ng-bind="content"></div>\n' + '  </div>\n' + '</div>\n' + '');
-  }
-]);
-angular.module('template/progressbar/bar.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/progressbar/bar.html', '<div class="progress-bar" ng-class="type && \'progress-bar-\' + type" ng-transclude></div>');
-  }
-]);
-angular.module('template/progressbar/progress.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/progressbar/progress.html', '<div class="progress" ng-transclude></div>');
-  }
-]);
-angular.module('template/progressbar/progressbar.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/progressbar/progressbar.html', '<div class="progress"><div class="progress-bar" ng-class="type && \'progress-bar-\' + type" ng-transclude></div></div>');
-  }
-]);
-angular.module('template/rating/rating.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/rating/rating.html', '<span ng-mouseleave="reset()">\n' + '    <i ng-repeat="r in range" ng-mouseenter="enter($index + 1)" ng-click="rate($index + 1)" class="glyphicon" ng-class="$index < val && (r.stateOn || \'glyphicon-star\') || (r.stateOff || \'glyphicon-star-empty\')"></i>\n' + '</span>');
-  }
-]);
-angular.module('template/tabs/tab.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/tabs/tab.html', '<li ng-class="{active: active, disabled: disabled}">\n' + '  <a ng-click="select()" tab-heading-transclude>{{heading}}</a>\n' + '</li>\n' + '');
-  }
-]);
-angular.module('template/tabs/tabset-titles.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/tabs/tabset-titles.html', '<ul class="nav {{type && \'nav-\' + type}}" ng-class="{\'nav-stacked\': vertical}">\n' + '</ul>\n' + '');
-  }
-]);
-angular.module('template/tabs/tabset.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/tabs/tabset.html', '\n' + '<div class="tabbable">\n' + '  <ul class="nav {{type && \'nav-\' + type}}" ng-class="{\'nav-stacked\': vertical, \'nav-justified\': justified}" ng-transclude></ul>\n' + '  <div class="tab-content">\n' + '    <div class="tab-pane" \n' + '         ng-repeat="tab in tabs" \n' + '         ng-class="{active: tab.active}"\n' + '         tab-content-transclude="tab">\n' + '    </div>\n' + '  </div>\n' + '</div>\n' + '');
-  }
-]);
-angular.module('template/timepicker/timepicker.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/timepicker/timepicker.html', '<table>\n' + '\t<tbody>\n' + '\t\t<tr class="text-center">\n' + '\t\t\t<td><a ng-click="incrementHours()" class="btn btn-link"><span class="glyphicon glyphicon-chevron-up"></span></a></td>\n' + '\t\t\t<td>&nbsp;</td>\n' + '\t\t\t<td><a ng-click="incrementMinutes()" class="btn btn-link"><span class="glyphicon glyphicon-chevron-up"></span></a></td>\n' + '\t\t\t<td ng-show="showMeridian"></td>\n' + '\t\t</tr>\n' + '\t\t<tr>\n' + '\t\t\t<td style="width:50px;" class="form-group" ng-class="{\'has-error\': invalidHours}">\n' + '\t\t\t\t<input type="text" ng-model="hours" ng-change="updateHours()" class="form-control text-center" ng-mousewheel="incrementHours()" ng-readonly="readonlyInput" maxlength="2">\n' + '\t\t\t</td>\n' + '\t\t\t<td>:</td>\n' + '\t\t\t<td style="width:50px;" class="form-group" ng-class="{\'has-error\': invalidMinutes}">\n' + '\t\t\t\t<input type="text" ng-model="minutes" ng-change="updateMinutes()" class="form-control text-center" ng-readonly="readonlyInput" maxlength="2">\n' + '\t\t\t</td>\n' + '\t\t\t<td ng-show="showMeridian"><button type="button" class="btn btn-default text-center" ng-click="toggleMeridian()">{{meridian}}</button></td>\n' + '\t\t</tr>\n' + '\t\t<tr class="text-center">\n' + '\t\t\t<td><a ng-click="decrementHours()" class="btn btn-link"><span class="glyphicon glyphicon-chevron-down"></span></a></td>\n' + '\t\t\t<td>&nbsp;</td>\n' + '\t\t\t<td><a ng-click="decrementMinutes()" class="btn btn-link"><span class="glyphicon glyphicon-chevron-down"></span></a></td>\n' + '\t\t\t<td ng-show="showMeridian"></td>\n' + '\t\t</tr>\n' + '\t</tbody>\n' + '</table>\n' + '');
-  }
-]);
-angular.module('template/typeahead/typeahead-match.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/typeahead/typeahead-match.html', '<a tabindex="-1" bind-html-unsafe="match.label | typeaheadHighlight:query"></a>');
-  }
-]);
-angular.module('template/typeahead/typeahead-popup.html', []).run([
-  '$templateCache',
-  function ($templateCache) {
-    $templateCache.put('template/typeahead/typeahead-popup.html', '<ul class="dropdown-menu" ng-style="{display: isOpen()&&\'block\' || \'none\', top: position.top+\'px\', left: position.left+\'px\'}">\n' + '    <li ng-repeat="match in matches" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)">\n' + '        <div typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>\n' + '    </li>\n' + '</ul>');
-  }
-]);
 /**
  * angular-ui-utils - Swiss-Army-Knife of AngularJS tools (with no external dependencies!)
  * @version v0.1.1 - 2014-02-05
@@ -55917,9 +52869,22 @@ angular.module('ui.grid').run([
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 });
+angular.module('dellUiComponents').directive('alertCollapsible', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, $attrs) {
+      //toggle x
+      $element.find('.close').on('click', function () {
+        $(event.currentTarget).parent().addClass('collapsed');
+      });
+      $element.find('> .show-collapsed').on('click', function () {
+        $(event.currentTarget).parent().removeClass('collapsed');
+      });
+    }
+  };
+});
 /* globals s */
 angular.module('demo', [
-  'ui.bootstrap',
   'ui.utils',
   'ui.router',
   'ngAnimate',
@@ -56161,19 +53126,6 @@ angular.module('demo').controller('breadcrumbsCtrl', [
   }
 ]);
 angular.module('demo').controller('breadcrumbsPLayDemoCtrl', [
-  '$scope',
-  '$rootScope',
-  '$sce',
-  function ($scope, $rootScope, $sce) {
-  }
-]);
-angular.module('demo').controller('buttonsCtrl', [
-  '$scope',
-  '$rootScope',
-  function ($scope, $rootScope) {
-  }
-]);
-angular.module('demo').controller('buttonsPLayDemoCtrl', [
   '$scope',
   '$rootScope',
   '$sce',
@@ -74650,60 +71602,6 @@ angular.module('demo').controller('typographyPLayDemoCtrl', [
   function ($scope, $rootScope, $sce) {
   }
 ]);
-angular.module('dellUiComponents').directive('toggle', function () {
-  return {
-    restrict: 'A',
-    link: function ($scope, element, attributes, controller) {
-      switch (attributes.toggle) {
-      case 'popover':
-        var destroy = function () {
-          $('[data-toggle="popover"]').popover('destroy');
-        };
-        if (attributes.trigger === 'hover') {
-          $(element).mouseover(function (event) {
-            event.preventDefault();
-            destroy();
-            $(this).popover('show');
-          });
-        } else {
-          $(element).popover({ trigger: 'manual' });
-          $(element).click(function (event) {
-            event.preventDefault();
-            destroy();
-            $(this).popover('show');
-            $('[data-dismiss="popover"]').bind('click', function (event) {
-              event.preventDefault();
-              destroy();
-            });
-          });
-        }
-        break;
-      case 'tooltip':
-        $(element).tooltip();
-        break;
-      case 'offcanvas':
-        $(element).on('click', function (event) {
-          event.preventDefault();
-          $(element).parents('.row-offcanvas').find('.tab-content').removeClass('active');
-        });
-        break;
-      case 'tab':
-        $(element).on('click', function (event) {
-          event.preventDefault();
-          $(this).tab('show');
-          console.log($(this).parents('.row-offcanvas').html());
-          $(this).parents('.row-offcanvas').find('.tab-content').addClass('active');
-        });
-        break;
-      case 'collapse':
-        $(element).on('click', function (event) {
-          event.preventDefault();
-        });
-        break;
-      }
-    }
-  };
-});
 angular.module('demo').filter('_.str', function () {
   // Examples: 
   // Simple {{ string_variable | _.str:'capitalize' }}
@@ -74732,13 +71630,668 @@ angular.module('dellUiComponents').directive('tabs', function () {
     }
   };
 });
-angular.module('demo').controller('searchAndFilteringCtrl', [
+angular.module('demo').controller('ratingsAndReviewsCtrl', [
+  '$scope',
+  '$rootScope',
+  function ($scope, $rootScope) {
+    // this is for functionality related to demo code
+    var block = 0;
+    var s = 0;
+    var totalRatings = 0;
+    var ratingAverage = 0;
+    var a = 0;
+    var thisVar = 0;
+    var perCent = 0;
+    var recs = 0;
+    var totalUsers = 0;
+    function renderStars(contextPath, thisVar, perCent) {
+      //render stars
+      $(contextPath, thisVar).prevAll().andSelf().addClass('yesRatings');
+      $(contextPath, thisVar).prevAll().andSelf().removeClass('noRatings');
+      $(contextPath, thisVar).prevAll().andSelf().html('<i class="icon-small-favorite-100"></i>');
+      $(contextPath, thisVar).nextAll().addClass('noRatings');
+      $(contextPath, thisVar).nextAll().removeClass('yesRatings');
+      $(contextPath, thisVar).nextAll().html('<i class="icon-small-favorite-0"></i>');
+      $(contextPath, thisVar).next().html('<i class="icon-small-favorite-' + perCent * 10 % 10 + '0"></i>');
+      console.log(perCent * 10 % 10);
+    }
+    // iterate through recomends divs on the page
+    $('.recoRatio').each(function () {
+      $(this).html('<strong style=\'font-size:15px;\'>' + $(this).data('recs') + '</strong> out of <strong style=\'font-size:15px;\'>' + $(this).data('total') + '</strong> (' + Math.floor(parseInt($(this).data('recs')) / parseInt($(this).data('total')) * 100) + '%) people would recommend this product to a friend');
+    });
+    // iterate through rating divs on the page
+    $('.ratingBlock').each(function () {
+      // grab the data
+      var block = $(this).data('reviewStars');
+      // check if there are any star ratings
+      if (block.length > 1) {
+        //there is rating data
+        s = block;
+        //store data in an array
+        totalRatings = s[0] + s[1] + s[2] + s[3] + s[4];
+        //total number of ratings
+        ratingAverage = ((s[0] + s[1] * 2 + s[2] * 3 + s[3] * 4 + s[4] * 5) / totalRatings).toFixed(1);
+        // get average and store it
+        //inject content on the page
+        $(this).html('<div style=\'width:100%;\' class=\'pull-left\'><div class=\'starbox pull-left yesRatings\'><span data-rate=\'1\'><i class=\'icon-small-favorite-0\'></i></span><span data-rate=\'2\'><i class=\'icon-small-favorite-0\'></i></span><span data-rate=\'3\'><i class=\'icon-small-favorite-0\'></i></span><span data-rate=\'4\'><i class=\'icon-small-favorite-0\'></i></span><span data-rate=\'5\'><i class=\'icon-small-favorite-0\'></i></span></div><div class=\'pull-left reviewText\'><div class=\'pointy text-blue bold-12 pull-left\'>' + totalRatings + '&nbsp;</div><div class=\'pointy text-blue bold-12 pull-left\'> Ratings</div></div><div class=\'pull-right reviewText\'><div class=\'pointy text-blue bold-12\'>Write your review</div></div></div>');
+        $(this).data('userRating', ratingAverage);
+        //set current user rating stars
+        a = 'span:nth-child(' + Math.floor(parseInt($(this).data('userRating'))) + ')';
+        //render stars
+        renderStars(a, $(this), $(this).data('userRating'));
+      } else {
+        //nope, no data... just render the blank stars
+        $(this).html('<div style="width:100%;" class="pull-left"><div class="starbox pull-left"><span data-rate="1"><i class="icon-small-favorite-0"></i></span><span data-rate="2"><i class="icon-small-favorite-0"></i></span><span data-rate="3"><i class="icon-small-favorite-0"></i></span><span data-rate="4"><i class="icon-small-favorite-0"></i></span><span data-rate="5"><i class="icon-small-favorite-0"></i></span></div><div class="pull-left reviewText"><div class="linkStyle text-blue">Write your review</div></div>');
+        a = 'span:nth-child(' + Math.floor(parseInt($(this).data('userRating'))) + ')';
+        //render stars
+        renderStars(a, $(this), $(this).data('userRating'));
+      }
+      if ($(this).data('histogram') === 'yes') {
+        $(this).addClass('histogramBlock');
+        $(this).removeClass('ratingBlock');
+        $(this).append('<div style=\'width:100%;\' class=\'pull-left\'><p>' + ratingAverage + ' out of 5</p></div><div style=\'width:100%;\' class=\'pull-left\'><table width=\'100%\'><tr height=\'24px\'><td width=\'15%\'>5 Stars</td><td width=\'70%\'><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[4] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td width=\'15%\'>&nbsp;&nbsp;' + s[4] + '</td></tr><tr><td>4 Stars</td><td><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[3] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td>&nbsp;&nbsp;' + s[3] + '</td></tr><tr><td>3 Stars</td><td><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[2] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td>&nbsp;&nbsp;' + s[2] + '</td></tr><tr><td>2 Stars</td><td><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[1] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td>&nbsp;&nbsp;' + s[1] + '</td></tr><tr><td>1 Star</td><td><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[0] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td>&nbsp;&nbsp;' + s[0] + '</td></tr></table></div>');
+      }
+    });
+    // iterate through Customer Quote divs on the page
+    $('.revQuote').each(function () {
+      $(this).html('<p style="font-size:15px;">"' + $(this).data('quote') + '"</p><span style="font-size:12px;">- ' + $(this).data('attribution') + '</span>');
+    });
+    //star rating hover function
+    $('.starbox > span').mouseenter(function () {
+      $(this).prevAll().andSelf().addClass('yesRatings');
+      $(this).prevAll().andSelf().removeClass('noRatings');
+      $(this).prevAll().andSelf().html('<i class="icon-small-favorite-100"></i>');
+      $(this).nextAll().addClass('noRatings');
+      $(this).nextAll().removeClass('yesRatings');
+      $(this).nextAll().html('<i class="icon-small-favorite-0"></i>');
+      console.log('Hover!');
+    }).click(function () {
+      //set user rating
+      $(this).parent().parent().data('userRating', Math.floor(parseInt($(this).data('rate'))));
+      console.log('Click!');
+    });
+    //click to set user rating
+    $('.starbox > span').on('click', function () {
+      //set user rating
+      $(this).parent().parent().data('userRating', Math.floor(parseInt($(this).data('rate'))));
+      console.log('Click!');
+    });
+    $('.starbox').mouseout(function () {
+      //set current user rating stars
+      a = 'span:nth-child(' + Math.floor(parseInt($(this).parent().parent().data('userRating'))) + ')';
+      //render stars
+      if ($(this).parent().parent().data('userRating') === 0) {
+        $('span:nth-child(5)', $(this)).prevAll().andSelf().addClass('noRatings');
+        $('span:nth-child(5)', $(this)).prevAll().andSelf().removeClass('yesRatings');
+        $('span:nth-child(5)', $(this)).prevAll().andSelf().html('<i class="icon-small-favorite-0"></i>');
+      } else {
+        renderStars(a, $(this), $(this).parent().parent().data('userRating'));
+      }
+    });
+  }
+]);
+angular.module('demo').controller('ratingsAndReviewsPLayDemoCtrl', [
+  '$scope',
+  '$rootScope',
+  '$sce',
+  function ($scope, $rootScope, $sce) {
+  }
+]);
+//asumes that angular-ui-bootstrap is loaded
+angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition']).controller('CarouselController', [
+  '$scope',
+  '$timeout',
+  '$transition',
+  '$q',
+  function ($scope, $timeout, $transition, $q) {
+  }
+]).directive('carousel', function () {
+  return {};
+}).directive('slide', function () {
+  return {};
+});
+angular.module('dellUiComponents').directive('carouselFilmstrip', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, iAttrs, controller) {
+        $($element).find('.carousel-inner').slick({
+          dots: true,
+          infinite: false,
+          speed: 300,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                infinite: true,
+                dots: true
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }
+          ]
+        });
+      }
+    };
+  }
+]).directive('slide', [
+  '$timeout',
+  function ($timeout) {
+    return {
+      restrict: 'A',
+      link: function ($scope, $element, $attr, controller) {
+        $element.on('click', function (event) {
+          event.preventDefault();
+        });
+        $element.carousel($attr.slide);
+      }
+    };
+  }
+]);
+/**
+ * Created by Clint_Batte on 3/24/2015.
+ */
+angular.module('dellUiComponents').directive('msCheckbox', function () {
+  return {
+    restrict: 'C',
+    link: function () {
+      $('.ms-checkbox').multipleSelect({ placeholder: 'Select title' });
+    }
+  };
+}).directive('listTree', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, $attr) {
+      $element.find('.checkbox input').on('click', function () {
+        if ($(this).is(':checked')) {
+          $(this).parent().addClass('open');
+        } else {
+          $(this).parent().removeClass('open');
+        }
+      });
+    }
+  };
+}).directive('emailAddress', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, element, attributes, controller) {
+      $('form input[name="email"]').blur(function () {
+        var email = $(this).val();
+        var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
+        if (re.test(email)) {
+          $(element).addClass('hide');
+        } else {
+        }
+      });
+    }
+  };
+}).directive('showPassword', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, $attrs, controller) {
+      $scope.togglePassword = function () {
+        $scope.showPassword = !$scope.showPassword;
+        if ($scope.showPassword) {
+          $($element).find('input[type=password]').attr('type', 'text');
+        } else {
+          $($element).find('input[type=text]').attr('type', 'password');
+        }
+      };
+    }
+  };
+}).directive('phoneNumber', function () {
+  // Runs during compile
+  return {
+    restrict: 'C',
+    link: function ($scope, element, attributes, controller) {
+      //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
+      //TODO use $locale to create mask
+      if ($(element).is('input')) {
+        $(element).attr('data-inputmask', '\'mask\': \'(999)-999-9999\'');
+        $(element).inputmask();
+      }
+    }
+  };
+}).directive('phoneExtension', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, element, attributes, controller) {
+      if ($(element).is('input')) {
+        $(element).attr('data-inputmask', '\'mask\': \'ext: (9999)\'');
+        $(element).inputmask();
+      }
+    }
+  };
+}).directive('spinbox', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, element, attributes, controller) {
+      // Inject html code
+      $('.spinbox').each(function (index) {
+        var el = $(this);
+        if (el.data('orient') === 'vertical') {
+          $(el).addClass('dpui-numberPicker spinbox-vert').html('<button class=\'spinbox-increase\'>' + el.data('spinincrease') + '</button><input type=\'text\' class=\'spinbox-input spinbox-input-vert\' style=\'border-top: 0px solid #cfcfcf; border-bottom: 0px solid #cfcfcf;\' value=\'' + el.data('spindefault') + '\' name=\'' + el.data('spinname') + '\'/><button class=\'spinbox-decrease\'>' + el.data('spindecrease') + '</button>');
+        } else {
+          $(el).addClass('dpui-numberPicker').html('<button class=\'spinbox-decrease\'>' + el.data('spindecrease') + '</button><input type=\'text\' class=\'spinbox-input\' style=\'border-left: 0px solid #cfcfcf; border-right: 0px solid #cfcfcf;\' value=\'' + el.data('spindefault') + '\' name=\'' + el.data('spinname') + '\'/><button class=\'spinbox-increase\'>' + el.data('spinincrease') + '</button>');
+        }
+      });
+      // Increase Button code
+      $('.spinbox-increase').click(function () {
+        var em = $(this);
+        if (em.parent().data('orient') === 'vertical' && parseInt($(this).siblings('input').val()) < em.parent().data('spinmax')) {
+          $(em).next().val(parseInt($(em).next().val()) + em.parent().data('spinstep'));
+        } else if (parseInt($(this).siblings('input').val()) < em.parent().data('spinmax')) {
+          $(em).prev().val(parseInt($(em).prev().val()) + em.parent().data('spinstep'));
+        }
+      });
+      // Decrease Button code
+      $('.spinbox-decrease').click(function () {
+        var el = $(this);
+        if (el.parent().data('orient') === 'vertical' && parseInt($(this).siblings('input').val()) > el.parent().data('spinmin')) {
+          $(el).prev().val(parseInt($(el).prev().val()) - el.parent().data('spinstep'));
+        } else if (parseInt($(this).siblings('input').val()) > el.parent().data('spinmin')) {
+          $(el).next().val(parseInt($(el).next().val()) - el.parent().data('spinstep'));
+        }
+      });
+      //Checks to see if the manual input is outside the range of the min-max and changes it to bring it back in range.
+      $('.spinbox-input').blur(function () {
+        var em = $(this);
+        if (parseInt($(this).val()) > em.parent().data('spinmax')) {
+          $(this).val(em.parent().data('spinmax'));
+        } else if (parseInt($(this).val()) < em.parent().data('spinmin')) {
+          $(this).val(em.parent().data('spinmin'));
+        }
+      });
+      // Limits keyboard input to alphanumeric
+      $(document).ready(function () {
+        $('.spinbox-input').keypress(function (key) {
+          if (key.charCode < 48 || key.charCode > 57) {
+            return false;
+          }
+        });
+      });
+    }
+  };
+}).directive('selectState', function () {
+  // Runs during compile
+  var template = '<option value="">{{ emptyName }}</option>' + '<option ng-repeat="state in states" value="{{state.code}}">' + '   {{state[label]}}' + '</option>';
+  return {
+    scope: true,
+    controller: [
+      '$scope',
+      '$element',
+      '$attrs',
+      '$transclude',
+      function ($scope, $element, $attrs, $transclude) {
+        $scope.selectedState = '';
+        $scope.format = $attrs.format;
+        $scope.states = [
+          {
+            'code': 'AL',
+            'label': 'Alabama',
+            'long_label': 'AL - Alabama'
+          },
+          {
+            'code': 'AK',
+            'label': 'Alaska',
+            'long_label': 'AK - Alaska'
+          },
+          {
+            'code': 'AZ',
+            'label': 'Arizona',
+            'long_label': 'AZ - Arizona'
+          },
+          {
+            'code': 'AR',
+            'label': 'Arkansas',
+            'long_label': 'AR - Arkansas'
+          },
+          {
+            'code': 'CA',
+            'label': 'California',
+            'long_label': 'CA - California'
+          },
+          {
+            'code': 'CO',
+            'label': 'Colorado',
+            'long_label': 'CO - Colorado'
+          },
+          {
+            'code': 'CT',
+            'label': 'Connecticut',
+            'long_label': 'CT - Connecticut'
+          },
+          {
+            'code': 'DE',
+            'label': 'Delaware',
+            'long_label': 'DE - Delaware'
+          },
+          {
+            'code': 'DC',
+            'label': 'District of Columbia',
+            'long_label': 'DC - District of Columbia'
+          },
+          {
+            'code': 'FL',
+            'label': 'Florida',
+            'long_label': 'FL - Florida'
+          },
+          {
+            'code': 'GA',
+            'label': 'Georgia',
+            'long_label': 'GA - Georgia'
+          },
+          {
+            'code': 'HI',
+            'label': 'Hawaii',
+            'long_label': 'HI - Hawaii'
+          },
+          {
+            'code': 'ID',
+            'label': 'Idaho',
+            'long_label': 'ID - Idaho'
+          },
+          {
+            'code': 'IL',
+            'label': 'Illinois',
+            'long_label': 'IL - Illinois'
+          },
+          {
+            'code': 'IN',
+            'label': 'Indiana',
+            'long_label': 'IN - Indiana'
+          },
+          {
+            'code': 'IA',
+            'label': 'Iowa',
+            'long_label': 'IA - Iowa'
+          },
+          {
+            'code': 'KS',
+            'label': 'Kansas',
+            'long_label': 'KS - Kansas'
+          },
+          {
+            'code': 'KY',
+            'label': 'Kentucky',
+            'long_label': 'KY - Kentucky'
+          },
+          {
+            'code': 'LA',
+            'label': 'Louisiana',
+            'long_label': 'LA - Louisiana'
+          },
+          {
+            'code': 'ME',
+            'label': 'Maine',
+            'long_label': 'ME - Maine'
+          },
+          {
+            'code': 'MD',
+            'label': 'Maryland',
+            'long_label': 'MD - Maryland'
+          },
+          {
+            'code': 'MA',
+            'label': 'Massachusetts',
+            'long_label': 'MA - Massachusetts'
+          },
+          {
+            'code': 'MI',
+            'label': 'Michigan',
+            'long_label': 'MI - Michigan'
+          },
+          {
+            'code': 'MN',
+            'label': 'Minnesota',
+            'long_label': 'MN - Minnesota'
+          },
+          {
+            'code': 'MS',
+            'label': 'Mississippi',
+            'long_label': 'MS - Mississippi'
+          },
+          {
+            'code': 'MO',
+            'label': 'Missouri',
+            'long_label': 'MO - Missouri'
+          },
+          {
+            'code': 'MT',
+            'label': 'Montana',
+            'long_label': 'MT - Montana'
+          },
+          {
+            'code': 'NE',
+            'label': 'Nebraska',
+            'long_label': 'NE - Nebraska'
+          },
+          {
+            'code': 'NV',
+            'label': 'Nevada',
+            'long_label': 'NV - Nevada'
+          },
+          {
+            'code': 'NH',
+            'label': 'New Hampshire',
+            'long_label': 'NH - New Hampshire'
+          },
+          {
+            'code': 'NJ',
+            'label': 'New Jersey',
+            'long_label': 'NJ - New Jersey'
+          },
+          {
+            'code': 'NM',
+            'label': 'New Mexico',
+            'long_label': 'NM - New Mexico'
+          },
+          {
+            'code': 'NY',
+            'label': 'New York',
+            'long_label': 'NY - New York'
+          },
+          {
+            'code': 'NC',
+            'label': 'North Carolina',
+            'long_label': 'NC - North Carolina'
+          },
+          {
+            'code': 'ND',
+            'label': 'North Dakota',
+            'long_label': 'ND - North Dakota'
+          },
+          {
+            'code': 'OH',
+            'label': 'Ohio',
+            'long_label': 'OH - Ohio'
+          },
+          {
+            'code': 'OK',
+            'label': 'Oklahoma',
+            'long_label': 'OK - Oklahoma'
+          },
+          {
+            'code': 'OR',
+            'label': 'Oregon',
+            'long_label': 'OR - Oregon'
+          },
+          {
+            'code': 'PA',
+            'label': 'Pennsylvania',
+            'long_label': 'PA - Pennsylvania'
+          },
+          {
+            'code': 'RI',
+            'label': 'Rhode Island',
+            'long_label': 'RI - Rhode Island'
+          },
+          {
+            'code': 'SC',
+            'label': 'South Carolina',
+            'long_label': 'SC - South Carolina'
+          },
+          {
+            'code': 'SD',
+            'label': 'South Dakota',
+            'long_label': 'SD - South Dakota'
+          },
+          {
+            'code': 'TN',
+            'label': 'Tennessee',
+            'long_label': 'TN - Tennessee'
+          },
+          {
+            'code': 'TX',
+            'label': 'Texas',
+            'long_label': 'TX - Texas'
+          },
+          {
+            'code': 'UT',
+            'label': 'Utah',
+            'long_label': 'UT - Utah'
+          },
+          {
+            'code': 'VA',
+            'label': 'Virginia',
+            'long_label': 'VA - Virginia'
+          },
+          {
+            'code': 'WA',
+            'label': 'Washington',
+            'long_label': 'WA - Washington'
+          },
+          {
+            'code': 'WV',
+            'label': 'West Virginia',
+            'long_label': 'WV - West Virginia'
+          },
+          {
+            'code': 'WI',
+            'label': 'Wisconsin',
+            'long_label': 'WI - Wisconsin'
+          },
+          {
+            'code': 'WY',
+            'label': 'Wyoming',
+            'long_label': 'WY - Wyoming'
+          },
+          {
+            'code': 'AA',
+            'label': 'Armed Forces-Americas',
+            'long_label': 'AA - Armed Forces-Americas'
+          },
+          {
+            'code': 'AE',
+            'label': 'Armed Forces-Europe',
+            'long_label': 'AE - Armed Forces-Europe'
+          },
+          {
+            'code': 'AP',
+            'label': 'Armed Forces-Pacific',
+            'long_label': 'AP - Armed Forces-Pacific'
+          }
+        ];
+        switch ($attrs.format) {
+        case 'short':
+          $scope.label = 'code';
+          break;
+        case 'both':
+          $scope.label = 'long_label';
+          break;
+        default:
+          $scope.label = 'label';
+        }
+      }
+    ],
+    restrict: 'AC',
+    template: template,
+    link: function ($scope, $element, $attributes, controller) {
+      $scope.emptyName = $attributes.emptyName || '*State';
+    }
+  };
+});
+angular.module('demo').controller('contentTeaserCtrl', [
   '$scope',
   '$rootScope',
   function ($scope, $rootScope) {
   }
 ]);
-angular.module('demo').controller('searchAndFilteringPLayDemoCtrl', [
+angular.module('demo').controller('contentTeaserPLayDemoCtrl', [
+  '$scope',
+  '$rootScope',
+  '$sce',
+  function ($scope, $rootScope, $sce) {
+  }
+]);
+angular.module('demo').controller('dateSelectorCtrl', [
+  '$scope',
+  '$rootScope',
+  function ($scope, $rootScope) {
+  }
+]).controller('DatepickerDemoCtrl', [
+  '$scope',
+  function ($scope) {
+    $scope.today = function () {
+      $scope.dt = new Date();
+    };
+    // $scope.today();
+    $scope.clear = function () {
+      $scope.dt = null;
+    };
+    // Disable weekend selection
+    $scope.disabled = function (date, mode) {
+      return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+    };
+    $scope.toggleMin = function () {
+      $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    // $scope.toggleMin();
+    $scope.open = function ($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.opened = true;
+    };
+    $scope.dateOptions = {
+      formatYear: 'yy',
+      startingDay: 1
+    };
+    $('thead > tr > th').addClass('theader');
+  }
+]);
+angular.module('demo').controller('dateSelectorPLayDemoCtrl', [
+  '$scope',
+  '$rootScope',
+  '$sce',
+  function ($scope, $rootScope, $sce) {
+  }
+]);
+angular.module('demo').controller('searchAndNavigationCtrl', [
+  '$scope',
+  '$rootScope',
+  function ($scope, $rootScope) {
+  }
+]);
+angular.module('demo').controller('searchAndNavigationPLayDemoCtrl', [
   '$scope',
   '$rootScope',
   '$sce',
@@ -74924,182 +72477,37 @@ function myDDCtrl($scope) {
     }
   };
 }
-angular.module('demo').controller('ratingsAndReviewsCtrl', [
-  '$scope',
-  '$rootScope',
-  function ($scope, $rootScope) {
-    // this is for functionality related to demo code
-    var block = 0;
-    var s = 0;
-    var totalRatings = 0;
-    var ratingAverage = 0;
-    var a = 0;
-    var thisVar = 0;
-    var perCent = 0;
-    var recs = 0;
-    var totalUsers = 0;
-    function renderStars(contextPath, thisVar, perCent) {
-      //render stars
-      $(contextPath, thisVar).prevAll().andSelf().addClass('yesRatings');
-      $(contextPath, thisVar).prevAll().andSelf().removeClass('noRatings');
-      $(contextPath, thisVar).prevAll().andSelf().html('<i class="icon-small-favorite-100"></i>');
-      $(contextPath, thisVar).nextAll().addClass('noRatings');
-      $(contextPath, thisVar).nextAll().removeClass('yesRatings');
-      $(contextPath, thisVar).nextAll().html('<i class="icon-small-favorite-0"></i>');
-      $(contextPath, thisVar).next().html('<i class="icon-small-favorite-' + perCent * 10 % 10 + '0"></i>');
-      console.log(perCent * 10 % 10);
-    }
-    // iterate through recomends divs on the page
-    $('.recoRatio').each(function () {
-      $(this).html('<strong style=\'font-size:15px;\'>' + $(this).data('recs') + '</strong> out of <strong style=\'font-size:15px;\'>' + $(this).data('total') + '</strong> (' + Math.floor(parseInt($(this).data('recs')) / parseInt($(this).data('total')) * 100) + '%) people would recommend this product to a friend');
-    });
-    // iterate through rating divs on the page
-    $('.ratingBlock').each(function () {
-      // grab the data
-      var block = $(this).data('reviewStars');
-      // check if there are any star ratings
-      if (block.length > 1) {
-        //there is rating data
-        s = block;
-        //store data in an array
-        totalRatings = s[0] + s[1] + s[2] + s[3] + s[4];
-        //total number of ratings
-        ratingAverage = ((s[0] + s[1] * 2 + s[2] * 3 + s[3] * 4 + s[4] * 5) / totalRatings).toFixed(1);
-        // get average and store it
-        //inject content on the page
-        $(this).html('<div style=\'width:100%;\' class=\'pull-left\'><div class=\'starbox pull-left yesRatings\'><span data-rate=\'1\'><i class=\'icon-small-favorite-0\'></i></span><span data-rate=\'2\'><i class=\'icon-small-favorite-0\'></i></span><span data-rate=\'3\'><i class=\'icon-small-favorite-0\'></i></span><span data-rate=\'4\'><i class=\'icon-small-favorite-0\'></i></span><span data-rate=\'5\'><i class=\'icon-small-favorite-0\'></i></span></div><div class=\'pull-left reviewText\'><div class=\'pointy text-blue bold-12 pull-left\'>' + totalRatings + '&nbsp;</div><div class=\'pointy text-blue bold-12 pull-left\'> Ratings</div></div><div class=\'pull-right reviewText\'><div class=\'pointy text-blue bold-12\'>Write your review</div></div></div>');
-        $(this).data('userRating', ratingAverage);
-        //set current user rating stars
-        a = 'span:nth-child(' + Math.floor(parseInt($(this).data('userRating'))) + ')';
-        //render stars
-        renderStars(a, $(this), $(this).data('userRating'));
-      } else {
-        //nope, no data... just render the blank stars
-        $(this).html('<div style="width:100%;" class="pull-left"><div class="starbox pull-left"><span data-rate="1"><i class="icon-small-favorite-0"></i></span><span data-rate="2"><i class="icon-small-favorite-0"></i></span><span data-rate="3"><i class="icon-small-favorite-0"></i></span><span data-rate="4"><i class="icon-small-favorite-0"></i></span><span data-rate="5"><i class="icon-small-favorite-0"></i></span></div><div class="pull-left reviewText"><div class="linkStyle text-blue">Write your review</div></div>');
-        a = 'span:nth-child(' + Math.floor(parseInt($(this).data('userRating'))) + ')';
-        //render stars
-        renderStars(a, $(this), $(this).data('userRating'));
-      }
-      if ($(this).data('histogram') === 'yes') {
-        $(this).addClass('histogramBlock');
-        $(this).removeClass('ratingBlock');
-        $(this).append('<div style=\'width:100%;\' class=\'pull-left\'><p>' + ratingAverage + ' out of 5</p></div><div style=\'width:100%;\' class=\'pull-left\'><table width=\'100%\'><tr height=\'24px\'><td width=\'15%\'>5 Stars</td><td width=\'70%\'><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[4] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td width=\'15%\'>&nbsp;&nbsp;' + s[4] + '</td></tr><tr><td>4 Stars</td><td><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[3] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td>&nbsp;&nbsp;' + s[3] + '</td></tr><tr><td>3 Stars</td><td><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[2] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td>&nbsp;&nbsp;' + s[2] + '</td></tr><tr><td>2 Stars</td><td><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[1] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td>&nbsp;&nbsp;' + s[1] + '</td></tr><tr><td>1 Star</td><td><div class=\'barG\'><div class=\'histBar well-blue\' style=\'width:' + Math.floor(s[0] / totalRatings * 217) + 'px;\'>&nbsp;</div></div></td><td>&nbsp;&nbsp;' + s[0] + '</td></tr></table></div>');
-      }
-    });
-    //star rating hover function
-    $('.starbox > span').mouseenter(function () {
-      $(this).prevAll().andSelf().addClass('yesRatings');
-      $(this).prevAll().andSelf().removeClass('noRatings');
-      $(this).prevAll().andSelf().html('<i class="icon-small-favorite-100"></i>');
-      $(this).nextAll().addClass('noRatings');
-      $(this).nextAll().removeClass('yesRatings');
-      $(this).nextAll().html('<i class="icon-small-favorite-0"></i>');
-      console.log('Hover!');
-    }).click(function () {
-      //set user rating
-      $(this).parent().parent().data('userRating', Math.floor(parseInt($(this).data('rate'))));
-      console.log('Click!');
-    });
-    //click to set user rating
-    $('.starbox > span').on('click', function () {
-      //set user rating
-      $(this).parent().parent().data('userRating', Math.floor(parseInt($(this).data('rate'))));
-      console.log('Click!');
-    });
-    $('.starbox').mouseout(function () {
-      //set current user rating stars
-      a = 'span:nth-child(' + Math.floor(parseInt($(this).parent().parent().data('userRating'))) + ')';
-      //render stars
-      if ($(this).parent().parent().data('userRating') === 0) {
-        $('span:nth-child(5)', $(this)).prevAll().andSelf().addClass('noRatings');
-        $('span:nth-child(5)', $(this)).prevAll().andSelf().removeClass('yesRatings');
-        $('span:nth-child(5)', $(this)).prevAll().andSelf().html('<i class="icon-small-favorite-0"></i>');
-      } else {
-        renderStars(a, $(this), $(this).parent().parent().data('userRating'));
-      }
-    });
-  }
-]);
-angular.module('demo').controller('ratingsAndReviewsPLayDemoCtrl', [
-  '$scope',
-  '$rootScope',
-  '$sce',
-  function ($scope, $rootScope, $sce) {
-  }
-]);
-angular.module('demo').controller('dataElementsCtrl', [
-  '$scope',
-  '$rootScope',
-  function ($scope, $rootScope) {
-  }
-]).controller('DatepickerDemoCtrl', [
-  '$scope',
-  function ($scope) {
-    $scope.today = function () {
-      $scope.dt = new Date();
-    };
-    // $scope.today();
-    $scope.clear = function () {
-      $scope.dt = null;
-    };
-    // Disable weekend selection
-    $scope.disabled = function (date, mode) {
-      return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-    };
-    $scope.toggleMin = function () {
-      $scope.minDate = $scope.minDate ? null : new Date();
-    };
-    // $scope.toggleMin();
-    $scope.open = function ($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      $scope.opened = true;
-    };
-    $scope.dateOptions = {
-      formatYear: 'yy',
-      startingDay: 1
-    };
-    $('thead > tr > th').addClass('theader');
-  }
-]);
-angular.module('demo').controller('dataElementsPLayDemoCtrl', [
-  '$scope',
-  '$rootScope',
-  '$sce',
-  function ($scope, $rootScope, $sce) {
-  }
-]);
 angular.module('dellUiComponents').run([
   '$templateCache',
   function ($templateCache) {
     'use strict';
-    $templateCache.put('components/alerts/demo-alerts.html', '<section ng-controller=alertsCtrl id=alerts-html-example><div class=container><h2>Alerts Demo</h2><h3 class=bottom-offset-20>Alert types</h3><div class=alert><div class="alert-warning alert-dismissible cssDataTargetDismiss-1 fade in"><p><strong>User Errors:</strong>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p></div></div><div class="row bottom-offset-20"><div class="col-xs-12 col-md-4"><div class=alert><div class="alert-success alert-dismissible cssDataTargetDismiss-2 fade in"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-2>\xd7</button><p><strong>Success Alerts:</strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p></div><span class="cssDataTargetDismiss-2 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-2><a href=javascript:; class=text-blue>Re-open dismissed info alert</a></span></div></div><div class="col-xs-12 col-md-4"><div class=alert><div class="alert-info alert-dismissible cssDataTargetDismiss-3 fade in"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-3>\xd7</button><p><strong>Information Alerts:</strong>Information alerts display important information for the page. Can be collapsed and reopened.</p></div><span class="cssDataTargetDismiss-3 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-3><a href=javascript:; class=text-blue>Re-open dismissed info alert</a></span></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-error alert-dismissible"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></div><h3 class="top-offset-40 bottom-offset-20">Informational alerts</h3><div class=alert><div class="alert-info alert-dismissible cssDataTargetDismiss-4 fade in"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-4>\xd7</button><p><strong>Informational alerts:</strong>Information alerts display important information for the page. Can be collapsed and reopened.</p></div><span class="cssDataTargetDismiss-4 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-4><a href=javascript:; class=text-blue>Re-open dismissed alert</a></span></div><div class=alert><div class="alert-info alert-dismissible cssDataTargetDismiss-5 fade in"><button type=button class=close data-toggle=collapse data-target=".cssDataTargetDismiss-5 ">\xd7</button><h4>Informational alerts example with a title.</h4><p>Information alerts display important information for the page. Can be collapsed and reopened.</p></div><span class="cssDataTargetDismiss-5 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-5><a href=javascript:; class=text-blue>Re-open dismissed alert</a></span></div><div class=alert><div class="alert-info alert-dismissible cssDataTargetDismiss-6 fade in"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-6>\xd7</button><h4>Informational alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><span class="cssDataTargetDismiss-6 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-6><a href=javascript:; class=text-blue>Re-open <strong>first</strong> dismissed alert</a></span><div class="alert-info alert-dismissible cssDataTargetDismiss-7 fade in"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-7>\xd7</button><h4>Additional alert example.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><span class="cssDataTargetDismiss-7 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-7><a href=javascript:; class=text-blue>Re-open <strong>second</strong> dismissed alert</a></span></div><h3 class="top-offset-40 bottom-offset-20">Success alerts</h3><div class=alert><div class="alert-success alert-dismissible cssDataTargetDismiss-8 fade in"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-8>\xd7</button><p><strong>Success alerts:</strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p></div><span class="cssDataTargetDismiss-8 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-8><a href=javascript:; class=text-blue>Re-open dismissed alert</a></span></div><div class=alert><div class="alert-success alert-dismissible cssDataTargetDismiss-9 fade in"><button type=button class=close data-toggle=collapse data-target=".cssDataTargetDismiss-9 ">\xd7</button><h4>Success alerts example with a title.</h4><p><strong>Success alerts:</strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p></div><span class="cssDataTargetDismiss-9 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-9><a href=javascript:; class=text-blue>Re-open dismissed alert</a></span></div><div class=alert><div class="alert-success alert-dismissible cssDataTargetDismiss-10 fade in"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-10>\xd7</button><h4>Success alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Indicates the task has been completed successfully. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><span class="cssDataTargetDismiss-10 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-10><a href=javascript:; class=text-blue>Re-open dismissed alert</a></span></div><h3 class="top-offset-40 bottom-offset-20">User Error</h3><div class=alert><div class="alert-warning alert-dismissible cssDataTargetDismiss-11 fade in"><p><strong>User Errors:</strong>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p></div><span class="cssDataTargetDismiss-11 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-11><a href=javascript:; class=text-blue>Re-open dismissed alert</a></span></div><div class=alert><div class="alert-warning alert-dismissible cssDataTargetDismiss-12 fade in"><h4>User Errors example with a title and multiple links.</h4><p class=bottom-offset-0>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><span class="cssDataTargetDismiss-12 collapse fade bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-12><a href=javascript:; class=text-blue>Re-open <strong>first</strong> dismissed alert with links</a></span><div class="alert-info alert-dismissible cssDataTargetDismiss-13 fade in"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-13>\xd7</button><h4>Dismissible informational alert example with title.</h4><p class=bottom-offset-0>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas scelerisque porttitor.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><span class="cssDataTargetDismiss-13 collapse fade top-offset-10 bottom-offset-10" data-toggle=collapse data-target=.cssDataTargetDismiss-13><a href=javascript:; class=text-blue>Re-open dismissed alert with links</a></span></div><h3 class="top-offset-40 bottom-offset-20">Catastrophic Error</h3><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div><div class="alert alert-error"><h4>Catastrophic Errors example with a title</h4><p>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></section>');
+    $templateCache.put('components/alerts/demo-alerts.html', '<section ng-controller=alertsCtrl id=alerts-html-example><div class=container><h2>Alerts Demo</h2><h3 class=bottom-offset-20>Alert types</h3><div class="alert alert-warning"><p><strong>User Errors:</strong>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p></div><div class="row bottom-offset-20"><div class="col-xs-12 col-md-4"><div class="alert alert-success alert-collapsible"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-2>\xd7</button><p class=show-expanded><strong>Success Alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Information Alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></div><h3 class="top-offset-40 bottom-offset-20">Informational alerts</h3><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Informational alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-info alert-collapsible"><button type=button class=close data-toggle=collapse data-target=".cssDataTargetDismiss-5 ">\xd7</button><div class=show-expanded><h4>Informational alerts example with a title.</h4><p>Information alerts display important information for the page. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Informational alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>first</strong> dismissed alert</p></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Additional alert example.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>second</strong> dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Success alerts</h3><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Success alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title.</h4><p><strong>Success alerts:</strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Indicates the task has been completed successfully. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div><h3 class="top-offset-40 bottom-offset-20">User Error</h3><div class="alert alert-warning alert-collapsible"><p class=show-expanded><strong>User Errors:</strong> A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class=alert-warning><h4>User Errors example with a title and multiple links.</h4><p class=bottom-offset-0>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Dismissible informational alert example with title.</h4><p class=bottom-offset-0>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas scelerisque porttitor.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Catastrophic Error</h3><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div><div class="alert alert-error"><h4>Catastrophic Errors example with a title</h4><p>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></section>');
     $templateCache.put('components/alerts/demo-play-alerts.html', '<section ng-controller=alertsPLayDemoCtrl id=alerts-play-demo><div class=container><h2>Alerts Builder</h2><div></div></div></section>');
     $templateCache.put('components/announcements/demo-announcements.html', '<section ng-controller=announcementsCtrl id=announcements-html-example><div class=container><h2>Announcements Demo</h2><div><h3>Default announcement (Bootstrap blockquote)</h3><div id=announcement-default><blockquote><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><h3>Right justified announcement (Bootstrap blockquote - pull right)</h3><div id=announcement-default><blockquote class=pull-right><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><h3>Announcements with links</h3><p>An Announcement can include a maximum of 2 links. Links are stacked vertically</p><div class="bottom-offset-10 clearfix"><h3>Colored bar with title and call to action link</h3><div id=announcement-call-to-action><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li></ul></blockquote></div></div><div class="bottom-offset-10 clearfix"><h3>Colored bar with two call to action links</h3><div id=announcement-two-call-to-action><blockquote class=blockquote-blue><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li><li><a href=javascript:;>Register now for free</a></li></ul></blockquote></div></div><h3>Announcements with color treatment (Bootstrap enhancement)</h3><div id=announcement-blue><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-green><blockquote class=blockquote-green><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-purple><blockquote class=blockquote-purple><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-orange><blockquote class=blockquote-orange><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-berry><blockquote class=blockquote-berry><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-red><blockquote class=blockquote-red><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-red-dark><blockquote class=blockquote-red-dark><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-dark-blue><blockquote class=blockquote-dark-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><h3>Announcements with icon treatment (Dell specific enhancement)</h3><div id=announcement-icon-dpa><blockquote class=blockquote-icon><div class=blockquote-dell-dpa></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-icon-advantage><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div></blockquote></div><h3>Right justified announcements with icon treatment (Dell specific enhancement)</h3><div id=announcement-icon-dpa><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-dpa pull-right"></div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><div id=announcement-icon-advantage><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-advantage pull-right"></div><div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div></blockquote></div></div></div></section>');
     $templateCache.put('components/announcements/demo-play-announcements.html', '<section ng-controller=announcementsPLayDemoCtrl id=announcements-play-demo><div class=container><h2>Announcements Builder</h2><div><h4>Rendered Example</h4><div id=announcement-play-code ng-bind-html=renderingHTML></div><h4>Rendered HTML Code</h4><div class=play-code><button to-clipboard clipboard-target=#announcement-play-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code>{{playHtmlCode}}</code></pre></div><hr><div class=row><div class=col-sm-5><h4>Customize</h4><div class=form-group><label for=text-label-input>ID</label><div><input type=text class=form-control id=sample-announcement-id placeholder=optional ng-model=sampleAnnouncementConfig.id></div></div><div class=form-group><label for=sample-announcement-type>Type</label><select class=form-control id=sample-announcement-type ng-model=sampleAnnouncementConfig.type><option value=blue>Blue (Default)</option><option value=purple>Purple</option><option value=green>Green</option><option value=orange>Orange</option><option value=berry>Berry</option><option value=dark-blue>Dark blue</option><option value=red>Red</option><option value=red-dark>Dark red</option><option value=gray>Gray</option><option value=gray-dark>Dark gray</option><option value=icon>Icon</option></select></div><div class=form-group ng-if="sampleAnnouncementConfig.type===\'icon\'"><label for=sample-announcement-icon>Icon</label><select class=form-control id=sample-announcement-icon ng-model=sampleAnnouncementConfig.icon><option value=dell-advantage-star>Star (Default)</option><option value=dpa-card>Dell Prefered Card</option></select></div><div class=form-group><label for=text-label-input>Title</label><div><input type=text class=form-control id=sample-announcement-title placeholder=optional ng-model=sampleAnnouncementConfig.title></div></div><div class=form-group><label for=textarea>Body text</label><textarea id=sample-announcement-body class=form-control rows=5 ng-model=sampleAnnouncementConfig.body></textarea></div><div class=form-group><label for=text-label-input>First Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_0.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_0.url></div></div><div class=form-group><label for=text-label-input>Second Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_1.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_1.url></div></div></div><div class=col-sm-7><prototype-code-title></prototype-code-title><div ng-if=sampleAnnouncementConfig.id><h5>HTML code</h5><div class=play-code><button to-clipboard clipboard-target=#announcement-sherpa-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code id=announcement-sherpa-code>&lt;blockquote id="{{sampleSherpaConfig.id | _.str: \'dasherize\'}}" class="blockquote-{{sampleSherpaConfig.type}}"&gt;\n' + '\t&lt;h4 msg="title_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/h4&gt;\n' + '\t&lt;p msg="text_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/p&gt;\n' + '&lt;/blockquote&gt;</code></pre></div><h5>Textkeys to add to messages file</h5><div class=play-code ng-if=textkeysToAdd><button to-clipboard clipboard-target=#announcement-sherpa-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-keys>{{textkeysToAdd}}</code></pre></div><pre ng-if=!textkeysToAdd>None specified until custom body or title is entered.</pre><h5>Resource keys to add to resources file</h5><div class=play-code ng-if=resourcesToAdd><button to-clipboard clipboard-target=#announcement-sherpa-resource-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-resource-keys>{{resourcesToAdd}}</code></pre></div><pre ng-if=!resourcesToAdd>None specified until cta is specified.</pre></div><p ng-if=!sampleAnnouncementConfig.id>Must enter id to see Sherpa code</p></div></div></div></div></section>');
-    $templateCache.put('components/block-buttons/demo-block-buttons.html', '<section ng-controller=blockButtonsCtrl id=block-buttons-html-example><div class=container><h2>Block-Buttons Demo</h2><div></div></div></section>');
+    $templateCache.put('components/block-buttons/demo-block-buttons.html', '<section ng-controller=blockButtonsCtrl id=block-buttons-html-example><div class=container><h2 class=bottom-offset-40>Block-Buttons Demo</h2><div class="top-offset-20 bottom-offset-30"><div class=row><h4 class=col-xs-12>Block level button col-xs-12</h4><div class=col-xs-12><button class="btn btn-primary btn-lg btn-block" type=button>col-xs-12</button></div><h4 class="top-offset-40 col-xs-12">Block level button col-xs-6</h4><div class=col-xs-6><button class="btn btn-primary btn-lg btn-block" type=button>col-xs-6</button></div><h4 class="top-offset-40 col-xs-12">Block level button col-xs-4</h4><div class=col-xs-4><button class="btn btn-primary btn-lg btn-block" type=button>col-xs-4</button></div></div></div></div></section>');
     $templateCache.put('components/block-buttons/demo-play-block-buttons.html', '<section ng-controller=blockButtonsPLayDemoCtrl id=block-buttons-play-demo><div class=container><h2>Block-Buttons Builder</h2><div></div></div></section>');
-    $templateCache.put('components/breadcrumbs/demo-breadcrumbs.html', '<section ng-controller=breadcrumbsCtrl id=breadcrumbs-html-example><div class=container><h2>Breadcrumbs Demo</h2><div></div></div></section>');
+    $templateCache.put('components/breadcrumbs/demo-breadcrumbs.html', '<section ng-controller=breadcrumbsCtrl id=breadcrumbs-html-example><div class=container><h2 class=bottom-offset-20>Breadcrumbs Demo</h2><div class=bottom-offset-30><h4>Generic Breadcrumb</h4><ul class=breadcrumb><li><a href=#></a><span class=divider></span></li><li><a href=#>Level 1</a><span class=divider></span></li><li><a href=#>Level 2</a><span class=divider></span></li><li><a href=#>Level 3</a><span class=divider></span></li><li><a href=#>Level 4</a><span class=divider></span></li><li><a href=#>...</a><span class=divider></span></li><li class=active>Level 6</li></ul></div></div></section>');
     $templateCache.put('components/breadcrumbs/demo-play-breadcrumbs.html', '<section ng-controller=breadcrumbsPLayDemoCtrl id=breadcrumbs-play-demo><div class=container><h2>Breadcrumbs Builder</h2><div></div></div></section>');
-    $templateCache.put('components/buttons/demo-buttons.html', '<section ng-controller=buttonsCtrl id=buttons-html-example><div class=container><h2>Buttons Demo</h2><div></div></div></section>');
-    $templateCache.put('components/buttons/demo-play-buttons.html', '<section ng-controller=buttonsPLayDemoCtrl id=buttons-play-demo><div class=container><h2>Buttons Builder</h2><div></div></div></section>');
-    $templateCache.put('components/carousel/demo-carousel.html', '<section ng-controller=carouselCtrl id=carousel-html-example><div class=container><h2>Carousel Demo</h2><h3 class=top-offset-40>Banner carousel with all options</h3><div id=banner-carousel-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-example data-slide-to=0></li><li data-target=#banner-carousel-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-example data-slide-to=2></li></ol><a class="left carousel-control" href=#banner-carousel-example data-slide=prev></a> <a class="right carousel-control" href=#banner-carousel-example data-slide=next></a></div><h3 class=top-offset-40>Banner carousel with no arrows</h3><div id=banner-carousel-no-arrows-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-no-arrows-example data-slide-to=0></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=2></li></ol></div><h3 class=top-offset-40>Banner carousel captions & arrows</h3><div id=carousel-example-with-caption class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class="item active"><img alt="First slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="carousel-caption pull-left"><h2 class=hidden-xs>First slide lorem ipsum dolor sit amet.</h2><p>Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-right visible-xs lead">Buy Now!</a></p></div></div><div class=item><img alt="Second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="carousel-caption pull-right"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Ut enim ad minim veniam, laboris nisi ut aliquip ex ea commodo consequat.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs lead">Buy Now!</a></p></div></div><div class=item><img alt="Third slide" src=http://placehold.it/1140x430 alt=Image class=image><div class=carousel-caption><h2 class=hidden-xs>Third slide lorem ipsum dolor sit amet.</h2><p>Duis aute irure dolor in reprehenderit.</p></div></div><div class=item><a href=javascript:;><img alt="Fourth slide" src=http://placehold.it/1140x430 alt=Image class="image"></a></div></div><ol class=carousel-indicators><li data-target=#carousel-example-with-caption data-slide-to=0 class=active></li><li data-target=#carousel-example-with-caption data-slide-to=1></li><li data-target=#carousel-example-with-caption data-slide-to=2></li><li data-target=#carousel-example-with-caption data-slide-to=3></li></ol><a class="left carousel-control" href=#carousel-example-with-caption data-slide=prev></a> <a class="right carousel-control" href=#carousel-example-with-caption data-slide=next></a></div><h3 class=top-offset-40>Filmstrip carousel with images (only)</h3><div id=filmstrip-carousel-example class="carousel carousel-filmstrip slide"><div class=carousel-inner><div class="item active"><div class=row><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div></div></div><div class=item><div class=row><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div></div></div><div class=item><div class=row><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250&text=Image" alt=Image style=max-width:100%></a></div></div></div></div><ol class=carousel-indicators><li data-target=#filmstrip-carousel-example data-slide-to=0 class=active></li><li data-target=#filmstrip-carousel-example data-slide-to=1></li><li data-target=#filmstrip-carousel-example data-slide-to=2></li></ol><a class="left carousel-control" href=#filmstrip-carousel-example data-slide=prev></a> <a class="right carousel-control" href=#filmstrip-carousel-example data-slide=next></a></div><h3 class=top-offset-40>Filmstrip carousel with images and supporting content</h3><div id=filmstrip-carousel-with-stacks-example class="carousel carousel-filmstrip-content slide"><div class=carousel-inner><div class="item active"><div class=row><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div></div></div><div class=item><div class=row><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div></div></div><div class=item><div class=row><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div><div class=col-xs-3><a href=#><img src="http://placehold.it/250x250/aaaaaa/ffffff&text=Image" alt=Image style=max-width:100%></a><div class=support-content><img src="http://placehold.it/250x600&text=details" alt=details style=max-width:100%></div></div></div></div></div><a class="left carousel-control" href=#filmstrip-carousel-with-stacks-example data-slide=prev></a> <a class="right carousel-control" href=#filmstrip-carousel-with-stacks-example data-slide=next></a></div></div></section>');
+    $templateCache.put('components/carousel/demo-carousel.html', '<section ng-controller=carouselCtrl id=carousel-html-example><div class=container><h2>Carousel Demo</h2><h3 class=top-offset-40>Banner carousel with all options</h3><div id=banner-carousel-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-example data-slide-to=0></li><li data-target=#banner-carousel-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-example data-slide-to=2></li></ol><a class="left carousel-control" href=#banner-carousel-example data-slide=prev></a> <a class="right carousel-control" href=#banner-carousel-example data-slide=next></a></div><h3 class=top-offset-40>Banner carousel with no arrows</h3><div id=banner-carousel-no-arrows-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-no-arrows-example data-slide-to=0></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=2></li></ol></div><h3 class=top-offset-40>Banner carousel captions no arrows</h3><div id=carousel-example-with-caption class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class="item active"><img alt="First slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>First slide lorem ipsum dolor sit amet.</h2><p>First slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Second slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Second slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Fourth slide lorem ipsum dolor sit amet.</h2><p>Fourth slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div></div><ol class=carousel-indicators><li data-target=#carousel-example-with-caption data-slide-to=0 class=active></li><li data-target=#carousel-example-with-caption data-slide-to=1></li><li data-target=#carousel-example-with-caption data-slide-to=2></li><li data-target=#carousel-example-with-caption data-slide-to=3></li></ol></div><h3 class=top-offset-40>Filmstrip carousel with images (only)</h3><div class="carousel carousel-filmstrip"><div class=carousel-inner><div class=item><a href=#><img src="http://placehold.it/250x250/d74324/FFFFFF&text=Image" alt=Image class="red img-responsive"> Red</a></div><div class=item><a href=#><img src="http://placehold.it/250x250/6ea204/FFFFFF&text=Image" alt=Image class="green img-responsive"> Green</a></div><div class=item><a href=#><img src="http://placehold.it/250x250/007db8/FFFFFF&text=Image" alt=Image class="blue img-responsive"> Blue</a></div><div class=item><a href=#><img src="http://placehold.it/250x250/ce1126/FFFFFF&text=Image" alt=Image class="red-dark img-responsive"> Red Dark</a></div><div class=item><a href=#><img src="http://placehold.it/250x250/b7295a/FFFFFF&text=Image" alt=Image class="berry img-responsive"> Berry</a></div><div class=item><a href=#><img src="http://placehold.it/250x250/6e2585/FFFFFF&text=Image" alt=Image class="purple img-responsive"> purple</a></div><div class=item><a href=#><img src="http://placehold.it/250x250/f2af00/FFFFFF&text=Image" alt=Image class="yellow img-responsive"> Yellow</a></div></div></div></div></section>');
     $templateCache.put('components/carousel/demo-play-carousel.html', '<section ng-controller=carouselPLayDemoCtrl id=carousel-play-demo><div class=container><h2>Carousel Builder</h2><div></div></div></section>');
     $templateCache.put('components/collapsible-items/demo-collapsible-items.html', '<section ng-controller=collapsibleItemsCtrl id=collapsible-items-html-example><div class=container><h2>Collapsible-Items Demo</h2><div class=bottom-offset-40><h3 class=bottom-offset-30>Standard accordion</h3><div class=panel-group id=accordion><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#One>Headline title goes here</a></h4></div><div id=One class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Two class=collapsed>Headline title goes here</a></h4></div><div id=Two class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Three class=collapsed>Headline title goes here</a></h4></div><div id=Three class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div ng-if=!guidanceOff class="alert alert-info alert-dismissable bottom-offset-40"><h4>To default a panel open:</h4><p>You have to do two things:</p><ul><li>Remove the class <code>collapsed</code> from the trigger.</li><li>Add the class <code>in</code> to the target panel-collapse.</li></ul></div><div class=bottom-offset-60><h3 class=bottom-offset-30>Accordion with independent panels</h3><div id=accordion-independent-panels><div class=panel-group id=accordion-independant><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#bags-1>Headline title goes here</a></h4></div><div id=bags-1 class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#tax-1 class=collapsed>Headline title goes here</a></h4></div><div id=tax-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#home-1 class=collapsed>Headline title goes here</a></h4></div><div id=home-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div class=bottom-offset-60><h3 class=bottom-offset-20>Accordion with show/hide links</h3><div class=show-hide-links><a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse:not(.in)" aria-expanded=false>Show all</a> | <a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse.in" aria-expanded=false>Hide all</a></div><div class=panel-group id=accordion-independent-with-show-all><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#bags-2 class=collapsed>Headline title goes here</a></h4></div><div id=bags-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#tax-2 class=collapsed>Headline title goes here</a></h4></div><div id=tax-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#home-2 class=collapsed>Headline title goes here</a></h4></div><div id=home-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div><h3 class=bottom-offset-20>From a link</h3><div class=bottom-offset-40><div class=bottom-offset-10><p><a href=javascript:; class=collapsed data-toggle=collapse data-target=#collapsible-example-area-5><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show stuff</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Hide stuff</span></a></p><p id=collapsible-example-area-5 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.</p></div></div></div></section>');
     $templateCache.put('components/collapsible-items/demo-play-collapsible-items.html', '<section ng-controller=collapsibleItemsPLayDemoCtrl id=collapsible-items-play-demo><div class=container><h2>Collapsible-Items Builder</h2><div></div></div></section>');
-    $templateCache.put('components/colors/demo-colors.html', '<section ng-controller=colorsCtrl id=colors-html-example><div class=container><h2>Colors Demo</h2><div></div></div></section>');
+    $templateCache.put('components/colors/demo-colors.html', '<section ng-controller=colorsCtrl id=colors-html-example><div class=container><h2>Colors Demo</h2><div><div class=row><div class="col-sm-12 col-md-4"><div class="well well-white text-gray-medium well-white-stroke" to-clipboard="&lt;div class=&quot;well well-white&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;White</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#ffffff</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-white</span><br></div><div class="well text-gray-medium well-gray-very-light well-gray-very-light-stroke" to-clipboard="&lt;div class=&quot;well well-gray-very-light&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;7% Dell Light Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f9f9f9</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well text-gray-medium" to-clipboard="&lt;div class=&quot;well&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#eeeeee</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well text-white well-gray" to-clipboard="&lt;div class=&quot;well well-gray&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#aaaaaa</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-gray-medium" to-clipboard="&lt;div class=&quot;well well-gray-medium&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Medium Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#737373</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-gray-medium</span><br></div><div class="well well-gray-dark" to-clipboard="&lt;div class=&quot;well well-gray-dark&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray Dark</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#444444</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-gray-dark</span><br></div><div class="well well-blue" to-clipboard="&lt;div class=&quot;well well-blue&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#007db8</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-blue</span><br></div></div><div class="col-sm-12 col-md-4"><div class="well well-dark-blue" to-clipboard="&lt;div class=&quot;well well-dark-blue&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#00447c</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-dark-blue</span><br></div><div class="well well-light-green" to-clipboard="&lt;div class=&quot;well well-light-green&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#C1D82F</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-green" to-clipboard="&lt;div class=&quot;well well-green&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6EA204</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-green</span><br></div><div class="well well-yellow" to-clipboard="&lt;div class=&quot;well well-yellow&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Yellow</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f2af00</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-orange" to-clipboard="&lt;div class=&quot;well well-orange&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Orange</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#EE6411</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-orange</span><br></div><div class="well well-red" to-clipboard="&lt;div class=&quot;well well-red&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#D74324</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red</span><br></div><div class="well well-red-dark" to-clipboard="&lt;div class=&quot;well well-red-dark&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#CE1126</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red-dark</span><br></div></div><div class="col-sm-12 col-md-4"><div class="well well-berry" to-clipboard="&lt;div class=&quot;well well-berry&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Berry</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#B7295A</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-berry</span><br></div><div class="well well-purple" to-clipboard="&lt;div class=&quot;well well-purple&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Purple</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6E2585</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-purple</span><br></div><div class="well well-teal" to-clipboard="&lt;div class=&quot;well well-teal&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Teal</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#42aeaf</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div></div></div></div></div></section>');
     $templateCache.put('components/colors/demo-play-colors.html', '<section ng-controller=colorsPLayDemoCtrl id=colors-play-demo><div class=container><h2>Colors Builder</h2><div></div></div></section>');
     $templateCache.put('components/containers/demo-containers.html', '<section ng-controller=containersCtrl id=containers-html-example><div class=container><h2>Containers Demo</h2><div><h4>Default well example</h4><div id=example-well><div class="well well-transparent-stroke"><p>This is a default Well...</p></div></div></div><h4>Solid colored wells &amp; containers</h4><div class="well well-lg well-blue"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-blue"</strong></p></div><div class="well well-lg well-dark-blue"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-dark-blue"</strong></p></div><div class="well well-lg well-purple"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-purple"</strong></p></div><div class="well well-lg well-berry"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-berry"</strong></p></div><div class="well well-lg well-red"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red"</strong></p></div><div class="well well-lg well-gray-medium"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-medium"</strong></p></div><div class="well well-lg well-gray-dark"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-dark"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers</h4><div class="well well-lg well-blue-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-blue-stroke"</strong></p></div><div class="well well-lg well-dark-blue-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-dark-blue-stroke"</strong></p></div><div class="well well-lg well-purple-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-purple-stroke"</strong></p></div><div class="well well-lg well-berry-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-berry-stroke"</strong></p></div><div class="well well-lg well-red-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red-stroke"</strong></p></div><div class="well well-lg well-red-dark-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red-dark-stroke"</strong></p></div><div class="well well-lg well-gray-medium-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-medium-stroke"</strong></p></div><div class="well well-lg well-gray-dark-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-dark-stroke"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers with title</h4><div class="well well-lg well-blue-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-blue-stroke"</strong></p></div><div class="well well-lg well-dark-blue-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-dark-blue-stroke"</strong></p></div><div class="well well-lg well-purple-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-purple-stroke"</strong></p></div><div class="well well-lg well-berry-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-berry-stroke"</strong></p></div><div class="well well-lg well-red-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-red-stroke"</strong></p></div><div class="well well-lg well-red-dark-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-red-dark-stroke"</strong></p></div><div class="well well-lg well-gray-medium-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-gray-medium-stroke"</strong></p></div><div class="well well-lg well-gray-dark-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-gray-dark-stroke"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers with title</h4><div class="panel panel-blue"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-blue"</strong></p></div><div class="panel panel-dark-blue"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-dark-blue"</strong></p></div><div class="panel panel-purple"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-purple"</strong></p></div><div class="panel panel-purple"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-purple"</strong></p></div><div class="panel panel-berry"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-berry"</strong></p></div><div class="panel panel-red"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-red"</strong></p></div><div class="panel panel-red-dark"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-red-dark"</strong></p></div><div class="panel panel-gray-medium"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-gray-medium"</strong></p></div><div class="panel panel-gray-dark"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-gray-dark"</strong></p></div></div></section>');
     $templateCache.put('components/containers/demo-play-containers.html', '<section ng-controller=containersPLayDemoCtrl id=containers-play-demo><div class=container><h2>Containers Builder</h2><div></div></div></section>');
-    $templateCache.put('components/data-elements/demo-data-elements.html', '<section ng-controller=dataElementsCtrl id=data-elements-html-example><div class=container><h2>Data-Elements Demo</h2><div><div ng-controller=DatepickerDemoCtrl><h4>Select date</h4><div class=row><div class=col-md-6><p class=input-group><input type=text class=form-control datepicker-popup=MM-dd-yyyy ng-model=dt is-open=opened min-date=minDate max-date="\'2015-06-22\'" datepicker-options=dateOptions date-disabled="disabled(date, mode)" ng-required=true show-button-bar=false show-weeks="false"> <span class=input-group-btn><button type=button class="btn btn-default" ng-click=open($event)><i class="glyphicon glyphicon-calendar"></i></button></span></p><p>MM/DD/YYYY</p></div></div></div></div></div></section>');
-    $templateCache.put('components/data-elements/demo-play-data-elements.html', '<section ng-controller=dataElementsPLayDemoCtrl id=data-elements-play-demo><div class=container><h2>Data-Elements Builder</h2><div></div></div></section>');
+    $templateCache.put('components/content-teaser/demo-content-teaser.html', '<section ng-controller=contentTeaserCtrl id=content-teaser-html-example><div class=container><h2>Teasers Demo</h2><div class="content-holder col-lg-12"><h4>Full-width</h4><p class=full-width-teaser><span>Text area may contain centered text up to 140 characters including spaces and call-to-action. <span class=text-blue>Call to Action</span></span></p></div><div class="row pull-left"><div class=content-holder><h4>Horizontal - image left</h4><div class="horizontal-teaser row"><div class="pull-left col-xs-5"><img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175"> <img class=visible-xs src="http://placehold.it/105x80"></div><div class="pull-right col-xs-7"><h5 class=teaser-headline>Headline</h5><p class=teaser-text>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p><a class="btn btn-success" href=javascript:;>Call to Action</a></div></div></div><div class=content-holder><h4>Horizontal - image right</h4><div class="horizontal-teaser row"><div class="pull-left col-xs-7"><h5 class=teaser-headline>Headline</h5><p class=teaser-text>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p><a class="btn btn-successn hidden-xs" href=javascript:;>Call to Action</a></div><div class="pull-right col-xs-5"><img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175"> <img class=visible-xs src="http://placehold.it/105x80"></div></div></div></div><div class=content-holder><h4>Horizontal - full bleed image, text link overlay</h4><img class="pull-left visible-lg" src="http://placehold.it/580x130"> <img class="pull-left visible-md" src="http://placehold.it/750x175"> <img class="pull-left visible-xs visible-sm" src="http://placehold.it/320x155"><p class=teaser-link>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p></div><div class="row pull-left" style=width:100%><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><div class=vertical-teaser-box><h4>Vertical<br>image with links</h4><p class=text-blue>Link 1</p><p class=text-blue>Link 2 (optional)</p><p class=text-blue>Link 3 (optional)</p></div><img class=pull-left src="http://placehold.it/260x140"></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><div class=vertical-teaser-box><h4>Vertical<br>video with links</h4><p class=text-blue>Link 1</p><p class=text-blue>Link 2 (optional)</p><p class=text-blue>Link 3 (optional)</p><img class=pull-left src="http://placehold.it/260x140"></div></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><div class=vertical-teaser-box><h4>Vertical<br>heading, subheading, CTA, img</h4><p><a class=text-blue>Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p><p class=text-blue>Call to Action</p><img class="pull-left top-offset-15" src="http://placehold.it/260x140"></div></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><div class=vertical-teaser-box><h4>Vertical<br>with button</h4><p><span class=text-blue>Headline</span><br>Subheading lorem ipsum dolor sit amet. Consectius.</p><a class="btn btn-success" href=javascript:;>Call to Action</a> <img class="pull-left top-offset-15" src="http://placehold.it/260x140"></div></div></div></div></section>');
+    $templateCache.put('components/content-teaser/demo-play-content-teaser.html', '<section ng-controller=contentTeaserPLayDemoCtrl id=content-teaser-play-demo><div class=container><h2>Content-Teaser Builder</h2><div></div></div></section>');
+    $templateCache.put('components/date-selector/demo-date-selector.html', '<section ng-controller=dateSelectorCtrl id=date-selector-html-example><div class=container><h2>Date-Selector Demo</h2><div><div ng-controller=DatepickerDemoCtrl><h4>Select date</h4><div class=row><div class="col-md-6 date-selector"><p class=input-group><input type=text class=form-control datepicker-popup=MM-dd-yyyy ng-model=dt is-open=opened min-date=minDate max-date="\'2015-06-22\'" datepicker-options=dateOptions date-disabled="disabled(date, mode)" ng-required=true show-button-bar=false show-weeks="false"> <span class=input-group-btn><button type=button class="btn btn-default" ng-click=open($event)><i class="glyphicon glyphicon-calendar"></i></button></span></p><p>MM/DD/YYYY</p></div></div></div></div></div></section>');
+    $templateCache.put('components/date-selector/demo-play-date-selector.html', '<section ng-controller=dateSelectorPLayDemoCtrl id=date-selector-play-demo><div class=container><h2>Date-Selector Builder</h2><div></div></div></section>');
     $templateCache.put('components/dividers/demo-dividers.html', '<section ng-controller=dividersCtrl id=dividers-html-example><div class=container><h2>Dividers Demo</h2><div><div><h4>Section dividers with shadow<small>(supported browsers)</small></h4><hr class=shadow-separator></div><div class=bottom-offset-30><h4>Section dividers default dividers<small>(example of non-supported browsers)</small></h4><hr class=separator-default></div><div class=top-offset-40><h2>Horizontal Dividers</h2></div><div class=top-offset-20><h4>Primary divider</h4><hr class="hr-gray"></div><div class=top-offset-20><h4>Secondary dividers</h4><hr></div><div class=bottom-offset-30><h4>Tertiary dividers</h4><hr class="hr-gray-light"></div><div class=top-offset-40><h2>Vertical Dividers</h2></div><div class=row><div class="col-xs-12 top-offset-20 bottom-offset-20"><div class="col-xs-4 border-left-gray-stroke text-left">&nbsp;vertical divider left</div><div class="col-xs-4 border-right-gray-stroke text-right">&nbsp;vertical divider right</div></div><div class="col-xs-12 top-offset-20 bottom-offset-20"><div class="col-xs-4 border-left-thick-gray-stroke text-left">&nbsp;vertical thick divider left</div><div class="col-xs-4 border-right-thick-gray-stroke text-right">&nbsp;vertical thick divider right</div></div></div></div></div></section>');
     $templateCache.put('components/dividers/demo-play-dividers.html', '<section ng-controller=dividersPLayDemoCtrl id=dividers-play-demo><div class=container><h2>Dividers Builder</h2><div></div></div></section>');
-    $templateCache.put('components/dropdown-buttons/demo-dropdown-buttons.html', '<section ng-controller=dropdownButtonsCtrl id=dropdown-buttons-html-example><div class=container><h2>Dropdown-Buttons Demo</h2><div></div></div></section>');
+    $templateCache.put('components/dropdown-buttons/demo-dropdown-buttons.html', '<section ng-controller=dropdownButtonsCtrl id=dropdown-buttons-html-example><div class=container><h2 class=bottom-offset-20>Dropdown-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase Dropdown</h4><div class=btn-group id=button-primary-dropdown><button type=button class="btn btn-primary dropdown-toggle" data-toggle=dropdown aria-expanded=false>Primary <span class=caret></span></button><ul class=dropdown-menu role=menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><div class=bottom-offset-30><h4>Primary Purchase Dropdown</h4><div class=btn-group id=button-success-dropdown><a class="btn btn-success dropdown-toggle" data-toggle=dropdown href=javascript:;>Purchase <i class=caret></i></a><ul class=dropdown-menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><div class=bottom-offset-30><h4>Secondary or General Use Dropdown</h4><div class=btn-group id=button-default-dropdown><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>General Use <i class=caret></i></a><ul class=dropdown-menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><hr><div class=bottom-offset-30><h4>Primary Split Non-Purchase Dropdown</h4><div class=btn-group id=button-primary-split><button type=button class="btn btn-primary">Primary split</button> <button type=button class="btn btn-primary dropdown-toggle" data-toggle=dropdown aria-expanded=false><span class=caret></span> <span class=sr-only>Toggle Dropdown</span></button><ul class=dropdown-menu role=menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><div class=bottom-offset-30><h4>Primary Split Purchase Dropdown</h4><div class=btn-group id=button-success-split><button type=button class="btn btn-success">Purchase split</button> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-expanded=false><span class=caret></span> <span class=sr-only>Toggle Dropdown</span></button><ul class=dropdown-menu role=menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><div class=bottom-offset-30><h4>Secondary Split or General Use Dropdown</h4><div class=btn-group id=button-default-split><button type=button class="btn btn-default">General Use split</button> <button type=button class="btn btn-default dropdown-toggle" data-toggle=dropdown aria-expanded=false><span class=caret></span> <span class=sr-only>Toggle Dropdown</span></button><ul class=dropdown-menu role=menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div></div></section>');
     $templateCache.put('components/dropdown-buttons/demo-play-dropdown-buttons.html', '<section ng-controller=dropdownButtonsPLayDemoCtrl id=dropdown-buttons-play-demo><div class=container><h2>Dropdown-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/footer/demo-footer.html', '<section ng-controller=footerCtrl id=footer-html-example><div class=container><h2>Footer Demo</h2><div></div></div></section>');
     $templateCache.put('components/footer/demo-play-footer.html', '<section ng-controller=footerPLayDemoCtrl id=footer-play-demo><div class=container><h2>Footer Builder</h2><div></div></div></section>');
-    $templateCache.put('components/forms/demo-forms.html', '<section ng-controller=formsCtrl id=forms-html-example><div class=container><h2>Forms Demo</h2><div></div></div></section>');
+    $templateCache.put('components/forms/demo-forms.html', '<section ng-controller=formsCtrl id=forms-html-example><div class=container><h2>Forms Demo</h2><h3 class=top-offset-20>individual form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=text-label-input>Text input label</label><div class="col-xs-12 col-sm-5"><input type=text class=form-control id=text-label-input><p class=help-block>In addition to freeform text, any HTML5 text-based input appears like so.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=uneditable>Uneditable input</label><div class="col-xs-12 col-sm-5"><span id=uneditable class="uneditable-input form-control">Some value here</span></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=disabledInput>Disabled input</label><div class="col-xs-12 col-sm-5"><input class="disabled form-control" id=disabledInput type=text placeholder="Disabled input here\u2026" disabled></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=textarea>Textarea input</label><div class="col-xs-12 col-sm-5"><textarea id=textarea class=form-control rows=5></textarea></div></div></div></form></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Checkboxes</h4><div class=checkbox><label><input type=checkbox value="option 1"> Checkbox one</label></div><div class="checkbox disabled bottom-offset-20"><label><input type=checkbox value="value option 2" disabled> Checkbox two is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline checkboxes</h4><label class=checkbox-inline><input type=checkbox id=inlineCheckbox1 value=option1>1</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox2 value=option2>2</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox3 value=option3>3</label></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Radio Buttons</h4><div class=radio><label><input type=radio name=optionsRadios id=options-radio-1 value=option1 checked> Option one radio button</label></div><div class=radio><label><input type=radio name=optionsRadios id=options-radio-2 value=option2> Option two radio button</label></div><div class="radio disabled"><label><input type=radio name=optionsRadios id=options-radio-3 value=option3 disabled> Option three is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline Radio Buttons</h4><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio1 value=option1> 1</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio2 value=option2> 2</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio3 value=option3> 3</label></div></div><div class=row><div class="col-xs-12 col-sm-8 bottom-offset-40"><h4>Tree Checkboxes</h4><ul class=list-tree><li><label class=checkbox><input type=checkbox value=option1-parent1> Checkbox value (parent 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild1> Checkbox value (grand child 1)</label></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent1-child2> Checkbox value (child 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild3> Checkbox value (grand child 3)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild4> Checkbox value (grand child 4)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild5> Checkbox value (grand child 5)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild1> Checkbox value (great grand child 1)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild2> Checkbox value (great grand child 2)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild3> Checkbox value (great grand child 3)</label></li></ul></li></ul></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent2> Checkbox value (parent 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-grandchild1> Checkbox value (grand child 1)</label></li></ul></li></ul></li></ul></div></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=exampleInputFile>File upload label</label><div class="col-xs-6 col-sm-6"><input type=file id=exampleInputFile><p class=help-block>Example block-level help text here.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Input with error</label><div class="col-xs-6 col-sm-6"><input type=text id=inputError class="form-control alert alert-warning" data-html=true data-toggle=popover data-placement=top data-trigger=submit data-content="<strong>\'First Name\'</strong> should not be empty." data-original-title="&lt;i class=\'icon-small-alertnotice text-red pull-left\'&gt;&lt;/i&gt; &nbsp;Not a valid email &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;" placeholder="*First Name"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="form-group show-password"><label for=passwordShowHide class="col-xs-12 col-sm-2 form-label">Password</label><div class="col-xs-6 col-sm-6"><input id=passwordShowHide type=password class=form-control ng-model=password></div><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"><label class="checkbox help-block"><input type=checkbox value=option1 ng-model=showPassword ng-click=togglePassword()> <span ng-if=!showPassword>Show password</span> <span ng-if=showPassword>Hide password</span></label></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-6 col-sm-8 col-md-8"><label class="col-xs-12 col-sm-3 form-label" for=phone>Phone number</label><div class="col-xs-12 col-sm-9"><input id=phone type=text class="form-control phone-number" placeholder="(555) 111-2222"></div></div></div><div class=row><div class="col-xs-12 col-sm-8 col-md-8"><div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phone-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phone-ext class="collapse col-xs-6 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Email address</label><div class="col-xs-6 col-sm-6"><input name=email type=email class="form-control required" placeholder="*Enter email"></div></div></div><div class=row><div class="col-xs-12 col-md-6 col-md-offset-2 help-ext has-success has-feedback"><span><label class="email-success hide">Your email address is valid</label></span> <span><label class="email-error hide">Your email address is NOT valid</label></span></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label><div class=spinbox data-orient=vertical data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box horizontal</label><div class=spinbox data-orient=horizontal data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><h3 class=top-offset-40>select form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01>Select list</label><select class=form-control id=select01><option>something</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select-01>Tiered select list</label><select class=form-control id=select-01><option class=text-gray-dark value=all>All</option><optgroup class=text-gray-dark label="Original Release Date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup><optgroup class=text-gray-dark label="Last updated date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=multiSelect>multi-select</label><select multiple id=multiSelect><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><div class=form-group><label for=ms>Multi-select with checkboxes</label><select class=ms-checkbox id=ms multiple><option value=1>January</option><option value=2>February</option><option value=3>March</option><option value=4>April</option><option value=5>May</option><option value=6>June</option><option value=7>July</option><option value=8>August</option><option value=9>September</option><option value=10>October</option><option value=11>November</option><option value=12>December</option></select></div></div></div></div></form></div><h3 class=top-offset-40>Selects with pre-populated states (U.S. only)</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=default-select-state>Standard Select U.S. States</label><select class="form-control select-state" id=default-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=short-select-state>States with Abbreviations</label><select class="form-control select-state" data-format=short id=short-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=both-select-state>States with Abbreviations and Name</label><select class="form-control select-state" data-format=both id=both-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=emptyname-select-state>States with Custom Select Text</label><select class="form-control select-state" data-format="" data-empty-name="Please select a state" id=emptyname-select-state ng-model=stateDefault></select></div></div></div></form></div><h3 class=top-offset-40>Common Forms</h3><hr><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9">Ship to</h4></div><div class=row><div class="col-xs-11 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First Name</label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name>First</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name placeholder="*First Name"></div></div><div class="col-xs-1 col-sm-1 col-md-1"><label class="col-xs-12 col-sm-4 col-md-3 form-label" for=middle-initial>MI</label><div class="col-xs-12 col-sm-8 col-md-9"><input type=text class=form-control id=middle-initial placeholder=MI></div></div><div class="col-xs-12 col-sm-5 col-md-5"><label class="col-xs-12 col-sm-2 col-md-3 hidden-sm form-label" for=last-name>Last Name</label><label class="col-xs-12 col-sm-2 col-md-3 visible-sm-block form-label" for=last-name>Last</label><div class="col-xs-12 col-sm-10 col-md-9"><input type=text class=form-control id=last-name placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone #</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 col-md-1 form-label" for=email-address>Email&nbsp;</label><div class="col-xs-12 col-sm-10 col-md-11"><input type=text class="form-control email-address" id=email-address placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext class="collapse col-xs-12 col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-1>Address</label><div class="col-xs-12 col-sm-11 col-md-11"><input type=text class=form-control id=address-1 placeholder="*Street Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-2>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-2 placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state>&nbsp;</label><div><select class="form-control select-state" id=default-state ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip placeholder="*Zip Code"></div></div></div></form></div></div></section>');
     $templateCache.put('components/forms/demo-play-forms.html', '<section ng-controller=formsPLayDemoCtrl id=forms-play-demo><div class=container><h2>Forms Builder</h2><div></div></div></section>');
     $templateCache.put('components/icons/demo-icons.html', '<section ng-controller=iconsCtrl id=icons-html-example><div class=container><h2>Icons Demo</h2><div></div></div></section>');
     $templateCache.put('components/icons/demo-play-icons.html', '<section ng-controller=iconsPLayDemoCtrl id=icons-play-demo><div class=container><h2>Icons Builder</h2><div></div></div></section>');
@@ -75107,7 +72515,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/labels-and-badges/demo-play-labels-and-badges.html', '<section ng-controller=labelsAndBadgesPLayDemoCtrl id=labels-and-badges-play-demo><div class=container><h2>Labels-And-Badges Builder</h2><div></div></div></section>');
     $templateCache.put('components/lists/demo-lists.html', '<section ng-controller=listsCtrl id=lists-html-example><div class=container><h2>Lists Demo</h2><h3 class=bottom-offset-20>Unordered lists</h3><ul><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit<ul><li>Phasellus iaculis neque</li><li>Purus sodales ultricies</li><li>Vestibulum laoreet porttitor sem</li><li>Ac tristique libero volutpat at</li></ul></li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Ordered</h3><ol><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit</li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ol><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Unstyled</h3><ul class=list-unstyled><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit<ul><li>Phasellus iaculis neque</li><li>Purus sodales ultricies</li><li>Vestibulum laoreet porttitor sem</li><li>Ac tristique libero volutpat at</li></ul></li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Inline</h3><ul class=list-inline><li>Lorem ipsum</li><li>Phasellus iaculis</li><li>Nulla volutpat</li><li>Happy</li><li>Trees</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Description</h3><dl><dt>Description lists</dt><dd>A description list is perfect for defining terms.</dd><dt>Euismod</dt><dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd><dd>Donec id elit non mi porta gravida at eget metus.</dd><dt>Malesuada porta</dt><dd>Etiam porta sem malesuada magna mollis euismod.</dd></dl><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Horizontal description</h3><dl class=dl-horizontal><dt>Description lists</dt><dd>A description list is perfect for defining terms.</dd><dt>Euismod</dt><dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd><dd>Donec id elit non mi porta gravida at eget metus.</dd><dt>Malesuada porta</dt><dd>Etiam porta sem malesuada magna mollis euismod.</dd><dt>Felis euismod semper eget lacinia</dt><dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd></dl></div></section>');
     $templateCache.put('components/lists/demo-play-lists.html', '<section ng-controller=listsPLayDemoCtrl id=lists-play-demo><div class=container><h2>Lists Builder</h2><div></div></div></section>');
-    $templateCache.put('components/mini-buttons/demo-mini-buttons.html', '<section ng-controller=miniButtonsCtrl id=mini-buttons-html-example><div class=container><h2>Mini-Buttons Demo</h2><div></div></div></section>');
+    $templateCache.put('components/mini-buttons/demo-mini-buttons.html', '<section ng-controller=miniButtonsCtrl id=mini-buttons-html-example><div class=container><h2 class=bottom-offset-30>Mini-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase</h4><a class="btn btn-primary btn-xs" href=javascript:;>Primary</a></div><div class=bottom-offset-30><h4>Primary Non-Purchase disabled</h4><a class="btn btn-primary btn-xs disabled" href=javascript:;>Primary</a></div><hr><div class=bottom-offset-30><h4>Primary Purchase</h4><a class="btn btn-success btn-xs" href=javascript:;>Purchase</a></div><div class=bottom-offset-30><h4>Primary Purchase disabled</h4><a class="btn btn-success btn-xs disabled" href=javascript:;>Purchase</a></div><hr><div class=bottom-offset-30><h4>Secondary or General Use</h4><a class="btn btn-default btn-xs" href=javascript:;>General Use</a></div><div class=bottom-offset-30><h4>Secondary or General Use disabled</h4><a class="btn btn-default btn-xs disabled" href=javascript:;>General Use</a></div><hr></div></section>');
     $templateCache.put('components/mini-buttons/demo-play-mini-buttons.html', '<section ng-controller=miniButtonsPLayDemoCtrl id=mini-buttons-play-demo><div class=container><h2>Mini-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/modals/demo-modals.html', '<section ng-controller=modalsCtrl id=modals-html-example><div class=container><h2>Modals Demo</h2><div></div></div></section>');
     $templateCache.put('components/modals/demo-play-modals.html', '<section ng-controller=modalsPLayDemoCtrl id=modals-play-demo><div class=container><h2>Modals Builder</h2><div></div></div></section>');
@@ -75122,19 +72530,19 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/progress-bars/demo-play-progress-bars.html', '<section ng-controller=progressBarsPLayDemoCtrl id=progress-bars-play-demo><div class=container><h2>Progress-Bars Builder</h2><div></div></div></section>');
     $templateCache.put('components/progress-bars/demo-progress-bars.html', '<section ng-controller=progressBarsCtrl id=progress-bars-html-example><div class=container><h2>Progress-Bars Demo</h2><div class=row><div class="col-md-6 bottom-offset-20"><h4>Default</h4><div class=progress><div class=bar style="width: 60%"></div></div><h4>Default with percentage</h4><div class=progress><div class=bar style="width: 60%">60%</div></div></div></div><div class=bottom-offset-60><h4>Default progress status</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></a><div class="bar bar-progress" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status: Disabled</h4><div class="progress progress-status"><div href=javascript:; class="bar bar-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></div><div class="bar bar-progress-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status 2-Step minimum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 50%"><span class="hidden-xs hidden-sm">Payment</span></a><div class="bar bar-incomplete" style="width: 50%"><span class="hidden-xs hidden-sm">Verify &amp; submit order</span></div></div></div><div class=bottom-offset-60><h4>Progress status 6-Step maximum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 1</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 2</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 3</span></a><div class="bar bar-progress" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 4</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 5</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 6</span></div></div></div><div class=bottom-offset-60><h4>Animated Striped</h4><p>Add <code>.active</code> to <code>.progress-bar-striped</code> to animate the stripes right to left. Not available in IE9 and below.</p><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=45 aria-valuemin=0 aria-valuemax=100 style="width: 45%"><span class=sr-only>45% Complete</span></div></div></div><div class=bottom-offset-60><h4>Striped progress</h4><div ng-init=fakeAnimation()><div class="pull-right progress-counter hidden-xs"><h3 class=pull-right>{{fakeAnimationValue}}%</h3></div><div class="progress bottom-offset-5"><div ng-class=stripeAnimate class="progress-bar progress-bar-striped" role=progressbar aria-valuenow={{fakeAnimationValue}} aria-valuemin=0 aria-valuemax=100 style="width: {{fakeAnimationValue}}%"></div></div><div><p class=pull-left>Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p><button type=submit class="btn btn-primary btn-margin-left-5 pull-right" ng-click=pauseFakeAnimation() ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button> <button type=submit class="btn btn-primary btn-margin-left-5 pull-right" ng-click=fakeAnimation() ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button> <button type=submit class="btn btn-primary btn-margin-left-5 pull-right" ng-if="fakeAnimationValue === 100" ng-click=resetFakeAnimation()>Ok</button> <button type=reset class="btn btn-default btn-margin-left-5 pull-right" ng-click=resetFakeAnimation() ng-if="fakeAnimationValue !== 100">Cancel</button></div></div></div></div></section>');
     $templateCache.put('components/ratings-and-reviews/demo-play-ratings-and-reviews.html', '<section ng-controller=ratingsAndReviewsPLayDemoCtrl id=ratings-and-reviews-play-demo><div class=container><h2>Ratings-And-Reviews Builder</h2><div></div></div></section>');
-    $templateCache.put('components/ratings-and-reviews/demo-ratings-and-reviews.html', '<section ng-controller=ratingsAndReviewsCtrl id=ratings-and-reviews-html-example><div class=container><h2>Ratings-And-Reviews Demo</h2><div><h3 class=top-offset-40>Star Ratings (No Reviews)</h3><div class=ratingBlock data-user-rating=0 data-review-stars data-histogram=no></div><h3 class=top-offset-40>Star Ratings (Reviews)</h3><div class=ratingBlock data-user-rating=5 data-review-stars=[2,6,12,34,7] data-histogram=no></div><h3 class=top-offset-40>Star Ratings (Reviews w/Histogram)</h3><div class=ratingBlock data-user-rating=5 data-review-stars=[12,12,23,54,107] data-histogram=yes></div></div><div><h3 class=top-offset-40>Recommendation Ratio</h3><div class=recoRatio data-recs=74 data-total=91 style=font-size:.85em></div></div></div></section>');
+    $templateCache.put('components/ratings-and-reviews/demo-ratings-and-reviews.html', '<section ng-controller=ratingsAndReviewsCtrl id=ratings-and-reviews-html-example><div class=container><h2>Ratings-And-Reviews Demo</h2><div><h3 class=top-offset-40>Star Ratings (No Reviews)</h3><div class=ratingBlock data-user-rating=0 data-review-stars data-histogram=no></div><h3 class=top-offset-40>Star Ratings (Reviews)</h3><div class=ratingBlock data-user-rating=5 data-review-stars=[2,6,12,34,7] data-histogram=no></div><h3 class=top-offset-40>Star Ratings (Reviews w/Histogram)</h3><div class=ratingBlock data-user-rating=5 data-review-stars=[12,12,23,54,107] data-histogram=yes></div></div><div><h3 class=top-offset-40>Recommendation Ratio</h3><div class=recoRatio data-recs=74 data-total=91></div></div><h3 class=top-offset-40>Customer Review Quote</h3><div class=revQuote data-quote="When I received the XPS 16 I was so surprised at how thin, sharp, and stylish the XPS 16 was." data-attribution="jevester, September 24, 2009"></div></div></section>');
     $templateCache.put('components/responsive-utilities/demo-play-responsive-utilities.html', '<section ng-controller=responsiveUtilitiesPLayDemoCtrl id=responsive-utilities-play-demo><div class=container><h2>Responsive-Utilities Builder</h2><div></div></div></section>');
     $templateCache.put('components/responsive-utilities/demo-responsive-utilities.html', '<section ng-controller=responsiveUtilitiesCtrl id=responsive-utilities-html-example><div class=container><h2>Responsive-Utilities Demo</h2><div></div></div></section>');
-    $templateCache.put('components/search-and-filtering/demo-play-search-and-filtering.html', '<section ng-controller=searchAndFilteringPLayDemoCtrl id=search-and-filtering-play-demo><div class=container><h2>Search-And-Filtering Builder</h2><div></div></div></section>');
-    $templateCache.put('components/search-and-filtering/demo-search-and-filtering.html', '<section ng-controller=searchAndFilteringCtrl id=search-and-filtering-html-example><div class=container><h2>Search-And-Filtering Demo</h2><div><div data-ng-app data-ng-controller=myCheckboxCtrl><div class=row><h2>Filtering</h2></div><div class=row><h3>Filter by checkbox</h3></div><div class=row id=filter-checkbox><div class="pull-left col-sm-3 col-xs-12"><p>Narrow your search by screen size</p><label class=pull-left ng-repeat="c in classes"><input type=checkbox ng-model="selected[c]"> <span>{{c}}</span></label></div><div class="col-sm-9 col-xs-12"><div class="pull-left searchCard text-center well-gray" ng-repeat="card in cards | filter:showCards"><h3>{{card.name}}</h3><em>{{card.size}}</em><br><em>{{card.price}}</em></div></div></div></div><hr><div data-ng-app data-ng-controller=myDDCtrl><div class=row><h3>Filter by dropdown</h3></div><div class=row id=filter-drop><div class="pull-left col-sm-3 col-xs-12"><p class="text-left top-padding-5">Screen size:</p><select ng-model=screenSize ng-options="item.size for item in filterOptions.sizes"><option value="" selected>-- Select your Size --</option></select><div><p class="text-left top-padding-5">Price:</p><select ng-model=priceRange ng-options="item.pricerange for item in filterOptions.prices"><option value="" selected>-- Select your Range --</option></select></div></div><div class="col-sm-9 col-xs-12"><div class="pull-left searchCard text-center well-gray" ng-repeat="item in data | filter:screenSize | filter:priceRange"><h3>{{item.name}}</h3><em>{{item.size}}</em><br><em>{{item.pricerange}}</em></div></div></div></div></div></div></section>');
+    $templateCache.put('components/search-and-navigation/demo-play-search-and-navigation.html', '<section ng-controller=searchAndNavigationPLayDemoCtrl id=search-and-navigation-play-demo><div class=container><h2>Search-And-Navigation Builder</h2><div></div></div></section>');
+    $templateCache.put('components/search-and-navigation/demo-search-and-navigation.html', '<section ng-controller=searchAndNavigationCtrl id=search-and-navigation-html-example><div class=container><h2>Search-And-Filtering Demo</h2><div><div data-ng-app data-ng-controller=myCheckboxCtrl><div class=row><h2>Filtering</h2></div><div class=row><h3>Filter by checkbox</h3></div><div class=row id=filter-checkbox><div class="pull-left col-sm-3 col-xs-12"><p>Narrow your search by screen size</p><label class=pull-left ng-repeat="c in classes"><input type=checkbox ng-model="selected[c]"> <span>{{c}}</span></label></div><div class="col-sm-9 col-xs-12"><div class="pull-left searchCard text-center well-gray" ng-repeat="card in cards | filter:showCards"><h3>{{card.name}}</h3><em>{{card.size}}</em><br><em>{{card.price}}</em></div></div></div></div><hr><div data-ng-app data-ng-controller=myDDCtrl><div class=row><h3>Filter by dropdown</h3></div><div class=row id=filter-drop><div class="pull-left col-sm-3 col-xs-12"><p class="text-left top-padding-5">Screen size:</p><select ng-model=screenSize ng-options="item.size for item in filterOptions.sizes"><option value="" selected>-- Select your Size --</option></select><div><p class="text-left top-padding-5">Price:</p><select ng-model=priceRange ng-options="item.pricerange for item in filterOptions.prices"><option value="" selected>-- Select your Range --</option></select></div></div><div class="col-sm-9 col-xs-12"><div class="pull-left searchCard text-center well-gray" ng-repeat="item in data | filter:screenSize | filter:priceRange"><h3>{{item.name}}</h3><em>{{item.size}}</em><br><em>{{item.pricerange}}</em></div></div></div></div></div></div></section>');
     $templateCache.put('components/standard-buttons/demo-play-standard-buttons.html', '<section ng-controller=standardButtonsPLayDemoCtrl id=standard-buttons-play-demo><div class=container><h2>Standard-Buttons Builder</h2><div></div></div></section>');
-    $templateCache.put('components/standard-buttons/demo-standard-buttons.html', '<section ng-controller=standardButtonsCtrl id=standard-buttons-html-example><div class=container><h2>Standard-Buttons Demo</h2><div></div></div></section>');
+    $templateCache.put('components/standard-buttons/demo-standard-buttons.html', '<section ng-controller=standardButtonsCtrl id=standard-buttons-html-example><div class=container><h2 class=bottom-offset-20>Standard-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase</h4><a class="btn btn-primary" href=javascript:;>Primary</a></div><div class=bottom-offset-30><h4>Primary Non-Purchase disabled</h4><a class="btn btn-primary disabled" href=javascript:;>Primary</a></div><hr><div class=bottom-offset-30><h4>Primary Purchase</h4><a class="btn btn-success" href=javascript:;>Purchase</a></div><div class=bottom-offset-30><h4>Primary Purchase disabled</h4><a class="btn btn-success disabled" href=javascript:;>Purchase</a></div><hr><div class=bottom-offset-30><h4>Secondary or General Use</h4><a class="btn btn-default" href=javascript:;>General Use</a></div><div class=bottom-offset-30><h4>Secondary or General Use disabled</h4><a class="btn btn-default disabled" href=javascript:;>General Use</a></div><hr><div class=bottom-offset-30><h4>Primary link</h4><a class="btn btn-link" href=javascript:;>Link</a></div><div class=bottom-offset-30><h4>Primary link disabled</h4><a class="btn btn-link disabled" href=javascript:;>Link</a></div></div></section>');
     $templateCache.put('components/tables/demo-play-tables.html', '<section ng-controller=tablesPLayDemoCtrl id=tables-play-demo><div class=container><h2>Tables Builder</h2><div></div></div></section>');
     $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><div><h3>Table with everything - table-striped table-bordered table-hover</h3></div><div class=bottom-offset-20><div id=tables-with-everything><table class="table table-striped table-bordered table-hover"><thead><tr><th>#</th><th>Column heading</th><th>Column heading</th><th>Column heading</th></tr></thead><tbody><tr><td>1</td><td>Column content</td><td>Column content</td><td>Column content</td></tr><tr><td>2</td><td>Column content</td><td>Column content</td><td>Column content</td></tr><tr><td>3</td><td>Column content</td><td>Column content</td><td>Column content</td></tr></tbody></table></div></div><hr><div><h3>Plain bordered table</h3></div><div class=bottom-offset-20><div id=plain-bordered-table><table class="table table-bordered"><thead><tr><th>#</th><th>Column heading</th><th>Column heading</th><th>Column heading</th></tr></thead><tbody><tr><td>1</td><td>Column content</td><td>Column content</td><td>Column content</td></tr><tr><td>2</td><td>Column content</td><td>Column content</td><td>Column content</td></tr><tr><td>3</td><td>Column content</td><td>Column content</td><td>Column content</td></tr></tbody></table></div></div><hr><div><h3>Borderless table with zebra stripes</h3></div><div class=bottom-offset-20><div id=borderless-table-with-zebra-stripes><table class="table table-striped"><thead><tr><th>#</th><th>Column heading</th><th>Column heading</th><th>Column heading</th></tr></thead><tbody><tr><td>1</td><td>Column content</td><td>Column content</td><td>Column content</td></tr><tr><td>2</td><td>Column content</td><td>Column content</td><td>Column content</td></tr><tr><td>3</td><td>Column content</td><td>Column content</td><td>Column content</td></tr></tbody></table></div></div><hr><div><h3>Bordered tables in a panel</h3></div><div class=bottom-offset-20><div id=bordered-tables-in-a-panel><div class="panel blue-stroke"><table class=table><thead><tr><th>#</th><th>Column heading</th><th>Column heading</th><th>Column heading</th></tr></thead><tbody><tr><td>1</td><td>Column content</td><td>Column content</td><td>Column content</td></tr><tr><td>2</td><td>Column content</td><td>Column content</td><td>Column content</td></tr><tr><td>3</td><td>Column content</td><td>Column content</td><td>Column content</td></tr></tbody></table></div></div></div><div><h3>Sortable tables</h3></div><div class=bottom-offset-20><div id=sortable-table-example><div id=sortable-table ui-grid=sortableTable class=sortable-table-example></div></div></div><div><h3>Filtered tables</h3></div><div class=bottom-offset-20><div id=filtered-table-example><div id=filtered-table ui-grid=filteredTable class=filtered-table-example></div></div></div></div></section>');
     $templateCache.put('components/tabs/demo-play-tabs.html', '<section ng-controller=tabsPLayDemoCtrl id=tabs-play-demo><div class=container><h2>Tabs Builder</h2><div></div></div></section>');
     $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs" role=tablist><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home</a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile</a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages</a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings</a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Home is the best place!</div></div></div><div role=tabpanel class="tab-pane fade" id=profile><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. What is this?</div></div></div><div role=tabpanel class="tab-pane fade" id=messages><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. You\'ve got mail!</div></div></div><div role=tabpanel class="tab-pane fade" id=settings><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Default settings or custom!</div></div></div></div></div></div><h3>Tabs <small>(justified)</small></h3><div class=bottom-offset-60><div class="row row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#trains aria-controls=home role=tab data-toggle=tab>Trains</a></li><li role=presentation><a href=#automobile role=tab data-toggle=tab>Automobile</a></li><li role=presentation><a href=#boats role=tab data-toggle=tab>Boats</a></li><li role=presentation><a href=#planes role=tab data-toggle=tab>Planes</a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=trains><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. I like trains</div></div></div><div role=tabpanel class="tab-pane fade" id=automobile><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Cars go fast</div></div></div><div role=tabpanel class="tab-pane fade" id=boats><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Boats are fun in summer</div></div></div><div role=tabpanel class="tab-pane fade" id=planes><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Planes take me places fast</div></div></div></div></div></div></div></section>');
     $templateCache.put('components/tooltips/demo-play-tooltips.html', '<section ng-controller=tooltipsPLayDemoCtrl id=tooltips-play-demo><div class=container><h2>Tooltips Builder</h2><div></div></div></section>');
-    $templateCache.put('components/tooltips/demo-tooltips.html', '<section ng-controller=tooltipsCtrl id=tooltips-html-example><div class=container><h2>Tooltips Demo</h2><div></div></div></section>');
+    $templateCache.put('components/tooltips/demo-tooltips.html', '<section ng-controller=tooltipsCtrl id=tooltips-html-example><div class=container><h2 class=bottom-offset-20>Tooltips Demo</h2><ul class="unstyled list-inline"><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Tooltip on bottom with simple filler copy">Tooltip on top</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=right data-original-title="Tooltip on left with simple filler copy">Tooltip on right</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=bottom data-original-title="Tooltip on bottom with simple filler copy">Tooltip on bottom</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=left data-original-title="Tooltip on left with simple filler copy">Tooltip on left</a></li></ul></div></section>');
     $templateCache.put('components/typography/demo-play-typography.html', '<section ng-controller=typographyPLayDemoCtrl id=typography-play-demo><div class=container><h2>Typography Builder</h2><div></div></div></section>');
     $templateCache.put('components/typography/demo-typography.html', '<section ng-controller=typographyCtrl id=typography-html-example><div class=container><h2>Typography Demo</h2><div></div></div></section>');
     $templateCache.put('demo-assets/partials/all-components/all-components.html', '<div ng-controller=AllComponentsCtrl><h2>All components</h2>testing auto deploy<ul><li ng-repeat="item in components"><a href=#/demo/{{item.id}}>{{item.label}} demo</a> | <a href=#/play/{{item.id}}>play</a></li></ul></div>');

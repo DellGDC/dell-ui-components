@@ -94,14 +94,15 @@ input[type="checkbox"]:focus {
 
 input[type="radio"],
 input[type="checkbox"] {
-  position:relative;
+  position:relative !important;
   top: 3px;
-  margin:0;
+  margin:0 5px 0;
   line-height: normal;
   padding: 7px 7px 7px 20px;
   cursor: pointer;
   width: 15px;
   height: 15px;
+
 }
 
 // Radios and checkboxes on same line
@@ -116,6 +117,7 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+
 // Checkboxes and radios
 //
 // Indent the labels to position radios/checkboxes as hanging controls.
@@ -124,10 +126,8 @@ input[type="checkbox"] {
 .checkbox {
   display: block;
   min-height: @line-height-computed; // clear the floating input if there is no label text
-  margin-top: 5px;
-  margin-bottom: 0px;
-  margin-left: -10px;
-  padding: 7px 7px 7px 30px;
+  margin-top: 5px 0 0;
+  padding: 7px 7px 7px 0px;
   cursor: pointer;
   label {
     display: inline;
