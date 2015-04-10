@@ -28,6 +28,17 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 		$(this).html( "<strong style='font-size:15px;'>"+$( this ).data('recs')+"</strong> out of <strong style='font-size:15px;'>"+$( this ).data('total')+"</strong> ("+Math.floor((parseInt($( this ).data('recs'))/parseInt($( this ).data('total')))*100)+"%) people would recommend this product to a friend" );
 	});
 
+
+	// iterate through like / dislike divs on the page
+	$(".likeDislike").each(function() {
+		$(this).html( "<a class='btn btn-default'>Yes ("+$( this ).data('yes')+")</a><a class='btn btn-default'>No ("+$( this ).data('no')+")</a>" );
+	});
+
+	// iterate through like / dislike divs on the page
+	$(".individual-rating").each(function() {
+		$(this).html( "<div class='pull-left'>"+$( this ).data('ratingLabel')+"</div><div class='pull-right'>"+$( this ).data('userRating')+"/5</div>" );
+	});
+
 	// iterate through rating divs on the page
 	$(".ratingBlock").each(function() {
 		// grab the data
