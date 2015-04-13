@@ -4,6 +4,21 @@
  */
 
 .carousel {
+    .well-banner {
+        max-height: 65%;
+        max-width: 40%;
+        min-height: 50%;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 0 solid transparent;
+        border-radius: 15px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        top: 30px;
+        left: 30px;
+        position: absolute;
+    }
     padding: 0 40px 30px 40px;
     > .carousel-control.right:after,
     > .carousel-control.left:before {
@@ -27,7 +42,7 @@
         }
         .carousel-control {
             top:34%;
-            
+
             &.left {
                 left: 0;
                 &:before {
@@ -136,22 +151,6 @@
         }
     }
 
-    .well-banner {
-        max-height: 65%;
-        max-width: 40%;
-        min-height: 50%;
-        padding: 20px;
-        margin-bottom: 20px;
-        background: rgba(255, 255, 255, 0.6);
-        border: 0 solid transparent;
-        border-radius: 15px;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        top: 20px;
-        left: 20px;
-        position: absolute;
-    }
-
 }
 
 
@@ -257,22 +256,6 @@
 
 
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-    .well-banner {
-        max-height: 65%;
-        max-width: 40%;
-        min-height: 50%;
-        padding: 20px;
-        margin-bottom: 20px;
-        background: rgba(255, 255, 255, 0.6);
-        border: 0 solid transparent;
-        border-radius: 15px;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        top: 30px;
-        left: 30px;
-        position: absolute;
-    }
-
     .carousel-inner {
         position: relative;
         overflow: hidden;
@@ -512,23 +495,25 @@
 
 
 @media (max-width: @screen-xs-max) {
-    .well-banner {
-        max-height: 65%;
-        min-width: 105%;
-        min-height: 40%;
-        padding-left: 25px;
-        padding-right: 25px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        margin-bottom: 0px;
-        background: @dell-gray-light;
-        border: 0 solid transparent;
-        border-radius: 0;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        top: 0;
-        left: 0;
-        position: relative;
+    .carousel{
+        .well-banner {
+            max-height: 65%;
+            min-width: 105%;
+            min-height: 40%;
+            padding-left: 25px;
+            padding-right: 25px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 0px;
+            background: @dell-gray-light;
+            border: 0 solid transparent;
+            border-radius: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            top: 0;
+            left: 0;
+            position: relative;
+        }
 
     }
 
@@ -543,23 +528,26 @@
 }
 
 @media (min-width: 580px) and (max-width: @screen-sm-min) {
-    .well-banner {
-        max-height: 65%;
-        min-width: 105%;
-        min-height: 40%;
-        padding-left: 35px;
-        padding-right: 35px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        margin-bottom: 0;
-        background: @dell-gray-light;
-        border: 0 solid transparent;
-        border-radius: 15px;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        top: 0;
-        left: 0;
-        position: relative;
+    .carousel {
+        .well-banner {
+            max-height: 65%;
+            min-width: 105%;
+            min-height: 40%;
+            padding-left: 35px;
+            padding-right: 35px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 0;
+            background: @dell-gray-light;
+            border: 0 solid transparent;
+            border-radius: 15px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            top: 0;
+            left: 0;
+            position: relative;
+        }
+
     }
 
 }
@@ -655,9 +643,3 @@
     height: auto;
     border: 1px solid transparent;
 }
-//
-//.slick-initialized .slick-slide {
-//    display: block;
-//    padding-left: 10px;
-//    padding-right: 10px;
-//}
