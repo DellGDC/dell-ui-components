@@ -6,15 +6,15 @@ angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
 
 
 angular.module('dellUiComponents')
-/*.directive('carousel', function($timeout){
+.directive('carousel', function($timeout){
     // Runs during compile
     return {
         restrict: 'C',
         link: function($scope, $element, iAttrs, controller) {
-            //$element.carousel();
+            $element.carousel();
         }
     };
-})*/
+})
 
 .directive('carouselFilmstrip', function($timeout){
     // Runs during compile
