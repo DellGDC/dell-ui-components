@@ -5,10 +5,13 @@
 		<!--                                    -->
 		<!-- example html for Teasers component -->
 		<!--                                    -->
-		<div class="content-holder col-lg-12">
-			<h4>Full-width</h4>
-			<p class="full-width-teaser">
-				<span>Text area may contain centered text up to 140 characters including spaces and call-to-action. <span class='text-blue'>Call to Action</span></span>
+		<div class="row pull-left full-width-container">
+			<div class="content-holder col-lg-12">
+				<h4>Full-width</h4>
+				<p class="full-width-teaser">
+					<span>Text area may contain centered text up to 140 characters including spaces and call-to-action. <a href='#'>Call to Action</a></span>
+				</p>
+			</div>
 		</div>
 		<!-- example html for Teasers component -->
 
@@ -25,9 +28,9 @@
 						<img class="visible-xs" src="http://placehold.it/105x80" />
 					</div>
 					<div class="pull-right col-xs-7">
-						<h5 class="teaser-headline">Headline</h5>
+						<h5 class="teaser-headline"><a href="#">Headline</a></h5>
 						<p class="teaser-text">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
-						<a class="btn btn-success" href="javascript:;">Call to Action</a>
+						<a class="btn btn-success" href="#">Call to Action</a>
 					</div>
 				</div>
 			</div>
@@ -40,9 +43,9 @@
 				<h4>Horizontal - image right</h4>		
 				<div class="horizontal-teaser row">
 					<div class="pull-left col-xs-7">
-						<h5 class="teaser-headline">Headline</h5>
+						<h5 class="teaser-headline"><a href="#">Headline</a></h5>
 						<p class="teaser-text">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
-						<a class="btn btn-successn hidden-xs" href="javascript:;">Call to Action</a>
+						<a class="hidden-xs" href="#">Call to Action</a>
 					</div>
 					<div class="pull-right col-xs-5">
 						<img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175" />
@@ -57,11 +60,15 @@
 		<!-- example html for Teasers Horizontal - full bleed image, text link overlay -->
 		<!--                                                                           -->
 		<div class="content-holder">
-			<h4>Horizontal - full bleed image, text link overlay</h4>
-			<img class="pull-left visible-lg" src="http://placehold.it/580x130" />
-			<img class="pull-left visible-md" src="http://placehold.it/750x175" />
-			<img class="pull-left visible-xs visible-sm" src="http://placehold.it/320x155" />
-			<p class="teaser-link">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
+			<div class="horizontal-full-bleed">
+				<h4>Horizontal - full bleed image, text link overlay</h4>
+				<img class="pull-left visible-lg" src="http://placehold.it/584x175" />
+				<img class="pull-left visible-md" src="http://placehold.it/750x175" />
+				<img class="pull-left visible-xs visible-sm" src="http://placehold.it/320x155" />
+				<p class="pull-left text-link-overlay">
+					<a href="#">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</a>
+				</p>
+			</div>
 		</div>	
 		<!-- example html for Teasers Horizontal - full bleed image, text link overlay -->
 
@@ -72,12 +79,11 @@
 			<!-- example html for Teasers Vertical - image with links -->
 			<!--                                                      -->			
 			<div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
-				<div class="vertical-teaser-box">
-					<h4>Vertical<br>image with links</h4>
-					<p class="text-blue">Link 1</p>
-					<p class="text-blue">Link 2 (optional)</p>
-					<p class="text-blue">Link 3 (optional)</p>
-					
+				<h4>Vertical<br>image with links</h4>			
+				<div class="vertical-teaser-box pull-left">
+					<p class="vertical-teaser-link"><a href="#">Link 1</a></p>
+					<p class="vertical-teaser-link"><a href="#">Link 2 (optional)</a></p>
+					<p class="vertical-teaser-link"><a href="#">Link 3 (optional)</a></p>
 				</div>
 				<img class="pull-left" src="http://placehold.it/260x140" />
 			</div>
@@ -88,13 +94,13 @@
 			<!-- example html for Teasers Vertical - video with links -->
 			<!--                                                      -->			
 			<div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
-				<div class="vertical-teaser-box">
-					<h4>Vertical<br>video with links</h4>
-					<p class="text-blue">Link 1</p>
-					<p class="text-blue">Link 2 (optional)</p>
-					<p class="text-blue">Link 3 (optional)</p>
-					<img class="pull-left" src="http://placehold.it/260x140" />
+				<h4>Vertical<br>video with links</h4>
+				<div class="vertical-teaser-box pull-left">
+					<p class="vertical-teaser-link"><a href="#">Link 1</a></p>
+					<p class="vertical-teaser-link"><a href="#">Link 2 (optional)</a></p>
+					<p class="vertical-teaser-link"><a href="#">Link 3 (optional)</a></p>
 				</div>
+				<img class="pull-left" src="http://placehold.it/260x140" />
 			</div>
 			<!-- example html for Teasers Vertical - video with links -->
 
@@ -103,12 +109,16 @@
 			<!-- example html for Teasers Vertical - heading, subheading, CTA, imgs -->
 			<!--                                                                    -->
 			<div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
-				<div class="vertical-teaser-box">
-					<h4>Vertical<br>heading, subheading, CTA, img</h4>
-					<p><a class="text-blue">Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p>
-					<p class="text-blue">Call to Action</p>
-					<img class="pull-left top-offset-15" src="http://placehold.it/260x140" />
+				<h4>Vertical<br>heading, subheading, CTA</h4>
+				<div class="vertical-teaser-box pull-left">
+					<p>
+						<a href="#">Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.
+					</p>
+					<p>
+						<a href="#">Call to Action</a>
+					</p>
 				</div>
+				<img class="pull-left top-offset-15" src="http://placehold.it/260x140" />
 			</div>
 			<!-- example html for Teasers Vertical - heading, subheading, CTA, imgs -->
 
@@ -119,10 +129,10 @@
 			<div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
 				<div class="vertical-teaser-box">
 					<h4>Vertical<br>with button</h4>
-					<p><span class="text-blue">Headline</span><br>Subheading lorem ipsum dolor sit amet. Consectius.</p>
-					<a class="btn btn-success" href="javascript:;">Call to Action</a>
-					<img class="pull-left top-offset-15" src="http://placehold.it/260x140" />
+					<p><a href="#">Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p>
+					<a class="btn btn-success" href="#">Call to Action</a>
 				</div>
+				<img class="pull-left top-offset-15" src="http://placehold.it/260x140" />
 			</div>
 			<!-- example html for Teasers Vertical - with button -->
 		</div>

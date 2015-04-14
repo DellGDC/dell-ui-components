@@ -105,25 +105,6 @@ angular.module('dellUiComponents')
     };
 })
 
-//.directive('variableWidth', function($timeout){
-//    // Runs during compile
-//    return {
-//        restrict: 'AC',
-//        link: function($scope, $element, iAttrs, controller) {
-//            $('.variable-width').slick({
-//                dots: true,
-//                infinite: true,
-//                speed: 300,
-//                slidesToShow: 1,
-//                centerMode: true,
-//                variableWidth: true
-//            });
-//        }
-//    };
-//})
-
-*/
-
 
 .directive('slide', function($timeout){
 	return {
