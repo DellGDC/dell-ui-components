@@ -6534,7 +6534,7 @@ button.close {
   margin-bottom: 0;
 }
 .alert-block p + p {
-  margin-top: 5px;
+  margin-top: 0px;
 }
 blockquote {
   min-height: 20px;
