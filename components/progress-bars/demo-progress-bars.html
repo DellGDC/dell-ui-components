@@ -118,10 +118,17 @@
                 </div>
                 <div>
                     <p class="pull-left">Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p>
-                    <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-click="pauseFakeAnimation()" ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button>
-                    <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-click="fakeAnimation()" ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button>
-                    <button type="submit" class="btn btn-primary btn-margin-left-5 pull-right" ng-if="fakeAnimationValue === 100" ng-click="resetFakeAnimation()" >Ok</button>
-                    <button type="reset" class="btn btn-default btn-margin-left-5 pull-right" ng-click="resetFakeAnimation()" ng-if="fakeAnimationValue !== 100">Cancel</button>
+                    <div class="btn-group pull-right fake-animation-controls">
+
+                        <button type="reset" class="btn btn-default" ng-click="resetFakeAnimation()" ng-if="fakeAnimationValue !== 100">Cancel</button>
+
+                        <button type="submit" class="btn btn-primary" ng-click="pauseFakeAnimation()" ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button>
+
+                        <button type="submit" class="btn btn-primary" ng-click="fakeAnimation()" ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button>
+
+                        <button type="submit" class="btn btn-primary" ng-if="fakeAnimationValue === 100" ng-click="resetFakeAnimation()" >Ok</button>
+
+                    </div>
                 </div>
             </div>
 
