@@ -9369,6 +9369,10 @@ ol.unstyled {
   margin-left: 20px;
   margin-right: 20px;
 }
+.modal-backdrop {
+  height: 100%;
+  overflow: hidden;
+}
 .brand .icon-ui-dell {
   font-size: 48px;
   display: inline-block;
