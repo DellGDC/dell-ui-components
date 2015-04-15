@@ -191,74 +191,6 @@
 }
 
 
-
-
-
-//
-//
-//@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-//    .carousel {
-//        &.carousel-filmstrip {
-//            padding: 0 15px 30px 15px;
-//            .carousel-inner {
-//                padding: 0 40px;
-//            }
-//            .carousel-control {
-//                top: 31%;
-//                &.left {
-//                    left: -7px;
-//                    &:before {
-//                        font-size: 32px;
-//                    }
-//                }
-//                &.right {
-//                    right: -17px;
-//                    &:after {
-//                        font-size: 32px;
-//                    }
-//                }
-//            }
-//        }
-//        .slick-dots {
-//            position: relative;
-//            bottom: -20px;
-//            padding-left: 330px;
-//            padding-right: 0;
-//            margin-left: auto;
-//            margin-right: auto;
-//            z-index: 15;
-//            list-style: none;
-//            text-align: center;
-//            display: inline-flex !important;
-//            button {
-//                width: 14px;
-//                height: 6px;
-//                margin: 0 5px;
-//                border-radius: 2px;
-//                border: none;
-//                background: #cccccc;
-//
-//            }
-//            > .slick-active > button{
-//                background: #444444;
-//                width: 14px;
-//                height: 6px;
-//                margin: 0 5px;
-//                border-radius: 2px;
-//                border: none;
-//                outline: none;
-//            }
-//        }
-//        .carousel img {
-//            vertical-align: middle;
-//            margin-left: auto;
-//            margin-right: auto;
-//        }
-//    }
-//}
-//
-//
-
 @media (min-width: 1025px) and (max-width: 1199px) {
     .carousel {
         &.carousel-filmstrip {
@@ -393,6 +325,15 @@
     }
 
     .carousel {
+        .carousel-control {
+            top: 36%;
+            &.left{
+                left: -20px;
+            }
+            &.right{
+                right:-30px;
+            }
+        }
         &.carousel-filmstrip {
             padding: 0 20px 30px 20px;
             .carousel-inner {
