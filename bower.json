@@ -20,7 +20,8 @@
     "angular-mocks": "~1.2",
     "angular-ui-utils": "~0.1",
     "angular-bootstrap": "~0.10",
-    "less.js": "~1.6"
+    "less.js": "~1.6",
+    "bootstrap-table": "~1.7.0"
   },
   "devDependencies": {
     "angular-ui-grid": "~3.0.0-rc.19"
