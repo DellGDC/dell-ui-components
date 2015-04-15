@@ -1,10 +1,39 @@
 <section ng-controller="labelsAndBadgesCtrl" id="labels-and-badges-html-example">
 
     <div class="container">
-        <h2>Labels-And-Badges Demo</h2>
-        <div>
-            <!-- example html for Labels-And-Badges component -->
+        <h2 class="bottom-offset-30">Labels-And-Badges Demo</h2>
+            <h4>Standard label</h4>
+        <div class="row">
+            <!--standard label-->
+            <div class="col-xs-6 col-sm-5">
+                <div class="bottom-offset-30" id="help-label"><span class="label label-info">Help</span></div>
+            </div>
+            <!--/standard label-->
         </div>
+
+        <h4>Standards badges</h4>
+        <div class="row">
+            <!--standard badge-->
+            <div class="col-xs-6 col-sm-5">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <a href="javascript:;">
+                            <span class="badge pull-right">42</span>
+                            Home
+                        </a>
+                    </li>
+                    <li><a href="javascript:;">Profile</a></li>
+                    <li>
+                        <a href="javascript:;">
+                            <span class="badge pull-right">3</span>
+                            Messages
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--/standard badge-->
+        </div>
+
     </div>
 
 </section>
