@@ -39,6 +39,13 @@ angular.module('myModule', ['dellUiComponents']);
 
 ``` indexhtml
 <html ng-app="myApp">
+<head>
+<script src="path-to-angular/angular.min.js"></script>
+<script src="path-to-jquery/jquery.min.js"></script>
+<script src="path-to-dell-ui-components/dist/dell-ui-components/dell-ui-components.min.js"></script>
+<link src="path-to-dell-ui-components/dist/dell-ui-bootstrap/dell-ui-bootstrap.min.css" type="text/css" rel="stylesheet"/>
+<link src="path-to-dell-ui-components/dist/dell-ui-components/dell-ui-components.min.css" type="text/css" rel="stylesheet"/>
+</head>
 <body>
 <h1>Hello world!</h1>
 <script src="myApp.js"></script>
