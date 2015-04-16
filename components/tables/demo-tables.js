@@ -3,7 +3,7 @@ angular.module('demo').controller('tablesCtrl',function($scope,$rootScope,uiGrid
 	//this is for functionality related to demo code
 
 $("thead tr th").click(function(){
-    alert ($(this).html());
+    console.log($(this).html());
 });
 
 
