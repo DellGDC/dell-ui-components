@@ -1,11 +1,11 @@
 {
   "generator-cg-angular": {
     "uirouter": true,
-    "partialDirectory": "demo-assets/partials/",
-    "modalDirectory": "demo-assets/",
-    "directiveDirectory": "demo-assets/directives/",
+    "partialDirectory": "components/",
+    "modalDirectory": "demo-assets/modals",
+    "directiveDirectory": "components/",
     "filterDirectory": "demo-assets/filters",
-    "serviceDirectory": "demo-assets/tilters",
+    "serviceDirectory": "demo-assets/services",
     "inject": {
       "js": {
         "file": "index.html",

@@ -1,6 +1,7 @@
 {
   "name": "dellUiComponents",
-  "version": "0.0.0",
+  "description":"Dell Inc's addition of components to Twitter Bootstrap for dell.com (Based om TWBS 3.3.4)",
+  "version": "0.1.0",
   "devDependencies": {
     "grunt": "~0.4",
     "grunt-angular-templates": "~0.5",
