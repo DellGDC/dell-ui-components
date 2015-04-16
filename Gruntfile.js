@@ -115,6 +115,7 @@ module.exports = function (grunt) {
                     {src: ['components/components-list.json'], dest: 'dist/components-list.json'},
                     {src: ['temp/dell-ui-components.js'], dest: 'dist/dell-ui-components/dell-ui-components.js'},
                     {src: ['temp/demo.js'], dest: 'dist/demo.js'},
+                    {src: ['README.md'], dest: 'dist/README.md'},
                     {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components/dell-ui-components.css'},
                     {cwd: 'bower_components/dell-ui-bootstrap/dist/', src: ['**'], dest: 'dist/dell-ui-bootstrap/', expand:true}
                 ]

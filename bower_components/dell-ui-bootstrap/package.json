@@ -1,6 +1,7 @@
 {
   "name": "dell-ui-bootstrap",
-  "version": "1.0.6",
+  "description":"Dell Inc's implementation of Twitter Bootstrap for dell.com (Based om TWBS 3.3.4)",
+  "version": "1.1.0",
   "devDependencies": {
     "bin-build": "^0.1.0",
     "bin-wrapper": "^0.3.0",

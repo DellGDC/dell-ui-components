@@ -1,5 +1,5 @@
 /* globals s */
-angular.module('demo', ['ui.utils', 'ui.router', 'ngAnimate', 'dellUiComponents', 'ui.grid']);
+angular.module('demo', ['ui.utils', 'ui.router', 'ngAnimate', 'dellUiComponents']);
 
 angular.module('demo').config(function ($stateProvider, $urlRouterProvider) {
 
