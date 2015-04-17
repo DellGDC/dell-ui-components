@@ -16,8 +16,7 @@ angular.module('dellUiComponents').directive('table', function(){
         // transclude: true,
         // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
         link: function($scope, $element, $attrs, controller) {
-
-        		$element.bootstrapTable();	
+            $element.bootstrapTable();
         }
     };
 });
