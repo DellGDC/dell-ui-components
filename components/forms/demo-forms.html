@@ -335,8 +335,6 @@
                         <label class="col-xs-12 col-sm-2 form-label">Email address</label>
                         <div class="col-xs-6 col-sm-6">
                             <input name="email" type="email" class="form-control required" placeholder="*Enter email">
-                            <!--<span class="glyphicon glyphicon-ok email-success hide" aria-hidden="true"></span>-->
-                            <!--<span class="glyphicon glyphicon-remove email-error hide" aria-hidden="true"></span>-->
                         </div>
                     </div>
                 </div>
@@ -407,7 +405,7 @@
                 <div class="row">
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-6">
-                            <label for="select01">Select list</label>
+                            <label for="select01" class="form-label">Select list</label>
                             <select class="form-control" id="select01">
                                 <option> something </option>
                                 <option> 2 </option>
@@ -428,7 +426,7 @@
                 <div class="row">
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-6">
-                            <label for="select-01">Tiered select list</label>
+                            <label for="select-01" class="form-label">Tiered select list</label>
                             <select class="form-control" id="select-01">
                                 <option class="text-gray-dark" value="all">All</option>
                                 <optgroup class="text-gray-dark" label="Original Release Date">
@@ -456,7 +454,7 @@
                 <div class="row">
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-6">
-                            <label for="multiSelect">multi-select</label>
+                            <label for="multiSelect" class="form-label">multi-select</label>
                             <select multiple="multiple" id="multiSelect">
                                 <option> 1 </option>
                                 <option> 2 </option>
@@ -478,7 +476,7 @@
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="ms">Multi-select with checkboxes</label>
+                                <label for="ms" class="form-label">Multi-select with checkboxes</label>
                                 <select class="ms-checkbox" id="ms" multiple="multiple">
                                     <option value="1">January</option>
                                     <option value="2">February</option>
@@ -512,7 +510,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
-                            <label for="default-select-state">Standard Select U.S. States</label>
+                            <label for="default-select-state" class="form-label">Standard Select U.S. States</label>
                             <select class="form-control select-state" id="default-select-state" ng-model="stateDefault"></select>
                         </div>
                     </div>
@@ -528,7 +526,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
-                            <label for="short-select-state">States with Abbreviations</label>
+                            <label for="short-select-state" class="form-label">States with Abbreviations</label>
                             <select class="form-control select-state" data-format="short" id="short-select-state" ng-model="stateDefault"></select>
                         </div>
                     </div>
@@ -544,7 +542,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
-                            <label for="both-select-state">States with Abbreviations and Name</label>
+                            <label for="both-select-state" class="form-label">States with Abbreviations and Name</label>
                             <select class="form-control select-state" data-format="both" id="both-select-state" ng-model="stateDefault"></select>
                         </div>
                     </div>
@@ -560,7 +558,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
-                            <label for="emptyname-select-state">States with Custom Select Text</label>
+                            <label for="emptyname-select-state" class="form-label">States with Custom Select Text</label>
                             <select class="form-control select-state" data-format="" data-empty-name="Please select a state" id="emptyname-select-state" ng-model="stateDefault"></select>
                         </div>
                     </div>
