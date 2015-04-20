@@ -2,4 +2,32 @@
  * Lists component theme overrides
  *------------------------------------------------------------------------------------------
  */
- 
+
+
+.inline-content-links {
+    min-height: 20px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background-color: #eee;
+    .content-links {
+        li + li::before {
+            content: " | ";
+            padding-right: 10px;
+            color: @dell-blue;
+        }
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .inline-content-links {
+        .content-links {
+            li {
+                width: 100%;
+            }
+            li + li::before {
+                content: "";
+                padding-right: 0;
+            }
+        }
+    }
+}
