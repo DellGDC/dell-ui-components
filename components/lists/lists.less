@@ -8,12 +8,27 @@
     min-height: 20px;
     padding: 10px 15px;
     margin-bottom: 20px;
-    background-color: #eee;
+    background-color: @dell-gray-light;
+
+    .list-inline {
+        //padding-left: 0;
+        //list-style: none;
+        //margin-left: -5px;
+        margin-bottom: 0;
+    }
     .content-links {
         li + li::before {
             content: " | ";
             padding-right: 10px;
             color: @dell-blue;
+        }
+    }
+    li {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        a {
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
     }
 }
@@ -23,10 +38,14 @@
         .content-links {
             li {
                 width: 100%;
+                padding-bottom: 20px;
             }
             li + li::before {
                 content: "";
                 padding-right: 0;
+            }
+            li + li:last-of-type {
+                padding-bottom: 0;
             }
         }
     }
