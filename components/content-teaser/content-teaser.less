@@ -3,6 +3,80 @@
  *------------------------------------------------------------------------------------------
  */
 
+
+.stacked-content-links {
+    min-height: 20px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+
+    li, span {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        a, span {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .inline-content-links {
+        .content-links {
+            li {
+                width: 100%;
+                padding-bottom: 20px;
+            }
+        }
+    }
+}
+//
+///* This example's styling */
+//
+//@media (max-width: 767px) {
+//    .breakpoint-alias:before {
+//        content: "XS";
+//    }
+//}
+//@media (min-width: 768px) and (max-width: 983px) {
+//    .breakpoint-alias:before {
+//        content: "SM";
+//    }
+//}
+//@media (min-width: 984px) and (max-width: 1199px) {
+//    .breakpoint-alias:before {
+//        content: "MD";
+//    }
+//}
+//@media (min-width: 1200px) {
+//    .breakpoint-alias:before {
+//        content: "LG";
+//    }
+//}
+//
+
+
+.content-links {
+    > li {
+        display: none;
+        @media (min-width: 768px) {
+
+            &:nth-child(-n+5) {
+                display: block;
+            }
+        }
+    }
+    &.view-all {
+        > li {
+            display: block;
+        }
+    }
+}
+
+
+
+
+
+
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 	.content-holder {
@@ -79,11 +153,11 @@
 
 	.text-link-overlay {
 		display:block;
-		position: absolute; 
-		bottom: -10px; 
-		left: 0; 
+		position: absolute;
+		bottom: -10px;
+		left: 0;
 		width: 100%;
-		height: 45px; 
+		height: 45px;
 		background-color: rgba(255,255,255,90%);
 	}
 
@@ -96,7 +170,7 @@
 	}
 
 
-@media (max-width: 2800px) { 
+@media (max-width: 2800px) {
 	.full-width-teaser {
 		width:100%;
 		height:40px;
@@ -149,7 +223,7 @@
 	.text-link-overlay {
 		width: 320px;
 		height: 60px;
-		padding: 15px; 
+		padding: 15px;
 	}
 
 	.content-holder {

@@ -1,142 +1,269 @@
 <section ng-controller="contentTeaserCtrl" id="content-teaser-html-example">
 
+
     <div class="container">
-		<h2 class="bottom-offset-30">Teasers Demo</h2>
-
-
+        <h2>Teasers Demo</h2>
         <h3 class="bottom-offset-20">inline Show/no-hide content disclosures</h3>
         <div class="row">
+
             <div class="col-xs-12">
-                <div>teaser
+                    <!--Example 1-->
+                <div class="col-xs-12 col-sm-4 col-md-3 stacked-content-links">
+                    <img class="img-responsive bottom-offset-10" src="http://placehold.it/210x125"/>
+                    <h4 class="text-blue">Identity & Access Management</h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                    <div><!--parent show/hide wrapper for links-->
+                        <ul id="parent-link-1" class="list-unstyled list-unstyled content-links list-group" ng-class="{'view-all': viewAll }">
+                            <li><a href="javascript:;">1 Data Protection</a></li>
+                            <li><a href="javascript:;">2 Endpoint Mobility Management</a></li>
+                            <li><a href="javascript:;">3 Example Endpoint Security</a></li>
+                            <li><a href="javascript:;">4 Endpoint Threat Protection</a></li>
+                            <li><a href="javascript:;">5 Secure Cloud Client</a></li>
+                            <li><a href="javascript:;">6 Additional Link</a></li>
+                            <li><a href="javascript:;">7 Next Generation Firewall</a></li>
+                            <li><a href="javascript:;">8 Security & Analytics</a></li>
+                            <li><a href="javascript:;">9 Secure Remote Access</a></li>
+                        </ul>
+                        <div class="content-links-view-all" ng-hide="viewAll">
+                            <a href="javascript:;" class="hidden-xs" ng-click="viewAll=true">View All</a>
+                            <a href="javascript:;" class="visible-xs" ng-click="viewAll=true">More</a>
+                        </div>
+                    </div><!--/parent show/hide wrapper for links-->
+
+
 
                 </div>
+                <!--/Example 1-->
 
+
+                <!--Example 2-->
+                <div class="col-xs-12 col-sm-4 col-md-3 stacked-content-links">
+                    <img class="img-responsive bottom-offset-10" src="http://placehold.it/210x125"/>
+                    <h4 class="text-blue">Identity & Access Management</h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                    <ul class="list-unstyled list-unstyled content-links list-group">
+                        <li><a href="javascript:;">Example Data Protection & Encryption</a></li>
+                        <li><a href="javascript:;">Endpoint Mobility Management</a></li>
+                        <li><a href="javascript:;">Example Endpoint Security</a></li>
+                        <li><a href="javascript:;">Endpoint Threat Protection</a></li>
+                        <li><a href="javascript:;">Secure Cloud Client</a></li>
+                        <div class="">
+                            <div class="">
+                                <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-bags">
+                                    <span class="show-collapsed">View All</span>
+                                    <!--<span class="hide-expanded"><i aria-hidden="true"></i>Show less</span>-->
+                                </a>
+                            </div>
+                            <ul id="show-hide-bags" class="list-unstyled list-group collapse">
+                                <li><a href="javascript:;">Additional Link</a></li>
+                                <li><a href="javascript:;">Next Generation Firewall</a></li>
+                                <li><a href="javascript:;">Security & Analytics Management</a></li>
+                                <li><a href="javascript:;">Secure Remote Access</a></li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+                <!--/Example 2-->
+
+                <!--Example 3-->
+                <div class="col-xs-12 col-sm-4 col-md-3 stacked-content-links">
+                    <img class="img-responsive bottom-offset-10" src="http://placehold.it/210x125"/>
+                    <h4 class="text-blue">Identity & Access Management</h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                    <ul class="list-unstyled list-unstyled content-links list-group">
+                        <li><a href="javascript:;">Example Data Protection & Encryption</a></li>
+                        <li><a href="javascript:;">Endpoint Mobility Management</a></li>
+                        <li><a href="javascript:;">Example Endpoint Security</a></li>
+                        <li><a href="javascript:;">Endpoint Threat Protection</a></li>
+                        <li><a href="javascript:;">Secure Cloud Client</a></li>
+                        <div class="">
+                            <div class="">
+                                <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-bags">
+                                    <span class="show-collapsed">View All</span>
+                                    <!--<span class="hide-expanded"><i aria-hidden="true"></i>Show less</span>-->
+                                </a>
+                            </div>
+                            <ul id="show-hide-bags" class="list-unstyled list-group collapse">
+                                <li><a href="javascript:;">Additional Link</a></li>
+                                <li><a href="javascript:;">Next Generation Firewall</a></li>
+                                <li><a href="javascript:;">Security & Analytics Management</a></li>
+                                <li><a href="javascript:;">Secure Remote Access</a></li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+                <!--/Example 3-->
+
+                <!--Example 4-->
+                <div class="col-xs-12 col-sm-4 col-md-3 stacked-content-links">
+                    <img class="img-responsive bottom-offset-10" src="http://placehold.it/210x125"/>
+                    <h4 class="text-blue">Identity & Access Management</h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                    <ul class="list-unstyled list-unstyled content-links list-group">
+                        <li><a href="javascript:;">Example Data Protection & Encryption</a></li>
+                        <li><a href="javascript:;">Endpoint Mobility Management</a></li>
+                        <li><a href="javascript:;">Example Endpoint Security</a></li>
+                        <li><a href="javascript:;">Endpoint Threat Protection</a></li>
+                        <li><a href="javascript:;">Secure Cloud Client</a></li>
+                        <div class="">
+                            <div class="">
+                                <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-bags">
+                                    <span class="show-collapsed">View All</span>
+                                    <!--<span class="hide-expanded"><i aria-hidden="true"></i>Show less</span>-->
+                                </a>
+                            </div>
+                            <ul id="show-hide-bags" class="list-unstyled list-group collapse">
+                                <li><a href="javascript:;">Additional Link</a></li>
+                                <li><a href="javascript:;">Next Generation Firewall</a></li>
+                                <li><a href="javascript:;">Security & Analytics Management</a></li>
+                                <li><a href="javascript:;">Secure Remote Access</a></li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+                <!--/Example 4-->
             </div>
         </div>
 
-        <hr class="top-offset-60 bottom-offset-60"/>
-
-        <h3 class="bottom-offset-10">Full-width</h3>
-		<!-- example html for Teasers component -->
-		<div class="row pull-left full-width-container">
-			<div class="content-holder col-lg-12">
-				<p class="full-width-teaser">
-					<span>Text area may contain centered text up to 140 characters including spaces and call-to-action. <a class="btn-link" href='#'>Call to Action</a></span>
-				</p>
-			</div>
-		</div>
-		<!-- /example html for Teasers component -->
 
 
-		<div class="row">
 
-            <h3 class="bottom-offset-20">Horizontal - image left</h3>
+
+        <hr class="bottom-offset-60 top-offset-60"/>
+
+        <!--                                    -->
+        <!-- example html for Teasers component -->
+        <!--                                    -->
+        <div class="row pull-left full-width-container">
+            <div class="content-holder col-lg-12">
+                <h4>Full-width</h4>
+                <p class="full-width-teaser">
+                    <span>Text area may contain centered text up to 140 characters including spaces and call-to-action. <a class="btn-link" href='#'>Call to Action</a></span>
+                </p>
+            </div>
+        </div>
+        <!-- example html for Teasers component -->
+
+
+        <div class="row pull-left">
+            <!--                                                  -->
+            <!-- example html for Teasers Horizontal - image left -->
+            <!--                                                  -->
+            <div class="content-holder">
+                <h4>Horizontal - image left</h4>
+                <div class="horizontal-teaser row">
+                    <div class="pull-left col-xs-5">
+                        <img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175" />
+                        <img class="visible-xs" src="http://placehold.it/105x80" />
+                    </div>
+                    <div class="pull-right col-xs-7">
+                        <h5 class="teaser-headline"><a class="btn-link" href="#">Headline</a></h5>
+                        <p class="teaser-text">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
+                        <a class="btn btn-success" href="#">Call to Action</a>
+                    </div>
+                </div>
+            </div>
             <!-- example html for Teasers Horizontal - image left -->
 
-			<div class="content-holder">
-				<div class="horizontal-teaser">
-					<div class="pull-left col-xs-5">
-						<img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175" />
-						<img class="visible-xs" src="http://placehold.it/105x80" />
-					</div>
-					<div class="pull-right col-xs-7">
-						<h5 class="teaser-headline"><a class="btn-link" href="#">Headline</a></h5>
-						<p class="teaser-text">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
-						<a class="btn btn-success" href="#">Call to Action</a>
-					</div>
-				</div>
-			</div>
-			<!-- example html for Teasers Horizontal - image left -->
-
-            <h3 class="bottom-offset-20">Horizontal - image right</h3>
+            <!--                                                   -->
             <!-- example html for Teasers Horizontal - image right -->
-			<div class="content-holder">
-				<div class="horizontal-teaser row">
-					<div class="pull-left col-xs-7">
-						<h5 class="teaser-headline"><a class="btn-link" href="#">Headline</a></h5>
-						<p class="teaser-text">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
-						<a class="hidden-xs btn-link" href="#">Call to Action</a>
-					</div>
-					<div class="pull-right col-xs-5">
-						<img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175" />
-						<img class="visible-xs" src="http://placehold.it/105x80" />
-					</div>
-				</div>
-			</div>
-			<!-- /example html for Teasers Horizontal - image right -->
-		</div>
+            <!--                                                   -->
+            <div class="content-holder">
+                <h4>Horizontal - image right</h4>
+                <div class="horizontal-teaser row">
+                    <div class="pull-left col-xs-7">
+                        <h5 class="teaser-headline"><a class="btn-link" href="#">Headline</a></h5>
+                        <p class="teaser-text">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p>
+                        <a class="hidden-xs btn-link" href="#">Call to Action</a>
+                    </div>
+                    <div class="pull-right col-xs-5">
+                        <img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175" />
+                        <img class="visible-xs" src="http://placehold.it/105x80" />
+                    </div>
+                </div>
+            </div>
+            <!-- example html for Teasers Horizontal - image right -->
+        </div>
 
-        <h3 class="bottom-offset-20">Horizontal - full bleed image, text link overlay</h3>
+        <!--                                                                           -->
         <!-- example html for Teasers Horizontal - full bleed image, text link overlay -->
-		<div class="content-holder">
-			<div class="horizontal-full-bleed">
-				<img class="pull-left visible-lg" src="http://placehold.it/584x175" />
-				<img class="pull-left visible-md" src="http://placehold.it/750x175" />
-				<img class="pull-left visible-xs visible-sm" src="http://placehold.it/320x155" />
-				<p class="pull-left text-link-overlay">
-					<a class="btn-link" href="#">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</a>
-				</p>
-			</div>
-		</div>
-		<!-- /example html for Teasers Horizontal - full bleed image, text link overlay -->
+        <!--                                                                           -->
+        <div class="content-holder">
+            <div class="horizontal-full-bleed">
+                <h4>Horizontal - full bleed image, text link overlay</h4>
+                <img class="pull-left visible-lg" src="http://placehold.it/584x175" />
+                <img class="pull-left visible-md" src="http://placehold.it/750x175" />
+                <img class="pull-left visible-xs visible-sm" src="http://placehold.it/320x155" />
+                <p class="pull-left text-link-overlay">
+                    <a class="btn-link" href="#">Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</a>
+                </p>
+            </div>
+        </div>
+        <!-- example html for Teasers Horizontal - full bleed image, text link overlay -->
 
 
 
-		<div class="row pull-left" style="width:100%;">
-            <h3 class="bottom-offset-20">Vertical<br>image with links</h3>
+        <div class="row pull-left" style="width:100%;">
+            <!--                                                      -->
             <!-- example html for Teasers Vertical - image with links -->
-			<div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
-				<div class="vertical-teaser-box pull-left">
-					<p class="btn-link vertical-teaser-link"><a href="#">Link 1</a></p>
-					<p class="vertical-teaser-link btn-link"><a href="#">Link 2 (optional)</a></p>
-					<p class="vertical-teaser-link btn-link"><a href="#">Link 3 (optional)</a></p>
-				</div>
-				<img class="pull-left" src="http://placehold.it/260x140" />
-			</div>
-			<!-- /example html for Teasers Vertical - image with links -->
-
-            <h3 class="bottom-offset-20">Vertical<br>video with links</h3>
-			<!-- example html for Teasers Vertical - video with links -->
-			<div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
-				<h3 class="bottom-offset-20">Vertical<br>video with links</h3>
-				<div class="vertical-teaser-box pull-left">
-					<p class="vertical-teaser-link btn-link"><a href="#">Link 1</a></p>
-					<p class="vertical-teaser-link btn-link"><a href="#">Link 2 (optional)</a></p>
-					<p class="vertical-teaser-link btn-link"><a href="#">Link 3 (optional)</a></p>
-				</div>
-				<img class="pull-left" src="http://placehold.it/260x140" />
-			</div>
-			<!-- /example html for Teasers Vertical - video with links -->
+            <!--                                                      -->
+            <div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <h4>Vertical<br>image with links</h4>
+                <div class="vertical-teaser-box pull-left">
+                    <p class="btn-link vertical-teaser-link"><a href="#">Link 1</a></p>
+                    <p class="vertical-teaser-link btn-link"><a href="#">Link 2 (optional)</a></p>
+                    <p class="vertical-teaser-link btn-link"><a href="#">Link 3 (optional)</a></p>
+                </div>
+                <img class="pull-left" src="http://placehold.it/260x140" />
+            </div>
+            <!-- example html for Teasers Vertical - image with links -->
 
 
-            <h3 class="bottom-offset-20">Vertical<br>heading, subheading, CTA</h3>
-			<!-- example html for Teasers Vertical - heading, subheading, CTA, imgs -->
-			<div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
-				<h3 class="bottom-offset-20">Vertical<br>heading, subheading, CTA</h3>
-				<div class="vertical-teaser-box pull-left">
-					<p>
-						<a class="btn-link" href="#">Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.
-					</p>
-					<p>
-						<a class="btn-link" href="#">Call to Action</a>
-					</p>
-				</div>
-				<img class="pull-left top-offset-15" src="http://placehold.it/260x140" />
-			</div>
-			<!-- /example html for Teasers Vertical - heading, subheading, CTA, imgs -->
+            <!--                                                      -->
+            <!-- example html for Teasers Vertical - video with links -->
+            <!--                                                      -->
+            <div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <h4>Vertical<br>video with links</h4>
+                <div class="vertical-teaser-box pull-left">
+                    <p class="vertical-teaser-link btn-link"><a href="#">Link 1</a></p>
+                    <p class="vertical-teaser-link btn-link"><a href="#">Link 2 (optional)</a></p>
+                    <p class="vertical-teaser-link btn-link"><a href="#">Link 3 (optional)</a></p>
+                </div>
+                <img class="pull-left" src="http://placehold.it/260x140" />
+            </div>
+            <!-- example html for Teasers Vertical - video with links -->
 
 
-			<h3 class="bottom-offset-20">Vertical<br>with button</h3>
-			<!-- example html for Teasers Vertical - with button -->
-			<div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
-				<div class="vertical-teaser-box">
-					<p><a class="btn-link" href="#">Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p>
-					<a class="btn btn-success" href="#">Call to Action</a>
-				</div>
-				<img class="pull-left top-offset-15" src="http://placehold.it/260x140" />
-			</div>
-			<!-- /example html for Teasers Vertical - with button -->
-		</div>
-	</div>
+            <!--                                                                    -->
+            <!-- example html for Teasers Vertical - heading, subheading, CTA, imgs -->
+            <!--                                                                    -->
+            <div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <h4>Vertical<br>heading, subheading, CTA</h4>
+                <div class="vertical-teaser-box pull-left">
+                    <p>
+                        <a class="btn-link" href="#">Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.
+                    </p>
+                    <p>
+                        <a class="btn-link" href="#">Call to Action</a>
+                    </p>
+                </div>
+                <img class="pull-left top-offset-15" src="http://placehold.it/260x140" />
+            </div>
+            <!-- example html for Teasers Vertical - heading, subheading, CTA, imgs -->
 
+
+            <!--                                                 -->
+            <!-- example html for Teasers Vertical - with button -->
+            <!--                                                 -->
+            <div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                <div class="vertical-teaser-box">
+                    <h4>Vertical<br>with button</h4>
+                    <p><a class="btn-link" href="#">Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p>
+                    <a class="btn btn-success" href="#">Call to Action</a>
+                </div>
+                <img class="pull-left top-offset-15" src="http://placehold.it/260x140" />
+            </div>
+            <!-- example html for Teasers Vertical - with button -->
+        </div>
+    </div>
 </section>
