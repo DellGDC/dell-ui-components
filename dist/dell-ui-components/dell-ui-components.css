@@ -167,10 +167,32 @@ blockquote .blockquote-links li + li::before {
  * Breadcrumbs component theme overrides
  *------------------------------------------------------------------------------------------
  */
+.breadcrumb > li a {
+  color: #737373;
+  font-size: 12px;
+}
+.breadcrumb > li + li:before {
+  color: #444444;
+  content: "/";
+  font-size: 17px;
+  top: 2px;
+  padding-right: 8px;
+  padding-left: 4px;
+}
+.breadcrumb > li:first-child:before {
+  font-size: 15px;
+  content: "\e62b";
+  font-family: icon-small;
+  vertical-align: bottom;
+}
 /*
  * Standard-Buttons component theme overrides
  *------------------------------------------------------------------------------------------
  */
+.btn-link:focus,
+.btn-link:hover {
+  text-decoration: underline;
+}
 .tap-to-load {
   height: 34px;
   color: #00618f;
@@ -1733,7 +1755,7 @@ a.btn.btn-hotspot i {
 .show-password .radio {
   margin-bottom: 5px;
   margin-top: -5px;
-  margin-left: -5px;
+  margin-left: 20px;
 }
 .list-tree {
   list-style-type: none;
@@ -1751,6 +1773,9 @@ a.btn.btn-hotspot i {
   text-align: right;
   top: 5px;
   padding-top: 2px;
+  padding-left: 0;
+  margin-bottom: 5px;
+  padding-bottom: 0;
 }
 .help-ext {
   float: left;
@@ -1977,6 +2002,7 @@ a.btn.btn-hotspot i {
     margin-top: -3px;
     text-align: left;
     margin-bottom: -10px;
+    margin-left: -20px;
   }
 }
 /*
