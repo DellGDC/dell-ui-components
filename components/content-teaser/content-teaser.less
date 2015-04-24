@@ -28,6 +28,21 @@
             }
         }
     }
+
+    .multiline-ellipsis {
+        display: block;
+        display: -webkit-box;
+        max-width: 100%;
+        height: 64px;
+        margin: 0 auto;
+        //font-size: 14px;
+        line-height: 20px;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
 }
 
 .content-links {
@@ -47,10 +62,10 @@
     }
 }
 
-
 .content-toggle {
     margin-top: -15px;
 }
+
 
 
 /* Extra small devices (phones, less than 768px) */
