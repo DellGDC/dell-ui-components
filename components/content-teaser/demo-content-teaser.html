@@ -107,8 +107,37 @@
                 <!--/Example 4-->
         </div>
 
+        <hr/>
 
-
+        <div class="top-offset-60">
+            <h3 class="bottom-offset-20">Vertical teaser – image-top (3-column desktop/tablet : 12-column mobile)</h3>
+                    <div class="row">
+                <!--Example 1-->
+                <div class="col-xs-12 col-sm-6 col-md-6 stacked-content-links">
+                    <img class="img img-responsive bottom-offset-10" src="http://placehold.it/555x275"/>
+                    <h4 class="text-blue">Content Headline Title Goes Here <i class="icon-small-whitepaper "></i></h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                    <div><!--parent show/hide wrapper for links-->
+                        <ul class="list-unstyled list-unstyled content-links list-group" ng-class="{'view-all': viewAll['parent-link-4']}">
+                            <li><a href="javascript:;">1 Sample Link</a></li>
+                            <li><a href="javascript:;">2 Sample Link</a></li>
+                            <li><a href="javascript:;">3 Sample Link</a></li>
+                            <li><a href="javascript:;">4 Sample Link</a></li>
+                            <li><a href="javascript:;">5 Sample Link</a></li>
+                            <li><a href="javascript:;">6 Sample Link</a></li>
+                            <li><a href="javascript:;">7 Sample Link</a></li>
+                            <li><a href="javascript:;">8 Sample Link</a></li>
+                            <li><a href="javascript:;">9 Sample Link</a></li>
+                        </ul>
+                        <div class="content-toggle" ng-hide="viewAll['parent-link-4']">
+                            <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-4'] = true">View All</a>
+                            <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-4'] = true">More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Example 1-->
+            </div>
+        </div>
 
 
         <hr class="bottom-offset-60 top-offset-60"/>
