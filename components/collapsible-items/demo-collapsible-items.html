@@ -268,13 +268,13 @@
                     </div>
                 </div>
             </div>
-                <!-- ----------- accordion with show/hide links -------------- -->
+            <!-- ----------- accordion with show/hide links -------------- -->
 
 
 
 
             <h3 class="bottom-offset-20">From a link</h3>
-
+            <!-------------  show/hide ---------------->
             <div class="bottom-offset-40">
                 <div class="bottom-offset-10">
                     <p>
@@ -288,13 +288,31 @@
                     </p>
                 </div>
             </div>
+        <!------------- / show/hide ---------------->
 
+        <div class="bottom-offset-60">
+            <h3 class="bottom-offset-20">Social links show/hide</h3>
+            <!------------- Social links show/hide  ---------------->
+            <div class="inline-image-content-links"><!--parent show/hide wrapper for links-->
+                <ul class="list-inline image-content-links list-group content-card" ng-class="{'view-all': viewAll['parent-link-1']}">
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="http://placehold.it/25x25" class="img-responsive"/></a></li>
+                </ul>
+                <div class="content-toggle" ng-hide="viewAll['parent-link-1']">
+                    <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-1'] = true">View All</a>
+                    <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-1'] = true">More</a>
+                </div>
+            </div><!--/parent show/hide wrapper for links-->
+
+        </div>
     </div>
-
-
-
-
-
 
 
 </section>
