@@ -61,20 +61,25 @@ angular.module('dellUiComponents')
     };
 })
 
-.directive('mosaicCarousel', function($timeout){
-    // Runs during compile
-    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
-    return {
-        restrict: 'C',
-        link: function($scope, $element, iAttrs, controller) {
+    //.directive('divHeightEqualize', function($timeout){
+    //    // Runs during compile
+    //    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+    //    return {
+    //        restrict: 'C',
+    //        link: function($scope, $element, iAttrs, controller ) {
+    //            //
+    //
+    //            var maxHeight = 0;
+    //            $($element).each(function(){
+    //                if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
+    //            });
+    //
+    //            $($element).height(maxHeight);
+    //        }
+    //    };
+    //})
 
-            $('.carousel').carousel('pause');
 
-
-
-        }
-    };
-})
 
 
 
