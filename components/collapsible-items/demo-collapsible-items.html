@@ -268,13 +268,13 @@
                     </div>
                 </div>
             </div>
-                <!-- ----------- accordion with show/hide links -------------- -->
+            <!-- ----------- accordion with show/hide links -------------- -->
 
 
 
 
             <h3 class="bottom-offset-20">From a link</h3>
-
+            <!-------------  show/hide ---------------->
             <div class="bottom-offset-40">
                 <div class="bottom-offset-10">
                     <p>
@@ -288,13 +288,34 @@
                     </p>
                 </div>
             </div>
+        <!------------- / show/hide ---------------->
 
+        <div class="bottom-offset-60">
+            <h3 class="bottom-offset-20">Social links show/hide</h3>
+            <!------------- Social links show/hide  ---------------->
+            <div class="inline-image-content-links"><!--parent show/hide wrapper for links-->
+                <ul class="list-inline image-content-links list-group content-card" ng-class="{'view-all': viewAll['parent-image-link-1']}">
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/facebook_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/twitter_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/linkedin_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/google_plus_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/slideshare_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/youtube_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/flickr_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/storify_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/pinterest_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/xing_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/renren_24x24.jpg" class="img-responsive"/></a></li>
+                    <li><a href="javascript:;"><img src="components/collapsible-items/social-img/weibo_24x24.jpg" class="img-responsive"/></a></li>
+                </ul>
+                <div class="content-toggle" ng-hide="viewAll['parent-image-link-1']">
+                    <!--<a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-image-link-1'] = true">View All</a>-->
+                    <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-image-link-1'] = true">View All</a>
+                </div>
+            </div><!--/parent show/hide wrapper for links-->
+
+        </div>
     </div>
-
-
-
-
-
 
 
 </section>
