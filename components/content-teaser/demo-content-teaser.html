@@ -3,106 +3,115 @@
 
     <div class="container">
         <h2>Teasers Demo</h2>
+        {{viewAll}}
         <h3 class="bottom-offset-20">Vertical Teaser – Show/no-hide</h3>
         <div class="row">
             <!--Example 1-->
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                    <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                    <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
-                        <ul class="list-unstyled detail-links list-group content-card" ng-class="{'view-all': viewAll['parent-link-1']}">
-                            <li><a href="javascript:;">1 Sample Link</a></li>
-                            <li><a href="javascript:;">2 Sample Link</a></li>
-                            <li><a href="javascript:;">3 Sample Link</a></li>
-                            <li><a href="javascript:;">4 Sample Link</a></li>
-                            <li><a href="javascript:;">5 Sample Link</a></li>
-                            <li><a href="javascript:;">6 Sample Link</a></li>
-                            <li><a href="javascript:;">7 Sample Link</a></li>
-                            <li><a href="javascript:;">8 Sample Link</a></li>
-                            <li><a href="javascript:;">9 Sample Link</a></li>
-                        </ul>
-                        <div class="content-toggle" ng-hide="viewAll['parent-link-1']">
-                            <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-1'] = true">View All</a>
-                            <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-1'] = true">More</a>
-                        </div>
-                    </div><!--/parent show/hide wrapper for links-->
+                <div class="content-teaser-container">
+                    <div class="col-xs-12 col-sm-4 col-md-3">
+                        <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
+                        <h4 class="text-blue">Content Headline Title Goes Here</h4>
+                        <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                        <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
+                            <ul class="list-unstyled detail-links list-group content-card" ng-class="{'view-all': viewAll['parent-link-1']}">
+                                <li><a href="javascript:;">1 Sample Link</a></li>
+                                <li><a href="javascript:;">2 Sample Link</a></li>
+                                <li><a href="javascript:;">3 Sample Link</a></li>
+                                <li><a href="javascript:;">4 Sample Link</a></li>
+                                <li><a href="javascript:;">5 Sample Link</a></li>
+                                <li><a href="javascript:;">6 Sample Link</a></li>
+                                <li><a href="javascript:;">7 Sample Link</a></li>
+                                <li><a href="javascript:;">8 Sample Link</a></li>
+                                <li><a href="javascript:;">9 Sample Link</a></li>
+                            </ul>
+                            <div class="content-toggle" ng-hide="viewAll['parent-link-1']">
+                                <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-1'] = true">View All</a>
+                                <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-1'] = true">More</a>
+                            </div>
+                        </div><!--/parent show/hide wrapper for links-->
+                    </div>
                 </div>
                 <!--/Example 1-->
 
 
                 <!--Example 2-->
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                    <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                    <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
-                        <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-2']}">
-                            <li><a href="javascript:;">1 Sample Link</a></li>
-                            <li><a href="javascript:;">2 Sample Link</a></li>
-                            <li><a href="javascript:;">3 Sample Link</a></li>
-                            <li><a href="javascript:;">4 Sample Link</a></li>
-                            <li><a href="javascript:;">5 Sample Link</a></li>
-                            <li><a href="javascript:;">6 Sample Link</a></li>
-                            <li><a href="javascript:;">7 Sample Link</a></li>
-                            <li><a href="javascript:;">8 Sample Link</a></li>
-                            <li><a href="javascript:;">9 Sample Link</a></li>
-                        </ul>
-                        <div class="content-toggle" ng-hide="viewAll['parent-link-2']">
-                            <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-2'] = true">View All</a>
-                            <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-2'] = true">More</a>
-                        </div>
-                    </div><!--/parent show/hide wrapper for links-->
+                <div class="content-teaser-container">
+                    <div class="col-xs-12 col-sm-4 col-md-3">
+                        <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
+                        <h4 class="text-blue">Content Headline Title Goes Here</h4>
+                        <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                        <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
+                            <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-2']}">
+                                <li><a href="javascript:;">1 Sample Link</a></li>
+                                <li><a href="javascript:;">2 Sample Link</a></li>
+                                <li><a href="javascript:;">3 Sample Link</a></li>
+                                <li><a href="javascript:;">4 Sample Link</a></li>
+                                <li><a href="javascript:;">5 Sample Link</a></li>
+                                <li><a href="javascript:;">6 Sample Link</a></li>
+                                <li><a href="javascript:;">7 Sample Link</a></li>
+                                <li><a href="javascript:;">8 Sample Link</a></li>
+                                <li><a href="javascript:;">9 Sample Link</a></li>
+                            </ul>
+                            <div class="content-toggle" ng-hide="viewAll['parent-link-2']">
+                                <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-2'] = true">View All</a>
+                                <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-2'] = true">More</a>
+                            </div>
+                        </div><!--/parent show/hide wrapper for links-->
+                    </div>
                 </div>
                 <!--/Example 2-->
 
                 <!--Example 3-->
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                    <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                    <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
-                        <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-3']}">
-                            <li><a href="javascript:;">1 Sample Link</a></li>
-                            <li><a href="javascript:;">2 Sample Link</a></li>
-                            <li><a href="javascript:;">3 Sample Link</a></li>
-                            <li><a href="javascript:;">4 Sample Link</a></li>
-                            <li><a href="javascript:;">5 Sample Link</a></li>
-                            <li><a href="javascript:;">6 Sample Link</a></li>
-                            <li><a href="javascript:;">7 Sample Link</a></li>
-                            <li><a href="javascript:;">8 Sample Link</a></li>
-                            <li><a href="javascript:;">9 Sample Link</a></li>
-                        </ul>
-                        <div class="content-toggle" ng-hide="viewAll['parent-link-3']">
-                            <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-3'] = true">View All</a>
-                            <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-3'] = true">More</a>
-                        </div>
-                    </div> <!--/parent show/hide wrapper for links-->
+                <div class="content-teaser-container">
+                    <div class="col-xs-12 col-sm-4 col-md-3">
+                        <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
+                        <h4 class="text-blue">Content Headline Title Goes Here</h4>
+                        <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                        <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
+                            <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-3']}">
+                                <li><a href="javascript:;">1 Sample Link</a></li>
+                                <li><a href="javascript:;">2 Sample Link</a></li>
+                                <li><a href="javascript:;">3 Sample Link</a></li>
+                                <li><a href="javascript:;">4 Sample Link</a></li>
+                                <li><a href="javascript:;">5 Sample Link</a></li>
+                                <li><a href="javascript:;">6 Sample Link</a></li>
+                                <li><a href="javascript:;">7 Sample Link</a></li>
+                                <li><a href="javascript:;">8 Sample Link</a></li>
+                                <li><a href="javascript:;">9 Sample Link</a></li>
+                            </ul>
+                            <div class="content-toggle" ng-hide="viewAll['parent-link-3']">
+                                <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-3'] = true">View All</a>
+                                <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-3'] = true">More</a>
+                            </div>
+                        </div> <!--/parent show/hide wrapper for links-->
+                    </div>
                 </div>
                 <!--/Example 3-->
 
                 <!--Example 4-->
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                    <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                    <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
-                        <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-4']}">
-                            <li><a href="javascript:;">1 Sample Link</a></li>
-                            <li><a href="javascript:;">2 Sample Link</a></li>
-                            <li><a href="javascript:;">3 Sample Link</a></li>
-                            <li><a href="javascript:;">4 Sample Link</a></li>
-                            <li><a href="javascript:;">5 Sample Link</a></li>
-                            <li><a href="javascript:;">6 Sample Link</a></li>
-                            <li><a href="javascript:;">7 Sample Link</a></li>
-                            <li><a href="javascript:;">8 Sample Link</a></li>
-                            <li><a href="javascript:;">9 Sample Link</a></li>
-                        </ul>
-                        <div class="content-toggle" ng-hide="viewAll['parent-link-4']">
-                            <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-4'] = true">View All</a>
-                            <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-4'] = true">More</a>
-                        </div>
-                    </div> <!--/parent show/hide wrapper for links-->
+                <div class="content-teaser-container">
+                    <div class="col-xs-12 col-sm-4 col-md-3">
+                        <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
+                        <h4 class="text-blue">Content Headline Title Goes Here</h4>
+                        <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                        <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
+                            <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-4']}">
+                                <li><a href="javascript:;">1 Sample Link</a></li>
+                                <li><a href="javascript:;">2 Sample Link</a></li>
+                                <li><a href="javascript:;">3 Sample Link</a></li>
+                                <li><a href="javascript:;">4 Sample Link</a></li>
+                                <li><a href="javascript:;">5 Sample Link</a></li>
+                                <li><a href="javascript:;">6 Sample Link</a></li>
+                                <li><a href="javascript:;">7 Sample Link</a></li>
+                                <li><a href="javascript:;">8 Sample Link</a></li>
+                                <li><a href="javascript:;">9 Sample Link</a></li>
+                            </ul>
+                            <div class="content-toggle" ng-hide="viewAll['parent-link-4']">
+                                <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-4'] = true">View All</a>
+                                <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-4'] = true">More</a>
+                            </div>
+                        </div> <!--/parent show/hide wrapper for links-->
+                    </div>
                 </div>
                 <!--/Example 4-->
         </div>
