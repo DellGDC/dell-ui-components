@@ -3,8 +3,8 @@ angular.module('demo').controller('contentTeaserCtrl',function($scope,$rootScope
 	//this is for functionality related to demo code
 
     $scope.viewAll = {};
-    $scope.$watch('viewAll', function(newValue){
-        console.log(newValue);
+    $scope.$watch('viewAll', function( newValue ){
+        console.log( newValue );
     });
 
 });
