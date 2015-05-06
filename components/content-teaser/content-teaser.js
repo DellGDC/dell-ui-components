@@ -1,17 +1,18 @@
 angular.module('dellUiComponents')
 
-    .directive('contentMatchHeight', function() {
+    .directive('contentTeaserContainer', function() {
 	return {
-		restrict: 'ACE',
-		link: function($scope, $element, attrs,  $state, $timeout, fn, viewport, window ) {
+		restrict: 'C',
+		link: function($scope, $element, attrs ) {
 
-            $($element).matchHeight({
-                byRow: true,
-                property: 'height',
-                target: null,
-                remove: false
+            $element.find('.content-toggle').on('click', function(event){
+                console.log(event);
+                var teasers = $('.content-teaser-container');
+                _.each(teasers, function(t){
+                    console.log($(t).height());
+                    $('.content-teaser-container').matchHeight();
+                });
             });
-
 		}
 	};
 });
