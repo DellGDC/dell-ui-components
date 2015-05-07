@@ -95,6 +95,16 @@ return {
     };
 })
 
+.directive('singleHandleSlider', function() {
+    return {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, element, attributes, controller) {
+
+            $("input.slider").bootstrapSlider();
+        }
+    };
+})
+
 
 //----------- spin box -------------------------------------------------------
 
