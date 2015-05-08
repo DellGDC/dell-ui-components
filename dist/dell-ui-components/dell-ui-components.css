@@ -307,6 +307,10 @@ a.btn.btn-hotspot.active {
 a.btn.btn-hotspot i {
   font-size: 10px;
 }
+a {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
 /*
  * Block-Buttons component theme overrides
  *------------------------------------------------------------------------------------------
@@ -364,7 +368,7 @@ a.btn.btn-hotspot i {
   top: 38%;
 }
 .carousel.carousel-filmstrip .carousel-control.left {
-  left: -10px;
+  left: -8px;
 }
 .carousel.carousel-filmstrip .carousel-control.left:before {
   font-size: 40px;
@@ -377,6 +381,32 @@ a.btn.btn-hotspot i {
 }
 .carousel.carousel-filmstrip .item,
 .carousel.carousel-filmstrip .carousel-inner .item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.carousel.carousel-filmstrip-arrow-only {
+  padding: 0 20px 30px 20px;
+}
+.carousel.carousel-filmstrip-arrow-only .carousel-inner {
+  padding: 0 40px;
+}
+.carousel.carousel-filmstrip-arrow-only .carousel-control {
+  top: 70px;
+}
+.carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+  left: -8px;
+}
+.carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+  font-size: 40px;
+}
+.carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+  right: -15px;
+}
+.carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+  font-size: 40px;
+}
+.carousel.carousel-filmstrip-arrow-only .item,
+.carousel.carousel-filmstrip-arrow-only .carousel-inner .item {
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -458,6 +488,30 @@ a.btn.btn-hotspot i {
   padding-left: 20px;
   padding-right: 20px;
 }
+.well-overlay {
+  background-color: rgba(238, 238, 238, 0.9);
+  background: rgba(238, 238, 238, 0.9);
+  bottom: -20px;
+  right: 15px;
+  left: 15px;
+  position: absolute;
+  padding: 15px 20px;
+}
+.well-overlay .h1,
+.well-overlay .h2,
+.well-overlay .h3,
+.well-overlay .h4,
+.well-overlay .h5,
+.well-overlay .h6,
+.well-overlay h1,
+.well-overlay h2,
+.well-overlay h3,
+.well-overlay h4,
+.well-overlay h5,
+.well-overlay h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .carousel .slick-dots {
@@ -517,6 +571,27 @@ a.btn.btn-hotspot i {
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
   }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 15px 30px 15px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 45px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -7px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -17px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 32px;
+  }
   .carousel .slick-dots {
     position: relative;
     bottom: -20px;
@@ -572,6 +647,27 @@ a.btn.btn-hotspot i {
     right: -17px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 15px 30px 15px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 45px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -7px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -17px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
   }
   .carousel .slick-dots {
@@ -647,6 +743,27 @@ a.btn.btn-hotspot i {
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
   }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 30px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -7px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -17px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 32px;
+  }
   .slick-dots {
     position: relative;
     bottom: -20px;
@@ -702,6 +819,27 @@ a.btn.btn-hotspot i {
     right: -17px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 30px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -7px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -17px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
   }
   .slick-dots {
@@ -761,6 +899,27 @@ a.btn.btn-hotspot i {
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
   }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 28px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -7px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -17px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 32px;
+  }
   .slick-dots {
     position: relative;
     bottom: -20px;
@@ -816,6 +975,27 @@ a.btn.btn-hotspot i {
     right: -17px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 18px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -7px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -17px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
   }
   .slick-dots {
@@ -875,6 +1055,27 @@ a.btn.btn-hotspot i {
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
   }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 18px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -7px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -17px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 32px;
+  }
   .slick-dots {
     position: relative;
     bottom: -20px;
@@ -931,6 +1132,24 @@ a.btn.btn-hotspot i {
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 55px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 34px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 34px;
   }
   .slick-dots {
     position: relative;
@@ -989,6 +1208,24 @@ a.btn.btn-hotspot i {
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
   }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 50px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 34px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 34px;
+  }
   .slick-dots {
     position: relative;
     bottom: -20px;
@@ -1045,6 +1282,24 @@ a.btn.btn-hotspot i {
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
+  }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 45px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 34px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 34px;
   }
   .slick-dots {
     position: relative;
@@ -1103,6 +1358,24 @@ a.btn.btn-hotspot i {
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
   }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 30px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 34px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 34px;
+  }
   .slick-dots {
     position: relative;
     bottom: -20px;
@@ -1150,6 +1423,24 @@ a.btn.btn-hotspot i {
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     display: none;
+  }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 60px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 34px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 34px;
   }
   .slick-dots {
     position: relative;
@@ -1199,6 +1490,24 @@ a.btn.btn-hotspot i {
   .carousel.carousel-filmstrip .carousel-control.right:after {
     display: none;
   }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 55px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 28px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 28px;
+  }
   .slick-dots {
     position: relative;
     bottom: -20px;
@@ -1247,6 +1556,24 @@ a.btn.btn-hotspot i {
   .carousel.carousel-filmstrip .carousel-control.right:after {
     display: none;
   }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 50px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 28px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 28px;
+  }
   .slick-dots {
     position: relative;
     bottom: -20px;
@@ -1294,6 +1621,24 @@ a.btn.btn-hotspot i {
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     display: none;
+  }
+  .carousel.carousel-filmstrip-arrow-only {
+    padding: 0 20px 30px 20px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
+    padding: 0 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 33px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 28px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 28px;
   }
   .slick-dots {
     position: relative;
@@ -1348,6 +1693,13 @@ a.btn.btn-hotspot i {
     top: 0;
     left: 0;
     position: relative;
+  }
+  .carousel .well-banner a {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .carousel .well-banner a h3 {
+    margin-bottom: 0;
   }
   .carousel-inner {
     position: relative;
@@ -1783,6 +2135,11 @@ a.btn.btn-hotspot i {
   text-align: left;
   margin-bottom: -20px;
 }
+.hide-expanded,
+.show-collapsed,
+.collapsed .show-collapsed {
+  padding: 10px 10px 10px 0;
+}
 .dpui-numberPicker i {
   font-size: 10px;
   vertical-align: middle;
@@ -1972,6 +2329,170 @@ a.btn.btn-hotspot i {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.slider {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+.slider.slider-horizontal {
+  width: 210px;
+  height: 20px;
+}
+.slider.slider-horizontal .slider-track {
+  height: 10px;
+  width: 100%;
+  margin-top: -5px;
+  top: 50%;
+  left: 0;
+}
+.slider.slider-horizontal .slider-selection,
+.slider.slider-horizontal .slider-track-low,
+.slider.slider-horizontal .slider-track-high {
+  height: 100%;
+  top: 0;
+  bottom: 0;
+}
+.slider.slider-horizontal .slider-tick,
+.slider.slider-horizontal .slider-handle {
+  margin-left: -10px;
+  margin-top: -5px;
+}
+.slider.slider-horizontal .slider-tick.triangle,
+.slider.slider-horizontal .slider-handle.triangle {
+  border-width: 0 10px 10px 10px;
+  width: 0;
+  height: 0;
+  border-bottom-color: #0480be;
+  margin-top: 0;
+}
+.slider.slider-horizontal .slider-tick-label-container {
+  white-space: nowrap;
+  margin-top: 20px;
+}
+.slider.slider-horizontal .slider-tick-label-container .slider-tick-label {
+  padding-top: 4px;
+  display: inline-block;
+  text-align: center;
+}
+.slider.slider-vertical {
+  height: 210px;
+  width: 20px;
+}
+.slider.slider-vertical .slider-track {
+  width: 10px;
+  height: 100%;
+  margin-left: -5px;
+  left: 50%;
+  top: 0;
+}
+.slider.slider-vertical .slider-selection {
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.slider.slider-vertical .slider-track-low,
+.slider.slider-vertical .slider-track-high {
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+.slider.slider-vertical .slider-tick,
+.slider.slider-vertical .slider-handle {
+  margin-left: -5px;
+  margin-top: -10px;
+}
+.slider.slider-vertical .slider-tick.triangle,
+.slider.slider-vertical .slider-handle.triangle {
+  border-width: 10px 0 10px 10px;
+  width: 1px;
+  height: 1px;
+  border-left-color: #0480be;
+  margin-left: 0;
+}
+.slider.slider-disabled .slider-handle {
+  background: red;
+}
+.slider.slider-disabled .slider-track {
+  background: red;
+  cursor: not-allowed;
+}
+.slider input {
+  display: none;
+}
+.slider .tooltip.top {
+  margin-top: -36px;
+}
+.slider .tooltip-inner {
+  white-space: nowrap;
+}
+.slider .hide {
+  display: none;
+}
+.slider-track {
+  position: absolute;
+  cursor: pointer;
+  border-radius: 1px;
+}
+.slider-selection {
+  position: absolute;
+  border-radius: 1px;
+}
+.slider-track-low,
+.slider-track-high {
+  position: absolute;
+  background: transparent;
+  border-radius: 1px;
+}
+.slider-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #337ab7;
+  filter: none;
+  border: 0px solid transparent;
+}
+.slider-handle.round {
+  border-radius: 50%;
+}
+.slider-handle.triangle {
+  background: transparent none;
+}
+.slider-handle.custom {
+  background: transparent none;
+}
+.slider-handle.custom::before {
+  line-height: 20px;
+  font-size: 20px;
+  content: '\2605';
+  color: #726204;
+}
+.slider-tick {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  filter: none;
+  opacity: 0.8;
+  border: 0px solid transparent;
+}
+.slider-tick.round {
+  border-radius: 50%;
+}
+.slider-tick.triangle {
+  background: transparent none;
+}
+.slider-tick.custom {
+  background: transparent none;
+}
+.slider-tick.custom::before {
+  line-height: 20px;
+  font-size: 20px;
+  content: '\2605';
+  color: #726204;
+}
+.slider-tick.in-selection {
+  opacity: 1;
+}
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
   .form-compressed [class^=col-] {
@@ -2004,15 +2525,97 @@ a.btn.btn-hotspot i {
     margin-bottom: -10px;
     margin-left: -20px;
   }
+  .hide-expanded,
+  .show-collapsed,
+  .collapsed .show-collapsed {
+    padding: 10px 10px 10px 20px;
+  }
 }
 /*
  * Icons component theme overrides
  *------------------------------------------------------------------------------------------
  */
+[class^=icon-social] {
+  background: url('icons/social-img/icon-sm-sprite.png') no-repeat top left;
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.icon-social-facebook {
+  background-position: 0 0;
+}
+.icon-social-flickr {
+  background-position: 0 -34px;
+}
+.icon-social-google_plus {
+  background-position: 0 -68px;
+}
+.icon-social-linkedin {
+  background-position: 0 -102px;
+}
+.icon-social-pinterest {
+  background-position: 0 -136px;
+}
+.icon-social-renren {
+  background-position: 0 -170px;
+}
+.icon-social-slideshare {
+  background-position: 0 -204px;
+}
+.icon-social-storify {
+  background-position: 0 -238px;
+}
+.icon-social-twitter {
+  background-position: 0 -272px;
+}
+.icon-social-weibo {
+  background-position: 0 -306px;
+}
+.icon-social-xing {
+  background-position: 0 -340px;
+}
+.icon-social-youtube {
+  background-position: 0 -374px;
+}
 /*
  * Lists component theme overrides
  *------------------------------------------------------------------------------------------
  */
+.inline-content-links {
+  min-height: 20px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  background-color: #eeeeee;
+}
+.inline-content-links .list-inline {
+  margin-bottom: 0;
+}
+.inline-content-links .content-links li + li::before {
+  content: " | ";
+  padding-right: 10px;
+  color: #007db8;
+}
+.inline-content-links li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.inline-content-links li a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+@media (max-width: 767px) {
+  .inline-content-links .content-links li {
+    width: 100%;
+    padding-bottom: 20px;
+  }
+  .inline-content-links .content-links li + li::before {
+    content: "";
+    padding-right: 0;
+  }
+  .inline-content-links .content-links li + li:last-of-type {
+    padding-bottom: 0;
+  }
+}
 /*
  * Labels-And-Badges component theme overrides
  *------------------------------------------------------------------------------------------
@@ -2208,6 +2811,11 @@ a.btn.btn-hotspot i {
   .progress.progress-status .bar span {
     left: 2%;
   }
+}
+.progress.progress-status .bar {
+  position: relative;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 /*  
  * Simple data tables - bootstrap css override
@@ -2674,156 +3282,137 @@ label {
 [data-toggle="collapse"] .when-collapsed {
   display: none;
 }
+.inline-image-content-links {
+  min-height: 20px;
+  margin-bottom: 10px;
+}
+.inline-image-content-links ul > li,
+.inline-image-content-links ul > span {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.inline-image-content-links ul > li a,
+.inline-image-content-links ul > span a,
+.inline-image-content-links ul > li span,
+.inline-image-content-links ul > span span {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+@media (max-width: 767px) {
+  .image-content-links li {
+    padding-bottom: 20px;
+  }
+  .multiline-ellipsis {
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 64px;
+    margin: 0 auto;
+    line-height: 20px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+@media (min-width: 290px) and (max-width: 767px) {
+  .image-content-links > li {
+    display: none;
+    padding-bottom: 20px;
+  }
+  .image-content-links.view-all > li {
+    display: inline-block;
+  }
+}
+@media (min-width: 290px) and (max-width: 767px) and (max-width: 768px) {
+  .image-content-links > li:nth-child(-n+6) {
+    display: inline-block;
+  }
+}
+@media (min-width: 290px) and (max-width: 767px) and (min-width: 768px) {
+  .image-content-links > li {
+    display: inline-block;
+  }
+}
+@media (max-width: 289px) {
+  .image-content-links > li {
+    display: none;
+    padding-bottom: 20px;
+  }
+  .image-content-links.view-all > li {
+    display: inline-block;
+  }
+}
+@media (max-width: 289px) and (max-width: 768px) {
+  .image-content-links > li:nth-child(-n+5) {
+    display: inline-block;
+  }
+}
+@media (max-width: 289px) and (min-width: 768px) {
+  .image-content-links > li {
+    display: inline-block;
+  }
+}
 /*
  * Content-Teaser component theme overrides
  *------------------------------------------------------------------------------------------
  */
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
-.content-holder {
-  float: left;
-  margin-top: 40px;
-  margin-left: 20px;
-  padding-left: 0px;
+.stacked-detail-links {
+  min-height: 20px;
+  margin-bottom: 10px;
 }
-.full-width-container {
-  width: 100%;
-  max-width: 1210px;
+.stacked-detail-links ul > li,
+.stacked-detail-links ul > span {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
-.full-width-teaser {
-  width: 100%;
-  max-width: 1210px;
-  text-align: center;
-  height: 40px;
-  border-top: 1px solid #cccccc;
+.stacked-detail-links ul > li a,
+.stacked-detail-links ul > span a,
+.stacked-detail-links ul > li span,
+.stacked-detail-links ul > span span {
   padding-top: 10px;
-  padding-left: 10px;
-  background: #eeeeee;
+  padding-bottom: 10px;
 }
-.div-wrapper {
-  position: relative;
-  height: 320px;
-  max-width: 262px;
+@media (max-width: 767px) {
+  .detail-links li {
+    width: 100%;
+    padding-bottom: 20px;
+  }
+  .multiline-ellipsis {
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 64px;
+    margin: 0 auto;
+    line-height: 20px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
-.div-wrapper img {
-  position: absolute;
-  left: 0;
-  bottom: 0;
+.detail-links > li {
+  display: none;
+  padding-bottom: 20px;
 }
-.top-offset-15 {
-  margin-top: 15px;
+@media (min-width: 768px) {
+  .detail-links > li:nth-child(-n+4) {
+    display: block;
+  }
 }
-.horizontal-teaser {
-  width: 584px;
-  height: 175px;
-}
-.teaser-headline {
-  margin-top: 30px;
-  margin-bottom: 0px;
-}
-.teaser-link {
-  color: #007db8;
-  width: 584px;
-  height: 45px;
-  padding-top: 15px;
-  padding-left: 15px;
-  float: left;
-}
-.horizontal-teaser .pull-right {
-  padding-left: 15px;
-}
-.horizontal-full-bleed {
-  position: relative;
-  float: left;
-  clear: none;
-}
-.horizontal-full-bleed p {
-  padding-left: 10px;
-}
-.text-link-overlay {
+.detail-links.view-all > li {
   display: block;
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 100%;
-  height: 45px;
-  background-color: rgba(255, 255, 255, 0.9);
 }
-.content-holder p {
-  padding-top: 10px;
+.content-toggle {
+  margin-top: -15px;
 }
-.vertical-teaser-link {
-  margin: 0px;
+.dropdown-menu i {
+  margin-left: -6px;
+  vertical-align: text-bottom;
 }
-@media (max-width: 2800px) {
-  .full-width-teaser {
-    width: 100%;
-    height: 40px;
-    text-align: center;
-    border-top: 1px solid #cccccc;
-    padding-top: 10px;
-    background: #ffffff;
-    /* Old browsers */
-    background: -moz-linear-gradient(left, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ffffff), color-stop(50%, #f0f0f0), color-stop(100%, #ffffff));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* Opera 11.10+ */
-    background: -ms-linear-gradient(left, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* IE10+ */
-    background: linear-gradient(to right, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1);
-    /* IE6-9 */
-  }
-}
-@media (max-width: 993px) {
-  .full-width-teaser {
-    width: 100%;
-    max-width: 750px;
-    height: 60px;
-    text-align: center;
-    border-top: 1px solid #cccccc;
-    padding-top: 10px;
-    background: #ffffff;
-    /* Old browsers */
-    background: -moz-linear-gradient(left, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ffffff), color-stop(50%, #f0f0f0), color-stop(100%, #ffffff));
-    /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(left, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(left, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* Opera 11.10+ */
-    background: -ms-linear-gradient(left, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* IE10+ */
-    background: linear-gradient(to right, #ffffff 0%, #f0f0f0 50%, #ffffff 100%);
-    /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1);
-    /* IE6-9 */
-  }
-  .horizontal-teaser {
-    width: 100%;
-    max-width: 700px;
-    /*height:175px;
-		padding-left: 15px;*/
-  }
-  .teaser-headline {
-    color: #007db8;
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
-  .text-link-overlay {
-    width: 320px;
-    height: 60px;
-    padding: 15px;
-  }
-  .content-holder {
-    width: 100%;
-  }
+.content-teaser-container {
+  display: block;
+  margin-bottom: 30px;
 }
 /*
  * Date-Selector component theme overrides

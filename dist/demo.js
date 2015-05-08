@@ -26835,7 +26835,7 @@
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>');
 /**
  * State-based routing for AngularJS
- * @version v0.2.13
+ * @version v0.2.14
  * @link http://angular-ui.github.com/
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -26890,7 +26890,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       return Object.keys(object);
     }
     var result = [];
-    angular.forEach(object, function (val, key) {
+    forEach(object, function (val, key) {
       result.push(key);
     });
     return result;
@@ -27480,7 +27480,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
  * of search parameters. Multiple search parameter names are separated by '&'. Search parameters
  * do not influence whether or not a URL is matched, but their values are passed through into
  * the matched parameters returned by {@link ui.router.util.type:UrlMatcher#methods_exec exec}.
- * 
+ *
  * Path parameter placeholders can be specified using simple colon/catch-all syntax or curly brace
  * syntax, which optionally allows a regular expression for the parameter to be specified:
  *
@@ -27491,13 +27491,13 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
  *   regexp itself contain curly braces, they must be in matched pairs or escaped with a backslash.
  *
  * Parameter names may contain only word characters (latin letters, digits, and underscore) and
- * must be unique within the pattern (across both path and search parameters). For colon 
+ * must be unique within the pattern (across both path and search parameters). For colon
  * placeholders or curly placeholders without an explicit regexp, a path parameter matches any
  * number of characters other than '/'. For catch-all placeholders the path parameter matches
  * any number of characters.
- * 
+ *
  * Examples:
- * 
+ *
  * * `'/hello/'` - Matches only if the path is exactly '/hello/'. There is no special treatment for
  *   trailing slashes, and patterns have to match the entire path, not just a prefix.
  * * `'/user/:id'` - Matches '/user/bob' or '/user/1234!!!' or even '/user/' but not '/user' or
@@ -27530,7 +27530,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
  *
  * @property {string} sourceSearch  The search portion of the source property
  *
- * @property {string} regex  The constructed regex that will be used to match against the url when 
+ * @property {string} regex  The constructed regex that will be used to match against the url when
  *   it is time to determine which url will match.
  *
  * @returns {Object}  New `UrlMatcher` object
@@ -27562,7 +27562,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       params[id] = new $$UMFP.Param(id, type, config, location);
       return params[id];
     }
-    function quoteRegExp(string, pattern, squash) {
+    function quoteRegExp(string, pattern, squash, optional) {
       var surroundPattern = [
           '',
           ''
@@ -27573,7 +27573,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       case false:
         surroundPattern = [
           '(',
-          ')'
+          ')' + (optional ? '?' : '')
         ];
         break;
       case true:
@@ -27601,7 +27601,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       cfg = config.params[id];
       segment = pattern.substring(last, m.index);
       regexp = isSearch ? m[4] : m[4] || (m[1] == '*' ? '.*' : null);
-      type = $$UMFP.type(regexp || 'string') || inherit($$UMFP.type('string'), { pattern: new RegExp(regexp) });
+      type = $$UMFP.type(regexp || 'string') || inherit($$UMFP.type('string'), { pattern: new RegExp(regexp, config.caseInsensitive ? 'i' : undefined) });
       return {
         id: id,
         regexp: regexp,
@@ -27617,7 +27617,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         break;
       // we're into the search part
       param = addParameter(p.id, p.type, p.cfg, 'path');
-      compiled += quoteRegExp(p.segment, param.type.pattern.source, param.squash);
+      compiled += quoteRegExp(p.segment, param.type.pattern.source, param.squash, param.isOptional);
       segments.push(p.segment);
       last = placeholder.lastIndex;
     }
@@ -27719,7 +27719,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         return str.split('').reverse().join('');
       }
       function unquoteDashes(str) {
-        return str.replace(/\\-/, '-');
+        return str.replace(/\\-/g, '-');
       }
       var split = reverseString(string).split(/-(?!\\)/);
       var allReversed = map(split, reverseString);
@@ -27751,7 +27751,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
  *
  * @description
  * Returns the names of all path and search parameters of this pattern in an unspecified order.
- * 
+ *
  * @returns {Array.<string>}  An array of parameter names. Must be treated as read-only. If the
  *    pattern has no parameters, an empty array is returned.
  */
@@ -27949,6 +27949,10 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
   Type.prototype.toString = function () {
     return '{Type:' + this.name + '}';
   };
+  /** Given an encoded string, or a decoded object, returns a decoded object */
+  Type.prototype.$normalize = function (val) {
+    return this.is(val) ? val : this.decode(val);
+  };
   /*
  * Wraps an existing custom Type as an array of Type, depending on 'mode'.
  * e.g.:
@@ -27964,7 +27968,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       return this;
     if (mode === 'auto' && !isSearch)
       throw new Error('\'auto\' array mode is for query parameters only');
-    return new ArrayType(this, mode);
     function ArrayType(type, mode) {
       function bindTo(type, callbackName) {
         return function () {
@@ -28017,8 +28020,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       this.is = arrayHandler(bindTo(type, 'is'), true);
       this.equals = arrayEqualsHandler(bindTo(type, 'equals'));
       this.pattern = type.pattern;
+      this.$normalize = arrayHandler(bindTo(type, '$normalize'));
+      this.name = type.name;
       this.$arrayMode = mode;
     }
+    return new ArrayType(this, mode);
   };
   /**
  * @ngdoc object
@@ -28047,7 +28053,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         string: {
           encode: valToString,
           decode: valFromString,
-          is: regexpMatches,
+          is: function (val) {
+            return typeof val === 'string';
+          },
           pattern: /[^/]*/
         },
         int: {
@@ -28455,7 +28463,10 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       function $$getDefaultValue() {
         if (!injector)
           throw new Error('Injectable functions cannot be called at configuration time');
-        return injector.invoke(config.$$fn);
+        var defaultValue = injector.invoke(config.$$fn);
+        if (defaultValue !== null && defaultValue !== undefined && !self.type.is(defaultValue))
+          throw new Error('Default value (' + defaultValue + ') for parameter \'' + self.id + '\' is not an instance of Type (' + self.type.name + ')');
+        return defaultValue;
       }
       /**
      * [Internal] Gets the decoded representation of a value if the value is defined, otherwise, returns the
@@ -28474,7 +28485,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           return replacement.length ? replacement[0] : value;
         }
         value = $replace(value);
-        return isDefined(value) ? self.type.decode(value) : $$getDefaultValue();
+        return !isDefined(value) ? $$getDefaultValue() : self.type.$normalize(value);
       }
       function toString() {
         return '{Param:' + id + ' ' + type + ' squash: \'' + squash + '\' optional: ' + isOptional + '}';
@@ -28532,14 +28543,22 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         return equal;
       },
       $$validates: function $$validate(paramValues) {
-        var result = true, isOptional, val, param, self = this;
-        forEach(this.$$keys(), function (key) {
-          param = self[key];
-          val = paramValues[key];
-          isOptional = !val && param.isOptional;
-          result = result && (isOptional || !!param.type.is(val));
-        });
-        return result;
+        var keys = this.$$keys(), i, param, rawVal, normalized, encoded;
+        for (i = 0; i < keys.length; i++) {
+          param = this[keys[i]];
+          rawVal = paramValues[keys[i]];
+          if ((rawVal === undefined || rawVal === null) && param.isOptional)
+            break;
+          // There was no parameter value, but the param is optional
+          normalized = param.type.$normalize(rawVal);
+          if (!param.type.is(normalized))
+            return false;
+          // The value was not of the correct Type, and could not be decoded to the correct Type
+          encoded = param.type.encode(normalized);
+          if (angular.isString(encoded) && !param.type.pattern.exec(encoded))
+            return false;  // The value was of the correct type, but when encoded, did not match the Type's regexp
+        }
+        return true;
       },
       $$parent: undefined
     };
@@ -28887,7 +28906,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           $location.replace();
         },
         push: function (urlMatcher, params, options) {
-          $location.url(urlMatcher.format(params || {}));
+          var url = urlMatcher.format(params || {});
+          // Handle the special hash param, if needed
+          if (url !== null && params && params['#']) {
+            url += '#' + params['#'];
+          }
+          $location.url(url);
           lastPushedUrl = options && options.$$avoidResync ? $location.url() : undefined;
           if (options && options.replace)
             $location.replace();
@@ -28903,6 +28927,10 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           options = options || {};
           if (!isHtml5 && url !== null) {
             url = '#' + $locationProvider.hashPrefix() + url;
+          }
+          // Handle special hash param, if needed
+          if (url !== null && params && params['#']) {
+            url += '#' + params['#'];
           }
           url = appendBasePath(url, isHtml5, options.absolute);
           if (!options.absolute || !url) {
@@ -29107,6 +29135,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
     // Returns true if glob matches current $state name.
     function doesStateMatchGlob(glob) {
       var globSegments = glob.split('.'), segments = $state.$current.name.split('.');
+      //match single stars
+      for (var i = 0, l = globSegments.length; i < l; i++) {
+        if (globSegments[i] === '*') {
+          segments[i] = '*';
+        }
+      }
       //match greedy starts
       if (globSegments[0] === '**') {
         segments = segments.slice(indexOf(segments, globSegments[1]));
@@ -29119,12 +29153,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       }
       if (globSegments.length != segments.length) {
         return false;
-      }
-      //match single stars
-      for (var i = 0, l = globSegments.length; i < l; i++) {
-        if (globSegments[i] === '*') {
-          segments[i] = '*';
-        }
       }
       return segments.join('') === globSegments.join('');
     }
@@ -29329,6 +29357,13 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
    *   published to scope under the controllerAs name.
    * <pre>controllerAs: "myCtrl"</pre>
    *
+   * @param {string|object=} stateConfig.parent
+   * <a id='parent'></a>
+   * Optionally specifies the parent state of this state.
+   *
+   * <pre>parent: 'parentState'</pre>
+   * <pre>parent: parentState // JS variable</pre>
+   *
    * @param {object=} stateConfig.resolve
    * <a id='resolve'></a>
    *
@@ -29360,6 +29395,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
    *   transitioned to, the `$stateParams` service will be populated with any 
    *   parameters that were passed.
    *
+   *   (See {@link ui.router.util.type:UrlMatcher UrlMatcher} `UrlMatcher`} for
+   *   more details on acceptable patterns )
+   *
    * examples:
    * <pre>url: "/home"
    * url: "/users/:userid"
@@ -29367,8 +29405,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
    * url: "/books/{categoryid:int}"
    * url: "/books/{publishername:string}/{categoryid:int}"
    * url: "/messages?before&after"
-   * url: "/messages?{before:date}&{after:date}"</pre>
+   * url: "/messages?{before:date}&{after:date}"
    * url: "/messages/:mailboxid?{before:date}&{after:date}"
+   * </pre>
    *
    * @param {object=} stateConfig.views
    * <a id='views'></a>
@@ -29677,8 +29716,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
      * @methodOf ui.router.state.$state
      *
      * @description
-     * A method that force reloads the current state. All resolves are re-resolved, events are not re-fired, 
-     * and controllers reinstantiated (bug with controllers reinstantiating right now, fixing soon).
+     * A method that force reloads the current state. All resolves are re-resolved,
+     * controllers reinstantiated, and events re-fired.
      *
      * @example
      * <pre>
@@ -29698,12 +29737,34 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
      * });
      * </pre>
      *
+     * @param {string=|object=} state - A state name or a state object, which is the root of the resolves to be re-resolved.
+     * @example
+     * <pre>
+     * //assuming app application consists of 3 states: 'contacts', 'contacts.detail', 'contacts.detail.item' 
+     * //and current state is 'contacts.detail.item'
+     * var app angular.module('app', ['ui.router']);
+     *
+     * app.controller('ctrl', function ($scope, $state) {
+     *   $scope.reload = function(){
+     *     //will reload 'contact.detail' and 'contact.detail.item' states
+     *     $state.reload('contact.detail');
+     *   }
+     * });
+     * </pre>
+     *
+     * `reload()` is just an alias for:
+     * <pre>
+     * $state.transitionTo($state.current, $stateParams, { 
+     *   reload: true, inherit: false, notify: true
+     * });
+     * </pre>
+
      * @returns {promise} A promise representing the state of the new transition. See
      * {@link ui.router.state.$state#methods_go $state.go}.
      */
-      $state.reload = function reload() {
+      $state.reload = function reload(state) {
         return $state.transitionTo($state.current, $stateParams, {
-          reload: true,
+          reload: state || true,
           inherit: false,
           notify: true
         });
@@ -29811,9 +29872,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
      * - **`relative`** - {object=}, When transitioning with relative path (e.g '^'), 
      *    defines which state to be relative from.
      * - **`notify`** - {boolean=true}, If `true` will broadcast $stateChangeStart and $stateChangeSuccess events.
-     * - **`reload`** (v0.2.5) - {boolean=false}, If `true` will force transition even if the state or params 
+     * - **`reload`** (v0.2.5) - {boolean=false|string=|object=}, If `true` will force transition even if the state or params 
      *    have not changed, aka a reload of the same state. It differs from reloadOnSearch because you'd
      *    use this when you want to force a reload when *everything* is the same, including search params.
+     *    if String, then will reload the state with the name given in reload, and any children.
+     *    if Object, then a stateObj is expected, will reload the state found in stateObj, and any chhildren.
      *
      * @returns {promise} A promise representing the state of the new transition. See
      * {@link ui.router.state.$state#methods_go $state.go}.
@@ -29830,6 +29893,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         }, options || {});
         var from = $state.$current, fromParams = $state.params, fromPath = from.path;
         var evt, toState = findState(to, options.relative);
+        // Store the hash param for later (since it will be stripped out by various methods)
+        var hash = toParams['#'];
         if (!isDefined(toState)) {
           var redirect = {
               to: to,
@@ -29863,8 +29928,23 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         var toPath = to.path;
         // Starting from the root of the path, keep all levels that haven't changed
         var keep = 0, state = toPath[keep], locals = root.locals, toLocals = [];
+        var skipTriggerReloadCheck = false;
         if (!options.reload) {
           while (state && state === fromPath[keep] && state.ownParams.$$equals(toParams, fromParams)) {
+            locals = toLocals[keep] = state.locals;
+            keep++;
+            state = toPath[keep];
+          }
+        } else if (isString(options.reload) || isObject(options.reload)) {
+          if (isObject(options.reload) && !options.reload.name) {
+            throw new Error('Invalid reload state object');
+          }
+          var reloadState = options.reload === true ? fromPath[0] : findState(options.reload);
+          if (options.reload && !reloadState) {
+            throw new Error('No such reload state \'' + (isString(options.reload) ? options.reload : options.reload.name) + '\'');
+          }
+          skipTriggerReloadCheck = true;
+          while (state && state === fromPath[keep] && state !== reloadState) {
             locals = toLocals[keep] = state.locals;
             keep++;
             state = toPath[keep];
@@ -29875,7 +29955,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         // TODO: We may not want to bump 'transition' if we're called from a location change
         // that we've initiated ourselves, because we might accidentally abort a legitimate
         // transition initiated from code?
-        if (shouldTriggerReload(to, from, locals, options)) {
+        if (!skipTriggerReloadCheck && shouldTriggerReload(to, from, locals, options)) {
           if (to.self.reloadOnSearch !== false)
             $urlRouter.update();
           $state.transition = null;
@@ -29913,6 +29993,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
          * </pre>
          */
           if ($rootScope.$broadcast('$stateChangeStart', to.self, toParams, from.self, fromParams).defaultPrevented) {
+            $rootScope.$broadcast('$stateChangeCancel', to.self, toParams, from.self, fromParams);
             $urlRouter.update();
             return TransitionPrevented;
           }
@@ -29953,6 +30034,9 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
                 $injector.invoke(entering.self.onEnter, entering.self, entering.locals.globals);
               }
             }
+            // Re-add the saved hash before we start returning things
+            if (hash)
+              toParams['#'] = hash;
             // Run it again, to catch any transitions in callbacks
             if ($state.transition !== transition)
               return TransitionSuperseded;
@@ -30173,7 +30257,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         if (!nav || nav.url === undefined || nav.url === null) {
           return null;
         }
-        return $urlRouter.href(nav.url, filterByKeys(state.params.$$keys(), params || {}), { absolute: options.absolute });
+        return $urlRouter.href(nav.url, filterByKeys(state.params.$$keys().concat('#'), params || {}), { absolute: options.absolute });
       };
       /**
      * @ngdoc function
@@ -30227,7 +30311,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           promises.push($resolve.resolve(injectables, locals, dst.resolve, state).then(function (result) {
             // References to the controller (only instantiated at link time)
             if (isFunction(view.controllerProvider) || isArray(view.controllerProvider)) {
-              var injectLocals = angular.extend({}, injectables, locals);
+              var injectLocals = angular.extend({}, injectables, locals, result);
               result.$$controller = $injector.invoke(view.controllerProvider, null, injectLocals);
             } else {
               result.$$controller = view.controller;
@@ -30360,7 +30444,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           return $anchorScroll;
         }
         return function ($element) {
-          $timeout(function () {
+          return $timeout(function () {
             $element[0].scrollIntoView();
           }, 0, false);
         };
@@ -30639,6 +30723,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           var link = $compile($element.contents());
           if (locals.$$controller) {
             locals.$scope = scope;
+            locals.$element = $element;
             var controller = $controller(locals.$$controller, locals);
             if (locals.$$controllerAs) {
               scope[locals.$$controllerAs] = controller;
@@ -30750,7 +30835,8 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
     var allowedOptions = [
         'location',
         'inherit',
-        'reload'
+        'reload',
+        'absolute'
       ];
     return {
       restrict: 'A',
@@ -30761,9 +30847,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
       link: function (scope, element, attrs, uiSrefActive) {
         var ref = parseStateRef(attrs.uiSref, $state.current.name);
         var params = null, url = null, base = stateContext(element) || $state.$current;
-        var newHref = null, isAnchor = element.prop('tagName') === 'A';
+        // SVGAElement does not use the href attribute, but rather the 'xlinkHref' attribute.
+        var hrefKind = Object.prototype.toString.call(element.prop('href')) === '[object SVGAnimatedString]' ? 'xlink:href' : 'href';
+        var newHref = null, isAnchor = element.prop('tagName').toUpperCase() === 'A';
         var isForm = element[0].nodeName === 'FORM';
-        var attr = isForm ? 'action' : 'href', nav = true;
+        var attr = isForm ? 'action' : hrefKind, nav = true;
         var options = {
             relative: base,
             inherit: true
@@ -30782,7 +30870,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           newHref = $state.href(ref.state, params, options);
           var activeDirective = uiSrefActive[1] || uiSrefActive[0];
           if (activeDirective) {
-            activeDirective.$$setStateInfo(ref.state, params);
+            activeDirective.$$addStateInfo(ref.state, params);
           }
           if (newHref === null) {
             nav = false;
@@ -30905,31 +30993,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
         '$element',
         '$attrs',
         function ($scope, $element, $attrs) {
-          var state, params, activeClass;
+          var states = [], activeClass;
           // There probably isn't much point in $observing this
           // uiSrefActive and uiSrefActiveEq share the same directive object with some
           // slight difference in logic routing
           activeClass = $interpolate($attrs.uiSrefActiveEq || $attrs.uiSrefActive || '', false)($scope);
           // Allow uiSref to communicate with uiSrefActive[Equals]
-          this.$$setStateInfo = function (newState, newParams) {
-            state = $state.get(newState, stateContext($element));
-            params = newParams;
+          this.$$addStateInfo = function (newState, newParams) {
+            var state = $state.get(newState, stateContext($element));
+            states.push({
+              state: state || { name: newState },
+              params: newParams
+            });
             update();
           };
           $scope.$on('$stateChangeSuccess', update);
           // Update route state
           function update() {
-            if (isMatch()) {
+            if (anyMatch()) {
               $element.addClass(activeClass);
             } else {
               $element.removeClass(activeClass);
             }
           }
-          function isMatch() {
+          function anyMatch() {
+            for (var i = 0; i < states.length; i++) {
+              if (isMatch(states[i].state, states[i].params)) {
+                return true;
+              }
+            }
+            return false;
+          }
+          function isMatch(state, params) {
             if (typeof $attrs.uiSrefActiveEq !== 'undefined') {
-              return state && $state.is(state.name, params);
+              return $state.is(state.name, params);
             } else {
-              return state && $state.includes(state.name, params);
+              return $state.includes(state.name, params);
             }
           }
         }
@@ -42753,6 +42852,1542 @@ if (!console) {
     a('[data-toggle="table"]').bootstrapTable();
   });
 }(jQuery);
+/**
+* jquery.matchHeight.js master
+* http://brm.io/jquery-match-height/
+* License: MIT
+*/
+;
+(function ($) {
+  /*
+    *  internal
+    */
+  var _previousResizeWidth = -1, _updateTimeout = -1;
+  /*
+    *  _parse
+    *  value parse utility function
+    */
+  var _parse = function (value) {
+    // parse value and convert NaN to 0
+    return parseFloat(value) || 0;
+  };
+  /*
+    *  _rows
+    *  utility function returns array of jQuery selections representing each row
+    *  (as displayed after float wrapping applied by browser)
+    */
+  var _rows = function (elements) {
+    var tolerance = 1, $elements = $(elements), lastTop = null, rows = [];
+    // group elements by their top position
+    $elements.each(function () {
+      var $that = $(this), top = $that.offset().top - _parse($that.css('margin-top')), lastRow = rows.length > 0 ? rows[rows.length - 1] : null;
+      if (lastRow === null) {
+        // first item on the row, so just push it
+        rows.push($that);
+      } else {
+        // if the row top is the same, add to the row group
+        if (Math.floor(Math.abs(lastTop - top)) <= tolerance) {
+          rows[rows.length - 1] = lastRow.add($that);
+        } else {
+          // otherwise start a new row group
+          rows.push($that);
+        }
+      }
+      // keep track of the last row top
+      lastTop = top;
+    });
+    return rows;
+  };
+  /*
+    *  _parseOptions
+    *  handle plugin options
+    */
+  var _parseOptions = function (options) {
+    var opts = {
+        byRow: true,
+        property: 'height',
+        target: null,
+        remove: false
+      };
+    if (typeof options === 'object') {
+      return $.extend(opts, options);
+    }
+    if (typeof options === 'boolean') {
+      opts.byRow = options;
+    } else if (options === 'remove') {
+      opts.remove = true;
+    }
+    return opts;
+  };
+  /*
+    *  matchHeight
+    *  plugin definition
+    */
+  var matchHeight = $.fn.matchHeight = function (options) {
+      var opts = _parseOptions(options);
+      // handle remove
+      if (opts.remove) {
+        var that = this;
+        // remove fixed height from all selected elements
+        this.css(opts.property, '');
+        // remove selected elements from all groups
+        $.each(matchHeight._groups, function (key, group) {
+          group.elements = group.elements.not(that);
+        });
+        // TODO: cleanup empty groups
+        return this;
+      }
+      if (this.length <= 1 && !opts.target) {
+        return this;
+      }
+      // keep track of this group so we can re-apply later on load and resize events
+      matchHeight._groups.push({
+        elements: this,
+        options: opts
+      });
+      // match each element's height to the tallest element in the selection
+      matchHeight._apply(this, opts);
+      return this;
+    };
+  /*
+    *  plugin global options
+    */
+  matchHeight._groups = [];
+  matchHeight._throttle = 80;
+  matchHeight._maintainScroll = false;
+  matchHeight._beforeUpdate = null;
+  matchHeight._afterUpdate = null;
+  /*
+    *  matchHeight._apply
+    *  apply matchHeight to given elements
+    */
+  matchHeight._apply = function (elements, options) {
+    var opts = _parseOptions(options), $elements = $(elements), rows = [$elements];
+    // take note of scroll position
+    var scrollTop = $(window).scrollTop(), htmlHeight = $('html').outerHeight(true);
+    // get hidden parents
+    var $hiddenParents = $elements.parents().filter(':hidden');
+    // cache the original inline style
+    $hiddenParents.each(function () {
+      var $that = $(this);
+      $that.data('style-cache', $that.attr('style'));
+    });
+    // temporarily must force hidden parents visible
+    $hiddenParents.css('display', 'block');
+    // get rows if using byRow, otherwise assume one row
+    if (opts.byRow && !opts.target) {
+      // must first force an arbitrary equal height so floating elements break evenly
+      $elements.each(function () {
+        var $that = $(this), display = $that.css('display') === 'inline-block' ? 'inline-block' : 'block';
+        // cache the original inline style
+        $that.data('style-cache', $that.attr('style'));
+        $that.css({
+          'display': display,
+          'padding-top': '0',
+          'padding-bottom': '0',
+          'margin-top': '0',
+          'margin-bottom': '0',
+          'border-top-width': '0',
+          'border-bottom-width': '0',
+          'height': '100px'
+        });
+      });
+      // get the array of rows (based on element top position)
+      rows = _rows($elements);
+      // revert original inline styles
+      $elements.each(function () {
+        var $that = $(this);
+        $that.attr('style', $that.data('style-cache') || '');
+      });
+    }
+    $.each(rows, function (key, row) {
+      var $row = $(row), targetHeight = 0;
+      if (!opts.target) {
+        // skip apply to rows with only one item
+        if (opts.byRow && $row.length <= 1) {
+          $row.css(opts.property, '');
+          return;
+        }
+        // iterate the row and find the max height
+        $row.each(function () {
+          var $that = $(this), display = $that.css('display') === 'inline-block' ? 'inline-block' : 'block';
+          // ensure we get the correct actual height (and not a previously set height value)
+          var css = { 'display': display };
+          css[opts.property] = '';
+          $that.css(css);
+          // find the max height (including padding, but not margin)
+          if ($that.outerHeight(false) > targetHeight) {
+            targetHeight = $that.outerHeight(false);
+          }
+          // revert display block
+          $that.css('display', '');
+        });
+      } else {
+        // if target set, use the height of the target element
+        targetHeight = opts.target.outerHeight(false);
+      }
+      // iterate the row and apply the height to all elements
+      $row.each(function () {
+        var $that = $(this), verticalPadding = 0;
+        // don't apply to a target
+        if (opts.target && $that.is(opts.target)) {
+          return;
+        }
+        // handle padding and border correctly (required when not using border-box)
+        if ($that.css('box-sizing') !== 'border-box') {
+          verticalPadding += _parse($that.css('border-top-width')) + _parse($that.css('border-bottom-width'));
+          verticalPadding += _parse($that.css('padding-top')) + _parse($that.css('padding-bottom'));
+        }
+        // set the height (accounting for padding and border)
+        $that.css(opts.property, targetHeight - verticalPadding);
+      });
+    });
+    // revert hidden parents
+    $hiddenParents.each(function () {
+      var $that = $(this);
+      $that.attr('style', $that.data('style-cache') || null);
+    });
+    // restore scroll position if enabled
+    if (matchHeight._maintainScroll) {
+      $(window).scrollTop(scrollTop / htmlHeight * $('html').outerHeight(true));
+    }
+    return this;
+  };
+  /*
+    *  matchHeight._applyDataApi
+    *  applies matchHeight to all elements with a data-match-height attribute
+    */
+  matchHeight._applyDataApi = function () {
+    var groups = {};
+    // generate groups by their groupId set by elements using data-match-height
+    $('[data-match-height], [data-mh]').each(function () {
+      var $this = $(this), groupId = $this.attr('data-mh') || $this.attr('data-match-height');
+      if (groupId in groups) {
+        groups[groupId] = groups[groupId].add($this);
+      } else {
+        groups[groupId] = $this;
+      }
+    });
+    // apply matchHeight to each group
+    $.each(groups, function () {
+      this.matchHeight(true);
+    });
+  };
+  /*
+    *  matchHeight._update
+    *  updates matchHeight on all current groups with their correct options
+    */
+  var _update = function (event) {
+    if (matchHeight._beforeUpdate) {
+      matchHeight._beforeUpdate(event, matchHeight._groups);
+    }
+    $.each(matchHeight._groups, function () {
+      matchHeight._apply(this.elements, this.options);
+    });
+    if (matchHeight._afterUpdate) {
+      matchHeight._afterUpdate(event, matchHeight._groups);
+    }
+  };
+  matchHeight._update = function (throttle, event) {
+    // prevent update if fired from a resize event
+    // where the viewport width hasn't actually changed
+    // fixes an event looping bug in IE8
+    if (event && event.type === 'resize') {
+      var windowWidth = $(window).width();
+      if (windowWidth === _previousResizeWidth) {
+        return;
+      }
+      _previousResizeWidth = windowWidth;
+    }
+    // throttle updates
+    if (!throttle) {
+      _update(event);
+    } else if (_updateTimeout === -1) {
+      _updateTimeout = setTimeout(function () {
+        _update(event);
+        _updateTimeout = -1;
+      }, matchHeight._throttle);
+    }
+  };
+  /*
+    *  bind events
+    */
+  // apply on DOM ready event
+  $(matchHeight._applyDataApi);
+  // update heights on load and resize events
+  $(window).bind('load', function (event) {
+    matchHeight._update(false, event);
+  });
+  // throttled update heights on resize events
+  $(window).bind('resize orientationchange', function (event) {
+    matchHeight._update(true, event);
+  });
+}(jQuery));
+/*! =========================================================
+ * bootstrap-slider.js
+ *
+ * Maintainers:
+ *		Kyle Kemp
+ *			- Twitter: @seiyria
+ *			- Github:  seiyria
+ *		Rohit Kalkur
+ *			- Twitter: @Rovolutionary
+ *			- Github:  rovolution
+ *
+ * =========================================================
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ========================================================= */
+/**
+ * Bridget makes jQuery widgets
+ * v1.0.1
+ * MIT license
+ */
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    var jQuery;
+    try {
+      jQuery = require('jquery');
+    } catch (err) {
+      jQuery = null;
+    }
+    module.exports = factory(jQuery);
+  } else {
+    root.Slider = factory(root.jQuery);
+  }
+}(this, function ($) {
+  // Reference to Slider constructor
+  var Slider;
+  (function ($) {
+    'use strict';
+    // -------------------------- utils -------------------------- //
+    var slice = Array.prototype.slice;
+    function noop() {
+    }
+    // -------------------------- definition -------------------------- //
+    function defineBridget($) {
+      // bail if no jQuery
+      if (!$) {
+        return;
+      }
+      // -------------------------- addOptionMethod -------------------------- //
+      /**
+			 * adds option method -> $().plugin('option', {...})
+			 * @param {Function} PluginClass - constructor class
+			 */
+      function addOptionMethod(PluginClass) {
+        // don't overwrite original option method
+        if (PluginClass.prototype.option) {
+          return;
+        }
+        // option setter
+        PluginClass.prototype.option = function (opts) {
+          // bail out if not an object
+          if (!$.isPlainObject(opts)) {
+            return;
+          }
+          this.options = $.extend(true, this.options, opts);
+        };
+      }
+      // -------------------------- plugin bridge -------------------------- //
+      // helper function for logging errors
+      // $.error breaks jQuery chaining
+      var logError = typeof console === 'undefined' ? noop : function (message) {
+          console.error(message);
+        };
+      /**
+			 * jQuery plugin bridge, access methods like $elem.plugin('method')
+			 * @param {String} namespace - plugin name
+			 * @param {Function} PluginClass - constructor class
+			 */
+      function bridge(namespace, PluginClass) {
+        // add to jQuery fn namespace
+        $.fn[namespace] = function (options) {
+          if (typeof options === 'string') {
+            // call plugin method when first argument is a string
+            // get arguments for method
+            var args = slice.call(arguments, 1);
+            for (var i = 0, len = this.length; i < len; i++) {
+              var elem = this[i];
+              var instance = $.data(elem, namespace);
+              if (!instance) {
+                logError('cannot call methods on ' + namespace + ' prior to initialization; ' + 'attempted to call \'' + options + '\'');
+                continue;
+              }
+              if (!$.isFunction(instance[options]) || options.charAt(0) === '_') {
+                logError('no such method \'' + options + '\' for ' + namespace + ' instance');
+                continue;
+              }
+              // trigger method with arguments
+              var returnValue = instance[options].apply(instance, args);
+              // break look and return first value if provided
+              if (returnValue !== undefined && returnValue !== instance) {
+                return returnValue;
+              }
+            }
+            // return this if no return value
+            return this;
+          } else {
+            var objects = this.map(function () {
+                var instance = $.data(this, namespace);
+                if (instance) {
+                  // apply options & init
+                  instance.option(options);
+                  instance._init();
+                } else {
+                  // initialize new instance
+                  instance = new PluginClass(this, options);
+                  $.data(this, namespace, instance);
+                }
+                return $(this);
+              });
+            if (!objects || objects.length > 1) {
+              return objects;
+            } else {
+              return objects[0];
+            }
+          }
+        };
+      }
+      // -------------------------- bridget -------------------------- //
+      /**
+			 * converts a Prototypical class into a proper jQuery plugin
+			 *   the class must have a ._init method
+			 * @param {String} namespace - plugin name, used in $().pluginName
+			 * @param {Function} PluginClass - constructor class
+			 */
+      $.bridget = function (namespace, PluginClass) {
+        addOptionMethod(PluginClass);
+        bridge(namespace, PluginClass);
+      };
+      return $.bridget;
+    }
+    // get jquery from browser global
+    defineBridget($);
+  }($));
+  /*************************************************
+
+			BOOTSTRAP-SLIDER SOURCE CODE
+
+	**************************************************/
+  (function ($) {
+    var ErrorMsgs = {
+        formatInvalidInputErrorMsg: function (input) {
+          return 'Invalid input value \'' + input + '\' passed in';
+        },
+        callingContextNotSliderInstance: 'Calling context element does not have instance of Slider bound to it. Check your code to make sure the JQuery object returned from the call to the slider() initializer is calling the method'
+      };
+    var SliderScale = {
+        linear: {
+          toValue: function (percentage) {
+            var rawValue = percentage / 100 * (this.options.max - this.options.min);
+            if (this.options.ticks_positions.length > 0) {
+              var minv, maxv, minp, maxp = 0;
+              for (var i = 0; i < this.options.ticks_positions.length; i++) {
+                if (percentage <= this.options.ticks_positions[i]) {
+                  minv = i > 0 ? this.options.ticks[i - 1] : 0;
+                  minp = i > 0 ? this.options.ticks_positions[i - 1] : 0;
+                  maxv = this.options.ticks[i];
+                  maxp = this.options.ticks_positions[i];
+                  break;
+                }
+              }
+              if (i > 0) {
+                var partialPercentage = (percentage - minp) / (maxp - minp);
+                rawValue = minv + partialPercentage * (maxv - minv);
+              }
+            }
+            var value = this.options.min + Math.round(rawValue / this.options.step) * this.options.step;
+            if (value < this.options.min) {
+              return this.options.min;
+            } else if (value > this.options.max) {
+              return this.options.max;
+            } else {
+              return value;
+            }
+          },
+          toPercentage: function (value) {
+            if (this.options.max === this.options.min) {
+              return 0;
+            }
+            if (this.options.ticks_positions.length > 0) {
+              var minv, maxv, minp, maxp = 0;
+              for (var i = 0; i < this.options.ticks.length; i++) {
+                if (value <= this.options.ticks[i]) {
+                  minv = i > 0 ? this.options.ticks[i - 1] : 0;
+                  minp = i > 0 ? this.options.ticks_positions[i - 1] : 0;
+                  maxv = this.options.ticks[i];
+                  maxp = this.options.ticks_positions[i];
+                  break;
+                }
+              }
+              if (i > 0) {
+                var partialPercentage = (value - minv) / (maxv - minv);
+                return minp + partialPercentage * (maxp - minp);
+              }
+            }
+            return 100 * (value - this.options.min) / (this.options.max - this.options.min);
+          }
+        },
+        logarithmic: {
+          toValue: function (percentage) {
+            var min = this.options.min === 0 ? 0 : Math.log(this.options.min);
+            var max = Math.log(this.options.max);
+            var value = Math.exp(min + (max - min) * percentage / 100);
+            value = this.options.min + Math.round((value - this.options.min) / this.options.step) * this.options.step;
+            /* Rounding to the nearest step could exceed the min or
+					 * max, so clip to those values. */
+            if (value < this.options.min) {
+              return this.options.min;
+            } else if (value > this.options.max) {
+              return this.options.max;
+            } else {
+              return value;
+            }
+          },
+          toPercentage: function (value) {
+            if (this.options.max === this.options.min) {
+              return 0;
+            } else {
+              var max = Math.log(this.options.max);
+              var min = this.options.min === 0 ? 0 : Math.log(this.options.min);
+              var v = value === 0 ? 0 : Math.log(value);
+              return 100 * (v - min) / (max - min);
+            }
+          }
+        }
+      };
+    /*************************************************
+
+							CONSTRUCTOR
+
+		**************************************************/
+    Slider = function (element, options) {
+      createNewSlider.call(this, element, options);
+      return this;
+    };
+    function createNewSlider(element, options) {
+      if (typeof element === 'string') {
+        this.element = document.querySelector(element);
+      } else if (element instanceof HTMLElement) {
+        this.element = element;
+      }
+      /*************************************************
+
+							Process Options
+
+			**************************************************/
+      options = options ? options : {};
+      var optionTypes = Object.keys(this.defaultOptions);
+      for (var i = 0; i < optionTypes.length; i++) {
+        var optName = optionTypes[i];
+        // First check if an option was passed in via the constructor
+        var val = options[optName];
+        // If no data attrib, then check data atrributes
+        val = typeof val !== 'undefined' ? val : getDataAttrib(this.element, optName);
+        // Finally, if nothing was specified, use the defaults
+        val = val !== null ? val : this.defaultOptions[optName];
+        // Set all options on the instance of the Slider
+        if (!this.options) {
+          this.options = {};
+        }
+        this.options[optName] = val;
+      }
+      function getDataAttrib(element, optName) {
+        var dataName = 'data-slider-' + optName.replace(/_/g, '-');
+        var dataValString = element.getAttribute(dataName);
+        try {
+          return JSON.parse(dataValString);
+        } catch (err) {
+          return dataValString;
+        }
+      }
+      /*************************************************
+
+							Create Markup
+
+			**************************************************/
+      var origWidth = this.element.style.width;
+      var updateSlider = false;
+      var parent = this.element.parentNode;
+      var sliderTrackSelection;
+      var sliderTrackLow, sliderTrackHigh;
+      var sliderMinHandle;
+      var sliderMaxHandle;
+      if (this.sliderElem) {
+        updateSlider = true;
+      } else {
+        /* Create elements needed for slider */
+        this.sliderElem = document.createElement('div');
+        this.sliderElem.className = 'slider';
+        /* Create slider track elements */
+        var sliderTrack = document.createElement('div');
+        sliderTrack.className = 'slider-track';
+        sliderTrackLow = document.createElement('div');
+        sliderTrackLow.className = 'slider-track-low';
+        sliderTrackSelection = document.createElement('div');
+        sliderTrackSelection.className = 'slider-selection';
+        sliderTrackHigh = document.createElement('div');
+        sliderTrackHigh.className = 'slider-track-high';
+        sliderMinHandle = document.createElement('div');
+        sliderMinHandle.className = 'slider-handle min-slider-handle';
+        sliderMaxHandle = document.createElement('div');
+        sliderMaxHandle.className = 'slider-handle max-slider-handle';
+        sliderTrack.appendChild(sliderTrackLow);
+        sliderTrack.appendChild(sliderTrackSelection);
+        sliderTrack.appendChild(sliderTrackHigh);
+        /* Create ticks */
+        this.ticks = [];
+        if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
+          for (i = 0; i < this.options.ticks.length; i++) {
+            var tick = document.createElement('div');
+            tick.className = 'slider-tick';
+            this.ticks.push(tick);
+            sliderTrack.appendChild(tick);
+          }
+          sliderTrackSelection.className += ' tick-slider-selection';
+        }
+        sliderTrack.appendChild(sliderMinHandle);
+        sliderTrack.appendChild(sliderMaxHandle);
+        this.tickLabels = [];
+        if (Array.isArray(this.options.ticks_labels) && this.options.ticks_labels.length > 0) {
+          this.tickLabelContainer = document.createElement('div');
+          this.tickLabelContainer.className = 'slider-tick-label-container';
+          for (i = 0; i < this.options.ticks_labels.length; i++) {
+            var label = document.createElement('div');
+            label.className = 'slider-tick-label';
+            label.innerHTML = this.options.ticks_labels[i];
+            this.tickLabels.push(label);
+            this.tickLabelContainer.appendChild(label);
+          }
+        }
+        var createAndAppendTooltipSubElements = function (tooltipElem) {
+          var arrow = document.createElement('div');
+          arrow.className = 'tooltip-arrow';
+          var inner = document.createElement('div');
+          inner.className = 'tooltip-inner';
+          tooltipElem.appendChild(arrow);
+          tooltipElem.appendChild(inner);
+        };
+        /* Create tooltip elements */
+        var sliderTooltip = document.createElement('div');
+        sliderTooltip.className = 'tooltip tooltip-main';
+        createAndAppendTooltipSubElements(sliderTooltip);
+        var sliderTooltipMin = document.createElement('div');
+        sliderTooltipMin.className = 'tooltip tooltip-min';
+        createAndAppendTooltipSubElements(sliderTooltipMin);
+        var sliderTooltipMax = document.createElement('div');
+        sliderTooltipMax.className = 'tooltip tooltip-max';
+        createAndAppendTooltipSubElements(sliderTooltipMax);
+        /* Append components to sliderElem */
+        this.sliderElem.appendChild(sliderTrack);
+        this.sliderElem.appendChild(sliderTooltip);
+        this.sliderElem.appendChild(sliderTooltipMin);
+        this.sliderElem.appendChild(sliderTooltipMax);
+        if (this.tickLabelContainer) {
+          this.sliderElem.appendChild(this.tickLabelContainer);
+        }
+        /* Append slider element to parent container, right before the original <input> element */
+        parent.insertBefore(this.sliderElem, this.element);
+        /* Hide original <input> element */
+        this.element.style.display = 'none';
+      }
+      /* If JQuery exists, cache JQ references */
+      if ($) {
+        this.$element = $(this.element);
+        this.$sliderElem = $(this.sliderElem);
+      }
+      /*************************************************
+
+								Setup
+
+			**************************************************/
+      this.eventToCallbackMap = {};
+      this.sliderElem.id = this.options.id;
+      this.touchCapable = 'ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch;
+      this.tooltip = this.sliderElem.querySelector('.tooltip-main');
+      this.tooltipInner = this.tooltip.querySelector('.tooltip-inner');
+      this.tooltip_min = this.sliderElem.querySelector('.tooltip-min');
+      this.tooltipInner_min = this.tooltip_min.querySelector('.tooltip-inner');
+      this.tooltip_max = this.sliderElem.querySelector('.tooltip-max');
+      this.tooltipInner_max = this.tooltip_max.querySelector('.tooltip-inner');
+      if (SliderScale[this.options.scale]) {
+        this.options.scale = SliderScale[this.options.scale];
+      }
+      if (updateSlider === true) {
+        // Reset classes
+        this._removeClass(this.sliderElem, 'slider-horizontal');
+        this._removeClass(this.sliderElem, 'slider-vertical');
+        this._removeClass(this.tooltip, 'hide');
+        this._removeClass(this.tooltip_min, 'hide');
+        this._removeClass(this.tooltip_max, 'hide');
+        // Undo existing inline styles for track
+        [
+          'left',
+          'top',
+          'width',
+          'height'
+        ].forEach(function (prop) {
+          this._removeProperty(this.trackLow, prop);
+          this._removeProperty(this.trackSelection, prop);
+          this._removeProperty(this.trackHigh, prop);
+        }, this);
+        // Undo inline styles on handles
+        [
+          this.handle1,
+          this.handle2
+        ].forEach(function (handle) {
+          this._removeProperty(handle, 'left');
+          this._removeProperty(handle, 'top');
+        }, this);
+        // Undo inline styles and classes on tooltips
+        [
+          this.tooltip,
+          this.tooltip_min,
+          this.tooltip_max
+        ].forEach(function (tooltip) {
+          this._removeProperty(tooltip, 'left');
+          this._removeProperty(tooltip, 'top');
+          this._removeProperty(tooltip, 'margin-left');
+          this._removeProperty(tooltip, 'margin-top');
+          this._removeClass(tooltip, 'right');
+          this._removeClass(tooltip, 'top');
+        }, this);
+      }
+      if (this.options.orientation === 'vertical') {
+        this._addClass(this.sliderElem, 'slider-vertical');
+        this.stylePos = 'top';
+        this.mousePos = 'pageY';
+        this.sizePos = 'offsetHeight';
+        this._addClass(this.tooltip, 'right');
+        this.tooltip.style.left = '100%';
+        this._addClass(this.tooltip_min, 'right');
+        this.tooltip_min.style.left = '100%';
+        this._addClass(this.tooltip_max, 'right');
+        this.tooltip_max.style.left = '100%';
+      } else {
+        this._addClass(this.sliderElem, 'slider-horizontal');
+        this.sliderElem.style.width = origWidth;
+        this.options.orientation = 'horizontal';
+        this.stylePos = 'left';
+        this.mousePos = 'pageX';
+        this.sizePos = 'offsetWidth';
+        this._addClass(this.tooltip, 'top');
+        this.tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
+        this._addClass(this.tooltip_min, 'top');
+        this.tooltip_min.style.top = -this.tooltip_min.outerHeight - 14 + 'px';
+        this._addClass(this.tooltip_max, 'top');
+        this.tooltip_max.style.top = -this.tooltip_max.outerHeight - 14 + 'px';
+      }
+      /* In case ticks are specified, overwrite the min and max bounds */
+      if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
+        this.options.max = Math.max.apply(Math, this.options.ticks);
+        this.options.min = Math.min.apply(Math, this.options.ticks);
+      }
+      if (Array.isArray(this.options.value)) {
+        this.options.range = true;
+      } else if (this.options.range) {
+        // User wants a range, but value is not an array
+        this.options.value = [
+          this.options.value,
+          this.options.max
+        ];
+      }
+      this.trackLow = sliderTrackLow || this.trackLow;
+      this.trackSelection = sliderTrackSelection || this.trackSelection;
+      this.trackHigh = sliderTrackHigh || this.trackHigh;
+      if (this.options.selection === 'none') {
+        this._addClass(this.trackLow, 'hide');
+        this._addClass(this.trackSelection, 'hide');
+        this._addClass(this.trackHigh, 'hide');
+      }
+      this.handle1 = sliderMinHandle || this.handle1;
+      this.handle2 = sliderMaxHandle || this.handle2;
+      if (updateSlider === true) {
+        // Reset classes
+        this._removeClass(this.handle1, 'round triangle');
+        this._removeClass(this.handle2, 'round triangle hide');
+        for (i = 0; i < this.ticks.length; i++) {
+          this._removeClass(this.ticks[i], 'round triangle hide');
+        }
+      }
+      var availableHandleModifiers = [
+          'round',
+          'triangle',
+          'custom'
+        ];
+      var isValidHandleType = availableHandleModifiers.indexOf(this.options.handle) !== -1;
+      if (isValidHandleType) {
+        this._addClass(this.handle1, this.options.handle);
+        this._addClass(this.handle2, this.options.handle);
+        for (i = 0; i < this.ticks.length; i++) {
+          this._addClass(this.ticks[i], this.options.handle);
+        }
+      }
+      this.offset = this._offset(this.sliderElem);
+      this.size = this.sliderElem[this.sizePos];
+      this.setValue(this.options.value);
+      /******************************************
+
+						Bind Event Listeners
+
+			******************************************/
+      // Bind keyboard handlers
+      this.handle1Keydown = this._keydown.bind(this, 0);
+      this.handle1.addEventListener('keydown', this.handle1Keydown, false);
+      this.handle2Keydown = this._keydown.bind(this, 1);
+      this.handle2.addEventListener('keydown', this.handle2Keydown, false);
+      this.mousedown = this._mousedown.bind(this);
+      if (this.touchCapable) {
+        // Bind touch handlers
+        this.sliderElem.addEventListener('touchstart', this.mousedown, false);
+      }
+      this.sliderElem.addEventListener('mousedown', this.mousedown, false);
+      // Bind tooltip-related handlers
+      if (this.options.tooltip === 'hide') {
+        this._addClass(this.tooltip, 'hide');
+        this._addClass(this.tooltip_min, 'hide');
+        this._addClass(this.tooltip_max, 'hide');
+      } else if (this.options.tooltip === 'always') {
+        this._showTooltip();
+        this._alwaysShowTooltip = true;
+      } else {
+        this.showTooltip = this._showTooltip.bind(this);
+        this.hideTooltip = this._hideTooltip.bind(this);
+        this.sliderElem.addEventListener('mouseenter', this.showTooltip, false);
+        this.sliderElem.addEventListener('mouseleave', this.hideTooltip, false);
+        this.handle1.addEventListener('focus', this.showTooltip, false);
+        this.handle1.addEventListener('blur', this.hideTooltip, false);
+        this.handle2.addEventListener('focus', this.showTooltip, false);
+        this.handle2.addEventListener('blur', this.hideTooltip, false);
+      }
+      if (this.options.enabled) {
+        this.enable();
+      } else {
+        this.disable();
+      }
+    }
+    /*************************************************
+
+					INSTANCE PROPERTIES/METHODS
+
+		- Any methods bound to the prototype are considered
+		part of the plugin's `public` interface
+
+		**************************************************/
+    Slider.prototype = {
+      _init: function () {
+      },
+      constructor: Slider,
+      defaultOptions: {
+        id: '',
+        min: 0,
+        max: 10,
+        step: 1,
+        precision: 0,
+        orientation: 'horizontal',
+        value: 5,
+        range: false,
+        selection: 'before',
+        tooltip: 'show',
+        tooltip_split: false,
+        handle: 'round',
+        reversed: false,
+        enabled: true,
+        formatter: function (val) {
+          if (Array.isArray(val)) {
+            return val[0] + ' : ' + val[1];
+          } else {
+            return val;
+          }
+        },
+        natural_arrow_keys: false,
+        ticks: [],
+        ticks_positions: [],
+        ticks_labels: [],
+        ticks_snap_bounds: 0,
+        scale: 'linear',
+        focus: false
+      },
+      over: false,
+      inDrag: false,
+      getValue: function () {
+        if (this.options.range) {
+          return this.options.value;
+        }
+        return this.options.value[0];
+      },
+      setValue: function (val, triggerSlideEvent, triggerChangeEvent) {
+        if (!val) {
+          val = 0;
+        }
+        var oldValue = this.getValue();
+        this.options.value = this._validateInputValue(val);
+        var applyPrecision = this._applyPrecision.bind(this);
+        if (this.options.range) {
+          this.options.value[0] = applyPrecision(this.options.value[0]);
+          this.options.value[1] = applyPrecision(this.options.value[1]);
+          this.options.value[0] = Math.max(this.options.min, Math.min(this.options.max, this.options.value[0]));
+          this.options.value[1] = Math.max(this.options.min, Math.min(this.options.max, this.options.value[1]));
+        } else {
+          this.options.value = applyPrecision(this.options.value);
+          this.options.value = [Math.max(this.options.min, Math.min(this.options.max, this.options.value))];
+          this._addClass(this.handle2, 'hide');
+          if (this.options.selection === 'after') {
+            this.options.value[1] = this.options.max;
+          } else {
+            this.options.value[1] = this.options.min;
+          }
+        }
+        if (this.options.max > this.options.min) {
+          this.percentage = [
+            this._toPercentage(this.options.value[0]),
+            this._toPercentage(this.options.value[1]),
+            this.options.step * 100 / (this.options.max - this.options.min)
+          ];
+        } else {
+          this.percentage = [
+            0,
+            0,
+            100
+          ];
+        }
+        this._layout();
+        var newValue = this.options.range ? this.options.value : this.options.value[0];
+        if (triggerSlideEvent === true) {
+          this._trigger('slide', newValue);
+        }
+        if (oldValue !== newValue && triggerChangeEvent === true) {
+          this._trigger('change', {
+            oldValue: oldValue,
+            newValue: newValue
+          });
+        }
+        this._setDataVal(newValue);
+        return this;
+      },
+      destroy: function () {
+        // Remove event handlers on slider elements
+        this._removeSliderEventHandlers();
+        // Remove the slider from the DOM
+        this.sliderElem.parentNode.removeChild(this.sliderElem);
+        /* Show original <input> element */
+        this.element.style.display = '';
+        // Clear out custom event bindings
+        this._cleanUpEventCallbacksMap();
+        // Remove data values
+        this.element.removeAttribute('data');
+        // Remove JQuery handlers/data
+        if ($) {
+          this._unbindJQueryEventHandlers();
+          this.$element.removeData('slider');
+        }
+      },
+      disable: function () {
+        this.options.enabled = false;
+        this.handle1.removeAttribute('tabindex');
+        this.handle2.removeAttribute('tabindex');
+        this._addClass(this.sliderElem, 'slider-disabled');
+        this._trigger('slideDisabled');
+        return this;
+      },
+      enable: function () {
+        this.options.enabled = true;
+        this.handle1.setAttribute('tabindex', 0);
+        this.handle2.setAttribute('tabindex', 0);
+        this._removeClass(this.sliderElem, 'slider-disabled');
+        this._trigger('slideEnabled');
+        return this;
+      },
+      toggle: function () {
+        if (this.options.enabled) {
+          this.disable();
+        } else {
+          this.enable();
+        }
+        return this;
+      },
+      isEnabled: function () {
+        return this.options.enabled;
+      },
+      on: function (evt, callback) {
+        this._bindNonQueryEventHandler(evt, callback);
+        return this;
+      },
+      getAttribute: function (attribute) {
+        if (attribute) {
+          return this.options[attribute];
+        } else {
+          return this.options;
+        }
+      },
+      setAttribute: function (attribute, value) {
+        this.options[attribute] = value;
+        return this;
+      },
+      refresh: function () {
+        this._removeSliderEventHandlers();
+        createNewSlider.call(this, this.element, this.options);
+        if ($) {
+          // Bind new instance of slider to the element
+          $.data(this.element, 'slider', this);
+        }
+        return this;
+      },
+      relayout: function () {
+        this._layout();
+        return this;
+      },
+      _removeSliderEventHandlers: function () {
+        // Remove event listeners from handle1
+        this.handle1.removeEventListener('keydown', this.handle1Keydown, false);
+        this.handle1.removeEventListener('focus', this.showTooltip, false);
+        this.handle1.removeEventListener('blur', this.hideTooltip, false);
+        // Remove event listeners from handle2
+        this.handle2.removeEventListener('keydown', this.handle2Keydown, false);
+        this.handle2.removeEventListener('focus', this.handle2Keydown, false);
+        this.handle2.removeEventListener('blur', this.handle2Keydown, false);
+        // Remove event listeners from sliderElem
+        this.sliderElem.removeEventListener('mouseenter', this.showTooltip, false);
+        this.sliderElem.removeEventListener('mouseleave', this.hideTooltip, false);
+        this.sliderElem.removeEventListener('touchstart', this.mousedown, false);
+        this.sliderElem.removeEventListener('mousedown', this.mousedown, false);
+      },
+      _bindNonQueryEventHandler: function (evt, callback) {
+        if (this.eventToCallbackMap[evt] === undefined) {
+          this.eventToCallbackMap[evt] = [];
+        }
+        this.eventToCallbackMap[evt].push(callback);
+      },
+      _cleanUpEventCallbacksMap: function () {
+        var eventNames = Object.keys(this.eventToCallbackMap);
+        for (var i = 0; i < eventNames.length; i++) {
+          var eventName = eventNames[i];
+          this.eventToCallbackMap[eventName] = null;
+        }
+      },
+      _showTooltip: function () {
+        if (this.options.tooltip_split === false) {
+          this._addClass(this.tooltip, 'in');
+        } else {
+          this._addClass(this.tooltip_min, 'in');
+          this._addClass(this.tooltip_max, 'in');
+        }
+        this.over = true;
+      },
+      _hideTooltip: function () {
+        if (this.inDrag === false && this.alwaysShowTooltip !== true) {
+          this._removeClass(this.tooltip, 'in');
+          this._removeClass(this.tooltip_min, 'in');
+          this._removeClass(this.tooltip_max, 'in');
+        }
+        this.over = false;
+      },
+      _layout: function () {
+        var positionPercentages;
+        if (this.options.reversed) {
+          positionPercentages = [
+            100 - this.percentage[0],
+            this.percentage[1]
+          ];
+        } else {
+          positionPercentages = [
+            this.percentage[0],
+            this.percentage[1]
+          ];
+        }
+        this.handle1.style[this.stylePos] = positionPercentages[0] + '%';
+        this.handle2.style[this.stylePos] = positionPercentages[1] + '%';
+        /* Position ticks and labels */
+        if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
+          var maxTickValue = Math.max.apply(Math, this.options.ticks);
+          var minTickValue = Math.min.apply(Math, this.options.ticks);
+          var styleSize = this.options.orientation === 'vertical' ? 'height' : 'width';
+          var styleMargin = this.options.orientation === 'vertical' ? 'marginTop' : 'marginLeft';
+          var labelSize = this.size / (this.options.ticks.length - 1);
+          if (this.tickLabelContainer) {
+            var extraMargin = 0;
+            if (this.options.ticks_positions.length === 0) {
+              this.tickLabelContainer.style[styleMargin] = -labelSize / 2 + 'px';
+              extraMargin = this.tickLabelContainer.offsetHeight;
+            } else {
+              /* Chidren are position absolute, calculate height by finding the max offsetHeight of a child */
+              for (i = 0; i < this.tickLabelContainer.childNodes.length; i++) {
+                if (this.tickLabelContainer.childNodes[i].offsetHeight > extraMargin) {
+                  extraMargin = this.tickLabelContainer.childNodes[i].offsetHeight;
+                }
+              }
+            }
+            if (this.options.orientation === 'horizontal') {
+              this.sliderElem.style.marginBottom = extraMargin + 'px';
+            }
+          }
+          for (var i = 0; i < this.options.ticks.length; i++) {
+            var percentage = this.options.ticks_positions[i] || 100 * (this.options.ticks[i] - minTickValue) / (maxTickValue - minTickValue);
+            this.ticks[i].style[this.stylePos] = percentage + '%';
+            /* Set class labels to denote whether ticks are in the selection */
+            this._removeClass(this.ticks[i], 'in-selection');
+            if (!this.options.range) {
+              if (this.options.selection === 'after' && percentage >= positionPercentages[0]) {
+                this._addClass(this.ticks[i], 'in-selection');
+              } else if (this.options.selection === 'before' && percentage <= positionPercentages[0]) {
+                this._addClass(this.ticks[i], 'in-selection');
+              }
+            } else if (percentage >= positionPercentages[0] && percentage <= positionPercentages[1]) {
+              this._addClass(this.ticks[i], 'in-selection');
+            }
+            if (this.tickLabels[i]) {
+              this.tickLabels[i].style[styleSize] = labelSize + 'px';
+              if (this.options.ticks_positions[i] !== undefined) {
+                this.tickLabels[i].style.position = 'absolute';
+                this.tickLabels[i].style[this.stylePos] = this.options.ticks_positions[i] + '%';
+                this.tickLabels[i].style[styleMargin] = -labelSize / 2 + 'px';
+              }
+            }
+          }
+        }
+        if (this.options.orientation === 'vertical') {
+          this.trackLow.style.top = '0';
+          this.trackLow.style.height = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+          this.trackSelection.style.top = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+          this.trackSelection.style.height = Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
+          this.trackHigh.style.bottom = '0';
+          this.trackHigh.style.height = 100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
+        } else {
+          this.trackLow.style.left = '0';
+          this.trackLow.style.width = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+          this.trackSelection.style.left = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+          this.trackSelection.style.width = Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
+          this.trackHigh.style.right = '0';
+          this.trackHigh.style.width = 100 - Math.min(positionPercentages[0], positionPercentages[1]) - Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
+          var offset_min = this.tooltip_min.getBoundingClientRect();
+          var offset_max = this.tooltip_max.getBoundingClientRect();
+          if (offset_min.right > offset_max.left) {
+            this._removeClass(this.tooltip_max, 'top');
+            this._addClass(this.tooltip_max, 'bottom');
+            this.tooltip_max.style.top = 18 + 'px';
+          } else {
+            this._removeClass(this.tooltip_max, 'bottom');
+            this._addClass(this.tooltip_max, 'top');
+            this.tooltip_max.style.top = this.tooltip_min.style.top;
+          }
+        }
+        var formattedTooltipVal;
+        if (this.options.range) {
+          formattedTooltipVal = this.options.formatter(this.options.value);
+          this._setText(this.tooltipInner, formattedTooltipVal);
+          this.tooltip.style[this.stylePos] = (positionPercentages[1] + positionPercentages[0]) / 2 + '%';
+          if (this.options.orientation === 'vertical') {
+            this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+          } else {
+            this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
+          }
+          if (this.options.orientation === 'vertical') {
+            this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+          } else {
+            this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
+          }
+          var innerTooltipMinText = this.options.formatter(this.options.value[0]);
+          this._setText(this.tooltipInner_min, innerTooltipMinText);
+          var innerTooltipMaxText = this.options.formatter(this.options.value[1]);
+          this._setText(this.tooltipInner_max, innerTooltipMaxText);
+          this.tooltip_min.style[this.stylePos] = positionPercentages[0] + '%';
+          if (this.options.orientation === 'vertical') {
+            this._css(this.tooltip_min, 'margin-top', -this.tooltip_min.offsetHeight / 2 + 'px');
+          } else {
+            this._css(this.tooltip_min, 'margin-left', -this.tooltip_min.offsetWidth / 2 + 'px');
+          }
+          this.tooltip_max.style[this.stylePos] = positionPercentages[1] + '%';
+          if (this.options.orientation === 'vertical') {
+            this._css(this.tooltip_max, 'margin-top', -this.tooltip_max.offsetHeight / 2 + 'px');
+          } else {
+            this._css(this.tooltip_max, 'margin-left', -this.tooltip_max.offsetWidth / 2 + 'px');
+          }
+        } else {
+          formattedTooltipVal = this.options.formatter(this.options.value[0]);
+          this._setText(this.tooltipInner, formattedTooltipVal);
+          this.tooltip.style[this.stylePos] = positionPercentages[0] + '%';
+          if (this.options.orientation === 'vertical') {
+            this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+          } else {
+            this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
+          }
+        }
+      },
+      _removeProperty: function (element, prop) {
+        if (element.style.removeProperty) {
+          element.style.removeProperty(prop);
+        } else {
+          element.style.removeAttribute(prop);
+        }
+      },
+      _mousedown: function (ev) {
+        if (!this.options.enabled) {
+          return false;
+        }
+        this.offset = this._offset(this.sliderElem);
+        this.size = this.sliderElem[this.sizePos];
+        var percentage = this._getPercentage(ev);
+        if (this.options.range) {
+          var diff1 = Math.abs(this.percentage[0] - percentage);
+          var diff2 = Math.abs(this.percentage[1] - percentage);
+          this.dragged = diff1 < diff2 ? 0 : 1;
+        } else {
+          this.dragged = 0;
+        }
+        this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
+        this._layout();
+        if (this.touchCapable) {
+          document.removeEventListener('touchmove', this.mousemove, false);
+          document.removeEventListener('touchend', this.mouseup, false);
+        }
+        if (this.mousemove) {
+          document.removeEventListener('mousemove', this.mousemove, false);
+        }
+        if (this.mouseup) {
+          document.removeEventListener('mouseup', this.mouseup, false);
+        }
+        this.mousemove = this._mousemove.bind(this);
+        this.mouseup = this._mouseup.bind(this);
+        if (this.touchCapable) {
+          // Touch: Bind touch events:
+          document.addEventListener('touchmove', this.mousemove, false);
+          document.addEventListener('touchend', this.mouseup, false);
+        }
+        // Bind mouse events:
+        document.addEventListener('mousemove', this.mousemove, false);
+        document.addEventListener('mouseup', this.mouseup, false);
+        this.inDrag = true;
+        var newValue = this._calculateValue();
+        this._trigger('slideStart', newValue);
+        this._setDataVal(newValue);
+        this.setValue(newValue, false, true);
+        this._pauseEvent(ev);
+        if (this.options.focus) {
+          this._triggerFocusOnHandle(this.dragged);
+        }
+        return true;
+      },
+      _triggerFocusOnHandle: function (handleIdx) {
+        if (handleIdx === 0) {
+          this.handle1.focus();
+        }
+        if (handleIdx === 1) {
+          this.handle2.focus();
+        }
+      },
+      _keydown: function (handleIdx, ev) {
+        if (!this.options.enabled) {
+          return false;
+        }
+        var dir;
+        switch (ev.keyCode) {
+        case 37:
+        // left
+        case 40:
+          // down
+          dir = -1;
+          break;
+        case 39:
+        // right
+        case 38:
+          // up
+          dir = 1;
+          break;
+        }
+        if (!dir) {
+          return;
+        }
+        // use natural arrow keys instead of from min to max
+        if (this.options.natural_arrow_keys) {
+          var ifVerticalAndNotReversed = this.options.orientation === 'vertical' && !this.options.reversed;
+          var ifHorizontalAndReversed = this.options.orientation === 'horizontal' && this.options.reversed;
+          if (ifVerticalAndNotReversed || ifHorizontalAndReversed) {
+            dir = -dir;
+          }
+        }
+        var val = this.options.value[handleIdx] + dir * this.options.step;
+        if (this.options.range) {
+          val = [
+            !handleIdx ? val : this.options.value[0],
+            handleIdx ? val : this.options.value[1]
+          ];
+        }
+        this._trigger('slideStart', val);
+        this._setDataVal(val);
+        this.setValue(val, true, true);
+        this._trigger('slideStop', val);
+        this._setDataVal(val);
+        this._layout();
+        this._pauseEvent(ev);
+        return false;
+      },
+      _pauseEvent: function (ev) {
+        if (ev.stopPropagation) {
+          ev.stopPropagation();
+        }
+        if (ev.preventDefault) {
+          ev.preventDefault();
+        }
+        ev.cancelBubble = true;
+        ev.returnValue = false;
+      },
+      _mousemove: function (ev) {
+        if (!this.options.enabled) {
+          return false;
+        }
+        var percentage = this._getPercentage(ev);
+        this._adjustPercentageForRangeSliders(percentage);
+        this.percentage[this.dragged] = this.options.reversed ? 100 - percentage : percentage;
+        this._layout();
+        var val = this._calculateValue(true);
+        this.setValue(val, true, true);
+        return false;
+      },
+      _adjustPercentageForRangeSliders: function (percentage) {
+        if (this.options.range) {
+          if (this.dragged === 0 && this.percentage[1] < percentage) {
+            this.percentage[0] = this.percentage[1];
+            this.dragged = 1;
+          } else if (this.dragged === 1 && this.percentage[0] > percentage) {
+            this.percentage[1] = this.percentage[0];
+            this.dragged = 0;
+          }
+        }
+      },
+      _mouseup: function () {
+        if (!this.options.enabled) {
+          return false;
+        }
+        if (this.touchCapable) {
+          // Touch: Unbind touch event handlers:
+          document.removeEventListener('touchmove', this.mousemove, false);
+          document.removeEventListener('touchend', this.mouseup, false);
+        }
+        // Unbind mouse event handlers:
+        document.removeEventListener('mousemove', this.mousemove, false);
+        document.removeEventListener('mouseup', this.mouseup, false);
+        this.inDrag = false;
+        if (this.over === false) {
+          this._hideTooltip();
+        }
+        var val = this._calculateValue(true);
+        this._layout();
+        this._trigger('slideStop', val);
+        this._setDataVal(val);
+        return false;
+      },
+      _calculateValue: function (snapToClosestTick) {
+        var val;
+        if (this.options.range) {
+          val = [
+            this.options.min,
+            this.options.max
+          ];
+          if (this.percentage[0] !== 0) {
+            val[0] = this._toValue(this.percentage[0]);
+            val[0] = this._applyPrecision(val[0]);
+          }
+          if (this.percentage[1] !== 100) {
+            val[1] = this._toValue(this.percentage[1]);
+            val[1] = this._applyPrecision(val[1]);
+          }
+        } else {
+          val = this._toValue(this.percentage[0]);
+          val = parseFloat(val);
+          val = this._applyPrecision(val);
+        }
+        if (snapToClosestTick) {
+          var min = [
+              val,
+              Infinity
+            ];
+          for (var i = 0; i < this.options.ticks.length; i++) {
+            var diff = Math.abs(this.options.ticks[i] - val);
+            if (diff <= min[1]) {
+              min = [
+                this.options.ticks[i],
+                diff
+              ];
+            }
+          }
+          if (min[1] <= this.options.ticks_snap_bounds) {
+            return min[0];
+          }
+        }
+        return val;
+      },
+      _applyPrecision: function (val) {
+        var precision = this.options.precision || this._getNumDigitsAfterDecimalPlace(this.options.step);
+        return this._applyToFixedAndParseFloat(val, precision);
+      },
+      _getNumDigitsAfterDecimalPlace: function (num) {
+        var match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+        if (!match) {
+          return 0;
+        }
+        return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
+      },
+      _applyToFixedAndParseFloat: function (num, toFixedInput) {
+        var truncatedNum = num.toFixed(toFixedInput);
+        return parseFloat(truncatedNum);
+      },
+      _getPercentage: function (ev) {
+        if (this.touchCapable && (ev.type === 'touchstart' || ev.type === 'touchmove')) {
+          ev = ev.touches[0];
+        }
+        var eventPosition = ev[this.mousePos];
+        var sliderOffset = this.offset[this.stylePos];
+        var distanceToSlide = eventPosition - sliderOffset;
+        // Calculate what percent of the length the slider handle has slid
+        var percentage = distanceToSlide / this.size * 100;
+        percentage = Math.round(percentage / this.percentage[2]) * this.percentage[2];
+        // Make sure the percent is within the bounds of the slider.
+        // 0% corresponds to the 'min' value of the slide
+        // 100% corresponds to the 'max' value of the slide
+        return Math.max(0, Math.min(100, percentage));
+      },
+      _validateInputValue: function (val) {
+        if (typeof val === 'number') {
+          return val;
+        } else if (Array.isArray(val)) {
+          this._validateArray(val);
+          return val;
+        } else {
+          throw new Error(ErrorMsgs.formatInvalidInputErrorMsg(val));
+        }
+      },
+      _validateArray: function (val) {
+        for (var i = 0; i < val.length; i++) {
+          var input = val[i];
+          if (typeof input !== 'number') {
+            throw new Error(ErrorMsgs.formatInvalidInputErrorMsg(input));
+          }
+        }
+      },
+      _setDataVal: function (val) {
+        var value = 'value: \'' + val + '\'';
+        this.element.setAttribute('data', value);
+        this.element.setAttribute('value', val);
+        this.element.value = val;
+      },
+      _trigger: function (evt, val) {
+        val = val || val === 0 ? val : undefined;
+        var callbackFnArray = this.eventToCallbackMap[evt];
+        if (callbackFnArray && callbackFnArray.length) {
+          for (var i = 0; i < callbackFnArray.length; i++) {
+            var callbackFn = callbackFnArray[i];
+            callbackFn(val);
+          }
+        }
+        /* If JQuery exists, trigger JQuery events */
+        if ($) {
+          this._triggerJQueryEvent(evt, val);
+        }
+      },
+      _triggerJQueryEvent: function (evt, val) {
+        var eventData = {
+            type: evt,
+            value: val
+          };
+        this.$element.trigger(eventData);
+        this.$sliderElem.trigger(eventData);
+      },
+      _unbindJQueryEventHandlers: function () {
+        this.$element.off();
+        this.$sliderElem.off();
+      },
+      _setText: function (element, text) {
+        if (typeof element.innerText !== 'undefined') {
+          element.innerText = text;
+        } else if (typeof element.textContent !== 'undefined') {
+          element.textContent = text;
+        }
+      },
+      _removeClass: function (element, classString) {
+        var classes = classString.split(' ');
+        var newClasses = element.className;
+        for (var i = 0; i < classes.length; i++) {
+          var classTag = classes[i];
+          var regex = new RegExp('(?:\\s|^)' + classTag + '(?:\\s|$)');
+          newClasses = newClasses.replace(regex, ' ');
+        }
+        element.className = newClasses.trim();
+      },
+      _addClass: function (element, classString) {
+        var classes = classString.split(' ');
+        var newClasses = element.className;
+        for (var i = 0; i < classes.length; i++) {
+          var classTag = classes[i];
+          var regex = new RegExp('(?:\\s|^)' + classTag + '(?:\\s|$)');
+          var ifClassExists = regex.test(newClasses);
+          if (!ifClassExists) {
+            newClasses += ' ' + classTag;
+          }
+        }
+        element.className = newClasses.trim();
+      },
+      _offsetLeft: function (obj) {
+        var offsetLeft = obj.offsetLeft;
+        while ((obj = obj.offsetParent) && !isNaN(obj.offsetLeft)) {
+          offsetLeft += obj.offsetLeft;
+        }
+        return offsetLeft;
+      },
+      _offsetTop: function (obj) {
+        var offsetTop = obj.offsetTop;
+        while ((obj = obj.offsetParent) && !isNaN(obj.offsetTop)) {
+          offsetTop += obj.offsetTop;
+        }
+        return offsetTop;
+      },
+      _offset: function (obj) {
+        return {
+          left: this._offsetLeft(obj),
+          top: this._offsetTop(obj)
+        };
+      },
+      _css: function (elementRef, styleName, value) {
+        if ($) {
+          $.style(elementRef, styleName, value);
+        } else {
+          var style = styleName.replace(/^-ms-/, 'ms-').replace(/-([\da-z])/gi, function (all, letter) {
+              return letter.toUpperCase();
+            });
+          elementRef.style[style] = value;
+        }
+      },
+      _toValue: function (percentage) {
+        return this.options.scale.toValue.apply(this, [percentage]);
+      },
+      _toPercentage: function (value) {
+        return this.options.scale.toPercentage.apply(this, [value]);
+      }
+    };
+    /*********************************
+
+			Attach to global namespace
+
+		*********************************/
+    if ($) {
+      var namespace = $.fn.slider ? 'bootstrapSlider' : 'slider';
+      $.bridget(namespace, Slider);
+    }
+  }($));
+  return Slider;
+}));
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 });
@@ -42884,6 +44519,68 @@ angular.module('dellUiComponents').directive('carousel', [
       }
     };
   }
+]).directive('carouselFilmstripArrowOnly', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, iAttrs, controller) {
+        $($element).find('.carousel-inner').slick({
+          dots: false,
+          infinite: false,
+          speed: 300,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                infinite: false,
+                dots: false
+              }
+            },
+            {
+              breakpoint: 600,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: false,
+                dots: false
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                infinite: false,
+                dots: false
+              }
+            }
+          ]
+        });
+      }
+    };
+  }
+]).directive('divHeightEqualize', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, iAttrs, controller) {
+        //
+        $(function () {
+          $('.div-height-equalize').matchHeight();
+        });
+      }
+    };
+  }
 ]).directive('slide', [
   '$timeout',
   function ($timeout) {
@@ -42970,6 +44667,24 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         $(element).attr('data-inputmask', '\'mask\': \'ext: (9999)\'');
         $(element).inputmask();
       }
+    }
+  };
+}).directive('singleHandleSlider', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, element, attributes, controller) {
+      //$("input.slider").bootstrapSlider();
+      // With JQuery
+      $('#ex1').bootstrapSlider({
+        formatter: function (value) {
+          return 'Current value: ' + value;
+        }
+      });  //// Without JQuery
+           //var slider = new Slider('#ex1', {
+           //    formatter: function(value) {
+           //        return 'Current value: ' + value;
+           //    }
+           //});
     }
   };
 }).directive('spinbox', function () {
@@ -43344,6 +45059,41 @@ angular.module('dellUiComponents').directive('table', function () {
     restrict: 'C',
     link: function ($scope, $element, $attrs, controller) {
       $element.bootstrapTable();
+    }
+  };
+});
+angular.module('dellUiComponents').directive('contentTeaserContainer', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, attrs) {
+      $element.find('.content-toggle').on('click', function (event) {
+        console.log(event);
+        var teasers = $('.content-teaser-container');
+        _.each(teasers, function (t) {
+          console.log($(t).height());
+          $('.content-teaser-container').matchHeight();
+        });
+      });
+    }
+  };
+});
+/**
+ * Created by Clint_Batte on 5/7/2015.
+ */
+angular.module('dellUiComponents').directive('tapToLoad', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, attrs) {
+      $(document).ready(function () {
+        $('.news-pagination li').slice(5).hide();
+        $('#loadmore').jqPagination({
+          max_page: Math.ceil($('.news-pagination li').length / 5),
+          paged: function (page) {
+            $('.news-pagination li').hide();
+            $('.news-pagination li').slice((page - 1) * 5, page * 5).fadeIn('slow');
+          }
+        });
+      });
     }
   };
 });
@@ -43826,16 +45576,6 @@ angular.module('demo').controller('paginationCtrl', [
       paged: function (page) {
       }
     });
-    $(document).ready(function () {
-      $('.news-pagination li').slice(5).hide();
-      $('#loadmore').jqPagination({
-        max_page: Math.ceil($('.news-pagination li').length / 5),
-        paged: function (page) {
-          $('.news-pagination li').hide();
-          $('.news-pagination li').slice((page - 1) * 5, page * 5).fadeIn('slow');
-        }
-      });
-    });
   }
 ]);
 angular.module('demo').controller('paginationPLayDemoCtrl', [
@@ -44105,6 +45845,11 @@ angular.module('demo').controller('contentTeaserCtrl', [
   '$scope',
   '$rootScope',
   function ($scope, $rootScope) {
+    //this is for functionality related to demo code
+    $scope.viewAll = {};
+    $scope.$watch('viewAll', function (newValue) {
+      console.log(newValue);
+    });
   }
 ]);
 angular.module('demo').controller('contentTeaserPLayDemoCtrl', [
@@ -44360,15 +46105,15 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/block-buttons/demo-play-block-buttons.html', '<section ng-controller=blockButtonsPLayDemoCtrl id=block-buttons-play-demo><div class=container><h2>Block-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/breadcrumbs/demo-breadcrumbs.html', '<section ng-controller=breadcrumbsCtrl id=breadcrumbs-html-example><div class=container><h2 class=bottom-offset-20>Breadcrumbs Demo</h2><div class=bottom-offset-30><h4>Generic Breadcrumb</h4><ul class=breadcrumb><li><a href=#></a><span class=divider></span></li><li><a href=#>Level 1</a><span class=divider></span></li><li><a href=#>Level 2</a><span class=divider></span></li><li><a href=#>Level 3</a><span class=divider></span></li><li><a href=#>Level 4</a><span class=divider></span></li><li class=active>Level 5</li></ul></div></div></section>');
     $templateCache.put('components/breadcrumbs/demo-play-breadcrumbs.html', '<section ng-controller=breadcrumbsPLayDemoCtrl id=breadcrumbs-play-demo><div class=container><h2>Breadcrumbs Builder</h2><div></div></div></section>');
-    $templateCache.put('components/carousel/demo-carousel.html', '<section ng-controller=carouselCtrl id=carousel-html-example><div class=container><h2>Carousel Demo</h2><h3 class=top-offset-40>Banner carousel with all options</h3><div id=banner-carousel-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-example data-slide-to=0></li><li data-target=#banner-carousel-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-example data-slide-to=2></li></ol><a class="left carousel-control" href=#banner-carousel-example data-slide=prev></a> <a class="right carousel-control" href=#banner-carousel-example data-slide=next></a></div><h3 class=top-offset-40>Banner carousel with no arrows</h3><div id=banner-carousel-no-arrows-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-no-arrows-example data-slide-to=0></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=2></li></ol></div><h3 class=top-offset-40>Banner carousel captions no arrows</h3><div id=carousel-example-with-caption class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class="item active"><img alt="First slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>First slide lorem ipsum dolor sit amet.</h2><p>First slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Second slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Second slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Fourth slide lorem ipsum dolor sit amet.</h2><p>Fourth slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div></div><ol class=carousel-indicators><li data-target=#carousel-example-with-caption data-slide-to=0 class=active></li><li data-target=#carousel-example-with-caption data-slide-to=1></li><li data-target=#carousel-example-with-caption data-slide-to=2></li><li data-target=#carousel-example-with-caption data-slide-to=3></li></ol></div><h3 class=top-offset-40>Filmstrip carousel with images (only)</h3><div class="carousel carousel-filmstrip"><div class=carousel-inner><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 1" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 2" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 3" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 4" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 5" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 6" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 7" alt=Image class=img-responsive></a></div></div></div></div></section>');
+    $templateCache.put('components/carousel/demo-carousel.html', '<section ng-controller=carouselCtrl id=carousel-html-example><div class=container><h2>Carousel Demo</h2><h3 class=top-offset-40>Banner carousel with all options</h3><div id=banner-carousel-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-example data-slide-to=0></li><li data-target=#banner-carousel-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-example data-slide-to=2></li></ol><a class="left carousel-control" href=#banner-carousel-example data-slide=prev></a> <a class="right carousel-control" href=#banner-carousel-example data-slide=next></a></div><hr><h3 class=top-offset-40>Banner carousel with no arrows</h3><div id=banner-carousel-no-arrows-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-no-arrows-example data-slide-to=0></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=2></li></ol></div><hr><h3 class=top-offset-40>Banner carousel captions no arrows</h3><div id=carousel-example-with-caption class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class="item active"><img alt="First slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>First slide lorem ipsum dolor sit amet.</h2><p>First slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Second slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Second slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Fourth slide lorem ipsum dolor sit amet.</h2><p>Fourth slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div></div><ol class=carousel-indicators><li data-target=#carousel-example-with-caption data-slide-to=0 class=active></li><li data-target=#carousel-example-with-caption data-slide-to=1></li><li data-target=#carousel-example-with-caption data-slide-to=2></li><li data-target=#carousel-example-with-caption data-slide-to=3></li></ol></div><h3 class=top-offset-40>Adaptive carousel mobile / static mosaic desktop & tablet</h3><div class=hidden-xs><div class=row><div class="col-sm-12 col-md-6 bottom-offset-20"><img alt="First slide" src=http://placehold.it/720x505 alt=Image class=img-responsive><div class="well well-overlay"><a href=javascript:;><h3>Better security for better business.</h3></a></div></div></div><div class=row><div class="col-sm-6 col-md-3 bottom-offset-20"><img alt="First slide" src=http://placehold.it/720x505 alt=Image class=img-responsive><div class="well well-overlay"><a href=javascript:;><h5>Security is a shared responsibility.</h5></a></div></div><div class="col-sm-6 col-md-3 bottom-offset-20"><img alt="First slide" src=http://placehold.it/720x505 alt=Image class=img-responsive><div class="well well-overlay"><a href=javascript:;><h5 class=text-blue>Can your IT security withstand a breach?</h5></a></div></div></div></div><div id=mosaic-carousel class="carousel slide carousel-gallery visible-xs-block" data-ride=carousel><div class=carousel-inner><div class="item active"><img alt="First slide" src=http://placehold.it/720x505 alt=Image class=img-responsive><div class="well well-banner"><a href=javascript:;><h3>Better security for better business.</h3></a></div></div><div class=item><img alt="First slide" src=http://placehold.it/720x505 alt=Image class=img-responsive><div class="well well-banner pull-left"><a href=javascript:;><h3>Security is a shared responsibility.</h3></a></div></div><div class=item><img alt="First slide" src=http://placehold.it/720x505 alt=Image class=img-responsive><div class="well well-banner pull-left"><a href=javascript:;><h3 class=text-blue>Can your IT security withstand a breach?</h3></a></div></div></div><ol class=carousel-indicators><li data-target=#mosaic-carousel data-slide-to=0 class=active></li><li data-target=#mosaic-carousel data-slide-to=1></li><li data-target=#mosaic-carousel data-slide-to=2></li></ol></div><hr class="top-offset-60"><h3 class=top-offset-40>Filmstrip carousel images (no arrows on XS)</h3><div class="carousel carousel-filmstrip"><div class=carousel-inner><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 1" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 2" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 3" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 4" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 5" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 6" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 7" alt=Image class=img-responsive></a></div></div></div><h3 class=top-offset-40>Filmstrip carousel with images and content block (no arrows on XS)</h3><div class="carousel carousel-filmstrip-arrow-only"><div class=carousel-inner><div class=item><a href=javascript:;><img src="http://placehold.it/230x173/cccccc/FFFFFF&text=Image 1" alt=Image class=img-responsive><h5 class=text-blue>Content Headline Title Goes Here</h5></a><p>Etiam velit ex, sagittis non vehicula in, efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus, non interdum felis ornare sit amet.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/230x173/cccccc/FFFFFF&text=Image 2" alt=Image class=img-responsive><h5 class=text-blue>Headline Title Goes Here with Additional Headline</h5></a><p>Aenean interdum nulla sed ante imperdiet, sit amet aliquam dui iaculis. Vivamus tempus ligula eget fringilla venenatis. Suspendisse malesuada leo nunc, in suscipit velit molestie sed. Integer lacus quam, gravida eu sollicitudin in, convallis ac justo. Nullam eget turpis eu elit finibus aliquet in in nisl.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/230x173/cccccc/FFFFFF&text=Image 3" alt=Image class=img-responsive><h5 class=text-blue>Content Headline Title Goes Here</h5></a><p>Etiam velit ex, sagittis non vehicula in, efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/230x173/cccccc/FFFFFF&text=Image 4" alt=Image class=img-responsive><h5 class=text-blue>Headline Title Goes Here</h5></a><p>Vehicula in, efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus, non interdum felis ornare sit amet. Aliquam erat volutpat.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/230x173/cccccc/FFFFFF&text=Image 5" alt=Image class=img-responsive><h5 class=text-blue>Content Headline Title Goes Here</h5></a><p>Nullam eget turpis eu elit finibus aliquet in in nisl. Aenean interdum nulla sed ante imperdiet, sit amet aliquam dui iaculis. Vivamus tempus ligula eget fringilla venenatis. Suspendisse malesuada leo nunc, in suscipit velit molestie sed. Integer lacus quam, gravida eu sollicitudin in, convallis ac justo.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/230x173/cccccc/FFFFFF&text=Image 6" alt=Image class=img-responsive><h5 class=text-blue>Headline Title Goes Here</h5></a><p>Etiam velit ex, sagittis non vehicula in, efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus, non interdum felis ornare sit amet.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/230x173/cccccc/FFFFFF&text=Image 7" alt=Image class=img-responsive><h5 class=text-blue>Content Headline Title Goes Here</h5></a><p>liquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus, non interdum felis ornare sit amet.</p></div></div></div></div></section>');
     $templateCache.put('components/carousel/demo-play-carousel.html', '<section ng-controller=carouselPLayDemoCtrl id=carousel-play-demo><div class=container><h2>Carousel Builder</h2><div></div></div></section>');
-    $templateCache.put('components/collapsible-items/demo-collapsible-items.html', '<section ng-controller=collapsibleItemsCtrl id=collapsible-items-html-example><div class=container><h2>Collapsible-Items Demo</h2><div class=bottom-offset-40><h3 class=bottom-offset-30>Standard accordion</h3><div class=panel-group id=accordion><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#One>Headline title goes here</a></h4></div><div id=One class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Two class=collapsed>Headline title goes here</a></h4></div><div id=Two class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Three class=collapsed>Headline title goes here</a></h4></div><div id=Three class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div ng-if=!guidanceOff class="alert alert-info alert-dismissable bottom-offset-40"><h4>To default a panel open:</h4><p>You have to do two things:</p><ul><li>Remove the class <code>collapsed</code> from the trigger.</li><li>Add the class <code>in</code> to the target panel-collapse.</li></ul></div><div class=bottom-offset-60><h3 class=bottom-offset-30>Accordion with independent panels</h3><div id=accordion-independent-panels><div class=panel-group id=accordion-independant><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#bags-1>Headline title goes here</a></h4></div><div id=bags-1 class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#tax-1 class=collapsed>Headline title goes here</a></h4></div><div id=tax-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#home-1 class=collapsed>Headline title goes here</a></h4></div><div id=home-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div class=bottom-offset-60><h3 class=bottom-offset-20>Accordion with show/hide links</h3><div class=show-hide-links><a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse:not(.in)" aria-expanded=false>Show all</a> | <a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse.in" aria-expanded=false>Hide all</a></div><div class=panel-group id=accordion-independent-with-show-all><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#bags-2 class=collapsed>Headline title goes here</a></h4></div><div id=bags-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#tax-2 class=collapsed>Headline title goes here</a></h4></div><div id=tax-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#home-2 class=collapsed>Headline title goes here</a></h4></div><div id=home-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div><h3 class=bottom-offset-20>From a link</h3><div class=bottom-offset-40><div class=bottom-offset-10><p><a href=javascript:; class=collapsed data-toggle=collapse data-target=#collapsible-example-area-5><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show stuff</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Hide stuff</span></a></p><p id=collapsible-example-area-5 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.</p></div></div></div></section>');
+    $templateCache.put('components/collapsible-items/demo-collapsible-items.html', '<section ng-controller=collapsibleItemsCtrl id=collapsible-items-html-example><div class=container><h2>Collapsible-Items Demo</h2><div class=bottom-offset-40><h3 class=bottom-offset-30>Standard accordion</h3><div class=panel-group id=accordion><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#One>Headline title goes here</a></h4></div><div id=One class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Two class=collapsed>Headline title goes here</a></h4></div><div id=Two class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Three class=collapsed>Headline title goes here</a></h4></div><div id=Three class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div ng-if=!guidanceOff class="alert alert-info alert-dismissable bottom-offset-40"><h4>To default a panel open:</h4><p>You have to do two things:</p><ul><li>Remove the class <code>collapsed</code> from the trigger.</li><li>Add the class <code>in</code> to the target panel-collapse.</li></ul></div><div class=bottom-offset-60><h3 class=bottom-offset-30>Accordion with independent panels</h3><div id=accordion-independent-panels><div class=panel-group id=accordion-independant><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#bags-1>Headline title goes here</a></h4></div><div id=bags-1 class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#tax-1 class=collapsed>Headline title goes here</a></h4></div><div id=tax-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#home-1 class=collapsed>Headline title goes here</a></h4></div><div id=home-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div class=bottom-offset-60><h3 class=bottom-offset-20>Accordion with show/hide links</h3><div class=show-hide-links><a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse:not(.in)" aria-expanded=false>Show all</a> | <a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse.in" aria-expanded=false>Hide all</a></div><div class=panel-group id=accordion-independent-with-show-all><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#bags-2 class=collapsed>Headline title goes here</a></h4></div><div id=bags-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#tax-2 class=collapsed>Headline title goes here</a></h4></div><div id=tax-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#home-2 class=collapsed>Headline title goes here</a></h4></div><div id=home-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div><h3 class=bottom-offset-20>From a link</h3><div class=bottom-offset-40><div class=bottom-offset-10><p><a href=javascript:; class=collapsed data-toggle=collapse data-target=#collapsible-example-area-5><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show stuff</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Hide stuff</span></a></p><p id=collapsible-example-area-5 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.</p></div></div><div class=bottom-offset-60><h3 class=bottom-offset-20>Social links show/hide</h3><div class=inline-image-content-links><ul class="list-inline image-content-links list-group content-card" ng-class="{\'view-all\': viewAll[\'parent-image-link-1\']}"><li><a href=javascript:; class=icon-social-facebook></a></li><li><a href=javascript:; class=icon-social-twitter></a></li><li><a href=javascript:; class=icon-social-linkedin></a></li><li><a href=javascript:; class=icon-social-google_plus></a></li><li><a href=javascript:; class=icon-social-slideshare></a></li><li><a href=javascript:; class=icon-social-youtube></a></li><li><a href=javascript:; class=icon-social-flickr></a></li><li><a href=javascript:; class=icon-social-storify></a></li><li><a href=javascript:; class=icon-social-pinterest></a></li><li><a href=javascript:; class=icon-social-xing></a></li><li><a href=javascript:; class=icon-social-renren></a></li><li><a href=javascript:; class=icon-social-weibo></a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-image-link-1\']"><a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-image-link-1\'] = true">View All</a></div></div></div></div></section>');
     $templateCache.put('components/collapsible-items/demo-play-collapsible-items.html', '<section ng-controller=collapsibleItemsPLayDemoCtrl id=collapsible-items-play-demo><div class=container><h2>Collapsible-Items Builder</h2><div></div></div></section>');
-    $templateCache.put('components/colors/demo-colors.html', '<section ng-controller=colorsCtrl id=colors-html-example><div class=container><h2>Colors Demo</h2><div><div class=row><div class="col-sm-12 col-md-4"><div class="well well-white text-gray-medium well-white-stroke" to-clipboard="&lt;div class=&quot;well well-white&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;White</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#ffffff</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-white</span><br></div><div class="well text-gray-medium well-gray-very-light well-gray-very-light-stroke" to-clipboard="&lt;div class=&quot;well well-gray-very-light&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;7% Dell Light Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f9f9f9</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well text-gray-medium" to-clipboard="&lt;div class=&quot;well&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#eeeeee</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well text-white well-gray" to-clipboard="&lt;div class=&quot;well well-gray&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#aaaaaa</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-gray-medium" to-clipboard="&lt;div class=&quot;well well-gray-medium&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Medium Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#737373</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-gray-medium</span><br></div><div class="well well-gray-dark" to-clipboard="&lt;div class=&quot;well well-gray-dark&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray Dark</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#444444</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-gray-dark</span><br></div><div class="well well-blue" to-clipboard="&lt;div class=&quot;well well-blue&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#007db8</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-blue</span><br></div></div><div class="col-sm-12 col-md-4"><div class="well well-dark-blue" to-clipboard="&lt;div class=&quot;well well-dark-blue&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#00447c</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-dark-blue</span><br></div><div class="well well-light-green" to-clipboard="&lt;div class=&quot;well well-light-green&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#C1D82F</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-green" to-clipboard="&lt;div class=&quot;well well-green&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6EA204</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-green</span><br></div><div class="well well-yellow" to-clipboard="&lt;div class=&quot;well well-yellow&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Yellow</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f2af00</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-orange" to-clipboard="&lt;div class=&quot;well well-orange&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Orange</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#EE6411</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-orange</span><br></div><div class="well well-red" to-clipboard="&lt;div class=&quot;well well-red&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#D74324</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red</span><br></div><div class="well well-red-dark" to-clipboard="&lt;div class=&quot;well well-red-dark&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#CE1126</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red-dark</span><br></div></div><div class="col-sm-12 col-md-4"><div class="well well-berry" to-clipboard="&lt;div class=&quot;well well-berry&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Berry</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#B7295A</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-berry</span><br></div><div class="well well-purple" to-clipboard="&lt;div class=&quot;well well-purple&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Purple</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6E2585</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-purple</span><br></div><div class="well well-teal" to-clipboard="&lt;div class=&quot;well well-teal&quot;&gt;&lt;p&gt;Lorem ipsum...&lt;/p&gt;&lt;/div&gt;"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Teal</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#42aeaf</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div></div></div></div></div></section>');
+    $templateCache.put('components/colors/demo-colors.html', '<section ng-controller=colorsCtrl id=colors-html-example><div class=container><h2>Colors Demo</h2><div><div class=row><div class="col-sm-12 col-md-4"><div class="well well-white text-gray-dark well-white-stroke"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;White</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#ffffff</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-white</span><br></div><div class="well text-gray-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#eeeeee</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well text-white well-gray"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#aaaaaa</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-gray-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray Dark</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#444444</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-gray-dark</span><br></div><div class="well well-blue"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#007db8</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-blue</span><br></div><div class="well well-dark-blue"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#00447c</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-dark-blue</span><br></div><div class="well text-gray-medium well-light-green"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#C1D82F</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div></div><div class="col-sm-12 col-md-4"><div class="well well-green"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6EA204</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-green</span><br></div><div class="well well-yellow"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Yellow</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f2af00</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-orange"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Orange</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#EE6411</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-orange</span><br></div><div class="well well-red"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#D74324</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red</span><br></div><div class="well well-red-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#CE1126</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red-dark</span><br></div><div class="well well-berry"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Berry</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#B7295A</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-berry</span><br></div><div class="well well-purple"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Purple</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6E2585</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-purple</span><br></div><div class="well well-teal"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Teal</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#42aeaf</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div></div><div class="col-sm-12 col-md-4 well"><p>**The following colors may <strong>only be used</strong> in instances associated below.</p><div class="well text-gray-dark well-gray-very-light well-gray-very-light-stroke"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;7% Dell Light Gray</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;backgrounds only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f9f9f9</span><br></div><div class="well text-white well-gray-medium"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;75% Dell Gray Dark</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;borders only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#737373</span><br></div><div class="well text-gray-dark well-alert-yellow"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Online Alert Yellow</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;Alerts only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#FFFFC9</span><br></div><div class="well text-gray-dark well-dell-blue-20-percent"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;20% Dell Blue</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp; highlighting and selecting</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#CCE5F1</span><br></div></div></div></div></div></section>');
     $templateCache.put('components/colors/demo-play-colors.html', '<section ng-controller=colorsPLayDemoCtrl id=colors-play-demo><div class=container><h2>Colors Builder</h2><div></div></div></section>');
     $templateCache.put('components/containers/demo-containers.html', '<section ng-controller=containersCtrl id=containers-html-example><div class=container><h2>Containers Demo</h2><div><h4>Default well example</h4><div id=example-well><div class="well well-transparent-stroke"><p>This is a default Well...</p></div></div></div><h4>Solid colored wells &amp; containers</h4><div class="well well-lg well-blue"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-blue"</strong></p></div><div class="well well-lg well-dark-blue"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-dark-blue"</strong></p></div><div class="well well-lg well-purple"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-purple"</strong></p></div><div class="well well-lg well-berry"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-berry"</strong></p></div><div class="well well-lg well-red"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red"</strong></p></div><div class="well well-lg well-gray-medium"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-medium"</strong></p></div><div class="well well-lg well-gray-dark"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-dark"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers</h4><div class="well well-lg well-blue-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-blue-stroke"</strong></p></div><div class="well well-lg well-dark-blue-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-dark-blue-stroke"</strong></p></div><div class="well well-lg well-purple-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-purple-stroke"</strong></p></div><div class="well well-lg well-berry-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-berry-stroke"</strong></p></div><div class="well well-lg well-red-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red-stroke"</strong></p></div><div class="well well-lg well-red-dark-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red-dark-stroke"</strong></p></div><div class="well well-lg well-gray-medium-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-medium-stroke"</strong></p></div><div class="well well-lg well-gray-dark-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-dark-stroke"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers with title</h4><div class="well well-lg well-blue-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-blue-stroke"</strong></p></div><div class="well well-lg well-dark-blue-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-dark-blue-stroke"</strong></p></div><div class="well well-lg well-purple-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-purple-stroke"</strong></p></div><div class="well well-lg well-berry-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-berry-stroke"</strong></p></div><div class="well well-lg well-red-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-red-stroke"</strong></p></div><div class="well well-lg well-red-dark-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-red-dark-stroke"</strong></p></div><div class="well well-lg well-gray-medium-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-gray-medium-stroke"</strong></p></div><div class="well well-lg well-gray-dark-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-gray-dark-stroke"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers with title</h4><div class="panel panel-blue"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-blue"</strong></p></div><div class="panel panel-dark-blue"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-dark-blue"</strong></p></div><div class="panel panel-purple"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-purple"</strong></p></div><div class="panel panel-purple"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-purple"</strong></p></div><div class="panel panel-berry"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-berry"</strong></p></div><div class="panel panel-red"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-red"</strong></p></div><div class="panel panel-red-dark"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-red-dark"</strong></p></div><div class="panel panel-gray-medium"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-gray-medium"</strong></p></div><div class="panel panel-gray-dark"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-gray-dark"</strong></p></div></div></section>');
     $templateCache.put('components/containers/demo-play-containers.html', '<section ng-controller=containersPLayDemoCtrl id=containers-play-demo><div class=container><h2>Containers Builder</h2><div></div></div></section>');
-    $templateCache.put('components/content-teaser/demo-content-teaser.html', '<section ng-controller=contentTeaserCtrl id=content-teaser-html-example><div class=container><h2>Teasers Demo</h2><div class="row pull-left full-width-container"><div class="content-holder col-lg-12"><h4>Full-width</h4><p class=full-width-teaser><span>Text area may contain centered text up to 140 characters including spaces and call-to-action. <a class=btn-link href=#>Call to Action</a></span></p></div></div><div class="row pull-left"><div class=content-holder><h4>Horizontal - image left</h4><div class="horizontal-teaser row"><div class="pull-left col-xs-5"><img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175"> <img class=visible-xs src="http://placehold.it/105x80"></div><div class="pull-right col-xs-7"><h5 class=teaser-headline><a class=btn-link href=#>Headline</a></h5><p class=teaser-text>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p><a class="btn btn-success" href=#>Call to Action</a></div></div></div><div class=content-holder><h4>Horizontal - image right</h4><div class="horizontal-teaser row"><div class="pull-left col-xs-7"><h5 class=teaser-headline><a class=btn-link href=#>Headline</a></h5><p class=teaser-text>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p><a class="hidden-xs btn-link" href=#>Call to Action</a></div><div class="pull-right col-xs-5"><img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175"> <img class=visible-xs src="http://placehold.it/105x80"></div></div></div></div><div class=content-holder><div class=horizontal-full-bleed><h4>Horizontal - full bleed image, text link overlay</h4><img class="pull-left visible-lg" src="http://placehold.it/584x175"> <img class="pull-left visible-md" src="http://placehold.it/750x175"> <img class="pull-left visible-xs visible-sm" src="http://placehold.it/320x155"><p class="pull-left text-link-overlay"><a class=btn-link href=#>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</a></p></div></div><div class="row pull-left" style=width:100%><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><h4>Vertical<br>image with links</h4><div class="vertical-teaser-box pull-left"><p class="btn-link vertical-teaser-link"><a href=#>Link 1</a></p><p class="vertical-teaser-link btn-link"><a href=#>Link 2 (optional)</a></p><p class="vertical-teaser-link btn-link"><a href=#>Link 3 (optional)</a></p></div><img class=pull-left src="http://placehold.it/260x140"></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><h4>Vertical<br>video with links</h4><div class="vertical-teaser-box pull-left"><p class="vertical-teaser-link btn-link"><a href=#>Link 1</a></p><p class="vertical-teaser-link btn-link"><a href=#>Link 2 (optional)</a></p><p class="vertical-teaser-link btn-link"><a href=#>Link 3 (optional)</a></p></div><img class=pull-left src="http://placehold.it/260x140"></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><h4>Vertical<br>heading, subheading, CTA</h4><div class="vertical-teaser-box pull-left"><p><a class=btn-link href=#>Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p><p><a class=btn-link href=#>Call to Action</a></p></div><img class="pull-left top-offset-15" src="http://placehold.it/260x140"></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><div class=vertical-teaser-box><h4>Vertical<br>with button</h4><p><a class=btn-link href=#>Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p><a class="btn btn-success" href=#>Call to Action</a></div><img class="pull-left top-offset-15" src="http://placehold.it/260x140"></div></div></div></section>');
+    $templateCache.put('components/content-teaser/demo-content-teaser.html', '<section ng-controller=contentTeaserCtrl id=content-teaser-html-example><div class=container><h2>Teasers Demo</h2><h3 class=bottom-offset-20>Vertical Teaser \u2013 Show/no-hide</h3><div class=row><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group content-card" ng-class="{\'view-all\': viewAll[\'parent-link-1\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-1\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-1\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-1\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-2\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-2\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-2\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-2\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-3\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-3\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-3\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-3\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-4\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-4\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-4\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-4\'] = true">More</a></div></div></div></div></div><hr><h3 class=bottom-offset-20>Vertical Teaser \u2013 truncated content with dropdown CTA</h3><div class=row><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div></div><hr><div class=top-offset-60><h3 class=bottom-offset-20>Vertical Teaser \u2013 truncated content</h3><div class=row><div class="col-xs-12 col-sm-6 col-md-6 stacked-detail-links"><img src=http://placehold.it/555x275 class="img-responsive bottom-offset-10"><h4 class=text-blue>Headline Title Goes Here <img src="components/content-teaser/pdficon_small.png"></h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group"><li class=text-gray-medium>Updated: 3/25/2015</li><li class=text-gray-medium>Category:<a href=javascript:;>&nbsp;&nbsp;Security Solutions</a></li><li><a href=javascript:;>View all Security resources</a></li></ul></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><div class=hidden><div class="row pull-left full-width-container"><div class="content-holder col-lg-12"><h4>Full-width</h4><p class=full-width-teaser><span>Text area may contain centered text up to 140 characters including spaces and call-to-action. <a class=btn-link href=#>Call to Action</a></span></p></div></div><div class="row pull-left"><div class=content-holder><h4>Horizontal - image left</h4><div class="horizontal-teaser row"><div class="pull-left col-xs-5"><img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175"> <img class=visible-xs src="http://placehold.it/105x80"></div><div class="pull-right col-xs-7"><h5 class=teaser-headline><a class=btn-link href=#>Headline</a></h5><p class=teaser-text>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p><a class="btn btn-success" href=#>Call to Action</a></div></div></div><div class=content-holder><h4>Horizontal - image right</h4><div class="horizontal-teaser row"><div class="pull-left col-xs-7"><h5 class=teaser-headline><a class=btn-link href=#>Headline</a></h5><p class=teaser-text>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</p><a class="hidden-xs btn-link" href=#>Call to Action</a></div><div class="pull-right col-xs-5"><img class="visible-sm visible-md visible-lg hidden-xs" src="http://placehold.it/230x175"> <img class=visible-xs src="http://placehold.it/105x80"></div></div></div></div><div class=content-holder><div class=horizontal-full-bleed><h4>Horizontal - full bleed image, text link overlay</h4><img class="pull-left visible-lg" src="http://placehold.it/584x175"> <img class="pull-left visible-md" src="http://placehold.it/750x175"> <img class="pull-left visible-xs visible-sm" src="http://placehold.it/320x155"><p class="pull-left text-link-overlay"><a class=btn-link href=#>Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet.</a></p></div></div><div class="row pull-left" style=width:100%><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><h4>Vertical<br>image with links</h4><div class="vertical-teaser-box pull-left"><p class="btn-link vertical-teaser-link"><a href=#>Link 1</a></p><p class="vertical-teaser-link btn-link"><a href=#>Link 2 (optional)</a></p><p class="vertical-teaser-link btn-link"><a href=#>Link 3 (optional)</a></p></div><img class=pull-left src="http://placehold.it/260x140"></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><h4>Vertical<br>video with links</h4><div class="vertical-teaser-box pull-left"><p class="vertical-teaser-link btn-link"><a href=#>Link 1</a></p><p class="vertical-teaser-link btn-link"><a href=#>Link 2 (optional)</a></p><p class="vertical-teaser-link btn-link"><a href=#>Link 3 (optional)</a></p></div><img class=pull-left src="http://placehold.it/260x140"></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><h4>Vertical<br>heading, subheading, CTA</h4><div class="vertical-teaser-box pull-left"><p><a class=btn-link href=#>Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p><p><a class=btn-link href=#>Call to Action</a></p></div><img class="pull-left top-offset-15" src="http://placehold.it/260x140"></div><div class="content-holder div-wrapper col-lg-4 col-md-6 col-sm-12 col-xs-12"><div class=vertical-teaser-box><h4>Vertical<br>with button</h4><p><a class=btn-link href=#>Headline</a><br>Subheading lorem ipsum dolor sit amet. Consectius.</p><a class="btn btn-success" href=#>Call to Action</a></div><img class="pull-left top-offset-15" src="http://placehold.it/260x140"></div></div></div></div></section>');
     $templateCache.put('components/content-teaser/demo-play-content-teaser.html', '<section ng-controller=contentTeaserPLayDemoCtrl id=content-teaser-play-demo><div class=container><h2>Content-Teaser Builder</h2><div></div></div></section>');
     $templateCache.put('components/date-selector/demo-date-selector.html', '<section ng-controller=dateSelectorCtrl id=date-selector-html-example><div class=container><h2>Date-Selector Demo</h2><div><div ng-controller=DatepickerDemoCtrl><h4>Select date</h4><div class=row><div class="col-md-6 date-selector"><p class=input-group><input type=text class=form-control datepicker-popup=MM-dd-yyyy ng-model=dt is-open=opened min-date=minDate max-date="\'2015-06-22\'" datepicker-options=dateOptions date-disabled="disabled(date, mode)" ng-required=true show-button-bar=false show-weeks="false"> <span class=input-group-btn><button type=button class="btn btn-default" ng-click=open($event)><i class="glyphicon glyphicon-calendar"></i></button></span></p><p>MM/DD/YYYY</p></div></div></div></div></div></section>');
     $templateCache.put('components/date-selector/demo-play-date-selector.html', '<section ng-controller=dateSelectorPLayDemoCtrl id=date-selector-play-demo><div class=container><h2>Date-Selector Builder</h2><div></div></div></section>');
@@ -44380,17 +46125,17 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/footer/demo-play-footer.html', '<section ng-controller=footerPLayDemoCtrl id=footer-play-demo><div class=container><h2>Footer Builder</h2><div></div></div></section>');
     $templateCache.put('components/forms/demo-forms.html', '<section ng-controller=formsCtrl id=forms-html-example><div class=container><h2>Forms Demo</h2><h3 class=top-offset-20>individual form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=text-label-input>Text input label</label><div class="col-xs-12 col-sm-5"><input type=text class=form-control id=text-label-input><p class=help-block>In addition to freeform text, any HTML5 text-based input appears like so.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=uneditable>Uneditable input</label><div class="col-xs-12 col-sm-5"><span id=uneditable class="uneditable-input form-control">Some value here</span></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=disabledInput>Disabled input</label><div class="col-xs-12 col-sm-5"><input class="disabled form-control" id=disabledInput type=text placeholder="Disabled input here\u2026" disabled></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=textarea>Textarea input</label><div class="col-xs-12 col-sm-5"><textarea id=textarea class=form-control rows=5></textarea></div></div></div></form></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Checkboxes</h4><div class=checkbox><label><input type=checkbox value="option 1"> Checkbox one</label></div><div class="checkbox disabled bottom-offset-20"><label><input type=checkbox value="value option 2" disabled> Checkbox two is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline checkboxes</h4><label class=checkbox-inline><input type=checkbox id=inlineCheckbox1 value=option1>1</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox2 value=option2>2</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox3 value=option3>3</label></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Radio Buttons</h4><div class=radio><label><input type=radio name=optionsRadios id=options-radio-1 value=option1 checked> Option one radio button</label></div><div class=radio><label><input type=radio name=optionsRadios id=options-radio-2 value=option2> Option two radio button</label></div><div class="radio disabled"><label><input type=radio name=optionsRadios id=options-radio-3 value=option3 disabled> Option three is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline Radio Buttons</h4><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio1 value=option1> 1</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio2 value=option2> 2</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio3 value=option3> 3</label></div></div><div class=row><div class="col-xs-12 col-sm-8 bottom-offset-40"><h4>Tree Checkboxes</h4><ul class=list-tree><li><label class=checkbox><input type=checkbox value=option1-parent1> Checkbox value (parent 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild1> Checkbox value (grand child 1)</label></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent1-child2> Checkbox value (child 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild3> Checkbox value (grand child 3)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild4> Checkbox value (grand child 4)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild5> Checkbox value (grand child 5)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild1> Checkbox value (great grand child 1)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild2> Checkbox value (great grand child 2)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild3> Checkbox value (great grand child 3)</label></li></ul></li></ul></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent2> Checkbox value (parent 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-grandchild1> Checkbox value (grand child 1)</label></li></ul></li></ul></li></ul></div></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=exampleInputFile>File upload label</label><div class="col-xs-6 col-sm-6"><input type=file id=exampleInputFile><p class=help-block>Example block-level help text here.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Input with error</label><div class="col-xs-6 col-sm-6"><input type=text id=inputError class="form-control alert alert-warning" data-html=true data-toggle=popover data-placement=top data-trigger=submit data-content="<strong>\'First Name\'</strong> should not be empty." data-original-title="&lt;i class=\'icon-small-alertnotice text-red pull-left\'&gt;&lt;/i&gt; &nbsp;Not a valid email &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;" placeholder="*First Name"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="form-group show-password"><label for=passwordShowHide class="col-xs-12 col-sm-2 form-label">Password</label><div class="col-xs-6 col-sm-6"><input id=passwordShowHide type=password class=form-control ng-model=password></div><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"><label class="checkbox help-block"><input type=checkbox value=option1 ng-model=showPassword ng-click=togglePassword()> <span ng-if=!showPassword>Show password</span> <span ng-if=showPassword>Hide password</span></label></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-6 col-sm-8 col-md-8"><label class="col-xs-12 col-sm-3 form-label" for=phone>Phone number</label><div class="col-xs-12 col-sm-9"><input id=phone type=text class="form-control phone-number" placeholder="(555) 111-2222"></div></div></div><div class=row><div class="col-xs-12 col-sm-8 col-md-8"><div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phone-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phone-ext class="collapse col-xs-6 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Email address</label><div class="col-xs-6 col-sm-6"><input name=email type=email class="form-control required" placeholder="*Enter email"></div></div></div><div class=row><div class="col-xs-12 col-md-6 col-md-offset-2 help-ext has-success has-feedback"><span><label class="email-success hide">Your email address is valid</label></span> <span><label class="email-error hide">Your email address is NOT valid</label></span></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label><div class=spinbox data-orient=vertical data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box horizontal</label><div class=spinbox data-orient=horizontal data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><h3 class=top-offset-40>select form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Select list</label><select class=form-control id=select01><option>something</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select-01 class=form-label>Tiered select list</label><select class=form-control id=select-01><option class=text-gray-dark value=all>All</option><optgroup class=text-gray-dark label="Original Release Date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup><optgroup class=text-gray-dark label="Last updated date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=multiSelect class=form-label>multi-select</label><select multiple id=multiSelect><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><div class=form-group><label for=ms class=form-label>Multi-select with checkboxes</label><select class=ms-checkbox id=ms multiple><option value=1>January</option><option value=2>February</option><option value=3>March</option><option value=4>April</option><option value=5>May</option><option value=6>June</option><option value=7>July</option><option value=8>August</option><option value=9>September</option><option value=10>October</option><option value=11>November</option><option value=12>December</option></select></div></div></div></div></form></div><h3 class=top-offset-40>Selects with pre-populated states (U.S. only)</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=default-select-state class=form-label>Standard Select U.S. States</label><select class="form-control select-state" id=default-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=short-select-state class=form-label>States with Abbreviations</label><select class="form-control select-state" data-format=short id=short-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=both-select-state class=form-label>States with Abbreviations and Name</label><select class="form-control select-state" data-format=both id=both-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=emptyname-select-state class=form-label>States with Custom Select Text</label><select class="form-control select-state" data-format="" data-empty-name="Please select a state" id=emptyname-select-state ng-model=stateDefault></select></div></div></div></form></div><h3 class=top-offset-40>Common Forms</h3><hr><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9">Ship to</h4></div><div class=row><div class="col-xs-11 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First Name</label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name>First</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name placeholder="*First Name"></div></div><div class="col-xs-1 col-sm-1 col-md-1"><label class="col-xs-12 col-sm-4 col-md-3 form-label" for=middle-initial>MI</label><div class="col-xs-12 col-sm-8 col-md-9"><input type=text class=form-control id=middle-initial placeholder=MI></div></div><div class="col-xs-12 col-sm-5 col-md-5"><label class="col-xs-12 col-sm-2 col-md-3 hidden-sm form-label" for=last-name>Last Name</label><label class="col-xs-12 col-sm-2 col-md-3 visible-sm-block form-label" for=last-name>Last</label><div class="col-xs-12 col-sm-10 col-md-9"><input type=text class=form-control id=last-name placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone #</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 col-md-1 form-label" for=email-address>Email&nbsp;</label><div class="col-xs-12 col-sm-10 col-md-11"><input type=text class="form-control email-address" id=email-address placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext class="collapse col-xs-12 col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-1>Address</label><div class="col-xs-12 col-sm-11 col-md-11"><input type=text class=form-control id=address-1 placeholder="*Street Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-2>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-2 placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state>&nbsp;</label><div><select class="form-control select-state" id=default-state ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip placeholder="*Zip Code"></div></div></div></form></div></div></section>');
     $templateCache.put('components/forms/demo-play-forms.html', '<section ng-controller=formsPLayDemoCtrl id=forms-play-demo><div class=container><h2>Forms Builder</h2><div></div></div></section>');
-    $templateCache.put('components/icons/demo-icons.html', '<section ng-controller=iconsCtrl id=icons-html-example><div class=container><h2>Icons Demo</h2><div></div></div></section>');
+    $templateCache.put('components/icons/demo-icons.html', '<section ng-controller=iconsCtrl id=icons-html-example><div class=container><h2>Icons Demo</h2><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><p><strong>Dev guidance:</strong> The following icons are specific to Dell Brand Standards. Please use the following icon class names in place of native Bootstrap icon class names.</p><p><strong>Color guidance:</strong> All of the icons below can change to the following colors by adding these class modifiers <code>.text-blue</code>, <code>.text-dark-blue</code>, <code>.text-purple</code>, <code>.text-berry</code>, <code>.text-red</code>, <code>.text-red-dark</code>, <code>.text-gray-medium</code>, <code>.text-gray-dark</code>, <code>.text-orange</code>, <code>.text-green</code>, or <code>.text-white</code>. For example: <code>class="icon-ui-arrowleft text-blue"</code> change the modifier color after the <code>.text-*</code>.</p><h3 class=top-offset-20>UI icons</h3><ul class=icons-gallery-list><li><i class=icon-ui-arrowleft></i> <span class="icons-gallery-class ng-binding">icon-ui-arrowleft</span></li><li><i class=icon-ui-arrowright></i> <span class="icons-gallery-class ng-binding">icon-ui-arrowright</span></li><li><i class=icon-ui-close></i> <span class="icons-gallery-class ng-binding">icon-ui-close</span></li><li><i class=icon-ui-closecircle></i> <span class="icons-gallery-class ng-binding">icon-ui-closecircle</span></li><li><i class=icon-ui-collapse></i> <span class="icons-gallery-class ng-binding">icon-ui-collapse</span></li><li><i class=icon-ui-dell></i> <span class="icons-gallery-class ng-binding">icon-ui-dell</span></li><li><i class=icon-ui-expand></i> <span class="icons-gallery-class ng-binding">icon-ui-expand</span></li><li><i class=icon-ui-grid-view></i> <span class="icons-gallery-class ng-binding">icon-ui-grid-view</span></li><li><i class=icon-ui-list-view></i> <span class="icons-gallery-class ng-binding">icon-ui-list-view</span></li><li><i class=icon-ui-menucollapsed></i> <span class="icons-gallery-class ng-binding">icon-ui-menucollapsed</span></li><li><i class=icon-ui-minus></i> <span class="icons-gallery-class ng-binding">icon-ui-minus</span></li><li><i class=icon-ui-pause></i> <span class="icons-gallery-class ng-binding">icon-ui-pause</span></li><li><i class=icon-ui-play></i> <span class="icons-gallery-class ng-binding">icon-ui-play</span></li><li><i class=icon-ui-plus></i> <span class="icons-gallery-class ng-binding">icon-ui-plus</span></li><li><i class=icon-ui-triangledown></i> <span class="icons-gallery-class ng-binding">icon-ui-triangledown</span></li><li><i class=icon-ui-triangleleft></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleleft</span></li><li><i class=icon-ui-triangleright></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleright</span></li><li><i class=icon-ui-triangleup></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleup</span></li><li><i class=icon-ui-loading></i> <span class="icons-gallery-class ng-binding">icon-ui-loading</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Small icons</h3><p>The small icons have less detail and are intended to be used at the default font size of 16px. Please use the small icons for task based communications. For crisper small icons use the following sizes: 16px, 28px and 42px.</p><ul class=icons-gallery-list><li><i class="icon-small-360-hinge text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-360-hinge</span></li><li><i class="icon-small-add text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-add</span></li><li><i class="icon-small-alertcomplete text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertcomplete</span></li><li><i class="icon-small-alerterror text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alerterror</span></li><li><i class="icon-small-alertinfo text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertinfo</span></li><li><i class="icon-small-alertnotice text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertnotice</span></li><li><i class="icon-small-audiocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-audiocard</span></li><li><i class="icon-small-audiospeaker text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-audiospeaker</span></li><li><i class="icon-small-award text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-award</span></li><li><i class="icon-small-battery text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-battery</span></li><li><i class="icon-small-bell text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-bell</span></li><li><i class="icon-small-cables text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cables</span></li><li><i class="icon-small-calculator text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-calculator</span></li><li><i class="icon-small-calendar text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-calendar</span></li><li><i class="icon-small-carryingcase text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-carryingcase</span></li><li><i class="icon-small-cart text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cart</span></li><li><i class="icon-small-chat text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-chat</span></li><li><i class="icon-small-checkmark text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-checkmark</span></li><li><i class="icon-small-chipset text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-chipset</span></li><li><i class="icon-small-clock text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-clock</span></li><li><i class="icon-small-cloud text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cloud</span></li><li><i class="icon-small-color text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-color</span></li><li><i class="icon-small-computergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-computergeneric</span></li><li><i class="icon-small-contact text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-contact</span></li><li><i class="icon-small-copy text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-copy</span></li><li><i class="icon-small-data text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-data</span></li><li><i class="icon-small-deals text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-deals</span></li><li><i class="icon-small-detachable text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-detachable</span></li><li><i class="icon-small-diagnostic text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-diagnostic</span></li><li><i class="icon-small-dimensionsweight text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-dimensionsweight</span></li><li><i class="icon-small-display text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-display</span></li><li><i class="icon-small-download text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-download</span></li><li><i class="icon-small-drivers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-drivers</span></li><li><i class="icon-small-edit text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-edit</span></li><li><i class="icon-small-employee text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-employee</span></li><li><i class="icon-small-energyefficient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-energyefficient</span></li><li><i class="icon-small-enterprise text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-enterprise</span></li><li><i class="icon-small-e-value text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-e-value</span></li><li><i class="icon-small-gift-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-gift-card</span></li><li><i class="icon-small-globe text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-globe</span></li><li><i class="icon-small-graphics-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-graphics-card</span></li><li><i class="icon-small-harddrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-harddrive</span></li><li><i class="icon-small-help text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-help</span></li><li><i class="icon-small-house text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-house</span></li><li><i class="icon-small-infrastructure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-infrastructure</span></li><li><i class="icon-small-inktoner text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-inktoner</span></li><li><i class="icon-small-keyboard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-keyboard</span></li><li><i class="icon-small-lightbulb text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-lightbulb</span></li><li><i class="icon-small-location text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-location</span></li><li><i class="icon-small-magnifying-glass text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-magnifying-glass</span></li><li><i class="icon-small-mail text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mail</span></li><li><i class="icon-small-memory text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-memory</span></li><li><i class="icon-small-memorycardreader text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-memorycardreader</span></li><li><i class="icon-small-missingimage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-missingimage</span></li><li><i class="icon-small-mobile text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mobile</span></li><li><i class="icon-small-mouse text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mouse</span></li><li><i class="icon-small-music text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-music</span></li><li><i class="icon-small-network text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-network</span></li><li><i class="icon-small-notebook text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-notebook</span></li><li><i class="icon-small-operatingsystem text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-operatingsystem</span></li><li><i class="icon-small-opticaldrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-opticaldrive</span></li><li><i class="icon-small-package text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-package</span></li><li><i class="icon-small-partners text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-partners</span></li><li><i class="icon-small-performance text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-performance</span></li><li><i class="icon-small-phone text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-phone</span></li><li><i class="icon-small-photos text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-photos</span></li><li><i class="icon-small-ports text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-ports</span></li><li><i class="icon-small-powersupply text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-powersupply</span></li><li><i class="icon-small-printer text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-printer</span></li><li><i class="icon-small-processor text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-processor</span></li><li><i class="icon-small-projector text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-projector</span></li><li><i class="icon-small-protection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-protection</span></li><li><i class="icon-small-recycle text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-recycle</span></li><li><i class="icon-small-refresh text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-refresh</span></li><li><i class="icon-small-rss text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-rss</span></li><li><i class="icon-small-save text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-save</span></li><li><i class="icon-small-scale-out text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-scale-out</span></li><li><i class="icon-small-searchleft text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-searchleft</span></li><li><i class="icon-small-secure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-secure</span></li><li><i class="icon-small-securesoftware text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-securesoftware</span></li><li><i class="icon-small-server text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-server</span></li><li><i class="icon-small-serverrack text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-serverrack</span></li><li><i class="icon-small-share text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-share</span></li><li><i class="icon-small-shipping text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-shipping</span></li><li><i class="icon-small-socialnetworking text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-socialnetworking</span></li><li><i class="icon-small-software text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-software</span></li><li><i class="icon-small-solutions text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-solutions</span></li><li><i class="icon-small-speakers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-speakers</span></li><li><i class="icon-small-star text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-star</span></li><li><i class="icon-small-storage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-storage</span></li><li><i class="icon-small-support text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-support</span></li><li><i class="icon-small-surgeprotection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-surgeprotection</span></li><li><i class="icon-small-tablet text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-tablet</span></li><li><i class="icon-small-thinclient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-thinclient</span></li><li><i class="icon-small-touch text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-touch</span></li><li><i class="icon-small-touch-pad text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-touch-pad</span></li><li><i class="icon-small-towergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-towergeneric</span></li><li><i class="icon-small-trash text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-trash</span></li><li><i class="icon-small-tv text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-tv</span></li><li><i class="icon-small-useraccount text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-useraccount</span></li><li><i class="icon-small-video text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-video</span></li><li><i class="icon-small-videocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-videocard</span></li><li><i class="icon-small-virtualization text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-virtualization</span></li><li><i class="icon-small-warranty text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-warranty</span></li><li><i class="icon-small-webcam text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-webcam</span></li><li><i class="icon-small-whitepaper text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-whitepaper</span></li><li><i class="icon-small-wireless text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-wireless</span></li><li><i class="icon-small-zoomin text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-zoomin</span></li><li><i class="icon-small-zoomout text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-zoomout</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Large icons</h3><p>The large icons have more detail then the small icons. These should be used to support content only. For crisper large icons use the following sizes: 36px, 72px and 108px.</p><ul class="icons-gallery-list large"><li><i class="icon-large-360-hinge text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-360-hinge</span></li><li><i class="icon-large-add text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-add</span></li><li><i class="icon-large-alertcomplete text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertcomplete</span></li><li><i class="icon-large-alerterror text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alerterror</span></li><li><i class="icon-large-alertinfo text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertinfo</span></li><li><i class="icon-large-alertnotice text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertnotice</span></li><li><i class="icon-large-audicard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-audicard</span></li><li><i class="icon-large-audiospeaker text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-audiospeaker</span></li><li><i class="icon-large-award text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-award</span></li><li><i class="icon-large-battery text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-battery</span></li><li><i class="icon-large-bell text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-bell</span></li><li><i class="icon-large-cables text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cables</span></li><li><i class="icon-large-calculator text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-calculator</span></li><li><i class="icon-large-calendar text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-calendar</span></li><li><i class="icon-large-carryingcase text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-carryingcase</span></li><li><i class="icon-large-cart text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cart</span></li><li><i class="icon-large-chat text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-chat</span></li><li><i class="icon-large-checkmark text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-checkmark</span></li><li><i class="icon-large-chipset text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-chipset</span></li><li><i class="icon-large-clock text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-clock</span></li><li><i class="icon-large-cloud text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cloud</span></li><li><i class="icon-large-color text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-color</span></li><li><i class="icon-large-computergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-computergeneric</span></li><li><i class="icon-large-contact text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-contact</span></li><li><i class="icon-large-copy text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-copy</span></li><li><i class="icon-large-data text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-data</span></li><li><i class="icon-large-deals text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-deals</span></li><li><i class="icon-large-detachable text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-detachable</span></li><li><i class="icon-large-diagnostic text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-diagnostic</span></li><li><i class="icon-large-dimensionsweight text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-dimensionsweight</span></li><li><i class="icon-large-display text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-display</span></li><li><i class="icon-large-download text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-download</span></li><li><i class="icon-large-drivers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-drivers</span></li><li><i class="icon-large-edit text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-edit</span></li><li><i class="icon-large-employee text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-employee</span></li><li><i class="icon-large-energyefficient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-energyefficient</span></li><li><i class="icon-large-enterprise text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-enterprise</span></li><li><i class="icon-large-e-value text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-e-value</span></li><li><i class="icon-large-giftcard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-giftcard</span></li><li><i class="icon-large-globe text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-globe</span></li><li><i class="icon-large-graphics-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-graphics-card</span></li><li><i class="icon-large-harddrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-harddrive</span></li><li><i class="icon-large-help text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-help</span></li><li><i class="icon-large-house text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-house</span></li><li><i class="icon-large-infrastructure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-infrastructure</span></li><li><i class="icon-large-inktoner text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-inktoner</span></li><li><i class="icon-large-keyboard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-keyboard</span></li><li><i class="icon-large-lightbulb text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-lightbulb</span></li><li><i class="icon-large-location text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-location</span></li><li><i class="icon-large-magnifying-glass text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-magnifying-glass</span></li><li><i class="icon-large-mail text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mail</span></li><li><i class="icon-large-memory text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-memory</span></li><li><i class="icon-large-memorycarreader text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-memorycarreader</span></li><li><i class="icon-large-missingimage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-missingimage</span></li><li><i class="icon-large-mobile text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mobile</span></li><li><i class="icon-large-mouse text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mouse</span></li><li><i class="icon-large-music text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-music</span></li><li><i class="icon-large-network text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-network</span></li><li><i class="icon-large-notebook text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-notebook</span></li><li><i class="icon-large-operatingsystem text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-operatingsystem</span></li><li><i class="icon-large-opticaldrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-opticaldrive</span></li><li><i class="icon-large-package text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-package</span></li><li><i class="icon-large-partners text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-partners</span></li><li><i class="icon-large-performance text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-performance</span></li><li><i class="icon-large-phone text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-phone</span></li><li><i class="icon-large-photos text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-photos</span></li><li><i class="icon-large-ports text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-ports</span></li><li><i class="icon-large-powersupply text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-powersupply</span></li><li><i class="icon-large-printer text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-printer</span></li><li><i class="icon-large-processor text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-processor</span></li><li><i class="icon-large-projector text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-projector</span></li><li><i class="icon-large-protection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-protection</span></li><li><i class="icon-large-recycle text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-recycle</span></li><li><i class="icon-large-refresh text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-refresh</span></li><li><i class="icon-large-rss text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-rss</span></li><li><i class="icon-large-save text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-save</span></li><li><i class="icon-large-scale-out text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-scale-out</span></li><li><i class="icon-large-searchleft text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-searchleft</span></li><li><i class="icon-large-secure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-secure</span></li><li><i class="icon-large-securesoftware text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-securesoftware</span></li><li><i class="icon-large-server text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-server</span></li><li><i class="icon-large-serverrack text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-serverrack</span></li><li><i class="icon-large-share text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-share</span></li><li><i class="icon-large-shipping text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-shipping</span></li><li><i class="icon-large-socialnetworking text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-socialnetworking</span></li><li><i class="icon-large-software text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-software</span></li><li><i class="icon-large-solutions text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-solutions</span></li><li><i class="icon-large-speakers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-speakers</span></li><li><i class="icon-large-star text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-star</span></li><li><i class="icon-large-storage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-storage</span></li><li><i class="icon-large-support text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-support</span></li><li><i class="icon-large-surgeprotection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-surgeprotection</span></li><li><i class="icon-large-tablet text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-tablet</span></li><li><i class="icon-large-thinclient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-thinclient</span></li><li><i class="icon-large-touch text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-touch</span></li><li><i class="icon-large-touchpad text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-touchpad</span></li><li><i class="icon-large-towergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-towergeneric</span></li><li><i class="icon-large-trash text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-trash</span></li><li><i class="icon-large-tv text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-tv</span></li><li><i class="icon-large-useraccount text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-useraccount</span></li><li><i class="icon-large-video text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-video</span></li><li><i class="icon-large-videocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-videocard</span></li><li><i class="icon-large-virtualization text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-virtualization</span></li><li><i class="icon-large-warranty text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-warranty</span></li><li><i class="icon-large-webcam text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-webcam</span></li><li><i class="icon-large-whitepaper text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-whitepaper</span></li><li><i class="icon-large-wireless text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-wireless</span></li><li><i class="icon-large-zoomin text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-zoomin</span></li><li><i class="icon-large-zoomout text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-zoomout</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Ratings icons</h3><p>The rating icons have been broken down to 10% increments. These small changes are demonstrated on the last star of the examples below</p><ul class=icons-gallery-list><li><i class=icon-small-favorite-100></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-100</span></li><li><i class=icon-small-favorite-90></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-90</span></li><li><i class=icon-small-favorite-80></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-80</span></li><li><i class=icon-small-favorite-70></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-70</span></li><li><i class=icon-small-favorite-60></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-60</span></li><li><i class=icon-small-favorite-50></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-50</span></li><li><i class=icon-small-favorite-40></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-40</span></li><li><i class=icon-small-favorite-30></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-30</span></li><li><i class=icon-small-favorite-20></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-20</span></li><li><i class=icon-small-favorite-10></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-10</span></li><li><i class=icon-small-favorite-0></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-0</span></li></ul></div></div></div></section>');
     $templateCache.put('components/icons/demo-play-icons.html', '<section ng-controller=iconsPLayDemoCtrl id=icons-play-demo><div class=container><h2>Icons Builder</h2><div></div></div></section>');
     $templateCache.put('components/labels-and-badges/demo-labels-and-badges.html', '<section ng-controller=labelsAndBadgesCtrl id=labels-and-badges-html-example><div class=container><h2 class=bottom-offset-30>Labels-And-Badges Demo</h2><h4>Standard label</h4><div class=row><div class="col-xs-6 col-sm-5"><div class=bottom-offset-30 id=help-label><span class="label label-info">Help</span></div></div></div><h4>Standards badges</h4><div class=row><div class="col-xs-6 col-sm-5"><ul class="nav nav-pills nav-stacked"><li class=active><a href=javascript:;><span class="badge pull-right">42</span> Home</a></li><li><a href=javascript:;>Profile</a></li><li><a href=javascript:;><span class="badge pull-right">3</span> Messages</a></li></ul></div></div></div></section>');
     $templateCache.put('components/labels-and-badges/demo-play-labels-and-badges.html', '<section ng-controller=labelsAndBadgesPLayDemoCtrl id=labels-and-badges-play-demo><div class=container><h2>Labels-And-Badges Builder</h2><div></div></div></section>');
-    $templateCache.put('components/lists/demo-lists.html', '<section ng-controller=listsCtrl id=lists-html-example><div class=container><h2>Lists Demo</h2><h3 class=bottom-offset-20>Unordered lists</h3><ul><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit<ul><li>Phasellus iaculis neque</li><li>Purus sodales ultricies</li><li>Vestibulum laoreet porttitor sem</li><li>Ac tristique libero volutpat at</li></ul></li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Ordered</h3><ol><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit</li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ol><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Unstyled</h3><ul class=list-unstyled><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit<ul><li>Phasellus iaculis neque</li><li>Purus sodales ultricies</li><li>Vestibulum laoreet porttitor sem</li><li>Ac tristique libero volutpat at</li></ul></li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Inline</h3><ul class=list-inline><li>Lorem ipsum</li><li>Phasellus iaculis</li><li>Nulla volutpat</li><li>Happy</li><li>Trees</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Description</h3><dl><dt>Description lists</dt><dd>A description list is perfect for defining terms.</dd><dt>Euismod</dt><dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd><dd>Donec id elit non mi porta gravida at eget metus.</dd><dt>Malesuada porta</dt><dd>Etiam porta sem malesuada magna mollis euismod.</dd></dl><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Horizontal description</h3><dl class=dl-horizontal><dt>Description lists</dt><dd>A description list is perfect for defining terms.</dd><dt>Euismod</dt><dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd><dd>Donec id elit non mi porta gravida at eget metus.</dd><dt>Malesuada porta</dt><dd>Etiam porta sem malesuada magna mollis euismod.</dd><dt>Felis euismod semper eget lacinia</dt><dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd></dl></div></section>');
+    $templateCache.put('components/lists/demo-lists.html', '<section ng-controller=listsCtrl id=lists-html-example><div class=container><h2 class=bottom-offset-30>Lists Demo</h2><h3 class=bottom-offset-20>Horizontal inline link collector</h3><div class=row><div class="col-xs-12 col-sm-9 clearfix"><div class=inline-content-links><ul class="list-unstyled list-inline content-links"><li><a href=javascript:;>Security Online Training</a></li><li><a href=javascript:;>Security Webcasts</a></li><li><a href=javascript:;>Contact an Expert</a></li><li><a href=javascript:;>Additional Link</a></li></ul></div></div></div><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Unordered lists</h3><ul><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit<ul><li>Phasellus iaculis neque</li><li>Purus sodales ultricies</li><li>Vestibulum laoreet porttitor sem</li><li>Ac tristique libero volutpat at</li></ul></li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Ordered</h3><ol><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit</li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ol><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Unstyled</h3><ul class=list-unstyled><li>Lorem ipsum dolor sit amet</li><li>Consectetur adipiscing elit</li><li>Integer molestie lorem at massa</li><li>Facilisis in pretium nisl aliquet</li><li>Nulla volutpat aliquam velit<ul><li>Phasellus iaculis neque</li><li>Purus sodales ultricies</li><li>Vestibulum laoreet porttitor sem</li><li>Ac tristique libero volutpat at</li></ul></li><li>Faucibus porta lacus fringilla vel</li><li>Aenean sit amet erat nunc</li><li>Eget porttitor lorem</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Inline</h3><ul class=list-inline><li>Lorem ipsum</li><li>Phasellus iaculis</li><li>Nulla volutpat</li><li>Happy</li><li>Trees</li></ul><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Description</h3><dl><dt>Description lists</dt><dd>A description list is perfect for defining terms.</dd><dt>Euismod</dt><dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd><dd>Donec id elit non mi porta gravida at eget metus.</dd><dt>Malesuada porta</dt><dd>Etiam porta sem malesuada magna mollis euismod.</dd></dl><hr class="bottom-offset-30"><h3 class=bottom-offset-20>Horizontal description</h3><dl class=dl-horizontal><dt>Description lists</dt><dd>A description list is perfect for defining terms.</dd><dt>Euismod</dt><dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd><dd>Donec id elit non mi porta gravida at eget metus.</dd><dt>Malesuada porta</dt><dd>Etiam porta sem malesuada magna mollis euismod.</dd><dt>Felis euismod semper eget lacinia</dt><dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd></dl></div></section>');
     $templateCache.put('components/lists/demo-play-lists.html', '<section ng-controller=listsPLayDemoCtrl id=lists-play-demo><div class=container><h2>Lists Builder</h2><div></div></div></section>');
     $templateCache.put('components/mini-buttons/demo-mini-buttons.html', '<section ng-controller=miniButtonsCtrl id=mini-buttons-html-example><div class=container><h2 class=bottom-offset-30>Mini-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase</h4><a class="btn btn-primary btn-xs" href=javascript:;>Primary</a></div><div class=bottom-offset-30><h4>Primary Non-Purchase disabled</h4><a class="btn btn-primary btn-xs disabled" href=javascript:;>Primary</a></div><hr><div class=bottom-offset-30><h4>Primary Purchase</h4><a class="btn btn-success btn-xs" href=javascript:;>Purchase</a></div><div class=bottom-offset-30><h4>Primary Purchase disabled</h4><a class="btn btn-success btn-xs disabled" href=javascript:;>Purchase</a></div><hr><div class=bottom-offset-30><h4>Secondary or General Use</h4><a class="btn btn-default btn-xs" href=javascript:;>General Use</a></div><div class=bottom-offset-30><h4>Secondary or General Use disabled</h4><a class="btn btn-default btn-xs disabled" href=javascript:;>General Use</a></div><hr></div></section>');
     $templateCache.put('components/mini-buttons/demo-play-mini-buttons.html', '<section ng-controller=miniButtonsPLayDemoCtrl id=mini-buttons-play-demo><div class=container><h2>Mini-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/modals/demo-modals.html', '<section ng-controller=modalsCtrl id=modals-html-example><div class=container><h2 class=bottom-offset-30>Modals Demo</h2><button class="btn btn-default" data-toggle=modal data-target=#example-modal>Launch demo modal</button><div class="modal fade" id=example-modal tabindex=-1 role=dialog aria-labelledby=myModalLabel aria-hidden=true style="display: none"><div class=modal-dialog><div class=modal-content><div class=modal-header><button type=button class=close data-dismiss=modal aria-hidden=true>\xd7</button><h3 class=modal-title>Modal title</h3></div><div class=modal-body><p>Placeholder for body text</p></div><div class=modal-footer><button type=button class="btn btn-default" data-dismiss=modal>Close</button> <button type=button class="btn btn-primary">Save changes</button></div></div></div></div></div></section>');
     $templateCache.put('components/modals/demo-play-modals.html', '<section ng-controller=modalsPLayDemoCtrl id=modals-play-demo><div class=container><h2>Modals Builder</h2><div></div></div></section>');
-    $templateCache.put('components/offsets/demo-offsets.html', '<section ng-controller=offsetsCtrl id=offsets-html-example><div class=container><h2>Offsets Demo</h2><div class="bottom-offset-30 row"><ul class=list-unstyled><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>0px</p><hr><div id=top-offset-0><div class="well well-blue top-offset-0">class="top-offset-0"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>5px</p><hr><div id=top-offset-5><div class="well well-blue top-offset-5">class="top-offset-5"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>10px</p><hr><div id=top-offset-10><div class="well well-blue top-offset-10">class="top-offset-10"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>20px</p><hr><div id=top-offset-20><div class="well well-blue top-offset-20">class="top-offset-20"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>30px</p><hr><div id=top-offset-30><div class="well well-blue top-offset-30">class="top-offset-30"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>40px</p><hr><div id=top-offset-40><div class="well well-blue top-offset-40">class="top-offset-40"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>60px</p><hr><div id=top-offset-60><div class="well well-blue top-offset-60">class="top-offset-60"</div></div></div></li></ul></div><hr><div class=bottom-offset-10><h3>Bottom offsets <small>(by pixel modifier)</small></h3></div><div class="bottom-offset-30 row"><ul class=list-unstyled><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>0px</p><div id=bottom-offset-0><div class="well well-green bottom-offset-0">class="bottom-offset-0"</div></div><hr></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>5px</p><div id=bottom-offset-5><div class="well well-green bottom-offset-5">class="bottom-offset-5"</div></div><hr></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>10px</p><div id=bottom-offset-10><div class="well well-green bottom-offset-10">class="bottom-offset-10"</div></div><hr></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>20px</p><div id=bottom-offset-20><div class="well well-green bottom-offset-20">class="bottom-offset-20"</div></div><hr></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>30px</p><div id=bottom-offset-30><div class="well well-green bottom-offset-30">class="bottom-offset-30"</div></div><hr></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>40px</p><div id=bottom-offset-40><div class="well well-green bottom-offset-40">class="bottom-offset-40"</div></div><hr></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>60px</p><div id=bottom-offset-60><div class="well well-green bottom-offset-60">class="bottom-offset-60"</div></div><hr></div></li></ul></div></div></section>');
+    $templateCache.put('components/offsets/demo-offsets.html', '<section ng-controller=offsetsCtrl id=offsets-html-example><div class=container><h2>Offsets Demo</h2><div class="bottom-offset-30 row"><ul class=list-unstyled><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>0px</p><hr class=hr-offset-none><div id=top-offset-0><div class="well well-blue top-offset-0">class="top-offset-0"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>5px</p><hr class=hr-offset-none><div id=top-offset-5><div class="well well-blue top-offset-5">class="top-offset-5"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>10px</p><hr class=hr-offset-none><div id=top-offset-10><div class="well well-blue top-offset-10">class="top-offset-10"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>20px</p><hr class=hr-offset-none><div id=top-offset-20><div class="well well-blue top-offset-20">class="top-offset-20"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>30px</p><hr class=hr-offset-none><div id=top-offset-30><div class="well well-blue top-offset-30">class="top-offset-30"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>40px</p><hr class=hr-offset-none><div id=top-offset-40><div class="well well-blue top-offset-40">class="top-offset-40"</div></div></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>60px</p><hr class=hr-offset-none><div id=top-offset-60><div class="well well-blue top-offset-60">class="top-offset-60"</div></div></div></li></ul></div><hr><div class=bottom-offset-10><h3>Bottom offsets <small>(by pixel modifier)</small></h3></div><div class="bottom-offset-30 row"><ul class=list-unstyled><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>0px</p><div id=bottom-offset-0><div class="well well-green bottom-offset-0">class="bottom-offset-0"</div></div><hr class=hr-offset-none></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>5px</p><div id=bottom-offset-5><div class="well well-green bottom-offset-5">class="bottom-offset-5"</div></div><hr class=hr-offset-none></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>10px</p><div id=bottom-offset-10><div class="well well-green bottom-offset-10">class="bottom-offset-10"</div></div><hr class=hr-offset-none></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>20px</p><div id=bottom-offset-20><div class="well well-green bottom-offset-20">class="bottom-offset-20"</div></div><hr class=hr-offset-none></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>30px</p><div id=bottom-offset-30><div class="well well-green bottom-offset-30">class="bottom-offset-30"</div></div><hr class=hr-offset-none></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>40px</p><div id=bottom-offset-40><div class="well well-green bottom-offset-40">class="bottom-offset-40"</div></div><hr class=hr-offset-none></div></li><li class="col-xs-12 col-sm-3"><div class="well well-gray-light offset-example"><p>60px</p><div id=bottom-offset-60><div class="well well-green bottom-offset-60">class="bottom-offset-60"</div></div><hr class=hr-offset-none></div></li></ul></div></div></section>');
     $templateCache.put('components/offsets/demo-play-offsets.html', '<section ng-controller=offsetsPLayDemoCtrl id=offsets-play-demo><div class=container><h2>Offsets Builder</h2><div></div></div></section>');
     $templateCache.put('components/pagers/demo-pagers.html', '<section ng-controller=pagersCtrl id=pagers-html-example><div class=container><h2>Pagers Demo</h2><div><div class=bottom-offset-60><h3 class=bottom-offset-40>Standard pagers</h3><div class=bottom-offset-40><ul class=pager><li><a href=javascript:;><span aria-hidden=true class=icon-ui-arrowleft></span></a></li><li><a href=javascript:;><span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div><h3>Pagers with text</h3><div class=bottom-offset-40><ul class=pager><li><a href=javascript:;><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><a href=javascript:;>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div></div></div></div></section>');
     $templateCache.put('components/pagers/demo-play-pagers.html', '<section ng-controller=pagersPLayDemoCtrl id=pagers-play-demo><div class=container><h2>Pagers Builder</h2><div></div></div></section>');
@@ -44399,11 +46144,11 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/popovers/demo-play-popovers.html', '<section ng-controller=popoversPLayDemoCtrl id=popovers-play-demo><div class=container><h2>Popovers Builder</h2><div></div></div></section>');
     $templateCache.put('components/popovers/demo-popovers.html', '<section ng-controller=popoversCtrl id=popovers-html-example><div class=container><h2>Popovers Demo</h2><div><div class=bottom-offset-40><ul class="unstyled list-inline"><li class=top-offset-20><a tabindex=0 data-trigger=focus class="btn btn-default hidden-xs" data-html=true data-toggle=popover data-placement=top data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on top &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on top</a></li><li class=top-offset-20><a tabindex=0 data-trigger=focus class="btn btn-default hidden-xs" data-html=true data-toggle=popover data-placement=right data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on right</a></li><li class=top-offset-20><a tabindex=0 data-trigger=focus class="btn btn-default hidden-xs" data-html=true data-toggle=popover data-placement=bottom data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on bottom &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on bottom</a></li><li class=top-offset-20><a tabindex=0 data-trigger=focus class="btn btn-default hidden-xs" data-html=true data-toggle=popover data-placement=left data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on left</a></li></ul></div></div></div></section>');
     $templateCache.put('components/progress-bars/demo-play-progress-bars.html', '<section ng-controller=progressBarsPLayDemoCtrl id=progress-bars-play-demo><div class=container><h2>Progress-Bars Builder</h2><div></div></div></section>');
-    $templateCache.put('components/progress-bars/demo-progress-bars.html', '<section ng-controller=progressBarsCtrl id=progress-bars-html-example><div class=container><h2>Progress-Bars Demo</h2><div class=row><div class="col-md-6 bottom-offset-20"><h4>Default</h4><div class=progress><div class=bar style="width: 60%"></div></div><h4>Default with percentage</h4><div class=progress><div class=bar style="width: 60%">60%</div></div></div></div><div class=bottom-offset-60><h4>Default progress status</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></a><div class="bar bar-progress" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status: Disabled</h4><div class="progress progress-status"><div href=javascript:; class="bar bar-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></div><div class="bar bar-progress-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status 2-Step minimum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 50%"><span class="hidden-xs hidden-sm">Payment</span></a><div class="bar bar-incomplete" style="width: 50%"><span class="hidden-xs hidden-sm">Verify &amp; submit order</span></div></div></div><div class=bottom-offset-60><h4>Progress status 6-Step maximum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 1</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 2</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 3</span></a><div class="bar bar-progress" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 4</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 5</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 6</span></div></div></div><div class=bottom-offset-60><h4>Animated Striped</h4><p>Add <code>.active</code> to <code>.progress-bar-striped</code> to animate the stripes right to left. Not available in IE9 and below.</p><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=45 aria-valuemin=0 aria-valuemax=100 style="width: 45%"><span class=sr-only>45% Complete</span></div></div></div><div class=bottom-offset-60><h4>Striped progress</h4><div ng-init=fakeAnimation()><div class="pull-right progress-counter hidden-xs"><h3 class=pull-right>{{fakeAnimationValue}}%</h3></div><div class="progress bottom-offset-5"><div ng-class=stripeAnimate class="progress-bar progress-bar-striped" role=progressbar aria-valuenow={{fakeAnimationValue}} aria-valuemin=0 aria-valuemax=100 style="width: {{fakeAnimationValue}}%"></div></div><div><p class=pull-left>Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p><div class="btn-group pull-right fake-animation-controls"><button type=reset class="btn btn-default" ng-click=resetFakeAnimation() ng-if="fakeAnimationValue !== 100">Cancel</button> <button type=submit class="btn btn-primary" ng-click=pauseFakeAnimation() ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button> <button type=submit class="btn btn-primary" ng-click=fakeAnimation() ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button> <button type=submit class="btn btn-primary" ng-if="fakeAnimationValue === 100" ng-click=resetFakeAnimation()>Ok</button></div></div></div></div></div></section>');
+    $templateCache.put('components/progress-bars/demo-progress-bars.html', '<section ng-controller=progressBarsCtrl id=progress-bars-html-example><div class=container><h2>Progress-Bars Demo</h2><div class=row><div class="col-md-6 bottom-offset-20"><h4>Default</h4><div class=progress><div class=bar style="width: 60%"></div></div><h4>Default with percentage</h4><div class=progress><div class=bar style="width: 60%">60%</div></div></div></div><div class=bottom-offset-60><h4>Default progress status</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></a><div class="bar bar-progress" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status: Disabled</h4><div class="progress progress-status"><div href=javascript:; class="bar bar-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></div><div class="bar bar-progress-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status 2-Step minimum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 50%"><span class="hidden-xs hidden-sm">Payment</span></a><div class="bar bar-incomplete" style="width: 50%"><span class="hidden-xs hidden-sm">Verify &amp; submit order</span></div></div></div><div class=bottom-offset-60><h4>Progress status 6-Step maximum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 1</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 2</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 3</span></a><div class="bar bar-progress" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 4</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 5</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 6</span></div></div></div><div class=bottom-offset-60><h4>Animated Striped</h4><p>Add <code>.active</code> to <code>.progress-bar-striped</code> to animate the stripes right to left. Not available in IE9 and below.</p><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=45 aria-valuemin=0 aria-valuemax=100 style="width: 45%"><span class=sr-only>45% Complete</span></div></div></div><div class=bottom-offset-60><h4>Striped progress</h4><div ng-init=fakeAnimation()><div class="pull-right progress-counter hidden-xs"><h4 class=pull-right>{{fakeAnimationValue}}%</h4></div><div class="progress bottom-offset-5"><div ng-class=stripeAnimate class="progress-bar progress-bar-striped" role=progressbar aria-valuenow={{fakeAnimationValue}} aria-valuemin=0 aria-valuemax=100 style="width: {{fakeAnimationValue}}%"></div></div><div><p class=pull-left>Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p><div class="btn-group pull-right fake-animation-controls"><button type=reset class="btn btn-default" ng-click=resetFakeAnimation() ng-if="fakeAnimationValue !== 100">Cancel</button> <button type=submit class="btn btn-primary" ng-click=pauseFakeAnimation() ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button> <button type=submit class="btn btn-primary" ng-click=fakeAnimation() ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button> <button type=submit class="btn btn-primary" ng-if="fakeAnimationValue === 100" ng-click=resetFakeAnimation()>Ok</button></div></div></div></div></div></section>');
     $templateCache.put('components/ratings-and-reviews/demo-play-ratings-and-reviews.html', '<section ng-controller=ratingsAndReviewsPLayDemoCtrl id=ratings-and-reviews-play-demo><div class=container><h2>Ratings-And-Reviews Builder</h2><div></div></div></section>');
     $templateCache.put('components/ratings-and-reviews/demo-ratings-and-reviews.html', '<section ng-controller=ratingsAndReviewsCtrl id=ratings-and-reviews-html-example><div class=container><h2>Ratings-And-Reviews Demo</h2><div><h3 class=top-offset-40>Star Ratings (No Reviews)</h3><div class=ratingBlock data-user-rating=0 data-review-stars data-histogram=no></div><h3 class=top-offset-40>Star Ratings (Reviews)</h3><div class=ratingBlock data-user-rating=5 data-review-stars=[2,6,12,34,7] data-histogram=no></div><h3 class=top-offset-40>Star Ratings (Reviews w/Histogram)</h3><div class=ratingBlock data-user-rating=5 data-review-stars=[12,12,23,54,107] data-histogram=yes></div></div><div><h3 class=top-offset-40>Recommendation Ratio</h3><div class=recoRatio data-recs=74 data-total=91></div></div><div><h3 class=top-offset-40>Customer Review Quote</h3><div class=revQuote data-quote="When I received the XPS 16 I was so surprised at how thin, sharp, and stylish the XPS 16 was." data-attribution="jevester, September 24, 2009"></div></div><div><h3 class=top-offset-40>Like / Dislike</h3>Was this review helpful?<div class=likeDislike data-yes=74 data-no=6></div><span class=text-blue>Report review</span><div class=nonlink></div></div><div><h3 class=top-offset-40>Individual Ratings</h3><div class="ind-rating-block pull-left"><div class=ratingBlock data-user-rating=5 data-review-stars=[2,6,12,34,7] data-histogram=no></div><div class="individual-rating pull-left" data-rating-label=Features data-user-rating=4.4></div><div class="individual-rating pull-left" data-rating-label=Performance data-user-rating=4.4></div><div class="individual-rating pull-left" data-rating-label=Value data-user-rating=5></div><div class="individual-rating pull-left" data-rating-label="Customer Service" data-user-rating=4.1></div><div class="individual-rating pull-left" data-rating-label="Operating System" data-user-rating=4.1></div></div></div></div></section>');
     $templateCache.put('components/responsive-utilities/demo-play-responsive-utilities.html', '<section ng-controller=responsiveUtilitiesPLayDemoCtrl id=responsive-utilities-play-demo><div class=container><h2>Responsive-Utilities Builder</h2><div></div></div></section>');
-    $templateCache.put('components/responsive-utilities/demo-responsive-utilities.html', '<section ng-controller=responsiveUtilitiesCtrl id=responsive-utilities-html-example><div class=container><h2 class=bottom-offset-30>Responsive-Utilities Demo</h2><div class=bottom-offset-30><h3>Available classes</h3><p>Use a single or combination of the available classes for toggling content across viewport breakpoints.</p><div class=table-responsive><table class="table table-bordered table-striped responsive-utilities"><thead><tr><th></th><th>Extra small devices<br><small>Phones (&lt;768px)</small></th><th>Small devices<br><small>Tablets (\u2265768px)</small></th><th>Medium devices<br><small>Desktops (\u2265992px)</small></th><th>Large devices<br><small>Desktops (\u22651200px)</small></th></tr></thead><tbody><tr><th><code>.visible-xs</code></th><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td></tr><tr><th><code>.visible-sm</code></th><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td></tr><tr><th><code>.visible-md</code></th><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr><tr><th><code>.visible-lg</code></th><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr></tbody><tbody><tr><th><code>.hidden-xs</code></th><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td></tr><tr><th><code>.hidden-sm</code></th><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td></tr><tr><th><code>.hidden-md</code></th><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr><tr><th><code>.hidden-lg</code></th><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr></tbody></table></div></div><div><h3>Print classes</h3><p>Similar to the regular responsive classes, use these for toggling content for print.</p><div class=table-responsive><table class="table table-bordered table-striped responsive-utilities"><thead><tr><th>Class</th><th>Browser</th><th>Print</th></tr></thead><tbody><tr><th><code>.visible-print</code></th><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr><tr><th><code>.hidden-print</code></th><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr></tbody></table></div></div></div></section>');
+    $templateCache.put('components/responsive-utilities/demo-responsive-utilities.html', '<section ng-controller=responsiveUtilitiesCtrl id=responsive-utilities-html-example><div class=container><h2 class=bottom-offset-30>Responsive-Utilities Demo</h2><div class=bottom-offset-30><h3>Available classes</h3><p>Use a single or combination of the available classes for toggling content across viewport breakpoints.</p><div><table class="table table-bordered table-striped"><thead><tr><th></th><th>Extra small devices<br><small>Phones (&lt;768px)</small></th><th>Small devices<br><small>Tablets (\u2265768px)</small></th><th>Medium devices<br><small>Desktops (\u2265992px)</small></th><th>Large devices<br><small>Desktops (\u22651200px)</small></th></tr></thead><tbody><tr><td><code>.visible-xs-*</code></td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td></tr><tr><td><code>.visible-sm-*</code></td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td></tr><tr><td><code>.visible-md-*</code></td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr><tr><td><code>.visible-lg-*</code></td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr></tbody><tbody><tr><td><code>.hidden-xs</code></td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td></tr><tr><td><code>.hidden-sm</code></td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td></tr><tr><td><code>.hidden-md</code></td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr><tr><td><code>.hidden-lg</code></td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr></tbody></table></div></div><div><h3>Print classes</h3><p>Similar to the regular responsive classes, use these for toggling content for print.</p><div class=table-responsive><table class="table table-bordered table-striped responsive-utilities"><thead><tr><td>Class</td><td>Browser</td><td>Print</td></tr></thead><tbody><tr><td><code>.visible-print</code></td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr><tr><td><code>.hidden-print</code></td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr></tbody></table></div></div></div></section>');
     $templateCache.put('components/search-and-navigation/demo-play-search-and-navigation.html', '<section ng-controller=searchAndNavigationPLayDemoCtrl id=search-and-navigation-play-demo><div class=container><h2>Search-And-Navigation Builder</h2><div></div></div></section>');
     $templateCache.put('components/search-and-navigation/demo-search-and-navigation.html', '<section ng-controller=searchAndNavigationCtrl id=search-and-navigation-html-example><div class=container><h2>Search-And-Filtering Demo</h2><div><div data-ng-app data-ng-controller=myCheckboxCtrl><div class=row><h2>Filtering</h2></div><div class=row><h3>Filter by checkbox</h3></div><div class=row id=filter-checkbox><div class="pull-left col-sm-3 col-xs-12"><p>Narrow your search by screen size</p><label class=pull-left ng-repeat="c in classes"><input type=checkbox ng-model="selected[c]"> <span>{{c}}</span></label></div><div class="col-sm-9 col-xs-12"><div class="pull-left searchCard text-center well-gray" ng-repeat="card in cards | filter:showCards"><h3>{{card.name}}</h3><em>{{card.size}}</em><br><em>{{card.price}}</em></div></div></div></div><hr><div data-ng-app data-ng-controller=myDDCtrl><div class=row><h3>Filter by dropdown</h3></div><div class=row id=filter-drop><div class="pull-left col-sm-3 col-xs-12"><p class="text-left top-padding-5">Screen size:</p><select ng-model=screenSize ng-options="item.size for item in filterOptions.sizes"><option value="" selected>-- Select your Size --</option></select><div><p class="text-left top-padding-5">Price:</p><select ng-model=priceRange ng-options="item.pricerange for item in filterOptions.prices"><option value="" selected>-- Select your Range --</option></select></div></div><div class="col-sm-9 col-xs-12"><div class="pull-left searchCard text-center well-gray" ng-repeat="item in data | filter:screenSize | filter:priceRange"><h3>{{item.name}}</h3><em>{{item.size}}</em><br><em>{{item.pricerange}}</em></div></div></div></div></div></div></section>');
     $templateCache.put('components/standard-buttons/demo-play-standard-buttons.html', '<section ng-controller=standardButtonsPLayDemoCtrl id=standard-buttons-play-demo><div class=container><h2>Standard-Buttons Builder</h2><div></div></div></section>');
@@ -44411,11 +46156,11 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/tables/demo-play-tables.html', '<section ng-controller=tablesPLayDemoCtrl id=tables-play-demo><div class=container><h2>Tables Builder</h2><div></div></div></section>');
     $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><div><h3>Data Tables - Simple</h3></div><div class=bottom-offset-20><div class=data-table-simple><table class=table data-toggle=table data-url=components\\tables\\data.json data-show-columns=true><thead><tr><th data-field="Column 1" data-sortable=true data-formatter=nameFormatter>Column 1</th><th data-field="Column 2" data-sortable=true>Column 2</th><th data-field="Column 3" data-sortable=true>Column 3</th><th data-field="Column 4" data-sortable=true>Column 4</th><th data-field="Column 5" data-sortable=false>Column 5</th><th data-field="Column 6" data-sortable=true>Column 7</th><th data-field="Column 7" data-sortable=true>Column 7</th></tr></thead></table></div></div><div><h3>Data Tables - Simple w/ optional zebra striping</h3></div><div class=bottom-offset-20><div id="data-table-simple bootstrap-table"><table data-toggle=table data-url=components\\tables\\data.json data-sort-name="Column 1" data-sort-order=asc class="table table-hover table-striped bootstrap-table"><thead><tr><th data-field="Column 1" data-sortable=true data-formatter=nameFormatter>Column 1</th><th data-field="Column 2" data-sortable=true>Column 2</th><th data-field="Column 3" data-sortable=true>Column 3</th><th data-field="Column 4" data-sortable=true>Column 4</th><th data-field="Column 5" data-sortable=false>Column 5</th><th data-field="Column 6" data-sortable=true>Column 7</th><th data-field="Column 7" data-sortable=true>Column 7</th></tr></thead></table></div></div></div></section>');
     $templateCache.put('components/tabs/demo-play-tabs.html', '<section ng-controller=tabsPLayDemoCtrl id=tabs-play-demo><div class=container><h2>Tabs Builder</h2><div></div></div></section>');
-    $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs" role=tablist><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home</a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile</a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages</a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings</a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Home is the best place!</div></div></div><div role=tabpanel class="tab-pane fade" id=profile><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. What is this?</div></div></div><div role=tabpanel class="tab-pane fade" id=messages><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. You\'ve got mail!</div></div></div><div role=tabpanel class="tab-pane fade" id=settings><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Default settings or custom!</div></div></div></div></div></div><h3>Tabs <small>(justified)</small></h3><div class=bottom-offset-60><div class="row row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#trains aria-controls=home role=tab data-toggle=tab>Trains</a></li><li role=presentation><a href=#automobile role=tab data-toggle=tab>Automobile</a></li><li role=presentation><a href=#boats role=tab data-toggle=tab>Boats</a></li><li role=presentation><a href=#planes role=tab data-toggle=tab>Planes</a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=trains><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. I like trains</div></div></div><div role=tabpanel class="tab-pane fade" id=automobile><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Cars go fast</div></div></div><div role=tabpanel class="tab-pane fade" id=boats><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Boats are fun in summer</div></div></div><div role=tabpanel class="tab-pane fade" id=planes><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Your content goes here. Planes take me places fast</div></div></div></div></div></div></div></section>');
+    $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs" role=tablist><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home</a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile</a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages</a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings</a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</div></div></div><div role=tabpanel class="tab-pane fade" id=profile><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. Vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</div></div></div><div role=tabpanel class="tab-pane fade" id=messages><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</div></div></div><div role=tabpanel class="tab-pane fade" id=settings><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Vivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</div></div></div></div></div></div><h3>Tabs <small>(justified)</small></h3><div class=bottom-offset-60><div class="row row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#trains aria-controls=home role=tab data-toggle=tab>Trains</a></li><li role=presentation><a href=#automobile role=tab data-toggle=tab>Automobile</a></li><li role=presentation><a href=#boats role=tab data-toggle=tab>Boats</a></li><li role=presentation><a href=#planes role=tab data-toggle=tab>Planes</a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=trains><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Aute gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div></div><div role=tabpanel class="tab-pane fade" id=automobile><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Magna biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div></div><div role=tabpanel class="tab-pane fade" id=boats><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Yr nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div></div><div role=tabpanel class="tab-pane fade" id=planes><div class="offcanvas-back-btn well visible-xs-block"><button class="btn btn-link" data-toggle=offcanvas>Back</button></div><div class=row><div class=col-xs-12>Leggings biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div></div></div></section>');
     $templateCache.put('components/tooltips/demo-play-tooltips.html', '<section ng-controller=tooltipsPLayDemoCtrl id=tooltips-play-demo><div class=container><h2>Tooltips Builder</h2><div></div></div></section>');
     $templateCache.put('components/tooltips/demo-tooltips.html', '<section ng-controller=tooltipsCtrl id=tooltips-html-example><div class=container><h2 class=bottom-offset-20>Tooltips Demo</h2><ul class="unstyled list-inline"><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Tooltip on bottom with simple filler copy">Tooltip on top</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=right data-original-title="Tooltip on left with simple filler copy">Tooltip on right</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=bottom data-original-title="Tooltip on bottom with simple filler copy">Tooltip on bottom</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=left data-original-title="Tooltip on left with simple filler copy">Tooltip on left</a></li></ul></div></section>');
     $templateCache.put('components/typography/demo-play-typography.html', '<section ng-controller=typographyPLayDemoCtrl id=typography-play-demo></section>');
-    $templateCache.put('components/typography/demo-typography.html', '<section ng-controller=typographyCtrl id=typography-html-example><div class=container><h2>Typography Demo</h2><div class=well><table class="table bottom-offset-0"><tr><td><div id=h1-example class=hide><h1>Heading 1</h1></div><h1 class=visible-lg>H1 : 32px/40px</h1><h1 class=visible-md>H1 : 32px/40px</h1><h1 class=visible-sm>H1 : 30px/36px</h1><h1 class=visible-xs>H1 : 24px/28px</h1><p><small>Font-family: museo-sans-for-dell-300</small></p></td></tr><tr><td><div id=h2-example class=hide><h2>Heading 2</h2></div><h2 class=visible-lg>H2 : 28px/32px</h2><h2 class=visible-md>H2 : 28px/32px</h2><h2 class=visible-sm>H2 : 26px/30px</h2><h2 class=visible-xs>H2 : 20px/24px</h2><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><div id=heading-3-feature class=hide><h3 class=feature>Heading 3 feature</h3></div><h3 class="visible-lg feature">H3 "feature" : 24px/28px</h3><h3 class="visible-md feature">H3 "feature" : 24px/28px</h3><h3 class="visible-sm feature">H3 "feature" : 22px/26px</h3><h3 class="visible-xs feature">H3 "feature" : 18px/22px</h3><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><div id=h3-example class=hide><h3>Heading 3</h3></div><h3 class=visible-lg>H3 : 20px/24px</h3><h3 class=visible-md>H3 : 20px/24px</h3><h3 class=visible-sm>H3 : 20px/24px</h3><h3 class=visible-xs>H3 : 17px/20px</h3><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><div id=h4-example class=hide><h4>Heading 4</h4></div><h4 class=visible-lg>H4 : 18px/22px</h4><h4 class=visible-md>H4 : 18px/22px</h4><h4 class=visible-sm>H4 : 18px/22px</h4><h4 class=visible-xs>H4 : 16px/20px</h4><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><div id=h5-example class=hide><h5>Heading 5</h5></div><h5 class=visible-lg>H5 : 16px/20px</h5><h5 class=visible-md>H5 : 16px/20px</h5><h5 class=visible-sm>H5 : 16px/20px</h5><h5 class=visible-xs>H5 : 14px/20px</h5><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><div id=bold-16-example class=hide><p class=bold-16>bold-16</p></div><p class="bold-16 bottom-offset-0">bold-16</p><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><div id=bold-14-example class=hide><p class=bold-14>bold-14</p></div><p class="bold-14 bottom-offset-0">bold-14</p><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><div id=bold-12-example class=hide><p class=bold-12>bold-12</p></div><p class="bold-12 bottom-offset-0">bold-12</p><p><small>Font-family: Trebuchet MS</small></p></td></tr></table></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-20"><div><h3>Example body text <small>(default)</small></h3><div id=example-body-text><p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p></div><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p></div><div class="top-offset-30 bottom-offset-20"><h3>Example small text <small>(fine print)</small></h3><div><p id=example-small-body-text><small>This copy is meant to be treated as fine print. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</small></p><p><small>This copy is meant to be treated as fine print. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</small></p></div></div></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-20"><h3 class=text-rtl>Example body text <small>(default)</small></h3><p class=text-rtl>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p><p class=text-rtl>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p><div class="top-offset-30 bottom-offset-20"><h3 class=text-rtl>Example small text <small>(fine print)</small></h3><p class=text-rtl><small>This copy is meant to be treated as fine print. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</small></p><p class=text-rtl><small>This copy is meant to be treated as fine print. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</small></p></div></div></div><div class=bottom-offset-40><h3>Example bold copy</h3><div class="well well-sm bottom-offset-40"><div id=strong-text><strong>Text rendered as bold text</strong></div></div><h3>Example italicized copy</h3><div class="well well-sm bottom-offset-40"><div id=italic-text><em>Text rendered as italicized text</em></div></div></div><h3>Example colored text</h3><div class="well well-sm" style="background: #ddd"><p class=text-gray-dark>This text is <strong>text-gray-dark</strong> <small>&nbsp;(default)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-blue>This text is <strong>text-blue</strong> <small>&nbsp;(Brand name: Dell Blue)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-dark-blue>This text is <strong>text-dark-blue</strong> <small>&nbsp;(Brand name: Dell Dark Blue)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-purple>This text is <strong>text-purple</strong> <small>&nbsp;(Brand name: Dell Purple)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-berry>This text is <strong>text-berry</strong> <small>&nbsp;(Brand name: Dell Berry)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-red>This text is <strong>text-red</strong> <small>&nbsp;(Brand name: Dell Red)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-red-dark>This text is <strong>text-red-dark</strong> <small>&nbsp;(Brand name: Dell Dark Red)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-white>This text is <strong>text-white</strong> <small>&nbsp;(Brand name: White)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-gray-medium>This text is <strong>text-gray-medium</strong> <small>&nbsp;(Brand name: 75% Dell Dark Gray)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-gray-dark>This text is <strong>text-gray-dark</strong> <small>&nbsp;(Brand name: Dell Dark Gray)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-orange>This text is <strong>text-orange</strong> <small>&nbsp;(Brand name: Dell Orange)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-green>This text is <strong>text-orange</strong> <small>&nbsp;(Brand name: Dell Green)</small> .</p></div><h3>Example text alignment</h3><div class="well well-sm"><div id=left-aligned-text><p class=text-left>Left aligned text.</p></div><hr><div id=center-aligned-text><p class=text-center>Center aligned text.</p></div><hr><div id=right-aligned-text><p class=text-right>Right aligned text.</p></div></div><h3>Example strikethrough</h3><div class="well well-sm bottom-offset-40"><div id=strikethrough-text><p class=strike-through>This is an example of strikethrough text.</p></div></div></div></section>');
+    $templateCache.put('components/typography/demo-typography.html', '<section ng-controller=typographyCtrl id=typography-html-example><div class=container><h2>Typography Demo</h2><div class=well><table class="table bottom-offset-0"><tr><td><h1 class=visible-lg>H1 : 32px/40px</h1><h1 class=visible-md>H1 : 32px/40px</h1><h1 class=visible-sm>H1 : 30px/36px</h1><h1 class=visible-xs>H1 : 24px/28px</h1><p><small>Font-family: museo-sans-for-dell-300</small></p></td></tr><tr><td><h2 class=visible-lg>H2 : 28px/32px</h2><h2 class=visible-md>H2 : 28px/32px</h2><h2 class=visible-sm>H2 : 26px/30px</h2><h2 class=visible-xs>H2 : 20px/24px</h2><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><h3 class="visible-lg feature">H3 "feature" : 24px/28px</h3><h3 class="visible-md feature">H3 "feature" : 24px/28px</h3><h3 class="visible-sm feature">H3 "feature" : 22px/26px</h3><h3 class="visible-xs feature">H3 "feature" : 18px/22px</h3><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><h3 class=visible-lg>H3 : 20px/24px</h3><h3 class=visible-md>H3 : 20px/24px</h3><h3 class=visible-sm>H3 : 20px/24px</h3><h3 class=visible-xs>H3 : 17px/20px</h3><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><h4 class=visible-lg>H4 : 18px/22px</h4><h4 class=visible-md>H4 : 18px/22px</h4><h4 class=visible-sm>H4 : 18px/22px</h4><h4 class=visible-xs>H4 : 16px/20px</h4><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><h5 class=visible-lg>H5 : 16px/20px</h5><h5 class=visible-md>H5 : 16px/20px</h5><h5 class=visible-sm>H5 : 16px/20px</h5><h5 class=visible-xs>H5 : 14px/20px</h5><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><p class="bold-16 bottom-offset-0">bold-16</p><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><p class="bold-14 bottom-offset-0">bold-14</p><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><p class="bold-12 bottom-offset-0">bold-12</p><p><small>Font-family: Trebuchet MS</small></p></td></tr></table></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-20"><h3>Example body text <small>(default)</small></h3><div id=example-body-text><p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p></div><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p><div class="top-offset-30 bottom-offset-20"><h3>Example small text <small>(fine print)</small></h3><p id=example-small-body-text><small>This copy is meant to be treated as fine print. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</small></p><p><small>This copy is meant to be treated as fine print. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</small></p></div></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-20"><h3 class=text-rtl>Example body text <small>(default)</small></h3><p class=text-rtl>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p><p class=text-rtl>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p><div class="top-offset-30 bottom-offset-20"><h3 class=text-rtl>Example small text <small>(fine print)</small></h3><p class=text-rtl><small>This copy is meant to be treated as fine print. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</small></p><p class=text-rtl><small>This copy is meant to be treated as fine print. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</small></p></div></div></div><div class=bottom-offset-40><h3>Example bold copy</h3><div class="well well-sm bottom-offset-40"><div id=strong-text><strong>Text rendered as bold text</strong></div></div><h3>Example italicized copy</h3><div class="well well-sm bottom-offset-40"><div id=italic-text><em>Text rendered as italicized text</em></div></div></div><h3>Example colored text</h3><div class="well well-sm" style="background: #ddd"><p class=text-gray-dark>This text is <strong>text-gray-dark</strong> <small>&nbsp;(default)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-blue>This text is <strong>text-blue</strong> <small>&nbsp;(Brand name: Dell Blue)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-dark-blue>This text is <strong>text-dark-blue</strong> <small>&nbsp;(Brand name: Dell Dark Blue)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-purple>This text is <strong>text-purple</strong> <small>&nbsp;(Brand name: Dell Purple)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-berry>This text is <strong>text-berry</strong> <small>&nbsp;(Brand name: Dell Berry)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-red>This text is <strong>text-red</strong> <small>&nbsp;(Brand name: Dell Red)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-red-dark>This text is <strong>text-red-dark</strong> <small>&nbsp;(Brand name: Dell Dark Red)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-white>This text is <strong>text-white</strong> <small>&nbsp;(Brand name: White)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-gray-medium>This text is <strong>text-gray-medium</strong> <small>&nbsp;(Brand name: 75% Dell Dark Gray)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-gray-dark>This text is <strong>text-gray-dark</strong> <small>&nbsp;(Brand name: Dell Dark Gray)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-orange>This text is <strong>text-orange</strong> <small>&nbsp;(Brand name: Dell Orange)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-green>This text is <strong>text-orange</strong> <small>&nbsp;(Brand name: Dell Green)</small> .</p></div><h3>Example text alignment</h3><div class="well well-sm"><div id=left-aligned-text><p class=text-left>Left aligned text.</p></div><hr><div id=center-aligned-text><p class=text-center>Center aligned text.</p></div><hr><div id=right-aligned-text><p class=text-right>Right aligned text.</p></div></div><h3>Example strikethrough</h3><div class="well well-sm bottom-offset-40"><div id=strikethrough-text><p class=strike-through>This is an example of strikethrough text.</p></div></div></div></section>');
     $templateCache.put('demo-assets/partials/all-components/all-components.html', '<div ng-controller=AllComponentsCtrl><h2>All components</h2>testing auto deploy<ul><li ng-repeat="item in components"><a href=#/demo/{{item.id}}>{{item.label}} demo</a> | <a href=#/play/{{item.id}}>play</a></li></ul></div>');
     $templateCache.put('demo-assets/partials/demo/demo.html', '<div ng-controller=ComponentsDemoCtrl><div ng-if=activeComponent ng-include=componentDemoUrl></div><div ng-if=!activeComponent class=container ng-include="\'demo-assets/partials/all-components/all-components.html\'"></div></div>');
     $templateCache.put('demo-assets/partials/home/home.html', '<div ng-controller=HomeCtrl><nav class="navbar navbar-inverse"><div class=container><div class=row><div class="navbar-header col-sm-9"><button type=button class="navbar-toggle collapsed" data-toggle=collapse data-target=#navbar aria-expanded=false aria-controls=navbar><span class=sr-only>Toggle navigation</span> <span class=icon-bar></span> <span class=icon-bar></span> <span class=icon-bar></span></button> <a class=navbar-brand href=#><i class=icon-ui-dell style="font-size: 42px;\r' + '\n' + '                          position: relative;\r' + '\n' + '                          top: -12px"></i> <span style="position: relative;\r' + '\n' + '                            top: -22px;\r' + '\n' + '                            left: -5px;\r' + '\n' + '                            font-size: 20px">Dell UI Components Demo</span></a></div><div id=navbar class="collapse navbar-collapse col-sm-3 pull-right" ng-if=activeComponent><div class="btn-group pull-right top-offset-10"><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;><span ng-if=activeComponent>{{activeComponent.label}}</span> <i class=caret></i></a><ul class=dropdown-menu><li><a href=#/demo>All components</a></li><li ng-repeat="item in components"><a href=#{{pageType}}/{{item.id}}>{{item.label}}</a></li></ul></div></div></div></div></nav><div class=container ng-if=activeComponent><div class="btn-group demo-play-switcher"><a href=#demo/{{activeComponent.id}} class="btn btn-default btn-xs" ng-class="{\'btn-primary\':pageType === \'demo\'}">Demo</a> <a href=#play/{{activeComponent.id}} class="btn btn-default btn-xs" ng-class="{\'btn-primary\':pageType === \'play\'}">Play</a></div></div><div id=component-{{pageType}} ng-include="\'demo-assets/partials/\'+pageType+\'/\'+pageType+\'.html\'"></div></div>');
