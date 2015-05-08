@@ -100,7 +100,21 @@ return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
         link: function($scope, element, attributes, controller) {
 
-            $("input.slider").bootstrapSlider();
+            //$("input.slider").bootstrapSlider();
+
+            // With JQuery
+            $('#ex1').bootstrapSlider({
+                formatter: function(value) {
+                    return 'Current value: ' + value;
+                }
+            });
+
+            //// Without JQuery
+            //var slider = new Slider('#ex1', {
+            //    formatter: function(value) {
+            //        return 'Current value: ' + value;
+            //    }
+            //});
         }
     };
 })
