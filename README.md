@@ -170,3 +170,12 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 * To prevent a script or link tag from being removed from the finalized `index.html`, use a `data-remove="false"` attribute.
 
 
+### Version history:
+You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
+```
+#1.0.0 - Initial publish of components
+#1.0.1 - Upgraded to Bootstrap 3.3.1 and had minor fixes
+#1.0.2 - Upgraded to Bootstrap 3.3.4 and had minor fixes
+#1.0.3 - Fixed issues with broken images.
+...
+```
