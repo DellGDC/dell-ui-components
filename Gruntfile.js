@@ -32,12 +32,16 @@ var createFolderGlobs = function (fileTypePatterns) {
         .concat(fileTypePatterns);
 };
 
+
+
 module.exports = function (grunt) {
 
     // load all grunt tasks
     require('load-grunt-tasks')(grunt);
     grunt.loadNpmTasks('grunt-prompt');
     grunt.loadNpmTasks('grunt-string-replace');
+
+
 
     // Project configuration.
     grunt.initConfig({
@@ -115,6 +119,7 @@ module.exports = function (grunt) {
                     {src: ['components/components-list.json'], dest: 'dist/components-list.json'},
                     {src: ['temp/dell-ui-components.js'], dest: 'dist/dell-ui-components/dell-ui-components.js'},
                     {src: ['temp/demo.js'], dest: 'dist/demo.js'},
+                    {src: ['components/**/*.gif','components/**/*.jpg','components/**/*.png','components/**/*.svg','!components/**/demo*','!components/**/test*','!components/**/FPO*'], dest: 'dist/dell-ui-components/img/'},
                     {src: ['README.md'], dest: 'dist/README.md'},
                     {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components/dell-ui-components.css'},
                     {cwd: 'bower_components/dell-ui-bootstrap/dist/', src: ['**'], dest: 'dist/dell-ui-bootstrap/', expand:true}
@@ -271,6 +276,22 @@ module.exports = function (grunt) {
                         {
                             pattern: /\/* Add Component LESS Above *\//ig,
                             replacement: ''
+                        },
+                        {
+                            pattern: /url\(\'forms/g,
+                            replacement: "url('img/components/forms"
+                        },
+                        {
+                            pattern: /url\(\'announcements/g,
+                            replacement: "url('img/components/announcements"
+                        },
+                        {
+                            pattern: /url\(\'icons/g,
+                            replacement: "url('img/components/icons"
+                        },
+                        {
+                            pattern: /url\(\'standard-buttons/g,
+                            replacement: "url('img/components/standard-buttons"
                         }
 
 
@@ -283,6 +304,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['jshint', 'clean:before', 'less', 'dom_munger', 'ngtemplates', 'cssmin', 'concat', 'ngmin','string-replace', 'uglify', 'copy', 'htmlmin', 'clean:after']);
     grunt.registerTask('serve', ['dom_munger:read', 'jshint', 'connect', 'watch']);
     grunt.registerTask('test', ['dom_munger:read', 'karma:all_tests']);
+    grunt.registerTask('testcopy', ['copy:test']);
     grunt.registerTask('component', 'Builds a Dell-UI-Component componentt and demo files', function () {
         var hasErrors = false,
             componentsToBuild = this.args,
@@ -307,7 +329,6 @@ module.exports = function (grunt) {
             _.each(componentsToBuild, function (component) {
 
                 var dashedId = _.str.dasherize(component);
-
                 grunt.log.writeln("Copying files for " + component + " component");
                 if (grunt.file.isDir(targetPath + dashedId)) {
                     grunt.log.error("We are sorry, the component you requested (" + component + ") already exists.");

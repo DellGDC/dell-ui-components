@@ -130,7 +130,7 @@ blockquote .blockquote-links li + li::before {
   height: 40px;
   margin-left: -42px;
   margin-top: 2px;
-  background: url('announcements/dell-advantage-star.svg') no-repeat;
+  background: url('img/components/announcements/dell-advantage-star.svg') no-repeat;
   background-size: 30px 30px;
   float: left;
 }
@@ -149,7 +149,7 @@ blockquote .blockquote-links li + li::before {
   height: 40px;
   margin-left: -45px;
   margin-top: -5px;
-  background: url('announcements/dell-preferred-account.svg') no-repeat;
+  background: url('img/components/announcements/dell-preferred-account.svg') no-repeat;
   background-size: 35px 35px;
   float: left;
 }
@@ -159,7 +159,7 @@ blockquote .blockquote-links li + li::before {
   height: 40px;
   margin-right: -50px;
   margin-top: -5px;
-  background: url('announcements/dell-preferred-account.svg') no-repeat;
+  background: url('img/components/announcements/dell-preferred-account.svg') no-repeat;
   background-size: 35px 35px;
   float: left;
 }
@@ -213,7 +213,7 @@ blockquote .blockquote-links li + li::before {
 /* tap-to-load-rule NOTE: not part of Bootstrap*/
 .tap-to-load-rule {
   text-align: center;
-  background: url(app/dell-ui-bootstrap/img/gray-dark-dot-line.png) repeat-x;
+  background: url('img/components/standard-buttons/gray-dark-dot-line.png') repeat-x;
   background-position: 50% 30%;
   margin-bottom: 20px;
   display: block;
@@ -2199,10 +2199,10 @@ a {
   width: 20px;
   height: 25px;
   content: "\e252";
-  background: url('/components/forms/multiple-select.png') left top no-repeat;
+  background: url('img/components/forms/multiple-select.png') left top no-repeat;
 }
 .ms-choice > div.open {
-  background: url('/components/forms/multiple-select.png') right top no-repeat;
+  background: url('img/components/forms/multiple-select.png') right top no-repeat;
   right: -2px;
 }
 .ms-choice:focus {
@@ -2313,13 +2313,13 @@ a {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  background: #ffffff url('app/dell-ui-bootstrap/img/multiple-select.png') no-repeat 100% -22px;
-  background: url('app/dell-ui-bootstrap/img/multiple-select.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #ffffff), color-stop(0.99, #eeeeee));
-  background: url('app/dell-ui-bootstrap/img/multiple-select.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
-  background: url('app/dell-ui-bootstrap/img/multiple-select.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
-  background: url('app/dell-ui-bootstrap/img/multiple-select.png') no-repeat 100% -22px, -o-linear-gradient(bottom, #ffffff 85%, #eeeeee 99%);
-  background: url('app/dell-ui-bootstrap/img/multiple-select.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
-  background: url('app/dell-ui-bootstrap/img/multiple-select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+  background: #ffffff url('img/components/forms/multiple-select.png') no-repeat 100% -22px;
+  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #ffffff), color-stop(0.99, #eeeeee));
+  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -o-linear-gradient(bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
 }
 .ms-search,
 .ms-search input {
@@ -2536,7 +2536,7 @@ a {
  *------------------------------------------------------------------------------------------
  */
 [class^=icon-social] {
-  background: url('icons/social-img/icon-sm-sprite.png') no-repeat top left;
+  background: url('img/components/icons/social-img/icon-sm-sprite.png') no-repeat top left;
   width: 24px;
   height: 24px;
   display: block;
