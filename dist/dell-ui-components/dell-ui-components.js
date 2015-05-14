@@ -7424,9 +7424,7 @@ angular.module('dellUiComponents').directive('alertCollapsible', function () {
     }
   };
 });
-console.log('hello woo');
 angular.module('dellUiComponents').directive('table', function () {
-  console.log('woohoo');
   // Runs during compile
   return {
     scope: {},
