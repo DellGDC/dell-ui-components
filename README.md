@@ -4,7 +4,7 @@
 # Installation
 
 Installation of dell-ui-components has a few dependencies:
-  - AngularJS, 
+  - AngularJS,
   - jQuery
   - dell-ui-bootstrap css. (included in this package)
 
@@ -74,7 +74,7 @@ Features
    * It uses an Angular annotation library so you don't have to use the Angular injection syntax for safe minification (i.e. you dont need `$inject` or `(['$scope','$http',...`.
 
      (note) While [grunt-ng-annotate](https://github.com/olov/ng-annotate) is the new defacto angular annotator, there are issues with it in this environment (windows) so the environment is currently using ngmin which has be deprecated but still works perfectly.
-   * Custom grunt script to create a new package component and creates all files needed: `grunt component my-component` 
+   * Custom grunt script to create a new package component and creates all files needed: `grunt component my-component`
    * Custom grunt script to create a new package directive and create all files needed: `grunt directive my-directive`
    * `grunt serve` task allows you to run a simple development server with watch/livereload enabled .  `http:localhost:9002` Additionally, JSHint and the appropriate unit tests are run for the changed files.
 * Integrates Bower for package management
@@ -177,5 +177,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 #1.0.1 - Upgraded to Bootstrap 3.3.1 and had minor fixes
 #1.0.2 - Upgraded to Bootstrap 3.3.4 and had minor fixes
 #1.0.3 - Fixed issues with broken images.
+#1.0.4 - Fixed issues accordions not displaying in wells correctly. Fixed tool-tip transparent background. Fix offsets examples.
 ...
 ```

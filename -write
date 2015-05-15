@@ -1,0 +1,17 @@
+grunt build add
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch SSI_components
+# Your branch is up-to-date with 'origin/SSI_components'.
+#
+ Changes to be committed:
+	modified:   README.md
+	modified:   bower.json
+	modified:   dist/README.md
+	modified:   dist/dell-ui-components/dell-ui-components.css
+	modified:   dist/dell-ui-components/dell-ui-components.min.css
+	modified:   dist/demo.js
+	modified:   dist/demo.min.css
+	modified:   dist/demo.min.js
+	modified:   package.json
+	

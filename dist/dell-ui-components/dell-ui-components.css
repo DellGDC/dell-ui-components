@@ -2639,6 +2639,11 @@ a {
  * Offsets component theme overrides
  *------------------------------------------------------------------------------------------
  */
+.hr-offset-demo {
+  margin-bottom: 0;
+  margin-top: 0;
+  border-top: 1px solid red;
+}
 /*
  * Pagers component theme overrides
  *------------------------------------------------------------------------------------------
@@ -3282,6 +3287,16 @@ label {
 }
 [data-toggle="collapse"] .when-collapsed {
   display: none;
+}
+.well-white .panel-heading,
+.white .panel-heading {
+  background: none;
+}
+.panel-group {
+  border-top: none;
+}
+.panel-collapse.collapse.in {
+  border-bottom: none;
 }
 .inline-image-content-links {
   min-height: 20px;
