@@ -3,95 +3,110 @@
     <div class="container">
         <h2>Tables Demo</h2>
 
-		<div>
-            <h3>
-                Data Tables - Simple
-        </div>
+        <h3>
+            Data Tables - Simple
+        </h3>
         <div class="bottom-offset-20">
-            <div class="data-table-simple">
-	            <table class="table" data-toggle="table" data-url="components\tables\data.json" data-show-columns="true">
-				    <thead>
-					    <tr>
-					        <th data-field="Column 1" 
-					            data-sortable="true"
-					            data-formatter="nameFormatter">
-					                Column 1
-					        </th>
-					        <th data-field="Column 2" 
-					            data-sortable="true">
-					                Column 2
-					        </th>
-					        <th data-field="Column 3" 
-					            data-sortable="true">
-					                Column 3
-					        </th>
-					        <th data-field="Column 4" 
-					            data-sortable="true">
-					                Column 4
-					        </th>
-					        <th data-field="Column 5" 
-					            data-sortable="false">
-					                Column 5
-					        </th>
-					        <th data-field="Column 6" 
-					            data-sortable="true">
-					                Column 7
-					        </th>
-					        <th data-field="Column 7" 
-					            data-sortable="true">
-					                Column 7
-					        </th>
-					    </tr>
-				    </thead>
-				</table>
-			</div>
-        </div>
-        <div>
-            <h3>
-                Data Tables - Simple w/ optional zebra striping
-        </div>
-        <div class="bottom-offset-20">
-            <div id="data-table-simple bootstrap-table">
-            	<table data-toggle="table"
-       data-url="components\tables\data.json"
-       data-sort-name="Column 1"
-       data-sort-order="asc" class="table table-hover table-striped bootstrap-table">
-                		<thead>
-						    <tr>
-						        <th data-field="Column 1" 
-						            data-sortable="true"
-						            data-formatter="nameFormatter">
-						                Column 1
-						        </th>
-						        <th data-field="Column 2" 
-						            data-sortable="true">
-						                Column 2
-						        </th>
-						        <th data-field="Column 3" 
-						            data-sortable="true">
-						                Column 3
-						        </th>
-						        <th data-field="Column 4" 
-						            data-sortable="true">
-						                Column 4
-						        </th>
-						        <th data-field="Column 5" 
-						            data-sortable="false">
-						                Column 5
-						        </th>
-						        <th data-field="Column 6" 
-						            data-sortable="true">
-						                Column 7
-						        </th>
-						        <th data-field="Column 7" 
-						            data-sortable="true">
-						                Column 7
-						        </th>
-						    </tr>
-					    </thead>
-					</table>
-                </div>
+            <div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Column 1</th>
+                        <th>Column 2</th>
+                        <th>Column 3</th>
+                        <th>Column 4</th>
+                        <th>Column 5</th>
+                        <th>Column 6</th>
+                        <th>Column 7</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>value 1:2</td>
+                        <td><a href="javascript:;">value 1:3</a></td>
+                        <td>value 1:4</td>
+                        <td>value 1:5</td>
+                        <td>value 1:6</td>
+                        <td>value 1:7</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>value 2:2</td>
+                        <td>value 2:3</td>
+                        <td><a href="javascript:;">value 2:4</a></td>
+                        <td>value 2:5</td>
+                        <td>value 2:6</td>
+                        <td>value 2:7</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>value 3:2</td>
+                        <td>value 3:3</td>
+                        <td>value 3:4</td>
+                        <td>value 3:5</td>
+                        <td>value 3:6</td>
+                        <td>value 3:7</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
+
+
+        <h3>
+            Data Tables - Simple w/ optional zebra striping
+        </h3>
+
+        <div class="bottom-offset-20">
+
+            <div>
+                <table class="table table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Column 1</th>
+                        <th>Column 2</th>
+                        <th>Column 3</th>
+                        <th>Column 4</th>
+                        <th>Column 5</th>
+                        <th>Column 6</th>
+                        <th>Column 7</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>value 1:2</td>
+                        <td><a href="javascript:;">value 1:3</a></td>
+                        <td>value 1:4</td>
+                        <td>value 1:5</td>
+                        <td>value 1:6</td>
+                        <td>value 1:7</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>value 2:2</td>
+                        <td>value 2:3</td>
+                        <td><a href="javascript:;">value 2:4</a></td>
+                        <td>value 2:5</td>
+                        <td>value 2:6</td>
+                        <td>value 2:7</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>value 3:2</td>
+                        <td>value 3:3</td>
+                        <td>value 3:4</td>
+                        <td>value 3:5</td>
+                        <td>value 3:6</td>
+                        <td>value 3:7</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
         </div>
     </div>
 
