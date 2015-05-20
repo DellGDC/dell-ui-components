@@ -1,10 +1,10 @@
 
 angular.module('demo').controller('paginationCtrl',function($scope, $rootScope, $timeout) {
 	//this is for functionality related to demo code
-    $('.pagination').jqPagination({
-        paged: function(page) {
-        }
-    });
+    //$('.pagination').jqPagination({
+     //   paged: function(page) {
+     //   }
+    //});
 
 });
 

@@ -23,4 +23,17 @@ angular.module('dellUiComponents')
 
             }
         };
+    })
+
+    .directive('pagination', function() {
+        return {
+            restrict: 'C',
+            link: function($scope, $element, attrs ) {
+
+                $('.pagination').jqPagination({
+                    paged: function(page) {
+                    }
+                });
+            }
+        };
     });
