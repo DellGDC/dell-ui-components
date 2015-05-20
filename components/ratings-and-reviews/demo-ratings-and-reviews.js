@@ -53,13 +53,13 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 			$(this).html( "<div style='width:100%;' class='pull-left'><div class='starbox pull-left yesRatings'><span data-rate='1'><i class='icon-small-favorite-0'></i></span><span data-rate='2'><i class='icon-small-favorite-0'></i></span><span data-rate='3'><i class='icon-small-favorite-0'></i></span><span data-rate='4'><i class='icon-small-favorite-0'></i></span><span data-rate='5'><i class='icon-small-favorite-0'></i></span></div><div class='pull-left reviewText'><div class='pointy text-blue bold-12 pull-left'>"+totalRatings+"&nbsp;</div><div class='pointy text-blue bold-12 pull-left'> Ratings</div></div><div class='pull-right reviewText'><div class='pointy text-blue bold-12'>Write your review</div></div></div>" );
 			$(this).data('userRating', ratingAverage);
 			//set current user rating stars
-			a = "span:nth-child("+Math.floor(parseInt($( this ).data('userRating')))+")"; 
+			a = "span:nth-child("+Math.floor(parseInt($( this ).data('userRating')))+")";
 			//render stars
 			renderStars(a, $(this), $( this ).data('userRating'));
 		}	else {
 			//nope, no data... just render the blank stars
 			$(this).html( '<div style="width:100%;" class="pull-left"><div class="starbox pull-left"><span data-rate="1"><i class="icon-small-favorite-0"></i></span><span data-rate="2"><i class="icon-small-favorite-0"></i></span><span data-rate="3"><i class="icon-small-favorite-0"></i></span><span data-rate="4"><i class="icon-small-favorite-0"></i></span><span data-rate="5"><i class="icon-small-favorite-0"></i></span></div><div class="pull-left reviewText"><div class="linkStyle text-blue">Write your review</div></div>' );
-			a = "span:nth-child("+Math.floor(parseInt($( this ).data('userRating')))+")"; 
+			a = "span:nth-child("+Math.floor(parseInt($( this ).data('userRating')))+")";
 			//render stars
 			renderStars(a, $(this), $( this ).data('userRating'));
 		}
@@ -101,7 +101,7 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 
 	$( ".starbox" ).mouseout(function() {
 		//set current user rating stars
-		a = "span:nth-child("+Math.floor(parseInt($( this ).parent().parent().data('userRating')))+")"; 
+		a = "span:nth-child("+Math.floor(parseInt($( this ).parent().parent().data('userRating')))+")";
 		//render stars
 		if ($( this ).parent().parent().data('userRating')===0) {
 			$( "span:nth-child(5)", $(this) ).prevAll().andSelf().addClass('noRatings');
@@ -120,4 +120,4 @@ angular.module('demo').controller('ratingsAndReviewsPLayDemoCtrl',function($scop
 });
 
 
-	
+

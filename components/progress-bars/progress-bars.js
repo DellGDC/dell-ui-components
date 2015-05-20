@@ -38,8 +38,6 @@ angular.module('dellUiComponents')
             }
         };
 
-
-
     });
 
 
