@@ -79,8 +79,7 @@
     background: -ms-linear-gradient(left,  #ffffff 0%,#ededed 51%,#ffffff 100%); /* IE10+ */
     background: linear-gradient(to right,  #ffffff 0%,#ededed 51%,#ffffff 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
-
-    padding: 5px 20px;
+    padding: 10px 20px;
 }
 
 
@@ -122,6 +121,33 @@
     display: block;
     margin-bottom: 30px;
 }
+
+
+//value props code
+//======================================================================//
+
+.value-props-gallery {
+    position: relative;
+    text-align: center;
+    border-top: 1px solid @dell-gray-stroke;
+    border-bottom: 1px solid @dell-gray-stroke;
+    background-color: @dell-gray-light;
+    z-index: 120;
+    .gallery-item {
+        padding: 20px 15px 10px 15px;
+        border-radius: 0;
+        cursor: pointer;
+        &:hover {
+            background: @white;
+            border-left: 1px solid @dell-gray-stroke;
+            border-right: 1px solid @dell-gray-stroke;
+
+        }
+    }
+}
+
+
+
 
 
 
