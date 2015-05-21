@@ -1,6 +1,7 @@
 [
      "alerts",
      "announcements",
+     "banner",
      "breadcrumbs",
      "standard-buttons",
      "block-buttons",
@@ -10,9 +11,11 @@
      "collapsible-items",
      "colors",
      "containers",
+    "content-teaser",
      "dividers",
      "footer",
      "forms",
+     "grid",
      "icons",
      "lists",
      "labels-and-badges",
@@ -28,7 +31,6 @@
      "tooltips",
      "typography",
      "ratings-and-reviews",
-     "content-teaser",
      "date-selector",
      "search-and-navigation"
 ]
