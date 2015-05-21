@@ -1,4 +1,3 @@
-@import "../bower_components/bootstrap-table/dist/bootstrap-table.min.css";
 /*
  * Basic theme colors are handled in dell-ui-bootstrap
  * The changes below extend basic Boostrap elements to create Dell specific components.
@@ -350,7 +349,7 @@ a {
   font-size: 40px;
 }
 .carousel .carousel-control {
-  top: 40%;
+  top: 35%;
 }
 .carousel .carousel-control.left {
   left: 14px;
@@ -368,7 +367,7 @@ a {
   top: 38%;
 }
 .carousel.carousel-filmstrip .carousel-control.left {
-  left: -8px;
+  left: -5px;
 }
 .carousel.carousel-filmstrip .carousel-control.left:before {
   font-size: 40px;
@@ -560,13 +559,13 @@ a {
     top: 31%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -581,13 +580,13 @@ a {
     top: 45px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
@@ -638,13 +637,13 @@ a {
     top: 31%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -659,13 +658,13 @@ a {
     top: 45px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
@@ -732,13 +731,13 @@ a {
     top: 28%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -753,13 +752,13 @@ a {
     top: 30px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
@@ -810,13 +809,13 @@ a {
     top: 28%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -831,13 +830,13 @@ a {
     top: 30px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
@@ -888,13 +887,13 @@ a {
     top: 24%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -909,13 +908,13 @@ a {
     top: 28px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
@@ -966,13 +965,13 @@ a {
     top: 20%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -987,13 +986,13 @@ a {
     top: 18px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
@@ -1044,13 +1043,13 @@ a {
     top: 18%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -1065,13 +1064,13 @@ a {
     top: 18px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
     font-size: 32px;
@@ -1122,13 +1121,13 @@ a {
     top: 33%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -1197,13 +1196,13 @@ a {
     top: 33%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -1272,13 +1271,13 @@ a {
     top: 28%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -1347,13 +1346,13 @@ a {
     top: 28%;
   }
   .carousel.carousel-filmstrip .carousel-control.left {
-    left: -7px;
+    left: -3px;
   }
   .carousel.carousel-filmstrip .carousel-control.left:before {
     font-size: 32px;
   }
   .carousel.carousel-filmstrip .carousel-control.right {
-    right: -17px;
+    right: -14px;
   }
   .carousel.carousel-filmstrip .carousel-control.right:after {
     font-size: 32px;
@@ -2127,7 +2126,7 @@ a {
   padding-top: 2px;
   padding-left: 0;
   margin-bottom: 5px;
-  padding-bottom: 0;
+  padding-bottom: 10px;
 }
 .help-ext {
   float: left;
@@ -2329,6 +2328,14 @@ a {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+.form-group:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
 .slider {
   display: inline-block;
   vertical-align: middle;
@@ -2516,7 +2523,7 @@ a {
     text-align: left;
     padding-left: 0;
     margin-bottom: 5px;
-    padding-bottom: 0;
+    padding-bottom: 10px !important;
   }
   .help-ext {
     float: left;
@@ -2822,23 +2829,14 @@ a {
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
 }
-/*  
+/*
  * Simple data tables - bootstrap css override
  */
-.table > thead > tr > th {
-  color: #0085c3;
-}
-label {
-  padding: 10px 10px 10px 20px;
-}
-.fixed-table-container tbody td {
-  border-left: 0px;
-}
-.fixed-table-container thead th {
-  border-left: 0px;
-}
-.fixed-table-container {
-  border: 0px;
+caption {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #444444;
+  text-align: left;
 }
 @media (max-width: 767px) {
   .nav-tabs {
@@ -3389,6 +3387,21 @@ label {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.teaser-media-heading {
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+.vertical-center {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+.vertical-center a {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
 @media (max-width: 767px) {
   .detail-links li {
     width: 100%;
@@ -3406,6 +3419,37 @@ label {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .full-width-teaser {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: 105%;
+    margin-bottom: 20px;
+  }
+}
+.well-site-wide {
+  border-top: 1px solid #cccccc;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  background: #ffffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #ffffff 0%, #ededed 51%, #ffffff 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ffffff), color-stop(51%, #ededed), color-stop(100%, #ffffff));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #ffffff 0%, #ededed 51%, #ffffff 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #ffffff 0%, #ededed 51%, #ffffff 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #ffffff 0%, #ededed 51%, #ffffff 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, #ffffff 0%, #ededed 51%, #ffffff 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1);
+  /* IE6-9 */
+  padding: 10px 20px;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 .detail-links > li {
   display: none;
@@ -3429,6 +3473,46 @@ label {
 .content-teaser-container {
   display: block;
   margin-bottom: 30px;
+}
+.value-props-gallery {
+  position: relative;
+  text-align: center;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  background-color: #eeeeee;
+  z-index: 120;
+}
+.value-props-gallery .gallery-item {
+  padding: 20px 15px 10px 15px;
+  border-radius: 0;
+  cursor: pointer;
+}
+.value-props-gallery .gallery-item:hover {
+  background: #ffffff;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+}
+@media (max-width: 767px) {
+  .value-props-gallery {
+    position: relative;
+    text-align: center;
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    background-color: #eeeeee;
+    z-index: 120;
+    margin-left: -30px;
+    margin-right: -30px;
+  }
+  .value-props-gallery .gallery-item {
+    padding: 20px 15px 10px 15px;
+    border-radius: 0;
+    cursor: pointer;
+  }
+  .value-props-gallery .gallery-item:hover {
+    background: #ffffff;
+    border-left: none;
+    border-right: none;
+  }
 }
 /*
  * Date-Selector component theme overrides
