@@ -178,5 +178,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 #1.0.2 - Upgraded to Bootstrap 3.3.4 and had minor fixes
 #1.0.3 - Fixed issues with broken images.
 #1.0.4 - Fixed issues accordions not displaying in wells correctly. Fixed tool-tip transparent background. Fix offsets examples.
+#1.0.5 - Fixed carousels slider dots disappearing in DesLib, added Content-teasers, additional colors, banners, grid example patterns. Moved progress bar and pagination demo.js to non-demo.js files. added code patch for forms.less
 ...
 ```
