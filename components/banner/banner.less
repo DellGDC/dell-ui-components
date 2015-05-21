@@ -1,0 +1,62 @@
+/*
+*banner component .LESS
+*------------------------------------------------------------------------------------------
+*/
+
+.banner {
+    position: relative;
+}
+
+
+.banner-inside {
+    left: 0;
+    top: 20px;
+    width: 42%;
+    max-width: 420px;
+    margin-left: 20px;
+    padding: 5px 20px 20px 20px;
+    vertical-align: middle;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    background: @white;
+    background: rgba(600,600,600,.92);
+    color: @dell-gray-dark;
+    -ms-text-shadow: none;
+    text-shadow: none;
+    right: auto;
+    bottom: auto;
+    position: absolute;
+}
+
+
+@media (min-width: @screen-xs-max) and (max-width: @screen-sm-max) {
+    .banner-inside {
+        padding: 20px;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .banner-inside-xs {
+        left: 0;
+        /* top: 20px; */
+        max-height: 86px;
+        max-width: 320px;
+        /* margin-left: 20px; */
+        padding: 10px 20px;
+        /* vertical-align: middle; */
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 5px;
+        border-radius: 0px;
+        background: @white;
+        background: rgba(600,600,600,.92);
+        color: @dell-gray-dark;
+        -ms-text-shadow: none;
+        text-shadow: none;
+        right: auto;
+        bottom: 0px;
+        position: absolute;
+    }
+}
