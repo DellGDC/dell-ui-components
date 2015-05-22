@@ -3659,11 +3659,23 @@ caption {
 .banner {
   position: relative;
 }
+.banner .img-responsive-constrained {
+  max-height: 600px;
+}
+.banner .img-responsive-constrained .img-responsive {
+  display: block;
+  width: 100%;
+}
+.container-fluid .banner {
+  margin-left: -15px;
+  margin-right: -15px;
+  max-height: 600px !important;
+  overflow: hidden;
+}
 .banner-inside {
   left: 0;
   top: 20px;
-  width: 42%;
-  max-width: 420px;
+  width: 45%;
   margin-left: 20px;
   padding: 5px 20px 20px 20px;
   vertical-align: middle;
@@ -3686,26 +3698,26 @@ caption {
   }
 }
 @media (max-width: 767px) {
-  .banner-inside-xs {
+  .banner-inside {
     left: 0;
-    /* top: 20px; */
-    max-height: 86px;
-    max-width: 320px;
-    /* margin-left: 20px; */
-    padding: 10px 20px;
-    /* vertical-align: middle; */
+    top: 0;
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    padding: 10px 20px 10px 20px;
+    vertical-align: middle;
     -webkit-border-radius: 10px;
     -moz-border-radius: 15px;
     -ms-border-radius: 5px;
-    border-radius: 0px;
+    border-radius: 0;
     background: #ffffff;
-    background: rgba(600, 600, 600, 0.92);
+    background: #eeeeee;
     color: #444444;
     -ms-text-shadow: none;
     text-shadow: none;
     right: auto;
-    bottom: 0px;
-    position: absolute;
+    bottom: auto;
+    position: relative;
   }
 }
 /* Add Component LESS Above */

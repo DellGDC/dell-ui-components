@@ -11,7 +11,7 @@
      "collapsible-items",
      "colors",
      "containers",
-    "content-teaser",
+     "content-teaser",
      "dividers",
      "footer",
      "forms",
@@ -32,5 +32,6 @@
      "typography",
      "ratings-and-reviews",
      "date-selector",
-     "search-and-navigation"
+     "search-and-navigation",
+     "foobar"
 ]
