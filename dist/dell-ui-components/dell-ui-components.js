@@ -7482,6 +7482,7 @@ angular.module('dellUiComponents').directive('tapToLoad', function () {
 /**
  * Created by Clint_Batte on 5/18/2015.
  */
+//TODO need to add this to wordpress site as native jquery
 angular.module('dellUiComponents').directive('interactiveProgressBar', [
   '$timeout',
   function ($timeout) {

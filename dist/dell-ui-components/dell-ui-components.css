@@ -2712,11 +2712,6 @@ a {
  * Offsets component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.hr-offset-demo {
-  margin-bottom: 0;
-  margin-top: 0;
-  border-top: 1px solid red;
-}
 /*
  * Pagers component theme overrides
  *------------------------------------------------------------------------------------------
@@ -3657,4 +3652,81 @@ caption {
  * Search-And-Navigation component theme overrides
  *------------------------------------------------------------------------------------------
  */
+/*
+*banner component .LESS
+*------------------------------------------------------------------------------------------
+*/
+.banner {
+  position: relative;
+}
+.banner-inside {
+  left: 0;
+  top: 20px;
+  width: 42%;
+  max-width: 420px;
+  margin-left: 20px;
+  padding: 5px 20px 20px 20px;
+  vertical-align: middle;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  background: rgba(600, 600, 600, 0.92);
+  color: #444444;
+  -ms-text-shadow: none;
+  text-shadow: none;
+  right: auto;
+  bottom: auto;
+  position: absolute;
+}
+@media (min-width: 767px) and (max-width: 991px) {
+  .banner-inside {
+    padding: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .banner-inside-xs {
+    left: 0;
+    /* top: 20px; */
+    max-height: 86px;
+    max-width: 320px;
+    /* margin-left: 20px; */
+    padding: 10px 20px;
+    /* vertical-align: middle; */
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 5px;
+    border-radius: 0px;
+    background: #ffffff;
+    background: rgba(600, 600, 600, 0.92);
+    color: #444444;
+    -ms-text-shadow: none;
+    text-shadow: none;
+    right: auto;
+    bottom: 0px;
+    position: absolute;
+  }
+}
 /* Add Component LESS Above */
+.tooltip {
+  background: #ffffff;
+}
+.close {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #444444;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.55;
+  filter: alpha(opacity=55.00000000000001);
+}
+.close:hover,
+.close:focus {
+  color: #444444;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
