@@ -2,6 +2,7 @@
  * Created by Clint_Batte on 5/18/2015.
  */
 
+//TODO need to add this to wordpress site as native jquery
 
 angular.module('dellUiComponents')
 
