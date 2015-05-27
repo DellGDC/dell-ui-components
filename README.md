@@ -54,7 +54,7 @@ angular.module('myModule', ['dellUiComponents']);
 ```
 
 ```myAppjs
-angular.module('myModule', ['dellUiComponents']);
+angular.module('myApp', ['dellUiComponents']);
 ```
 
 
