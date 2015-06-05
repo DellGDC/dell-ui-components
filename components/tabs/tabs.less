@@ -18,6 +18,7 @@
             margin-left: -1px;
             height: auto;
             padding-right: 4%;
+
             &:first-child {
                 margin-left: -1px;
                 border-top: 1px solid @nav-tabs-border-color;
@@ -47,6 +48,7 @@
                     border-top: none;
                     padding: 10px 15px;
                     color: @dell-blue;
+
                 }
                 a:hover {
                     background: @dell-highlight-blue;
@@ -77,7 +79,57 @@
             }
         }
 
-        &.nav-justified,
+        &.nav-justified {
+            width: 105%;
+            margin-left: -15px;
+            margin-right: -15px;
+            > li {
+                a {
+                    border: none;
+                    width: 100%;
+                    margin-left: -1px;
+                }
+                a,
+                a:hover {
+                    margin-bottom: -1px;
+                    border-top: none !important;
+                    margin-left: -1px;
+                }
+
+                &.active > a {
+                    border: none;
+                    margin-left: -1px;
+                    padding: 5px 15px 0 15px;
+                    width: 100%;
+
+                    &:hover,
+                    &:focus {
+                        border: none;
+                        width: 100%;
+                        margin-left: -1px;
+                        padding: 5px 15px 0 15px;
+                    }
+                }
+
+                &:first-child {
+                    margin-left: -1px;
+                    border-top: 1px solid @nav-tabs-border-color;
+                }
+                &:last-child {
+                    margin-left: -1px;
+                    border-bottom: 1px solid @nav-tabs-border-color;
+                }
+
+                &.active > a:after,
+                a:after {
+                    font-family:    'icon-ui';
+                    content: "\e601";
+                    right: 2%;
+                    position: absolute;
+                }
+            }
+        }
+
         &.nav-centered {
             width: 105%;
             margin-left: -15px;
@@ -98,17 +150,18 @@
                 &.active > a {
                     border: none;
                     margin-left: -1px;
-                    padding: 10px 15px;
+                    padding: 5px 15px 0 15px;
                     width: 100%;
 
                     &:hover,
                     &:focus {
                         border: none;
-                        padding: 10px 15px;
                         width: 100%;
                         margin-left: -1px;
+                        padding: 5px 15px 0 15px;
                     }
                 }
+
                 &:first-child {
                     margin-left: -1px;
                     border-top: 1px solid @nav-tabs-border-color;
@@ -118,13 +171,13 @@
                     border-bottom: 1px solid @nav-tabs-border-color;
                 }
 
-                &.active > a:after,
-                a:after {
-                    font-family:    'icon-ui';
-                    content: "\e601";
-                    right: 2%;
-                    position: absolute;
-                }
+                //&.active > a:after,
+                //a:after {
+                //    font-family:    'icon-ui';
+                //    content: "\e601";
+                //    right: 2%;
+                //    position: absolute;
+                //}
             }
         }
     }
@@ -136,6 +189,7 @@
         width: 112%;
         margin-left: -15px;
         margin-right: -15px;
+
         > li {
             background: @white;
             width: 105%;
@@ -198,12 +252,61 @@
             a:after {
                 font-family:    'icon-ui';
                 content: "\e601";
-                right: 7%;
+                right: 2%;
                 position: absolute;
             }
         }
 
-        &.nav-justified,
+        &.nav-justified {
+            width: 112%;
+            margin-left: -15px;
+            margin-right: -15px;
+            > li {
+                a {
+                    border: none;
+                    width: 100%;
+                    margin-left: -1px;
+                }
+                a,
+                a:hover {
+                    margin-bottom: -1px;
+                    border-top: none !important;
+                    margin-left: -1px;
+                }
+
+                &.active > a {
+                    border: none;
+                    margin-left: -1px;
+                    padding: 5px 15px 0 15px;
+                    width: 100%;
+
+                    &:hover,
+                    &:focus {
+                        border: none;
+                        width: 100%;
+                        margin-left: -1px;
+                        padding: 5px 15px 0 15px;
+                    }
+                }
+                &:first-child {
+                    margin-left: -1px;
+                    border-top: 1px solid @nav-tabs-border-color;
+                }
+                &:last-child {
+                    margin-left: -1px;
+                    border-bottom: 1px solid @nav-tabs-border-color;
+                }
+
+                &.active > a:after,
+                a:after {
+                    font-family:    'icon-ui';
+                    content: "\e601";
+                    right: 2%;
+                    position: absolute;
+                }
+            }
+        }
+
         &.nav-centered {
             width: 112%;
             margin-left: -15px;
@@ -224,15 +327,15 @@
                 &.active > a {
                     border: none;
                     margin-left: -1px;
-                    padding: 10px 15px;
+                    padding: 5px 15px 0 15px;
                     width: 100%;
 
                     &:hover,
                     &:focus {
                         border: none;
-                        padding: 10px 15px;
                         width: 100%;
                         margin-left: -1px;
+                        padding: 5px 15px 0 15px;
                     }
                 }
                 &:first-child {
@@ -244,17 +347,67 @@
                     border-bottom: 1px solid @nav-tabs-border-color;
                 }
 
-                &.active > a:after,
-                a:after {
-                    font-family:    'icon-ui';
-                    content: "\e601";
-                    right: 7%;
-                    position: absolute;
-                }
+                //&.active > a:after,
+                //a:after {
+                //    font-family:    'icon-ui';
+                //    content: "\e601";
+                //    right: 2%;
+                //    position: absolute;
+                //}
             }
         }
     }
 }
+//.vertical-align {
+//    position: relative
+//}
+//
+//.vertical-align-element {
+//    position: absolute;
+//    top: 50%;
+//    transform: translate(0, -50%);
+//}
+//.vertical-align-element-carat {
+//    position: absolute;
+//    top: 50%;
+//    transform: translate(0, -50%);
+//    right: 4%;
+//}
+//
+//.mobile-tab {
+//    width: 90px;
+//    margin-right: 10px;
+//    float: left !important;
+//}
+//
+//.block-of-text {
+//    min-height: 120px;
+//    padding-top: 10px;
+//    padding-bottom: 10px;
+//}
+
+
+
+
+
+//.img-mobile-tabs {
+//    margin-right: 20px;
+//    margin-bottom: 10px;
+//    max-width: 90px !important;
+//}
+
+//.tabs-caret {
+//    position: absolute;
+//    top: 50%;
+//    right: 1%;
+//    transform: translate(0%, 52%);
+//}
+
+.nav-tabs h4 {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+}
+
 
 .nav-center-rule {
     border-bottom: 1px solid #ccc;
@@ -268,6 +421,12 @@
     margin-right:auto;
 }
 
+
+.tab-image {
+    width: 100px;
+    margin-top: 15px;
+}
+
 @media (max-width: @screen-xs-max) {
     .nav-center-rule {
         border-bottom: none;
@@ -279,6 +438,41 @@
         margin-left:auto;
         margin-right:auto;
     }
+
+    .nav-tabs h4 {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .vertical-align {
+        position: relative
+    }
+
+    .vertical-align-element {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+    .vertical-align-element-carat {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        right: 4%;
+    }
+
+    .tab-image {
+        width: 90px;
+        margin-right: 10px;
+        margin-top: 0;
+        float: left !important;
+    }
+
+    .block-of-text {
+        min-height: 120px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
 
 }
 
