@@ -97,24 +97,18 @@ return {
 
 .directive('singleHandleSlider', function() {
     return {
-        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
         link: function($scope, element, attributes, controller) {
 
             //$("input.slider").bootstrapSlider();
 
             // With JQuery
-            $('#ex1').bootstrapSlider({
+            $('#ex1').slider({
                 formatter: function(value) {
                     return 'Current value: ' + value;
                 }
             });
 
-            //// Without JQuery
-            //var slider = new Slider('#ex1', {
-            //    formatter: function(value) {
-            //        return 'Current value: ' + value;
-            //    }
-            //});
         }
     };
 })
