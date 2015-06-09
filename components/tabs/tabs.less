@@ -305,6 +305,7 @@
 }
 
 
+
 .nav-tabs h4 {
     margin-top: 10px !important;
     margin-bottom: 0 !important;
@@ -383,8 +384,13 @@
         padding-bottom: 10px;
     }
 
+    .nav div.vertical-align {
+        padding-right: 40px !important;
+    }
 
 }
+
+
 
 
     /*
@@ -473,7 +479,7 @@
             &:before, {
                 color: @dell-blue;
                 font-family:    'icon-ui';
-                content: "\e600";
+                content: none !important;
                 position: absolute;
                 left: 30px;
                 padding-top: 7px;
@@ -482,7 +488,11 @@
                 text-decoration: none;
             }
             .btn {
-                padding: 6px 20px;
+                padding: 6px 0 !important;
+            }
+            [class^=icon] {
+                top: 2px;
+                position: relative;
             }
         }
     }
