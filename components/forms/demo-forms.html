@@ -393,44 +393,47 @@
         </div>
 
 
-        <div class="top-offset-60 bottom-offset-60">
-            <input class="single-handle-slider" id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
-        </div>
-
-<!--<script>-->
-    <!--$('#ex1').slider({-->
-        <!--formatter: function(value) {-->
-            <!--return 'Current value: ' + value;-->
-        <!--}-->
-    <!--});-->
-
-<!--</script>-->
 
 
 
-        <div class="bottom-offset-40">
-            <!-- single slider -->
+        <div class="bottom-offset-40 top-offset-40">
+            <!-- single slider: current value -->
             <form class="form-compressed" role="form">
                 <div class="row">
-                    <div class="form-group single-handle-slider">
+                    <div class="form-group">
                         <div class="col-xs-12 col-sm-6">
-                            <label for="select01" class="form-label">Single handle Slider</label>
-                            <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+                            <label for="select01" class="form-label">Single handle Slider: current value</label>
+                            <input class="bs-slider" id="single-handle-ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
                         </div>
                     </div>
                 </div>
             </form>
-            <!-- /single slider -->
+            <!-- /single slider: current value -->
         </div>
 
         <div class="bottom-offset-40">
-            <!-- single handle slider -->
+            <!-- single slider: value only -->
+            <form class="form-compressed" role="form">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-6">
+                            <label for="select01" class="form-label">Single handle Slider: tooltip constant</label>
+                            <input class="bs-slider" id="single-handle-ex2" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /single slider: value only -->
+        </div>
+
+        <div class="bottom-offset-40">
+            <!-- Double handle slider -->
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group single-handle-slider">
                         <div class="col-xs-12 col-sm-6">
                             <label for="select01" class="form-label">Double handler  Slider</label>
-                            <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="14"/>
+                            <input class="bs-slider" id="double-handle-ex1" type="text"/>
                         </div>
                     </div>
                 </div>

@@ -95,7 +95,7 @@ return {
     };
 })
 
-.directive('singleHandleSlider', function() {
+.directive('bsSlider', function() {
     return {
         restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
         link: function($scope, element, attributes, controller) {
@@ -103,11 +103,20 @@ return {
             //$("input.slider").bootstrapSlider();
 
             // With JQuery
-            $('#ex1').slider({
+            $('#single-handle-ex1').slider({
                 formatter: function(value) {
                     return 'Current value: ' + value;
                 }
             });
+
+            $("#single-handle-ex2").slider({
+                tooltip: 'always'
+            });
+            //
+            //$("#ex12a").slider({ id: "slider12a", min: 0, max: 10, value: 5 });
+            //$("#ex12b").slider({ id: "slider12b", min: 0, max: 10, range: true, value: [3, 7] });
+            $("#double-handle-ex1").slider({ id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
+
 
         }
     };

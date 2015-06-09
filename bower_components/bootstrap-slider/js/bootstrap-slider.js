@@ -590,15 +590,15 @@
 
 			if (updateSlider === true) {
 				// Reset classes
-				this._removeClass(this.handle1, 'round triangle');
-				this._removeClass(this.handle2, 'round triangle hide');
+				this._removeClass(this.handle1, 'square triangle');
+				this._removeClass(this.handle2, 'square triangle hide');
 
 				for (i = 0; i < this.ticks.length; i++) {
-					this._removeClass(this.ticks[i], 'round triangle hide');
+					this._removeClass(this.ticks[i], 'square triangle hide');
 				}
 			}
 
-			var availableHandleModifiers = ['round', 'triangle', 'custom'];
+			var availableHandleModifiers = ['square', 'triangle', 'custom'];
 			var isValidHandleType = availableHandleModifiers.indexOf(this.options.handle) !== -1;
 			if (isValidHandleType) {
 				this._addClass(this.handle1, this.options.handle);
@@ -690,8 +690,9 @@
 				selection: 'before',
 				tooltip: 'show',
 				tooltip_split: false,
-				handle: 'round',
-				reversed: false,
+				//handle: 'round',
+                handle: 'square',
+                reversed: false,
 				enabled: true,
 				formatter: function(val) {
 					if (Array.isArray(val)) {
