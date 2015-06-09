@@ -5529,7 +5529,7 @@ if (!console) {
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory);
+    define(['../../../../jquery/jquery'], factory);
   } else if (typeof module === 'object' && module.exports) {
     var jQuery;
     try {
@@ -5991,14 +5991,14 @@ if (!console) {
       this.handle2 = sliderMaxHandle || this.handle2;
       if (updateSlider === true) {
         // Reset classes
-        this._removeClass(this.handle1, 'round triangle');
-        this._removeClass(this.handle2, 'round triangle hide');
+        this._removeClass(this.handle1, 'square triangle');
+        this._removeClass(this.handle2, 'square triangle hide');
         for (i = 0; i < this.ticks.length; i++) {
-          this._removeClass(this.ticks[i], 'round triangle hide');
+          this._removeClass(this.ticks[i], 'square triangle hide');
         }
       }
       var availableHandleModifiers = [
-          'round',
+          'square',
           'triangle',
           'custom'
         ];
@@ -6077,7 +6077,7 @@ if (!console) {
         selection: 'before',
         tooltip: 'show',
         tooltip_split: false,
-        handle: 'round',
+        handle: 'square',
         reversed: false,
         enabled: true,
         formatter: function (val) {
@@ -6255,9 +6255,12 @@ if (!console) {
       _showTooltip: function () {
         if (this.options.tooltip_split === false) {
           this._addClass(this.tooltip, 'in');
+          this.tooltip_min.style.display = 'none';
+          this.tooltip_max.style.display = 'none';
         } else {
           this._addClass(this.tooltip_min, 'in');
           this._addClass(this.tooltip_max, 'in');
+          this.tooltip.style.display = 'none';
         }
         this.over = true;
       },
@@ -7054,22 +7057,31 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       }
     }
   };
-}).directive('singleHandleSlider', function () {
+}).directive('bsSlider', function () {
   return {
-    restrict: 'C',
+    restrict: 'AEC',
     link: function ($scope, element, attributes, controller) {
       //$("input.slider").bootstrapSlider();
       // With JQuery
-      $('#ex1').bootstrapSlider({
+      $('#single-handle-ex1').slider({
         formatter: function (value) {
           return 'Current value: ' + value;
         }
-      });  //// Without JQuery
-           //var slider = new Slider('#ex1', {
-           //    formatter: function(value) {
-           //        return 'Current value: ' + value;
-           //    }
-           //});
+      });
+      $('#single-handle-ex2').slider({ tooltip: 'always' });
+      //
+      //$("#ex12a").slider({ id: "slider12a", min: 0, max: 10, value: 5 });
+      //$("#ex12b").slider({ id: "slider12b", min: 0, max: 10, range: true, value: [3, 7] });
+      $('#double-handle-ex1').slider({
+        id: 'slider12c',
+        min: 0,
+        max: 10,
+        range: true,
+        value: [
+          3,
+          7
+        ]
+      });
     }
   };
 }).directive('spinbox', function () {
