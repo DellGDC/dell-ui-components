@@ -7006,16 +7006,16 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       });
     }
   };
-}).directive('emailAddress', function () {
+}).directive('emailCheck', function () {
   return {
-    restrict: 'C',
+    restrict: 'AEC',
     link: function ($scope, element, attributes, controller) {
-      $('form input[name="email"]').blur(function () {
-        var email = $(this).val();
-        var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
-        if (re.test(email)) {
-          $(element).addClass('hide');
-        } else {
+      $(element).blur(function () {
+        var string1 = $(element).val();
+        if (string1.indexOf('@') === -1) {
+          $(element).tooltip({ title: 'Please input a valid email address!' });
+          $(element).addClass('alert alert-warning');
+          $(element).focus();
         }
       });
     }
@@ -7061,7 +7061,6 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   return {
     restrict: 'AEC',
     link: function ($scope, element, attributes, controller) {
-      //$("input.slider").bootstrapSlider();
       // With JQuery
       $('#single-handle-ex1').slider({
         formatter: function (value) {
@@ -7069,9 +7068,6 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         }
       });
       $('#single-handle-ex2').slider({ tooltip: 'always' });
-      //
-      //$("#ex12a").slider({ id: "slider12a", min: 0, max: 10, value: 5 });
-      //$("#ex12b").slider({ id: "slider12b", min: 0, max: 10, range: true, value: [3, 7] });
       $('#double-handle-ex1').slider({
         id: 'slider12c',
         min: 0,
