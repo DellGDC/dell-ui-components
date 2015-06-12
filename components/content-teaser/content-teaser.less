@@ -137,24 +137,28 @@
         padding: 20px 15px 10px 15px;
         border-radius: 0;
         cursor: pointer;
-        &:hover {
-            background: @white;
-            border-left: 1px solid @dell-gray-stroke;
-            border-right: 1px solid @dell-gray-stroke;
-
+        h5 {
+            margin-bottom: 0;
         }
-    }
-    .gallery-item-border {
-        padding: 20px 15px 10px 15px;
-        border-radius: 0;
-        border-left: 1px solid @dell-gray-stroke;
-        border-right: 1px solid @dell-gray-stroke;
-        cursor: pointer;
+        &:first-child {
+            border-right: 1px solid @dell-gray-stroke;
+            border-left: 1px solid transparent;
+        }
+        &:last-child {
+            border-left: 1px solid @dell-gray-stroke;
+            border-right: 1px solid transparent;
+        }
         &:hover {
             background: @white;
-            border-left: 1px solid @dell-gray-stroke;
-            border-right: 1px solid @dell-gray-stroke;
 
+            &:first-child {
+                border-left: 1px solid @dell-gray-stroke;
+                border-right: 1px solid transparent;
+            }
+            &:last-child {
+                border-right: 1px solid @dell-gray-stroke;
+                border-left: 1px solid transparent;
+            }
         }
     }
 }
@@ -165,8 +169,8 @@
     .value-props-gallery {
         position: relative;
         text-align: center;
-        border-top: 1px solid @dell-gray-stroke;
-        border-bottom: 1px solid @dell-gray-stroke;
+        border-top:none;
+        border-bottom: none;
         background-color: @dell-gray-light;
         z-index: 120;
         margin-left: -30px;
@@ -175,30 +179,46 @@
             padding: 20px 15px 10px 15px;
             border-radius: 0;
             cursor: pointer;
+            border-top: 1px solid @dell-gray-stroke;
             &:hover {
                 background: @white;
                 border-left: none;
                 border-right: none;
             }
-        }
+            &:first-child {
+                border-right: 1px solid transparent;
+                border-left: 1px solid transparent;
+            }
+            &:last-child {
+                border-left: 1px solid transparent;
+                border-right: 1px solid transparent;
+            }
 
-        .gallery-item-border {
-            padding: 20px 15px 10px 15px;
-            border-radius: 0;
-            border-top: 1px solid @dell-gray-stroke;
-            border-bottom: 1px solid @dell-gray-stroke;
-            cursor: pointer;
-            &:hover {
-                background: @white;
-                border-top: 1px solid @dell-gray-stroke;
-                border-bottom: 1px solid @dell-gray-stroke;
+            a {
+
+                h5 {
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    text-align: left;
+                    padding-left: 40px;
+                }
+
+                p {
+                    text-align: left;
+                    padding-left: 55px;
+                }
+
+                [class^=icon] {
+                    float: left;
+                    margin-right: 20px;
+                    padding-lift: 20px;
+
+                }
+
 
             }
+
         }
 
-        [class^=icon] {
-            float: left;
-            margin-right: 20px;
-        }
     }
 }
