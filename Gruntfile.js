@@ -116,13 +116,13 @@ module.exports = function (grunt) {
         copy: {
             main: {
                 files: [
-                    {src: ['components/components-list.json'], dest: 'dist/components-list.json'},
+                    {src: ['components/components-list.json'], dest: 'dist/dell-ui-components/demo/components-list.json'},
                     {src: ['temp/dell-ui-components.js'], dest: 'dist/dell-ui-components/dell-ui-components.js'},
-                    {src: ['temp/demo.js'], dest: 'dist/demo.js'},
+                    {src: ['temp/demo.js'], dest: 'dist/dell-ui-components/demo/demo.js'},
                     {src: ['components/**/*.gif','components/**/*.jpg','components/**/*.png','components/**/*.svg','!components/**/demo*','!components/**/test*','!components/**/FPO*'], dest: 'dist/dell-ui-components/img/'},
                     {src: ['README.md'], dest: 'dist/README.md'},
                     {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components/dell-ui-components.css'},
-                    {cwd: 'bower_components/dell-ui-bootstrap/dist/', src: ['**'], dest: 'dist/dell-ui-bootstrap/', expand:true}
+                    {cwd: 'bower_components/dell-ui-bootstrap/', src: ['**'], dest: 'dist/dell-ui-bootstrap/', expand:true}
                 ]
             }
         },
@@ -142,13 +142,13 @@ module.exports = function (grunt) {
                     remove: ['script[data-remove!="false"]', 'link[data-remove!="false"]'],
                     append: [
                         {selector: 'body', html: '<script src="demo.min.js"></script>'},
-                        {selector: 'head', html: '<link rel="stylesheet" href="dell-ui-bootstrap/dell-ui-bootstrap.min.css">'},
-                        {selector: 'head', html: '<link rel="stylesheet" href="dell-ui-components/dell-ui-components.min.css">'},
+                        {selector: 'head', html: '<link rel="stylesheet" href="../../dell-ui-bootstrap/dell-ui-bootstrap.min.css">'},
+                        {selector: 'head', html: '<link rel="stylesheet" href="../dell-ui-components.min.css">'},
                         {selector: 'head', html: '<link rel="stylesheet" href="demo.min.css">'}
                     ]
                 },
                 src: 'index.html',
-                dest: 'dist/index.html'
+                dest: 'dist/dell-ui-components/demo/index.html'
             }
         },
         cssmin: {
@@ -158,7 +158,7 @@ module.exports = function (grunt) {
             },
             demo: {
                 src: ['temp/demo.css'],
-                dest: 'dist/demo.min.css'
+                dest: 'dist/dell-ui-components/demo/demo.min.css'
             }
         },
         concat: {
@@ -188,7 +188,7 @@ module.exports = function (grunt) {
             },
             demo: {
                 src: 'temp/demo.js',
-                dest: 'dist/demo.min.js'
+                dest: 'dist/dell-ui-components/demo/demo.min.js'
             }
         },
         htmlmin: {
@@ -203,7 +203,7 @@ module.exports = function (grunt) {
                     removeStyleLinkTypeAttributes: true
                 },
                 files: {
-                    'dist/index.html': 'dist/index.html'
+                    'dist/dell-ui-components/demo/index.html': 'dist/dell-ui-components/demo/index.html'
                 }
             }
         },

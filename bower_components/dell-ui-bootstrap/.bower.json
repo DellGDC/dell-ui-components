@@ -1,30 +1,12 @@
 {
   "name": "dell-ui-bootstrap",
-  "description": "Dell Inc's implementation of Twitter Bootstrap for dell.com (Based om TWBS 3.3.4)",
-  "version": "1.1.0",
-  "main": "index.html",
-  "keywords": [
-    "twitter bootstrap",
-    "bootstrap theme",
-    "dell"
-  ],
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components"
-  ],
-  "devDependencies ": {
-    "less.js": "~1.6",
-    "jquery": "~2.0",
-    "bootstrap": "~3"
-  },
-  "dependencies": {},
   "homepage": "https://github.com/DellGDC/dell-ui-bootstrap",
-  "_release": "1.1.0",
+  "version": "1.2.0",
+  "_release": "1.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "1.1.0",
-    "commit": "ad7c8c703fe425a8412f06fb646d7a25dfcc2653"
+    "tag": "1.2.0",
+    "commit": "3d96240bb61c796b3e240867145aacdc1178a111"
   },
   "_source": "git://github.com/DellGDC/dell-ui-bootstrap.git",
   "_target": "~1",
