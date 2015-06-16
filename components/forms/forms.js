@@ -32,22 +32,25 @@ angular.module('dellUiComponents')
 })
 
 
-//.directive('emailAddress', function() {
-//    return {
-//        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-//        link: function($scope, element, attributes, controller) {
-//            $('form input[name="email"]').blur(function () {
-//                var email = $(this).val();
-//                var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
-//                if (re.test(email)) {
-//                    $(element).addClass('hide');
-//                } else {
-//                    //$(this).addClass('alert alert-warning');
-//                }
-//            });
-//        }
-//    };
-//})
+.directive('emailValidate', function() {
+    return {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, element, attributes, controller) {
+            $(element).blur(function () {
+                var email = $(this).validate();
+                var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+                if (re.test(element)) {
+                    $(element).addClass('alert alert-warning');
+                    $(element).tooltip({
+                        title: "Please input a valid email address!",
+                    });
+                } else {
+                    //$(this).addClass('alert alert-warning');
+                }
+            });
+        }
+    };
+})
 
 //.directive('emailCheck', function() {
 //    return {
@@ -77,40 +80,51 @@ angular.module('dellUiComponents')
         restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
         link: function($scope, element, attributes, controller) {
 
-            $(element).blur(function () {
+            //$(element).blur(function () {
+            //    var string1 = $(element).val();
+            //    if (string1.indexOf("@") === -1){
+            //        $(element).addClass('alert alert-warning');
+            //        $(element).tooltip({
+            //            title: "Please input a valid email address!"
+            //        });
+            //    //$(element).blur();
+            //    } else {
+            //        $(element).removeClass('alert alert-warning');
+            //        $(element).tooltip('disable');
+            //    }
+            //});
+
+
+            $(element).on('keyup',function () {
                 var string1 = $(element).val();
                 if (string1.indexOf("@") === -1){
-                    $(element).tooltip({
-                        title: "Please input a valid email address!"
-                    });
-
                     $(element).addClass('alert alert-warning');
-
-                    $(element).focus();
+                    $(element).tooltip({
+                        title: "Please input a valid email address!",
+                    });
+                } else {
+                    $(element).removeClass('alert alert-warning');
+                    $(element).tooltip('destroy');
                 }
             });
         }
     };
 })
 
-//.directive('emailCheck', function() {
+//
+//    .directive('emailCheck', function() {
 //    return {
 //        restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
 //        link: function($scope, element, attributes, controller) {
 //
-//            $(element).blur(function () {
-//                var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-//                if(re.test($(element).val())){
-//                    $(element).tooltip({
-//                        title: "Please input a valid email address!"
-//                    });
-//                    $(element).focus();
 //
-//                }
-//            });
+//                $(element).validate()
+//
 //        }
 //    };
 //})
+
+
 
 
 
@@ -552,3 +566,22 @@ return {
     };
 });
 
+Eve.register('emailValidator', function() {
+
+    this.listen('input', 'blur', function() {
+        console.log("checking email validation");
+    });
+
+});
+
+Eve.attach('emailValidator', '[data-valitation=email]');
+
+
+
+Eve.scope('.email-check', function() {
+
+    this.listen('input', 'blur', function(e) {
+        console.log("You clicked on .email-check");
+    });
+
+});
