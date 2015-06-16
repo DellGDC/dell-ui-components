@@ -531,22 +531,3 @@ return {
     };
 });
 
-Eve.register('emailValidator', function() {
-
-    this.listen('input', 'blur', function() {
-        console.log("checking email validation");
-    });
-
-});
-
-Eve.attach('emailValidator', '[data-valitation=email]');
-
-
-
-Eve.scope('.email-check', function() {
-
-    this.listen('input', 'blur', function(e) {
-        console.log("You clicked on .email-check");
-    });
-
-});
