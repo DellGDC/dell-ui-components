@@ -44391,6 +44391,748 @@ if (!console) {
   }($));
   return Slider;
 }));
+// Eve.js <evejs.com> - v0.8.4 February 18, 2013
+(function (u) {
+  function g(a) {
+    if (!f)
+      a:
+        if (!f) {
+          for (var b = [
+                'jQuery',
+                'MooTools',
+                'YUI',
+                'Prototype',
+                'dojo'
+              ], d = 0; d <= b.length; d++)
+            if (window[b[d]]) {
+              Eve.setFramework(b[d]);
+              break a;
+            }
+          console.error('Eve doesn\'t support your JavaScript framework.');
+        }
+    return a ? f == a.toLowerCase() : f;
+  }
+  function l(a, b) {
+    if (window.console) {
+      var d = m;
+      if (!m)
+        for (var d = !1, c = 0; c < n.length; c++)
+          n[c] == a && (d = !0);
+      if (d) {
+        for (; 10 > a.length;)
+          a += ' ';
+        a = a.substring(0, 10) + ' - ';
+        console.info(a, b);
+      }
+    }
+  }
+  function q(a, b, d, c) {
+    for (var e in r)
+      b[e] = r[e];
+    for (e in p)
+      b[e] = p[e];
+    g('YUI') ? YUI().use('node', function (e) {
+      j = e.one;
+      d[c] = a.apply(b);
+    }) : g('dojo') ? require([
+      'dojo/NodeList-dom',
+      'dojo/NodeList-traverse'
+    ], function (e) {
+      j = e;
+      d[c] = a.apply(b);
+    }) : d[c] = a.apply(b);
+  }
+  var h = {}, s = {}, t = {}, p = {}, n = [], m = !1, f, j;
+  u.Eve = {
+    setFramework: function (a) {
+      f = (a + '').toLowerCase();
+      'jquery' == f && ($ = jQuery);
+    },
+    debug: function (a) {
+      a ? n.push(a) : m = !0;
+    },
+    register: function (a, b) {
+      l(a, 'registered');
+      if (h[a])
+        throw Error('Module already exists: ' + a);
+      h[a] = b;
+      return this;
+    },
+    extend: function (a, b) {
+      p[a] = b;
+    },
+    scope: function (a, b) {
+      s[a] && console.warn('Duplicate namespace: ' + a);
+      q(b, {
+        name: a,
+        namespace: a
+      }, s, a);
+    },
+    attach: function (a, b) {
+      var d = [], c = 0;
+      for (c; c < arguments.length; c++)
+        d[d.length] = arguments[c];
+      l(a, 'attached to ' + b);
+      if (t[a + b])
+        return !1;
+      if (!h[a])
+        return console.warn('Module not found: ' + a), !1;
+      q(function () {
+        h[a].apply(this, d.slice(2));
+      }, {
+        namespace: b,
+        name: a
+      }, t, a + b);
+      return !0;
+    }
+  };
+  var r = {
+      listen: function (a, b, d) {
+        function c(a, c) {
+          l(v, f + ':' + b);
+          h.event = a;
+          g('MooTools') && (a.target = c);
+          g('jQuery') && (a.target = a.currentTarget);
+          g('dojo') && (a.target = a.explicitOriginalTarget);
+          d.apply(h, arguments);
+        }
+        d || (d = b, b = a, a = '');
+        a = a || '';
+        var e = this.event ? this.find() : document.body, v = this.name, f = (this.namespace + ' ' + a).trim(), h = {}, k;
+        for (k in this)
+          this.hasOwnProperty(k) && (h[k] = this[k]);
+        if (g('jQuery'))
+          $(e).delegate(f, b, c);
+        else if (g('MooTools'))
+          $(e).addEvent(b + ':relay(' + f + ')', c);
+        else if (g('YUI'))
+          j(e).delegate(b, c, f);
+        else if (g('Prototype'))
+          $(e).on(b, f, c);
+        else
+          g('dojo') && require(['dojo/on'], function (a) {
+            a(e, f + ':' + b, c);
+          });
+      },
+      find: function (a) {
+        var b, d = this.namespace;
+        if (!a || 'string' == typeof a)
+          a = (a || '').trim();
+        b = this.event ? this.event.target : document.body;
+        g('jQuery') && (b = jQuery(b));
+        j && (b = j(b));
+        var c = {
+            jQuery: [
+              'is',
+              'parents',
+              'find'
+            ],
+            MooTools: [
+              'match',
+              'getParent',
+              'getElements'
+            ],
+            Prototype: [
+              'match',
+              'up',
+              'select'
+            ],
+            YUI: [
+              'test',
+              'ancestor',
+              'all'
+            ],
+            dojo: [
+              '',
+              'closest',
+              'query'
+            ]
+          }, e;
+        for (e in c)
+          if (g(e)) {
+            var f = c[e], c = f[0];
+            e = f[1];
+            f = f[2];
+            if (!g('dojo') && b[c](d))
+              return b;
+            b = this.event ? b[e](d) : b;
+            return this.event ? b[f](a) : b[f](d + ' ' + a);
+          }
+      },
+      first: function (a, b) {
+        b = 2 == arguments.length ? b : this.find(a);
+        g('YUI') && (b = b.getDOMNodes());
+        return b[0];
+      },
+      scope: function (a, b) {
+        Eve.scope(this.namespace + ' ' + a, b);
+      },
+      attach: function (a, b) {
+        Eve.attach(a, this.namespace + ' ' + (b || ''));
+      }
+    };
+}(this));
+this.module && (this.module.exports = this.Eve);
+/*! jQuery Validation Plugin - v1.13.1 - 10/14/2014
+ * http://jqueryvalidation.org/
+ * Copyright (c) 2014 Jörn Zaefferer; Licensed MIT */
+!function (a) {
+  'function' == typeof define && define.amd ? define(['../../jquery/jquery'], a) : a(jQuery);
+}(function (a) {
+  a.extend(a.fn, {
+    validate: function (b) {
+      if (!this.length)
+        return void (b && b.debug && window.console && console.warn('Nothing selected, can\'t validate, returning nothing.'));
+      var c = a.data(this[0], 'validator');
+      return c ? c : (this.attr('novalidate', 'novalidate'), c = new a.validator(b, this[0]), a.data(this[0], 'validator', c), c.settings.onsubmit && (this.validateDelegate(':submit', 'click', function (b) {
+        c.settings.submitHandler && (c.submitButton = b.target), a(b.target).hasClass('cancel') && (c.cancelSubmit = !0), void 0 !== a(b.target).attr('formnovalidate') && (c.cancelSubmit = !0);
+      }), this.submit(function (b) {
+        function d() {
+          var d, e;
+          return c.settings.submitHandler ? (c.submitButton && (d = a('<input type=\'hidden\'/>').attr('name', c.submitButton.name).val(a(c.submitButton).val()).appendTo(c.currentForm)), e = c.settings.submitHandler.call(c, c.currentForm, b), c.submitButton && d.remove(), void 0 !== e ? e : !1) : !0;
+        }
+        return c.settings.debug && b.preventDefault(), c.cancelSubmit ? (c.cancelSubmit = !1, d()) : c.form() ? c.pendingRequest ? (c.formSubmitted = !0, !1) : d() : (c.focusInvalid(), !1);
+      })), c);
+    },
+    valid: function () {
+      var b, c;
+      return a(this[0]).is('form') ? b = this.validate().form() : (b = !0, c = a(this[0].form).validate(), this.each(function () {
+        b = c.element(this) && b;
+      })), b;
+    },
+    removeAttrs: function (b) {
+      var c = {}, d = this;
+      return a.each(b.split(/\s/), function (a, b) {
+        c[b] = d.attr(b), d.removeAttr(b);
+      }), c;
+    },
+    rules: function (b, c) {
+      var d, e, f, g, h, i, j = this[0];
+      if (b)
+        switch (d = a.data(j.form, 'validator').settings, e = d.rules, f = a.validator.staticRules(j), b) {
+        case 'add':
+          a.extend(f, a.validator.normalizeRule(c)), delete f.messages, e[j.name] = f, c.messages && (d.messages[j.name] = a.extend(d.messages[j.name], c.messages));
+          break;
+        case 'remove':
+          return c ? (i = {}, a.each(c.split(/\s/), function (b, c) {
+            i[c] = f[c], delete f[c], 'required' === c && a(j).removeAttr('aria-required');
+          }), i) : (delete e[j.name], f);
+        }
+      return g = a.validator.normalizeRules(a.extend({}, a.validator.classRules(j), a.validator.attributeRules(j), a.validator.dataRules(j), a.validator.staticRules(j)), j), g.required && (h = g.required, delete g.required, g = a.extend({ required: h }, g), a(j).attr('aria-required', 'true')), g.remote && (h = g.remote, delete g.remote, g = a.extend(g, { remote: h })), g;
+    }
+  }), a.extend(a.expr[':'], {
+    blank: function (b) {
+      return !a.trim('' + a(b).val());
+    },
+    filled: function (b) {
+      return !!a.trim('' + a(b).val());
+    },
+    unchecked: function (b) {
+      return !a(b).prop('checked');
+    }
+  }), a.validator = function (b, c) {
+    this.settings = a.extend(!0, {}, a.validator.defaults, b), this.currentForm = c, this.init();
+  }, a.validator.format = function (b, c) {
+    return 1 === arguments.length ? function () {
+      var c = a.makeArray(arguments);
+      return c.unshift(b), a.validator.format.apply(this, c);
+    } : (arguments.length > 2 && c.constructor !== Array && (c = a.makeArray(arguments).slice(1)), c.constructor !== Array && (c = [c]), a.each(c, function (a, c) {
+      b = b.replace(new RegExp('\\{' + a + '\\}', 'g'), function () {
+        return c;
+      });
+    }), b);
+  }, a.extend(a.validator, {
+    defaults: {
+      messages: {},
+      groups: {},
+      rules: {},
+      errorClass: 'error',
+      validClass: 'valid',
+      errorElement: 'label',
+      focusCleanup: !1,
+      focusInvalid: !0,
+      errorContainer: a([]),
+      errorLabelContainer: a([]),
+      onsubmit: !0,
+      ignore: ':hidden',
+      ignoreTitle: !1,
+      onfocusin: function (a) {
+        this.lastActive = a, this.settings.focusCleanup && (this.settings.unhighlight && this.settings.unhighlight.call(this, a, this.settings.errorClass, this.settings.validClass), this.hideThese(this.errorsFor(a)));
+      },
+      onfocusout: function (a) {
+        this.checkable(a) || !(a.name in this.submitted) && this.optional(a) || this.element(a);
+      },
+      onkeyup: function (a, b) {
+        (9 !== b.which || '' !== this.elementValue(a)) && (a.name in this.submitted || a === this.lastElement) && this.element(a);
+      },
+      onclick: function (a) {
+        a.name in this.submitted ? this.element(a) : a.parentNode.name in this.submitted && this.element(a.parentNode);
+      },
+      highlight: function (b, c, d) {
+        'radio' === b.type ? this.findByName(b.name).addClass(c).removeClass(d) : a(b).addClass(c).removeClass(d);
+      },
+      unhighlight: function (b, c, d) {
+        'radio' === b.type ? this.findByName(b.name).removeClass(c).addClass(d) : a(b).removeClass(c).addClass(d);
+      }
+    },
+    setDefaults: function (b) {
+      a.extend(a.validator.defaults, b);
+    },
+    messages: {
+      required: 'This field is required.',
+      remote: 'Please fix this field.',
+      email: 'Please enter a valid email address.',
+      url: 'Please enter a valid URL.',
+      date: 'Please enter a valid date.',
+      dateISO: 'Please enter a valid date ( ISO ).',
+      number: 'Please enter a valid number.',
+      digits: 'Please enter only digits.',
+      creditcard: 'Please enter a valid credit card number.',
+      equalTo: 'Please enter the same value again.',
+      maxlength: a.validator.format('Please enter no more than {0} characters.'),
+      minlength: a.validator.format('Please enter at least {0} characters.'),
+      rangelength: a.validator.format('Please enter a value between {0} and {1} characters long.'),
+      range: a.validator.format('Please enter a value between {0} and {1}.'),
+      max: a.validator.format('Please enter a value less than or equal to {0}.'),
+      min: a.validator.format('Please enter a value greater than or equal to {0}.')
+    },
+    autoCreateRanges: !1,
+    prototype: {
+      init: function () {
+        function b(b) {
+          var c = a.data(this[0].form, 'validator'), d = 'on' + b.type.replace(/^validate/, ''), e = c.settings;
+          e[d] && !this.is(e.ignore) && e[d].call(c, this[0], b);
+        }
+        this.labelContainer = a(this.settings.errorLabelContainer), this.errorContext = this.labelContainer.length && this.labelContainer || a(this.currentForm), this.containers = a(this.settings.errorContainer).add(this.settings.errorLabelContainer), this.submitted = {}, this.valueCache = {}, this.pendingRequest = 0, this.pending = {}, this.invalid = {}, this.reset();
+        var c, d = this.groups = {};
+        a.each(this.settings.groups, function (b, c) {
+          'string' == typeof c && (c = c.split(/\s/)), a.each(c, function (a, c) {
+            d[c] = b;
+          });
+        }), c = this.settings.rules, a.each(c, function (b, d) {
+          c[b] = a.validator.normalizeRule(d);
+        }), a(this.currentForm).validateDelegate(':text, [type=\'password\'], [type=\'file\'], select, textarea, [type=\'number\'], [type=\'search\'] ,[type=\'tel\'], [type=\'url\'], [type=\'email\'], [type=\'datetime\'], [type=\'date\'], [type=\'month\'], [type=\'week\'], [type=\'time\'], [type=\'datetime-local\'], [type=\'range\'], [type=\'color\'], [type=\'radio\'], [type=\'checkbox\']', 'focusin focusout keyup', b).validateDelegate('select, option, [type=\'radio\'], [type=\'checkbox\']', 'click', b), this.settings.invalidHandler && a(this.currentForm).bind('invalid-form.validate', this.settings.invalidHandler), a(this.currentForm).find('[required], [data-rule-required], .required').attr('aria-required', 'true');
+      },
+      form: function () {
+        return this.checkForm(), a.extend(this.submitted, this.errorMap), this.invalid = a.extend({}, this.errorMap), this.valid() || a(this.currentForm).triggerHandler('invalid-form', [this]), this.showErrors(), this.valid();
+      },
+      checkForm: function () {
+        this.prepareForm();
+        for (var a = 0, b = this.currentElements = this.elements(); b[a]; a++)
+          this.check(b[a]);
+        return this.valid();
+      },
+      element: function (b) {
+        var c = this.clean(b), d = this.validationTargetFor(c), e = !0;
+        return this.lastElement = d, void 0 === d ? delete this.invalid[c.name] : (this.prepareElement(d), this.currentElements = a(d), e = this.check(d) !== !1, e ? delete this.invalid[d.name] : this.invalid[d.name] = !0), a(b).attr('aria-invalid', !e), this.numberOfInvalids() || (this.toHide = this.toHide.add(this.containers)), this.showErrors(), e;
+      },
+      showErrors: function (b) {
+        if (b) {
+          a.extend(this.errorMap, b), this.errorList = [];
+          for (var c in b)
+            this.errorList.push({
+              message: b[c],
+              element: this.findByName(c)[0]
+            });
+          this.successList = a.grep(this.successList, function (a) {
+            return !(a.name in b);
+          });
+        }
+        this.settings.showErrors ? this.settings.showErrors.call(this, this.errorMap, this.errorList) : this.defaultShowErrors();
+      },
+      resetForm: function () {
+        a.fn.resetForm && a(this.currentForm).resetForm(), this.submitted = {}, this.lastElement = null, this.prepareForm(), this.hideErrors(), this.elements().removeClass(this.settings.errorClass).removeData('previousValue').removeAttr('aria-invalid');
+      },
+      numberOfInvalids: function () {
+        return this.objectLength(this.invalid);
+      },
+      objectLength: function (a) {
+        var b, c = 0;
+        for (b in a)
+          c++;
+        return c;
+      },
+      hideErrors: function () {
+        this.hideThese(this.toHide);
+      },
+      hideThese: function (a) {
+        a.not(this.containers).text(''), this.addWrapper(a).hide();
+      },
+      valid: function () {
+        return 0 === this.size();
+      },
+      size: function () {
+        return this.errorList.length;
+      },
+      focusInvalid: function () {
+        if (this.settings.focusInvalid)
+          try {
+            a(this.findLastActive() || this.errorList.length && this.errorList[0].element || []).filter(':visible').focus().trigger('focusin');
+          } catch (b) {
+          }
+      },
+      findLastActive: function () {
+        var b = this.lastActive;
+        return b && 1 === a.grep(this.errorList, function (a) {
+          return a.element.name === b.name;
+        }).length && b;
+      },
+      elements: function () {
+        var b = this, c = {};
+        return a(this.currentForm).find('input, select, textarea').not(':submit, :reset, :image, [disabled], [readonly]').not(this.settings.ignore).filter(function () {
+          return !this.name && b.settings.debug && window.console && console.error('%o has no name assigned', this), this.name in c || !b.objectLength(a(this).rules()) ? !1 : (c[this.name] = !0, !0);
+        });
+      },
+      clean: function (b) {
+        return a(b)[0];
+      },
+      errors: function () {
+        var b = this.settings.errorClass.split(' ').join('.');
+        return a(this.settings.errorElement + '.' + b, this.errorContext);
+      },
+      reset: function () {
+        this.successList = [], this.errorList = [], this.errorMap = {}, this.toShow = a([]), this.toHide = a([]), this.currentElements = a([]);
+      },
+      prepareForm: function () {
+        this.reset(), this.toHide = this.errors().add(this.containers);
+      },
+      prepareElement: function (a) {
+        this.reset(), this.toHide = this.errorsFor(a);
+      },
+      elementValue: function (b) {
+        var c, d = a(b), e = b.type;
+        return 'radio' === e || 'checkbox' === e ? a('input[name=\'' + b.name + '\']:checked').val() : 'number' === e && 'undefined' != typeof b.validity ? b.validity.badInput ? !1 : d.val() : (c = d.val(), 'string' == typeof c ? c.replace(/\r/g, '') : c);
+      },
+      check: function (b) {
+        b = this.validationTargetFor(this.clean(b));
+        var c, d, e, f = a(b).rules(), g = a.map(f, function (a, b) {
+            return b;
+          }).length, h = !1, i = this.elementValue(b);
+        for (d in f) {
+          e = {
+            method: d,
+            parameters: f[d]
+          };
+          try {
+            if (c = a.validator.methods[d].call(this, i, b, e.parameters), 'dependency-mismatch' === c && 1 === g) {
+              h = !0;
+              continue;
+            }
+            if (h = !1, 'pending' === c)
+              return void (this.toHide = this.toHide.not(this.errorsFor(b)));
+            if (!c)
+              return this.formatAndAdd(b, e), !1;
+          } catch (j) {
+            throw this.settings.debug && window.console && console.log('Exception occurred when checking element ' + b.id + ', check the \'' + e.method + '\' method.', j), j;
+          }
+        }
+        if (!h)
+          return this.objectLength(f) && this.successList.push(b), !0;
+      },
+      customDataMessage: function (b, c) {
+        return a(b).data('msg' + c.charAt(0).toUpperCase() + c.substring(1).toLowerCase()) || a(b).data('msg');
+      },
+      customMessage: function (a, b) {
+        var c = this.settings.messages[a];
+        return c && (c.constructor === String ? c : c[b]);
+      },
+      findDefined: function () {
+        for (var a = 0; a < arguments.length; a++)
+          if (void 0 !== arguments[a])
+            return arguments[a];
+        return void 0;
+      },
+      defaultMessage: function (b, c) {
+        return this.findDefined(this.customMessage(b.name, c), this.customDataMessage(b, c), !this.settings.ignoreTitle && b.title || void 0, a.validator.messages[c], '<strong>Warning: No message defined for ' + b.name + '</strong>');
+      },
+      formatAndAdd: function (b, c) {
+        var d = this.defaultMessage(b, c.method), e = /\$?\{(\d+)\}/g;
+        'function' == typeof d ? d = d.call(this, c.parameters, b) : e.test(d) && (d = a.validator.format(d.replace(e, '{$1}'), c.parameters)), this.errorList.push({
+          message: d,
+          element: b,
+          method: c.method
+        }), this.errorMap[b.name] = d, this.submitted[b.name] = d;
+      },
+      addWrapper: function (a) {
+        return this.settings.wrapper && (a = a.add(a.parent(this.settings.wrapper))), a;
+      },
+      defaultShowErrors: function () {
+        var a, b, c;
+        for (a = 0; this.errorList[a]; a++)
+          c = this.errorList[a], this.settings.highlight && this.settings.highlight.call(this, c.element, this.settings.errorClass, this.settings.validClass), this.showLabel(c.element, c.message);
+        if (this.errorList.length && (this.toShow = this.toShow.add(this.containers)), this.settings.success)
+          for (a = 0; this.successList[a]; a++)
+            this.showLabel(this.successList[a]);
+        if (this.settings.unhighlight)
+          for (a = 0, b = this.validElements(); b[a]; a++)
+            this.settings.unhighlight.call(this, b[a], this.settings.errorClass, this.settings.validClass);
+        this.toHide = this.toHide.not(this.toShow), this.hideErrors(), this.addWrapper(this.toShow).show();
+      },
+      validElements: function () {
+        return this.currentElements.not(this.invalidElements());
+      },
+      invalidElements: function () {
+        return a(this.errorList).map(function () {
+          return this.element;
+        });
+      },
+      showLabel: function (b, c) {
+        var d, e, f, g = this.errorsFor(b), h = this.idOrName(b), i = a(b).attr('aria-describedby');
+        g.length ? (g.removeClass(this.settings.validClass).addClass(this.settings.errorClass), g.html(c)) : (g = a('<' + this.settings.errorElement + '>').attr('id', h + '-error').addClass(this.settings.errorClass).html(c || ''), d = g, this.settings.wrapper && (d = g.hide().show().wrap('<' + this.settings.wrapper + '/>').parent()), this.labelContainer.length ? this.labelContainer.append(d) : this.settings.errorPlacement ? this.settings.errorPlacement(d, a(b)) : d.insertAfter(b), g.is('label') ? g.attr('for', h) : 0 === g.parents('label[for=\'' + h + '\']').length && (f = g.attr('id').replace(/(:|\.|\[|\])/g, '\\$1'), i ? i.match(new RegExp('\\b' + f + '\\b')) || (i += ' ' + f) : i = f, a(b).attr('aria-describedby', i), e = this.groups[b.name], e && a.each(this.groups, function (b, c) {
+          c === e && a('[name=\'' + b + '\']', this.currentForm).attr('aria-describedby', g.attr('id'));
+        }))), !c && this.settings.success && (g.text(''), 'string' == typeof this.settings.success ? g.addClass(this.settings.success) : this.settings.success(g, b)), this.toShow = this.toShow.add(g);
+      },
+      errorsFor: function (b) {
+        var c = this.idOrName(b), d = a(b).attr('aria-describedby'), e = 'label[for=\'' + c + '\'], label[for=\'' + c + '\'] *';
+        return d && (e = e + ', #' + d.replace(/\s+/g, ', #')), this.errors().filter(e);
+      },
+      idOrName: function (a) {
+        return this.groups[a.name] || (this.checkable(a) ? a.name : a.id || a.name);
+      },
+      validationTargetFor: function (b) {
+        return this.checkable(b) && (b = this.findByName(b.name)), a(b).not(this.settings.ignore)[0];
+      },
+      checkable: function (a) {
+        return /radio|checkbox/i.test(a.type);
+      },
+      findByName: function (b) {
+        return a(this.currentForm).find('[name=\'' + b + '\']');
+      },
+      getLength: function (b, c) {
+        switch (c.nodeName.toLowerCase()) {
+        case 'select':
+          return a('option:selected', c).length;
+        case 'input':
+          if (this.checkable(c))
+            return this.findByName(c.name).filter(':checked').length;
+        }
+        return b.length;
+      },
+      depend: function (a, b) {
+        return this.dependTypes[typeof a] ? this.dependTypes[typeof a](a, b) : !0;
+      },
+      dependTypes: {
+        'boolean': function (a) {
+          return a;
+        },
+        string: function (b, c) {
+          return !!a(b, c.form).length;
+        },
+        'function': function (a, b) {
+          return a(b);
+        }
+      },
+      optional: function (b) {
+        var c = this.elementValue(b);
+        return !a.validator.methods.required.call(this, c, b) && 'dependency-mismatch';
+      },
+      startRequest: function (a) {
+        this.pending[a.name] || (this.pendingRequest++, this.pending[a.name] = !0);
+      },
+      stopRequest: function (b, c) {
+        this.pendingRequest--, this.pendingRequest < 0 && (this.pendingRequest = 0), delete this.pending[b.name], c && 0 === this.pendingRequest && this.formSubmitted && this.form() ? (a(this.currentForm).submit(), this.formSubmitted = !1) : !c && 0 === this.pendingRequest && this.formSubmitted && (a(this.currentForm).triggerHandler('invalid-form', [this]), this.formSubmitted = !1);
+      },
+      previousValue: function (b) {
+        return a.data(b, 'previousValue') || a.data(b, 'previousValue', {
+          old: null,
+          valid: !0,
+          message: this.defaultMessage(b, 'remote')
+        });
+      }
+    },
+    classRuleSettings: {
+      required: { required: !0 },
+      email: { email: !0 },
+      url: { url: !0 },
+      date: { date: !0 },
+      dateISO: { dateISO: !0 },
+      number: { number: !0 },
+      digits: { digits: !0 },
+      creditcard: { creditcard: !0 }
+    },
+    addClassRules: function (b, c) {
+      b.constructor === String ? this.classRuleSettings[b] = c : a.extend(this.classRuleSettings, b);
+    },
+    classRules: function (b) {
+      var c = {}, d = a(b).attr('class');
+      return d && a.each(d.split(' '), function () {
+        this in a.validator.classRuleSettings && a.extend(c, a.validator.classRuleSettings[this]);
+      }), c;
+    },
+    attributeRules: function (b) {
+      var c, d, e = {}, f = a(b), g = b.getAttribute('type');
+      for (c in a.validator.methods)
+        'required' === c ? (d = b.getAttribute(c), '' === d && (d = !0), d = !!d) : d = f.attr(c), /min|max/.test(c) && (null === g || /number|range|text/.test(g)) && (d = Number(d)), d || 0 === d ? e[c] = d : g === c && 'range' !== g && (e[c] = !0);
+      return e.maxlength && /-1|2147483647|524288/.test(e.maxlength) && delete e.maxlength, e;
+    },
+    dataRules: function (b) {
+      var c, d, e = {}, f = a(b);
+      for (c in a.validator.methods)
+        d = f.data('rule' + c.charAt(0).toUpperCase() + c.substring(1).toLowerCase()), void 0 !== d && (e[c] = d);
+      return e;
+    },
+    staticRules: function (b) {
+      var c = {}, d = a.data(b.form, 'validator');
+      return d.settings.rules && (c = a.validator.normalizeRule(d.settings.rules[b.name]) || {}), c;
+    },
+    normalizeRules: function (b, c) {
+      return a.each(b, function (d, e) {
+        if (e === !1)
+          return void delete b[d];
+        if (e.param || e.depends) {
+          var f = !0;
+          switch (typeof e.depends) {
+          case 'string':
+            f = !!a(e.depends, c.form).length;
+            break;
+          case 'function':
+            f = e.depends.call(c, c);
+          }
+          f ? b[d] = void 0 !== e.param ? e.param : !0 : delete b[d];
+        }
+      }), a.each(b, function (d, e) {
+        b[d] = a.isFunction(e) ? e(c) : e;
+      }), a.each([
+        'minlength',
+        'maxlength'
+      ], function () {
+        b[this] && (b[this] = Number(b[this]));
+      }), a.each([
+        'rangelength',
+        'range'
+      ], function () {
+        var c;
+        b[this] && (a.isArray(b[this]) ? b[this] = [
+          Number(b[this][0]),
+          Number(b[this][1])
+        ] : 'string' == typeof b[this] && (c = b[this].replace(/[\[\]]/g, '').split(/[\s,]+/), b[this] = [
+          Number(c[0]),
+          Number(c[1])
+        ]));
+      }), a.validator.autoCreateRanges && (null != b.min && null != b.max && (b.range = [
+        b.min,
+        b.max
+      ], delete b.min, delete b.max), null != b.minlength && null != b.maxlength && (b.rangelength = [
+        b.minlength,
+        b.maxlength
+      ], delete b.minlength, delete b.maxlength)), b;
+    },
+    normalizeRule: function (b) {
+      if ('string' == typeof b) {
+        var c = {};
+        a.each(b.split(/\s/), function () {
+          c[this] = !0;
+        }), b = c;
+      }
+      return b;
+    },
+    addMethod: function (b, c, d) {
+      a.validator.methods[b] = c, a.validator.messages[b] = void 0 !== d ? d : a.validator.messages[b], c.length < 3 && a.validator.addClassRules(b, a.validator.normalizeRule(b));
+    },
+    methods: {
+      required: function (b, c, d) {
+        if (!this.depend(d, c))
+          return 'dependency-mismatch';
+        if ('select' === c.nodeName.toLowerCase()) {
+          var e = a(c).val();
+          return e && e.length > 0;
+        }
+        return this.checkable(c) ? this.getLength(b, c) > 0 : a.trim(b).length > 0;
+      },
+      email: function (a, b) {
+        return this.optional(b) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(a);
+      },
+      url: function (a, b) {
+        return this.optional(b) || /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(a);
+      },
+      date: function (a, b) {
+        return this.optional(b) || !/Invalid|NaN/.test(new Date(a).toString());
+      },
+      dateISO: function (a, b) {
+        return this.optional(b) || /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(a);
+      },
+      number: function (a, b) {
+        return this.optional(b) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(a);
+      },
+      digits: function (a, b) {
+        return this.optional(b) || /^\d+$/.test(a);
+      },
+      creditcard: function (a, b) {
+        if (this.optional(b))
+          return 'dependency-mismatch';
+        if (/[^0-9 \-]+/.test(a))
+          return !1;
+        var c, d, e = 0, f = 0, g = !1;
+        if (a = a.replace(/\D/g, ''), a.length < 13 || a.length > 19)
+          return !1;
+        for (c = a.length - 1; c >= 0; c--)
+          d = a.charAt(c), f = parseInt(d, 10), g && (f *= 2) > 9 && (f -= 9), e += f, g = !g;
+        return e % 10 === 0;
+      },
+      minlength: function (b, c, d) {
+        var e = a.isArray(b) ? b.length : this.getLength(b, c);
+        return this.optional(c) || e >= d;
+      },
+      maxlength: function (b, c, d) {
+        var e = a.isArray(b) ? b.length : this.getLength(b, c);
+        return this.optional(c) || d >= e;
+      },
+      rangelength: function (b, c, d) {
+        var e = a.isArray(b) ? b.length : this.getLength(b, c);
+        return this.optional(c) || e >= d[0] && e <= d[1];
+      },
+      min: function (a, b, c) {
+        return this.optional(b) || a >= c;
+      },
+      max: function (a, b, c) {
+        return this.optional(b) || c >= a;
+      },
+      range: function (a, b, c) {
+        return this.optional(b) || a >= c[0] && a <= c[1];
+      },
+      equalTo: function (b, c, d) {
+        var e = a(d);
+        return this.settings.onfocusout && e.unbind('.validate-equalTo').bind('blur.validate-equalTo', function () {
+          a(c).valid();
+        }), b === e.val();
+      },
+      remote: function (b, c, d) {
+        if (this.optional(c))
+          return 'dependency-mismatch';
+        var e, f, g = this.previousValue(c);
+        return this.settings.messages[c.name] || (this.settings.messages[c.name] = {}), g.originalMessage = this.settings.messages[c.name].remote, this.settings.messages[c.name].remote = g.message, d = 'string' == typeof d && { url: d } || d, g.old === b ? g.valid : (g.old = b, e = this, this.startRequest(c), f = {}, f[c.name] = b, a.ajax(a.extend(!0, {
+          url: d,
+          mode: 'abort',
+          port: 'validate' + c.name,
+          dataType: 'json',
+          data: f,
+          context: e.currentForm,
+          success: function (d) {
+            var f, h, i, j = d === !0 || 'true' === d;
+            e.settings.messages[c.name].remote = g.originalMessage, j ? (i = e.formSubmitted, e.prepareElement(c), e.formSubmitted = i, e.successList.push(c), delete e.invalid[c.name], e.showErrors()) : (f = {}, h = d || e.defaultMessage(c, 'remote'), f[c.name] = g.message = a.isFunction(h) ? h(b) : h, e.invalid[c.name] = !0, e.showErrors(f)), g.valid = j, e.stopRequest(c, j);
+          }
+        }, d)), 'pending');
+      }
+    }
+  }), a.format = function () {
+    throw '$.format has been deprecated. Please use $.validator.format instead.';
+  };
+  var b, c = {};
+  a.ajaxPrefilter ? a.ajaxPrefilter(function (a, b, d) {
+    var e = a.port;
+    'abort' === a.mode && (c[e] && c[e].abort(), c[e] = d);
+  }) : (b = a.ajax, a.ajax = function (d) {
+    var e = ('mode' in d ? d : a.ajaxSettings).mode, f = ('port' in d ? d : a.ajaxSettings).port;
+    return 'abort' === e ? (c[f] && c[f].abort(), c[f] = b.apply(this, arguments), c[f]) : b.apply(this, arguments);
+  }), a.extend(a.fn, {
+    validateDelegate: function (b, c, d) {
+      return this.bind(c, function (c) {
+        var e = a(c.target);
+        return e.is(b) ? d.apply(e, arguments) : void 0;
+      });
+    }
+  });
+});
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 });
@@ -44632,16 +45374,46 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       });
     }
   };
+}).directive('emailValidate', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, element, attributes, controller) {
+      $(element).blur(function () {
+        var email = $(this).validate();
+        var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
+        if (re.test(element)) {
+          $(element).addClass('alert alert-warning');
+          $(element).tooltip({ title: 'Please input a valid email address!' });
+        } else {
+        }
+      });
+    }
+  };
 }).directive('emailCheck', function () {
   return {
     restrict: 'AEC',
     link: function ($scope, element, attributes, controller) {
-      $(element).blur(function () {
+      //$(element).blur(function () {
+      //    var string1 = $(element).val();
+      //    if (string1.indexOf("@") === -1){
+      //        $(element).addClass('alert alert-warning');
+      //        $(element).tooltip({
+      //            title: "Please input a valid email address!"
+      //        });
+      //    //$(element).blur();
+      //    } else {
+      //        $(element).removeClass('alert alert-warning');
+      //        $(element).tooltip('disable');
+      //    }
+      //});
+      $(element).on('keyup', function () {
         var string1 = $(element).val();
         if (string1.indexOf('@') === -1) {
-          $(element).tooltip({ title: 'Please input a valid email address!' });
           $(element).addClass('alert alert-warning');
-          $(element).focus();
+          $(element).tooltip({ title: 'Please input a valid email address!' });
+        } else {
+          $(element).removeClass('alert alert-warning');
+          $(element).tooltip('destroy');
         }
       });
     }
@@ -46163,7 +46935,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/colors/demo-play-colors.html', '<section ng-controller=colorsPLayDemoCtrl id=colors-play-demo><div class=container><h2>Colors Builder</h2><div></div></div></section>');
     $templateCache.put('components/containers/demo-containers.html', '<section ng-controller=containersCtrl id=containers-html-example><div class=container><h2>Containers Demo</h2><div><h4>Default well example</h4><div id=example-well><div class="well well-transparent-stroke"><p>This is a default Well...</p></div></div></div><h4>Solid colored wells &amp; containers</h4><div class="well well-lg well-blue"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-blue"</strong></p></div><div class="well well-lg well-dark-blue"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-dark-blue"</strong></p></div><div class="well well-lg well-purple"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-purple"</strong></p></div><div class="well well-lg well-berry"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-berry"</strong></p></div><div class="well well-lg well-red"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red"</strong></p></div><div class="well well-lg well-gray-medium"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-medium"</strong></p></div><div class="well well-lg well-gray-dark"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-dark"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers</h4><div class="well well-lg well-blue-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-blue-stroke"</strong></p></div><div class="well well-lg well-dark-blue-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-dark-blue-stroke"</strong></p></div><div class="well well-lg well-purple-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-purple-stroke"</strong></p></div><div class="well well-lg well-berry-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-berry-stroke"</strong></p></div><div class="well well-lg well-red-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red-stroke"</strong></p></div><div class="well well-lg well-red-dark-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red-dark-stroke"</strong></p></div><div class="well well-lg well-gray-medium-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-medium-stroke"</strong></p></div><div class="well well-lg well-gray-dark-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-dark-stroke"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers with title</h4><div class="well well-lg well-blue-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-blue-stroke"</strong></p></div><div class="well well-lg well-dark-blue-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-dark-blue-stroke"</strong></p></div><div class="well well-lg well-purple-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-purple-stroke"</strong></p></div><div class="well well-lg well-berry-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-berry-stroke"</strong></p></div><div class="well well-lg well-red-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-red-stroke"</strong></p></div><div class="well well-lg well-red-dark-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-red-dark-stroke"</strong></p></div><div class="well well-lg well-gray-medium-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-gray-medium-stroke"</strong></p></div><div class="well well-lg well-gray-dark-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-gray-dark-stroke"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers with title</h4><div class="panel panel-blue"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-blue"</strong></p></div><div class="panel panel-dark-blue"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-dark-blue"</strong></p></div><div class="panel panel-purple"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-purple"</strong></p></div><div class="panel panel-purple"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-purple"</strong></p></div><div class="panel panel-berry"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-berry"</strong></p></div><div class="panel panel-red"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-red"</strong></p></div><div class="panel panel-red-dark"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-red-dark"</strong></p></div><div class="panel panel-gray-medium"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-gray-medium"</strong></p></div><div class="panel panel-gray-dark"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-gray-dark"</strong></p></div></div></section>');
     $templateCache.put('components/containers/demo-play-containers.html', '<section ng-controller=containersPLayDemoCtrl id=containers-play-demo><div class=container><h2>Containers Builder</h2><div></div></div></section>');
-    $templateCache.put('components/content-teaser/demo-content-teaser.html', '<section ng-controller=contentTeaserCtrl id=content-teaser-html-example><div class=container><h2>Teasers Demo</h2><h3 class=bottom-offset-20>Vertical Teaser \u2013 Show/no-hide</h3><div class=row><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group content-card" ng-class="{\'view-all\': viewAll[\'parent-link-1\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-1\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-1\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-1\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-2\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-2\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-2\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-2\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-3\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-3\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-3\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-3\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-4\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-4\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-4\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-4\'] = true">More</a></div></div></div></div></div><hr><h3 class=bottom-offset-20>Vertical Teaser \u2013 truncated content with dropdown CTA</h3><div class=row><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div></div><hr><div class=top-offset-60><h3 class=bottom-offset-20>Vertical Teaser \u2013 truncated content</h3><div class=row><div class="col-xs-12 col-sm-6 col-md-6 stacked-detail-links"><img src=http://placehold.it/555x275 class="img-responsive bottom-offset-10"><h4 class=text-blue>Headline Title Goes Here <img src="components/content-teaser/pdficon_small.png"></h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group"><li class=text-gray-medium>Updated: 3/25/2015</li><li class=text-gray-medium>Category:<a href=javascript:;>&nbsp;&nbsp;Security Solutions</a></li><li><a href=javascript:;>View all Security resources</a></li></ul></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser image left (responsive image)</h3><div class=clearfix><div class=form-compressed><div class=row><div class="col-xs-3 vertical-center"><a href=javascript:;><img class=img-responsive alt=275x175 src=http://placehold.it/275x175 data-holder-rendered=true></a></div><div class="col-xs-8 vertical-center"><a href=javascript:;><h5 class=teaser-media-heading>Middle aligned media</h5></a><p class=bottom-offset-5>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p><button class="btn btn-success hidden-xs hidden-sm">Call to Action</button> <a class="btn-link visible-xs-block visible-sm-block" href=javascript:;>Call to Action</a></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser image right (responsive)</h3><div class=clearfix><div class=form-compressed><div class=row><div class="col-xs-8 vertical-center"><a href=javascript:;><h5 class=teaser-media-heading>Middle aligned media</h5></a><p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p><button class="btn btn-success hidden-xs hidden-sm">Call to Action</button> <a class="btn-link visible-xs-block visible-sm-block" href=javascript:;>Call to Action</a></div><div class="col-xs-3 vertical-center"><a href=javascript:;><img class=img-responsive alt=275x175 src=http://placehold.it/275x175 data-holder-rendered=true></a></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser full-bleed text overlay</h3><div class=row><div class="col-xs-12 col-sm-6 full-width-teaser"><img alt=850x325 src=http://placehold.it/850x325 class=img-responsive><div class="well well-overlay"><a href=javascript:;>Sed susscipt ligua nec lorem semper, vel condimentum tincidunt.</a></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser full-width gradient</h3><div class=container-fluid><div class=row><div class=col-xs-12><div class="well well-site-wide"><p class=text-center>Text area may contain centered text up to 140 characters including spaces and call-to-action.<a href=javascript:;>Call to Action</a></p></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>Value props</h3></div><div class=container-fluid><div class="row value-props-gallery"><div class=container><div class="col-xs-12 col-sm-4 div-height-equalize gallery-item"><a href=javascript:;><i class="icon-large-shipping text-blue"></i><h5>Free shipping, free returns</h5><p class=text-gray-dark>Shop now with free shipping and no-cost returns.</p></a></div><div class="col-xs-12 col-sm-4 div-height-equalize gallery-item"><a href=javascript:;><i class="icon-large-calculator text-blue"></i><h5>Fast. Easy. Financing.*</h5><p class=text-gray-dark>Dell Preferred Account <sup>TM</sup> makes purchasing easier.</p></a></div><div class="col-xs-12 col-sm-4 div-height-equalize gallery-item"><a href=javascript:;><i class="icon-large-giftcard text-blue"></i><h5>Dell Advantage Loyalty Program.</h5><p class=text-gray-dark>Here\'s how much we appreciate our customers.</p></a></div></div></div></div></section>');
+    $templateCache.put('components/content-teaser/demo-content-teaser.html', '<section ng-controller=contentTeaserCtrl id=content-teaser-html-example><div class=container><h2>Teasers Demo</h2><h3 class=bottom-offset-20>Vertical Teaser \u2013 Show/no-hide</h3><div class=row><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group content-card" ng-class="{\'view-all\': viewAll[\'parent-link-1\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-1\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-1\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-1\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-2\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-2\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-2\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-2\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-3\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-3\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-3\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-3\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-4\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-4\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-4\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-4\'] = true">More</a></div></div></div></div></div><hr><h3 class=bottom-offset-20>Vertical Teaser \u2013 truncated content with dropdown CTA</h3><div class=row><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div></div><hr><div class=top-offset-60><h3 class=bottom-offset-20>Vertical Teaser \u2013 truncated content</h3><div class=row><div class="col-xs-12 col-sm-6 col-md-6 stacked-detail-links"><img src=http://placehold.it/555x275 class="img-responsive bottom-offset-10"><h4 class=text-blue>Headline Title Goes Here <img src="components/content-teaser/pdficon_small.png"></h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group"><li class=text-gray-medium>Updated: 3/25/2015</li><li class=text-gray-medium>Category:<a href=javascript:;>&nbsp;&nbsp;Security Solutions</a></li><li><a href=javascript:;>View all Security resources</a></li></ul></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser image left (responsive image)</h3><div class=clearfix><div class=form-compressed><div class=row><div class="col-xs-3 vertical-center"><a href=javascript:;><img class=img-responsive alt=275x175 src=http://placehold.it/275x175 data-holder-rendered=true></a></div><div class="col-xs-8 vertical-center"><a href=javascript:;><h5 class=teaser-media-heading>Middle aligned media</h5></a><p class=bottom-offset-5>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p><button class="btn btn-success hidden-xs hidden-sm">Call to Action</button> <a class="btn-link visible-xs-block visible-sm-block" href=javascript:;>Call to Action</a></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser image right (responsive)</h3><div class=clearfix><div class=form-compressed><div class=row><div class="col-xs-8 vertical-center"><a href=javascript:;><h5 class=teaser-media-heading>Middle aligned media</h5></a><p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p><button class="btn btn-success hidden-xs hidden-sm">Call to Action</button> <a class="btn-link visible-xs-block visible-sm-block" href=javascript:;>Call to Action</a></div><div class="col-xs-3 vertical-center"><a href=javascript:;><img class=img-responsive alt=275x175 src=http://placehold.it/275x175 data-holder-rendered=true></a></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser full-bleed text overlay</h3><div class=row><div class="col-xs-12 col-sm-6 full-width-teaser"><img alt=850x325 src=http://placehold.it/850x325 class=img-responsive><div class="well well-banner"><a href=javascript:;>Sed susscipt ligua nec lorem semper, vel condimentum tincidunt.</a></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser full-width gradient</h3><div class=container-fluid><div class=row><div class=col-xs-12><div class="well well-site-wide"><p class=text-center>Text area may contain centered text up to 140 characters including spaces and call-to-action.<a href=javascript:;>Call to Action</a></p></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>Value props</h3></div><div class=container-fluid><div class="row value-props-gallery"><div class=container><div class="col-xs-12 col-sm-4 div-height-equalize gallery-item"><a href=javascript:;><i class="icon-large-shipping text-blue"></i><h5>Free shipping, free returns</h5><p class=text-gray-dark>Shop now with free shipping and no-cost returns.</p></a></div><div class="col-xs-12 col-sm-4 div-height-equalize gallery-item"><a href=javascript:;><i class="icon-large-calculator text-blue"></i><h5>Fast. Easy. Financing.*</h5><p class=text-gray-dark>Dell Preferred Account <sup>TM</sup> makes purchasing easier.</p></a></div><div class="col-xs-12 col-sm-4 div-height-equalize gallery-item"><a href=javascript:;><i class="icon-large-giftcard text-blue"></i><h5>Dell Advantage Loyalty Program.</h5><p class=text-gray-dark>Here\'s how much we appreciate our customers.</p></a></div></div></div></div></section>');
     $templateCache.put('components/content-teaser/demo-play-content-teaser.html', '<section ng-controller=contentTeaserPLayDemoCtrl id=content-teaser-play-demo><div class=container><h2>Content-Teaser Builder</h2><div></div></div></section>');
     $templateCache.put('components/date-selector/demo-date-selector.html', '<section ng-controller=dateSelectorCtrl id=date-selector-html-example><div class=container><h2>Date-Selector Demo</h2><div><div ng-controller=DatepickerDemoCtrl><h4>Select date</h4><div class=row><div class="col-md-6 date-selector"><p class=input-group><input type=text class=form-control datepicker-popup=MM-dd-yyyy ng-model=dt is-open=opened min-date=minDate max-date="\'2015-06-22\'" datepicker-options=dateOptions date-disabled="disabled(date, mode)" ng-required=true show-button-bar=false show-weeks="false"> <span class=input-group-btn><button type=button class="btn btn-default" ng-click=open($event)><i class="glyphicon glyphicon-calendar"></i></button></span></p><p>MM/DD/YYYY</p></div></div></div></div></div></section>');
     $templateCache.put('components/date-selector/demo-play-date-selector.html', '<section ng-controller=dateSelectorPLayDemoCtrl id=date-selector-play-demo><div class=container><h2>Date-Selector Builder</h2><div></div></div></section>');
@@ -46173,7 +46945,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/dropdown-buttons/demo-play-dropdown-buttons.html', '<section ng-controller=dropdownButtonsPLayDemoCtrl id=dropdown-buttons-play-demo><div class=container><h2>Dropdown-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/footer/demo-footer.html', '<section ng-controller=footerCtrl id=footer-html-example><div class=container><h2>Footer Demo</h2><div></div></div></section>');
     $templateCache.put('components/footer/demo-play-footer.html', '<section ng-controller=footerPLayDemoCtrl id=footer-play-demo><div class=container><h2>Footer Builder</h2><div></div></div></section>');
-    $templateCache.put('components/forms/demo-forms.html', '<section ng-controller=formsCtrl id=forms-html-example><div class=container><h2>Forms Demo</h2><h3 class=top-offset-20>individual form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=text-label-input>Text input label</label><div class="col-xs-12 col-sm-5"><input type=text class=form-control id=text-label-input><p class=help-block>In addition to freeform text, any HTML5 text-based input appears like so.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=uneditable>Uneditable input</label><div class="col-xs-12 col-sm-5"><span id=uneditable class="uneditable-input form-control">Some value here</span></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=disabledInput>Disabled input</label><div class="col-xs-12 col-sm-5"><input class="disabled form-control" id=disabledInput type=text placeholder="Disabled input here\u2026" disabled></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=textarea>Textarea input</label><div class="col-xs-12 col-sm-5"><textarea id=textarea class=form-control rows=5></textarea></div></div></div></form></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Checkboxes</h4><div class=checkbox><label><input type=checkbox value="option 1"> Checkbox one</label></div><div class="checkbox disabled bottom-offset-20"><label><input type=checkbox value="value option 2" disabled> Checkbox two is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline checkboxes</h4><label class=checkbox-inline><input type=checkbox id=inlineCheckbox1 value=option1>1</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox2 value=option2>2</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox3 value=option3>3</label></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Radio Buttons</h4><div class=radio><label><input type=radio name=optionsRadios id=options-radio-1 value=option1 checked> Option one radio button</label></div><div class=radio><label><input type=radio name=optionsRadios id=options-radio-2 value=option2> Option two radio button</label></div><div class="radio disabled"><label><input type=radio name=optionsRadios id=options-radio-3 value=option3 disabled> Option three is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline Radio Buttons</h4><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio1 value=option1> 1</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio2 value=option2> 2</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio3 value=option3> 3</label></div></div><div class=row><div class="col-xs-12 col-sm-8 bottom-offset-40"><h4>Tree Checkboxes</h4><ul class=list-tree><li><label class=checkbox><input type=checkbox value=option1-parent1> Checkbox value (parent 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild1> Checkbox value (grand child 1)</label></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent1-child2> Checkbox value (child 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild3> Checkbox value (grand child 3)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild4> Checkbox value (grand child 4)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild5> Checkbox value (grand child 5)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild1> Checkbox value (great grand child 1)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild2> Checkbox value (great grand child 2)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild3> Checkbox value (great grand child 3)</label></li></ul></li></ul></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent2> Checkbox value (parent 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-grandchild1> Checkbox value (grand child 1)</label></li></ul></li></ul></li></ul></div></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=exampleInputFile>File upload label</label><div class="col-xs-6 col-sm-6"><input type=file id=exampleInputFile><p class=help-block>Example block-level help text here.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Input with error</label><div class="col-xs-6 col-sm-6"><input type=text id=inputError class="form-control alert alert-warning" data-html=true data-toggle=popover data-placement=top data-trigger=submit data-content="<strong>\'First Name\'</strong> should not be empty." data-original-title="&lt;i class=\'icon-small-alertnotice text-red pull-left\'&gt;&lt;/i&gt; &nbsp;Not a valid email &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;" placeholder="*First Name"></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="form-group show-password"><label for=passwordShowHide class="col-xs-12 col-sm-2 form-label">Password</label><div class="col-xs-6 col-sm-6"><input id=passwordShowHide type=password class=form-control ng-model=password></div><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"><label class="checkbox help-block"><input type=checkbox value=option1 ng-model=showPassword ng-click=togglePassword()> <span ng-if=!showPassword>Show password</span> <span ng-if=showPassword>Hide password</span></label></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-6 col-sm-8 col-md-8"><label class="col-xs-12 col-sm-3 form-label" for=phone>Phone number</label><div class="col-xs-12 col-sm-9"><input id=phone type=text class="form-control phone-number" placeholder="(555) 111-2222"></div></div></div><div class=row><div class="col-xs-12 col-sm-8 col-md-8"><div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phone-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phone-ext class="collapse col-xs-6 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Email address</label><div class="col-xs-6 col-sm-6"><input name=email type=email class="form-control required" placeholder="*Enter email"></div></div></div><div class=row><div class="col-xs-12 col-md-6 col-md-offset-2 help-ext has-success has-feedback"><span><label class="email-success hide">Your email address is valid</label></span> <span><label class="email-error hide">Your email address is NOT valid</label></span></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label><div class=spinbox data-orient=vertical data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box horizontal</label><div class=spinbox data-orient=horizontal data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class="bottom-offset-40 top-offset-40"><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: current value</label><input class=bs-slider id=single-handle-ex1 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: tooltip constant</label><input class=bs-slider id=single-handle-ex2 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class="form-group single-handle-slider"><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Double handler Slider</label><input class=bs-slider id=double-handle-ex1 type="text"></div></div></div></form></div><h3 class=top-offset-40>select form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Select list</label><select class=form-control id=select01><option>something</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select-01 class=form-label>Tiered select list</label><select class=form-control id=select-01><option class=text-gray-dark value=all>All</option><optgroup class=text-gray-dark label="Original Release Date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup><optgroup class=text-gray-dark label="Last updated date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=multiSelect class=form-label>multi-select</label><select multiple id=multiSelect><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><div class=form-group><label for=ms class=form-label>Multi-select with checkboxes</label><select class=ms-checkbox id=ms multiple><option value=1>January</option><option value=2>February</option><option value=3>March</option><option value=4>April</option><option value=5>May</option><option value=6>June</option><option value=7>July</option><option value=8>August</option><option value=9>September</option><option value=10>October</option><option value=11>November</option><option value=12>December</option></select></div></div></div></div></form></div><h3 class=top-offset-40>Selects with pre-populated states (U.S. only)</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=default-select-state class=form-label>Standard Select U.S. States</label><select class="form-control select-state" id=default-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=short-select-state class=form-label>States with Abbreviations</label><select class="form-control select-state" data-format=short id=short-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=both-select-state class=form-label>States with Abbreviations and Name</label><select class="form-control select-state" data-format=both id=both-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=emptyname-select-state class=form-label>States with Custom Select Text</label><select class="form-control select-state" data-format="" data-empty-name="Please select a state" id=emptyname-select-state ng-model=stateDefault></select></div></div></div></form></div><h3 class=top-offset-40>Common Forms</h3><hr><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9"></h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First Name</label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name>First</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 col-md-3 hidden-sm form-label" for=last-name>Last Name</label><label class="col-xs-12 col-sm-2 col-md-3 visible-sm-block form-label" for=last-name>Last</label><div class="col-xs-12 col-sm-10 col-md-9"><input type=text class=form-control id=last-name placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone #</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 col-md-1 form-label" for=email-address>Email&nbsp;</label><div class="col-xs-12 col-sm-10 col-md-11"><input type=text class="form-control email-address" id=email-address placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 form-label" for=address-1>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-1 placeholder="*Street Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-2>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-2 placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state>&nbsp;</label><div><select class="form-control select-state" id=default-state ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip placeholder="*Zip Code"></div></div></div></form><hr class="top-offset-40"><h3>Ship to (group addressed form in Well)</h3><div class=bottom-offset-40><div class=row><div class=col-md-9><div class="well well-white text-gray-medium well-white-stroke"><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9">Ship to</h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name-1>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name-1 placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial-1>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial-1 placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 hidden-sm form-label" for=last-name>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-12 col-sm-2 visible-sm-block form-label" for=last-name-1>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=last-name-1 placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone<span class="hidden-xs hidden-sm hidden-md">#</span></label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number-1 placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=email-address-1>Email&nbsp;</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control email-address" id=email-address-1 placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext-2><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext-2 class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-A>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-A placeholder="*Street Address"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-B>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-B placeholder="*Additional Address"></div></div></div><div class=row><div class=col-xs-12><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address-1><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address-1 class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city-1>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city-1 placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state-1>&nbsp;</label><div><select class="form-control select-state" id=default-state-1 ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip-1>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip-1 placeholder="*Zip Code"></div></div></div></form></div></div></div></div></div></div></section>');
+    $templateCache.put('components/forms/demo-forms.html', '<section ng-controller=formsCtrl id=forms-html-example><div class=container><h2>Forms Demo</h2><h3 class=top-offset-20>individual form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=text-label-input>Text input label</label><div class="col-xs-12 col-sm-5"><input type=text class=form-control id=text-label-input><p class=help-block>In addition to freeform text, any HTML5 text-based input appears like so.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=uneditable>Uneditable input</label><div class="col-xs-12 col-sm-5"><span id=uneditable class="uneditable-input form-control">Some value here</span></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=disabledInput>Disabled input</label><div class="col-xs-12 col-sm-5"><input class="disabled form-control" id=disabledInput type=text placeholder="Disabled input here\u2026" disabled></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=textarea>Textarea input</label><div class="col-xs-12 col-sm-5"><textarea id=textarea class=form-control rows=5></textarea></div></div></div></form></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Checkboxes</h4><div class=checkbox><label><input type=checkbox value="option 1"> Checkbox one</label></div><div class="checkbox disabled bottom-offset-20"><label><input type=checkbox value="value option 2" disabled> Checkbox two is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline checkboxes</h4><label class=checkbox-inline><input type=checkbox id=inlineCheckbox1 value=option1>1</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox2 value=option2>2</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox3 value=option3>3</label></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Radio Buttons</h4><div class=radio><label><input type=radio name=optionsRadios id=options-radio-1 value=option1 checked> Option one radio button</label></div><div class=radio><label><input type=radio name=optionsRadios id=options-radio-2 value=option2> Option two radio button</label></div><div class="radio disabled"><label><input type=radio name=optionsRadios id=options-radio-3 value=option3 disabled> Option three is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline Radio Buttons</h4><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio1 value=option1> 1</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio2 value=option2> 2</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio3 value=option3> 3</label></div></div><div class=row><div class="col-xs-12 col-sm-8 bottom-offset-40"><h4>Tree Checkboxes</h4><ul class=list-tree><li><label class=checkbox><input type=checkbox value=option1-parent1> Checkbox value (parent 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild1> Checkbox value (grand child 1)</label></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent1-child2> Checkbox value (child 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild3> Checkbox value (grand child 3)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild4> Checkbox value (grand child 4)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild5> Checkbox value (grand child 5)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild1> Checkbox value (great grand child 1)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild2> Checkbox value (great grand child 2)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild3> Checkbox value (great grand child 3)</label></li></ul></li></ul></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent2> Checkbox value (parent 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-grandchild1> Checkbox value (grand child 1)</label></li></ul></li></ul></li></ul></div></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=exampleInputFile>File upload label</label><div class="col-xs-6 col-sm-6"><input type=file id=exampleInputFile><p class=help-block>Example block-level help text here.</p></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Email Valid (opt#1)</label><div class="col-xs-6 col-sm-6"><input type=text class="email-check form-control"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Email Valid (opt#2)</label><div class="col-xs-6 col-sm-6"><input type=text class="email-validate form-control"></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="form-group show-password"><label for=passwordShowHide class="col-xs-12 col-sm-2 form-label">Password</label><div class="col-xs-6 col-sm-6"><input id=passwordShowHide type=password class=form-control ng-model=password></div><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"><label class="checkbox help-block"><input type=checkbox value=option1 ng-model=showPassword ng-click=togglePassword()> <span ng-if=!showPassword>Show password</span> <span ng-if=showPassword>Hide password</span></label></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-6 col-sm-8 col-md-8"><label class="col-xs-12 col-sm-3 form-label" for=phone>Phone number</label><div class="col-xs-12 col-sm-9"><input id=phone type=text class="form-control phone-number" placeholder="(555) 111-2222"></div></div></div><div class=row><div class="col-xs-12 col-sm-8 col-md-8"><div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phone-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phone-ext class="collapse col-xs-6 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Email address</label><div class="col-xs-6 col-sm-6"><input name=email type=email class="form-control required" placeholder="*Enter email"></div></div></div><div class=row><div class="col-xs-12 col-md-6 col-md-offset-2 help-ext has-success has-feedback"><span><label class="email-success hide">Your email address is valid</label></span> <span><label class="email-error hide">Your email address is NOT valid</label></span></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label><div class=spinbox data-orient=vertical data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box horizontal</label><div class=spinbox data-orient=horizontal data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class="bottom-offset-40 top-offset-40"><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: current value</label><input class=bs-slider id=single-handle-ex1 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: tooltip constant</label><input class=bs-slider id=single-handle-ex2 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class="form-group single-handle-slider"><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Double handler Slider</label><input class=bs-slider id=double-handle-ex1 type="text"></div></div></div></form></div><h3 class=top-offset-40>select form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Select list</label><select class=form-control id=select01><option>something</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select-01 class=form-label>Tiered select list</label><select class=form-control id=select-01><option class=text-gray-dark value=all>All</option><optgroup class=text-gray-dark label="Original Release Date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup><optgroup class=text-gray-dark label="Last updated date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=multiSelect class=form-label>multi-select</label><select multiple id=multiSelect><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><div class=form-group><label for=ms class=form-label>Multi-select with checkboxes</label><select class=ms-checkbox id=ms multiple><option value=1>January</option><option value=2>February</option><option value=3>March</option><option value=4>April</option><option value=5>May</option><option value=6>June</option><option value=7>July</option><option value=8>August</option><option value=9>September</option><option value=10>October</option><option value=11>November</option><option value=12>December</option></select></div></div></div></div></form></div><h3 class=top-offset-40>Selects with pre-populated states (U.S. only)</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=default-select-state class=form-label>Standard Select U.S. States</label><select class="form-control select-state" id=default-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=short-select-state class=form-label>States with Abbreviations</label><select class="form-control select-state" data-format=short id=short-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=both-select-state class=form-label>States with Abbreviations and Name</label><select class="form-control select-state" data-format=both id=both-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=emptyname-select-state class=form-label>States with Custom Select Text</label><select class="form-control select-state" data-format="" data-empty-name="Please select a state" id=emptyname-select-state ng-model=stateDefault></select></div></div></div></form></div><h3 class=top-offset-40>Common Forms</h3><hr><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9"></h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First Name</label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name>First</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 col-md-3 hidden-sm form-label" for=last-name>Last Name</label><label class="col-xs-12 col-sm-2 col-md-3 visible-sm-block form-label" for=last-name>Last</label><div class="col-xs-12 col-sm-10 col-md-9"><input type=text class=form-control id=last-name placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone #</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 col-md-1 form-label" for=email-address>Email&nbsp;</label><div class="col-xs-12 col-sm-10 col-md-11"><input type=text class="form-control email-address" id=email-address placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 form-label" for=address-1>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-1 placeholder="*Street Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-2>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-2 placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state>&nbsp;</label><div><select class="form-control select-state" id=default-state ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip placeholder="*Zip Code"></div></div></div></form><hr class="top-offset-40"><h3>Ship to (group addressed form in Well)</h3><div class=bottom-offset-40><div class=row><div class=col-md-9><div class="well well-white text-gray-medium well-white-stroke"><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9">Ship to</h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name-1>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name-1 placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial-1>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial-1 placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 hidden-sm form-label" for=last-name>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-12 col-sm-2 visible-sm-block form-label" for=last-name-1>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=last-name-1 placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone<span class="hidden-xs hidden-sm hidden-md">#</span></label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number-1 placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=email-address-1>Email&nbsp;</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control email-address" id=email-address-1 placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext-2><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext-2 class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-A>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-A placeholder="*Street Address"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-B>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-B placeholder="*Additional Address"></div></div></div><div class=row><div class=col-xs-12><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address-1><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address-1 class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city-1>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city-1 placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state-1>&nbsp;</label><div><select class="form-control select-state" id=default-state-1 ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip-1>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip-1 placeholder="*Zip Code"></div></div></div></form></div></div></div></div></div></div></section>');
     $templateCache.put('components/forms/demo-play-forms.html', '<section ng-controller=formsPLayDemoCtrl id=forms-play-demo><div class=container><h2>Forms Builder</h2><div></div></div></section>');
     $templateCache.put('components/grid/demo-grid.html', '<section ng-controller=gridCtrl><div class=container id=grid-html-example><h2>Grid sample</h2><h3 class=top-offset-20>Gutter explanation</h3><div class=grid-gutter-demo><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 outer-div-column-area"><span class="visible-xs-block text-center inner-div-live-area">Live Area<br>.col-xs-3</span> <span class="visible-sm-block text-center inner-div-live-area">Live Area<br>.col-sm-3</span> <span class="visible-md-block text-center inner-div-live-area">Live Area<br>.col-md-3</span> <span class="visible-lg-block text-center inner-div-live-area">Live Area<br>.col-lg-3</span></div><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 outer-div-column-area"><span class="visible-xs-block text-center inner-div-live-area">Live Area<br>.col-xs-3</span> <span class="visible-sm-block text-center inner-div-live-area">Live Area<br>.col-sm-3</span> <span class="visible-md-block text-center inner-div-live-area">Live Area<br>.col-md-3</span> <span class="visible-lg-block text-center inner-div-live-area">Live Area<br>.col-lg-3</span></div><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 outer-div-column-area"><span class="visible-xs-block text-center inner-div-live-area">Live Area<br>.col-xs-3</span> <span class="visible-sm-block text-center inner-div-live-area">Live Area<br>.col-sm-3</span> <span class="visible-md-block text-center inner-div-live-area">Live Area<br>.col-md-3</span> <span class="visible-lg-block text-center inner-div-live-area">Live Area<br>.col-lg-3</span></div><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 outer-div-column-area"><span class="visible-xs-block text-center inner-div-live-area">Live Area<br>.col-xs-3</span> <span class="visible-sm-block text-center inner-div-live-area">Live Area<br>.col-sm-3</span> <span class="visible-md-block text-center inner-div-live-area">Live Area<br>.col-md-3</span> <span class="visible-lg-block text-center inner-div-live-area">Live Area<br>.col-lg-3</span></div></div><div class="row top-offset-20"><div class="well well-white"><div class=media><div class=media-left><div class=outer-div-column-area-square-div></div></div><div class=media-body><h4 class=media-heading>Columns<a class=anchorjs-link href=#media-heading><span class=anchorjs-icon></span></a></h4>Inside each column is 15px of padding placed on the left and right <i><strong>( See the light gray shaded area )</strong></i>. This padding pushes the live area in by a total of 30px per column. The "Gutter" is created by the sum of the padding between two adjacent columns.</div></div><div class=media><div class=media-left><div class=inner-div-live-area-square-div></div></div><div class=media-body><h4 class=media-heading>Inside Live Area for a Column<a class=anchorjs-link href=#media-heading><span class=anchorjs-icon></span></a></h4>The live content area for each column is indicated by the light yellow shaded area with red dotted lines.</div></div></div></div><hr></div></section>');
     $templateCache.put('components/icons/demo-icons.html', '<section ng-controller=iconsCtrl id=icons-html-example><div class=container><h2>Icons Demo</h2><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><p><strong>Dev guidance:</strong> The following icons are specific to Dell Brand Standards. Please use the following icon class names in place of native Bootstrap icon class names.</p><p><strong>Color guidance:</strong> All of the icons below can change to the following colors by adding these class modifiers <code>.text-blue</code>, <code>.text-dark-blue</code>, <code>.text-purple</code>, <code>.text-berry</code>, <code>.text-red</code>, <code>.text-red-dark</code>, <code>.text-gray-medium</code>, <code>.text-gray-dark</code>, <code>.text-orange</code>, <code>.text-green</code>, or <code>.text-white</code>. For example: <code>class="icon-ui-arrowleft text-blue"</code> change the modifier color after the <code>.text-*</code>.</p><h3 class=top-offset-20>UI icons</h3><ul class=icons-gallery-list><li><i class=icon-ui-arrowleft></i> <span class="icons-gallery-class ng-binding">icon-ui-arrowleft</span></li><li><i class=icon-ui-arrowright></i> <span class="icons-gallery-class ng-binding">icon-ui-arrowright</span></li><li><i class=icon-ui-close></i> <span class="icons-gallery-class ng-binding">icon-ui-close</span></li><li><i class=icon-ui-closecircle></i> <span class="icons-gallery-class ng-binding">icon-ui-closecircle</span></li><li><i class=icon-ui-collapse></i> <span class="icons-gallery-class ng-binding">icon-ui-collapse</span></li><li><i class=icon-ui-dell></i> <span class="icons-gallery-class ng-binding">icon-ui-dell</span></li><li><i class=icon-ui-expand></i> <span class="icons-gallery-class ng-binding">icon-ui-expand</span></li><li><i class=icon-ui-grid-view></i> <span class="icons-gallery-class ng-binding">icon-ui-grid-view</span></li><li><i class=icon-ui-list-view></i> <span class="icons-gallery-class ng-binding">icon-ui-list-view</span></li><li><i class=icon-ui-menucollapsed></i> <span class="icons-gallery-class ng-binding">icon-ui-menucollapsed</span></li><li><i class=icon-ui-minus></i> <span class="icons-gallery-class ng-binding">icon-ui-minus</span></li><li><i class=icon-ui-pause></i> <span class="icons-gallery-class ng-binding">icon-ui-pause</span></li><li><i class=icon-ui-play></i> <span class="icons-gallery-class ng-binding">icon-ui-play</span></li><li><i class=icon-ui-plus></i> <span class="icons-gallery-class ng-binding">icon-ui-plus</span></li><li><i class=icon-ui-triangledown></i> <span class="icons-gallery-class ng-binding">icon-ui-triangledown</span></li><li><i class=icon-ui-triangleleft></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleleft</span></li><li><i class=icon-ui-triangleright></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleright</span></li><li><i class=icon-ui-triangleup></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleup</span></li><li><i class=icon-ui-loading></i> <span class="icons-gallery-class ng-binding">icon-ui-loading</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Small icons</h3><p>The small icons have less detail and are intended to be used at the default font size of 16px. Please use the small icons for task based communications. For crisper small icons use the following sizes: 16px, 28px and 42px.</p><ul class=icons-gallery-list><li><i class="icon-small-360-hinge text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-360-hinge</span></li><li><i class="icon-small-add text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-add</span></li><li><i class="icon-small-alertcomplete text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertcomplete</span></li><li><i class="icon-small-alerterror text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alerterror</span></li><li><i class="icon-small-alertinfo text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertinfo</span></li><li><i class="icon-small-alertnotice text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertnotice</span></li><li><i class="icon-small-audiocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-audiocard</span></li><li><i class="icon-small-audiospeaker text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-audiospeaker</span></li><li><i class="icon-small-award text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-award</span></li><li><i class="icon-small-battery text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-battery</span></li><li><i class="icon-small-bell text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-bell</span></li><li><i class="icon-small-cables text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cables</span></li><li><i class="icon-small-calculator text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-calculator</span></li><li><i class="icon-small-calendar text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-calendar</span></li><li><i class="icon-small-carryingcase text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-carryingcase</span></li><li><i class="icon-small-cart text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cart</span></li><li><i class="icon-small-chat text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-chat</span></li><li><i class="icon-small-checkmark text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-checkmark</span></li><li><i class="icon-small-chipset text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-chipset</span></li><li><i class="icon-small-clock text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-clock</span></li><li><i class="icon-small-cloud text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cloud</span></li><li><i class="icon-small-color text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-color</span></li><li><i class="icon-small-computergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-computergeneric</span></li><li><i class="icon-small-contact text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-contact</span></li><li><i class="icon-small-copy text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-copy</span></li><li><i class="icon-small-data text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-data</span></li><li><i class="icon-small-deals text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-deals</span></li><li><i class="icon-small-detachable text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-detachable</span></li><li><i class="icon-small-diagnostic text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-diagnostic</span></li><li><i class="icon-small-dimensionsweight text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-dimensionsweight</span></li><li><i class="icon-small-display text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-display</span></li><li><i class="icon-small-download text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-download</span></li><li><i class="icon-small-drivers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-drivers</span></li><li><i class="icon-small-edit text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-edit</span></li><li><i class="icon-small-employee text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-employee</span></li><li><i class="icon-small-energyefficient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-energyefficient</span></li><li><i class="icon-small-enterprise text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-enterprise</span></li><li><i class="icon-small-e-value text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-e-value</span></li><li><i class="icon-small-gift-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-gift-card</span></li><li><i class="icon-small-globe text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-globe</span></li><li><i class="icon-small-graphics-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-graphics-card</span></li><li><i class="icon-small-harddrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-harddrive</span></li><li><i class="icon-small-help text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-help</span></li><li><i class="icon-small-house text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-house</span></li><li><i class="icon-small-infrastructure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-infrastructure</span></li><li><i class="icon-small-inktoner text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-inktoner</span></li><li><i class="icon-small-keyboard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-keyboard</span></li><li><i class="icon-small-lightbulb text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-lightbulb</span></li><li><i class="icon-small-location text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-location</span></li><li><i class="icon-small-magnifying-glass text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-magnifying-glass</span></li><li><i class="icon-small-mail text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mail</span></li><li><i class="icon-small-memory text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-memory</span></li><li><i class="icon-small-memorycardreader text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-memorycardreader</span></li><li><i class="icon-small-missingimage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-missingimage</span></li><li><i class="icon-small-mobile text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mobile</span></li><li><i class="icon-small-mouse text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mouse</span></li><li><i class="icon-small-music text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-music</span></li><li><i class="icon-small-network text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-network</span></li><li><i class="icon-small-notebook text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-notebook</span></li><li><i class="icon-small-operatingsystem text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-operatingsystem</span></li><li><i class="icon-small-opticaldrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-opticaldrive</span></li><li><i class="icon-small-package text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-package</span></li><li><i class="icon-small-partners text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-partners</span></li><li><i class="icon-small-performance text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-performance</span></li><li><i class="icon-small-phone text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-phone</span></li><li><i class="icon-small-photos text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-photos</span></li><li><i class="icon-small-ports text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-ports</span></li><li><i class="icon-small-powersupply text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-powersupply</span></li><li><i class="icon-small-printer text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-printer</span></li><li><i class="icon-small-processor text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-processor</span></li><li><i class="icon-small-projector text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-projector</span></li><li><i class="icon-small-protection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-protection</span></li><li><i class="icon-small-recycle text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-recycle</span></li><li><i class="icon-small-refresh text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-refresh</span></li><li><i class="icon-small-rss text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-rss</span></li><li><i class="icon-small-save text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-save</span></li><li><i class="icon-small-scale-out text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-scale-out</span></li><li><i class="icon-small-searchleft text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-searchleft</span></li><li><i class="icon-small-secure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-secure</span></li><li><i class="icon-small-securesoftware text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-securesoftware</span></li><li><i class="icon-small-server text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-server</span></li><li><i class="icon-small-serverrack text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-serverrack</span></li><li><i class="icon-small-share text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-share</span></li><li><i class="icon-small-shipping text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-shipping</span></li><li><i class="icon-small-socialnetworking text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-socialnetworking</span></li><li><i class="icon-small-software text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-software</span></li><li><i class="icon-small-solutions text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-solutions</span></li><li><i class="icon-small-speakers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-speakers</span></li><li><i class="icon-small-star text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-star</span></li><li><i class="icon-small-storage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-storage</span></li><li><i class="icon-small-support text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-support</span></li><li><i class="icon-small-surgeprotection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-surgeprotection</span></li><li><i class="icon-small-tablet text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-tablet</span></li><li><i class="icon-small-thinclient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-thinclient</span></li><li><i class="icon-small-touch text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-touch</span></li><li><i class="icon-small-touch-pad text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-touch-pad</span></li><li><i class="icon-small-towergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-towergeneric</span></li><li><i class="icon-small-trash text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-trash</span></li><li><i class="icon-small-tv text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-tv</span></li><li><i class="icon-small-useraccount text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-useraccount</span></li><li><i class="icon-small-video text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-video</span></li><li><i class="icon-small-videocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-videocard</span></li><li><i class="icon-small-virtualization text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-virtualization</span></li><li><i class="icon-small-warranty text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-warranty</span></li><li><i class="icon-small-webcam text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-webcam</span></li><li><i class="icon-small-whitepaper text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-whitepaper</span></li><li><i class="icon-small-wireless text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-wireless</span></li><li><i class="icon-small-zoomin text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-zoomin</span></li><li><i class="icon-small-zoomout text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-zoomout</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Large icons</h3><p>The large icons have more detail then the small icons. These should be used to support content only. For crisper large icons use the following sizes: 36px, 72px and 108px.</p><ul class="icons-gallery-list large"><li><i class="icon-large-360-hinge text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-360-hinge</span></li><li><i class="icon-large-add text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-add</span></li><li><i class="icon-large-alertcomplete text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertcomplete</span></li><li><i class="icon-large-alerterror text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alerterror</span></li><li><i class="icon-large-alertinfo text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertinfo</span></li><li><i class="icon-large-alertnotice text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertnotice</span></li><li><i class="icon-large-audicard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-audicard</span></li><li><i class="icon-large-audiospeaker text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-audiospeaker</span></li><li><i class="icon-large-award text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-award</span></li><li><i class="icon-large-battery text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-battery</span></li><li><i class="icon-large-bell text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-bell</span></li><li><i class="icon-large-cables text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cables</span></li><li><i class="icon-large-calculator text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-calculator</span></li><li><i class="icon-large-calendar text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-calendar</span></li><li><i class="icon-large-carryingcase text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-carryingcase</span></li><li><i class="icon-large-cart text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cart</span></li><li><i class="icon-large-chat text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-chat</span></li><li><i class="icon-large-checkmark text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-checkmark</span></li><li><i class="icon-large-chipset text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-chipset</span></li><li><i class="icon-large-clock text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-clock</span></li><li><i class="icon-large-cloud text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cloud</span></li><li><i class="icon-large-color text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-color</span></li><li><i class="icon-large-computergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-computergeneric</span></li><li><i class="icon-large-contact text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-contact</span></li><li><i class="icon-large-copy text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-copy</span></li><li><i class="icon-large-data text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-data</span></li><li><i class="icon-large-deals text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-deals</span></li><li><i class="icon-large-detachable text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-detachable</span></li><li><i class="icon-large-diagnostic text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-diagnostic</span></li><li><i class="icon-large-dimensionsweight text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-dimensionsweight</span></li><li><i class="icon-large-display text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-display</span></li><li><i class="icon-large-download text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-download</span></li><li><i class="icon-large-drivers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-drivers</span></li><li><i class="icon-large-edit text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-edit</span></li><li><i class="icon-large-employee text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-employee</span></li><li><i class="icon-large-energyefficient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-energyefficient</span></li><li><i class="icon-large-enterprise text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-enterprise</span></li><li><i class="icon-large-e-value text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-e-value</span></li><li><i class="icon-large-giftcard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-giftcard</span></li><li><i class="icon-large-globe text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-globe</span></li><li><i class="icon-large-graphics-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-graphics-card</span></li><li><i class="icon-large-harddrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-harddrive</span></li><li><i class="icon-large-help text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-help</span></li><li><i class="icon-large-house text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-house</span></li><li><i class="icon-large-infrastructure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-infrastructure</span></li><li><i class="icon-large-inktoner text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-inktoner</span></li><li><i class="icon-large-keyboard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-keyboard</span></li><li><i class="icon-large-lightbulb text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-lightbulb</span></li><li><i class="icon-large-location text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-location</span></li><li><i class="icon-large-magnifying-glass text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-magnifying-glass</span></li><li><i class="icon-large-mail text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mail</span></li><li><i class="icon-large-memory text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-memory</span></li><li><i class="icon-large-memorycarreader text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-memorycarreader</span></li><li><i class="icon-large-missingimage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-missingimage</span></li><li><i class="icon-large-mobile text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mobile</span></li><li><i class="icon-large-mouse text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mouse</span></li><li><i class="icon-large-music text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-music</span></li><li><i class="icon-large-network text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-network</span></li><li><i class="icon-large-notebook text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-notebook</span></li><li><i class="icon-large-operatingsystem text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-operatingsystem</span></li><li><i class="icon-large-opticaldrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-opticaldrive</span></li><li><i class="icon-large-package text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-package</span></li><li><i class="icon-large-partners text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-partners</span></li><li><i class="icon-large-performance text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-performance</span></li><li><i class="icon-large-phone text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-phone</span></li><li><i class="icon-large-photos text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-photos</span></li><li><i class="icon-large-ports text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-ports</span></li><li><i class="icon-large-powersupply text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-powersupply</span></li><li><i class="icon-large-printer text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-printer</span></li><li><i class="icon-large-processor text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-processor</span></li><li><i class="icon-large-projector text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-projector</span></li><li><i class="icon-large-protection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-protection</span></li><li><i class="icon-large-recycle text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-recycle</span></li><li><i class="icon-large-refresh text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-refresh</span></li><li><i class="icon-large-rss text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-rss</span></li><li><i class="icon-large-save text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-save</span></li><li><i class="icon-large-scale-out text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-scale-out</span></li><li><i class="icon-large-searchleft text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-searchleft</span></li><li><i class="icon-large-secure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-secure</span></li><li><i class="icon-large-securesoftware text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-securesoftware</span></li><li><i class="icon-large-server text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-server</span></li><li><i class="icon-large-serverrack text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-serverrack</span></li><li><i class="icon-large-share text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-share</span></li><li><i class="icon-large-shipping text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-shipping</span></li><li><i class="icon-large-socialnetworking text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-socialnetworking</span></li><li><i class="icon-large-software text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-software</span></li><li><i class="icon-large-solutions text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-solutions</span></li><li><i class="icon-large-speakers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-speakers</span></li><li><i class="icon-large-star text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-star</span></li><li><i class="icon-large-storage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-storage</span></li><li><i class="icon-large-support text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-support</span></li><li><i class="icon-large-surgeprotection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-surgeprotection</span></li><li><i class="icon-large-tablet text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-tablet</span></li><li><i class="icon-large-thinclient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-thinclient</span></li><li><i class="icon-large-touch text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-touch</span></li><li><i class="icon-large-touchpad text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-touchpad</span></li><li><i class="icon-large-towergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-towergeneric</span></li><li><i class="icon-large-trash text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-trash</span></li><li><i class="icon-large-tv text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-tv</span></li><li><i class="icon-large-useraccount text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-useraccount</span></li><li><i class="icon-large-video text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-video</span></li><li><i class="icon-large-videocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-videocard</span></li><li><i class="icon-large-virtualization text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-virtualization</span></li><li><i class="icon-large-warranty text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-warranty</span></li><li><i class="icon-large-webcam text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-webcam</span></li><li><i class="icon-large-whitepaper text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-whitepaper</span></li><li><i class="icon-large-wireless text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-wireless</span></li><li><i class="icon-large-zoomin text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-zoomin</span></li><li><i class="icon-large-zoomout text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-zoomout</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Ratings icons</h3><p>The rating icons have been broken down to 10% increments. These small changes are demonstrated on the last star of the examples below</p><ul class=icons-gallery-list><li><i class=icon-small-favorite-100></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-100</span></li><li><i class=icon-small-favorite-90></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-90</span></li><li><i class=icon-small-favorite-80></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-80</span></li><li><i class=icon-small-favorite-70></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-70</span></li><li><i class=icon-small-favorite-60></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-60</span></li><li><i class=icon-small-favorite-50></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-50</span></li><li><i class=icon-small-favorite-40></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-40</span></li><li><i class=icon-small-favorite-30></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-30</span></li><li><i class=icon-small-favorite-20></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-20</span></li><li><i class=icon-small-favorite-10></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-10</span></li><li><i class=icon-small-favorite-0></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-0</span></li></ul></div></div></div></section>');

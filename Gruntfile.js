@@ -120,6 +120,7 @@ module.exports = function (grunt) {
                     {src: ['temp/dell-ui-components.js'], dest: 'dist/dell-ui-components/dell-ui-components.js'},
                     {src: ['temp/demo.js'], dest: 'dist/dell-ui-components/demo/demo.js'},
                     {src: ['components/**/*.gif','components/**/*.jpg','components/**/*.png','components/**/*.svg','!components/**/demo*','!components/**/test*','!components/**/FPO*'], dest: 'dist/dell-ui-components/img/'},
+                    {src: ['components/**/FPO*'], dest: 'dist/dell-ui-components/demo/'},
                     {src: ['README.md'], dest: 'dist/README.md'},
                     {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components/dell-ui-components.css'},
                     {cwd: 'bower_components/dell-ui-bootstrap/', src: ['**'], dest: 'dist/dell-ui-bootstrap/', expand:true}
