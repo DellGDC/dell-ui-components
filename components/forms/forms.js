@@ -52,28 +52,6 @@ angular.module('dellUiComponents')
     };
 })
 
-//.directive('emailCheck', function() {
-//    return {
-//        restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
-//        link: function($scope, element, attributes, controller) {
-//
-//            $(element).blur(function () {
-//                //var string1=document.example.email.value;
-//                var string1 = $(element).val();
-//                if (string1.indexOf("@") === -1){
-//                    $(element).tooltip({
-//                        title: "Please input a valid email address!"
-//                    });
-//                    //alert("Please input a valid email address!");
-//                    //document.example.email.focus();
-//                    $(element).focus();
-//                }
-//            });
-//        }
-//    };
-//})
-
-
 
     .directive('emailCheck', function() {
     return {
@@ -110,19 +88,6 @@ angular.module('dellUiComponents')
         }
     };
 })
-
-//
-//    .directive('emailCheck', function() {
-//    return {
-//        restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
-//        link: function($scope, element, attributes, controller) {
-//
-//
-//                $(element).validate()
-//
-//        }
-//    };
-//})
 
 
 
