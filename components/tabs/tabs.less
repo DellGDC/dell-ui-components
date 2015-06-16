@@ -3,6 +3,21 @@
 // *------------------------------------------------------------------------------------------
 // */
 
+//============== update to Dell-bootstrap-ui
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+    width: 100%;
+    margin-left: 0;
+}
+
+
+
+
+
+
+
+
 @media (min-width: 520px) and (max-width: @screen-xs-max) {
     .nav-tabs {
         display: block;
@@ -572,7 +587,7 @@ ul.nav-center {
 
   @media (min-width: @screen-sm-min) {
     > li > a {
-      border-bottom: 1px solid @nav-tabs-justified-link-border-color;
+      //border-bottom: 1px solid @nav-tabs-justified-link-border-color;
       border-radius: @border-radius-base @border-radius-base 0 0;
     }
     > .active > a,
@@ -582,3 +597,4 @@ ul.nav-center {
     }
   }
 }
+
