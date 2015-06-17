@@ -174,20 +174,36 @@
 }
 
 
-.well-overlay {
-    padding: 15px 20px;
-    background-color: rgba(238, 238, 238, 0.9);
-    background: rgba(238, 238, 238, 0.9);
+.well-caption {
+    background: rgba(255, 255, 255, 0.9);
     bottom: -20px;
     right: 15px;
     left: 15px;
     position: absolute;
-    padding: 15px 20px;
+    padding: 12px 15px 15px 15px;
+    border: none;
     .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
         margin-top: 0;
         margin-bottom: 0;
     }
 }
+
+@media (max-width: @screen-xs-max)  {
+    .well-caption {
+        background: @dell-gray-light;
+        //bottom: -20px;
+        right: 15px;
+        left: 15px;
+        position: absolute;
+        padding: 10px 15px 10px 15px;
+        border: none;
+        //.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        //    margin-top: 0;
+        //    margin-bottom: 0;
+        //}
+    }
+}
+
 
 
 /* Large devices (large desktops, 1200px and up) */

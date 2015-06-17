@@ -75,10 +75,15 @@ angular.module('dellUiComponents')
 
             $(element).on('keyup',function () {
                 var string1 = $(element).val();
-                if (string1.indexOf("@") === -1){
+                var regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+
+                if (!string1.match(regex)){
+                    if(!attributes.errorMessage) {
+                        attributes.errorMessage = "Please input a valid email address!";
+                    }
                     $(element).addClass('alert alert-warning');
                     $(element).tooltip({
-                        title: "Please input a valid email address!",
+                        title: attributes.errorMessage,
                     });
                 } else {
                     $(element).removeClass('alert alert-warning');
