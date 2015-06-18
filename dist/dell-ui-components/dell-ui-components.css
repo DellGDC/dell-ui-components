@@ -487,30 +487,6 @@ a {
   padding-left: 20px;
   padding-right: 20px;
 }
-.well-overlay {
-  background-color: rgba(238, 238, 238, 0.9);
-  background: rgba(238, 238, 238, 0.9);
-  bottom: -20px;
-  right: 15px;
-  left: 15px;
-  position: absolute;
-  padding: 15px 20px;
-}
-.well-overlay .h1,
-.well-overlay .h2,
-.well-overlay .h3,
-.well-overlay .h4,
-.well-overlay .h5,
-.well-overlay .h6,
-.well-overlay h1,
-.well-overlay h2,
-.well-overlay h3,
-.well-overlay h4,
-.well-overlay h5,
-.well-overlay h6 {
-  margin-top: 0;
-  margin-bottom: 0;
-}
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .carousel .slick-dots {
@@ -1897,6 +1873,51 @@ a {
   .well-sm {
     margin-left: -15px;
     margin-right: -15px;
+  }
+}
+@media (min-width: 480px) {
+  .well-caption {
+    background: rgba(255, 255, 255, 0.9);
+    bottom: 20px;
+    right: 15px;
+    left: 15px;
+    position: absolute;
+    padding: 12px 15px 15px 15px;
+    border: none;
+  }
+  .well-caption .h1,
+  .well-caption .h2,
+  .well-caption .h3,
+  .well-caption .h4,
+  .well-caption .h5,
+  .well-caption .h6,
+  .well-caption h1,
+  .well-caption h2,
+  .well-caption h3,
+  .well-caption h4,
+  .well-caption h5,
+  .well-caption h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .well-teaser {
+    padding: 0;
+    overflow: hidden;
+  }
+}
+@media (max-width: 767px) {
+  .well-caption {
+    background: #eeeeee;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+    position: relative;
+    padding: 10px 15px 10px 15px;
+    border: none;
+  }
+  .well-teaser {
+    padding: 0;
+    overflow: hidden;
   }
 }
 /*
@@ -4135,6 +4156,13 @@ ul.nav-center {
     margin-right: -20px;
     width: 107%;
     margin-bottom: 20px;
+  }
+  .container,
+  .container-fluid-no-padding {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 .well-site-wide {
