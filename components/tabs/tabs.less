@@ -470,9 +470,22 @@ ul.nav-center {
                 }
             }
         }
-        .nav-centered > li > a > .icon-ui-arrowright {
-            top: -15px;
-            position: relative;
+        .nav-tabs > li > a {  
+            position:relative;
+            padding-right:25px;
+            > .icon-ui-arrowright {
+                position: absolute;
+                top: 50%;
+                transform: translate(0, -50%);
+                right:2%;
+            }
+
+            > .icon-ui-arrowleft {
+                position: absolute;
+                top: 50%;
+                transform: translate(0, -50%);
+                left:2%;
+            }
         }
 
 
