@@ -12,6 +12,24 @@
 }
 
 
+/*
+  font-family: icon-ui;
+  font-size: 16px;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+
+
+.icon-ui-arrowright:before {
+  content: "\e601";
+}
+
+  */
+
 
 
 
@@ -351,6 +369,7 @@ ul.nav-center {
         width: 80px;
         margin-top: 15px;
     }
+
 }
 
 @media (max-width: @screen-xs-max) {
@@ -368,6 +387,10 @@ ul.nav-center {
     .nav-tabs h4 {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
+    }
+
+    .row-offcanvas-right .nav-tabs > li> a > .icon-ui-arrowright {
+        float:right;
     }
 
     .vertical-align {
@@ -424,11 +447,35 @@ ul.nav-center {
 
         .row-offcanvas-right {
             right: 0;
+            [data-toggle="offcanvas"] {
+                text-align:left;
+                padding: 10px;
+                margin-bottom:10px;
+                .icon-ui-arrowleft {
+                    top: 2px;
+                    position: relative;
+                }
+            }
         }
 
         .row-offcanvas-left {
             left: 0;
+            [data-toggle="offcanvas"] {
+                text-align:right;
+                padding: 10px;
+                margin-bottom:10px;
+                .icon-ui-arrowright {
+                    top: 2px;
+                    position: relative;
+                }
+            }
         }
+        .nav-centered > li > a > .icon-ui-arrowright {
+            top: -15px;
+            position: relative;
+        }
+
+
 
         .row-offcanvas-right
         .sidebar-offcanvas {
@@ -449,7 +496,7 @@ ul.nav-center {
         }
 
 
-        .row-offcanvas-right .tab-content {
+        .row-offcanvas-left .tab-content {
             position: fixed;
             top: 0;
             left: 100%;
@@ -463,6 +510,7 @@ ul.nav-center {
             &.active {
                 left: 0;
             }
+
         }
 
         .row-offcanvas-right .tab-content {
@@ -470,8 +518,8 @@ ul.nav-center {
             top: 0;
             right: 100%;
             width: 102%;
-            background: @body-bg;
-            height: 3000px;
+            z-index:1000;
+            
             // animation goes here
             -webkit-transition: all .25s ease-out;
             -o-transition: all .25s ease-out;
@@ -479,6 +527,13 @@ ul.nav-center {
             &.active {
                 right: 0;
             }
+            .tab-pane {
+                min-height: 3000px;
+                background: @body-bg;
+            }
+        }
+        .row-offcanvas .nav-centered + .tab-content {
+            top: -11px;
         }
 
         .row-offcanvas-left.active {
@@ -512,6 +567,9 @@ ul.nav-center {
                 position: relative;
             }
         }
+        .tab-image {
+            padding-bottom: 10px;
+        }
     }
 
 
@@ -537,6 +595,9 @@ ul.nav-center {
 
   > li {
     float: none;
+    &.active {
+        border-bottom-color: @body-bg;
+    }
     > a {
       text-align: center;
       margin-bottom: 5px;
@@ -565,6 +626,22 @@ ul.nav-center {
       }
     }
   }
+
+  @media (max-width: @screen-xs-max) {
+    > li {
+        &.active {
+            z-index:1;
+            border-bottom-color: @dell-gray-stroke;
+        }
+        > a {
+            padding-top:20px;
+            display:table;
+            cursor:pointer;
+
+        }
+    }
+  }
+
 }
 
 // Move borders to anchors instead of bottom of list

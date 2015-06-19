@@ -3,7 +3,11 @@
 
 var pkg = require('./package.json'),
     components = require('./components/components-list.json'),
+    componentsForDirectives = components,
     currentVersion = pkg.version;
+
+    componentsForDirectives = components.unshift("global");
+
 
 
 //Using exclusion patterns slows down Grunt significantly
@@ -444,6 +448,10 @@ module.exports = function (grunt) {
         dashedId = _.str.dasherize(directiveId);
         camelId = _.str.camelize(directiveId);
         name = _.str.titleize(directiveId);
+        
+        if(component == "global") {
+            component = "directives";
+        }
         targetJSFilename = targetPath + component + "/directive-" + dashedId + ".js";
 
         if (grunt.file.exists(targetJSFilename)) {
