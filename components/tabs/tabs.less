@@ -12,30 +12,6 @@
 }
 
 
-/*
-  font-family: icon-ui;
-  font-size: 16px;
-  speak: none;
-  font-style: normal;
-  font-weight: 400;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-
-
-.icon-ui-arrowright:before {
-  content: "\e601";
-}
-
-  */
-
-
-
-
-
-
-
 @media (min-width: 520px) and (max-width: @screen-xs-max) {
     .nav-tabs {
         display: block;
@@ -44,12 +20,12 @@
         margin-right: -15px;
         > li {
             background: @white;
-            width: 105%;
+            width: 100%;
             border: 1px solid @nav-tabs-border-color;
             margin-bottom: -1px;
             margin-left: -1px;
             height: auto;
-            padding-right: 4%;
+            //padding-right: 4%;
 
             &:first-child {
                 margin-left: -1px;
@@ -97,6 +73,9 @@
                     background: none;
                     color: @dell-blue;
                 }
+            }
+            i {
+                margin-right: 1%;
             }
         }
 
@@ -197,12 +176,12 @@
 
         > li {
             background: @white;
-            width: 103%;
+            width: 100%;
             border: 1px solid @nav-tabs-border-color;
             margin-bottom: -1px;
             margin-left: -1px;
             height: auto;
-            padding-right: 5%;
+            padding-right: 6%;
             &:first-child {
                 margin-left: -1px;
                 border-top: 1px solid @nav-tabs-border-color;
@@ -248,6 +227,9 @@
                     background: none;
                     color: @dell-blue;
                 }
+            }
+            i {
+                margin-right: 1%;
             }
         }
 
@@ -532,7 +514,7 @@ ul.nav-center {
             right: 100%;
             width: 102%;
             z-index:1000;
-            
+
             // animation goes here
             -webkit-transition: all .25s ease-out;
             -o-transition: all .25s ease-out;
