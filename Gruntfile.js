@@ -449,7 +449,7 @@ module.exports = function (grunt) {
         camelId = _.str.camelize(directiveId);
         name = _.str.titleize(directiveId);
         
-        if(component == "global") {
+        if(component === "global") {
             component = "directives";
         }
         targetJSFilename = targetPath + component + "/directive-" + dashedId + ".js";

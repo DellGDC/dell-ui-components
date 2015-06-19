@@ -7136,21 +7136,6 @@ angular.module('dellUiComponents').directive('carousel', [
       }
     };
   }
-]).directive('divHeightEqualize', [
-  '$timeout',
-  function ($timeout) {
-    // Runs during compile
-    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
-    return {
-      restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
-        //
-        $(function () {
-          $('.div-height-equalize').matchHeight();
-        });
-      }
-    };
-  }
 ]).directive('slide', [
   '$timeout',
   function ($timeout) {
@@ -7760,6 +7745,26 @@ angular.module('dellUiComponents').directive('ratingsAndReviews', [
     return {
       restrict: 'C',
       link: function ($scope, $element, iAttrs, controller) {
+      }
+    };
+  }
+]);
+angular.module('dellUiComponents').directive('equalizeHeight', [
+  '$timeout',
+  '$rootScope',
+  function ($timeout, $rootScope) {
+    // Runs during compile
+    return {
+      restrict: 'A',
+      link: function ($scope, $element, $attrs, controller) {
+        var selector = $attrs.equalizeHeight;
+        if (selector) {
+          $timeout(function () {
+            $(selector).matchHeight();
+          }, 300);
+        } else {
+          console.error('equalize-height usage error. Must include css selector to identify objects to equalize. Example: cequalize-height=".classname"');
+        }
       }
     };
   }

@@ -3215,6 +3215,23 @@ caption {
   width: 100%;
   margin-left: 0;
 }
+/*
+  font-family: icon-ui;
+  font-size: 16px;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+
+
+.icon-ui-arrowright:before {
+  content: "\e601";
+}
+
+  */
 @media (min-width: 520px) and (max-width: 767px) {
   .nav-tabs {
     display: block;
@@ -3529,6 +3546,9 @@ ul.nav-center {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
+  .row-offcanvas-right .nav-tabs > li > a > .icon-ui-arrowright {
+    float: right;
+  }
   .vertical-align {
     position: relative;
   }
@@ -3573,8 +3593,30 @@ ul.nav-center {
   .row-offcanvas-right {
     right: 0;
   }
+  .row-offcanvas-right [data-toggle="offcanvas"] {
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .row-offcanvas-right [data-toggle="offcanvas"] .icon-ui-arrowleft {
+    top: 2px;
+    position: relative;
+  }
   .row-offcanvas-left {
     left: 0;
+  }
+  .row-offcanvas-left [data-toggle="offcanvas"] {
+    text-align: right;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .row-offcanvas-left [data-toggle="offcanvas"] .icon-ui-arrowright {
+    top: 2px;
+    position: relative;
+  }
+  .nav-centered > li > a > .icon-ui-arrowright {
+    top: -15px;
+    position: relative;
   }
   .row-offcanvas-right .sidebar-offcanvas {
     right: 108%;
@@ -3590,7 +3632,7 @@ ul.nav-center {
     left: -50%;
     /* 6 columns */
   }
-  .row-offcanvas-right .tab-content {
+  .row-offcanvas-left .tab-content {
     position: fixed;
     top: 0;
     left: 100%;
@@ -3601,7 +3643,7 @@ ul.nav-center {
     -o-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
   }
-  .row-offcanvas-right .tab-content.active {
+  .row-offcanvas-left .tab-content.active {
     left: 0;
   }
   .row-offcanvas-right .tab-content {
@@ -3609,14 +3651,20 @@ ul.nav-center {
     top: 0;
     right: 100%;
     width: 102%;
-    background: #ffffff;
-    height: 3000px;
+    z-index: 1000;
     -webkit-transition: all 0.25s ease-out;
     -o-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
   }
   .row-offcanvas-right .tab-content.active {
     right: 0;
+  }
+  .row-offcanvas-right .tab-content .tab-pane {
+    min-height: 3000px;
+    background: #ffffff;
+  }
+  .row-offcanvas .nav-centered + .tab-content {
+    top: -11px;
   }
   .row-offcanvas-left.active {
     left: 50%;
@@ -3648,6 +3696,9 @@ ul.nav-center {
     top: 2px;
     position: relative;
   }
+  .tab-image {
+    padding-bottom: 10px;
+  }
 }
 .nav-centered {
   width: 80%;
@@ -3659,6 +3710,9 @@ ul.nav-center {
 }
 .nav-centered > li {
   float: none;
+}
+.nav-centered > li.active {
+  border-bottom-color: #ffffff;
 }
 .nav-centered > li > a {
   text-align: center;
@@ -3675,6 +3729,9 @@ ul.nav-center {
   top: -11px;
   padding-top: 10px;
 }
+.nav-centered + .tab-content.active {
+  z-index: 1000;
+}
 @media (min-width: 768px) {
   .nav-centered > li {
     display: table-cell;
@@ -3682,6 +3739,17 @@ ul.nav-center {
   }
   .nav-centered > li > a {
     margin-bottom: 0;
+  }
+}
+@media (max-width: 767px) {
+  .nav-centered > li.active {
+    z-index: 1;
+    border-bottom-color: #cccccc;
+  }
+  .nav-centered > li > a {
+    padding-top: 20px;
+    display: table;
+    cursor: pointer;
   }
 }
 .nav-centered > li > a {
@@ -3713,6 +3781,9 @@ ul.nav-center {
 .nav-centered > li {
   float: none;
 }
+.nav-centered > li.active {
+  border-bottom-color: #ffffff;
+}
 .nav-centered > li > a {
   text-align: center;
   margin-bottom: 5px;
@@ -3728,6 +3799,9 @@ ul.nav-center {
   top: -11px;
   padding-top: 10px;
 }
+.nav-centered + .tab-content.active {
+  z-index: 1000;
+}
 @media (min-width: 768px) {
   .nav-centered > li {
     display: table-cell;
@@ -3735,6 +3809,17 @@ ul.nav-center {
   }
   .nav-centered > li > a {
     margin-bottom: 0;
+  }
+}
+@media (max-width: 767px) {
+  .nav-centered > li.active {
+    z-index: 1;
+    border-bottom-color: #cccccc;
+  }
+  .nav-centered > li > a {
+    padding-top: 20px;
+    display: table;
+    cursor: pointer;
   }
 }
 .nav-tabs-centered {
