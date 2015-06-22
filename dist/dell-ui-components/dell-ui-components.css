@@ -335,9 +335,10 @@ a {
   min-height: 50%;
   padding: 20px;
   margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  background: #fff;
+  background: rgba(600, 600, 600, 0.92);
   border: 0 solid transparent;
-  border-radius: 15px;
   -webkit-box-shadow: none;
   box-shadow: none;
   top: 30px;
@@ -3720,6 +3721,7 @@ caption {
 }
 @media (min-width: 768px) {
   .nav-centered > li > a {
+    border-bottom: none;
     border-radius: 1px 1px 0 0;
   }
   .nav-centered > .active > a,
@@ -3792,6 +3794,7 @@ caption {
 }
 @media (min-width: 768px) {
   .nav-tabs-centered > li > a {
+    border-bottom: none;
     border-radius: 1px 1px 0 0;
   }
   .nav-tabs-centered > .active > a,
