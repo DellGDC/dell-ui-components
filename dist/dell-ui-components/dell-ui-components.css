@@ -3702,7 +3702,6 @@ caption {
 @media (max-width: 767px) {
   .nav-centered > li.active {
     z-index: 1;
-    border-bottom-color: #cccccc;
   }
   .nav-centered > li > a {
     padding-top: 20px;
@@ -3772,7 +3771,6 @@ caption {
 @media (max-width: 767px) {
   .nav-centered > li.active {
     z-index: 1;
-    border-bottom-color: #cccccc;
   }
   .nav-centered > li > a {
     padding-top: 20px;
