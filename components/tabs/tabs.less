@@ -142,16 +142,8 @@
                 &.active > a {
                     border: none;
                     margin-left: -1px;
-                    padding: 10px 15px;
+                    padding: 20px 15px 10px 15px;
                     width: 100%;
-
-                    &:hover,
-                    &:focus {
-                        border: none;
-                        width: 100%;
-                        margin-left: -1px;
-                        padding: 10px 15px;
-                    }
                 }
 
                 &:first-child {
@@ -295,16 +287,9 @@
                 &.active > a {
                     border: none;
                     margin-left: -1px;
-                    padding: 10px 15px;
+                    padding: 20px 15px 10px 15px;
                     width: 100%;
 
-                    &:hover,
-                    &:focus {
-                        border: none;
-                        width: 100%;
-                        margin-left: -1px;
-                        padding: 10px 15px;
-                    }
                 }
                 &:first-child {
                     margin-left: -1px;
@@ -559,7 +544,7 @@
     top: -11px;
     padding-top: 10px;
     &.active {
-        z-index:1000;
+        z-index:-1;
 
     }
   }
@@ -578,7 +563,7 @@
     > li {
         &.active {
             z-index:1;
-            //border-bottom-color: @dell-gray-stroke;
+            border-bottom: 1px solid @nav-tabs-border-color;
         }
         > a {
             padding-top:20px;
@@ -587,6 +572,17 @@
 
         }
     }
+      + .tab-content {
+          border-top: 1px solid @nav-tabs-justified-link-border-color;
+          position:relative;
+          z-index:0;
+          top: -11px;
+          padding-top: 10px;
+          &.active {
+              z-index:1000;
+
+          }
+      }
   }
 
 }
