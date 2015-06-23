@@ -3337,15 +3337,8 @@ caption {
   .nav-tabs.nav-centered > li.active > a {
     border: none;
     margin-left: -1px;
-    padding: 10px 15px;
+    padding: 20px 15px 10px 15px;
     width: 100%;
-  }
-  .nav-tabs.nav-centered > li.active > a:hover,
-  .nav-tabs.nav-centered > li.active > a:focus {
-    border: none;
-    width: 100%;
-    margin-left: -1px;
-    padding: 10px 15px;
   }
   .nav-tabs.nav-centered > li:first-child {
     margin-left: -1px;
@@ -3477,15 +3470,8 @@ caption {
   .nav-tabs.nav-centered > li.active > a {
     border: none;
     margin-left: -1px;
-    padding: 10px 15px;
+    padding: 20px 15px 10px 15px;
     width: 100%;
-  }
-  .nav-tabs.nav-centered > li.active > a:hover,
-  .nav-tabs.nav-centered > li.active > a:focus {
-    border: none;
-    width: 100%;
-    margin-left: -1px;
-    padding: 10px 15px;
   }
   .nav-tabs.nav-centered > li:first-child {
     margin-left: -1px;
@@ -3689,7 +3675,7 @@ caption {
   padding-top: 10px;
 }
 .nav-centered + .tab-content.active {
-  z-index: 1000;
+  z-index: -1;
 }
 @media (min-width: 768px) {
   .nav-centered > li {
@@ -3703,11 +3689,22 @@ caption {
 @media (max-width: 767px) {
   .nav-centered > li.active {
     z-index: 1;
+    border-bottom: 1px solid #cccccc;
   }
   .nav-centered > li > a {
     padding-top: 20px;
     display: table;
     cursor: pointer;
+  }
+  .nav-centered + .tab-content {
+    border-top: 1px solid #cccccc;
+    position: relative;
+    z-index: 0;
+    top: -11px;
+    padding-top: 10px;
+  }
+  .nav-centered + .tab-content.active {
+    z-index: 1000;
   }
 }
 .nav-centered > li > a {
@@ -3759,7 +3756,7 @@ caption {
   padding-top: 10px;
 }
 .nav-centered + .tab-content.active {
-  z-index: 1000;
+  z-index: -1;
 }
 @media (min-width: 768px) {
   .nav-centered > li {
@@ -3773,11 +3770,22 @@ caption {
 @media (max-width: 767px) {
   .nav-centered > li.active {
     z-index: 1;
+    border-bottom: 1px solid #cccccc;
   }
   .nav-centered > li > a {
     padding-top: 20px;
     display: table;
     cursor: pointer;
+  }
+  .nav-centered + .tab-content {
+    border-top: 1px solid #cccccc;
+    position: relative;
+    z-index: 0;
+    top: -11px;
+    padding-top: 10px;
+  }
+  .nav-centered + .tab-content.active {
+    z-index: 1000;
   }
 }
 .nav-tabs-centered {
