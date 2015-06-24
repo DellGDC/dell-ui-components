@@ -4303,23 +4303,31 @@ caption {
     margin-right: -30px;
   }
   .value-props-gallery .gallery-item {
-    padding: 20px 15px 10px 15px;
+    padding: 20px 15px 10px 30px;
     border-radius: 0;
     cursor: pointer;
     border-top: 1px solid #cccccc;
   }
-  .value-props-gallery .gallery-item:hover {
-    background: #ffffff;
-    border-left: none;
-    border-right: none;
-  }
   .value-props-gallery .gallery-item:first-child {
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+  }
+  .value-props-gallery .gallery-item:first-child:hover {
     border-right: 1px solid transparent;
     border-left: 1px solid transparent;
   }
   .value-props-gallery .gallery-item:last-child {
     border-left: 1px solid transparent;
     border-right: 1px solid transparent;
+  }
+  .value-props-gallery .gallery-item:last-child:hover {
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+  }
+  .value-props-gallery .gallery-item:hover {
+    background: #ffffff;
+    border-left: none;
+    border-right: none;
   }
   .value-props-gallery .gallery-item a h5 {
     margin-bottom: 0;
