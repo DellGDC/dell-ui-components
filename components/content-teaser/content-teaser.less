@@ -185,22 +185,31 @@
         margin-left: -30px;
         margin-right: -30px;
         .gallery-item {
-            padding: 20px 15px 10px 15px;
+            padding: 20px 15px 10px 30px;
             border-radius: 0;
             cursor: pointer;
             border-top: 1px solid @dell-gray-stroke;
-            &:hover {
-                background: @white;
-                border-left: none;
-                border-right: none;
-            }
+
             &:first-child {
                 border-right: 1px solid transparent;
                 border-left: 1px solid transparent;
+                &:hover {
+                    border-right: 1px solid transparent;
+                    border-left: 1px solid transparent;
+                }
             }
             &:last-child {
                 border-left: 1px solid transparent;
                 border-right: 1px solid transparent;
+                &:hover {
+                    border-right: 1px solid transparent;
+                    border-left: 1px solid transparent;
+                }
+            }
+            &:hover {
+                background: @white;
+                border-left: none;
+                border-right: none;
             }
 
             a {
@@ -223,7 +232,6 @@
                     padding-lift: 20px;
 
                 }
-
 
             }
 
