@@ -4271,6 +4271,7 @@ caption {
 }
 .value-props-gallery .gallery-item h5 {
   margin-bottom: 0;
+  color: #007db8;
 }
 .value-props-gallery .gallery-item:first-child {
   border-right: 1px solid #cccccc;
@@ -4334,6 +4335,7 @@ caption {
     margin-top: 0;
     text-align: left;
     padding-left: 40px;
+    color: #007db8;
   }
   .value-props-gallery .gallery-item a p {
     text-align: left;
