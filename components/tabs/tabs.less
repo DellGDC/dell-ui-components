@@ -142,7 +142,7 @@
                 &.active > a {
                     border: none;
                     margin-left: -1px;
-                    padding: 20px 15px 10px 15px;
+                    padding: 20px 15px 10px 15px !important;
                     width: 100%;
                 }
 
@@ -544,7 +544,7 @@
     top: -11px;
     padding-top: 10px;
     &.active {
-        z-index:-1;
+        z-index:0;
 
     }
   }
@@ -572,20 +572,29 @@
 
         }
     }
-      + .tab-content {
-          border-top: 1px solid @nav-tabs-justified-link-border-color;
-          position:relative;
-          z-index:0;
-          top: -11px;
-          padding-top: 10px;
-          &.active {
-              z-index:1000;
 
-          }
-      }
   }
 
 }
+
+@media (max-width: @screen-xs-max) {
+    .nav-centered {
+        + .tab-content {
+            border-top: 1px solid @nav-tabs-justified-link-border-color;
+            position:relative;
+            z-index:0;
+            top: -11px;
+            padding-top: 10px;
+            &.active {
+                z-index:1000;
+
+            }
+        }
+    }
+}
+
+
+
 
 // Move borders to anchors instead of bottom of list
 //
