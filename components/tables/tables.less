@@ -8,3 +8,78 @@ caption {
     color: @dell-gray-dark;
     text-align: left;
 }
+
+@media screen and (max-width: 767px) {
+    .table-responsive {
+        border: none;
+    }
+}
+
+
+// ---------- Responsive Simple Table ---------
+
+/*
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+    .table-responsive-vert-xs {
+        /* Force table to not be like tables anymore */
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr { border: 1px solid #ccc; }
+
+        td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+
+        td:before {
+            /* Now like a table header */
+            //position: absolute;
+            position: relative;
+
+            /* Top/left values mimic padding */
+            //top: 6px;
+            //left: 6px;
+            width: 70%;
+            padding-right: 10px;
+            white-space: nowrap;
+            float: left;
+        }
+
+        /*
+        Label the data
+        */
+        //td:nth-of-type(1):before { content: "Column 1"; }
+        //td:nth-of-type(2):before { content: "Column 2"; }
+        //td:nth-of-type(3):before { content: "Column 3"; }
+        //td:nth-of-type(4):before { content: "Column 4"; }
+        //td:nth-of-type(5):before { content: "Column 5"; }
+        //td:nth-of-type(6):before { content: "Column 6"; }
+        //td:nth-of-type(7):before { content: "Column 6"; }
+        //td:nth-of-type(8):before { content: "Column 7"; }
+        //td:nth-of-type(9):before { content: "Column 8"; }
+        //td:nth-of-type(10):before { content: "Column 9"; }
+    }
+
+}
+
+
+
+// ---------- /Responsive Simple Table ---------
