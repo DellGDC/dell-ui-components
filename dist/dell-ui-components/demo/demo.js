@@ -37673,6 +37673,188 @@ angular.module('ui.utils', [
     ]
   }, {}, [14])(14);
 });
+// Eve.js <evejs.com> - v0.8.4 February 18, 2013
+(function (u) {
+  function g(a) {
+    if (!f)
+      a:
+        if (!f) {
+          for (var b = [
+                'jQuery',
+                'MooTools',
+                'YUI',
+                'Prototype',
+                'dojo'
+              ], d = 0; d <= b.length; d++)
+            if (window[b[d]]) {
+              Eve.setFramework(b[d]);
+              break a;
+            }
+          console.error('Eve doesn\'t support your JavaScript framework.');
+        }
+    return a ? f == a.toLowerCase() : f;
+  }
+  function l(a, b) {
+    if (window.console) {
+      var d = m;
+      if (!m)
+        for (var d = !1, c = 0; c < n.length; c++)
+          n[c] == a && (d = !0);
+      if (d) {
+        for (; 10 > a.length;)
+          a += ' ';
+        a = a.substring(0, 10) + ' - ';
+        console.info(a, b);
+      }
+    }
+  }
+  function q(a, b, d, c) {
+    for (var e in r)
+      b[e] = r[e];
+    for (e in p)
+      b[e] = p[e];
+    g('YUI') ? YUI().use('node', function (e) {
+      j = e.one;
+      d[c] = a.apply(b);
+    }) : g('dojo') ? require([
+      'dojo/NodeList-dom',
+      'dojo/NodeList-traverse'
+    ], function (e) {
+      j = e;
+      d[c] = a.apply(b);
+    }) : d[c] = a.apply(b);
+  }
+  var h = {}, s = {}, t = {}, p = {}, n = [], m = !1, f, j;
+  u.Eve = {
+    setFramework: function (a) {
+      f = (a + '').toLowerCase();
+      'jquery' == f && ($ = jQuery);
+    },
+    debug: function (a) {
+      a ? n.push(a) : m = !0;
+    },
+    register: function (a, b) {
+      l(a, 'registered');
+      if (h[a])
+        throw Error('Module already exists: ' + a);
+      h[a] = b;
+      return this;
+    },
+    extend: function (a, b) {
+      p[a] = b;
+    },
+    scope: function (a, b) {
+      s[a] && console.warn('Duplicate namespace: ' + a);
+      q(b, {
+        name: a,
+        namespace: a
+      }, s, a);
+    },
+    attach: function (a, b) {
+      var d = [], c = 0;
+      for (c; c < arguments.length; c++)
+        d[d.length] = arguments[c];
+      l(a, 'attached to ' + b);
+      if (t[a + b])
+        return !1;
+      if (!h[a])
+        return console.warn('Module not found: ' + a), !1;
+      q(function () {
+        h[a].apply(this, d.slice(2));
+      }, {
+        namespace: b,
+        name: a
+      }, t, a + b);
+      return !0;
+    }
+  };
+  var r = {
+      listen: function (a, b, d) {
+        function c(a, c) {
+          l(v, f + ':' + b);
+          h.event = a;
+          g('MooTools') && (a.target = c);
+          g('jQuery') && (a.target = a.currentTarget);
+          g('dojo') && (a.target = a.explicitOriginalTarget);
+          d.apply(h, arguments);
+        }
+        d || (d = b, b = a, a = '');
+        a = a || '';
+        var e = this.event ? this.find() : document.body, v = this.name, f = (this.namespace + ' ' + a).trim(), h = {}, k;
+        for (k in this)
+          this.hasOwnProperty(k) && (h[k] = this[k]);
+        if (g('jQuery'))
+          $(e).delegate(f, b, c);
+        else if (g('MooTools'))
+          $(e).addEvent(b + ':relay(' + f + ')', c);
+        else if (g('YUI'))
+          j(e).delegate(b, c, f);
+        else if (g('Prototype'))
+          $(e).on(b, f, c);
+        else
+          g('dojo') && require(['dojo/on'], function (a) {
+            a(e, f + ':' + b, c);
+          });
+      },
+      find: function (a) {
+        var b, d = this.namespace;
+        if (!a || 'string' == typeof a)
+          a = (a || '').trim();
+        b = this.event ? this.event.target : document.body;
+        g('jQuery') && (b = jQuery(b));
+        j && (b = j(b));
+        var c = {
+            jQuery: [
+              'is',
+              'parents',
+              'find'
+            ],
+            MooTools: [
+              'match',
+              'getParent',
+              'getElements'
+            ],
+            Prototype: [
+              'match',
+              'up',
+              'select'
+            ],
+            YUI: [
+              'test',
+              'ancestor',
+              'all'
+            ],
+            dojo: [
+              '',
+              'closest',
+              'query'
+            ]
+          }, e;
+        for (e in c)
+          if (g(e)) {
+            var f = c[e], c = f[0];
+            e = f[1];
+            f = f[2];
+            if (!g('dojo') && b[c](d))
+              return b;
+            b = this.event ? b[e](d) : b;
+            return this.event ? b[f](a) : b[f](d + ' ' + a);
+          }
+      },
+      first: function (a, b) {
+        b = 2 == arguments.length ? b : this.find(a);
+        g('YUI') && (b = b.getDOMNodes());
+        return b[0];
+      },
+      scope: function (a, b) {
+        Eve.scope(this.namespace + ' ' + a, b);
+      },
+      attach: function (a, b) {
+        Eve.attach(a, this.namespace + ' ' + (b || ''));
+      }
+    };
+}(this));
+this.module && (this.module.exports = this.Eve);
 /*!
  * jqPagination, a jQuery pagination plugin (obviously)
  * Version: 1.4 (26th July 2013)
@@ -44440,188 +44622,115 @@ if (!console) {
   }($));
   return Slider;
 }));
-// Eve.js <evejs.com> - v0.8.4 February 18, 2013
-(function (u) {
-  function g(a) {
-    if (!f)
-      a:
-        if (!f) {
-          for (var b = [
-                'jQuery',
-                'MooTools',
-                'YUI',
-                'Prototype',
-                'dojo'
-              ], d = 0; d <= b.length; d++)
-            if (window[b[d]]) {
-              Eve.setFramework(b[d]);
-              break a;
-            }
-          console.error('Eve doesn\'t support your JavaScript framework.');
-        }
-    return a ? f == a.toLowerCase() : f;
-  }
-  function l(a, b) {
-    if (window.console) {
-      var d = m;
-      if (!m)
-        for (var d = !1, c = 0; c < n.length; c++)
-          n[c] == a && (d = !0);
-      if (d) {
-        for (; 10 > a.length;)
-          a += ' ';
-        a = a.substring(0, 10) + ' - ';
-        console.info(a, b);
+/* jQuery rt Responsive Tables - v1.0.2 - 2014-07-07
+* https://github.com/stazna01/jQuery-rt-Responsive-Tables
+*
+* This plugin is built heavily upon the work by Chris Coyier
+* found at http://css-tricks.com/responsive-data-tables/
+*
+* Copyright (c) 2014 Nathan Stazewski; Licensed MIT */
+(function ($) {
+  $.fn.rtResponsiveTables = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({ containerBreakPoint: 0 }, options);
+    rtStartingOuterWidth = $(window).width();
+    //used later to detect orientation change across all mobile browsers (other methods don't always work on Android)
+    is_iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+    //needed due to the fact that iOS scrolling causes false resizes
+    rt_responsive_table_object = this;
+    function isEmpty(el) {
+      return !$.trim(el.html());
+    }
+    function rt_write_css(rt_class_identifier) {
+      rt_css_code = '<style type="text/css">';
+      $(rt_class_identifier).find('th').each(function (index, element) {
+        rt_css_code += rt_class_identifier + '.rt-vertical-table td:nth-of-type(' + (index + 1) + '):before { content: "' + $(this).text() + '"; }';
+      });
+      rt_css_code += '</style>';
+      $(rt_css_code).appendTo('head');
+    }
+    function determine_table_width(rt_table_object) {
+      //outerWidth doesn't work properly in Safari if the table is overflowing its container
+      rt_table_width = 0;
+      if (rt_table_object.hasClass('rt-vertical-table')) {
+        rt_table_width = rt_table_object.outerWidth();
+      } else {
+        rt_table_object.find('th').each(function (index, element) {
+          rt_table_width += $(this).outerWidth();
+        });
+        rt_table_width = rt_table_width;  //this seems to fix a rounding bug in firefox
       }
+      return rt_table_width;
     }
-  }
-  function q(a, b, d, c) {
-    for (var e in r)
-      b[e] = r[e];
-    for (e in p)
-      b[e] = p[e];
-    g('YUI') ? YUI().use('node', function (e) {
-      j = e.one;
-      d[c] = a.apply(b);
-    }) : g('dojo') ? require([
-      'dojo/NodeList-dom',
-      'dojo/NodeList-traverse'
-    ], function (e) {
-      j = e;
-      d[c] = a.apply(b);
-    }) : d[c] = a.apply(b);
-  }
-  var h = {}, s = {}, t = {}, p = {}, n = [], m = !1, f, j;
-  u.Eve = {
-    setFramework: function (a) {
-      f = (a + '').toLowerCase();
-      'jquery' == f && ($ = jQuery);
-    },
-    debug: function (a) {
-      a ? n.push(a) : m = !0;
-    },
-    register: function (a, b) {
-      l(a, 'registered');
-      if (h[a])
-        throw Error('Module already exists: ' + a);
-      h[a] = b;
-      return this;
-    },
-    extend: function (a, b) {
-      p[a] = b;
-    },
-    scope: function (a, b) {
-      s[a] && console.warn('Duplicate namespace: ' + a);
-      q(b, {
-        name: a,
-        namespace: a
-      }, s, a);
-    },
-    attach: function (a, b) {
-      var d = [], c = 0;
-      for (c; c < arguments.length; c++)
-        d[d.length] = arguments[c];
-      l(a, 'attached to ' + b);
-      if (t[a + b])
-        return !1;
-      if (!h[a])
-        return console.warn('Module not found: ' + a), !1;
-      q(function () {
-        h[a].apply(this, d.slice(2));
-      }, {
-        namespace: b,
-        name: a
-      }, t, a + b);
-      return !0;
-    }
-  };
-  var r = {
-      listen: function (a, b, d) {
-        function c(a, c) {
-          l(v, f + ':' + b);
-          h.event = a;
-          g('MooTools') && (a.target = c);
-          g('jQuery') && (a.target = a.currentTarget);
-          g('dojo') && (a.target = a.explicitOriginalTarget);
-          d.apply(h, arguments);
-        }
-        d || (d = b, b = a, a = '');
-        a = a || '';
-        var e = this.event ? this.find() : document.body, v = this.name, f = (this.namespace + ' ' + a).trim(), h = {}, k;
-        for (k in this)
-          this.hasOwnProperty(k) && (h[k] = this[k]);
-        if (g('jQuery'))
-          $(e).delegate(f, b, c);
-        else if (g('MooTools'))
-          $(e).addEvent(b + ':relay(' + f + ')', c);
-        else if (g('YUI'))
-          j(e).delegate(b, c, f);
-        else if (g('Prototype'))
-          $(e).on(b, f, c);
-        else
-          g('dojo') && require(['dojo/on'], function (a) {
-            a(e, f + ':' + b, c);
-          });
-      },
-      find: function (a) {
-        var b, d = this.namespace;
-        if (!a || 'string' == typeof a)
-          a = (a || '').trim();
-        b = this.event ? this.event.target : document.body;
-        g('jQuery') && (b = jQuery(b));
-        j && (b = j(b));
-        var c = {
-            jQuery: [
-              'is',
-              'parents',
-              'find'
-            ],
-            MooTools: [
-              'match',
-              'getParent',
-              'getElements'
-            ],
-            Prototype: [
-              'match',
-              'up',
-              'select'
-            ],
-            YUI: [
-              'test',
-              'ancestor',
-              'all'
-            ],
-            dojo: [
-              '',
-              'closest',
-              'query'
-            ]
-          }, e;
-        for (e in c)
-          if (g(e)) {
-            var f = c[e], c = f[0];
-            e = f[1];
-            f = f[2];
-            if (!g('dojo') && b[c](d))
-              return b;
-            b = this.event ? b[e](d) : b;
-            return this.event ? b[f](a) : b[f](d + ' ' + a);
+    function fix_responsive_tables() {
+      if ($('table.rt-responsive-table').length) {
+        $('table.rt-responsive-table').each(function (index) {
+          rt_containers_width = $(this).parent().width();
+          rt_current_width = determine_table_width($(this)) - 1;
+          //this "-1" seems to fix an issue in firefox without harming any other browsers
+          rt_max_width = $(this).attr('data-rt-max-width');
+          rt_has_class_rt_vertical_table = $(this).hasClass('rt-vertical-table');
+          if ($(this).attr('data-rtContainerBreakPoint')) {
+            rt_user_defined_container_breakpoint = $(this).attr('data-rtContainerBreakPoint');
+          } else {
+            rt_user_defined_container_breakpoint = settings.containerBreakPoint;
           }
-      },
-      first: function (a, b) {
-        b = 2 == arguments.length ? b : this.find(a);
-        g('YUI') && (b = b.getDOMNodes());
-        return b[0];
-      },
-      scope: function (a, b) {
-        Eve.scope(this.namespace + ' ' + a, b);
-      },
-      attach: function (a, b) {
-        Eve.attach(a, this.namespace + ' ' + (b || ''));
+          if (rt_containers_width < rt_current_width || rt_containers_width <= rt_user_defined_container_breakpoint) {
+            //the parent element is less than the current width of the table or the parent element is less than or equal to a user supplied breakpoint
+            $(this).addClass('rt-vertical-table');
+            //switch to vertical orientation (or at least keep it that orientation)
+            if (rt_max_width > rt_current_width && rt_max_width > rt_user_defined_container_breakpoint) {
+              //the max width was set too high and needs to be adjusted to this lower number
+              $(this).attr('data-rt-max-width', rt_current_width);
+            } else if (rt_max_width > rt_current_width && rt_max_width <= rt_user_defined_container_breakpoint) {
+              //same as above but in this case the breakpoint is larger or equal so it needs to be set as the max width
+              $(this).attr('data-rt-max-width', rt_user_defined_container_breakpoint);
+            }
+          } else if (rt_containers_width > rt_max_width && rt_containers_width > rt_user_defined_container_breakpoint) {
+            //the parent element is bigger than the max width and user supplied breakpoint
+            $(this).removeClass('rt-vertical-table');
+            //switch to horizontal orientation (or at least keep it that orientation)
+            if (rt_max_width > rt_current_width && !rt_has_class_rt_vertical_table && (rt_max_width > rt_user_defined_container_breakpoint && !rt_has_class_rt_vertical_table)) {
+              //max width is greater than the table's current width and it's in horizontal mode currently...so the max width was set to low and needs to be adjusted to a higher number
+              $(this).attr('data-rt-max-width', rt_current_width);
+            } else if (rt_max_width > rt_current_width && !rt_has_class_rt_vertical_table && (rt_max_width <= rt_user_defined_container_breakpoint && !rt_has_class_rt_vertical_table)) {
+              //same as above but in this case the user supplied breakpoint is larger or equal so it needs to be set as the max width
+              $(this).attr('data-rt-max-width', rt_user_defined_container_breakpoint);
+            }
+          } else {
+          }
+        });
       }
-    };
-}(this));
-this.module && (this.module.exports = this.Eve);
+    }
+    rt_responsive_table_object.each(function (index, element) {
+      $(this).addClass('rt-responsive-table-' + index).addClass('rt-responsive-table');
+      if (index == rt_responsive_table_object.length - 1) {
+        $(window).resize(function () {
+          if (!is_iOS || is_iOS && rtStartingOuterWidth !== $(window).width()) {
+            rtStartingOuterWidth = $(window).width();
+            //MUST update the starting width so future orientation changes will be noticed
+            fix_responsive_tables();
+          }
+        });
+        rt_responsive_table_count = $('table.rt-responsive-table').length;
+        $('table.rt-responsive-table').each(function (index2, element2) {
+          rt_write_css('table.rt-responsive-table-' + index2);
+          $('table.rt-responsive-table-' + index2).attr('data-rt-max-width', determine_table_width($(this)));
+          $(this).find('td,th').each(function (index3, element3) {
+            //empty td tags made them disappear
+            if (isEmpty($(this))) {
+              $(this).html('&#160;');
+            }
+          });
+          if (rt_responsive_table_count - 1 == index2) {
+            fix_responsive_tables();
+          }
+        });
+      }
+    });
+    return this;
+  };
+}(jQuery));
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 });
@@ -45444,6 +45553,31 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     };
   }
 ]);
+angular.module('dellUiComponents').directive('responsiveTable', function () {
+  // Runs during compile
+  return {
+    restrict: 'A',
+    link: function ($scope, $element, $attrs, controller) {
+      var selector = $attrs.responsiveTable;
+      if (selector) {
+        $timeout(function () {
+          $(selector).rtResponsiveTables();
+        }, 300);
+      } else {
+        console.error('responsive-table usage error. Must include css selector to identify objects to equalize. Example: responsive-table=".classname"');
+      }
+    }
+  };
+});
+//$("table").rtResponsiveTables({
+//    containerBreakPoint: 300
+//});
+Eve.scope('.contact-drawer', function () {
+  this.listen('.contact-drawer-cta', 'click', function (e) {
+    var contactDrawer = $(e.currentTarget).parents('.contact-drawer');
+    contactDrawer.toggleClass('open');
+  });
+});
 /* globals s */
 angular.module('demo', [
   'ui.utils',
@@ -46412,6 +46546,19 @@ function myDDCtrl($scope) {
     }
   };
 }
+angular.module('demo').controller('contactDrawerCtrl', [
+  '$scope',
+  '$rootScope',
+  function ($scope, $rootScope) {
+  }
+]);
+angular.module('demo').controller('contactDrawerPLayDemoCtrl', [
+  '$scope',
+  '$rootScope',
+  '$sce',
+  function ($scope, $rootScope, $sce) {
+  }
+]);
 angular.module('dellUiComponents').run([
   '$templateCache',
   function ($templateCache) {
@@ -46431,6 +46578,8 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/collapsible-items/demo-play-collapsible-items.html', '<section ng-controller=collapsibleItemsPLayDemoCtrl id=collapsible-items-play-demo><div class=container><h2>Collapsible-Items Builder</h2><div></div></div></section>');
     $templateCache.put('components/colors/demo-colors.html', '<section ng-controller=colorsCtrl id=colors-html-example><div class=container><h2>Colors Demo</h2><div><div class=row><div class="col-sm-12 col-md-4"><div class="well well-white text-gray-dark well-white-stroke"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;White</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#ffffff</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-white</span><br></div><div class="well text-gray-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#eeeeee</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well text-white well-gray"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#aaaaaa</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-gray-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray Dark</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#444444</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-gray-dark</span><br></div><div class="well well-blue"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#007db8</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-blue</span><br></div><div class="well well-dark-blue"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#00447c</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-dark-blue</span><br></div><div class="well text-gray-medium well-light-green"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#C1D82F</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div></div><div class="col-sm-12 col-md-4"><div class="well well-green"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6EA204</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-green</span><br></div><div class="well well-yellow"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Yellow</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f2af00</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-orange"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Orange</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#EE6411</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-orange</span><br></div><div class="well well-red"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#D74324</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red</span><br></div><div class="well well-red-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#CE1126</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red-dark</span><br></div><div class="well well-berry"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Berry</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#B7295A</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-berry</span><br></div><div class="well well-purple"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Purple</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6E2585</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-purple</span><br></div><div class="well well-teal"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Teal</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#42aeaf</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div></div><div class="col-sm-12 col-md-4 well"><p>**The following colors may <strong>only be used</strong> in instances associated below.</p><div class="well text-gray-dark well-gray-very-light well-gray-very-light-stroke"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;7% Dell Light Gray</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;backgrounds only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f9f9f9</span><br></div><div class="well text-white well-gray-medium"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;75% Dell Gray Dark</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;borders only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#737373</span><br></div><div class="well text-gray-dark well-alert-yellow"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Online Alert Yellow</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;Alerts only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#FFFFC9</span><br></div><div class="well text-gray-dark well-dell-blue-20-percent"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;20% Dell Blue</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp; highlighting and selecting</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#CCE5F1</span><br></div></div></div></div></div></section>');
     $templateCache.put('components/colors/demo-play-colors.html', '<section ng-controller=colorsPLayDemoCtrl id=colors-play-demo><div class=container><h2>Colors Builder</h2><div></div></div></section>');
+    $templateCache.put('components/contact-drawer/demo-contact-drawer.html', '<section ng-controller=contactDrawerCtrl id=contact-drawer-html-example><div class=container id=contact-drawer><h2>Contact-Drawer Demo</h2><div class=block-grid-item><div class="hidden-xs hidden-sm contact-drawer"><div class=contact-drawer-cta>Contact us</div><div class=contact-drawer-panel><ul class=unstyled><li><div class=icon><i class=icon-small-chat></i></div><div class=description><p>Get immediate answers about your product.</p><p><a href=javascript:;>Chat now</a></p></div></li><li><div class=icon><i class=icon-small-phone></i></div><div class=description><p>Talk to a Dell expert over the phone.</p><p><a href=javascript:;>Call 1-800-WWW-DELL</a></p></div></li><li><div class=icon><i class=icon-small-mail></i></div><div class=description><p>Email us, and we\'ll reply within one business day</p><p><a href=javascript:;>Email us</a></p></div></li></ul></div></div></div></div></section>');
+    $templateCache.put('components/contact-drawer/demo-play-contact-drawer.html', '<section ng-controller=contactDrawerPLayDemoCtrl id=contact-drawer-play-demo><div class=container><h2>Contact-Drawer Builder</h2><div></div></div></section>');
     $templateCache.put('components/containers/demo-containers.html', '<section ng-controller=containersCtrl id=containers-html-example><div class=container><h2>Containers Demo</h2><div><h4>Default well example</h4><div id=example-well><div class="well well-transparent-stroke"><p>This is a default Well...</p></div></div></div><h4>Solid colored wells &amp; containers</h4><div class="well well-lg well-blue"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-blue"</strong></p></div><div class="well well-lg well-dark-blue"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-dark-blue"</strong></p></div><div class="well well-lg well-purple"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-purple"</strong></p></div><div class="well well-lg well-berry"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-berry"</strong></p></div><div class="well well-lg well-red"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red"</strong></p></div><div class="well well-lg well-gray-medium"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-medium"</strong></p></div><div class="well well-lg well-gray-dark"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-dark"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers</h4><div class="well well-lg well-blue-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-blue-stroke"</strong></p></div><div class="well well-lg well-dark-blue-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-dark-blue-stroke"</strong></p></div><div class="well well-lg well-purple-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-purple-stroke"</strong></p></div><div class="well well-lg well-berry-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-berry-stroke"</strong></p></div><div class="well well-lg well-red-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red-stroke"</strong></p></div><div class="well well-lg well-red-dark-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-red-dark-stroke"</strong></p></div><div class="well well-lg well-gray-medium-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-medium-stroke"</strong></p></div><div class="well well-lg well-gray-dark-stroke"><h2>Headline</h2><p>Content placed in a <strong>"well well-lg well-gray-dark-stroke"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers with title</h4><div class="well well-lg well-blue-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-blue-stroke"</strong></p></div><div class="well well-lg well-dark-blue-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-dark-blue-stroke"</strong></p></div><div class="well well-lg well-purple-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-purple-stroke"</strong></p></div><div class="well well-lg well-berry-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-berry-stroke"</strong></p></div><div class="well well-lg well-red-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-red-stroke"</strong></p></div><div class="well well-lg well-red-dark-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-red-dark-stroke"</strong></p></div><div class="well well-lg well-gray-medium-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-gray-medium-stroke"</strong></p></div><div class="well well-lg well-gray-dark-stroke"><h4 class=container-title>A really long title goes here</h4><p>Content placed in a <strong>"well well-lg well-gray-dark-stroke"</strong></p></div><h4 class=top-offset-60>Color stroked wells &amp; containers with title</h4><div class="panel panel-blue"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-blue"</strong></p></div><div class="panel panel-dark-blue"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-dark-blue"</strong></p></div><div class="panel panel-purple"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-purple"</strong></p></div><div class="panel panel-purple"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-purple"</strong></p></div><div class="panel panel-berry"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-berry"</strong></p></div><div class="panel panel-red"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-red"</strong></p></div><div class="panel panel-red-dark"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-red-dark"</strong></p></div><div class="panel panel-gray-medium"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-gray-medium"</strong></p></div><div class="panel panel-gray-dark"><h3 class=panel-heading>A really long title goes here</h3><p class=panel-body>Content placed in a <strong>"panel panel-gray-dark"</strong></p></div></div></section>');
     $templateCache.put('components/containers/demo-play-containers.html', '<section ng-controller=containersPLayDemoCtrl id=containers-play-demo><div class=container><h2>Containers Builder</h2><div></div></div></section>');
     $templateCache.put('components/content-teaser/demo-content-teaser.html', '<section ng-controller=contentTeaserCtrl id=content-teaser-html-example><div class=container><h2>Teasers Demo</h2><h3 class=bottom-offset-20>Vertical Teaser \u2013 Show/no-hide</h3><div class=row equalize-height=.content-teaser-container><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group content-card" ng-class="{\'view-all\': viewAll[\'parent-link-1\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-1\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-1\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-1\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-2\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-2\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-2\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-2\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-3\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-3\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-3\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-3\'] = true">More</a></div></div></div></div><div class="col-xs-12 col-sm-4 col-md-3"><div class=content-teaser-container><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled detail-links list-group" ng-class="{\'view-all\': viewAll[\'parent-link-4\']}"><li><a href=javascript:;>1 Sample Link</a></li><li><a href=javascript:;>2 Sample Link</a></li><li><a href=javascript:;>3 Sample Link</a></li><li><a href=javascript:;>4 Sample Link</a></li><li><a href=javascript:;>5 Sample Link</a></li><li><a href=javascript:;>6 Sample Link</a></li><li><a href=javascript:;>7 Sample Link</a></li><li><a href=javascript:;>8 Sample Link</a></li><li><a href=javascript:;>9 Sample Link</a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-link-4\']"><a href=javascript:; class=hidden-xs ng-click="viewAll[\'parent-link-4\'] = true">View All</a> <a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-link-4\'] = true">More</a></div></div></div></div></div><hr><h3 class=bottom-offset-20>Vertical Teaser \u2013 truncated content with dropdown CTA</h3><div class=row><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div><div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30"><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"><h4 class=text-blue>Content Headline Title Goes Here</h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group bottom-offset-10"><li class=text-gray-medium>Updated: 3/25/2015</li></ul></div><div class=btn-group><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>Actions <i class=caret></i></a><ul class="dropdown-menu dropdown-icon-menu"><li><a href=javascript:;><i class=icon-small-download></i>&nbsp;&nbsp;Download</a></li><li><a href=javascript:;><i class=icon-small-share></i>&nbsp;&nbsp;Share</a></li><li><a href=javascript:;><i class=icon-small-chat></i>&nbsp;&nbsp;Contact an Expert</a></li></ul></div></div></div><hr><div class=top-offset-60><h3 class=bottom-offset-20>Vertical Teaser \u2013 truncated content</h3><div class=row><div class="col-xs-12 col-sm-6 col-md-6 stacked-detail-links"><img src=http://placehold.it/555x275 class="img-responsive bottom-offset-10"><h4 class=text-blue>Headline Title Goes Here <img src="components/content-teaser/pdficon_small.png"></h4><p class=multiline-ellipsis>Controlling access and achieving governance has become more complicated than ever. Today\u2019s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p><div class=stacked-detail-links><ul class="list-unstyled list-group"><li class=text-gray-medium>Updated: 3/25/2015</li><li class=text-gray-medium>Category:<a href=javascript:;>&nbsp;&nbsp;Security Solutions</a></li><li><a href=javascript:;>View all Security resources</a></li></ul></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser image left (responsive image)</h3><div class=clearfix><div class=form-compressed><div class=row><div class="col-xs-3 vertical-center"><a href=javascript:;><img class=img-responsive alt=275x175 src=http://placehold.it/275x175 data-holder-rendered=true></a></div><div class="col-xs-8 vertical-center"><a href=javascript:;><h5 class=teaser-media-heading>Middle aligned media</h5></a><p class=bottom-offset-5>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p><button class="btn btn-success hidden-xs hidden-sm">Call to Action</button> <a class="btn-link visible-xs-block visible-sm-block" href=javascript:;>Call to Action</a></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser image right (responsive)</h3><div class=clearfix><div class=form-compressed><div class=row><div class="col-xs-8 vertical-center"><a href=javascript:;><h5 class=teaser-media-heading>Middle aligned media</h5></a><p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p><button class="btn btn-success hidden-xs hidden-sm">Call to Action</button> <a class="btn-link visible-xs-block visible-sm-block" href=javascript:;>Call to Action</a></div><div class="col-xs-3 vertical-center"><a href=javascript:;><img class=img-responsive alt=275x175 src=http://placehold.it/275x175 data-holder-rendered=true></a></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser full-bleed text overlay</h3><div class=container-fluid-no-padding><div class=row><div class="col-xs-12 col-sm-7"><div class="well well-teaser"><img alt=665x155 src=http://placehold.it/750x275 class=img-responsive></div><div class=well-caption><a href=javascript:;>Sed susscipt ligua nec lorem semper, velimydfgentum.</a></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>horizontal teaser full-width gradient</h3><div class=container-fluid><div class=row><div class=col-xs-12><div class="well well-site-wide"><p class=text-center>Text area may contain centered text up to 140 characters including spaces and call-to-action.<a href=javascript:;>Call to Action</a></p></div></div></div></div><hr class="bottom-offset-60 top-offset-60"><h3 class=bottom-offset-20>Value props</h3></div><div id=teasers-content-teaser-groupings-value-props><div id=value-props class=value-props-gallery equalize-height="#value-props .gallery-item"><div class=container><div class="col-xs-12 col-sm-4 gallery-item"><a href=javascript:;><i class="icon-large-shipping text-blue"></i><h5 class=text-blue>Free shipping, free returns</h5><p class=text-gray-dark>Shop now with free shipping and no-cost returns.</p></a></div><div class="col-xs-12 col-sm-4 gallery-item"><a href=javascript:;><i class="icon-large-calculator text-blue"></i><h5 class=text-blue>Fast. Easy. Financing.*</h5><p class=text-gray-dark>Dell Preferred Account <sup>TM</sup> makes purchasing easier.</p></a></div><div class="col-xs-12 col-sm-4 gallery-item"><a href=javascript:;><i class="icon-large-giftcard text-blue"></i><h5 class=text-blue>Dell Advantage Loyalty Program.</h5><p class=text-gray-dark>Here\'s how much we appreciate our customers.</p></a></div></div></div></div></section>');
@@ -46475,7 +46624,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/standard-buttons/demo-play-standard-buttons.html', '<section ng-controller=standardButtonsPLayDemoCtrl id=standard-buttons-play-demo><div class=container><h2>Standard-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/standard-buttons/demo-standard-buttons.html', '<section ng-controller=standardButtonsCtrl id=standard-buttons-html-example><div class=container><h2 class=bottom-offset-20>Standard-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase</h4><a class="btn btn-primary" href=javascript:;>Primary</a></div><div class=bottom-offset-30><h4>Primary Non-Purchase disabled</h4><a class="btn btn-primary disabled" href=javascript:;>Primary</a></div><hr><div class=bottom-offset-30><h4>Primary Purchase</h4><a class="btn btn-success" href=javascript:;>Purchase</a></div><div class=bottom-offset-30><h4>Primary Purchase disabled</h4><a class="btn btn-success disabled" href=javascript:;>Purchase</a></div><hr><div class=bottom-offset-30><h4>Secondary or General Use</h4><a class="btn btn-default" href=javascript:;>General Use</a></div><div class=bottom-offset-30><h4>Secondary or General Use disabled</h4><a class="btn btn-default disabled" href=javascript:;>General Use</a></div><hr><div class=bottom-offset-30><h4>Primary link</h4><a class="btn btn-link" href=javascript:;>Link</a></div><div class=bottom-offset-30><h4>Primary link disabled</h4><a class="btn btn-link disabled" href=javascript:;>Link</a></div></div></section>');
     $templateCache.put('components/tables/demo-play-tables.html', '<section ng-controller=tablesPLayDemoCtrl id=tables-play-demo><div class=container><h2>Tables Builder</h2><div></div></div></section>');
-    $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><h3>Data Tables - Simple</h3><div class=bottom-offset-20><div><table class="table table-hover"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div><h3>Data Tables - Simple w/ optional zebra striping</h3><div class=bottom-offset-20><div><table class="table table-hover table-striped"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div></div></section>');
+    $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><h3>Data Tables - Simple</h3><div class=bottom-offset-20><div class=table-responsive><table class="table table-hover"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div><h3>Data Tables - Simple w/ optional zebra striping</h3><div class=bottom-offset-20><div class=table-responsive><table class="table table-hover table-striped"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div><h3>Data Tables - Responsive Simple Table</h3><div class=bottom-offset-20><div class=table-responsive-vert-xs><table class="table table-hover table-striped"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div></div></section>');
     $templateCache.put('components/tabs/demo-play-tabs.html', '<section ng-controller=tabsPLayDemoCtrl id=tabs-play-demo><div class=container><h2>Tabs Builder</h2><div></div></div></section>');
     $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs"><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings <i class="icon-ui-arrowright visible-xs-block"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</div></div><div role=tabpanel class="tab-pane fade" id=profile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. Vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</div></div><div role=tabpanel class="tab-pane fade" id=messages><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</div></div><div role=tabpanel class="tab-pane fade" id=settings><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</div></div></div></div></div><div class=row><h3 class="col-xs-12 top-offset-60">Tabs <small>(justified)</small></h3></div><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#long-example aria-controls=long-example role=tab data-toggle=tab>Example to show the auto adjusted tab height. <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#automobile aria-controls=Automobile role=tab data-toggle=tab>Automobile<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#boats aria-controls=Boats role=tab data-toggle=tab>Boats<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#planes aria-controls=Planes role=tab data-toggle=tab>Planes<i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=long-example><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Long example Aute gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div><div role=tabpanel class="tab-pane fade" id=automobile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Automobile magna biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div><div role=tabpanel class="tab-pane fade" id=boats><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Boats nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div><div role=tabpanel class="tab-pane fade" id=planes><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Planes biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div><div class=row><h3 class="col-xs-12 top-offset-60">Tabs <small>(centered)</small></h3></div><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-centered" role=tablist><li role=presentation class=active><a href=#inspiron role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Inspiron Laptops</h4><p class=text-gray-dark>For home and home office</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#latitude role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Latitude Laptops</h4><p class=text-gray-dark>For business-class security and reliability</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#vostro role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Vostro Laptops</h4><p class=text-gray-dark>For small business computing</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#XPS role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>XPS Laptops</h4><p class=text-gray-dark>For the ultimate experience</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#precision role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Dell Precision Mobile Workstation\'s</h4><p class=text-gray-dark>For professional creators</p><i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=inspiron><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Inspiron gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div><div role=tabpanel class="tab-pane fade" id=latitude><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Latitude biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div><div role=tabpanel class="tab-pane fade" id=vostro><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Vostro nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div><div role=tabpanel class="tab-pane fade" id=XPS><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>XPS biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div><div role=tabpanel class="tab-pane fade" id=precision><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Precision biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div></div></section>');
     $templateCache.put('components/tooltips/demo-play-tooltips.html', '<section ng-controller=tooltipsPLayDemoCtrl id=tooltips-play-demo><div class=container><h2>Tooltips Builder</h2><div></div></div></section>');

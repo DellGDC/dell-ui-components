@@ -1,4 +1,4 @@
-angular.module('dellUiComponents').directive('responsiveTable', function(){
+angular.module('dellUiComponents').directive('responsiveTable', function($timeout){
     // Runs during compile
     return {
         restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
