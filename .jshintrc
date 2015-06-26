@@ -26,6 +26,7 @@
         "expect": true,
         "xdescribe": true,
         "xit": true,
+        "Eve": true,
         "spyOn": true
     }
 }
