@@ -1,0 +1,64 @@
+/*
+ * Contact-Drawer component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+
+.contact-drawer {
+	z-index: 9000;
+	position: fixed;
+	top: @contact-drawer-distance-top;
+	right: 0px;
+	width: @contact-drawer-width;
+	-webkit-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+	-moz-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+	-o-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+	transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+
+	&.open {
+		right: 0px !important;
+	}
+	.contact-drawer-cta {
+		max-width: 150px;
+		height: 33px;
+		position: absolute;
+		left: -69px;
+		top: 36px;
+		cursor: pointer;
+		background: @contact-drawer-cta-color;
+		color: #ffffff;
+		-webkit-transform: rotate(-90deg);
+		-ms-transform: rotate(-90deg);
+		transform: rotate(-90deg);
+		padding: 5px 10px;
+		font-size: 18px;
+		line-height: 22px;
+		font-family:  @contact-drawer-cta-font-family;
+	}
+	.contact-drawer-panel {
+		border: 1px solid @dell-gray-very-light;
+		border-top: 1px solid @dell-gray-light;
+		padding: 20px 20px 0;
+		background:  @contact-drawer-background-color;
+		display: inline-block;
+		width: @contact-drawer-width;
+		-webkit-box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.2);
+		box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.2);
+		.icon {
+			float: left;
+			min-height: 80px;
+			margin-right: 10px;
+			color: @contact-drawer-cta-color;
+		}
+		&:before {
+			content: " ";
+			width: 2px;
+			background:  @contact-drawer-cta-color;
+			height: @contact-drawer-height;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+
+	}
+}
+

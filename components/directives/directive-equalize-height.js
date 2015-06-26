@@ -7,7 +7,7 @@ angular.module('dellUiComponents').directive('equalizeHeight', function($timeout
             if(selector) {
                 $timeout(function(){
                     $(selector).matchHeight();
-                },300);
+                },500);
             } else {
                 console.error('equalize-height usage error. Must include css selector to identify objects to equalize. Example: cequalize-height=".classname"');
             }   
