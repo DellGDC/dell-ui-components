@@ -1,3 +1,185 @@
+// Eve.js <evejs.com> - v0.8.4 February 18, 2013
+(function (u) {
+  function g(a) {
+    if (!f)
+      a:
+        if (!f) {
+          for (var b = [
+                'jQuery',
+                'MooTools',
+                'YUI',
+                'Prototype',
+                'dojo'
+              ], d = 0; d <= b.length; d++)
+            if (window[b[d]]) {
+              Eve.setFramework(b[d]);
+              break a;
+            }
+          console.error('Eve doesn\'t support your JavaScript framework.');
+        }
+    return a ? f == a.toLowerCase() : f;
+  }
+  function l(a, b) {
+    if (window.console) {
+      var d = m;
+      if (!m)
+        for (var d = !1, c = 0; c < n.length; c++)
+          n[c] == a && (d = !0);
+      if (d) {
+        for (; 10 > a.length;)
+          a += ' ';
+        a = a.substring(0, 10) + ' - ';
+        console.info(a, b);
+      }
+    }
+  }
+  function q(a, b, d, c) {
+    for (var e in r)
+      b[e] = r[e];
+    for (e in p)
+      b[e] = p[e];
+    g('YUI') ? YUI().use('node', function (e) {
+      j = e.one;
+      d[c] = a.apply(b);
+    }) : g('dojo') ? require([
+      'dojo/NodeList-dom',
+      'dojo/NodeList-traverse'
+    ], function (e) {
+      j = e;
+      d[c] = a.apply(b);
+    }) : d[c] = a.apply(b);
+  }
+  var h = {}, s = {}, t = {}, p = {}, n = [], m = !1, f, j;
+  u.Eve = {
+    setFramework: function (a) {
+      f = (a + '').toLowerCase();
+      'jquery' == f && ($ = jQuery);
+    },
+    debug: function (a) {
+      a ? n.push(a) : m = !0;
+    },
+    register: function (a, b) {
+      l(a, 'registered');
+      if (h[a])
+        throw Error('Module already exists: ' + a);
+      h[a] = b;
+      return this;
+    },
+    extend: function (a, b) {
+      p[a] = b;
+    },
+    scope: function (a, b) {
+      s[a] && console.warn('Duplicate namespace: ' + a);
+      q(b, {
+        name: a,
+        namespace: a
+      }, s, a);
+    },
+    attach: function (a, b) {
+      var d = [], c = 0;
+      for (c; c < arguments.length; c++)
+        d[d.length] = arguments[c];
+      l(a, 'attached to ' + b);
+      if (t[a + b])
+        return !1;
+      if (!h[a])
+        return console.warn('Module not found: ' + a), !1;
+      q(function () {
+        h[a].apply(this, d.slice(2));
+      }, {
+        namespace: b,
+        name: a
+      }, t, a + b);
+      return !0;
+    }
+  };
+  var r = {
+      listen: function (a, b, d) {
+        function c(a, c) {
+          l(v, f + ':' + b);
+          h.event = a;
+          g('MooTools') && (a.target = c);
+          g('jQuery') && (a.target = a.currentTarget);
+          g('dojo') && (a.target = a.explicitOriginalTarget);
+          d.apply(h, arguments);
+        }
+        d || (d = b, b = a, a = '');
+        a = a || '';
+        var e = this.event ? this.find() : document.body, v = this.name, f = (this.namespace + ' ' + a).trim(), h = {}, k;
+        for (k in this)
+          this.hasOwnProperty(k) && (h[k] = this[k]);
+        if (g('jQuery'))
+          $(e).delegate(f, b, c);
+        else if (g('MooTools'))
+          $(e).addEvent(b + ':relay(' + f + ')', c);
+        else if (g('YUI'))
+          j(e).delegate(b, c, f);
+        else if (g('Prototype'))
+          $(e).on(b, f, c);
+        else
+          g('dojo') && require(['dojo/on'], function (a) {
+            a(e, f + ':' + b, c);
+          });
+      },
+      find: function (a) {
+        var b, d = this.namespace;
+        if (!a || 'string' == typeof a)
+          a = (a || '').trim();
+        b = this.event ? this.event.target : document.body;
+        g('jQuery') && (b = jQuery(b));
+        j && (b = j(b));
+        var c = {
+            jQuery: [
+              'is',
+              'parents',
+              'find'
+            ],
+            MooTools: [
+              'match',
+              'getParent',
+              'getElements'
+            ],
+            Prototype: [
+              'match',
+              'up',
+              'select'
+            ],
+            YUI: [
+              'test',
+              'ancestor',
+              'all'
+            ],
+            dojo: [
+              '',
+              'closest',
+              'query'
+            ]
+          }, e;
+        for (e in c)
+          if (g(e)) {
+            var f = c[e], c = f[0];
+            e = f[1];
+            f = f[2];
+            if (!g('dojo') && b[c](d))
+              return b;
+            b = this.event ? b[e](d) : b;
+            return this.event ? b[f](a) : b[f](d + ' ' + a);
+          }
+      },
+      first: function (a, b) {
+        b = 2 == arguments.length ? b : this.find(a);
+        g('YUI') && (b = b.getDOMNodes());
+        return b[0];
+      },
+      scope: function (a, b) {
+        Eve.scope(this.namespace + ' ' + a, b);
+      },
+      attach: function (a, b) {
+        Eve.attach(a, this.namespace + ' ' + (b || ''));
+      }
+    };
+}(this));
+this.module && (this.module.exports = this.Eve);
 /*!
  * jqPagination, a jQuery pagination plugin (obviously)
  * Version: 1.4 (26th July 2013)
@@ -6954,21 +7136,6 @@ angular.module('dellUiComponents').directive('carousel', [
       }
     };
   }
-]).directive('divHeightEqualize', [
-  '$timeout',
-  function ($timeout) {
-    // Runs during compile
-    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
-    return {
-      restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
-        //
-        $(function () {
-          $('.div-height-equalize').matchHeight();
-        });
-      }
-    };
-  }
 ]).directive('slide', [
   '$timeout',
   function ($timeout) {
@@ -7006,16 +7173,50 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       });
     }
   };
+}).directive('emailValidate', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, element, attributes, controller) {
+      $(element).blur(function () {
+        var email = $(this).validate();
+        var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
+        if (re.test(element)) {
+          $(element).addClass('alert alert-warning');
+          $(element).tooltip({ title: 'Please input a valid email address!' });
+        } else {
+        }
+      });
+    }
+  };
 }).directive('emailCheck', function () {
   return {
     restrict: 'AEC',
     link: function ($scope, element, attributes, controller) {
-      $(element).blur(function () {
+      //$(element).blur(function () {
+      //    var string1 = $(element).val();
+      //    if (string1.indexOf("@") === -1){
+      //        $(element).addClass('alert alert-warning');
+      //        $(element).tooltip({
+      //            title: "Please input a valid email address!"
+      //        });
+      //    //$(element).blur();
+      //    } else {
+      //        $(element).removeClass('alert alert-warning');
+      //        $(element).tooltip('disable');
+      //    }
+      //});
+      $(element).on('keyup', function () {
         var string1 = $(element).val();
-        if (string1.indexOf('@') === -1) {
-          $(element).tooltip({ title: 'Please input a valid email address!' });
+        var regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
+        if (!string1.match(regex)) {
+          if (!attributes.errorMessage) {
+            attributes.errorMessage = 'Please input a valid email address!';
+          }
           $(element).addClass('alert alert-warning');
-          $(element).focus();
+          $(element).tooltip({ title: attributes.errorMessage });
+        } else {
+          $(element).removeClass('alert alert-warning');
+          $(element).tooltip('destroy');
         }
       });
     }
@@ -7453,21 +7654,6 @@ angular.module('dellUiComponents').directive('table', function () {
     }
   };
 });
-angular.module('dellUiComponents').directive('contentTeaserContainer', function () {
-  return {
-    restrict: 'C',
-    link: function ($scope, $element, attrs) {
-      $element.find('.content-toggle').on('click', function (event) {
-        console.log(event);
-        var teasers = $('.content-teaser-container');
-        _.each(teasers, function (t) {
-          console.log($(t).height());
-          $('.content-teaser-container').matchHeight();
-        });
-      });
-    }
-  };
-});
 /**
  * Created by Clint_Batte on 5/7/2015.
  */
@@ -7548,3 +7734,29 @@ angular.module('dellUiComponents').directive('ratingsAndReviews', [
     };
   }
 ]);
+angular.module('dellUiComponents').directive('equalizeHeight', [
+  '$timeout',
+  '$rootScope',
+  function ($timeout, $rootScope) {
+    // Runs during compile
+    return {
+      restrict: 'A',
+      link: function ($scope, $element, $attrs, controller) {
+        var selector = $attrs.equalizeHeight;
+        if (selector) {
+          $timeout(function () {
+            $(selector).matchHeight();
+          }, 500);
+        } else {
+          console.error('equalize-height usage error. Must include css selector to identify objects to equalize. Example: cequalize-height=".classname"');
+        }
+      }
+    };
+  }
+]);
+Eve.scope('.contact-drawer', function () {
+  this.listen('.contact-drawer-cta', 'click', function (e) {
+    var contactDrawer = $(e.currentTarget).parents('.contact-drawer');
+    contactDrawer.toggleClass('open');
+  });
+});

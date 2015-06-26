@@ -33,6 +33,7 @@ When you are done downloading all the dependencies and project files the only re
 angular.module('myModule', ['dellUiComponents']);
 ```
 
+NOTE: dellUiComponents Angular module is experimental at the moment.
 
 ### Minimal example
 
@@ -42,9 +43,9 @@ angular.module('myModule', ['dellUiComponents']);
 <head>
 <script src="path-to-angular/angular.min.js"></script>
 <script src="path-to-jquery/jquery.min.js"></script>
-<script src="path-to-dell-ui-components/dist/dell-ui-components/dell-ui-components.min.js"></script>
-<link src="path-to-dell-ui-components/dist/dell-ui-bootstrap/dell-ui-bootstrap.min.css" type="text/css" rel="stylesheet"/>
-<link src="path-to-dell-ui-components/dist/dell-ui-components/dell-ui-components.min.css" type="text/css" rel="stylesheet"/>
+<script src="path-to-dell-ui-components/dell-ui-components/dell-ui-components.min.js"></script>
+<link src="path-to-dell-ui-components/dell-ui-bootstrap/dell-ui-bootstrap.min.css" type="text/css" rel="stylesheet"/>
+<link src="path-to-dell-ui-components/dell-ui-components/dell-ui-components.min.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
 <h1>Hello world!</h1>
@@ -54,12 +55,13 @@ angular.module('myModule', ['dellUiComponents']);
 ```
 
 ```myAppjs
-angular.module('myModule', ['dellUiComponents']);
+angular.module('myApp', ['dellUiComponents']);
 ```
 
 
 
-##Dell UI Components Bower Package development environment
+##Dell UI Components development environment
+NOTE: Not included in Bower package, must download/fork from github master branch.
 
 >Node.js environment for developing Dell's UI Components
 
@@ -180,6 +182,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 #1.0.4 - Fixed issues accordions not displaying in wells correctly. Fixed tool-tip transparent background. Fix offsets examples.
 #1.0.5 - Fixed carousels slider dots disappearing in DesLib, added Content-teasers, additional colors, banners, grid example patterns. Moved progress bar and pagination demo.js to non-demo.js files. added code patch for forms.less
 #1.0.6 - Updated Value Props so the content aligns left in mobile XS view, updated tool-tip hover and removed underline onconnect with dell component, made fix on show/hide toggle in XS view, updated grouped form to view in DesLib. Restructured package to remove development files from distribution.
-
+#1.0.7 Changes to tabs and cleaned up README instructions 
 ...
 ```
