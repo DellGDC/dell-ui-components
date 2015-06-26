@@ -1,0 +1,56 @@
+/*
+ * Pagination component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+
+.pagination-input {
+    width: 30px;
+    text-align: center;
+    height: 35px;
+    padding: 5px;
+}
+
+.dashed-text-rule {
+    overflow: hidden;
+    text-align: center;
+    margin-top: 5px;
+    input[type=text] {
+        border: none;
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+}
+
+.dashed-text-rule:before,
+.dashed-text-rule:after {
+    content: "";
+    display: inline-block;
+    position: relative;
+    border-top: 1px dashed @dell-gray;
+    vertical-align: middle;
+    width: 50%;
+}
+.dashed-text-rule:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+.dashed-text-rule:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.tap-to-load {
+    height: 34px;
+    color: #007db8;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    background: #eee;
+
+    &.disabled{
+        color: @dell-gray;
+        border: 1px solid @dell-gray-light-stroke;
+    }
+}

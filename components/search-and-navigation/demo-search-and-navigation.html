@@ -1,0 +1,63 @@
+<section ng-controller="searchAndNavigationCtrl" id="search-and-navigation-html-example">
+
+    <div class="container">
+        <h2>Search-And-Filtering Demo</h2>
+        <div>
+            <!-- example html for Search-And-Filtering component -->
+
+            <!-- CheckBox Filter Example -->
+			<div data-ng-app data-ng-controller="myCheckboxCtrl">
+				<div class="row"><h2>Filtering</h2></div>
+				<div class="row"><h3>Filter by checkbox</h3></div>
+			    <div class="row" id="filter-checkbox">
+			    	<div class="pull-left col-sm-3 col-xs-12">
+			    		<p>Narrow your search by screen size</p>
+					    <label class="pull-left" ng-repeat="c in classes">
+					        <input type="checkbox"  ng-model="selected[c]" />
+					        <span>{{c}}</span>
+					    </label>
+					</div>
+					<div class="col-sm-9 col-xs-12">
+					    <div class="pull-left searchCard text-center well-gray" ng-repeat="card in cards | filter:showCards">
+					        <h3>{{card.name}}</h3>
+					        <em>{{card.size}}</em><br>
+					        <em>{{card.price}}</em>
+					    </div>
+				    </div>
+			    </div>
+			</div>
+			<!-- CheckBox Filter Example -->
+			<hr>
+
+			<!-- Drop Down Filter Example -->
+			<div data-ng-app data-ng-controller="myDDCtrl">
+				<div class="row"><h3>Filter by dropdown</h3></div>
+				<div class="row" id="filter-drop">
+			    	<div class="pull-left col-sm-3 col-xs-12">
+			    		<p class="text-left top-padding-5">Screen size:</p>
+					    <select ng-model="screenSize"
+			            	ng-options="item.size for item in filterOptions.sizes">
+			            	<option value="" selected>-- Select your Size --</option>
+			    		</select>
+			    		<div>
+				    		<p class="text-left top-padding-5">Price:</p>
+						    <select ng-model="priceRange"
+				            	ng-options="item.pricerange for item in filterOptions.prices">
+				            	<option value="" selected>-- Select your Range --</option>
+				    		</select>
+				    	</div>
+					</div>
+					<div class="col-sm-9 col-xs-12">
+					    <div class="pull-left searchCard text-center well-gray" ng-repeat="item in data | filter:screenSize | filter:priceRange">
+					        <h3>{{item.name}}</h3>
+					        <em>{{item.size}}</em><br>
+					        <em>{{item.pricerange}}</em>
+					    </div>
+				    </div>
+			    </div>
+			</div>
+			<!-- Drop Down Filter Example -->
+        </div>
+    </div>
+
+</section>

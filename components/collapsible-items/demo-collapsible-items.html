@@ -1,0 +1,406 @@
+<section ng-controller="collapsibleItemsCtrl" id="collapsible-items-html-example">
+
+    <div class="container">
+        <h2>Collapsible-Items Demo</h2>
+
+            <div class="bottom-offset-40">
+                    <h3 class="bottom-offset-30">Standard accordion</h3>
+                <!-- ------------- standard accordion ------------------- -->
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#One">
+                                        Headline title goes here
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="One" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <div class="top-offset-10">
+                                        <div class="bottom-offset-5">
+                                            <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-bags">
+                                                <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                                <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                            </a>
+                                        </div>
+                                        <div id="show-hide-bags" class="collapse">
+                                            Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#Two" class="collapsed">
+                                        Headline title goes here
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="Two" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <div class="top-offset-10">
+                                        <div class="bottom-offset-5">
+                                            <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-tax">
+                                                <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                                <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                            </a>
+                                        </div>
+                                        <div id="show-hide-tax" class="collapse">
+                                            Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#Three" class="collapsed">
+                                        Headline title goes here
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="Three" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <div class="top-offset-10">
+                                        <div class="bottom-offset-5">
+                                            <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-solutions">
+                                                <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                                <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                            </a>
+                                        </div>
+                                        <div id="show-hide-solutions" class="collapse">
+                                            Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!-- ------------- /standard accordion ------------------- -->
+
+            <div ng-if="!guidanceOff" class="alert alert-info alert-dismissable bottom-offset-40">
+                <h4>To default a panel open:</h4>
+                <p>You have to do two things:</p>
+                <ul>
+                    <li>Remove the class <code>collapsed</code> from the trigger.</li>
+                    <li>Add the class <code>in</code> to the target panel-collapse.</li>
+                </ul>
+            </div>
+
+            <div class="bottom-offset-60">
+                <h3 class="bottom-offset-30">Accordion with independent panels</h3>
+
+                <!-- ----------- accordion with independent panels -------------- -->
+                <div id="accordion-independent-panels">
+                    <div class="panel-group" id="accordion-independant">
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-independant" href="#bags-1">
+                                    Headline title goes here
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="bags-1" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <div class="top-offset-10">
+                                    <div class="bottom-offset-5">
+                                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-bags-1">
+                                            <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                            <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                        </a>
+                                    </div>
+                                    <div id="show-hide-bags-1" class="collapse">
+                                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-independant" href="#tax-1" class="collapsed">
+                                    Headline title goes here
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="tax-1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <div class="top-offset-10">
+                                    <div class="bottom-offset-5">
+                                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-tax-1">
+                                            <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                            <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                        </a>
+                                    </div>
+                                    <div id="show-hide-tax-1" class="collapse">
+                                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-independant" href="#home-1" class="collapsed">
+                                    Headline title goes here
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="home-1" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <div class="top-offset-10">
+                                    <div class="bottom-offset-5">
+                                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-solutions-1">
+                                            <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                            <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                        </a>
+                                    </div>
+                                    <div id="show-hide-solutions-1" class="collapse">
+                                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!------------- /accordion with independent panels ---------------->
+
+
+        <div class="bottom-offset-60">
+            <h3 class="bottom-offset-30">Accordion with independent panels in a well</h3>
+            <!-- ----------- accordion with independent panels in a well -------------- -->
+            <div class="well well-white text-gray-medium well-white-stroke">
+                <div id="accordion-independent-panels-well">
+                    <div class="panel-group" id="accordion-independent-1A">
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-independent-1A" href="#bags-1A">
+                                    Headline title goes here
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="bags-1A" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <div class="top-offset-10">
+                                    <div class="bottom-offset-5">
+                                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-bags-1A">
+                                            <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                            <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                        </a>
+                                    </div>
+                                    <div id="show-hide-bags-1A" class="collapse">
+                                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-independant" href="#tax-1A" class="collapsed">
+                                    Headline title goes here
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="tax-1A" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <div class="top-offset-10">
+                                    <div class="bottom-offset-5">
+                                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-tax-1A">
+                                            <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                            <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                        </a>
+                                    </div>
+                                    <div id="show-hide-tax-1A" class="collapse">
+                                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-independant" href="#home-1A" class="collapsed">
+                                    Headline title goes here
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="home-1A" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <div class="top-offset-10">
+                                    <div class="bottom-offset-5">
+                                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-solutions-1A">
+                                            <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                            <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                        </a>
+                                    </div>
+                                    <div id="show-hide-solutions-1A" class="collapse">
+                                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!------------- /accordion with independent panels in a well ---------------->
+
+
+
+            <div class="bottom-offset-60">
+                <h3 class="bottom-offset-20">Accordion with show/hide links</h3>
+                <!-- ----------- accordion with show/hide links -------------- -->
+
+                <div class="show-hide-links">
+                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#accordion-independent-with-show-all .panel-collapse:not(.in)" aria-expanded="false">
+                        Show all
+                    </a> |
+                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#accordion-independent-with-show-all .panel-collapse.in" aria-expanded="false">
+                        Hide all
+                    </a>
+                </div>
+                <div class="panel-group" id="accordion-independent-with-show-all">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion-independent-with-show-all" href="#bags-2" class="collapsed">
+                                Headline title goes here
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="bags-2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            <div class="top-offset-10">
+                                <div class="bottom-offset-5">
+                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-bags-a">
+                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                    </a>
+                                </div>
+                                <div id="show-hide-bags-a" class="collapse">
+                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion-independent-with-show-all" href="#tax-2" class="collapsed">
+                                Headline title goes here
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="tax-2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            <div class="top-offset-10">
+                                <div class="bottom-offset-5">
+                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-tax-a">
+                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                    </a>
+                                </div>
+                                <div id="show-hide-tax-a" class="collapse">
+                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion-independent-with-show-all" href="#home-2" class="collapsed">
+                                Headline title goes here
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="home-2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            <div class="top-offset-10">
+                                <div class="bottom-offset-5">
+                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#show-hide-solutions-a">
+                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show more</span>
+                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Show less</span>
+                                    </a>
+                                </div>
+                                <div id="show-hide-solutions-a" class="collapse">
+                                    Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ----------- accordion with show/hide links -------------- -->
+
+
+
+
+            <h3 class="bottom-offset-20">From a link</h3>
+            <!-------------  show/hide ---------------->
+            <div class="bottom-offset-40">
+                <div class="bottom-offset-10">
+                    <p>
+                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-example-area-5">
+                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show stuff</span>
+                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide stuff</span>
+                        </a>
+                    </p>
+                    <p id="collapsible-example-area-5" class="collapse">
+                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.
+                    </p>
+                </div>
+            </div>
+        <!------------- / show/hide ---------------->
+
+        <div class="bottom-offset-60">
+            <h3 class="bottom-offset-20">Social links show/hide</h3>
+            <!------------- Social links show/hide  ---------------->
+            <div class="inline-image-content-links"><!--parent show/hide wrapper for links-->
+                <h4 class="bottom-offset-5">Dell on Dell</h4>
+                <ul class="list-inline image-content-links list-group content-card icon-tooltip" ng-class="{'view-all': viewAll['parent-image-link-1']}">
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Facebook" class="icon-social-facebook"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Twitter" class="icon-social-twitter"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on LinkedIn" class="icon-social-linkedin"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Google+" class="icon-social-google_plus"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on SlideShare" class="icon-social-slideshare"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on YouTube" class="icon-social-youtube"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Flickr" class="icon-social-flickr"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Storify" class="icon-social-storify"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Pinterest" class="icon-social-pinterest"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Xing" class="icon-social-xing"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Renren" class="icon-social-renren"></a></li>
+                    <li><a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" data-original-title="Dell on Weibo" class="icon-social-weibo"></a></li>
+                </ul>
+                <div class="content-toggle" ng-hide="viewAll['parent-image-link-1']">
+                    <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-image-link-1'] = true">View All</a>
+                </div>
+            </div><!--/parent show/hide wrapper for links-->
+            <!------------- /Social links show/hide  ---------------->
+        </div>
+    </div>
+
+
+</section>

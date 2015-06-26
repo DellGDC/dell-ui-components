@@ -1,0 +1,78 @@
+/*
+*banner component .LESS
+*------------------------------------------------------------------------------------------
+*/
+
+.banner {
+    position: relative;
+    .img-responsive-constrained {
+        max-height: 600px;
+        .img-responsive {
+        display: block;
+        width: 100%;
+        }
+    }
+}
+
+
+.container-fluid {
+    .banner {
+        margin-left: -15px;
+        margin-right: -15px;
+        max-height: 600px !important;
+        overflow: hidden;
+    }
+}
+
+.banner-inside {
+    left: 0;
+    top: 20px;
+    width: 45%;
+    //max-width: 420px;
+    margin-left: 20px;
+    padding: 5px 20px 20px 20px;
+    vertical-align: middle;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    background: @white;
+    background: rgba(600,600,600,.92);
+    color: @dell-gray-dark;
+    -ms-text-shadow: none;
+    text-shadow: none;
+    right: auto;
+    bottom: auto;
+    position: absolute;
+}
+
+
+@media (min-width: @screen-xs-max) and (max-width: @screen-sm-max) {
+    .banner-inside {
+        padding: 20px;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .banner-inside {
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: none;
+        margin-left: 0;
+        padding: 10px 20px 10px 20px;
+        vertical-align: middle;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 5px;
+        border-radius: 0;
+        background: #ffffff;
+        background: @dell-gray-light;
+        color: #444444;
+        -ms-text-shadow: none;
+        text-shadow: none;
+        right: auto;
+        bottom: auto;
+        position: relative;
+    }
+}

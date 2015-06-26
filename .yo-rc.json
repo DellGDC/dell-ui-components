@@ -1,0 +1,29 @@
+{
+  "generator-cg-angular": {
+    "uirouter": true,
+    "partialDirectory": "components/",
+    "modalDirectory": "demo-assets/modals",
+    "directiveDirectory": "components/",
+    "filterDirectory": "demo-assets/filters",
+    "serviceDirectory": "demo-assets/services",
+    "inject": {
+      "js": {
+        "file": "index.html",
+        "marker": "<!-- Add New Component JS Above -->",
+        "template": "<script src=\"<%= filename %>\" data-concat=\"demoJs\"></script>"
+      },
+      "less": {
+        "relativeToModule": true,
+        "file": "app.less",
+        "marker": "/* Add Component LESS Above */",
+        "template": "@import \"<%= filename %>\";"
+      }
+    },
+    "modules": [
+      {
+        "name": "dellUiComponents",
+        "file": "components\\dell-ui-components.js"
+      }
+    ]
+  }
+}
