@@ -1,3 +1,9 @@
+/*!
+ * Dell-UI-Components v1.0.7 (bower dell-ui-components)
+ * Dell's themed version of Twitter Bootstrap version 3.3.5
+ * Copyright 2015 Dell, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
 /*
  * Basic theme colors are handled in dell-ui-bootstrap
  * The changes below extend basic Boostrap elements to create Dell specific components.
@@ -4491,6 +4497,67 @@ caption {
     bottom: auto;
     position: relative;
   }
+}
+/*
+ * Contact-Drawer component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+.contact-drawer {
+  z-index: 9000;
+  position: fixed;
+  top: 150px;
+  right: 0px;
+  width: 245px;
+  -webkit-transition: all 300ms cubic-bezier(1, 0, 0, 1);
+  -moz-transition: all 300ms cubic-bezier(1, 0, 0, 1);
+  -o-transition: all 300ms cubic-bezier(1, 0, 0, 1);
+  transition: all 300ms cubic-bezier(1, 0, 0, 1);
+  /* easeInOutExpo */
+}
+.contact-drawer.open {
+  right: 0px !important;
+}
+.contact-drawer .contact-drawer-cta {
+  max-width: 150px;
+  height: 33px;
+  position: absolute;
+  left: -69px;
+  top: 36px;
+  cursor: pointer;
+  background: #007db8;
+  color: #ffffff;
+  -webkit-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  padding: 5px 10px;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+}
+.contact-drawer .contact-drawer-panel {
+  border: 1px solid #f9f9f9;
+  border-top: 1px solid #eeeeee;
+  padding: 20px 20px 0;
+  background: #ffffff;
+  display: inline-block;
+  width: 245px;
+  -webkit-box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 10px -2px rgba(0, 0, 0, 0.2);
+}
+.contact-drawer .contact-drawer-panel .icon {
+  float: left;
+  min-height: 80px;
+  margin-right: 10px;
+  color: #007db8;
+}
+.contact-drawer .contact-drawer-panel:before {
+  content: " ";
+  width: 2px;
+  background: #007db8;
+  height: 262px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
 /* Add Component LESS Above */
 .tooltip {
