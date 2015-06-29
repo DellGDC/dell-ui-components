@@ -1,11 +1,6 @@
 
-angular.module('demo').controller('tablesCtrl',function($scope,$rootScope,uiGridConstants) {
+angular.module('demo').controller('tablesCtrl',function($scope,$rootScope) {
 	//this is for functionality related to demo code
-
-$("thead tr th").click(function(){
-    console.log($(this).html());
-});
-
 
 });
 

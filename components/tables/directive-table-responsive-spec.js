@@ -1,4 +1,4 @@
-describe('responsiveTable', function() {
+describe('tableResponsive', function() {
 
   beforeEach(module('dellUiComponents'));
 
@@ -9,7 +9,7 @@ describe('responsiveTable', function() {
     compile = $compile;
   }));
 
-  it('Testing responsive-table directive ...', function() {
+  it('Testing table-responsive directive ...', function() {
 
     /* 
     To test your directive, you need to create some html that would use your directive,
