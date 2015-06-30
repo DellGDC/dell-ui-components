@@ -36,4 +36,24 @@ angular.module('dellUiComponents')
                 });
             }
         };
+    })
+
+
+    .directive('loadMore', function() {
+        return {
+            restrict: 'C',
+            link: function($scope, $element, attrs ) {
+                var size_li = $element("li").size();
+                var x = 3;
+                $element('li:lt('+x+')').show();
+                $element('#loadMore').click(function () {
+                    x= (x+5 <= size_li) ? x+5 : size_li;
+                    $element('li:lt('+x+')').show();
+                });
+                $('#showLess').click(function () {
+                    x=(x-5<0) ? 3 : x-5;
+                    $element('li').not(':lt('+x+')').hide();
+                });
+            }
+        };
     });
