@@ -52,6 +52,23 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         event.preventDefault();
                     });
                     break;
+                case "load-more":
+                    var selector = attributes.target,
+                        size_li = $(selector + " li").size(),
+                        x=3;
+                    if (!selector) {
+                        console.error('You must use data-target when using data-toggle="load-more". ');
+                    }
+
+                    $(selector + ' li:lt('+x+')').show();
+                    $(element).click(function () {
+                        x= (x+5 <= size_li) ? x+5 : size_li;
+                        $(selector + ' li:lt('+x+')').fadeIn(1500);
+                        if ($(selector  + " li:visible").size() === size_li) {
+                            $(element).hide();
+                        }
+                    });
+                    break;
             }
         }
     };
