@@ -3106,6 +3106,9 @@ a {
   color: #aaaaaa;
   border: 1px solid #e4e4e4;
 }
+.load-more li {
+  display: none;
+}
 /*
  * Popovers component theme overrides
  *------------------------------------------------------------------------------------------

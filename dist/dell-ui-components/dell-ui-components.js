@@ -7000,6 +7000,20 @@ angular.module('dellUiComponents').directive('toggle', function () {
           event.preventDefault();
         });
         break;
+      case 'load-more':
+        var selector = attributes.target, size_li = $(selector + ' li').size(), x = 3;
+        if (!selector) {
+          console.error('You must use data-target when using data-toggle="load-more". ');
+        }
+        $(selector + ' li:lt(' + x + ')').show();
+        $(element).click(function () {
+          x = x + 5 <= size_li ? x + 5 : size_li;
+          $(selector + ' li:lt(' + x + ')').fadeIn(1500);
+          if ($(selector + ' li:visible').size() === size_li) {
+            $(element).hide();
+          }
+        });
+        break;
       }
     }
   };
@@ -7754,9 +7768,19 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     };
   }
 ]);
-Eve.scope('.contact-drawer', function () {
-  this.listen('.contact-drawer-cta', 'click', function (e) {
-    var contactDrawer = $(e.currentTarget).parents('.contact-drawer');
-    contactDrawer.toggleClass('open');
+/* globals: jQuery, Eve */
+/* ======================================================================================
+ * Dell-UI-Components: contact-drawer.js
+ * http://www.delldesignlibrary.com/components/contact-drawer/
+ * ======================================================================================
+ * Copyright 2015 Dell, Inc.
+ * Licensed under MIT (https://github.com/DellGDC/dell-ui-components/blob/master/LICENSE)
+ * ======================================================================================
+ */
+(function ($) {
+  Eve.scope('.contact-drawer', function () {
+    this.listen('.contact-drawer-cta', 'click', function (e) {
+      $(e.currentTarget).parent().toggleClass('open');
+    });
   });
-});
+}(jQuery));
