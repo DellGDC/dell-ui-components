@@ -6,51 +6,54 @@
         <h3>
             Data Tables - Simple
         </h3>
-        <div class="bottom-offset-20">
-            <div>
+        <div class="bottom-offset-40">
+            <!--Data Tables - Simple-->
+            <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Column 1</th>
-                        <th>Column 2</th>
-                        <th>Column 3</th>
-                        <th>Column 4</th>
-                        <th>Column 5</th>
-                        <th>Column 6</th>
-                        <th>Column 7</th>
+                        <th>Date</th>
+                        <th>Order</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Delivery</th>
+                        <th>Tracking</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>value 1:2</td>
-                        <td><a href="javascript:;">value 1:3</a></td>
-                        <td>value 1:4</td>
-                        <td>value 1:5</td>
-                        <td>value 1:6</td>
-                        <td>value 1:7</td>
+                        <th scope="row">03/19/15</th>
+                        <td>#42568</td>
+                        <td><a href="javascript:;">Optiplex 9020</a></td>
+                        <td>OptiPlex 9020-Dell’s premium business-class desktop.</td>
+                        <td>In process</td>
+                        <td>03/22/15</td>
+                        <td>TBD</td>
                     </tr>
                     <tr>
-                        <th scope="row">2</th>
-                        <td>value 2:2</td>
-                        <td>value 2:3</td>
-                        <td><a href="javascript:;">value 2:4</a></td>
-                        <td>value 2:5</td>
-                        <td>value 2:6</td>
-                        <td>value 2:7</td>
+                        <th scope="row">03/22/15</th>
+                        <td>#77475</td>
+                        <td><a href="javascript:;">OptiPlex 7020</a></td>
+                        <td>Mainstream performance, and advanced security and manageability.</td>
+                        <td>Shipping</td>
+                        <td>04/05/15</td>
+                        <td><a href="javascript:;">#de467ft53s</a></td>
                     </tr>
                     <tr>
-                        <th scope="row">3</th>
-                        <td>value 3:2</td>
-                        <td>value 3:3</td>
-                        <td>value 3:4</td>
-                        <td>value 3:5</td>
-                        <td>value 3:6</td>
-                        <td>value 3:7</td>
+                        <th scope="row">03/24/15</th>
+                        <td>#44356</td>
+                        <td><a href="javascript:;">OptiPlex XE2</a></td>
+                        <td>Long-term computing solution and highly durable OptiPlex XE2</td>
+                        <td>Out for Delivery</td>
+                        <td>04/08/15</td>
+                        <td><a href="javascript:;">#0U812-90210s</a></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <!--/Data Tables - Simple-->
+
         </div>
 
 
@@ -58,56 +61,118 @@
             Data Tables - Simple w/ optional zebra striping
         </h3>
 
-        <div class="bottom-offset-20">
-
-            <div>
+        <div class="bottom-offset-40">
+            <!--Data Tables - Simple w/ optional zebra striping-->
+            <div class="table-responsive">
                 <table class="table table-hover table-striped">
                     <thead>
                     <tr>
+                        <th>&nbsp;</th>
                         <th>Column 1</th>
                         <th>Column 2</th>
                         <th>Column 3</th>
                         <th>Column 4</th>
                         <th>Column 5</th>
                         <th>Column 6</th>
-                        <th>Column 7</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>value 1:2</td>
-                        <td><a href="javascript:;">value 1:3</a></td>
+                        <td>value 1:1</td>
+                        <td><a href="javascript:;">value 1:2</a></td>
+                        <td>value 1:3</td>
                         <td>value 1:4</td>
                         <td>value 1:5</td>
                         <td>value 1:6</td>
-                        <td>value 1:7</td>
                     </tr>
                     <tr>
                         <th scope="row">2</th>
+                        <td>value 2:1</td>
                         <td>value 2:2</td>
-                        <td>value 2:3</td>
-                        <td><a href="javascript:;">value 2:4</a></td>
+                        <td><a href="javascript:;">value 2:3</a></td>
+                        <td>value 2:4</td>
                         <td>value 2:5</td>
                         <td>value 2:6</td>
-                        <td>value 2:7</td>
                     </tr>
                     <tr>
                         <th scope="row">3</th>
+                        <td>value 3:1</td>
                         <td>value 3:2</td>
                         <td>value 3:3</td>
                         <td>value 3:4</td>
                         <td>value 3:5</td>
                         <td>value 3:6</td>
-                        <td>value 3:7</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <!--/Data Tables - Simple w/ optional zebra striping-->
         </div>
 
 
+
+
+        <h3>
+            Data Tables - Responsive Simple Table
+        </h3>
+
+        <div class="bottom-offset-40">
+            <!--Data Tables - Responsive Simple Table-->
+            <div id="responsive-simple-table">
+                <table class="table table-hover table-striped table-responsive">
+                    <thead data-rtContainerBreakPoint="1000">
+                        <tr>
+                            <th>Date</th>
+                            <th>Order</th>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Delivery</th>
+                            <th>Tracking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row"><strong>03/19/15</strong></td>
+                            <td>#42568</td>
+                            <td><a href="javascript:;">Optiplex 9020</a></td>
+                            <td>OptiPlex 9020-Dell’s premium business-class desktop.</td>
+                            <td>In process</td>
+                            <td>03/22/15</td>
+                            <td>TBD</td>
+                        </tr>
+                        <tr>
+                            <td scope="row"><strong>03/22/15</strong></td>
+                            <td>#77475</td>
+                            <td><a href="javascript:;">OptiPlex 7020</a></td>
+                            <td>Mainstream performance, and advanced security and manageability.</td>
+                            <td>Shipping</td>
+                            <td>04/05/15</td>
+                            <td><a href="javascript:;">#de467ft53s</a></td>
+                        </tr>
+                        <tr>
+                            <td scope="row"><strong>03/24/15</strong></td>
+                            <td>#44356</td>
+                            <td><a href="javascript:;">OptiPlex XE2</a></td>
+                            <td>Long-term computing solution and highly durable OptiPlex XE2</td>
+                            <td>Out for Delivery</td>
+                            <td>04/08/15</td>
+                            <td><a href="javascript:;">#0U812-90210s</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--/Data Tables - Responsive Simple Table-->
         </div>
+
+
+
+
+
+
+
+
     </div>
 
 </section>

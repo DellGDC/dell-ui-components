@@ -44622,6 +44622,118 @@ if (!console) {
   }($));
   return Slider;
 }));
+<<<<<<< HEAD
+=======
+/* jQuery rt Responsive Tables - v1.0.2 - 2014-07-07
+* https://github.com/stazna01/jQuery-rt-Responsive-Tables
+*
+* This plugin is built heavily upon the work by Chris Coyier
+* found at http://css-tricks.com/responsive-data-tables/
+*
+* Copyright (c) 2014 Nathan Stazewski; Licensed MIT */
+(function ($) {
+  $.fn.rtResponsiveTables = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({ containerBreakPoint: 0 }, options);
+    rtStartingOuterWidth = $(window).width();
+    //used later to detect orientation change across all mobile browsers (other methods don't always work on Android)
+    is_iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+    //needed due to the fact that iOS scrolling causes false resizes
+    rt_responsive_table_object = this;
+    function isEmpty(el) {
+      return !$.trim(el.html());
+    }
+    function rt_write_css(rt_class_identifier) {
+      rt_css_code = '<style type="text/css">';
+      $(rt_class_identifier).find('th').each(function (index, element) {
+        rt_css_code += rt_class_identifier + '.rt-vertical-table td:nth-of-type(' + (index + 1) + '):before { content: "' + $(this).text() + '"; }';
+      });
+      rt_css_code += '</style>';
+      $(rt_css_code).appendTo('head');
+    }
+    function determine_table_width(rt_table_object) {
+      //outerWidth doesn't work properly in Safari if the table is overflowing its container
+      rt_table_width = 0;
+      if (rt_table_object.hasClass('rt-vertical-table')) {
+        rt_table_width = rt_table_object.outerWidth();
+      } else {
+        rt_table_object.find('th').each(function (index, element) {
+          rt_table_width += $(this).outerWidth();
+        });
+        rt_table_width = rt_table_width;  //this seems to fix a rounding bug in firefox
+      }
+      return rt_table_width;
+    }
+    function fix_responsive_tables() {
+      if ($('table.rt-responsive-table').length) {
+        $('table.rt-responsive-table').each(function (index) {
+          rt_containers_width = $(this).parent().width();
+          rt_current_width = determine_table_width($(this)) - 1;
+          //this "-1" seems to fix an issue in firefox without harming any other browsers
+          rt_max_width = $(this).attr('data-rt-max-width');
+          rt_has_class_rt_vertical_table = $(this).hasClass('rt-vertical-table');
+          if ($(this).attr('data-rtContainerBreakPoint')) {
+            rt_user_defined_container_breakpoint = $(this).attr('data-rtContainerBreakPoint');
+          } else {
+            rt_user_defined_container_breakpoint = settings.containerBreakPoint;
+          }
+          if (rt_containers_width < rt_current_width || rt_containers_width <= rt_user_defined_container_breakpoint) {
+            //the parent element is less than the current width of the table or the parent element is less than or equal to a user supplied breakpoint
+            $(this).addClass('rt-vertical-table');
+            //switch to vertical orientation (or at least keep it that orientation)
+            if (rt_max_width > rt_current_width && rt_max_width > rt_user_defined_container_breakpoint) {
+              //the max width was set too high and needs to be adjusted to this lower number
+              $(this).attr('data-rt-max-width', rt_current_width);
+            } else if (rt_max_width > rt_current_width && rt_max_width <= rt_user_defined_container_breakpoint) {
+              //same as above but in this case the breakpoint is larger or equal so it needs to be set as the max width
+              $(this).attr('data-rt-max-width', rt_user_defined_container_breakpoint);
+            }
+          } else if (rt_containers_width > rt_max_width && rt_containers_width > rt_user_defined_container_breakpoint) {
+            //the parent element is bigger than the max width and user supplied breakpoint
+            $(this).removeClass('rt-vertical-table');
+            //switch to horizontal orientation (or at least keep it that orientation)
+            if (rt_max_width > rt_current_width && !rt_has_class_rt_vertical_table && (rt_max_width > rt_user_defined_container_breakpoint && !rt_has_class_rt_vertical_table)) {
+              //max width is greater than the table's current width and it's in horizontal mode currently...so the max width was set to low and needs to be adjusted to a higher number
+              $(this).attr('data-rt-max-width', rt_current_width);
+            } else if (rt_max_width > rt_current_width && !rt_has_class_rt_vertical_table && (rt_max_width <= rt_user_defined_container_breakpoint && !rt_has_class_rt_vertical_table)) {
+              //same as above but in this case the user supplied breakpoint is larger or equal so it needs to be set as the max width
+              $(this).attr('data-rt-max-width', rt_user_defined_container_breakpoint);
+            }
+          } else {
+          }
+        });
+      }
+    }
+    rt_responsive_table_object.each(function (index, element) {
+      $(this).addClass('rt-responsive-table-' + index).addClass('rt-responsive-table');
+      if (index == rt_responsive_table_object.length - 1) {
+        $(window).resize(function () {
+          if (!is_iOS || is_iOS && rtStartingOuterWidth !== $(window).width()) {
+            rtStartingOuterWidth = $(window).width();
+            //MUST update the starting width so future orientation changes will be noticed
+            fix_responsive_tables();
+          }
+        });
+        rt_responsive_table_count = $('table.rt-responsive-table').length;
+        $('table.rt-responsive-table').each(function (index2, element2) {
+          rt_write_css('table.rt-responsive-table-' + index2);
+          $('table.rt-responsive-table-' + index2).attr('data-rt-max-width', determine_table_width($(this)));
+          $(this).find('td,th').each(function (index3, element3) {
+            //empty td tags made them disappear
+            if (isEmpty($(this))) {
+              $(this).html('&#160;');
+            }
+          });
+          if (rt_responsive_table_count - 1 == index2) {
+            fix_responsive_tables();
+          }
+        });
+      }
+    });
+    return this;
+  };
+}(jQuery));
+>>>>>>> feature/DUC-101-build-table-preferences-for-simple
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 });
@@ -45443,6 +45555,7 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     };
   }
 ]);
+<<<<<<< HEAD
 /* globals: jQuery, Eve */
 /* ======================================================================================
  * Dell-UI-Components: contact-drawer.js
@@ -45459,6 +45572,33 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     });
   });
 }(jQuery));
+=======
+angular.module('dellUiComponents').directive('responsiveTable', function () {
+  // Runs during compile
+  return {
+    restrict: 'A',
+    link: function ($scope, $element, $attrs, controller) {
+      var selector = $attrs.responsiveTable;
+      if (selector) {
+        $timeout(function () {
+          $(selector).rtResponsiveTables();
+        }, 300);
+      } else {
+        console.error('responsive-table usage error. Must include css selector to identify objects to equalize. Example: responsive-table=".classname"');
+      }
+    }
+  };
+});
+//$("table").rtResponsiveTables({
+//    containerBreakPoint: 300
+//});
+Eve.scope('.contact-drawer', function () {
+  this.listen('.contact-drawer-cta', 'click', function (e) {
+    var contactDrawer = $(e.currentTarget).parents('.contact-drawer');
+    contactDrawer.toggleClass('open');
+  });
+});
+>>>>>>> feature/DUC-101-build-table-preferences-for-simple
 /* globals s */
 angular.module('demo', [
   'ui.utils',
@@ -46505,7 +46645,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/standard-buttons/demo-play-standard-buttons.html', '<section ng-controller=standardButtonsPLayDemoCtrl id=standard-buttons-play-demo><div class=container><h2>Standard-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/standard-buttons/demo-standard-buttons.html', '<section ng-controller=standardButtonsCtrl id=standard-buttons-html-example><div class=container><h2 class=bottom-offset-20>Standard-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase</h4><a class="btn btn-primary" href=javascript:;>Primary</a></div><div class=bottom-offset-30><h4>Primary Non-Purchase disabled</h4><a class="btn btn-primary disabled" href=javascript:;>Primary</a></div><hr><div class=bottom-offset-30><h4>Primary Purchase</h4><a class="btn btn-success" href=javascript:;>Purchase</a></div><div class=bottom-offset-30><h4>Primary Purchase disabled</h4><a class="btn btn-success disabled" href=javascript:;>Purchase</a></div><hr><div class=bottom-offset-30><h4>Secondary or General Use</h4><a class="btn btn-default" href=javascript:;>General Use</a></div><div class=bottom-offset-30><h4>Secondary or General Use disabled</h4><a class="btn btn-default disabled" href=javascript:;>General Use</a></div><hr><div class=bottom-offset-30><h4>Primary link</h4><a class="btn btn-link" href=javascript:;>Link</a></div><div class=bottom-offset-30><h4>Primary link disabled</h4><a class="btn btn-link disabled" href=javascript:;>Link</a></div></div></section>');
     $templateCache.put('components/tables/demo-play-tables.html', '<section ng-controller=tablesPLayDemoCtrl id=tables-play-demo><div class=container><h2>Tables Builder</h2><div></div></div></section>');
-    $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><h3>Data Tables - Simple</h3><div class=bottom-offset-20><div><table class="table table-hover"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div><h3>Data Tables - Simple w/ optional zebra striping</h3><div class=bottom-offset-20><div><table class="table table-hover table-striped"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div></div></section>');
+    $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><h3>Data Tables - Simple</h3><div class=bottom-offset-20><div class=table-responsive><table class="table table-hover"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div><h3>Data Tables - Simple w/ optional zebra striping</h3><div class=bottom-offset-20><div class=table-responsive><table class="table table-hover table-striped"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div><h3>Data Tables - Responsive Simple Table</h3><div class=bottom-offset-20><div class=table-responsive-vert-xs><table class="table table-hover table-striped"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div></div></section>');
     $templateCache.put('components/tabs/demo-play-tabs.html', '<section ng-controller=tabsPLayDemoCtrl id=tabs-play-demo><div class=container><h2>Tabs Builder</h2><div></div></div></section>');
     $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs"><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings <i class="icon-ui-arrowright visible-xs-block"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</div></div><div role=tabpanel class="tab-pane fade" id=profile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. Vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</div></div><div role=tabpanel class="tab-pane fade" id=messages><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</div></div><div role=tabpanel class="tab-pane fade" id=settings><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</div></div></div></div></div><div class=row><h3 class="col-xs-12 top-offset-60">Tabs <small>(justified)</small></h3></div><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#long-example aria-controls=long-example role=tab data-toggle=tab>Example to show the auto adjusted tab height. <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#automobile aria-controls=Automobile role=tab data-toggle=tab>Automobile<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#boats aria-controls=Boats role=tab data-toggle=tab>Boats<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#planes aria-controls=Planes role=tab data-toggle=tab>Planes<i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=long-example><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Long example Aute gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div><div role=tabpanel class="tab-pane fade" id=automobile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Automobile magna biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div><div role=tabpanel class="tab-pane fade" id=boats><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Boats nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div><div role=tabpanel class="tab-pane fade" id=planes><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Planes biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div><div class=row><h3 class="col-xs-12 top-offset-60">Tabs <small>(centered)</small></h3></div><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-centered" role=tablist><li role=presentation class=active><a href=#inspiron role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Inspiron Laptops</h4><p class=text-gray-dark>For home and home office</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#latitude role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Latitude Laptops</h4><p class=text-gray-dark>For business-class security and reliability</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#vostro role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Vostro Laptops</h4><p class=text-gray-dark>For small business computing</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#XPS role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>XPS Laptops</h4><p class=text-gray-dark>For the ultimate experience</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#precision role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Dell Precision Mobile Workstation\'s</h4><p class=text-gray-dark>For professional creators</p><i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=inspiron><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Inspiron gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div><div role=tabpanel class="tab-pane fade" id=latitude><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Latitude biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div><div role=tabpanel class="tab-pane fade" id=vostro><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Vostro nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div><div role=tabpanel class="tab-pane fade" id=XPS><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>XPS biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div><div role=tabpanel class="tab-pane fade" id=precision><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Precision biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div></div></section>');
     $templateCache.put('components/tooltips/demo-play-tooltips.html', '<section ng-controller=tooltipsPLayDemoCtrl id=tooltips-play-demo><div class=container><h2>Tooltips Builder</h2><div></div></div></section>');
