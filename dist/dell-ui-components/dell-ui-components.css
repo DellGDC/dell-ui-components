@@ -3219,6 +3219,57 @@ caption {
   color: #444444;
   text-align: left;
 }
+@media screen and (max-width: 767px) {
+  .table-responsive {
+    border: none;
+  }
+}
+/*
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+  .table-responsive-vert-xs {
+    /* Force table to not be like tables anymore */
+    /* Hide table headers (but not display: none;, for accessibility) */
+    /*
+        Label the data
+        */
+  }
+  .table-responsive-vert-xs table,
+  .table-responsive-vert-xs thead,
+  .table-responsive-vert-xs tbody,
+  .table-responsive-vert-xs th,
+  .table-responsive-vert-xs td,
+  .table-responsive-vert-xs tr {
+    display: block;
+  }
+  .table-responsive-vert-xs thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .table-responsive-vert-xs tr {
+    border: 1px solid #ccc;
+  }
+  .table-responsive-vert-xs td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+  .table-responsive-vert-xs td:before {
+    /* Now like a table header */
+    position: relative;
+    /* Top/left values mimic padding */
+    width: 70%;
+    padding-right: 10px;
+    white-space: nowrap;
+    float: left;
+  }
+}
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
 .nav-tabs > li.active > a:hover {
