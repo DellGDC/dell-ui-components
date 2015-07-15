@@ -38,8 +38,9 @@ angular.module('dellUiComponents')
             link: function($scope, $element, iAttrs, controller ) {
 
                 $(function(){
-                    $($element).trigger( "enhance.tablesaw" );
-                    //$($element).table( "refresh" );
+                    //$($element).trigger( "enhance.tablesaw" );
+                    $($element).table( "tablesawcreate" );
+                    //$($element).init("columntoggle");
 
                 });
 
