@@ -12,17 +12,38 @@
  * ======================================================================================
  */
 
+angular.module('dellUiComponents')
 
-//
-//(function($){
-//    Eve.scope('.contact-drawer', function() {
-//        this.listen('.contact-drawer-cta', 'click', function(e) {
-//            $(e.currentTarget).parent().toggleClass('open');
-//        });
-//    });
-//})(jQuery);
-//
+    .directive('tableSort', function($timeout){
+        // Runs during compile
+        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+        return {
+            restrict: 'C',
+            link: function($scope, $element, iAttrs, controller ) {
 
-$(function(){
-    $("#myTable").tablesorter();
-});
+                $(function(){
+                    $("#myTable").tablesorter();
+                });
+
+            }
+        };
+    })
+
+
+    .directive('tableSawController', function($timeout){
+        // Runs during compile
+        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+        return {
+            restrict: 'C',
+            link: function($scope, $element, iAttrs, controller ) {
+
+                $(function(){
+                    $($element).trigger( "enhance.tablesaw" );
+                    //$($element).table( "refresh" );
+
+                });
+
+            }
+        };
+    });
+
