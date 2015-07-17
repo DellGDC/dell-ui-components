@@ -69,6 +69,20 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         }
                     });
                     break;
+                case "slide-toggle":
+                    $(".toggleSlide").click(function(){
+                        $(".content").slideToggle('slow');
+                        $(".toggleSlide").addClass('hide');
+                        $(".closeContent").removeClass('hide');
+                    });
+
+                    $(".closeContent").click(function(){
+                        $(".content").slideToggle('slow');
+                        $(".toggleSlide").removeClass('hide');
+                        $(".closeContent").addClass('hide');
+                    });
+
+                    break;
             }
         }
     };
