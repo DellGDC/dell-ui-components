@@ -172,7 +172,7 @@ blockquote .blockquote-links li + li::before {
 }
 .breadcrumb > li + li:before {
   color: #444444;
-  content: "/";
+  content: "\e601";
   font-size: 17px;
   top: 2px;
   padding-right: 8px;
