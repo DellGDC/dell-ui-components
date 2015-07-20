@@ -70,17 +70,33 @@ angular.module('dellUiComponents').directive('toggle', function () {
                     });
                     break;
                 case "slide-toggle":
-                    $(".toggleSlide").click(function(){
-                        $(".content").slideToggle('slow');
-                        $(".toggleSlide").addClass('hide');
-                        $(".closeContent").removeClass('hide');
+
+                    $('.content').find('li:gt(2)').addClass('hide');
+                    $(".toggle-slide").click(function(){
+                        $(".toggle-slide").addClass('hide');
+                        $(".close-content").removeClass('hide');
+                        $('.content').find('li:gt(2)').removeClass('hide').addClass('show').slideDown("slow");
                     });
 
-                    $(".closeContent").click(function(){
-                        $(".content").slideToggle('slow');
-                        $(".toggleSlide").removeClass('hide');
-                        $(".closeContent").addClass('hide');
+                    $(".close-content").click(function(){
+                        $(".toggle-slide").removeClass('hide');
+                        $(".close-content").addClass('hide');
+                        $('.content').find('li:gt(2)').removeClass('show').addClass('show').slideUp("slow");
                     });
+
+                    //
+                    //$('.content').find('li:gt(2)').addClass('hide');
+                    //$(".toggle-slide").click(function(){
+                    //    $('.content').find('li:gt(2)').removeClass('hide').slideDown();
+                    //    $(".toggle-slide").addClass('hide');
+                    //    $(".close-content").removeClass('hide');
+                    //});
+                    //
+                    //$(".close-content").click(function(){
+                    //    $('.content').find('li:gt(2)').addClass('hide').slideUp();
+                    //    $(".toggle-slide").removeClass('hide');
+                    //    $(".close-content").addClass('hide');
+                    //});
 
                     break;
             }
