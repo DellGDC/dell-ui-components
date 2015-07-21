@@ -75,58 +75,34 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         target = $(element).prev();
                     }
 
-
-                    var maxHeight = 0, minHeight = 0;
-                    _.each($(target).find("li"), function(listItem,index){
-                        if(index < 4) {
-                            minHeight = minHeight + $(listItem).height();
-                            console.log('whats up');
-                        }
-
-                        maxHeight = maxHeight + $(listItem).height();
-                        //if($(target).find("li").length < 4) {
-                        //    $(element).hide();
-                        //    console.log('working now???');
-                        //}
-                    });
-
-                    _.each($(target).find("li"), function(listItem,index){
-                        if($(target).find("li").length < 4) {
-                            $(element).hide();
-                            console.log('working now???');
-                        }
-                    });
-
-
-
-
-
-                    //if($(target+" li").length < 4) {
-                    //    $(element).hide();
-                    //    console.log('working now???');
-                    //}
-                    //if($(target).find("li").length < 4) {
-                    //    $(element).hide();
-                    //    console.log('working now???')
-                    //}
-
-                    $(target).height(minHeight);
-                    $(element).on('click', function(){
-
-                        var height = minHeight;
-                        if($(element).hasClass('collapsed')) {
-                            height = maxHeight;
-                        }
-                        $(element).toggleClass('collapsed');
-                        $(target).animate({
-                            height: height
-                        }, {
-                            duration: 300,
-                            specialEasing: {
-                                height: "swing"
+                    if($(target).find("li").length < 4) {
+                        $(element).hide();
+                    } else {
+                        var maxHeight = 0, minHeight = 0;
+                        _.each($(target).find("li"), function(listItem,index){
+                            if(index < 5) {
+                                minHeight = minHeight + $(listItem).height();
                             }
+                            maxHeight = maxHeight + $(listItem).height();
                         });
-                    });
+
+                        $(target).height(minHeight);
+                        $(element).on('click', function(){
+                            var height = minHeight;
+                            if($(element).hasClass('collapsed')) {
+                                height = maxHeight;
+                            }
+                            $(element).toggleClass('collapsed');
+                            $(target).animate({
+                                height: height
+                            }, {
+                                duration: 300,
+                                specialEasing: {
+                                    height: "swing"
+                                }
+                            });
+                        });
+                    }
 
                     break;
             }
