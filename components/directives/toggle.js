@@ -81,56 +81,30 @@ angular.module('dellUiComponents').directive('toggle', function () {
                             $(element).hide();
                         } else {
                             var maxHeight = 0, minHeight = 0;
-                            setTimeout(function() {
                             _.each($(target).find("li"), function(listItem,index){
                                 if(index < 5) {
                                     minHeight = minHeight + $(listItem).height();
                                 }
                                 maxHeight = maxHeight + $(listItem).height();
-
-                            }, 2000);
                             });
-
 
                             $(target).height(minHeight);
                             $(element).on('click', function(){
-
-
-                                    var height = minHeight;
-                                    if($(element).hasClass('collapsed')) {
-                                        height = maxHeight;
+                                var height = minHeight;
+                                if($(element).hasClass('collapsed')) {
+                                    height = maxHeight;
+                                }
+                                $(element).toggleClass('collapsed');
+                                $(target).animate({
+                                    height: height
+                                }, {
+                                    duration: 300,
+                                    specialEasing: {
+                                        height: "swing"
                                     }
-                                    $(element).toggleClass('collapsed');
-                                    $(target).animate({
-                                        height: height
-                                    }, {
-                                        duration: 300,
-                                        specialEasing: {
-                                            height: "swing"
-                                        }
-                                    });
-
-
-
+                                });
                             });
-
-
-                            //var height = minHeight;
-                            //    if($(element).hasClass('collapsed')) {
-                            //        height = maxHeight;
-                            //    }
-                            //    $(element).toggleClass('collapsed');
-                            //    $(target).animate({
-                            //        height: height
-                            //    }, {
-                            //        duration: 300,
-                            //        specialEasing: {
-                            //            height: "swing"
-                            //        }
-                            //    });
-                            //});
                         }
-
                     break;
             }
         }
