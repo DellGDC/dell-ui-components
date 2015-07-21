@@ -75,8 +75,6 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         target = $(element).prev();
                     }
 
-
-
                         if($(target).find("li").length < 4) {
                             $(element).hide();
                         } else {
