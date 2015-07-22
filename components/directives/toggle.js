@@ -75,7 +75,7 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         target = $(element).prev();
                     }
 
-                        if($(target).find("li").length < 4) {
+                        if($(target).find("li").length <= 5) {
                             $(element).hide();
                         } else {
                             var maxHeight = 0, minHeight = 0;
