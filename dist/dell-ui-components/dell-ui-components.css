@@ -4210,23 +4210,17 @@ table.table-responsive td:before {
     display: inline-block;
   }
 }
-.toggle-slide .icon-ui-triangleright,
-.close-content .icon-ui-triangledown {
-  font-size: 14px;
-  top: 1px;
-  position: relative;
-  margin-right: 5px;
-  margin-left: -2px;
+.list-truncated {
+  overflow: hidden;
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 0;
+  line-height: 30px;
 }
-.fadeout {
-  opacity: 0;
-  -moz-transition: opacity 0.4s ease-in-out;
-  -o-transition: opacity 0.4s ease-in-out;
-  -webkit-transition: opacity 0.4s ease-in-out;
-  transition: opacity 0.4s ease-in-out;
-}
-.fadein {
-  opacity: 1;
+[data-toggle=list-truncated] .hide-expanded,
+[data-toggle=list-truncated] .show-collapsed,
+[data-toggle=list-truncated] .collapsed .show-collapsed {
+  padding: 6px 10px 10px 0;
 }
 /*
  * Content-Teaser component theme overrides

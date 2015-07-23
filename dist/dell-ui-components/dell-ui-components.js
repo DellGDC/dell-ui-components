@@ -6429,31 +6429,34 @@ angular.module('dellUiComponents').directive('toggle', function () {
           }
         });
         break;
-      case 'slide-toggle':
-        $('.content').find('li:gt(2)').addClass('hide');
-        $('.toggle-slide').click(function () {
-          $('.toggle-slide').addClass('hide');
-          $('.close-content').removeClass('hide');
-          $('.content').find('li:gt(2)').removeClass('hide').addClass('show').slideDown('slow');
-        });
-        $('.close-content').click(function () {
-          $('.toggle-slide').removeClass('hide');
-          $('.close-content').addClass('hide');
-          $('.content').find('li:gt(2)').removeClass('show').addClass('show').slideUp('slow');
-        });
-        //
-        //$('.content').find('li:gt(2)').addClass('hide');
-        //$(".toggle-slide").click(function(){
-        //    $('.content').find('li:gt(2)').removeClass('hide').slideDown();
-        //    $(".toggle-slide").addClass('hide');
-        //    $(".close-content").removeClass('hide');
-        //});
-        //
-        //$(".close-content").click(function(){
-        //    $('.content').find('li:gt(2)').addClass('hide').slideUp();
-        //    $(".toggle-slide").removeClass('hide');
-        //    $(".close-content").addClass('hide');
-        //});
+      case 'list-truncated':
+        var target = attributes.target;
+        if (!target) {
+          target = $(element).prev();
+        }
+        if ($(target).find('li').length <= 5) {
+          $(element).hide();
+        } else {
+          var maxHeight = 0, minHeight = 0;
+          _.each($(target).find('li'), function (listItem, index) {
+            if (index < 5) {
+              minHeight = minHeight + $(listItem).height();
+            }
+            maxHeight = maxHeight + $(listItem).height();
+          });
+          $(target).height(minHeight);
+          $(element).on('click', function () {
+            var height = minHeight;
+            if ($(element).hasClass('collapsed')) {
+              height = maxHeight;
+            }
+            $(element).toggleClass('collapsed');
+            $(target).animate({ height: height }, {
+              duration: 300,
+              specialEasing: { height: 'swing' }
+            });
+          });
+        }
         break;
       }
     }
