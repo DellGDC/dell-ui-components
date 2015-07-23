@@ -27,24 +27,8 @@ angular.module('dellUiComponents')
 
             }
         };
-    })
-
-
-    .directive('tableSawController', function($timeout){
-        // Runs during compile
-        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
-        return {
-            restrict: 'C',
-            link: function($scope, $element, iAttrs, controller ) {
-
-                $(function(){
-                    //$($element).trigger( "enhance.tablesaw" );
-                    $($element).table( "tablesawcreate" );
-                    //$($element).init("columntoggle");
-
-                });
-
-            }
-        };
     });
+
+
+
 

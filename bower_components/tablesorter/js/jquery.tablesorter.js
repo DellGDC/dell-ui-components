@@ -127,18 +127,32 @@
 			// internal css classes - these will ALWAYS be added to
 			// the table and MUST only contain one class name - fixes #381
 			ts.css = {
-				table      : 'tablesorter',
-				cssHasChild: 'tablesorter-hasChildRow',
-				childRow   : 'tablesorter-childRow',
-				colgroup   : 'tablesorter-colgroup',
-				header     : 'tablesorter-header',
-				headerRow  : 'tablesorter-headerRow',
-				headerIn   : 'tablesorter-header-inner',
-				icon       : 'tablesorter-icon',
-				processing : 'tablesorter-processing',
-				sortAsc    : 'tablesorter-headerAsc',
-				sortDesc   : 'tablesorter-headerDesc',
-				sortNone   : 'tablesorter-headerUnSorted'
+				//table      : 'tablesorter',
+				//cssHasChild: 'tablesorter-hasChildRow',
+				//childRow   : 'tablesorter-childRow',
+				//colgroup   : 'tablesorter-colgroup',
+				//header     : 'tablesorter-header',
+				//headerRow  : 'tablesorter-headerRow',
+				//headerIn   : 'tablesorter-header-inner',
+				//icon       : 'tablesorter-icon',
+				//processing : 'tablesorter-processing',
+				//sortAsc    : 'tablesorter-headerAsc',
+				//sortDesc   : 'tablesorter-headerDesc',
+				//sortNone   : 'tablesorter-headerUnSorted'
+
+                table      : 'table',
+                cssHasChild: 'tablesorter-hasChildRow',
+                childRow   : 'tablesorter-childRow',
+                colgroup   : 'tablesorter-colgroup',
+                header     : 'tablesorter-header',
+                headerRow  : 'tablesorter-headerRow',
+                headerIn   : 'tablesorter-header-inner',
+                icon       : 'tablesorter-icon',
+                processing : 'tablesorter-processing',
+                sortAsc    : 'icon-ui-triangleup',
+                sortDesc   : 'icon-ui-triangledown',
+                sortNone   : 'tablesorter-headerUnSorted'
+
 			};
 
 			// labels applied to sortable headers for accessibility (aria) support

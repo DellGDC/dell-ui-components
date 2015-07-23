@@ -147,7 +147,9 @@
 				icon       : 'tablesorter-icon',
 				processing : 'tablesorter-processing',
 				sortAsc    : 'tablesorter-headerAsc',
-				sortDesc   : 'tablesorter-headerDesc',
+                sortDesc   : 'tablesorter-headerDesc',
+                //sortAsc    : 'icon-ui-triangleup',
+                //sortDesc   : 'icon-ui-triangledown',
 				sortNone   : 'tablesorter-headerUnSorted'
 			};
 
