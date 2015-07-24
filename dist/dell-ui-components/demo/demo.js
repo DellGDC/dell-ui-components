@@ -44898,13 +44898,14 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
  * Licensed under MIT (https://github.com/DellGDC/dell-ui-components/blob/master/LICENSE)
  * ======================================================================================
  */
-(function ($) {
+//Requires jQuery and Eve.js
+(function ($, Eve) {
   Eve.scope('.contact-drawer', function () {
     this.listen('.contact-drawer-cta', 'click', function (e) {
       $(e.currentTarget).parent().toggleClass('open');
     });
   });
-}(jQuery));
+}(jQuery, Eve));
 /* globals s */
 angular.module('demo', [
   'ui.utils',
