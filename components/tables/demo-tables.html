@@ -224,8 +224,7 @@
         </h3>
         <!--Data Tables - Responsive (fixed-columns)-->
         <div class="bottom-offset-40">
-        <div class="tablesorter-scroller-has-fixed-columns tablesorter-scroller-fixed">
-            <table id="fixed-columns-table" class="table table-hover table-striped tablesorter">
+            <table id="fixed-columns-table" class="table table-hover table-striped table-fixed-column">
                 <thead>
                 <tr>
                     <th>Last Name</th>
@@ -267,11 +266,31 @@
                 </tbody>
             </table>
 
-        </div>
             <!--Data Tables - Responsive (fixed-columns)-->
         </div>
 
+<script>
 
+    $(function () {
+
+        $('table-fixed-column').tablesorter({
+            theme: 'blue',
+            // widthFixed: true, // <- now automatically set by the scroller widget
+            showProcessing: true,
+            widgets: ['zebra', 'scroller'],
+            widgetOptions: {
+                scroller_fixedColumns: 1,
+                scroller_height: 300,
+                // scroll tbody to top after sorting
+                scroller_upAfterSort: true,
+                // pop table header into view while scrolling up the page
+                scroller_jumpToHeader: true
+            }
+        });
+
+    });
+
+</script>
 
 
 
