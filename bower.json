@@ -1,7 +1,7 @@
 {
   "name": "delluicomponents",
   "description":"Dell Inc's addition of components to Twitter Bootstrap for dell.com (Based om TWBS 3.3.5)",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "index.html",
   "ignore": [
     "**/.*",
@@ -23,8 +23,5 @@
     "angular-bootstrap": "~0.10",
     "less.js": "~1.6",
     "bootstrap-table": "~1.7.0"
-  },
-  "devDependencies": {
-    "angular-ui-grid": "~3.0.0-rc.19"
   }
 }

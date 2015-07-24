@@ -178,8 +178,8 @@ blockquote .blockquote-links li + li::before {
 }
 .breadcrumb > li + li:before {
   color: #444444;
-  content: "/";
-  font-size: 17px;
+  content: "\e601";
+  font-size: 14px;
   top: 2px;
   padding-right: 8px;
   padding-left: 4px;
@@ -3106,6 +3106,9 @@ a {
   color: #aaaaaa;
   border: 1px solid #e4e4e4;
 }
+.load-more li {
+  display: none;
+}
 /*
  * Popovers component theme overrides
  *------------------------------------------------------------------------------------------
@@ -3210,11 +3213,69 @@ a {
 /*
  * Simple data tables - bootstrap css override
  */
-caption {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: #444444;
-  text-align: left;
+table.table-responsive td:before {
+  display: none;
+}
+@media (max-width: 767px) {
+  /*
+    Generic Styling, for Desktops/Laptops
+    */
+  table.table-responsive {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table.table-responsive th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 6px;
+    text-align: left;
+  }
+  table.table-responsive td {
+    padding: 6px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  /* Force table to not be like tables anymore */
+  table.table-responsive > tr,
+  table.table-responsive thead > tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  table.table-responsive tbody,
+  table.table-responsive th,
+  table.table-responsive td,
+  table.table-responsive tr {
+    display: block;
+    overflow: hidden;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* BELOW THREE STATEMENTS NEEDED FOR IE9 AND BELOW */
+    float: left;
+    clear: left;
+    width: 100%;
+  }
+  table.table-responsive td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50% !important;
+  }
+  table.table-responsive td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+    display: block;
+  }
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
@@ -4148,6 +4209,18 @@ caption {
   .image-content-links > li {
     display: inline-block;
   }
+}
+.list-truncated {
+  overflow: hidden;
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 0;
+  line-height: 30px;
+}
+[data-toggle=list-truncated] .hide-expanded,
+[data-toggle=list-truncated] .show-collapsed,
+[data-toggle=list-truncated] .collapsed .show-collapsed {
+  padding: 6px 10px 10px 0;
 }
 /*
  * Content-Teaser component theme overrides

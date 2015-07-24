@@ -52,6 +52,58 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         event.preventDefault();
                     });
                     break;
+                case "load-more":
+                    var selector = attributes.target,
+                        size_li = $(selector + " li").size(),
+                        x=3;
+                    if (!selector) {
+                        console.error('You must use data-target when using data-toggle="load-more". ');
+                    }
+
+                    $(selector + ' li:lt('+x+')').show();
+                    $(element).click(function () {
+                        x= (x+5 <= size_li) ? x+5 : size_li;
+                        $(selector + ' li:lt('+x+')').fadeIn(1500);
+                        if ($(selector  + " li:visible").size() === size_li) {
+                            $(element).hide();
+                        }
+                    });
+                    break;
+                case "list-truncated":
+                    var target = attributes.target;
+                    if (!target) {
+                        target = $(element).prev();
+                    }
+
+                        if($(target).find("li").length <= 5) {
+                            $(element).hide();
+                        } else {
+                            var maxHeight = 0, minHeight = 0;
+                            _.each($(target).find("li"), function(listItem,index){
+                                if(index < 5) {
+                                    minHeight = minHeight + $(listItem).height();
+                                }
+                                maxHeight = maxHeight + $(listItem).height();
+                            });
+
+                            $(target).height(minHeight);
+                            $(element).on('click', function(){
+                                var height = minHeight;
+                                if($(element).hasClass('collapsed')) {
+                                    height = maxHeight;
+                                }
+                                $(element).toggleClass('collapsed');
+                                $(target).animate({
+                                    height: height
+                                }, {
+                                    duration: 300,
+                                    specialEasing: {
+                                        height: "swing"
+                                    }
+                                });
+                            });
+                        }
+                    break;
             }
         }
     };

@@ -42389,700 +42389,6 @@ if (!console) {
     return _;
   };
 }));
-/*
-* bootstrap-table - v1.6.0 - 2015-03-03
-* https://github.com/wenzhixin/bootstrap-table
-* Copyright (c) 2015 zhixin wen
-* Licensed MIT License
-*/
-!function (a) {
-  'use strict';
-  var b = function (a) {
-      var b = arguments, c = !0, d = 1;
-      return a = a.replace(/%s/g, function () {
-        var a = b[d++];
-        return 'undefined' == typeof a ? (c = !1, '') : a;
-      }), c ? a : '';
-    }, c = function (b, c, d, e) {
-      var f = '';
-      return a.each(b, function (a, b) {
-        return b[c] === e ? (f = b[d], !1) : !0;
-      }), f;
-    }, d = function (b, c) {
-      var d = -1;
-      return a.each(b, function (a, b) {
-        return b.field === c ? (d = a, !1) : !0;
-      }), d;
-    }, e = function () {
-      var b, c, d = a('<p/>').addClass('fixed-table-scroll-inner'), e = a('<div/>').addClass('fixed-table-scroll-outer');
-      return e.append(d), a('body').append(e), b = d[0].offsetWidth, e.css('overflow', 'scroll'), c = d[0].offsetWidth, b === c && (c = e[0].clientWidth), e.remove(), b - c;
-    }, f = function (b, c, d, e) {
-      if ('string' == typeof c) {
-        var f = c.split('.');
-        f.length > 1 ? (c = window, a.each(f, function (a, b) {
-          c = c[b];
-        })) : c = window[c];
-      }
-      return 'object' == typeof c ? c : 'function' == typeof c ? c.apply(b, d) : e;
-    }, g = function (a) {
-      return 'string' == typeof a ? a.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;') : a;
-    }, h = function (b, c) {
-      this.options = c, this.$el = a(b), this.$el_ = this.$el.clone(), this.timeoutId_ = 0, this.init();
-    };
-  h.DEFAULTS = {
-    classes: 'table table-hover',
-    height: void 0,
-    undefinedText: '-',
-    sortName: void 0,
-    sortOrder: 'asc',
-    striped: !1,
-    columns: [],
-    data: [],
-    method: 'get',
-    url: void 0,
-    cache: !0,
-    contentType: 'application/json',
-    dataType: 'json',
-    ajaxOptions: {},
-    queryParams: function (a) {
-      return a;
-    },
-    queryParamsType: 'limit',
-    responseHandler: function (a) {
-      return a;
-    },
-    pagination: !1,
-    sidePagination: 'client',
-    totalRows: 0,
-    pageNumber: 1,
-    pageSize: 10,
-    pageList: [
-      10,
-      25,
-      50,
-      100
-    ],
-    search: !1,
-    searchAlign: 'right',
-    selectItemName: 'btSelectItem',
-    showHeader: !0,
-    showColumns: !1,
-    showPaginationSwitch: !1,
-    showRefresh: !1,
-    showToggle: !1,
-    buttonsAlign: 'right',
-    smartDisplay: !0,
-    minimumCountColumns: 1,
-    idField: void 0,
-    cardView: !1,
-    trimOnSearch: !0,
-    clickToSelect: !1,
-    singleSelect: !1,
-    toolbar: void 0,
-    toolbarAlign: 'left',
-    checkboxHeader: !0,
-    sortable: !0,
-    maintainSelected: !1,
-    searchTimeOut: 500,
-    iconSize: void 0,
-    iconsPrefix: 'glyphicon',
-    icons: {
-      paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
-      paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
-      refresh: 'glyphicon-refresh icon-refresh',
-      toggle: 'glyphicon-list-alt icon-list-alt',
-      columns: 'glyphicon-th icon-th'
-    },
-    rowStyle: function () {
-      return {};
-    },
-    rowAttributes: function () {
-      return {};
-    },
-    onAll: function () {
-      return !1;
-    },
-    onClickRow: function () {
-      return !1;
-    },
-    onDblClickRow: function () {
-      return !1;
-    },
-    onSort: function () {
-      return !1;
-    },
-    onCheck: function () {
-      return !1;
-    },
-    onUncheck: function () {
-      return !1;
-    },
-    onCheckAll: function () {
-      return !1;
-    },
-    onUncheckAll: function () {
-      return !1;
-    },
-    onLoadSuccess: function () {
-      return !1;
-    },
-    onLoadError: function () {
-      return !1;
-    },
-    onColumnSwitch: function () {
-      return !1;
-    },
-    onPageChange: function () {
-      return !1;
-    },
-    onSearch: function () {
-      return !1;
-    },
-    onPreBody: function () {
-      return !1;
-    },
-    onPostBody: function () {
-      return !1;
-    },
-    onPostHeader: function () {
-      return !1;
-    }
-  }, h.LOCALES = [], h.LOCALES['en-US'] = {
-    formatLoadingMessage: function () {
-      return 'Loading, please wait...';
-    },
-    formatRecordsPerPage: function (a) {
-      return b('%s records per page', a);
-    },
-    formatShowingRows: function (a, c, d) {
-      return b('Showing %s to %s of %s rows', a, c, d);
-    },
-    formatSearch: function () {
-      return 'Search';
-    },
-    formatNoMatches: function () {
-      return 'No matching records found';
-    },
-    formatPaginationSwitch: function () {
-      return 'Hide/Show pagination';
-    },
-    formatRefresh: function () {
-      return 'Refresh';
-    },
-    formatToggle: function () {
-      return 'Toggle';
-    },
-    formatColumns: function () {
-      return 'Columns';
-    }
-  }, a.extend(h.DEFAULTS, h.LOCALES['en-US']), h.COLUMN_DEFAULTS = {
-    radio: !1,
-    checkbox: !1,
-    checkboxEnabled: !0,
-    field: void 0,
-    title: void 0,
-    'class': void 0,
-    align: void 0,
-    halign: void 0,
-    valign: void 0,
-    width: void 0,
-    sortable: !1,
-    order: 'asc',
-    visible: !0,
-    switchable: !0,
-    clickToSelect: !0,
-    formatter: void 0,
-    events: void 0,
-    sorter: void 0,
-    cellStyle: void 0,
-    searchable: !0
-  }, h.EVENTS = {
-    'all.bs.table': 'onAll',
-    'click-row.bs.table': 'onClickRow',
-    'dbl-click-row.bs.table': 'onDblClickRow',
-    'sort.bs.table': 'onSort',
-    'check.bs.table': 'onCheck',
-    'uncheck.bs.table': 'onUncheck',
-    'check-all.bs.table': 'onCheckAll',
-    'uncheck-all.bs.table': 'onUncheckAll',
-    'load-success.bs.table': 'onLoadSuccess',
-    'load-error.bs.table': 'onLoadError',
-    'column-switch.bs.table': 'onColumnSwitch',
-    'page-change.bs.table': 'onPageChange',
-    'search.bs.table': 'onSearch',
-    'pre-body.bs.table': 'onPreBody',
-    'post-body.bs.table': 'onPostBody',
-    'post-header.bs.table': 'onPostHeader'
-  }, h.prototype.init = function () {
-    this.initContainer(), this.initTable(), this.initHeader(), this.initData(), this.initToolbar(), this.initPagination(), this.initBody(), this.initServer();
-  }, h.prototype.initContainer = function () {
-    this.$container = a([
-      '<div class="bootstrap-table">',
-      '<div class="fixed-table-toolbar"></div>',
-      '<div class="fixed-table-container">',
-      '<div class="fixed-table-header"><table></table></div>',
-      '<div class="fixed-table-body">',
-      '<div class="fixed-table-loading">',
-      this.options.formatLoadingMessage(),
-      '</div>',
-      '</div>',
-      '<div class="fixed-table-pagination"></div>',
-      '</div>',
-      '</div>'
-    ].join('')), this.$container.insertAfter(this.$el), this.$container.find('.fixed-table-body').append(this.$el), this.$container.after('<div class="clearfix"></div>'), this.$loading = this.$container.find('.fixed-table-loading'), this.$el.addClass(this.options.classes), this.options.striped && this.$el.addClass('table-striped');
-  }, h.prototype.initTable = function () {
-    var b = this, c = [], d = [];
-    this.$header = this.$el.find('thead'), this.$header.length || (this.$header = a('<thead></thead>').appendTo(this.$el)), this.$header.find('tr').length || this.$header.append('<tr></tr>'), this.$header.find('th').each(function () {
-      var b = a.extend({}, {
-          title: a(this).html(),
-          'class': a(this).attr('class')
-        }, a(this).data());
-      c.push(b);
-    }), this.options.columns = a.extend([], c, this.options.columns), a.each(this.options.columns, function (c, d) {
-      b.options.columns[c] = a.extend({}, h.COLUMN_DEFAULTS, { field: c }, d);
-    }), this.options.data.length || (this.$el.find('tbody tr').each(function () {
-      var c = {};
-      c._id = a(this).attr('id'), c._class = a(this).attr('class'), a(this).find('td').each(function (d) {
-        var e = b.options.columns[d].field;
-        c[e] = a(this).html(), c['_' + e + '_id'] = a(this).attr('id'), c['_' + e + '_class'] = a(this).attr('class'), c['_' + e + '_data'] = a(this).data();
-      }), d.push(c);
-    }), this.options.data = d);
-  }, h.prototype.initHeader = function () {
-    var c = this, d = [], e = [];
-    this.header = {
-      fields: [],
-      styles: [],
-      classes: [],
-      formatters: [],
-      events: [],
-      sorters: [],
-      cellStyles: [],
-      clickToSelects: [],
-      searchables: []
-    }, a.each(this.options.columns, function (a, f) {
-      {
-        var g = '', h = '', i = '', j = '', k = b(' class="%s"', f['class']);
-        c.options.sortOrder || f.order;
-      }
-      f.visible && (h = b('text-align: %s; ', f.halign ? f.halign : f.align), i = b('text-align: %s; ', f.align), j = b('vertical-align: %s; ', f.valign), j += b('width: %spx; ', f.checkbox || f.radio ? 36 : f.width), d.push(f), c.header.fields.push(f.field), c.header.styles.push(i + j), c.header.classes.push(k), c.header.formatters.push(f.formatter), c.header.events.push(f.events), c.header.sorters.push(f.sorter), c.header.cellStyles.push(f.cellStyle), c.header.clickToSelects.push(f.clickToSelect), c.header.searchables.push(f.searchable), e.push('<th', f.checkbox || f.radio ? b(' class="bs-checkbox %s"', f['class'] || '') : k, b(' style="%s"', h + j), '>'), e.push(b('<div class="th-inner %s">', c.options.sortable && f.sortable ? 'sortable' : '')), g = f.title, c.options.sortName === f.field && c.options.sortable && f.sortable && (g += c.getCaretHtml()), f.checkbox && (!c.options.singleSelect && c.options.checkboxHeader && (g = '<input name="btSelectAll" type="checkbox" />'), c.header.stateField = f.field), f.radio && (g = '', c.header.stateField = f.field, c.options.singleSelect = !0), e.push(g), e.push('</div>'), e.push('<div class="fht-cell"></div>'), e.push('</th>'));
-    }), this.$header.find('tr').html(e.join('')), this.$header.find('th').each(function (b) {
-      a(this).data(d[b]);
-    }), this.$container.off('click', 'th').on('click', 'th', function (b) {
-      c.options.sortable && a(this).data().sortable && c.onSort(b);
-    }), !this.options.showHeader || this.options.cardView ? (this.$header.hide(), this.$container.find('.fixed-table-header').hide(), this.$loading.css('top', 0)) : (this.$header.show(), this.$container.find('.fixed-table-header').show(), this.$loading.css('top', '37px')), this.$selectAll = this.$header.find('[name="btSelectAll"]'), this.$container.off('click', '[name="btSelectAll"]').on('click', '[name="btSelectAll"]', function () {
-      var b = a(this).prop('checked');
-      c[b ? 'checkAll' : 'uncheckAll']();
-    });
-  }, h.prototype.initData = function (a, b) {
-    this.data = 'append' === b ? this.data.concat(a) : 'prepend' === b ? [].concat(a).concat(this.data) : a || this.options.data, this.options.data = this.data, 'server' !== this.options.sidePagination && this.initSort();
-  }, h.prototype.initSort = function () {
-    var b = this, c = this.options.sortName, d = 'desc' === this.options.sortOrder ? -1 : 1, e = a.inArray(this.options.sortName, this.header.fields);
-    -1 !== e && this.data.sort(function (g, h) {
-      var i = g[c], j = h[c], k = f(b.header, b.header.sorters[e], [
-          i,
-          j
-        ]);
-      return void 0 !== k ? d * k : void 0 !== k ? d * k : ((void 0 === i || null === i) && (i = ''), (void 0 === j || null === j) && (j = ''), a.isNumeric(i) && a.isNumeric(j) ? (i = parseFloat(i), j = parseFloat(j), j > i ? -1 * d : d) : i === j ? 0 : ('string' != typeof i && (i = i.toString()), -1 === i.localeCompare(j) ? -1 * d : d));
-    });
-  }, h.prototype.onSort = function (b) {
-    var c = a(b.currentTarget), d = this.$header.find('th').eq(c.index());
-    return this.$header.add(this.$header_).find('span.order').remove(), this.options.sortName === c.data('field') ? this.options.sortOrder = 'asc' === this.options.sortOrder ? 'desc' : 'asc' : (this.options.sortName = c.data('field'), this.options.sortOrder = 'asc' === c.data('order') ? 'desc' : 'asc'), this.trigger('sort', this.options.sortName, this.options.sortOrder), c.add(d).data('order', this.options.sortOrder).find('.th-inner').append(this.getCaretHtml()), 'server' === this.options.sidePagination ? void this.initServer() : (this.initSort(), void this.initBody());
-  }, h.prototype.initToolbar = function () {
-    var c, d, e = this, g = [], h = 0, i = 0;
-    this.$toolbar = this.$container.find('.fixed-table-toolbar').html(''), 'string' == typeof this.options.toolbar && a(b('<div class="bars pull-%s"></div>', this.options.toolbarAlign)).appendTo(this.$toolbar).append(a(this.options.toolbar)), g = [b('<div class="columns columns-%s btn-group pull-%s">', this.options.buttonsAlign, this.options.buttonsAlign)], 'string' == typeof this.options.icons && (this.options.icons = f(null, this.options.icons)), this.options.showPaginationSwitch && g.push(b('<button class="btn btn-default" type="button" name="paginationSwitch" title="%s">', this.options.formatPaginationSwitch()), b('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.paginationSwitchDown), '</button>'), this.options.showRefresh && g.push(b('<button class="btn btn-default' + (void 0 === this.options.iconSize ? '' : ' btn-' + this.options.iconSize) + '" type="button" name="refresh" title="%s">', this.options.formatRefresh()), b('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.refresh), '</button>'), this.options.showToggle && g.push(b('<button class="btn btn-default' + (void 0 === this.options.iconSize ? '' : ' btn-' + this.options.iconSize) + '" type="button" name="toggle" title="%s">', this.options.formatToggle()), b('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.toggle), '</button>'), this.options.showColumns && (g.push(b('<div class="keep-open btn-group" title="%s">', this.options.formatColumns()), '<button type="button" class="btn btn-default' + (void 0 == this.options.iconSize ? '' : ' btn-' + this.options.iconSize) + ' dropdown-toggle" data-toggle="dropdown">', b('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.columns), ' <span class="caret"></span>', '</button>', '<ul class="dropdown-menu" role="menu">'), a.each(this.options.columns, function (a, c) {
-      if (!c.radio && !c.checkbox) {
-        var d = c.visible ? ' checked="checked"' : '';
-        c.switchable && (g.push(b('<li><label><input type="checkbox" data-field="%s" value="%s"%s> %s</label></li>', c.field, a, d, c.title)), i++);
-      }
-    }), g.push('</ul>', '</div>')), g.push('</div>'), (this.showToolbar || g.length > 2) && this.$toolbar.append(g.join('')), this.options.showPaginationSwitch && this.$toolbar.find('button[name="paginationSwitch"]').off('click').on('click', a.proxy(this.togglePagination, this)), this.options.showRefresh && this.$toolbar.find('button[name="refresh"]').off('click').on('click', a.proxy(this.refresh, this)), this.options.showToggle && this.$toolbar.find('button[name="toggle"]').off('click').on('click', function () {
-      e.options.cardView = !e.options.cardView, e.initHeader(), e.initBody();
-    }), this.options.showColumns && (c = this.$toolbar.find('.keep-open'), i <= this.options.minimumCountColumns && c.find('input').prop('disabled', !0), c.find('li').off('click').on('click', function (a) {
-      a.stopImmediatePropagation();
-    }), c.find('input').off('click').on('click', function () {
-      var b = a(this);
-      e.toggleColumn(b.val(), b.prop('checked'), !1), e.trigger('column-switch', a(this).data('field'), b.prop('checked'));
-    })), this.options.search && (g = [], g.push('<div class="pull-' + this.options.searchAlign + ' search">', b('<input class="form-control' + (void 0 === this.options.iconSize ? '' : ' input-' + this.options.iconSize) + '" type="text" placeholder="%s">', this.options.formatSearch()), '</div>'), this.$toolbar.append(g.join('')), d = this.$toolbar.find('.search input'), d.off('keyup').on('keyup', function (a) {
-      clearTimeout(h), h = setTimeout(function () {
-        e.onSearch(a);
-      }, e.options.searchTimeOut);
-    }));
-  }, h.prototype.onSearch = function (b) {
-    var c = a.trim(a(b.currentTarget).val());
-    this.options.trimOnSearch && a(b.currentTarget).val(c), c !== this.searchText && (this.searchText = c, this.options.pageNumber = 1, this.initSearch(), this.updatePagination(), this.trigger('search', c));
-  }, h.prototype.initSearch = function () {
-    var b = this;
-    if ('server' !== this.options.sidePagination) {
-      var c = this.searchText && this.searchText.toLowerCase(), d = a.isEmptyObject(this.filterColumns) ? null : this.filterColumns;
-      this.data = d ? a.grep(this.options.data, function (a) {
-        for (var b in d)
-          if (a[b] !== d[b])
-            return !1;
-        return !0;
-      }) : this.options.data, this.data = c ? a.grep(this.data, function (d, e) {
-        for (var g in d) {
-          g = a.isNumeric(g) ? parseInt(g, 10) : g;
-          var h = d[g];
-          h = f(b.header, b.header.formatters[a.inArray(g, b.header.fields)], [
-            h,
-            d,
-            e
-          ], h);
-          var i = a.inArray(g, b.header.fields);
-          if (-1 !== i && b.header.searchables[i] && ('string' == typeof h || 'number' == typeof h) && -1 !== (h + '').toLowerCase().indexOf(c))
-            return !0;
-        }
-        return !1;
-      }) : this.data;
-    }
-  }, h.prototype.initPagination = function () {
-    if (this.$pagination = this.$container.find('.fixed-table-pagination'), !this.options.pagination)
-      return void this.$pagination.hide();
-    this.$pagination.show();
-    var c, d, e, f, g, h, i, j, k, l = this, m = [], n = this.getData();
-    'server' !== this.options.sidePagination && (this.options.totalRows = n.length), this.totalPages = 0, this.options.totalRows && (this.totalPages = ~~((this.options.totalRows - 1) / this.options.pageSize) + 1, this.options.totalPages = this.totalPages), this.totalPages > 0 && this.options.pageNumber > this.totalPages && (this.options.pageNumber = this.totalPages), this.pageFrom = (this.options.pageNumber - 1) * this.options.pageSize + 1, this.pageTo = this.options.pageNumber * this.options.pageSize, this.pageTo > this.options.totalRows && (this.pageTo = this.options.totalRows), m.push('<div class="pull-left pagination-detail">', '<span class="pagination-info">', this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows), '</span>'), m.push('<span class="page-list">');
-    var o = [
-        '<span class="btn-group dropup">',
-        '<button type="button" class="btn btn-default ' + (void 0 === this.options.iconSize ? '' : ' btn-' + this.options.iconSize) + ' dropdown-toggle" data-toggle="dropdown">',
-        '<span class="page-size">',
-        this.options.pageSize,
-        '</span>',
-        ' <span class="caret"></span>',
-        '</button>',
-        '<ul class="dropdown-menu" role="menu">'
-      ], p = this.options.pageList;
-    if ('string' == typeof this.options.pageList) {
-      var q = this.options.pageList.replace('[', '').replace(']', '').replace(/ /g, '').split(',');
-      p = [], a.each(q, function (a, b) {
-        p.push(+b);
-      });
-    }
-    for (a.each(p, function (a, c) {
-        if (!l.options.smartDisplay || 0 === a || p[a - 1] <= l.options.totalRows) {
-          var d = c === l.options.pageSize ? ' class="active"' : '';
-          o.push(b('<li%s><a href="javascript:void(0)">%s</a></li>', d, c));
-        }
-      }), o.push('</ul></span>'), m.push(this.options.formatRecordsPerPage(o.join(''))), m.push('</span>'), m.push('</div>', '<div class="pull-right pagination">', '<ul class="pagination' + (void 0 === this.options.iconSize ? '' : ' pagination-' + this.options.iconSize) + '">', '<li class="page-first"><a href="javascript:void(0)">&lt;&lt;</a></li>', '<li class="page-pre"><a href="javascript:void(0)">&lt;</a></li>'), this.totalPages < 5 ? (d = 1, e = this.totalPages) : (d = this.options.pageNumber - 2, e = d + 4, 1 > d && (d = 1, e = 5), e > this.totalPages && (e = this.totalPages, d = e - 4)), c = d; e >= c; c++)
-      m.push('<li class="page-number' + (c === this.options.pageNumber ? ' active' : '') + '">', '<a href="javascript:void(0)">', c, '</a>', '</li>');
-    m.push('<li class="page-next"><a href="javascript:void(0)">&gt;</a></li>', '<li class="page-last"><a href="javascript:void(0)">&gt;&gt;</a></li>', '</ul>', '</div>'), this.$pagination.html(m.join('')), f = this.$pagination.find('.page-list a'), g = this.$pagination.find('.page-first'), h = this.$pagination.find('.page-pre'), i = this.$pagination.find('.page-next'), j = this.$pagination.find('.page-last'), k = this.$pagination.find('.page-number'), this.options.pageNumber <= 1 && (g.addClass('disabled'), h.addClass('disabled')), this.options.pageNumber >= this.totalPages && (i.addClass('disabled'), j.addClass('disabled')), this.options.smartDisplay && (this.totalPages <= 1 && this.$pagination.find('div.pagination').hide(), (this.options.pageList.length < 2 || this.options.totalRows <= this.options.pageList[0]) && this.$pagination.find('span.page-list').hide(), this.$pagination[this.getData().length ? 'show' : 'hide']()), f.off('click').on('click', a.proxy(this.onPageListChange, this)), g.off('click').on('click', a.proxy(this.onPageFirst, this)), h.off('click').on('click', a.proxy(this.onPagePre, this)), i.off('click').on('click', a.proxy(this.onPageNext, this)), j.off('click').on('click', a.proxy(this.onPageLast, this)), k.off('click').on('click', a.proxy(this.onPageNumber, this));
-  }, h.prototype.updatePagination = function (b) {
-    b && a(b.currentTarget).hasClass('disabled') || (this.options.maintainSelected || this.resetRows(), this.initPagination(), 'server' === this.options.sidePagination ? this.initServer() : this.initBody(), this.trigger('page-change', this.options.pageNumber, this.options.pageSize));
-  }, h.prototype.onPageListChange = function (b) {
-    var c = a(b.currentTarget);
-    c.parent().addClass('active').siblings().removeClass('active'), this.options.pageSize = +c.text(), this.$toolbar.find('.page-size').text(this.options.pageSize), this.updatePagination(b);
-  }, h.prototype.onPageFirst = function (a) {
-    this.options.pageNumber = 1, this.updatePagination(a);
-  }, h.prototype.onPagePre = function (a) {
-    this.options.pageNumber--, this.updatePagination(a);
-  }, h.prototype.onPageNext = function (a) {
-    this.options.pageNumber++, this.updatePagination(a);
-  }, h.prototype.onPageLast = function (a) {
-    this.options.pageNumber = this.totalPages, this.updatePagination(a);
-  }, h.prototype.onPageNumber = function (b) {
-    this.options.pageNumber !== +a(b.currentTarget).text() && (this.options.pageNumber = +a(b.currentTarget).text(), this.updatePagination(b));
-  }, h.prototype.initBody = function (e) {
-    var h = this, i = [], j = this.getData();
-    this.trigger('pre-body', j), this.$body = this.$el.find('tbody'), this.$body.length || (this.$body = a('<tbody></tbody>').appendTo(this.$el)), this.options.pagination && 'server' !== this.options.sidePagination || (this.pageFrom = 1, this.pageTo = j.length);
-    for (var k = this.pageFrom - 1; k < this.pageTo; k++) {
-      var l = j[k], m = {}, n = [], o = {}, p = [];
-      if (m = f(this.options, this.options.rowStyle, [
-          l,
-          k
-        ], m), m && m.css)
-        for (var q in m.css)
-          n.push(q + ': ' + m.css[q]);
-      if (o = f(this.options, this.options.rowAttributes, [
-          l,
-          k
-        ], o))
-        for (var q in o)
-          p.push(b('%s="%s"', q, g(o[q])));
-      i.push('<tr', b(' %s', p.join(' ')), b(' id="%s"', a.isArray(l) ? void 0 : l._id), b(' class="%s"', m.classes || (a.isArray(l) ? void 0 : l._class)), b(' data-index="%s"', k), '>'), this.options.cardView && i.push(b('<td colspan="%s">', this.header.fields.length)), a.each(this.header.fields, function (e, g) {
-        var j = '', o = l[g], p = '', q = {}, r = '', s = h.header.classes[e], t = '', u = h.options.columns[d(h.options.columns, g)];
-        if (m = b('style="%s"', n.concat(h.header.styles[e]).join('; ')), o = f(h.header, h.header.formatters[e], [
-            o,
-            l,
-            k
-          ], o), l['_' + g + '_id'] && (r = b(' id="%s"', l['_' + g + '_id'])), l['_' + g + '_class'] && (s = b(' class="%s"', l['_' + g + '_class'])), q = f(h.header, h.header.cellStyles[e], [
-            o,
-            l,
-            k
-          ], q), q.classes && (s = b(' class="%s"', q.classes)), q.css) {
-          var v = [];
-          for (var w in q.css)
-            v.push(w + ': ' + q.css[w]);
-          m = b('style="%s"', v.concat(h.header.styles[e]).join('; '));
-        }
-        l['_' + g + '_data'] && !a.isEmptyObject(l['_' + g + '_data']) && a.each(l['_' + g + '_data'], function (a, c) {
-          'index' !== a && (t += b(' data-%s="%s"', a, c));
-        }), u.checkbox || u.radio ? (p = u.checkbox ? 'checkbox' : p, p = u.radio ? 'radio' : p, j = [
-          h.options.cardView ? '<div class="card-view">' : '<td class="bs-checkbox">',
-          '<input' + b(' data-index="%s"', k) + b(' name="%s"', h.options.selectItemName) + b(' type="%s"', p) + b(' value="%s"', l[h.options.idField]) + b(' checked="%s"', o === !0 || o && o.checked ? 'checked' : void 0) + b(' disabled="%s"', !u.checkboxEnabled || o && o.disabled ? 'disabled' : void 0) + ' />',
-          h.options.cardView ? '</div>' : '</td>'
-        ].join('')) : (o = 'undefined' == typeof o || null === o ? h.options.undefinedText : o, j = h.options.cardView ? [
-          '<div class="card-view">',
-          h.options.showHeader ? b('<span class="title" %s>%s</span>', m, c(h.options.columns, 'field', 'title', g)) : '',
-          b('<span class="value">%s</span>', o),
-          '</div>'
-        ].join('') : [
-          b('<td%s %s %s %s>', r, s, m, t),
-          o,
-          '</td>'
-        ].join(''), h.options.cardView && h.options.smartDisplay && '' === o && (j = '')), i.push(j);
-      }), this.options.cardView && i.push('</td>'), i.push('</tr>');
-    }
-    i.length || i.push('<tr class="no-records-found">', b('<td colspan="%s">%s</td>', this.header.fields.length, this.options.formatNoMatches()), '</tr>'), this.$body.html(i.join('')), e || this.scrollTo(0), this.$body.find('> tr > td').off('click').on('click', function () {
-      var c = a(this).parent();
-      h.trigger('click-row', h.data[c.data('index')], c), h.options.clickToSelect && h.header.clickToSelects[c.children().index(a(this))] && c.find(b('[name="%s"]', h.options.selectItemName))[0].click();
-    }), this.$body.find('tr').off('dblclick').on('dblclick', function () {
-      h.trigger('dbl-click-row', h.data[a(this).data('index')], a(this));
-    }), this.$selectItem = this.$body.find(b('[name="%s"]', this.options.selectItemName)), this.$selectItem.off('click').on('click', function (b) {
-      b.stopImmediatePropagation();
-      var c = a(this).prop('checked'), d = h.data[a(this).data('index')];
-      d[h.header.stateField] = c, h.trigger(c ? 'check' : 'uncheck', d), h.options.singleSelect && (h.$selectItem.not(this).each(function () {
-        h.data[a(this).data('index')][h.header.stateField] = !1;
-      }), h.$selectItem.filter(':checked').not(this).prop('checked', !1)), h.updateSelected();
-    }), a.each(this.header.events, function (b, c) {
-      if (c) {
-        'string' == typeof c && (c = f(null, c));
-        for (var d in c)
-          h.$body.find('tr').each(function () {
-            var e = a(this), f = e.find(h.options.cardView ? '.card-view' : 'td').eq(b), g = d.indexOf(' '), i = d.substring(0, g), j = d.substring(g + 1), k = c[d];
-            f.find(j).off(i).on(i, function (a) {
-              var c = e.data('index'), d = h.data[c], f = d[h.header.fields[b]];
-              k.apply(this, [
-                a,
-                f,
-                d,
-                c
-              ]);
-            });
-          });
-      }
-    }), this.updateSelected(), this.resetView(), this.trigger('post-body');
-  }, h.prototype.initServer = function (b, c) {
-    var d = this, e = {}, g = {
-        pageSize: this.options.pageSize,
-        pageNumber: this.options.pageNumber,
-        searchText: this.searchText,
-        sortName: this.options.sortName,
-        sortOrder: this.options.sortOrder
-      };
-    this.options.url && ('limit' === this.options.queryParamsType && (g = {
-      search: g.searchText,
-      sort: g.sortName,
-      order: g.sortOrder
-    }, this.options.pagination && (g.limit = this.options.pageSize, g.offset = this.options.pageSize * (this.options.pageNumber - 1))), e = f(this.options, this.options.queryParams, [g], e), a.extend(e, c || {}), e !== !1 && (b || this.$loading.show(), a.ajax(a.extend({}, f(null, this.options.ajaxOptions), {
-      type: this.options.method,
-      url: this.options.url,
-      data: 'application/json' === this.options.contentType && 'post' === this.options.method ? JSON.stringify(e) : e,
-      cache: this.options.cache,
-      contentType: this.options.contentType,
-      dataType: this.options.dataType,
-      success: function (a) {
-        a = f(d.options, d.options.responseHandler, [a], a), d.load(a), d.trigger('load-success', a);
-      },
-      error: function (a) {
-        d.trigger('load-error', a.status);
-      },
-      complete: function () {
-        b || d.$loading.hide();
-      }
-    }))));
-  }, h.prototype.getCaretHtml = function () {
-    return [
-      '<span class="order' + ('desc' === this.options.sortOrder ? '' : ' dropup') + '">',
-      '<span class="caret" style="margin: 10px 5px;"></span>',
-      '</span>'
-    ].join('');
-  }, h.prototype.updateSelected = function () {
-    var b = this.$selectItem.filter(':enabled').length === this.$selectItem.filter(':enabled').filter(':checked').length;
-    this.$selectAll.add(this.$selectAll_).prop('checked', b), this.$selectItem.each(function () {
-      a(this).parents('tr')[a(this).prop('checked') ? 'addClass' : 'removeClass']('selected');
-    });
-  }, h.prototype.updateRows = function (b) {
-    var c = this;
-    this.$selectItem.each(function () {
-      c.data[a(this).data('index')][c.header.stateField] = b;
-    });
-  }, h.prototype.resetRows = function () {
-    var b = this;
-    a.each(this.data, function (a, c) {
-      b.$selectAll.prop('checked', !1), b.$selectItem.prop('checked', !1), c[b.header.stateField] = !1;
-    });
-  }, h.prototype.trigger = function (b) {
-    var c = Array.prototype.slice.call(arguments, 1);
-    b += '.bs.table', this.options[h.EVENTS[b]].apply(this.options, c), this.$el.trigger(a.Event(b), c), this.options.onAll(b, c), this.$el.trigger(a.Event('all.bs.table'), [
-      b,
-      c
-    ]);
-  }, h.prototype.resetHeader = function () {
-    var b = this, c = this.$container.find('.fixed-table-header'), d = this.$container.find('.fixed-table-body'), f = this.$el.width() > d.width() ? e() : 0;
-    return this.$el.is(':hidden') ? (clearTimeout(this.timeoutId_), void (this.timeoutId_ = setTimeout(a.proxy(this.resetHeader, this), 100))) : (this.$header_ = this.$header.clone(!0, !0), this.$selectAll_ = this.$header_.find('[name="btSelectAll"]'), void setTimeout(function () {
-      c.css({
-        height: '37px',
-        'border-bottom': '1px solid #dddddd',
-        'margin-right': f
-      }).find('table').css('width', b.$el.css('width')).html('').attr('class', b.$el.attr('class')).append(b.$header_), b.$header.find('th').each(function (c) {
-        b.$header_.find('th').eq(c).data(a(this).data());
-      }), b.$body.find('tr:first-child:not(.no-records-found) > *').each(function (c) {
-        b.$header_.find('div.fht-cell').eq(c).width(a(this).innerWidth());
-      }), b.$el.css('margin-top', -b.$header.height()), d.off('scroll').on('scroll', function () {
-        c.scrollLeft(a(this).scrollLeft());
-      }), b.trigger('post-header');
-    }));
-  }, h.prototype.toggleColumn = function (a, c, d) {
-    if (-1 !== a && (this.options.columns[a].visible = c, this.initHeader(), this.initSearch(), this.initPagination(), this.initBody(), this.options.showColumns)) {
-      var e = this.$toolbar.find('.keep-open input').prop('disabled', !1);
-      d && e.filter(b('[value="%s"]', a)).prop('checked', c), e.filter(':checked').length <= this.options.minimumCountColumns && e.filter(':checked').prop('disabled', !0);
-    }
-  }, h.prototype.resetView = function (a) {
-    {
-      var b = this;
-      this.header;
-    }
-    if (a && a.height && (this.options.height = a.height), this.$selectAll.prop('checked', this.$selectItem.length > 0 && this.$selectItem.length === this.$selectItem.filter(':checked').length), this.options.height) {
-      var c = +this.$toolbar.children().outerHeight(!0), d = +this.$pagination.children().outerHeight(!0), e = this.options.height - c - d;
-      this.$container.find('.fixed-table-container').css('height', e + 'px');
-    }
-    return this.options.cardView ? (b.$el.css('margin-top', '0'), void b.$container.find('.fixed-table-container').css('padding-bottom', '0')) : (this.options.showHeader && this.options.height ? this.resetHeader() : this.trigger('post-header'), void (this.options.height && this.options.showHeader && this.$container.find('.fixed-table-container').css('padding-bottom', '37px')));
-  }, h.prototype.getData = function () {
-    return this.searchText || !a.isEmptyObject(this.filterColumns) ? this.data : this.options.data;
-  }, h.prototype.load = function (b) {
-    var c = !1;
-    'server' === this.options.sidePagination ? (this.options.totalRows = b.total, c = b.fixedScroll, b = b.rows) : a.isArray(b) || (c = b.fixedScroll, b = b.data), this.initData(b), this.initSearch(), this.initPagination(), this.initBody(c);
-  }, h.prototype.append = function (a) {
-    this.initData(a, 'append'), this.initSearch(), this.initPagination(), this.initBody(!0);
-  }, h.prototype.prepend = function (a) {
-    this.initData(a, 'prepend'), this.initSearch(), this.initPagination(), this.initBody(!0);
-  }, h.prototype.remove = function (b) {
-    var c, d, e = this.options.data.length;
-    if (b.hasOwnProperty('field') && b.hasOwnProperty('values')) {
-      for (c = e - 1; c >= 0; c--)
-        d = this.options.data[c], d.hasOwnProperty(b.field) && -1 !== a.inArray(d[b.field], b.values) && this.options.data.splice(c, 1);
-      e !== this.options.data.length && (this.initSearch(), this.initPagination(), this.initBody(!0));
-    }
-  }, h.prototype.insertRow = function (a) {
-    a.hasOwnProperty('index') && a.hasOwnProperty('row') && (this.data.splice(a.index, 0, a.row), this.initBody(!0));
-  }, h.prototype.updateRow = function (b) {
-    b.hasOwnProperty('index') && b.hasOwnProperty('row') && (a.extend(this.data[b.index], b.row), this.initBody(!0));
-  }, h.prototype.mergeCells = function (b) {
-    var c, d, e = b.index, f = a.inArray(b.field, this.header.fields), g = b.rowspan || 1, h = b.colspan || 1, i = this.$body.find('tr'), j = i.eq(e).find('td').eq(f);
-    if (!(0 > e || 0 > f || e >= this.data.length)) {
-      for (c = e; e + g > c; c++)
-        for (d = f; f + h > d; d++)
-          i.eq(c).find('td').eq(d).hide();
-      j.attr('rowspan', g).attr('colspan', h).show();
-    }
-  }, h.prototype.getOptions = function () {
-    return this.options;
-  }, h.prototype.getSelections = function () {
-    var b = this;
-    return a.grep(this.data, function (a) {
-      return a[b.header.stateField];
-    });
-  }, h.prototype.checkAll = function () {
-    this.checkAll_(!0);
-  }, h.prototype.uncheckAll = function () {
-    this.checkAll_(!1);
-  }, h.prototype.checkAll_ = function (a) {
-    var b;
-    a || (b = this.getSelections()), this.$selectItem.filter(':enabled').prop('checked', a), this.updateRows(a), this.updateSelected(), a && (b = this.getSelections()), this.trigger(a ? 'check-all' : 'uncheck-all', b);
-  }, h.prototype.check = function (a) {
-    this.check_(!0, a);
-  }, h.prototype.uncheck = function (a) {
-    this.check_(!1, a);
-  }, h.prototype.check_ = function (a, c) {
-    this.$selectItem.filter(b('[data-index="%s"]', c)).prop('checked', a), this.data[c][this.header.stateField] = a, this.updateSelected(), this.trigger(a ? 'check' : 'uncheck', this.data[c]);
-  }, h.prototype.checkBy = function (a) {
-    this.checkBy_(!0, a);
-  }, h.prototype.uncheckBy = function (a) {
-    this.checkBy_(!1, a);
-  }, h.prototype.checkBy_ = function (c, d) {
-    if (d.hasOwnProperty('field') && d.hasOwnProperty('values')) {
-      var e = this;
-      a.each(this.options.data, function (f, g) {
-        return g.hasOwnProperty(d.field) ? void (-1 !== a.inArray(g[d.field], d.values) && (e.$selectItem.filter(b('[data-index="%s"]', f)).prop('checked', c), g[e.header.stateField] = c, e.trigger(c ? 'check' : 'uncheck', g))) : !1;
-      }), this.updateSelected();
-    }
-  }, h.prototype.destroy = function () {
-    this.$el.insertBefore(this.$container), a(this.options.toolbar).insertBefore(this.$el), this.$container.next().remove(), this.$container.remove(), this.$el.html(this.$el_.html()).css('margin-top', '0').attr('class', this.$el_.attr('class') || '');
-  }, h.prototype.showLoading = function () {
-    this.$loading.show();
-  }, h.prototype.hideLoading = function () {
-    this.$loading.hide();
-  }, h.prototype.togglePagination = function () {
-    this.options.pagination = !this.options.pagination;
-    var a = this.$toolbar.find('button[name="paginationSwitch"] i');
-    this.options.pagination ? a.attr('class', this.options.iconsPrefix + ' ' + this.options.icons.paginationSwitchDown) : a.attr('class', this.options.iconsPrefix + ' ' + this.options.icons.paginationSwitchUp), this.updatePagination();
-  }, h.prototype.refresh = function (a) {
-    a && a.url && (this.options.url = a.url, this.options.pageNumber = 1), this.initServer(a && a.silent, a && a.query);
-  }, h.prototype.showColumn = function (a) {
-    this.toggleColumn(d(this.options.columns, a), !0, !0);
-  }, h.prototype.hideColumn = function (a) {
-    this.toggleColumn(d(this.options.columns, a), !1, !0);
-  }, h.prototype.filterBy = function (b) {
-    this.filterColumns = a.isEmptyObject(b) ? {} : b, this.options.pageNumber = 1, this.initSearch(), this.updatePagination();
-  }, h.prototype.scrollTo = function (a) {
-    var b = this.$container.find('.fixed-table-body');
-    'string' == typeof a && (a = 'bottom' === a ? b[0].scrollHeight : 0), 'number' == typeof a && b.scrollTop(a);
-  }, h.prototype.selectPage = function (a) {
-    a > 0 && a <= this.options.totalPages && (this.options.pageNumber = a, this.updatePagination());
-  }, h.prototype.prevPage = function () {
-    this.options.pageNumber > 1 && (this.options.pageNumber--, this.updatePagination());
-  }, h.prototype.nextPage = function () {
-    this.options.pageNumber < this.options.totalPages && (this.options.pageNumber++, this.updatePagination());
-  }, h.prototype.toggleView = function () {
-    this.options.cardView = !this.options.cardView, this.initHeader(), this.initBody();
-  };
-  var i = [
-      'getOptions',
-      'getSelections',
-      'getData',
-      'load',
-      'append',
-      'prepend',
-      'remove',
-      'insertRow',
-      'updateRow',
-      'mergeCells',
-      'checkAll',
-      'uncheckAll',
-      'check',
-      'uncheck',
-      'checkBy',
-      'uncheckBy',
-      'refresh',
-      'resetView',
-      'destroy',
-      'showLoading',
-      'hideLoading',
-      'showColumn',
-      'hideColumn',
-      'filterBy',
-      'scrollTo',
-      'selectPage',
-      'prevPage',
-      'nextPage',
-      'togglePagination',
-      'toggleView'
-    ];
-  a.fn.bootstrapTable = function (b, c) {
-    var d;
-    return this.each(function () {
-      var e = a(this), f = e.data('bootstrap.table'), g = a.extend({}, h.DEFAULTS, e.data(), 'object' == typeof b && b);
-      if ('string' == typeof b) {
-        if (a.inArray(b, i) < 0)
-          throw 'Unknown method: ' + b;
-        if (!f)
-          return;
-        d = f[b](c), 'destroy' === b && e.removeData('bootstrap.table');
-      }
-      f || e.data('bootstrap.table', f = new h(this, g));
-    }), 'undefined' == typeof d ? this : d;
-  }, a.fn.bootstrapTable.Constructor = h, a.fn.bootstrapTable.defaults = h.DEFAULTS, a.fn.bootstrapTable.columnDefaults = h.COLUMN_DEFAULTS, a.fn.bootstrapTable.locales = h.LOCALES, a.fn.bootstrapTable.methods = i, a(function () {
-    a('[data-toggle="table"]').bootstrapTable();
-  });
-}(jQuery);
 /**
 * jquery.matchHeight.js master
 * http://brm.io/jquery-match-height/
@@ -44622,6 +43928,115 @@ if (!console) {
   }($));
   return Slider;
 }));
+/* jQuery rt Responsive Tables - v1.0.2 - 2014-07-07
+* https://github.com/stazna01/jQuery-rt-Responsive-Tables
+*
+* This plugin is built heavily upon the work by Chris Coyier
+* found at http://css-tricks.com/responsive-data-tables/
+*
+* Copyright (c) 2014 Nathan Stazewski; Licensed MIT */
+(function ($) {
+  $.fn.rtResponsiveTables = function (options) {
+    // This is the easiest way to have default options.
+    var settings = $.extend({ containerBreakPoint: 0 }, options);
+    rtStartingOuterWidth = $(window).width();
+    //used later to detect orientation change across all mobile browsers (other methods don't always work on Android)
+    is_iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+    //needed due to the fact that iOS scrolling causes false resizes
+    rt_responsive_table_object = this;
+    function isEmpty(el) {
+      return !$.trim(el.html());
+    }
+    function rt_write_css(rt_class_identifier) {
+      rt_css_code = '<style type="text/css">';
+      $(rt_class_identifier).find('th').each(function (index, element) {
+        rt_css_code += rt_class_identifier + '.rt-vertical-table td:nth-of-type(' + (index + 1) + '):before { content: "' + $(this).text() + '"; }';
+      });
+      rt_css_code += '</style>';
+      $(rt_css_code).appendTo('head');
+    }
+    function determine_table_width(rt_table_object) {
+      //outerWidth doesn't work properly in Safari if the table is overflowing its container
+      rt_table_width = 0;
+      if (rt_table_object.hasClass('rt-vertical-table')) {
+        rt_table_width = rt_table_object.outerWidth();
+      } else {
+        rt_table_object.find('th').each(function (index, element) {
+          rt_table_width += $(this).outerWidth();
+        });
+        rt_table_width = rt_table_width;  //this seems to fix a rounding bug in firefox
+      }
+      return rt_table_width;
+    }
+    function fix_responsive_tables() {
+      if ($('table.rt-responsive-table').length) {
+        $('table.rt-responsive-table').each(function (index) {
+          rt_containers_width = $(this).parent().width();
+          rt_current_width = determine_table_width($(this)) - 1;
+          //this "-1" seems to fix an issue in firefox without harming any other browsers
+          rt_max_width = $(this).attr('data-rt-max-width');
+          rt_has_class_rt_vertical_table = $(this).hasClass('rt-vertical-table');
+          if ($(this).attr('data-rtContainerBreakPoint')) {
+            rt_user_defined_container_breakpoint = $(this).attr('data-rtContainerBreakPoint');
+          } else {
+            rt_user_defined_container_breakpoint = settings.containerBreakPoint;
+          }
+          if (rt_containers_width < rt_current_width || rt_containers_width <= rt_user_defined_container_breakpoint) {
+            //the parent element is less than the current width of the table or the parent element is less than or equal to a user supplied breakpoint
+            $(this).addClass('rt-vertical-table');
+            //switch to vertical orientation (or at least keep it that orientation)
+            if (rt_max_width > rt_current_width && rt_max_width > rt_user_defined_container_breakpoint) {
+              //the max width was set too high and needs to be adjusted to this lower number
+              $(this).attr('data-rt-max-width', rt_current_width);
+            } else if (rt_max_width > rt_current_width && rt_max_width <= rt_user_defined_container_breakpoint) {
+              //same as above but in this case the breakpoint is larger or equal so it needs to be set as the max width
+              $(this).attr('data-rt-max-width', rt_user_defined_container_breakpoint);
+            }
+          } else if (rt_containers_width > rt_max_width && rt_containers_width > rt_user_defined_container_breakpoint) {
+            //the parent element is bigger than the max width and user supplied breakpoint
+            $(this).removeClass('rt-vertical-table');
+            //switch to horizontal orientation (or at least keep it that orientation)
+            if (rt_max_width > rt_current_width && !rt_has_class_rt_vertical_table && (rt_max_width > rt_user_defined_container_breakpoint && !rt_has_class_rt_vertical_table)) {
+              //max width is greater than the table's current width and it's in horizontal mode currently...so the max width was set to low and needs to be adjusted to a higher number
+              $(this).attr('data-rt-max-width', rt_current_width);
+            } else if (rt_max_width > rt_current_width && !rt_has_class_rt_vertical_table && (rt_max_width <= rt_user_defined_container_breakpoint && !rt_has_class_rt_vertical_table)) {
+              //same as above but in this case the user supplied breakpoint is larger or equal so it needs to be set as the max width
+              $(this).attr('data-rt-max-width', rt_user_defined_container_breakpoint);
+            }
+          } else {
+          }
+        });
+      }
+    }
+    rt_responsive_table_object.each(function (index, element) {
+      $(this).addClass('rt-responsive-table-' + index).addClass('rt-responsive-table');
+      if (index == rt_responsive_table_object.length - 1) {
+        $(window).resize(function () {
+          if (!is_iOS || is_iOS && rtStartingOuterWidth !== $(window).width()) {
+            rtStartingOuterWidth = $(window).width();
+            //MUST update the starting width so future orientation changes will be noticed
+            fix_responsive_tables();
+          }
+        });
+        rt_responsive_table_count = $('table.rt-responsive-table').length;
+        $('table.rt-responsive-table').each(function (index2, element2) {
+          rt_write_css('table.rt-responsive-table-' + index2);
+          $('table.rt-responsive-table-' + index2).attr('data-rt-max-width', determine_table_width($(this)));
+          $(this).find('td,th').each(function (index3, element3) {
+            //empty td tags made them disappear
+            if (isEmpty($(this))) {
+              $(this).html('&#160;');
+            }
+          });
+          if (rt_responsive_table_count - 1 == index2) {
+            fix_responsive_tables();
+          }
+        });
+      }
+    });
+    return this;
+  };
+}(jQuery));
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 });
@@ -44674,6 +44089,49 @@ angular.module('dellUiComponents').directive('toggle', function () {
         $(element).on('click', function (event) {
           event.preventDefault();
         });
+        break;
+      case 'load-more':
+        var selector = attributes.target, size_li = $(selector + ' li').size(), x = 3;
+        if (!selector) {
+          console.error('You must use data-target when using data-toggle="load-more". ');
+        }
+        $(selector + ' li:lt(' + x + ')').show();
+        $(element).click(function () {
+          x = x + 5 <= size_li ? x + 5 : size_li;
+          $(selector + ' li:lt(' + x + ')').fadeIn(1500);
+          if ($(selector + ' li:visible').size() === size_li) {
+            $(element).hide();
+          }
+        });
+        break;
+      case 'list-truncated':
+        var target = attributes.target;
+        if (!target) {
+          target = $(element).prev();
+        }
+        if ($(target).find('li').length <= 5) {
+          $(element).hide();
+        } else {
+          var maxHeight = 0, minHeight = 0;
+          _.each($(target).find('li'), function (listItem, index) {
+            if (index < 5) {
+              minHeight = minHeight + $(listItem).height();
+            }
+            maxHeight = maxHeight + $(listItem).height();
+          });
+          $(target).height(minHeight);
+          $(element).on('click', function () {
+            var height = minHeight;
+            if ($(element).hasClass('collapsed')) {
+              height = maxHeight;
+            }
+            $(element).toggleClass('collapsed');
+            $(target).animate({ height: height }, {
+              duration: 300,
+              specialEasing: { height: 'swing' }
+            });
+          });
+        }
         break;
       }
     }
@@ -45319,16 +44777,18 @@ angular.module('dellUiComponents').directive('alertCollapsible', function () {
     }
   };
 });
-angular.module('dellUiComponents').directive('table', function () {
-  // Runs during compile
-  return {
-    scope: {},
-    restrict: 'C',
-    link: function ($scope, $element, $attrs, controller) {
-      $element.bootstrapTable();
-    }
-  };
-});
+angular.module('dellUiComponents').directive('tableResponsive', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    return {
+      restrict: 'AC',
+      link: function ($scope, $element, $attrs, controller) {
+        $element.rtResponsiveTables({ containerBreakPoint: 300 });
+      }
+    };
+  }
+]);
 /**
  * Created by Clint_Batte on 5/7/2015.
  */
@@ -45429,12 +44889,23 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     };
   }
 ]);
-Eve.scope('.contact-drawer', function () {
-  this.listen('.contact-drawer-cta', 'click', function (e) {
-    var contactDrawer = $(e.currentTarget).parents('.contact-drawer');
-    contactDrawer.toggleClass('open');
+/* globals: jQuery, Eve */
+/* ======================================================================================
+ * Dell-UI-Components: contact-drawer.js
+ * http://www.delldesignlibrary.com/components/contact-drawer/
+ * ======================================================================================
+ * Copyright 2015 Dell, Inc.
+ * Licensed under MIT (https://github.com/DellGDC/dell-ui-components/blob/master/LICENSE)
+ * ======================================================================================
+ */
+//Requires jQuery and Eve.js
+(function ($, Eve) {
+  Eve.scope('.contact-drawer', function () {
+    this.listen('.contact-drawer-cta', 'click', function (e) {
+      $(e.currentTarget).parent().toggleClass('open');
+    });
   });
-});
+}(jQuery, Eve));
 /* globals s */
 angular.module('demo', [
   'ui.utils',
@@ -45961,12 +45432,7 @@ angular.module('demo').controller('progressBarsPLayDemoCtrl', [
 angular.module('demo').controller('tablesCtrl', [
   '$scope',
   '$rootScope',
-  'uiGridConstants',
-  function ($scope, $rootScope, uiGridConstants) {
-    //this is for functionality related to demo code
-    $('thead tr th').click(function () {
-      console.log($(this).html());
-    });
+  function ($scope, $rootScope) {
   }
 ]);
 angular.module('demo').controller('tablesPLayDemoCtrl', [
@@ -46431,7 +45897,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/breadcrumbs/demo-play-breadcrumbs.html', '<section ng-controller=breadcrumbsPLayDemoCtrl id=breadcrumbs-play-demo><div class=container><h2>Breadcrumbs Builder</h2><div></div></div></section>');
     $templateCache.put('components/carousel/demo-carousel.html', '<section ng-controller=carouselCtrl id=carousel-html-example><div class=container><h2>Carousel Demo</h2><h3 class=top-offset-40>Banner carousel with all options</h3><div id=banner-carousel-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-example data-slide-to=0></li><li data-target=#banner-carousel-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-example data-slide-to=2></li></ol><a class="left carousel-control" href=#banner-carousel-example data-slide=prev></a> <a class="right carousel-control" href=#banner-carousel-example data-slide=next></a></div><hr><h3 class=top-offset-40>Banner carousel with no arrows</h3><div id=banner-carousel-no-arrows-example class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class=item><a href=javascript:;><img alt="First slide" src=http://placehold.it/1140x430></a></div><div class="item active"><a href=javascript:;><img alt="Second slide" src=http://placehold.it/1140x430></a></div><div class=item><a href=javascript:;><img alt="Third slide" src=http://placehold.it/1140x430></a></div></div><ol class=carousel-indicators><li data-target=#banner-carousel-no-arrows-example data-slide-to=0></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=1 class=active></li><li data-target=#banner-carousel-no-arrows-example data-slide-to=2></li></ol></div><hr><h3 class=top-offset-40>Banner carousel captions no arrows</h3><div id=carousel-example-with-caption class="carousel slide carousel-gallery" data-ride=carousel><div class=carousel-inner><div class="item active"><img alt="First slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>First slide lorem ipsum dolor sit amet.</h2><p>First slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Second slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Second slide lorem ipsum dolor sit amet.</h2><p>Second slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div><div class=item><img alt="second slide" src=http://placehold.it/1140x430 alt=Image class=image><div class="well well-banner pull-left"><h2 class=hidden-xs>Fourth slide lorem ipsum dolor sit amet.</h2><p>Fourth slide: Mauris in ultricies leo, fermentum consectetur ligula.</p><p><a href=# class="btn btn-primary pull-left hidden-xs">Buy Now!</a> <a href=# class="pull-left visible-xs">Buy Now!</a></p></div></div></div><ol class=carousel-indicators><li data-target=#carousel-example-with-caption data-slide-to=0 class=active></li><li data-target=#carousel-example-with-caption data-slide-to=1></li><li data-target=#carousel-example-with-caption data-slide-to=2></li><li data-target=#carousel-example-with-caption data-slide-to=3></li></ol></div><h3 class=top-offset-40>Adaptive carousel mobile / static mosaic desktop & tablet</h3><div class=hidden-xs><div class=row><div class="col-sm-12 col-md-6 bottom-offset-20"><div class="well well-teaser"><img src=http://placehold.it/720x505 alt=720x505 class=img-responsive></div><div class=well-caption><a href=javascript:;><h5 class=text-blue>Better security for better business.</h5></a></div></div></div><div class=row><div class="col-sm-6 col-md-3 bottom-offset-20"><div class="well well-teaser"><img src=http://placehold.it/720x505 alt=720x505 class=img-responsive></div><div class=well-caption><a href=javascript:;><h5 class=text-blue>Security is a shared responsibility.</h5></a></div></div><div class="col-sm-6 col-md-3 bottom-offset-20"><div class="well well-teaser"><img src=http://placehold.it/720x505 alt=720x505 class=img-responsive></div><div class=well-caption><a href=javascript:;><h5 class=text-blue>Can your IT security lorum ipsum?</h5></a></div></div></div></div><div id=mosaic-carousel class="carousel slide carousel-gallery visible-xs-block" data-ride=carousel><div class=carousel-inner><div class="item active"><img src=http://placehold.it/720x505 alt=720x505 class=img-responsive><div class="well well-banner"><a href=javascript:;><h3 class=text-blue>Better security for better business.</h3></a></div></div><div class=item><img src=http://placehold.it/720x505 alt=720x505 class=img-responsive><div class="well well-banner pull-left"><a href=javascript:;><h3 class=text-blue>Security is a shared responsibility.</h3></a></div></div><div class=item><img alt="First slide" src=http://placehold.it/720x505 alt=Image class=img-responsive><div class="well well-banner pull-left"><a href=javascript:;><h3 class=text-blue>Can your IT security lorum ipsum?</h3></a></div></div></div><ol class=carousel-indicators><li data-target=#mosaic-carousel data-slide-to=0 class=active></li><li data-target=#mosaic-carousel data-slide-to=1></li><li data-target=#mosaic-carousel data-slide-to=2></li></ol></div><hr class="top-offset-60"><h3 class=top-offset-40>Filmstrip carousel images (no arrows on XS)</h3><div class="carousel carousel-filmstrip"><div class=carousel-inner><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 1" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 2" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 3" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 4" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 5" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 6" alt=Image class=img-responsive></a></div><div class=item><a href=javascript:;><img src="http://placehold.it/250x250/cccccc/FFFFFF&text=Image 7" alt=Image class=img-responsive></a></div></div></div><h3 class=top-offset-40>Filmstrip carousel with images and content block (no arrows on XS)</h3><div class="carousel carousel-filmstrip-arrow-only"><div class=carousel-inner><div class=item><a href=javascript:;><img src="http://placehold.it/300x200/cccccc/FFFFFF&text=Image 1" alt=300x200 class=img-responsive><h5 class=text-blue>Content Headline Title Goes Here</h5></a><p>Etiam velit ex, sagittis non vehicula in, efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus, non interdum felis ornare sit amet.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/300x200/cccccc/FFFFFF&text=Image 2" alt=300x200 class=img-responsive><h5 class=text-blue>Headline Title Goes Here with Additional Headline</h5></a><p>Aenean interdum nulla sed ante imperdiet, sit amet aliquam dui iaculis. Vivamus tempus ligula eget fringilla venenatis. Suspendisse malesuada leo nunc, in suscipit velit molestie sed. Integer lacus quam, gravida eu sollicitudin in, convallis ac justo. Nullam eget turpis eu elit finibus aliquet in in nisl.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/300x200/cccccc/FFFFFF&text=Image 3" alt=300x200 class=img-responsive><h5 class=text-blue>Content Headline Title Goes Here</h5></a><p>Etiam velit ex, sagittis non vehicula in, efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/300x200/cccccc/FFFFFF&text=Image 4" alt=300x200 class=img-responsive><h5 class=text-blue>Headline Title Goes Here</h5></a><p>Vehicula in, efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus, non interdum felis ornare sit amet. Aliquam erat volutpat.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/300x200/cccccc/FFFFFF&text=Image 5" alt=300x200 class=img-responsive><h5 class=text-blue>Content Headline Title Goes Here</h5></a><p>Nullam eget turpis eu elit finibus aliquet in in nisl. Aenean interdum nulla sed ante imperdiet, sit amet aliquam dui iaculis. Vivamus tempus ligula eget fringilla venenatis. Suspendisse malesuada leo nunc, in suscipit velit molestie sed. Integer lacus quam, gravida eu sollicitudin in, convallis ac justo.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/300x200/cccccc/FFFFFF&text=Image 6" alt=300x200 class=img-responsive><h5 class=text-blue>Headline Title Goes Here</h5></a><p>Etiam velit ex, sagittis non vehicula in, efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus, non interdum felis ornare sit amet.</p></div><div class=item><a href=javascript:;><img src="http://placehold.it/300x200/cccccc/FFFFFF&text=Image 7" alt=300x200 class=img-responsive><h5 class=text-blue>Content Headline Title Goes Here</h5></a><p>liquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. efficitur vel massa. Aliquam erat volutpat. Maecenas id laoreet leo. Ut ut pretium ex. Nunc fermentum vehicula lectus, non interdum felis ornare sit amet.</p></div></div></div></div></section>');
     $templateCache.put('components/carousel/demo-play-carousel.html', '<section ng-controller=carouselPLayDemoCtrl id=carousel-play-demo><div class=container><h2>Carousel Builder</h2><div></div></div></section>');
-    $templateCache.put('components/collapsible-items/demo-collapsible-items.html', '<section ng-controller=collapsibleItemsCtrl id=collapsible-items-html-example><div class=container><h2>Collapsible-Items Demo</h2><div class=bottom-offset-40><h3 class=bottom-offset-30>Standard accordion</h3><div class=panel-group id=accordion><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#One>Headline title goes here</a></h4></div><div id=One class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Two class=collapsed>Headline title goes here</a></h4></div><div id=Two class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Three class=collapsed>Headline title goes here</a></h4></div><div id=Three class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div ng-if=!guidanceOff class="alert alert-info alert-dismissable bottom-offset-40"><h4>To default a panel open:</h4><p>You have to do two things:</p><ul><li>Remove the class <code>collapsed</code> from the trigger.</li><li>Add the class <code>in</code> to the target panel-collapse.</li></ul></div><div class=bottom-offset-60><h3 class=bottom-offset-30>Accordion with independent panels</h3><div id=accordion-independent-panels><div class=panel-group id=accordion-independant><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#bags-1>Headline title goes here</a></h4></div><div id=bags-1 class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#tax-1 class=collapsed>Headline title goes here</a></h4></div><div id=tax-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#home-1 class=collapsed>Headline title goes here</a></h4></div><div id=home-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div class=bottom-offset-60><h3 class=bottom-offset-30>Accordion with independent panels in a well</h3><div class="well well-white text-gray-medium well-white-stroke"><div id=accordion-independent-panels-well><div class=panel-group id=accordion-independent-1A><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-1A href=#bags-1A>Headline title goes here</a></h4></div><div id=bags-1A class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-1A><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-1A class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#tax-1A class=collapsed>Headline title goes here</a></h4></div><div id=tax-1A class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-1A><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-1A class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#home-1A class=collapsed>Headline title goes here</a></h4></div><div id=home-1A class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-1A><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-1A class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div></div><div class=bottom-offset-60><h3 class=bottom-offset-20>Accordion with show/hide links</h3><div class=show-hide-links><a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse:not(.in)" aria-expanded=false>Show all</a> | <a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse.in" aria-expanded=false>Hide all</a></div><div class=panel-group id=accordion-independent-with-show-all><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#bags-2 class=collapsed>Headline title goes here</a></h4></div><div id=bags-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#tax-2 class=collapsed>Headline title goes here</a></h4></div><div id=tax-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#home-2 class=collapsed>Headline title goes here</a></h4></div><div id=home-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div><h3 class=bottom-offset-20>From a link</h3><div class=bottom-offset-40><div class=bottom-offset-10><p><a href=javascript:; class=collapsed data-toggle=collapse data-target=#collapsible-example-area-5><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show stuff</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Hide stuff</span></a></p><p id=collapsible-example-area-5 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.</p></div></div><div class=bottom-offset-60><h3 class=bottom-offset-20>Social links show/hide</h3><div class=inline-image-content-links><h4 class=bottom-offset-5>Dell on Dell</h4><ul class="list-inline image-content-links list-group content-card icon-tooltip" ng-class="{\'view-all\': viewAll[\'parent-image-link-1\']}"><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Facebook" class=icon-social-facebook></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Twitter" class=icon-social-twitter></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on LinkedIn" class=icon-social-linkedin></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Google+" class=icon-social-google_plus></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on SlideShare" class=icon-social-slideshare></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on YouTube" class=icon-social-youtube></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Flickr" class=icon-social-flickr></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Storify" class=icon-social-storify></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Pinterest" class=icon-social-pinterest></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Xing" class=icon-social-xing></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Renren" class=icon-social-renren></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Weibo" class=icon-social-weibo></a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-image-link-1\']"><a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-image-link-1\'] = true">View All</a></div></div></div></div></section>');
+    $templateCache.put('components/collapsible-items/demo-collapsible-items.html', '<section ng-controller=collapsibleItemsCtrl id=collapsible-items-html-example><div class=container><h2>Collapsible-Items Demo</h2><div class=bottom-offset-40><h3 class=bottom-offset-30>Standard accordion</h3><div class=panel-group id=accordion><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#One>Headline title goes here</a></h4></div><div id=One class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Two class=collapsed>Headline title goes here</a></h4></div><div id=Two class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div><div class="panel panel-default"><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion href=#Three class=collapsed>Headline title goes here</a></h4></div><div id=Three class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div ng-if=!guidanceOff class="alert alert-info alert-dismissable bottom-offset-40"><h4>To default a panel open:</h4><p>You have to do two things:</p><ul><li>Remove the class <code>collapsed</code> from the trigger.</li><li>Add the class <code>in</code> to the target panel-collapse.</li></ul></div><div class=bottom-offset-60><h3 class=bottom-offset-30>Accordion with independent panels</h3><div id=accordion-independent-panels><div class=panel-group id=accordion-independant><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#bags-1>Headline title goes here</a></h4></div><div id=bags-1 class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#tax-1 class=collapsed>Headline title goes here</a></h4></div><div id=tax-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#home-1 class=collapsed>Headline title goes here</a></h4></div><div id=home-1 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-1><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-1 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div><div class=bottom-offset-60><h3 class=bottom-offset-30>Accordion with independent panels in a well</h3><div class="well well-white text-gray-medium well-white-stroke"><div id=accordion-independent-panels-well><div class=panel-group id=accordion-independent-1A><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-1A href=#bags-1A>Headline title goes here</a></h4></div><div id=bags-1A class="panel-collapse collapse in"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-1A><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-1A class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#tax-1A class=collapsed>Headline title goes here</a></h4></div><div id=tax-1A class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-1A><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-1A class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independant href=#home-1A class=collapsed>Headline title goes here</a></h4></div><div id=home-1A class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-1A><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-1A class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div></div></div><div class=bottom-offset-60><h3 class=bottom-offset-20>Accordion with show/hide links</h3><div class=show-hide-links><a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse:not(.in)" aria-expanded=false>Show all</a> | <a href=javascript:; class=collapsed data-toggle=collapse data-target="#accordion-independent-with-show-all .panel-collapse.in" aria-expanded=false>Hide all</a></div><div class=panel-group id=accordion-independent-with-show-all><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#bags-2 class=collapsed>Headline title goes here</a></h4></div><div id=bags-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-bags-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-bags-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#tax-2 class=collapsed>Headline title goes here</a></h4></div><div id=tax-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-tax-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-tax-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div><div class=panel-heading><h4 class=panel-title><a data-toggle=collapse data-parent=#accordion-independent-with-show-all href=#home-2 class=collapsed>Headline title goes here</a></h4></div><div id=home-2 class="panel-collapse collapse"><div class=panel-body>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven\'t heard of them accusamus labore sustainable VHS.<div class=top-offset-10><div class=bottom-offset-5><a href=javascript:; class=collapsed data-toggle=collapse data-target=#show-hide-solutions-a><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show more</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Show less</span></a></div><div id=show-hide-solutions-a class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis.</div></div></div></div></div></div><h3 class=bottom-offset-20>From a link</h3><div class=bottom-offset-40><div class=bottom-offset-10><p><a href=javascript:; class=collapsed data-toggle=collapse data-target=#collapsible-example-area-5><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>Show stuff</span> <span class=hide-expanded><i aria-hidden=true class=icon-ui-triangledown></i>Hide stuff</span></a></p><p id=collapsible-example-area-5 class=collapse>Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.</p></div></div><h3 class="bottom-offset-10 top-offset-40">Show-hide expand/collapse</h3><div class=bottom-offset-40><div class=bottom-offset-10><ul id=truncated-list-sample class=list-truncated><li><a class=btn-link href=javascript:;>one</a></li><li><a class=btn-link href=javascript:;>two</a></li><li><a class=btn-link href=javascript:;>three</a></li><li><a class=btn-link href=javascript:;>four</a></li><li><a class=btn-link href=javascript:;>five</a></li><li><a class=btn-link href=javascript:;>six</a></li><li><a class=btn-link href=javascript:;>seven</a></li><li><a class=btn-link href=javascript:;>eight</a></li><li><a class=btn-link href=javascript:;>nine</a></li><li><a class=btn-link href=javascript:;>ten</a></li><li><a class=btn-link href=javascript:;>eleven</a></li><li><a class=btn-link href=javascript:;>twelve</a></li><li><a class=btn-link href=javascript:;>thirteen</a></li></ul><a href=javascript:; class=collapsed data-toggle=list-truncated data-target=#truncated-list-sample><span class="show-collapsed btn-link">Show more</span> <span class="hide-expanded btn-link">Show less</span></a></div><h3 class="bottom-offset-10 top-offset-40">Show-hide expand no-collapse</h3><div class=bottom-offset-40><div class=bottom-offset-10><ul id=truncated-list-sample-expand class=list-truncated><li><a class=btn-link href=javascript:;>one</a></li><li><a class=btn-link href=javascript:;>two</a></li><li><a class=btn-link href=javascript:;>three</a></li><li><a class=btn-link href=javascript:;>four</a></li><li><a class=btn-link href=javascript:;>five</a></li><li><a class=btn-link href=javascript:;>six</a></li><li><a class=btn-link href=javascript:;>seven</a></li><li><a class=btn-link href=javascript:;>eight</a></li><li><a class=btn-link href=javascript:;>nine</a></li><li><a class=btn-link href=javascript:;>ten</a></li><li><a class=btn-link href=javascript:;>eleven</a></li><li><a class=btn-link href=javascript:;>twelve</a></li><li><a class=btn-link href=javascript:;>thirteen</a></li></ul><a href=javascript:; class=collapsed data-toggle=list-truncated data-target=#truncated-list-sample-expand><span class="show-collapsed btn-link">Show more</span></a></div><div class="bottom-offset-60bottom-offset-20 top-offset-40"><h3 class=bottom-offset-20>Social links show/hide</h3><div class=inline-image-content-links><h4 class=bottom-offset-5>Dell on Dell</h4><ul class="list-inline image-content-links list-group content-card icon-tooltip" ng-class="{\'view-all\': viewAll[\'parent-image-link-1\']}"><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Facebook" class=icon-social-facebook></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Twitter" class=icon-social-twitter></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on LinkedIn" class=icon-social-linkedin></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Google+" class=icon-social-google_plus></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on SlideShare" class=icon-social-slideshare></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on YouTube" class=icon-social-youtube></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Flickr" class=icon-social-flickr></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Storify" class=icon-social-storify></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Pinterest" class=icon-social-pinterest></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Xing" class=icon-social-xing></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Renren" class=icon-social-renren></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Dell on Weibo" class=icon-social-weibo></a></li></ul><div class=content-toggle ng-hide="viewAll[\'parent-image-link-1\']"><a href=javascript:; class=visible-xs ng-click="viewAll[\'parent-image-link-1\'] = true">View All</a></div></div></div></div></div></div></section>');
     $templateCache.put('components/collapsible-items/demo-play-collapsible-items.html', '<section ng-controller=collapsibleItemsPLayDemoCtrl id=collapsible-items-play-demo><div class=container><h2>Collapsible-Items Builder</h2><div></div></div></section>');
     $templateCache.put('components/colors/demo-colors.html', '<section ng-controller=colorsCtrl id=colors-html-example><div class=container><h2>Colors Demo</h2><div><div class=row><div class="col-sm-12 col-md-4"><div class="well well-white text-gray-dark well-white-stroke"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;White</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#ffffff</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-white</span><br></div><div class="well text-gray-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#eeeeee</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well text-white well-gray"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#aaaaaa</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-gray-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Gray Dark</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#444444</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-gray-dark</span><br></div><div class="well well-blue"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#007db8</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-blue</span><br></div><div class="well well-dark-blue"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Blue</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#00447c</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-dark-blue</span><br></div><div class="well text-gray-medium well-light-green"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Light Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#C1D82F</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div></div><div class="col-sm-12 col-md-4"><div class="well well-green"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Green</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6EA204</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-green</span><br></div><div class="well well-yellow"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Yellow</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f2af00</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div><div class="well well-orange"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Orange</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#EE6411</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-orange</span><br></div><div class="well well-red"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#D74324</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red</span><br></div><div class="well well-red-dark"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Dark Red</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#CE1126</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-red-dark</span><br></div><div class="well well-berry"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Berry</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#B7295A</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-berry</span><br></div><div class="well well-purple"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Purple</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#6E2585</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;text-purple</span><br></div><div class="well well-teal"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Dell Teal</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#42aeaf</span><br><span class=pull-left>css:</span><span class=pull-right>&nbsp;&nbsp;n/a</span><br></div></div><div class="col-sm-12 col-md-4 well"><p>**The following colors may <strong>only be used</strong> in instances associated below.</p><div class="well text-gray-dark well-gray-very-light well-gray-very-light-stroke"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;7% Dell Light Gray</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;backgrounds only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#f9f9f9</span><br></div><div class="well text-white well-gray-medium"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;75% Dell Gray Dark</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;borders only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#737373</span><br></div><div class="well text-gray-dark well-alert-yellow"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;Online Alert Yellow</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp;Alerts only</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#FFFFC9</span><br></div><div class="well text-gray-dark well-dell-blue-20-percent"><span class=pull-left>color:</span><span class=pull-right>&nbsp;&nbsp;20% Dell Blue</span><br><span class=pull-left>use:</span><span class=pull-right>&nbsp;&nbsp; highlighting and selecting</span><br><span class=pull-left>hex:</span><span class=pull-right>&nbsp;&nbsp;#CCE5F1</span><br></div></div></div></div></div></section>');
     $templateCache.put('components/colors/demo-play-colors.html', '<section ng-controller=colorsPLayDemoCtrl id=colors-play-demo><div class=container><h2>Colors Builder</h2><div></div></div></section>');
@@ -46466,7 +45932,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/offsets/demo-play-offsets.html', '<section ng-controller=offsetsPLayDemoCtrl id=offsets-play-demo><div class=container><h2>Offsets Builder</h2><div></div></div></section>');
     $templateCache.put('components/pagers/demo-pagers.html', '<section ng-controller=pagersCtrl id=pagers-html-example><div class=container><h2>Pagers Demo</h2><div><div class=bottom-offset-60><h3 class=bottom-offset-40>Standard pagers</h3><div class=bottom-offset-40><ul class=pager><li><a href=javascript:;><span aria-hidden=true class=icon-ui-arrowleft></span></a></li><li><a href=javascript:;><span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div><h3>Pagers with text</h3><div class=bottom-offset-40><ul class=pager><li><a href=javascript:;><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><a href=javascript:;>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div></div></div></div></section>');
     $templateCache.put('components/pagers/demo-play-pagers.html', '<section ng-controller=pagersPLayDemoCtrl id=pagers-play-demo><div class=container><h2>Pagers Builder</h2><div></div></div></section>');
-    $templateCache.put('components/pagination/demo-pagination.html', '<section ng-controller=paginationCtrl id=pagination-html-example><div class=container><h2>Pagination Demo</h2><div><h3 class="top-offset-40 bottom-offset-20">Centered pagination</h3><div class="pagination center-block"><ul class=pager><li><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div><h3 class="top-offset-40 bottom-offset-20">Justified pagination</h3><div class=row><div class="pagination col-xs-12"><ul class="pager bottom-offset-20"><li class=previous><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li class=next><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div></div><h3 class="top-offset-40 bottom-offset-20">Centered pagination with filters</h3><div class=row><div class="pagination col-xs-12 col-md-8"><ul class="pager bottom-offset-10"><li class="previous pull-left"><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li class="next pull-right"><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div><div class="col-xs-12 col-md-4 bottom-offset-10"><select class=form-control><option value="Items per page">Items per page</option><option value="20 per page">20 per page</option><option value="30 per page">30 per page</option><option value="40 per page">40 per page</option></select></div></div><div class="top-offset-40 bottom-offset-5"><h3 class=bottom-offset-40>Tap-to-Load</h3><div id=loadmore class=pager><a href=# data-action=next><button type=button data-loading-text=Loading... class="btn tap-to-load form-control btn-block next" ng-init=loadingButtonInit()>Load more results</button></a><div class="dashed-text-rule text-center"><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 6</span></div></div></div><div class=row><div class=col-xs-12><ul class="news-pagination list-unstyled top-offset-10"><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>A</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>A</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>B</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>C</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>D</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>E</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>F</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>H</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>I</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>J</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>K</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>L</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>M</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>N</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>O</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>P</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>Q</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>R</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>S</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>T</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>U</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>V</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>W</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>X</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>Y</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>Z</strong></p></li></ul></div></div></div></div></section>');
+    $templateCache.put('components/pagination/demo-pagination.html', '<section ng-controller=paginationCtrl id=pagination-html-example><div class=container><h2>Pagination Demo</h2><div><h3 class="top-offset-40 bottom-offset-20">Centered pagination</h3><div class="pagination center-block"><ul class=pager><li><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div><h3 class="top-offset-40 bottom-offset-20">Justified pagination</h3><div class=row><div class="pagination col-xs-12"><ul class="pager bottom-offset-20"><li class=previous><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li class=next><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div></div><h3 class="top-offset-40 bottom-offset-20">Centered pagination with filters</h3><div class=row><div class="pagination col-xs-12 col-md-8"><ul class="pager bottom-offset-10"><li class="previous pull-left"><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li class="next pull-right"><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div><div class="col-xs-12 col-md-4 bottom-offset-10"><select class=form-control><option value="Items per page">Items per page</option><option value="20 per page">20 per page</option><option value="30 per page">30 per page</option><option value="40 per page">40 per page</option></select></div></div></div><div class="top-offset-40 bottom-offset-5"><h3 class=bottom-offset-40>Tap-to-Load</h3></div><div class=bottom-offset-60><div class=row><div class=col-xs-12><ul id=load-more-example class="list-unstyled load-more"><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>A</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>A</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>B</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>C</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>D</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is an data set example <strong>E</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>F</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>H</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>I</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>J</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is an data set example <strong>K</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>L</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>M</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>N</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>O</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is an data set example <strong>P</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>Q</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>R</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>S</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>T</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is an data set example <strong>U</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>V</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>W</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>X</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>Y</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is an data set example <strong>Z</strong></p></li></ul><div class=pager><button id=load-more-link type=button data-loading-text=Loading... data-target=#load-more-example data-toggle=load-more class="btn tap-to-load form-control btn-block">Load more results</button></div></div></div></div></div></section>');
     $templateCache.put('components/pagination/demo-play-pagination.html', '<section ng-controller=paginationPLayDemoCtrl id=pagination-play-demo><div class=container><h2>Pagination Builder</h2><div></div></div></section>');
     $templateCache.put('components/popovers/demo-play-popovers.html', '<section ng-controller=popoversPLayDemoCtrl id=popovers-play-demo><div class=container><h2>Popovers Builder</h2><div></div></div></section>');
     $templateCache.put('components/popovers/demo-popovers.html', '<section ng-controller=popoversCtrl id=popovers-html-example><div class=container><h2>Popovers Demo</h2><div><div class=bottom-offset-40><ul class="unstyled list-inline"><li class=top-offset-20><a tabindex=0 data-trigger=focus class="btn btn-default hidden-xs" data-html=true data-toggle=popover data-placement=top data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on top &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on top</a></li><li class=top-offset-20><a tabindex=0 data-trigger=focus class="btn btn-default hidden-xs" data-html=true data-toggle=popover data-placement=right data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on right</a></li><li class=top-offset-20><a tabindex=0 data-trigger=focus class="btn btn-default hidden-xs" data-html=true data-toggle=popover data-placement=bottom data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on bottom &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on bottom</a></li><li class=top-offset-20><a tabindex=0 data-trigger=focus class="btn btn-default hidden-xs" data-html=true data-toggle=popover data-placement=left data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on left</a></li></ul></div></div></div></section>');
@@ -46481,7 +45947,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/standard-buttons/demo-play-standard-buttons.html', '<section ng-controller=standardButtonsPLayDemoCtrl id=standard-buttons-play-demo><div class=container><h2>Standard-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/standard-buttons/demo-standard-buttons.html', '<section ng-controller=standardButtonsCtrl id=standard-buttons-html-example><div class=container><h2 class=bottom-offset-20>Standard-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase</h4><a class="btn btn-primary" href=javascript:;>Primary</a></div><div class=bottom-offset-30><h4>Primary Non-Purchase disabled</h4><a class="btn btn-primary disabled" href=javascript:;>Primary</a></div><hr><div class=bottom-offset-30><h4>Primary Purchase</h4><a class="btn btn-success" href=javascript:;>Purchase</a></div><div class=bottom-offset-30><h4>Primary Purchase disabled</h4><a class="btn btn-success disabled" href=javascript:;>Purchase</a></div><hr><div class=bottom-offset-30><h4>Secondary or General Use</h4><a class="btn btn-default" href=javascript:;>General Use</a></div><div class=bottom-offset-30><h4>Secondary or General Use disabled</h4><a class="btn btn-default disabled" href=javascript:;>General Use</a></div><hr><div class=bottom-offset-30><h4>Primary link</h4><a class="btn btn-link" href=javascript:;>Link</a></div><div class=bottom-offset-30><h4>Primary link disabled</h4><a class="btn btn-link disabled" href=javascript:;>Link</a></div></div></section>');
     $templateCache.put('components/tables/demo-play-tables.html', '<section ng-controller=tablesPLayDemoCtrl id=tables-play-demo><div class=container><h2>Tables Builder</h2><div></div></div></section>');
-    $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><h3>Data Tables - Simple</h3><div class=bottom-offset-20><div><table class="table table-hover"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div><h3>Data Tables - Simple w/ optional zebra striping</h3><div class=bottom-offset-20><div><table class="table table-hover table-striped"><thead><tr><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th><th>Column 7</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:2</td><td><a href=javascript:;>value 1:3</a></td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td><td>value 1:7</td></tr><tr><th scope=row>2</th><td>value 2:2</td><td>value 2:3</td><td><a href=javascript:;>value 2:4</a></td><td>value 2:5</td><td>value 2:6</td><td>value 2:7</td></tr><tr><th scope=row>3</th><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td><td>value 3:7</td></tr></tbody></table></div></div></div></section>');
+    $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><h3>Data Tables - Simple</h3><div class=bottom-offset-40><div class=table-responsive><table class="table table-hover"><thead><tr><th>Date</th><th>Order</th><th>Product</th><th>Description</th><th>Status</th><th>Delivery</th><th>Tracking</th></tr></thead><tbody><tr><th scope=row>03/19/15</th><td>#42568</td><td><a href=javascript:;>Optiplex 9020</a></td><td>OptiPlex 9020-Dell\u2019s premium business-class desktop.</td><td>In process</td><td>03/22/15</td><td>TBD</td></tr><tr><th scope=row>03/22/15</th><td>#77475</td><td><a href=javascript:;>OptiPlex 7020</a></td><td>Mainstream performance, and advanced security and manageability.</td><td>Shipping</td><td>04/05/15</td><td><a href=javascript:;>#de467ft53s</a></td></tr><tr><th scope=row>03/24/15</th><td>#44356</td><td><a href=javascript:;>OptiPlex XE2</a></td><td>Long-term computing solution and highly durable OptiPlex XE2</td><td>Out for Delivery</td><td>04/08/15</td><td><a href=javascript:;>#0U812-90210s</a></td></tr></tbody></table></div></div><h3>Data Tables - Simple w/ optional zebra striping</h3><div class=bottom-offset-40><div class=table-responsive><table class="table table-hover table-striped"><thead><tr><th>&nbsp;</th><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:1</td><td><a href=javascript:;>value 1:2</a></td><td>value 1:3</td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td></tr><tr><th scope=row>2</th><td>value 2:1</td><td>value 2:2</td><td><a href=javascript:;>value 2:3</a></td><td>value 2:4</td><td>value 2:5</td><td>value 2:6</td></tr><tr><th scope=row>3</th><td>value 3:1</td><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td></tr></tbody></table></div></div><h3>Data Tables - Responsive Simple Table</h3><div class=bottom-offset-40><div id=responsive-simple-table><table class="table table-hover table-striped table-responsive"><thead data-rtcontainerbreakpoint=1000><tr><th>Date</th><th>Order</th><th>Product</th><th>Description</th><th>Status</th><th>Delivery</th><th>Tracking</th></tr></thead><tbody><tr><td scope=row><strong>03/19/15</strong></td><td>#42568</td><td><a href=javascript:;>Optiplex 9020</a></td><td>OptiPlex 9020-Dell\u2019s premium business-class desktop.</td><td>In process</td><td>03/22/15</td><td>TBD</td></tr><tr><td scope=row><strong>03/22/15</strong></td><td>#77475</td><td><a href=javascript:;>OptiPlex 7020</a></td><td>Mainstream performance, and advanced security and manageability.</td><td>Shipping</td><td>04/05/15</td><td><a href=javascript:;>#de467ft53s</a></td></tr><tr><td scope=row><strong>03/24/15</strong></td><td>#44356</td><td><a href=javascript:;>OptiPlex XE2</a></td><td>Long-term computing solution and highly durable OptiPlex XE2</td><td>Out for Delivery</td><td>04/08/15</td><td><a href=javascript:;>#0U812-90210s</a></td></tr></tbody></table></div></div></div></section>');
     $templateCache.put('components/tabs/demo-play-tabs.html', '<section ng-controller=tabsPLayDemoCtrl id=tabs-play-demo><div class=container><h2>Tabs Builder</h2><div></div></div></section>');
     $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs"><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings <i class="icon-ui-arrowright visible-xs-block"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</div></div><div role=tabpanel class="tab-pane fade" id=profile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. Vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</div></div><div role=tabpanel class="tab-pane fade" id=messages><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</div></div><div role=tabpanel class="tab-pane fade" id=settings><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</div></div></div></div></div><div class=row><h3 class="col-xs-12 top-offset-60">Tabs <small>(justified)</small></h3></div><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#long-example aria-controls=long-example role=tab data-toggle=tab>Example to show the auto adjusted tab height. <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#automobile aria-controls=Automobile role=tab data-toggle=tab>Automobile<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#boats aria-controls=Boats role=tab data-toggle=tab>Boats<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#planes aria-controls=Planes role=tab data-toggle=tab>Planes<i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=long-example><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Long example Aute gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div><div role=tabpanel class="tab-pane fade" id=automobile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Automobile magna biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div><div role=tabpanel class="tab-pane fade" id=boats><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Boats nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div><div role=tabpanel class="tab-pane fade" id=planes><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Planes biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div><div class=row><h3 class="col-xs-12 top-offset-60">Tabs <small>(centered)</small></h3></div><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-centered" role=tablist><li role=presentation class=active><a href=#inspiron role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Inspiron Laptops</h4><p class=text-gray-dark>For home and home office</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#latitude role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Latitude Laptops</h4><p class=text-gray-dark>For business-class security and reliability</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#vostro role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Vostro Laptops</h4><p class=text-gray-dark>For small business computing</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#XPS role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>XPS Laptops</h4><p class=text-gray-dark>For the ultimate experience</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#precision role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Dell Precision Mobile Workstation\'s</h4><p class=text-gray-dark>For professional creators</p><i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=inspiron><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Inspiron gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div><div role=tabpanel class="tab-pane fade" id=latitude><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Latitude biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div><div role=tabpanel class="tab-pane fade" id=vostro><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Vostro nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div><div role=tabpanel class="tab-pane fade" id=XPS><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>XPS biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div><div role=tabpanel class="tab-pane fade" id=precision><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Precision biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div></div></section>');
     $templateCache.put('components/tooltips/demo-play-tooltips.html', '<section ng-controller=tooltipsPLayDemoCtrl id=tooltips-play-demo><div class=container><h2>Tooltips Builder</h2><div></div></div></section>');
