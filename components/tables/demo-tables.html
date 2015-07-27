@@ -219,78 +219,58 @@
             <!--Data Tables - Responsive (Sorting)-->
         </div>
 
-        <h3>
+        <h3 class="bottom-offset-60">
             Data Tables - Responsive (fixed-columns)
         </h3>
+
         <!--Data Tables - Responsive (fixed-columns)-->
-        <div class="bottom-offset-40">
-            <table id="fixed-columns-table" class="table table-hover table-striped table-fixed-column">
-                <thead>
-                <tr>
-                    <th>Last Name</th>
-                    <th>First Name</th>
-                    <th>Email</th>
-                    <th>Due</th>
-                    <th>Web Site</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Smith</td>
-                    <td>John</td>
-                    <td>jsmith@gmail.com</td>
-                    <td>$50.00</td>
-                    <td>http://www.jsmith.com</td>
-                </tr>
-                <tr>
-                    <td>Bach</td>
-                    <td>Frank</td>
-                    <td>fbach@yahoo.com</td>
-                    <td>$50.00</td>
-                    <td>http://www.frank.com</td>
-                </tr>
-                <tr>
-                    <td>Doe</td>
-                    <td>Jason</td>
-                    <td>jdoe@hotmail.com</td>
-                    <td>$100.00</td>
-                    <td>http://www.jdoe.com</td>
-                </tr>
-                <tr>
-                    <td>Conway</td>
-                    <td>Tim</td>
-                    <td>tconway@earthlink.net</td>
-                    <td>$50.00</td>
-                    <td>http://www.timconway.com</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="tablesorter-scroller tablesorter-scroller-has-fixed-columns">
+            <div class="table-fixed-column">
+                <table id="fixed-columns-table" class="table table-hover table-striped tablesorter">
+                    <thead>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                        <th>Due</th>
+                        <th>Web Site</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Smith</td>
+                        <td>John</td>
+                        <td>jsmith@gmail.com</td>
+                        <td>$50.00</td>
+                        <td>http://www.jsmith.com</td>
+                    </tr>
+                    <tr>
+                        <td>Bach</td>
+                        <td>Frank</td>
+                        <td>fbach@yahoo.com</td>
+                        <td>$50.00</td>
+                        <td>http://www.frank.com</td>
+                    </tr>
+                    <tr>
+                        <td>Doe</td>
+                        <td>Jason</td>
+                        <td>jdoe@hotmail.com</td>
+                        <td>$100.00</td>
+                        <td>http://www.jdoe.com</td>
+                    </tr>
+                    <tr>
+                        <td>Conway</td>
+                        <td>Tim</td>
+                        <td>tconway@earthlink.net</td>
+                        <td>$50.00</td>
+                        <td>http://www.timconway.com</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-            <!--Data Tables - Responsive (fixed-columns)-->
-        </div>
+            </div>
 
-<script>
-
-    $(function () {
-
-        $('table-fixed-column').tablesorter({
-            theme: 'blue',
-            // widthFixed: true, // <- now automatically set by the scroller widget
-            showProcessing: true,
-            widgets: ['zebra', 'scroller'],
-            widgetOptions: {
-                scroller_fixedColumns: 1,
-                scroller_height: 300,
-                // scroll tbody to top after sorting
-                scroller_upAfterSort: true,
-                // pop table header into view while scrolling up the page
-                scroller_jumpToHeader: true
-            }
-        });
-
-    });
-
-</script>
+        </div> <!-- tablesorter-scroller-has-fixed-columns -->
 
 
 
