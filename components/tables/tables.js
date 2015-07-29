@@ -14,16 +14,16 @@
 
 angular.module('dellUiComponents')
 
-    .directive('tableSort', function($timeout){
+    .directive('tableFixedHeader', function($timeout){
         // Runs during compile
         // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
         return {
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
 
-
                 $(document).ready(function() {
-                    var table = $('#table-fixed').DataTable({
+
+                    var table = $('.table-sort').DataTable({
                         "pagingType": "simple",
                         "language": {
                             "paginate": {
@@ -31,16 +31,38 @@ angular.module('dellUiComponents')
                                 "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
                             }
 
-                        },
-                        //"scrollY": "300px",
-                        //"scrollX": "100%",
-                        //"scrollCollapse": true,
-                        //"paging": false
+                        }
                     });
                     new $.fn.dataTable.FixedHeader( table );
+
                 });
 
+            }
+        };
+    })
 
+    .directive('tableFixed', function($timeout){
+        // Runs during compile
+        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+        return {
+            restrict: 'C',
+            link: function($scope, $element, iAttrs, controller ) {
+
+                $(document).ready(function() {
+
+                    var table = $('.table-fixed-column').DataTable({
+                        "pagingType": "simple",
+                        "language": {
+                            "paginate": {
+                                "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
+                                "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
+                            }
+
+                        }
+                    });
+                    new $.fn.dataTable.FixedHeader( table );
+
+                });
 
             }
         };
