@@ -12,52 +12,40 @@
  * ======================================================================================
  */
 
-//angular.module('dellUiComponents')
-//
-//    .directive('tableSort', function($timeout){
-//        // Runs during compile
-//        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
-//        return {
-//            restrict: 'C',
-//            link: function($scope, $element, iAttrs, controller ) {
-//
-//
-//                $(function(){
-//
-//
-//                    // Remove fuzzy search
-//                    //delete $.tablesorter.filter.types.fuzzy;
-//
-//                    $('.tablesorter').tablesorter({
-//                        //theme: 'jui',
-//
-//                        showProcessing: true,
-//                        headerTemplate : '{content} {icon}',
-//                        widgets: [ 'uitheme', 'scroller' ],
-//                        widgetOptions : {
-//
-//
-//                            scroller_height : 300,
-//                            // scroll tbody to top after sorting
-//                            scroller_upAfterSort: true,
-//                            // pop table header into view while scrolling up the page
-//                            scroller_jumpToHeader: true,
-//                            // In tablesorter v2.19.0 the scroll bar width is auto-detected
-//                            // add a value here to override the auto-detected setting
-//                            scroller_barWidth : null
-//                            // scroll_idPrefix was removed in v2.18.0
-//                            // scroller_idPrefix : 's_'
-//
-//
-//                        }
-//                    });
-//                });
-//
-//
-//            }
-//        };
-//    });
-//
-//
-//
+angular.module('dellUiComponents')
+
+    .directive('tableSort', function($timeout){
+        // Runs during compile
+        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+        return {
+            restrict: 'C',
+            link: function($scope, $element, iAttrs, controller ) {
+
+
+                $(document).ready(function() {
+                    var table = $('#table-fixed').DataTable({
+                        "pagingType": "simple",
+                        "language": {
+                            "paginate": {
+                                "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
+                                "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
+                            }
+
+                        },
+                        //"scrollY": "300px",
+                        //"scrollX": "100%",
+                        //"scrollCollapse": true,
+                        //"paging": false
+                    });
+                    new $.fn.dataTable.FixedHeader( table );
+                });
+
+
+
+            }
+        };
+    });
+
+
+
 
