@@ -1,11 +1,3 @@
-/*
- * Simple data tables - bootstrap css override
- */
-
-
-// ---------- /Responsive Simple Table ---------
-
-
 // ================== Datatables bootstrap ====================
 div.dataTables_length {
     label {
@@ -54,18 +46,24 @@ div.dataTables_paginate {
     div.dataTables_paginate {
         text-align: left; //modified from center
     }
-
     div.DTTT {
         margin-bottom: 0.5em;
     }
 }
 // ========== /modified ============
 
+
+
+// ====== doubling happening here ===========
 table.dataTable td,table.dataTable th {
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
 }
+
+
+
+// =========== adding bootstrap sort icons  ==========
 table.dataTable {
     clear: both;
     margin-top: 6px !important;
@@ -73,14 +71,17 @@ table.dataTable {
     max-width: none !important;
     thead {
         .sorting:after {
-            opacity: 0.2;
+            //opacity: 0.2;
             content: "\e150";
+            color: @dell-blue;
         }
         .sorting_asc:after {
             content: "\e155";
+            color: @dell-blue;
         }
         .sorting_desc:after {
             content: "\e156";
+            color: @dell-blue;
         }
         & > tr {
             & > th {
@@ -92,6 +93,7 @@ table.dataTable {
         outline: none;
     }
 }
+
 table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc,table.dataTable thead .sorting_asc_disabled,table.dataTable thead .sorting_desc_disabled {
     cursor: pointer;
     position: relative;
@@ -102,7 +104,7 @@ table.dataTable thead .sorting:after,table.dataTable thead .sorting_asc:after,ta
     right: 8px;
     display: block;
     font-family: 'Glyphicons Halflings';
-    opacity: 0.5;
+    opacity: 0.8;
 }
 div.dataTables_scrollBody table.dataTable thead .sorting:after,div.dataTables_scrollBody table.dataTable thead .sorting_asc:after,div.dataTables_scrollBody table.dataTable thead .sorting_desc:after {
     display: none;
@@ -123,9 +125,8 @@ table.dataTable.table-condensed thead .sorting:after,table.dataTable.table-conde
     top: 6px;
     right: 6px;
 }
+// =========== adding bootstrap sort icons  ==========
 
-
-//================
 div.dataTables_scrollHead {
     table {
         margin-bottom: 0 !important;
@@ -136,10 +137,8 @@ div.dataTables_scrollHead {
         border-bottom-width: 0;
     }
 }
-//================
 
-
-
+//=================================
 
 div.dataTables_scrollHead table thead tr:last-child th:first-child,div.dataTables_scrollHead table thead tr:last-child td:first-child {
     border-bottom-left-radius: 0 !important;
@@ -192,6 +191,9 @@ table.table-bordered th:last-child,table.table-bordered td:last-child {
 .table-striped.dataTable tbody tr.active:nth-child(odd) td,.table-striped.dataTable tbody tr.active:nth-child(odd) th {
     background-color: #017ebc;
 }
+
+//=================================
+//=================================
 table.DTTT_selectable {
     tbody {
         tr {
@@ -199,7 +201,6 @@ table.DTTT_selectable {
         }
     }
 }
-
 
 div.DTTT {
     .btn:hover {
@@ -221,6 +222,9 @@ ul.DTTT_dropdown.dropdown-menu {
         }
     }
 }
+//=================================
+//=================================
+
 div.DTTT_collection_background {
     z-index: 2002;
 }
@@ -252,8 +256,8 @@ div.DTTT_print_info {
         line-height: 20px;
     }
 }
-
-
+//=================================
+//======================================
 
 div.dataTables_processing {
     position: absolute;
@@ -275,6 +279,8 @@ div.dataTables_processing {
     background: -o-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 75%, rgba(255,255,255,0) 100%);
     background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 75%, rgba(255,255,255,0) 100%);
 }
+
+
 div.DTFC_LeftHeadWrapper table,div.DTFC_LeftFootWrapper table,div.DTFC_RightHeadWrapper table,div.DTFC_RightFootWrapper table,table.DTFC_Cloned tr.even {
     background-color: white;
     margin-bottom: 0;
@@ -290,6 +296,8 @@ div.DTFC_RightHeadWrapper table thead tr:last-child th:first-child,div.DTFC_Righ
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
+
+
 div.DTFC_RightBodyWrapper table,div.DTFC_LeftBodyWrapper table {
     border-top: none;
     margin: 0 !important;
@@ -304,13 +312,15 @@ div.DTFC_RightFootWrapper table,div.DTFC_LeftFootWrapper table {
 div.DTFC_LeftBodyWrapper table.dataTable thead .sorting:after,div.DTFC_LeftBodyWrapper table.dataTable thead .sorting_asc:after,div.DTFC_LeftBodyWrapper table.dataTable thead .sorting_desc:after,div.DTFC_RightBodyWrapper table.dataTable thead .sorting:after,div.DTFC_RightBodyWrapper table.dataTable thead .sorting_asc:after,div.DTFC_RightBodyWrapper table.dataTable thead .sorting_desc:after {
     display: none;
 }
+
+//==== fixes doubling =============
 div.FixedHeader_Cloned {
     table {
         margin: 0 !important;
     }
 }
-
-
+//======================================
+//======================================
 
 /*
  * Table styles
@@ -321,13 +331,10 @@ table.dataTable {
     clear: both;
     border-collapse: separate;
     border-spacing: 0;
-    /*
-     * Header and footer styles
-     */
-    /*
-     * Body styles
-     */
 }
+
+//======================================
+//======================================
 table.dataTable thead th,
 table.dataTable tfoot th {
     font-weight: bold;
@@ -335,7 +342,7 @@ table.dataTable tfoot th {
 table.dataTable thead th,
 table.dataTable thead td {
     padding: 10px 18px;
-    border-bottom: 1px solid #111;
+    border-bottom: 1px solid @dell-gray;
 }
 table.dataTable thead th:active,
 table.dataTable thead td:active {
@@ -344,7 +351,7 @@ table.dataTable thead td:active {
 table.dataTable tfoot th,
 table.dataTable tfoot td {
     padding: 10px 18px 6px 18px;
-    border-top: 1px solid #111;
+    border-top: 1px solid @dell-gray;
 }
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
@@ -361,35 +368,30 @@ table.dataTable thead .sorting_desc_disabled {
     background-position: center right;
 }
 
+//======================================
 
-
-
+//================= disable sort.png =====================
 table.dataTable thead .sorting {
-    //background-image: url("../bower_components/DataTables-1.10.7/media/images/sort_both.png");
     background-image: none;
 }
 table.dataTable thead .sorting_asc {
-    //background-image: url("../bower_components/DataTables-1.10.7/media/images/sort_asc.png");
     background-image: none;
 
 }
 table.dataTable thead .sorting_desc {
-    //background-image: url("../bower_components/DataTables-1.10.7/media/images/sort_desc.png");
     background-image: none;
 
 }
 table.dataTable thead .sorting_asc_disabled {
-    //background-image: url("../bower_components/DataTables-1.10.7/media/images/sort_asc_disabled.png");
     background-image: none;
 
 }
 table.dataTable thead .sorting_desc_disabled {
-    //background-image: url("../bower_components/DataTables-1.10.7/media/images/sort_desc_disabled.png");
     background-image: none;
 }
+//================= /disable sort.png =====================
 
-
-//
+//============= commented out ===============
 //table.dataTable tbody tr {
 //    background-color: #ffffff;
 //}
@@ -760,14 +762,6 @@ table.dataTable thead .sorting_desc_disabled {
 //    height: 0;
 //}
 
-
-
-
-
-
-
-
-
 //@media screen and (max-width: 767px) {
 //    .dataTables_wrapper .dataTables_info,
 //    .dataTables_wrapper .dataTables_paginate {
@@ -789,10 +783,12 @@ table.dataTable thead .sorting_desc_disabled {
 //    }
 //}
 
+//============= commented out =============
 
 
 
-/* =============== datatable modifications =============== */
+
+
 
 div.FixedHeader_Cloned th,
 div.FixedHeader_Cloned td {
@@ -808,37 +804,38 @@ table.dataTable thead th, table.dataTable thead td {
     border-bottom: none;
 }
 
-table.dataTable thead .sorting_asc:after {
-    color: @dell-blue;
-    content: "\e253";
-    opacity: 1;
-}
+/* =============== Modifications for Dell ui triangle toggles styles =============== */
+//table.dataTable thead .sorting_asc:after {
+//    color: @dell-blue;
+//    content: "\e253";
+//    opacity: 1;
+//}
+//table.dataTable thead .sorting_desc:after {
+//    color: @dell-blue;
+//    content: "\e252";
+//    opacity: 1;
+//}
+//table.dataTable thead .sorting:after {
+//    color: @dell-blue;
+//    content: "\e252";
+//    opacity: 0.5;
+//}
+/* =============== /Modifications for Dell ui triangle toggles styles =============== */
 
-table.dataTable thead .sorting_desc:after {
-    color: @dell-blue;
-    content: "\e252";
-    opacity: 1;
-}
-table.dataTable thead .sorting:after {
-    color: @dell-blue;
-    content: "\e252";
-    opacity: 0.5;
-}
-
-/* ====== integrate back into bootstrap? =========*/
+/* ====== create pagination/pager styling  =========*/
 .dataTables_paginate .pagination > li > a,
 .dataTables_paginate .pagination > li > a:hover,
 .dataTables_paginate .pagination > li > a:focus,
 .dataTables_paginate .pagination > li.active > a {
     float: none;
     background: none;
-    border: none !important;
-    outline: none !important;
-    border-radius: none !important;
-    color: #007db8;
+    border: none;
+    outline: none;
+    border-radius: none;
+    color: @dell-blue;
 }
 
-/* ========== new DataTables Less ============ */
+/* ========== DataTables code ============ */
 .dataTables_paginate span.icon-ui-arrowright,
 .dataTables_paginate span.icon-ui-arrowleft{
     top: 2px;
@@ -856,39 +853,41 @@ table.dataTable thead .sorting:after {
 .DTFC_LeftHeadWrapper table.dataTable thead th,
 .dataTables_scrollHead table.dataTable thead th {
     border-bottom: 1px solid @dell-gray;
+    //white-space: nowrap;
+    //min-width: 150px;
+}
+.dataTables_scrollBody {
+    padding-left: 10px;
+    white-space: nowrap;
 }
 
+.DTFC_ScrollWrapper {
+    padding-left: 5px;
+    white-space: nowrap;
+}
+
+/* Ensure that the demo table scrolls */
 .DTFC_LeftBodyWrapper table.dataTable td,
 .DTFC_LeftHeadWrapper table.dataTable th {
     border-right: 1px solid @dell-gray;
+    //white-space: inherit;
 }
-
-
-/* ==== required for fixed column ====== */
-table.DTFC_Cloned thead,
-table.DTFC_Cloned tfoot {
-    background-color: red;
-}
+/* ========== /DataTables code ============ */
 
 /* Block out the gap above the scrollbar on the right, when there is a fixed right column */
 div.DTFC_Blocker {
     background-color: white;
 }
-
 div.DTFC_LeftWrapper table.dataTable,
 div.DTFC_RightWrapper table.dataTable {
     margin-bottom: 0;
     z-index: 2;
 }
-
 div.DTFC_LeftWrapper table.dataTable.no-footer,
 div.DTFC_RightWrapper table.dataTable.no-footer {
     border-bottom: none;
 }
 /* ======= /required for fixed column ======== */
-
-/* Ensure that the demo table scrolls */
-th, td { white-space: nowrap; }
 
 /* Block out what is behind the fixed column's header and footer */
 table.DTFC_Cloned thead,
@@ -896,30 +895,80 @@ table.DTFC_Cloned tfoot {
     background-color: white;
 }
 
-/* Block out the gap above the scrollbar on the right, when there is a fixed
- * right column
- */
-div.DTFC_Blocker {
-    background-color: white;
-}
 
-div.DTFC_LeftWrapper table.dataTable,
-div.DTFC_RightWrapper table.dataTable {
-    margin-bottom: 0;
-    z-index: 2;
-}
 
-div.DTFC_LeftWrapper table.dataTable.no-footer,
-div.DTFC_RightWrapper table.dataTable.no-footer {
-    border-bottom: none;
+// ================= Code for the Responsive Simple Table =====================
+// ============================================================================
+table.table-responsive td:before {
+    display: none;
 }
+@media (max-width: 767px) {
+    /*
+    Generic Styling, for Desktops/Laptops
+    */
+    table.table-responsive {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    table.table-responsive {
+        th {
+            background: #333;
+            color: white;
+            font-weight: bold;
+            padding: 6px;
+            //border: 1px solid #ccc;
+            text-align: left;
+        }
+        td {
+            padding: 6px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+    }
+    /* Force table to not be like tables anymore */
+    table.table-responsive,
+    table.table-responsive thead {
+        ///* Hide table headers (but not display: none;, for accessibility) */
+        > tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+    }
+    table.table-responsive tbody,
+    table.table-responsive th,
+    table.table-responsive td,
+    table.table-responsive tr {
+        display: block;
+        overflow: hidden;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        /* BELOW THREE STATEMENTS NEEDED FOR IE9 AND BELOW */
+        float: left;
+        clear: left;
+        width: 100%;
+    }
+    table.table-responsive td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50% !important;
+        &:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+            display: block;
+        }
+    }
+}
+// ================= /Code for the Responsive Simple Table =====================
+// ============================================================================
 
-.dataTables_wrapper .dataTables_filter {
-    float: right;
-    text-align: right;
-    margin-right: 7px;
-}
-
-.dataTables_wrapper.no-footer .dataTables_scrollBody {
-    border-bottom: none;
-}
