@@ -16,7 +16,6 @@ angular.module('dellUiComponents')
 
     .directive('tableFixedHeader', function($timeout){
         // Runs during compile
-        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
         return {
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
@@ -41,28 +40,23 @@ angular.module('dellUiComponents')
         };
     })
 
-    .directive('tableFixed', function($timeout){
+    .directive('tableFixedColumn', function($timeout){
         // Runs during compile
-        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
         return {
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
 
+
                 $(document).ready(function() {
+                    var table = $('.table-column').DataTable( {
+                        scrollY:        "300px",
+                        scrollX:        true,
+                        scrollCollapse: true,
+                        paging:         false
+                    } );
+                    new $.fn.dataTable.FixedColumns( table );
+                } );
 
-                    var table = $('.table-fixed-column').DataTable({
-                        "pagingType": "simple",
-                        "language": {
-                            "paginate": {
-                                "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
-                                "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
-                            }
-
-                        }
-                    });
-                    new $.fn.dataTable.FixedHeader( table );
-
-                });
 
             }
         };
