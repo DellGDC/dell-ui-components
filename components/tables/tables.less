@@ -104,21 +104,21 @@ div.dataTables_paginate {
         white-space: nowrap;
     }
 }
-
+// ========== modified ============
 @media screen and (max-width: 767px) {
     div.dataTables_wrapper > div.row > div,
     div.dataTables_length,
     div.dataTables_filter,
     div.dataTables_info,
     div.dataTables_paginate {
-        text-align: center;
+        text-align: left; //modified from center
     }
 
     div.DTTT {
         margin-bottom: 0.5em;
     }
 }
-
+// ========== /modified ============
 
 table.dataTable td,table.dataTable th {
     -webkit-box-sizing: content-box;
@@ -890,20 +890,35 @@ table.dataTable thead .sorting:after {
     margin: 0 2px;
 }
 
-.dataTables_paginate.paging_full_numbers > .pagination > li.btn.btn-default {
-    color: @dell-blue;
-    padding-left: 1px;
-    padding-right: 1px;
+.DTFC_LeftHeadWrapper table.dataTable thead th,
+.dataTables_scrollHead table.dataTable thead th {
+    border-bottom: 1px solid @dell-gray;
 
-    li + li {
-        content: " | ";
-        padding-right: 10px;
-        color: @dell-blue;
-    }
-    &.active {
-        color: @dell-gray-dark;
-    }
+        -webkit-box-shadow: 0 8px 6px -6px black;
+        -moz-box-shadow: 0 8px 6px -6px black;
+        box-shadow: 0 8px 6px -6px black;
+
 }
+
+.DTFC_LeftBodyWrapper table.dataTable td,
+.DTFC_LeftHeadWrapper table.dataTable th {
+    border-right: 1px solid @dell-gray;
+}
+
+//.dataTables_paginate.paging_full_numbers > .pagination > li.btn.btn-default {
+//    color: @dell-blue;
+//    padding-left: 1px;
+//    padding-right: 1px;
+//
+//    li + li {
+//        content: " | ";
+//        padding-right: 10px;
+//        color: @dell-blue;
+//    }
+//    &.active {
+//        color: @dell-gray-dark;
+//    }
+//}
 
 /* ==== required for fixed column ====== */
 table.DTFC_Cloned thead,
@@ -952,5 +967,15 @@ div.DTFC_RightWrapper table.dataTable {
 
 div.DTFC_LeftWrapper table.dataTable.no-footer,
 div.DTFC_RightWrapper table.dataTable.no-footer {
+    border-bottom: none;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    float: right;
+    text-align: right;
+    margin-right: 7px;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
     border-bottom: none;
 }
