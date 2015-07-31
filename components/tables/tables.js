@@ -48,20 +48,71 @@ angular.module('dellUiComponents')
 
 
                 $(document).ready(function() {
-                    var table = $('.table-column').DataTable( {
+                    var table = $('.table-column').DataTable({
                         scrollY:        "300px",
                         scrollX:        true,
                         scrollCollapse: true,
                         paging:         false
-                    } );
+                    });
                     new $.fn.dataTable.FixedColumns( table );
-                } );
+                });
 
 
             }
         };
+    })
+
+    .directive('responsiveDataTable', function($timeout){
+        // Runs during compile
+        return {
+            restrict: 'C',
+            link: function($scope, $element, iAttrs, controller ) {
+
+
+                $(document).ready(function() {
+                    var table = $('#example-rdt').DataTable( {
+                        "scrollY": "200px",
+                        "paging": false
+                    } );
+
+                    $('a.toggle-vis').on( 'click', function (e) {
+                        e.preventDefault();
+
+                        // Get the column API object
+                        var column = table.column( $(this).attr('data-column') );
+
+                        // Toggle the visibility
+                        column.visible( ! column.visible() );
+                    });
+                });
+
+
+                //$(document).ready(function() {
+                //
+                //    $('#example-rdt').DataTable({
+                //        responsive: {
+                //            details: {
+                //                type: 'column'
+                //            }
+                //        },
+                //        "pagingType": "simple",
+                //        "language": {
+                //            "paginate": {
+                //                "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
+                //                "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
+                //            }
+                //        },
+                //        columnDefs: [ {
+                //            className: 'control',
+                //            orderable: false,
+                //            targets:   0
+                //        } ],
+                //        order: [ 1, 'asc' ]
+                //
+                //    });
+                //});
+            }
+        };
     });
-
-
 
 
