@@ -328,7 +328,7 @@ ColVis.prototype = {
 			this.s.restore = this.s.sRestore;
 		}
 
-		// CamelCase to Hungarian for the column groups 
+		// CamelCase to Hungarian for the column groups
 		var groups = this.s.groups;
 		var hungarianGroups = this.s.aoGroups;
 		if ( groups ) {
@@ -921,7 +921,7 @@ ColVis.defaults = {
 	 *  @type     string
 	 *  @default  Show / hide columns
 	 */
-	buttonText: 'Show / hide columns',
+	buttonText: '<i class=\"glyphicon glyphicon-option-horizontal text-blue\"><\/i>',
 
 	/**
 	 * List of columns (integers) which should be excluded from the list
