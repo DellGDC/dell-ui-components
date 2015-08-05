@@ -73,7 +73,8 @@ angular.module('dellUiComponents')
                         dom: 'C<"clear">lfrtip',
                         displayLength: 5,
                         paging: false,
-                        scrollY:"300px"
+                        scrollY:"300px",
+                        scrollX: true
                     });
                 });
 
@@ -125,7 +126,8 @@ angular.module('dellUiComponents')
                         dom: 'C<"clear">lfrtip',
                         displayLength: 5,
                         paging: false,
-                        scrollY:"300px"
+                        scrollY:"300px",
+                        scrollX: true
                     });
 
                     // Add event listener for opening and closing details
@@ -144,9 +146,7 @@ angular.module('dellUiComponents')
                             tr.addClass('shown');
                         }
                     });
-
                 });
-
             }
         };
     });

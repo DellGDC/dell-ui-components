@@ -280,7 +280,6 @@ div.dataTables_processing {
     background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.9) 75%, rgba(255,255,255,0) 100%);
 }
 
-
 div.DTFC_LeftHeadWrapper table,div.DTFC_LeftFootWrapper table,div.DTFC_RightHeadWrapper table,div.DTFC_RightFootWrapper table,table.DTFC_Cloned tr.even {
     background-color: white;
     margin-bottom: 0;
@@ -296,7 +295,6 @@ div.DTFC_RightHeadWrapper table thead tr:last-child th:first-child,div.DTFC_Righ
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }
-
 
 div.DTFC_RightBodyWrapper table,div.DTFC_LeftBodyWrapper table {
     border-top: none;
@@ -333,8 +331,6 @@ table.dataTable {
     border-spacing: 0;
 }
 
-//======================================
-//======================================
 table.dataTable thead th,
 table.dataTable tfoot th {
     font-weight: bold;
@@ -368,8 +364,6 @@ table.dataTable thead .sorting_desc_disabled {
     background-position: center right;
 }
 
-//======================================
-
 //================= disable sort.png =====================
 table.dataTable thead .sorting {
     background-image: none;
@@ -395,9 +389,9 @@ table.dataTable thead .sorting_desc_disabled {
 //table.dataTable tbody tr {
 //    background-color: #ffffff;
 //}
-//table.dataTable tbody tr.selected {
-//    background-color: #B0BED9;
-//}
+table.dataTable tbody tr.selected {
+    background-color: #B0BED9;
+}
 //table.dataTable tbody th,
 //table.dataTable tbody td {
 //    padding: 8px 10px;
@@ -425,83 +419,83 @@ table.dataTable thead .sorting_desc_disabled {
 //table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
 //    background-color: #f9f9f9;
 //}
-//table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected {
-//    background-color: #abb9d3;
-//}
-//table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
-//    background-color: whitesmoke;
-//}
-//table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
-//    background-color: #a9b7d1;
-//}
-//table.dataTable.order-column tbody tr > .sorting_1,
-//table.dataTable.order-column tbody tr > .sorting_2,
-//table.dataTable.order-column tbody tr > .sorting_3, table.dataTable.display tbody tr > .sorting_1,
-//table.dataTable.display tbody tr > .sorting_2,
-//table.dataTable.display tbody tr > .sorting_3 {
-//    background-color: #f9f9f9;
-//}
-//table.dataTable.order-column tbody tr.selected > .sorting_1,
-//table.dataTable.order-column tbody tr.selected > .sorting_2,
-//table.dataTable.order-column tbody tr.selected > .sorting_3, table.dataTable.display tbody tr.selected > .sorting_1,
-//table.dataTable.display tbody tr.selected > .sorting_2,
-//table.dataTable.display tbody tr.selected > .sorting_3 {
-//    background-color: #acbad4;
-//}
-//table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
-//    background-color: #f1f1f1;
-//}
-//table.dataTable.display tbody tr.odd > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd > .sorting_2 {
-//    background-color: #f3f3f3;
-//}
-//table.dataTable.display tbody tr.odd > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd > .sorting_3 {
-//    background-color: whitesmoke;
-//}
-//table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1 {
-//    background-color: #a6b3cd;
-//}
-//table.dataTable.display tbody tr.odd.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_2 {
-//    background-color: #a7b5ce;
-//}
-//table.dataTable.display tbody tr.odd.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_3 {
-//    background-color: #a9b6d0;
-//}
-//table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
-//    background-color: #f9f9f9;
-//}
-//table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2 {
-//    background-color: #fbfbfb;
-//}
-//table.dataTable.display tbody tr.even > .sorting_3, table.dataTable.order-column.stripe tbody tr.even > .sorting_3 {
-//    background-color: #fdfdfd;
-//}
-//table.dataTable.display tbody tr.even.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_1 {
-//    background-color: #acbad4;
-//}
-//table.dataTable.display tbody tr.even.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_2 {
-//    background-color: #adbbd6;
-//}
-//table.dataTable.display tbody tr.even.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_3 {
-//    background-color: #afbdd8;
-//}
-//table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
-//    background-color: #eaeaea;
-//}
-//table.dataTable.display tbody tr:hover > .sorting_2, table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
-//    background-color: #ebebeb;
-//}
-//table.dataTable.display tbody tr:hover > .sorting_3, table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
-//    background-color: #eeeeee;
-//}
-//table.dataTable.display tbody tr:hover.selected > .sorting_1, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_1 {
-//    background-color: #a1aec7;
-//}
-//table.dataTable.display tbody tr:hover.selected > .sorting_2, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_2 {
-//    background-color: #a2afc8;
-//}
-//table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_3 {
-//    background-color: #a4b2cb;
-//}
+table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected {
+    background-color: #abb9d3;
+}
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+    background-color: whitesmoke;
+}
+table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
+    background-color: #a9b7d1;
+}
+table.dataTable.order-column tbody tr > .sorting_1,
+table.dataTable.order-column tbody tr > .sorting_2,
+table.dataTable.order-column tbody tr > .sorting_3, table.dataTable.display tbody tr > .sorting_1,
+table.dataTable.display tbody tr > .sorting_2,
+table.dataTable.display tbody tr > .sorting_3 {
+    background-color: #f9f9f9;
+}
+table.dataTable.order-column tbody tr.selected > .sorting_1,
+table.dataTable.order-column tbody tr.selected > .sorting_2,
+table.dataTable.order-column tbody tr.selected > .sorting_3, table.dataTable.display tbody tr.selected > .sorting_1,
+table.dataTable.display tbody tr.selected > .sorting_2,
+table.dataTable.display tbody tr.selected > .sorting_3 {
+    background-color: #acbad4;
+}
+table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
+    background-color: #E4E4E4;
+}
+table.dataTable.display tbody tr.odd > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd > .sorting_2 {
+    background-color: #f3f3f3;
+}
+table.dataTable.display tbody tr.odd > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd > .sorting_3 {
+    background-color: whitesmoke;
+}
+table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1 {
+    background-color: #a6b3cd;
+}
+table.dataTable.display tbody tr.odd.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_2 {
+    background-color: #a7b5ce;
+}
+table.dataTable.display tbody tr.odd.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_3 {
+    background-color: #a9b6d0;
+}
+table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
+    background-color: #f7f7f7;
+}
+table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2 {
+    background-color: #fbfbfb;
+}
+table.dataTable.display tbody tr.even > .sorting_3, table.dataTable.order-column.stripe tbody tr.even > .sorting_3 {
+    background-color: #fdfdfd;
+}
+table.dataTable.display tbody tr.even.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_1 {
+    background-color: #acbad4;
+}
+table.dataTable.display tbody tr.even.selected > .sorting_2, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_2 {
+    background-color: #adbbd6;
+}
+table.dataTable.display tbody tr.even.selected > .sorting_3, table.dataTable.order-column.stripe tbody tr.even.selected > .sorting_3 {
+    background-color: #afbdd8;
+}
+table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
+    background-color: #eaeaea;
+}
+table.dataTable.display tbody tr:hover > .sorting_2, table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
+    background-color: #ebebeb;
+}
+table.dataTable.display tbody tr:hover > .sorting_3, table.dataTable.order-column.hover tbody tr:hover > .sorting_3 {
+    background-color: #eeeeee;
+}
+table.dataTable.display tbody tr:hover.selected > .sorting_1, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_1 {
+    background-color: #a1aec7;
+}
+table.dataTable.display tbody tr:hover.selected > .sorting_2, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_2 {
+    background-color: #a2afc8;
+}
+table.dataTable.display tbody tr:hover.selected > .sorting_3, table.dataTable.order-column.hover tbody tr:hover.selected > .sorting_3 {
+    background-color: #a4b2cb;
+}
 //
 //table.dataTable.nowrap th, table.dataTable.nowrap td {
 //    white-space: nowrap;
@@ -785,11 +779,6 @@ table.dataTable thead .sorting_desc_disabled {
 
 //============= commented out =============
 
-
-
-
-
-
 div.FixedHeader_Cloned th,
 div.FixedHeader_Cloned td {
     background-color: white !important;
@@ -853,16 +842,15 @@ table.dataTable thead th, table.dataTable thead td {
 .DTFC_LeftHeadWrapper table.dataTable thead th,
 .dataTables_scrollHead table.dataTable thead th {
     border-bottom: 1px solid @dell-gray;
-    //white-space: nowrap;
-    //min-width: 150px;
 }
 .dataTables_scrollBody {
-    padding-left: 10px;
+    //padding-left: 10px;
     white-space: nowrap;
 }
 
 .DTFC_ScrollWrapper {
-    padding-left: 5px;
+    //padding-left: 5px;
+    padding-left: 0;
     white-space: nowrap;
 }
 
@@ -887,15 +875,11 @@ div.DTFC_LeftWrapper table.dataTable.no-footer,
 div.DTFC_RightWrapper table.dataTable.no-footer {
     border-bottom: none;
 }
-/* ======= /required for fixed column ======== */
-
 /* Block out what is behind the fixed column's header and footer */
 table.DTFC_Cloned thead,
 table.DTFC_Cloned tfoot {
     background-color: white;
 }
-
-
 
 // =================== code for DataTable responsive =========================
 // ===========================================================================
@@ -1006,21 +990,6 @@ table.dataTable > tbody > tr.child span.dtr-title {
     font-weight: bold;
 }
 
-
-
-
-// ========================== duplicate code trying to get show/hide working ===============
-// =========================================================================================
-
-
-
-// ========================== /duplicate code trying to get show/hide working ===============
-// =========================================================================================
-
-
-
-
-
 // ================= Code for the Responsive Simple Table =====================
 // ============================================================================
 table.table-responsive td:before {
@@ -1102,8 +1071,8 @@ table.table-responsive td:before {
 // ================================================================================
 td.details-control {
     position: relative;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     display: block;
     font-family: icon-ui;
     opacity: 0.8;
@@ -1127,18 +1096,19 @@ tr.shown td.details-control {
     }
 }
 
-
 div#example-dt-complex_filter,
 div#example-rdt_filter {
     text-align: left;
 }
 
+table.table-complex > tbody > tr > td > table > tbody > tr > td {
+    background: none !important;
+    padding: 5px 20px;
+    border-bottom: 1px solid @dell-gray-stroke;
+}
 
 // ================= /Code for complex and column select Table =====================
 // ================================================================================
-
-
-
 
 // =========================== Code for Column Visible  ===========================
 // ================================================================================
@@ -1147,14 +1117,16 @@ div#example-rdt_filter {
  */
 div.ColVis {
     float: right;
-    margin-bottom: 1em;
+    margin-bottom: 0;
+    top: 10px;
+    position: relative;
 }
 
 button.ColVis_Button,
 ul.ColVis_collection li {
     position: relative;
     float: left;
-    margin-right: 3px;
+    //margin-right: 3px;
     padding: 5px 8px;
     border: 1px solid #999;
     cursor: pointer;
@@ -1162,47 +1134,37 @@ ul.ColVis_collection li {
     font-size: 0.88em;
     color: black !important;
     white-space: nowrap;
-
+    background: @dell-gray-light;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
     border-radius: 2px;
-
     -webkit-box-shadow: 1px 1px 3px #ccc;
     -moz-box-shadow: 1px 1px 3px #ccc;
     -ms-box-shadow: 1px 1px 3px #ccc;
     -o-box-shadow: 1px 1px 3px #ccc;
     box-shadow: 1px 1px 3px #ccc;
-
-    /* Generated by http://www.colorzilla.com/gradient-editor/ */
-    background: #ffffff; /* Old browsers */
-    background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */
-    background:    -moz-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* FF3.6+ */
-    background:     -ms-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* IE10+ */
-    background:      -o-linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* Opera 11.10+ */
-    background:         linear-gradient(top, #ffffff 0%,#f3f3f3 89%,#f9f9f9 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
 }
 
-.ColVis_Button:hover,
+.ColVis_Button {
+    &:hover {
+        background: #dadada;
+        border-color: #adadad;
+    }
+    &:active{
+        background: #dadada;
+        border-color: #adadad;
+        color: #00618f;
+        -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+        box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    }
+}
+
 ul.ColVis_collection li:hover {
-    border: 1px solid #666;
     text-decoration: none !important;
-
-    -webkit-box-shadow: 1px 1px 3px #999;
-    -moz-box-shadow: 1px 1px 3px #999;
-    -ms-box-shadow: 1px 1px 3px #999;
-    -o-box-shadow: 1px 1px 3px #999;
-    box-shadow: 1px 1px 3px #999;
-
-    background: #f3f3f3; /* Old browsers */
-    background: -webkit-linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* Chrome10+,Safari5.1+ */
-    background:    -moz-linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* FF3.6+ */
-    background:     -ms-linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* IE10+ */
-    background:      -o-linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* Opera 11.10+ */
-    background:         linear-gradient(top, #f3f3f3 0%,#e2e2e2 89%,#f4f4f4 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#f4f4f4',GradientType=0 ); /* IE6-9 */
+    border-color: #adadad;
+    background: @dell-highlight-blue;
 }
 
 button.ColVis_Button {
@@ -1219,7 +1181,6 @@ button.ColVis_Button:active {
     outline: none;
 }
 
-
 div.ColVis_collectionBackground {
     position: fixed;
     top: 0;
@@ -1233,21 +1194,13 @@ div.ColVis_collectionBackground {
 ul.ColVis_collection {
     list-style: none;
     width: 150px;
-    padding: 8px 8px 4px 8px;
     margin: 0;
-    border: 1px solid #ccc;
-    border: 1px solid rgba( 0, 0, 0, 0.4 );
-    background-color: #f3f3f3;
-    background-color: rgba( 255, 255, 255, 0.3 );
+    border: 1px solid @dell-gray-stroke;
+    background-color: @white;
     overflow: hidden;
     z-index: 2002;
-
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    border-radius: 5px;
-
+    padding: 0;
+    border-radius: 1px;
     -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
     -ms-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -1260,17 +1213,15 @@ ul.ColVis_collection li {
     height: auto;
     left: 0;
     right: 0;
-    padding: 0.5em;
-
+    padding:1px 10px;
+    border: none;
     display: block;
     float: none;
-    margin-bottom: 4px;
-
-    -webkit-box-shadow: 1px 1px 3px #999;
-    -moz-box-shadow: 1px 1px 3px #999;
-    -ms-box-shadow: 1px 1px 3px #999;
-    -o-box-shadow: 1px 1px 3px #999;
-    box-shadow: 1px 1px 3px #999;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
 }
 
 ul.ColVis_collection li {
@@ -1286,30 +1237,30 @@ ul.ColVis_collection li span {
     display: inline-block;
     padding-left: 0.5em;
     cursor: pointer;
+    color: @dell-blue;
 }
 
-
-ul.ColVis_collection li.ColVis_Special {
-    border-color: #555;
-    background: rgb(237,237,237); /* Old browsers */
-    background: -webkit-linear-gradient(top, rgba(237,237,237,1) 0%,rgba(214,214,214,1) 77%,rgba(232,232,232,1) 100%); /* Chrome10+,Safari5.1+ */
-    background:    -moz-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(214,214,214,1) 77%, rgba(232,232,232,1) 100%); /* FF3.6+ */
-    background:     -ms-linear-gradient(top, rgba(237,237,237,1) 0%,rgba(214,214,214,1) 77%,rgba(232,232,232,1) 100%); /* IE10+ */
-    background:      -o-linear-gradient(top, rgba(237,237,237,1) 0%,rgba(214,214,214,1) 77%,rgba(232,232,232,1) 100%); /* Opera 11.10+ */
-    background:         linear-gradient(to bottom, rgba(237,237,237,1) 0%,rgba(214,214,214,1) 77%,rgba(232,232,232,1) 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
-}
-
-ul.ColVis_collection li.ColVis_Special:hover {
-    background: #e2e2e2; /* Old browsers */
-    background: -webkit-linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* Chrome10+,Safari5.1+ */
-    background:    -moz-linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* FF3.6+ */
-    background:     -ms-linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* IE10+ */
-    background:      -o-linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* Opera 11.10+ */
-    background:         linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#e2e2e2',GradientType=0 ); /* IE6-9 */
-}
-
+//ul.ColVis_collection li.ColVis_Special {
+//    border-color: #555;
+//    background: rgb(237,237,237); /* Old browsers */
+//    background: -webkit-linear-gradient(top, rgba(237,237,237,1) 0%,rgba(214,214,214,1) 77%,rgba(232,232,232,1) 100%); /* Chrome10+,Safari5.1+ */
+//    background:    -moz-linear-gradient(top, rgba(237,237,237,1) 0%, rgba(214,214,214,1) 77%, rgba(232,232,232,1) 100%); /* FF3.6+ */
+//    background:     -ms-linear-gradient(top, rgba(237,237,237,1) 0%,rgba(214,214,214,1) 77%,rgba(232,232,232,1) 100%); /* IE10+ */
+//    background:      -o-linear-gradient(top, rgba(237,237,237,1) 0%,rgba(214,214,214,1) 77%,rgba(232,232,232,1) 100%); /* Opera 11.10+ */
+//    background:         linear-gradient(to bottom, rgba(237,237,237,1) 0%,rgba(214,214,214,1) 77%,rgba(232,232,232,1) 100%); /* W3C */
+//    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
+//}
+//
+//ul.ColVis_collection li.ColVis_Special:hover {
+//    background: #e2e2e2; /* Old browsers */
+//    background: -webkit-linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* Chrome10+,Safari5.1+ */
+//    background:    -moz-linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* FF3.6+ */
+//    background:     -ms-linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* IE10+ */
+//    background:      -o-linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* Opera 11.10+ */
+//    background:         linear-gradient(top, #d0d0d0 0%,#d5d5d5 89%,#e2e2e2 100%); /* W3C */
+//    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#e2e2e2',GradientType=0 ); /* IE6-9 */
+//}
+//
 
 span.ColVis_radio {
     display: inline-block;
@@ -1324,6 +1275,7 @@ div.ColVis_catcher {
 .disabled {
     color: #999;
 }
+
 
 // =========================== /Code for Column Visible  ===========================
 // ================================================================================

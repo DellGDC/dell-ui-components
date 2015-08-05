@@ -969,7 +969,7 @@ ColVis.defaults = {
 	 *  @type     string
 	 *  @default  left
 	 */
-	sAlign: 'left',
+	sAlign: 'right',
 
 	/**
 	 * Callback function to tell the user when the state has changed
