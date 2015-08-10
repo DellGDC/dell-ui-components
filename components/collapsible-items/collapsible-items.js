@@ -12,6 +12,13 @@ angular.module('dellUiComponents')
 
                     $element.find('.content-gallery-show-more').on('click',function(e){
                         e.preventDefault();
+                        var $this = $(this);
+                        $this.toggleClass('content-gallery-show-more');
+                        if($this.hasClass('content-gallery-show-more')){
+                            $this.text('See More');
+                        } else {
+                            $this.text('See Less');
+                        }
 
 
                         var parentLi = $(e.currentTarget).parents('li')[0],
@@ -50,8 +57,14 @@ angular.module('dellUiComponents')
                                             $element.find('.open').removeClass('open');
                                             $element.find('li.details-container').remove();
                                         });
+                                        //$('.content-gallery-show-more').on('click',function(e){
+                                        //    e.preventDefault();
+                                        //    $element.find('.open').removeClass('open');
+                                        //    $element.find('li.details-container').remove();
+                                        //});
                                         done = true;
                                     } else {
+
                                         rowWidth = 0;
                                     }
 
@@ -61,7 +74,7 @@ angular.module('dellUiComponents')
 
 
                     });
-                    console.log('++++++++++++++++++++ It Fired',$scope, $element, iAttrs, controller )
+                    console.log('++++++++++++++++++++ It Fired',$scope, $element, iAttrs, controller );
 
             }
         };
