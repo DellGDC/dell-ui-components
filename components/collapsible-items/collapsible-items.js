@@ -34,13 +34,18 @@ angular.module('dellUiComponents')
                                     content = $(i).find('.content-gallery-details').html();
                                 }
                                 rowWidth = rowWidth + itemWidth;
-                                console.log("ite width", itemWidth, rowWidth, rowMaxWidth);
+                                console.log("item width", itemWidth, rowWidth, rowMaxWidth);
 
                                 if (rowWidth >= rowMaxWidth) {
                                     if (targetFound) {
                                         console.log("Found target and inserting!!!");
                                         $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>'+content+'</li>');
                                         $('.details-container .close').on('click',function(e){
+                                            e.preventDefault();
+                                            $element.find('.open').removeClass('open');
+                                            $element.find('li.details-container').remove();
+                                        });
+                                        $('.details-container').on('click',function(e){
                                             e.preventDefault();
                                             $element.find('.open').removeClass('open');
                                             $element.find('li.details-container').remove();
