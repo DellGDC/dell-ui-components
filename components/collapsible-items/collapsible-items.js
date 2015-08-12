@@ -20,63 +20,66 @@ angular.module('dellUiComponents')
                         targetFound,
                         done,
                         //------------
-                        $this = $(this),
                         content;
 
-                    $element.find('.open').removeClass('open');
-                    $element.find('li.details-container').remove();
-                    $(parentLi).addClass('open');
+                    //$('.content-gallery-show-more').transition({ opacity: 0.1, scale: 0.3 }, 'fast');
+
+                    if ($(parentLi).hasClass('open')){
+                        $element.find('.open').removeClass('open');
+                        $element.find('li.details-container').remove();
+                    } else {
+                        $element.find('.open').removeClass('open');
+                        $element.find('li.details-container').remove();
+
+                        $timeout( function() {
+
+                            $(parentLi).addClass('open');
+                            _.each(allListItems, function (i, index) {
+                                if (!done) {
+                                    var itemWidth = Math.abs(($(i).css('width')).replace(/px/, ''));
+                                    if (!targetFound) {
+                                        targetFound = $(i).hasClass('open');
+                                        content = $(i).find('.content-gallery-details').html();
+                                    }
+
+                                    rowWidth = rowWidth + itemWidth;
+                                    console.log("item width", itemWidth, rowWidth, rowMaxWidth);
+
+                                    if (rowWidth >= rowMaxWidth || index === allListItems.length -1) {
+
+
+                                        if (targetFound) {
+                                            console.log("Found target and inserting!!!");
+                                            $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
+                                            $('.details-container .close').on('click', function (e) {
+                                                e.preventDefault();
+                                                $element.find('.open').removeClass('open');
+                                                $element.find('li.details-container').remove();
+                                            });
+                                            $('.details-container').on('click', function (e) {
+                                                e.preventDefault();
+                                                $element.find('.open').transition({opacity: 0}).removeClass('open');
+                                                $element.find('li.details-container').remove();
+                                                //$element.transition({opacity: 0});
+                                            });
+                                            $('.content-gallery-show-more').on('click', function (e) {
+                                                e.preventDefault();
+
+                                                $element.find('.open').removeClass('open');
+                                                $element.find('li.details-container').remove();
+                                            });
+                                            done = true;
+                                        } else {
+                                            rowWidth = 0;
+                                        }
+                                    }
+                                }
+                            });
+                        }, 100);
+                    }
 
                     //--------------------------------------------
 
-                    $this.toggleClass('content-gallery-show-more');
-                    if ($(this).text() === 'Show More') {
-                        $(this).text('Show Less');
-                        $element.find('.open').addClass('open');
-
-                    } else {
-                        $(this).text('Show More');
-                        $element.find('.open').removeClass('open');
-                        $element.find('li.details-container').remove();
-                    }
-
-
-                    _.each(allListItems,function(i){
-                        if(!done) {
-                            var itemWidth = Math.abs(($(i).css('width')).replace(/px/, ''));
-                            if (!targetFound) {
-                                targetFound = $(i).hasClass('open');
-                                content = $(i).find('.content-gallery-details').html();
-                            }
-                            rowWidth = rowWidth + itemWidth;
-                            console.log("item width", itemWidth, rowWidth, rowMaxWidth);
-
-                            if (rowWidth >= rowMaxWidth) {
-                                if (targetFound) {
-                                    console.log("Found target and inserting!!!");
-                                    $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>'+content+'</li>');
-                                    $('.details-container .close').on('click',function(e){
-                                        e.preventDefault();
-                                        $element.find('.open').removeClass('open');
-                                        $element.find('li.details-container').remove();
-                                    });
-                                    $('.details-container').on('click',function(e){
-                                        e.preventDefault();
-                                        $element.find('.open').removeClass('open');
-                                        $element.find('li.details-container').remove();
-                                    });
-                                    $('.content-gallery-show-more').on('click',function(e){
-                                        e.preventDefault();
-                                        //$element.find('Show Less').text('Show More');
-                                        $element.find('.open').removeClass('open');
-                                    });
-                                    done = true;
-                                } else {
-                                    rowWidth = 0;
-                                }
-                            }
-                        }
-                    });
                 });
                 console.log('++++++++++++++++++++ It Fired',$scope, $element, iAttrs, controller );
             }
