@@ -58,8 +58,9 @@ angular.module('dellUiComponents')
                                             });
                                             $('.details-container').on('click', function (e) {
                                                 e.preventDefault();
-                                                $element.find('.open').transition({opacity: 0}).removeClass('open');
+                                                $element.find('.open').removeClass('open');
                                                 $element.find('li.details-container').remove();
+
                                                 //$element.transition({opacity: 0});
                                             });
                                             $('.content-gallery-show-more').on('click', function (e) {
