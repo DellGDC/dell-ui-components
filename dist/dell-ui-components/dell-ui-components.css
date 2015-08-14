@@ -3118,6 +3118,12 @@ a {
   line-height: 1;
   padding-left: 5px;
 }
+.popover.right > .arrow {
+  left: 24px !important;
+}
+.popover.left > .arrow {
+  left: 113% !important;
+}
 /*
  * Responsive-Utilities component theme overrides
  *------------------------------------------------------------------------------------------
@@ -3190,6 +3196,44 @@ a {
 }
 .progress .progress-label {
   display: none;
+}
+.btn-progress.active,
+.btn-progress.focus,
+.btn-progress:active,
+.btn-progress:focus,
+.btn-progress:hover,
+.btn-progress .open > .dropdown-toggle.btn-progress {
+  background: white none repeat scroll 0 0;
+  margin-right: 10px;
+}
+.btn-progress + .dropdown-menu li {
+  position: relative;
+}
+.btn-progress + .dropdown-menu li a {
+  color: #007db8;
+  padding-left: 30px;
+}
+.btn-progress + .dropdown-menu li.disabled > a {
+  color: #ccc;
+}
+.btn-progress + .dropdown-menu li.active > a {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  color: #444;
+}
+.btn-progress + .dropdown-menu li.completed > a {
+  color: #007db8;
+}
+.btn-progress + .dropdown-menu li.completed > a::before,
+.btn-progress + .dropdown-menu li.active > a::before {
+  color: #6ea204;
+  content: "\e611";
+  font-family: icon-small;
+  font-size: 11px;
+  font-weight: 400;
+  left: -20px;
+  margin-right: -10px;
+  padding-right: 0;
+  position: relative;
 }
 .progress-counter {
   margin-left: 15px;
