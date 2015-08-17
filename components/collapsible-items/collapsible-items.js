@@ -29,7 +29,7 @@ angular.module('dellUiComponents')
                         $element.find('li.details-container').slideUp( "slow");
                     } else {
                         $element.find('.open').removeClass('open');
-                        $element.find('li.details-container').slideUp( "slow");
+                        $element.find('li.details-container').slideUp("slow");
 
                         $timeout( function() {
 
@@ -47,12 +47,10 @@ angular.module('dellUiComponents')
 
                                     if (rowWidth >= rowMaxWidth || index === allListItems.length -1) {
 
-
                                         if (targetFound) {
                                             console.log("Found target and inserting!!!");
-                                            
 
-                                            $(i).slideDown("slow").after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
+                                            $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
                                             $('.details-container .close').on('click', function (e) {
                                                 e.preventDefault();
                                                 $element.find('.open').removeClass('open');
@@ -62,16 +60,11 @@ angular.module('dellUiComponents')
                                                 e.preventDefault();
                                                 $element.find('.open').removeClass('open');
                                                 $element.find('li.details-container').slideUp( "slow");
-
-                                                //$element.transition({opacity: 0});
                                             });
                                             $('.content-gallery-show-more').on('click', function (e) {
                                                 e.preventDefault();
-
                                                 $element.find('.open').removeClass('open');
                                                 $element.find('li.details-container').slideUp( "slow");
-
-
                                             });
                                             done = true;
                                         } else {
