@@ -13,6 +13,10 @@ angular.module('dellUiComponents')
                 $element.find('.content-gallery-show-more').on('click',function(e){
                     e.preventDefault();
 
+                    //Th does not work
+                    //$element.find('content-gallery-details').slideDown( "slow");
+
+
                     var parentLi = $(e.currentTarget).parents('li')[0],
                         allListItems = $element.find('li'),
                         rowWidth= 0,
@@ -22,7 +26,6 @@ angular.module('dellUiComponents')
                         //------------
                         content;
 
-                    //$('.content-gallery-show-more').transition({ opacity: 0.1, scale: 0.3 }, 'fast');
 
                     if ($(parentLi).hasClass('open')){
                         $element.find('.open').removeClass('open');
@@ -34,6 +37,7 @@ angular.module('dellUiComponents')
                         $timeout( function() {
 
                             $(parentLi).addClass('open');
+
                             _.each(allListItems, function (i, index) {
                                 if (!done) {
                                     var itemWidth = Math.abs(($(i).css('width')).replace(/px/, ''));
@@ -50,6 +54,7 @@ angular.module('dellUiComponents')
                                         if (targetFound) {
                                             console.log("Found target and inserting!!!");
 
+
                                             $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
                                             $('.details-container .close').on('click', function (e) {
                                                 e.preventDefault();
@@ -58,6 +63,7 @@ angular.module('dellUiComponents')
                                             });
                                             $('.details-container').on('click', function (e) {
                                                 e.preventDefault();
+
                                                 $element.find('.open').removeClass('open');
                                                 $element.find('li.details-container').slideUp( "slow");
                                             });
@@ -76,9 +82,80 @@ angular.module('dellUiComponents')
                         }, 100);
                     }
 
-                    //--------------------------------------------
-
                 });
+
+                //--------------------------------------------
+
+                //$element.find('.content-gallery-show-more').on('click',function(e){
+                //    e.preventDefault();
+                //
+                //    var parentLi = $(e.currentTarget).parents('li')[0],
+                //        allListItems = $element.find('li'),
+                //        rowWidth= 0,
+                //        rowMaxWidth = Math.abs($('.container').css('width').replace(/px/,'')),
+                //        targetFound,
+                //        done,
+                //    //------------
+                //        content;
+                //
+                //
+                //    if ($(parentLi).hasClass('open')){
+                //        $element.find('.open').removeClass('open');
+                //        $element.find('li.details-container').slideUp( "slow");
+                //    } else {
+                //        $element.find('.open').removeClass('open');
+                //        $element.find('li.details-container').slideUp("slow");
+                //
+                //        $timeout( function() {
+                //
+                //            $(parentLi).addClass('open');
+                //            _.each(allListItems, function (i, index) {
+                //                if (!done) {
+                //                    var itemWidth = Math.abs(($(i).css('width')).replace(/px/, ''));
+                //                    if (!targetFound) {
+                //                        targetFound = $(i).hasClass('open');
+                //                        content = $(i).find('.content-gallery-details').html();
+                //                    }
+                //
+                //                    rowWidth = rowWidth + itemWidth;
+                //                    console.log("item width", itemWidth, rowWidth, rowMaxWidth);
+                //
+                //                    if (rowWidth >= rowMaxWidth || index === allListItems.length -1) {
+                //
+                //                        if (targetFound) {
+                //                            console.log("Found target and inserting!!!");
+                //
+                //                            $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
+                //                            $('.details-container .close').on('click', function (e) {
+                //                                e.preventDefault();
+                //                                $element.find('.open').removeClass('open');
+                //                                $element.find('li.details-container').slideUp( "slow");
+                //                            });
+                //                            $('.details-container').on('click', function (e) {
+                //                                e.preventDefault();
+                //                                $element.find('.open').removeClass('open');
+                //                                $element.find('li.details-container').slideUp( "slow");
+                //                            });
+                //                            $('.content-gallery-show-more').on('click', function (e) {
+                //                                e.preventDefault();
+                //                                $element.find('.open').removeClass('open');
+                //                                $element.find('li.details-container').slideUp( "slow");
+                //                            });
+                //                            done = true;
+                //                        } else {
+                //                            rowWidth = 0;
+                //                        }
+                //                    }
+                //                }
+                //            });
+                //        }, 100);
+                //    }
+                //
+                //});
+
+
+
+                //---------------------------------------------
                 console.log('++++++++++++++++++++ It Fired',$scope, $element, iAttrs, controller );
             }
         };
