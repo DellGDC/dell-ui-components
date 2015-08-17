@@ -72,7 +72,7 @@ angular.module('dellUiComponents')
                     }
 
                 });
-                
+
                 //---------------------------------------------
                 console.log('++++++++++++++++++++ It Fired',$scope, $element, iAttrs, controller );
             }
