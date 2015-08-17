@@ -13,7 +13,7 @@ angular.module('dellUiComponents')
                 $element.find('.content-gallery-show-more').on('click',function(e){
                     e.preventDefault();
 
-                    //Th does not work
+                    //The does not work
                     //$element.find('content-gallery-details').slideDown( "slow");
 
 
@@ -28,11 +28,11 @@ angular.module('dellUiComponents')
 
 
                     if ($(parentLi).hasClass('open')){
+                        $element.find('li.details-container').attr('display', 'none').slideUp(350).delay(1000).queue(function() { $(this).remove(); });
                         $element.find('.open').removeClass('open');
-                        $element.find('li.details-container').slideUp( "slow");
                     } else {
+                        $element.find('li.details-container').attr('display', 'none').slideUp(350).delay(1000).queue(function() { $(this).remove(); });
                         $element.find('.open').removeClass('open');
-                        $element.find('li.details-container').slideUp("slow");
 
                         $timeout( function() {
 
@@ -54,23 +54,26 @@ angular.module('dellUiComponents')
                                         if (targetFound) {
                                             console.log("Found target and inserting!!!");
 
-
                                             $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
+
+                                            $('.details-container').attr('display', 'block').slideDown(500);
+
+
                                             $('.details-container .close').on('click', function (e) {
                                                 e.preventDefault();
+                                                $element.find('li.details-container').attr('display', 'none').slideUp(350).delay(1000).queue(function() { $(this).remove(); });
                                                 $element.find('.open').removeClass('open');
-                                                $element.find('li.details-container').slideUp( "slow");
                                             });
                                             $('.details-container').on('click', function (e) {
                                                 e.preventDefault();
 
+                                                $element.find('li.details-container').attr('display', 'none').slideUp(350).delay(1000).queue(function() { $(this).remove(); });
                                                 $element.find('.open').removeClass('open');
-                                                $element.find('li.details-container').slideUp( "slow");
                                             });
                                             $('.content-gallery-show-more').on('click', function (e) {
                                                 e.preventDefault();
+                                                $element.find('li.details-container').attr('display', 'none').slideUp(350).delay(1000).queue(function() { $(this).remove(); });
                                                 $element.find('.open').removeClass('open');
-                                                $element.find('li.details-container').slideUp( "slow");
                                             });
                                             done = true;
                                         } else {
