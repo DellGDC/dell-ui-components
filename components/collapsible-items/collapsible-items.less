@@ -199,17 +199,19 @@
         margin-bottom: 15px;
     }
     .content-gallery-details {
-        display: none;
+        //display: none;
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        height: 0;
 
     }
-    li.details-container {
-        + li[class^=col] {
-            clear: both;
-        }
-        .content-gallery-details {
-            display: block;
-        }
+
+    .details-container {
+
+        background: pink;
     }
+
 
     .show-collapsed,
     .open .hide-expanded {
@@ -218,9 +220,10 @@
     }
 
     .hide-expanded,
-    .open .show-collapsed,
-    {
+    .open .show-collapsed {
         display: none !important;
         padding: 0;
     }
 }
+
+

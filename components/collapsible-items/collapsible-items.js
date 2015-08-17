@@ -26,10 +26,10 @@ angular.module('dellUiComponents')
 
                     if ($(parentLi).hasClass('open')){
                         $element.find('.open').removeClass('open');
-                        $element.find('li.details-container').remove();
+                        $element.find('li.details-container').slideUp( "slow");
                     } else {
                         $element.find('.open').removeClass('open');
-                        $element.find('li.details-container').remove();
+                        $element.find('li.details-container').slideUp( "slow");
 
                         $timeout( function() {
 
@@ -50,16 +50,18 @@ angular.module('dellUiComponents')
 
                                         if (targetFound) {
                                             console.log("Found target and inserting!!!");
-                                            $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
+                                            
+
+                                            $(i).slideDown("slow").after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
                                             $('.details-container .close').on('click', function (e) {
                                                 e.preventDefault();
                                                 $element.find('.open').removeClass('open');
-                                                $element.find('li.details-container').remove();
+                                                $element.find('li.details-container').slideUp( "slow");
                                             });
                                             $('.details-container').on('click', function (e) {
                                                 e.preventDefault();
                                                 $element.find('.open').removeClass('open');
-                                                $element.find('li.details-container').remove();
+                                                $element.find('li.details-container').slideUp( "slow");
 
                                                 //$element.transition({opacity: 0});
                                             });
@@ -67,7 +69,9 @@ angular.module('dellUiComponents')
                                                 e.preventDefault();
 
                                                 $element.find('.open').removeClass('open');
-                                                $element.find('li.details-container').remove();
+                                                $element.find('li.details-container').slideUp( "slow");
+
+
                                             });
                                             done = true;
                                         } else {
