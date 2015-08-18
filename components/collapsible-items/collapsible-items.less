@@ -221,6 +221,11 @@
         display: none;
         padding: 0;
     }
+    @media (max-width: @screen-xs-max) {
+        .open + li + li {
+            clear: both;
+        }
+    }
 }
 
 

@@ -22,12 +22,12 @@ angular.module('dellUiComponents')
                         content;
 
                     if ($(parentLi).hasClass('open')){
-                        $element.find('li.details-container').attr('display', 'none').slideUp(350).delay(1000).queue(function() {
+                        $element.find('li.details-container').attr('display', 'none').slideUp(250).delay(500).queue(function() {
                             $(this).remove();
                         });
                         $element.find('.open').removeClass('open');
                     } else {
-                        $element.find('li.details-container').attr('display', 'none').slideUp(350).delay(1000).queue(function() {
+                        $element.find('li.details-container').attr('display', 'none').slideUp(250).delay(500).queue(function() {
                             $(this).remove();
                         });
                         $element.find('.open').removeClass('open');
@@ -52,11 +52,11 @@ angular.module('dellUiComponents')
                                             console.log("Found target and inserting!!!");
 
                                             $(i).after('<li class="col-xs-12 details-container"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</li>');
-                                            $('.details-container').attr('display', 'block').slideDown(500);
+                                            $('.details-container').attr('display', 'block').slideDown(250);
 
-                                            $('.details-container .close' || '.details-container' || '.content-gallery-show-more' ).on('click', function (e) {
+                                            $('.details-container .close, .details-container, .content-gallery-show-more' ).on('click', function (e) {
                                                 e.preventDefault();
-                                                $element.find('li.details-container').attr('display', 'none').slideUp(350).delay(1000).queue(function() {
+                                                $element.find('li.details-container').attr('display', 'none').slideUp(250).delay(500).queue(function() {
                                                     $(this).remove();
                                                 });
                                                 $element.find('.open').removeClass('open');
