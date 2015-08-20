@@ -51,10 +51,7 @@ angular.module('dellUiComponents')
                                         if (targetFound) {
                                             console.log("Found target and inserting!!!");
 
-                                            //$(i).after('<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</div></li>');
-                                            //$('.details-container').attr('display', 'block').slideDown(150);
-
-                                            $(i).after('<li class="details-container"><div class="container-fluid-no-padding"><div class="col-xs-12 gallery"><span class="close"><i class="icon-ui-close"></i></span>' + content + '</div></div></li>');
+                                            $(i).after('<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">×</button></span>' + content + '</div></li>');
                                             $('.details-container').attr('display', 'block').slideDown(150);
 
                                             $('.details-container .close, .details-container, .content-gallery-show-more' ).on('click', function (e) {
