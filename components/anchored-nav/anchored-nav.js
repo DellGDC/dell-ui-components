@@ -15,6 +15,19 @@ angular.module('dellUiComponents')
             }
         };
 
+    })
+
+    .directive('anchoredNavScrollspy', function($timeout) {
+        return {
+            restrict: 'C',
+            link: function ($scope, $element, iAttrs, controller) {
+                $(document).ready(function (){
+                    $('body').scrollspy({ target: 'anchored-nav-scrollspy' });
+                });
+
+            }
+        };
+
     });
 
 
