@@ -70,12 +70,22 @@ angular.module('dellUiComponents')
                         };
 
                         //no id, assign a random id and add it in the dom to the element
-                        target_id = uuid();
+                        target_id = "#"+uuid();
                         $element.attr('id',target_id);
                     }
                     //fire scrollspy on the target with random id
                     $('body').scrollspy({ target: target_id });
                 }
+                if(target_id) {
+                    $(target_id).find('.nav a[href^=#]').on('click', function(e){
+                        e.preventDefault();
+                        $("body").animate({
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top
+                        }, 300);
+                    });
+                }
+
+                //set up anchor scrolling for nav elements
 
             }
         };
