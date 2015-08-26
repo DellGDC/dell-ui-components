@@ -1,35 +1,86 @@
 /**
  * Created by Clint_Batte on 5/18/2015.
+ *
+ * Examples
+ * <nav class="navbar navbar-inverse" data-spy="affix"> sets up affix immediately when window scrolls 
+ * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197"> sets up affix immediately when window scrolls past 197 pixels
+ * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197" data-offset-bottom="100">  affix off when 100 pixels from bottom
+ * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197" data-target="#myNavbar">  sets ups scrollspy on #myNavbar element
+ *
  */
-
 
 angular.module('dellUiComponents')
 
-    .directive('anchoredNavAffixed', function($timeout) {
+    .directive('spy', function($timeout) {
         return {
-            restrict: 'C',
+            restrict: 'A',
             link: function ($scope, $element, iAttrs, controller) {
-                $('.anchored-nav-affixed').affix({
-                });
+                var affixConfig = {offset:{}},
+                    offset,
+                    target_id,
+                    uuid;
+
+                if(iAttrs.spy === "affix") {
+                    //combines affix with scrollspy
+
+
+                    if(iAttrs.offsetTop) {
+                        //is there a top offset?
+                        affixConfig.offset.top = iAttrs.offsetTop;
+                        offset = true;
+                    }
+                    if(iAttrs.offsetBottom) {
+                        //is there a bottom offset?
+                        affixConfig.offset.bottom = iAttrs.offsetBottom;
+                        offset = true;
+                    }
+                    if(!offset) {
+                        //there are no offsets
+                        affixConfig = {};
+                    }
+
+                    //fire the affix
+                    $element.affix(affixConfig);
+
+                }
+
+
+                //is there a target?
+                if(iAttrs.target) {
+
+                    target_id = iAttrs.target;
+                    $('body').scrollspy({ target: target_id });
+                    //fire scrollspy on the target
+
+                } else if($element.hasClass('navbar')) {
+                    
+                    target_id = $element.attr('id');
+                    //does this element have id?
+                    if(!target_id) {
+                        
+                        //Needed to set up a unique id when we don't have a target
+                        uuid = function () {
+                            function s4() {
+                                return Math.floor((1 + Math.random()) * 0x10000)
+                                .toString(16)
+                                .substring(1);
+                            }
+                            return new Date().getTime().toString(36) + '-' + s4() + '-' + s4() + '-' +
+                            s4() + '-' + s4() + s4() + s4();
+                        };
+
+                        //no id, assign a random id and add it in the dom to the element
+                        target_id = uuid();
+                        $element.attr('id',target_id);
+                    }
+                    //fire scrollspy on the target with random id
+                    $('body').scrollspy({ target: target_id });
+                }
 
             }
         };
 
     });
-
-    //.directive('anchoredNavScrollspy', function($timeout) {
-    //    return {
-    //        restrict: 'C',
-    //        link: function ($scope, $element, iAttrs, controller) {
-    //            $(document).ready(function (){
-    //                $('body').scrollspy({ target: 'anchored-nav-scrollspy' });
-    //            });
-    //
-    //        }
-    //    };
-    //
-    //});
-
 
 
 
