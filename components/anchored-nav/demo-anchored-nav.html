@@ -2,77 +2,115 @@
 
     <div class="container">
         <h2>Anchored Nav Demo</h2>
-        <div>
             <!-- Nav tabs justify -->
             <div class="row">
-                <h3 class="col-xs-12 top-offset-60">Tabs
-                    <small>(justified)</small>
+                <h3 class="col-xs-12 top-offset-60">Affixed Tabs
                 </h3>
             </div>
-
-            <div class="bottom-offset-60">
-                <div class="row-offcanvas row-offcanvas-right">
-                    <ul class="nav nav-tabs nav-justified" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#long-example" aria-controls="long-example" role="tab" data-toggle="tab">
-                                Example to show the auto adjusted tab height. <i class="icon-ui-arrowright visible-xs"></i>
-                            </a>
-                        </li>
-                        <li role="presentation" class="">
-                            <a href="#automobile" aria-controls="Automobile" role="tab" data-toggle="tab">
-                                Automobile<i class="icon-ui-arrowright visible-xs"></i>
-                            </a>
-                        </li>
-                        <li role="presentation" class="">
-                            <a href="#boats" aria-controls="Boats" role="tab" data-toggle="tab">
-                                Boats<i class="icon-ui-arrowright visible-xs"></i>
-                            </a>
-                        </li>
-                        <li role="presentation" class="">
-                            <a href="#planes" aria-controls="Planes" role="tab" data-toggle="tab">
-                                Planes<i class="icon-ui-arrowright visible-xs"></i>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane fade active in" id="long-example">
-                            <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
-                                <i class="icon-ui-arrowleft "></i> Back
-                            </button>
-                            <div class="col-xs-12">
-                                Long example Aute gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney's aute tattooed voluptate.
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="automobile">
-                            <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
-                                <i class="icon-ui-arrowleft "></i> Back
-                            </button>
-                            <div class="col-xs-12">
-                                Automobile magna biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="boats">
-                            <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
-                                <i class="icon-ui-arrowleft "></i> Back
-                            </button>
-                            <div class="col-xs-12">
-                                Boats nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90's American Apparel assumenda four dollar toast.
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="planes">
-                            <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
-                                <i class="icon-ui-arrowleft "></i> Back
-                            </button>
-                            <div class="col-xs-12">
-                                Planes biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.
-                            </div>
-                        </div>
+            <div class="">
+                <div class="row bottom-offset-40">
+                    <div class="col-xs-12">
+                        <ul id="nav-tabs-scrollspy" class="nav nav-tabs nav-justified">
+                            <li role="presentation" class="active">
+                                <a href="#trains" aria-controls="long-example" data-toggle="tab">
+                                    Trains example to show the auto adjusted tab height.
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#automobile" aria-controls="Automobile" data-toggle="tab">
+                                    Automobile
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#boats" aria-controls="Boats" data-toggle="tab">
+                                    Boats
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#planes" aria-controls="Planes" data-toggle="tab">
+                                    Planes
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+
+                <div data-spy="scroll" data-target="#nav-tabs-scrollspy" class="scrollspy-example">
+                    <div class="col-xs-12 container-fluid bottom-offset-30">
+                        <h4 id="trains" class="text-blue"><a href="">Trains sample section one</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum vel turpis nec ornare. Phasellus sagittis egestas tellus at bibendum. Phasellus rhoncus hendrerit tristique. Mauris a luctus tortor. Donec vel fermentum tortor, vel varius mi. Aenean tincidunt metus aliquam nisl tincidunt, a gravida tortor tempus. Morbi commodo velit vehicula, facilisis lacus et, posuere ligula. Praesent a accumsan arcu, sit amet gravida diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis fermentum libero arcu.</p>
+                    </div>
+                    <div class="col-xs-12 container-fluid bottom-offset-30">
+                        <h4 id="automobile" class="text-blue"><a href="">Automobile sample section two</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum vel turpis nec ornare. Phasellus sagittis egestas tellus at bibendum. Phasellus rhoncus hendrerit tristique. Mauris a luctus tortor. Donec vel fermentum tortor, vel varius mi. Aenean tincidunt metus aliquam nisl tincidunt, a gravida tortor tempus. Morbi commodo velit vehicula, facilisis lacus et, posuere ligula. Praesent a accumsan arcu, sit amet gravida diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis fermentum libero arcu.</p>
+                    </div>
+                    <div class="col-xs-12 container-fluid bottom-offset-30">
+                        <h4 id="boats" class="text-blue"><a href="">Boat sample section three</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum vel turpis nec ornare. Phasellus sagittis egestas tellus at bibendum. Phasellus rhoncus hendrerit tristique. Mauris a luctus tortor. Donec vel fermentum tortor, vel varius mi. Aenean tincidunt metus aliquam nisl tincidunt, a gravida tortor tempus. Morbi commodo velit vehicula, facilisis lacus et, posuere ligula. Praesent a accumsan arcu, sit amet gravida diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis fermentum libero arcu.</p>
+                    </div>
+
+                    <div class="col-xs-12 container-fluid bottom-offset-30">
+                        <h4 id="planes" class="text-blue"><a href="">Planes sample section four</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fermentum vel turpis nec ornare. Phasellus sagittis egestas tellus at bibendum. Phasellus rhoncus hendrerit tristique. Mauris a luctus tortor. Donec vel fermentum tortor, vel varius mi. Aenean tincidunt metus aliquam nisl tincidunt, a gravida tortor tempus. Morbi commodo velit vehicula, facilisis lacus et, posuere ligula. Praesent a accumsan arcu, sit amet gravida diam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis fermentum libero arcu.</p>
+                    </div>
+                </div>
+
             </div>
+    </div>
+
+    <div class="bs-example" data-example-id="embedded-scrollspy">
+        <nav id="navbar-example2" class="navbar navbar-default navbar-static">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-example-js-navbar-scrollspy">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Project Name</a>
+                </div>
+                <div class="collapse navbar-collapse bs-example-js-navbar-scrollspy">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#fat">@fat</a></li>
+                        <li class=""><a href="#mdo">@mdo</a></li>
+                        <li class="dropdown">
+                            <a href="#" id="navbarDrop1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDrop1">
+                                <li class=""><a href="#one">one</a></li>
+                                <li><a href="#two">two</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#three">three</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" class="scrollspy-example">
+            <h4 id="fat">@fat</h4>
+            <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+            <h4 id="mdo">@mdo</h4>
+            <p>Veniam marfa mustache skateboard, adipisicing fugiat velit pitchfork beard. Freegan beard aliqua cupidatat mcsweeney's vero. Cupidatat four loko nisi, ea helvetica nulla carles. Tattooed cosby sweater food truck, mcsweeney's quis non freegan vinyl. Lo-fi wes anderson +1 sartorial. Carles non aesthetic exercitation quis gentrify. Brooklyn adipisicing craft beer vice keytar deserunt.</p>
+            <h4 id="one">one</h4>
+            <p>Occaecat commodo aliqua delectus. Fap craft beer deserunt skateboard ea. Lomo bicycle rights adipisicing banh mi, velit ea sunt next level locavore single-origin coffee in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.</p>
+            <h4 id="two">two</h4>
+            <p>In incididunt echo park, officia deserunt mcsweeney's proident master cleanse thundercats sapiente veniam. Excepteur VHS elit, proident shoreditch +1 biodiesel laborum craft beer. Single-origin coffee wayfarers irure four loko, cupidatat terry richardson master cleanse. Assumenda you probably haven't heard of them art party fanny pack, tattooed nulla cardigan tempor ad. Proident wolf nesciunt sartorial keffiyeh eu banh mi sustainable. Elit wolf voluptate, lo-fi ea portland before they sold out four loko. Locavore enim nostrud mlkshk brooklyn nesciunt.</p>
+            <h4 id="three">three</h4>
+            <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+            <p>Keytar twee blog, culpa messenger bag marfa whatever delectus food truck. Sapiente synth id assumenda. Locavore sed helvetica cliche irony, thundercats you probably haven't heard of them consequat hoodie gluten-free lo-fi fap aliquip. Labore elit placeat before they sold out, terry richardson proident brunch nesciunt quis cosby sweater pariatur keffiyeh ut helvetica artisan. Cardigan craft beer seitan readymade velit. VHS chambray laboris tempor veniam. Anim mollit minim commodo ullamco thundercats.
+            </p>
         </div>
     </div>
 
+
+    <script>
+            $(document).ready(function (){
+//                $('body').scrollspy({target: "#nav-tabs-scrollspy"})
+
+                $('body').scrollspy({ target: '#navbar-example' })
+            });
+    </script>
+
 </section>
+
