@@ -18,7 +18,9 @@ angular.module('dellUiComponents')
                 var affixConfig = {offset:{}},
                     offset,
                     target_id,
-                    uuid;
+                    uuid,
+                    distanceFromTheTop = 20,
+                    animation = 'swing';
 
                 if(iAttrs.spy === "affix") {
                     //combines affix with scrollspy
@@ -80,8 +82,8 @@ angular.module('dellUiComponents')
                     $(target_id).find('.nav a[href^=#]').on('click', function(e){
                         e.preventDefault();
                         $("body").animate({
-                            scrollTop: $($(e.currentTarget).attr('href')).offset().top
-                        }, 300);
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top - distanceFromTheTop
+                        }, animation);
                     });
                 }
 
