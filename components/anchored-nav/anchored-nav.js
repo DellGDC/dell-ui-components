@@ -2,7 +2,7 @@
  * Created by Clint_Batte on 5/18/2015.
  *
  * Examples
- * <nav class="navbar navbar-inverse" data-spy="affix"> sets up affix immediately when window scrolls 
+ * <nav class="navbar navbar-inverse" data-spy="affix"> sets up affix immediately when window scrolls
  * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197"> sets up affix immediately when window scrolls past 197 pixels
  * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197" data-offset-bottom="100">  affix off when 100 pixels from bottom
  * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197" data-target="#myNavbar">  sets ups scrollspy on #myNavbar element
@@ -55,11 +55,11 @@ angular.module('dellUiComponents')
                     //fire scrollspy on the target
 
                 } else if($element.hasClass('navbar')) {
-                    
+
                     target_id = $element.attr('id');
                     //does this element have id?
                     if(!target_id) {
-                        
+
                         //Needed to set up a unique id when we don't have a target
                         uuid = function () {
                             function s4() {
@@ -88,6 +88,11 @@ angular.module('dellUiComponents')
                 }
 
                 //set up anchor scrolling for nav elements
+
+                $(".nav-anchored a").on("click", function(){
+                    $(".nav-anchored").find(".active").removeClass("active");
+                    $(this).parent().addClass("active foo");
+                });
 
             }
         };
