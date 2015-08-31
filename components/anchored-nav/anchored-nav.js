@@ -76,13 +76,13 @@ angular.module('dellUiComponents')
                         $element.attr('id',target_id);
                     }
                     //fire scrollspy on the target with random id
-                    $('body').scrollspy({ target: target_id });
+                    $('body').scrollspy({  target: target_id });
                 }
                 if(target_id) {
                     $(target_id).find('.nav a[href^=#]').on('click', function(e){
                         e.preventDefault();
                         $("body").animate({
-                            scrollTop: $($(e.currentTarget).attr('href')).offset().top -100
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top
                         }, animation);
                     });
                 }
