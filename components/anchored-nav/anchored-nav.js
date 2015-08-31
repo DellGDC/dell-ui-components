@@ -82,19 +82,11 @@ angular.module('dellUiComponents')
                     $(target_id).find('.nav a[href^=#]').on('click', function(e){
                         e.preventDefault();
                         $("body").animate({
-                            scrollTop: $($(e.currentTarget).attr('href')).offset().top - 120
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top -100
                         }, animation);
                     });
                 }
 
-                
-
-                //set up anchor scrolling for nav elements
-
-                //$(".nav-anchored a").on("click", function(){
-                //    $(".nav-anchored").find(".active").removeClass("active");
-                //    $(this).parent().addClass("active foo");
-                //});
 
             }
         };
