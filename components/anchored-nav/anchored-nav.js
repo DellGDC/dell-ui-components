@@ -19,7 +19,7 @@ angular.module('dellUiComponents')
                     offset,
                     target_id,
                     uuid,
-                    spyOffset = 20,
+                    spyOffset = - 100,
                     distanceFromTheTop = 50,
                     animation = 'swing';
 
@@ -89,7 +89,9 @@ angular.module('dellUiComponents')
                     $(target_id).find('.nav a[href^=#]').on('click', function(e){
                         e.preventDefault();
                         $("body").animate({
-                            scrollTop: $($(e.currentTarget).attr('href')).offset().top -100
+                            //scrollTop: $($(e.currentTarget).attr('href')).offset().top - 100
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top
+
                         }, animation);
                     });
                 }
