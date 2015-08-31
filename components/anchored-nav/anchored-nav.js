@@ -19,7 +19,7 @@ angular.module('dellUiComponents')
                     offset,
                     target_id,
                     uuid,
-                    distanceFromTheTop = 20,
+                    distanceFromTheTop = 50,
                     animation = 'swing';
 
                 if(iAttrs.spy === "affix") {
@@ -82,17 +82,19 @@ angular.module('dellUiComponents')
                     $(target_id).find('.nav a[href^=#]').on('click', function(e){
                         e.preventDefault();
                         $("body").animate({
-                            scrollTop: $($(e.currentTarget).attr('href')).offset().top - distanceFromTheTop
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top - 120
                         }, animation);
                     });
                 }
 
+                
+
                 //set up anchor scrolling for nav elements
 
-                $(".nav-anchored a").on("click", function(){
-                    $(".nav-anchored").find(".active").removeClass("active");
-                    $(this).parent().addClass("active foo");
-                });
+                //$(".nav-anchored a").on("click", function(){
+                //    $(".nav-anchored").find(".active").removeClass("active");
+                //    $(this).parent().addClass("active foo");
+                //});
 
             }
         };
