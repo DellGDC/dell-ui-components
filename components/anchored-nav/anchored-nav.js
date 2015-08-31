@@ -2,7 +2,7 @@
  * Created by Clint_Batte on 5/18/2015.
  *
  * Examples
- * <nav class="navbar navbar-inverse" data-spy="affix"> sets up affix immediately when window scrolls 
+ * <nav class="navbar navbar-inverse" data-spy="affix"> sets up affix immediately when window scrolls
  * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197"> sets up affix immediately when window scrolls past 197 pixels
  * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197" data-offset-bottom="100">  affix off when 100 pixels from bottom
  * <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197" data-target="#myNavbar">  sets ups scrollspy on #myNavbar element
@@ -20,7 +20,7 @@ angular.module('dellUiComponents')
                     target_id,
                     uuid,
                     spyOffset = 20,
-                    distanceFromTheTop = 20,
+                    distanceFromTheTop = 50,
                     animation = 'swing';
 
                 if(iAttrs.spy === "affix") {
@@ -56,11 +56,11 @@ angular.module('dellUiComponents')
                     //fire scrollspy on the target
 
                 } else if($element.hasClass('navbar')) {
-                    
+
                     target_id = $element.attr('id');
                     //does this element have id?
                     if(!target_id) {
-                        
+
                         //Needed to set up a unique id when we don't have a target
                         uuid = function () {
                             function s4() {
@@ -89,12 +89,11 @@ angular.module('dellUiComponents')
                     $(target_id).find('.nav a[href^=#]').on('click', function(e){
                         e.preventDefault();
                         $("body").animate({
-                            scrollTop: $($(e.currentTarget).attr('href')).offset().top - distanceFromTheTop
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top -100
                         }, animation);
                     });
                 }
 
-                //set up anchor scrolling for nav elements
 
             }
         };
