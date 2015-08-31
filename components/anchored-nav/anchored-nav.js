@@ -19,6 +19,7 @@ angular.module('dellUiComponents')
                     offset,
                     target_id,
                     uuid,
+                    spyOffset = 20,
                     distanceFromTheTop = 50,
                     animation = 'swing';
 
@@ -76,13 +77,19 @@ angular.module('dellUiComponents')
                         $element.attr('id',target_id);
                     }
                     //fire scrollspy on the target with random id
-                    $('body').scrollspy({  target: target_id });
+
+                    //is there an offset configured?
+                    if(iAttrs.offset) {
+                        spyOffset = iAttrs.offset;
+                    }
+
+                    $('body').scrollspy({ target: target_id,offset: spyOffset });
                 }
                 if(target_id) {
                     $(target_id).find('.nav a[href^=#]').on('click', function(e){
                         e.preventDefault();
                         $("body").animate({
-                            scrollTop: $($(e.currentTarget).attr('href')).offset().top
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top -100
                         }, animation);
                     });
                 }
