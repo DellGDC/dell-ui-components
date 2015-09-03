@@ -69,14 +69,89 @@ angular.module('dellUiComponents')
             link: function($scope, $element, iAttrs, controller ) {
 
                 $(document).ready(function() {
-                    $('table.responsive-data-table').DataTable( {
-                        dom: 'C<"clear">lfrtip',
-                        displayLength: 5,
-                        paging: false,
-                        scrollY:"300px",
-                        scrollX: true
+
+                    var piosData = [{
+                        id: 'a',
+                        address: '7886 Dublin Blvd',
+                        city: 'Dublin, ',
+                        state: 'CA ',
+                        zip: '94568'
+                    }, {
+                        id: 'b',
+                        address: '1 Stoneridge Mall Space',
+                        city: 'Pleasanton, ',
+                        state: 'CA ',
+                        zip: '94568'
+                    }, {
+                        id: 'c',
+                        address: '1120 Stoneridge Mall Drive',
+                        city: 'Pleasanton, ',
+                        state: 'CA ',
+                        zip: '94568'
+                    }];
+
+                    piosData.forEach(function(pio) {
+                        pios(pio);
                     });
+
+                    function pios(pio) {
+                        var div = document.createElement('div');
+                        div.setAttribute('id', pio.id);
+                        div.innerHTML = pio.address + '<br />' + pio.city + pio.state + pio.zip;
+                        document.body.appendChild(div);
+                    }
                 });
+
+
+                //$(document).ready(function() {
+                //    var data = [
+                //        {
+                //            "word": "hello",
+                //            "favnumber": "0070",
+                //            "item": "item1",
+                //            "color": "red"
+                //        },
+                //        {
+                //            "word": "hello world",
+                //            "favnumber": "0233070",
+                //            "item": "item2",
+                //            "color": "blue"
+                //        },
+                //        {
+                //            "word": "hello mom",
+                //            "favnumber": "0070",
+                //            "item": "item3",
+                //            "color": "pink"
+                //        },
+                //        {
+                //            "word": "hello dad",
+                //            "favnumber": "0070",
+                //            "item": "item4",
+                //            "color": "silver"
+                //        }
+                //    ];
+                //
+                //    var items = document.querySelectorAll('[data-item]');
+                //
+                //    for (var e in items) {
+                //        var element = items[e];
+                //        var name = element.getAttribute('data-item');
+                //
+                //        for (var i in data) {
+                //            var item = data[i];
+                //
+                //            if (name == item.item) {
+                //                var text = [];
+                //                text.push(item.word);
+                //                text.push(item.favnumber);
+                //                text.push(item.item);
+                //                text.push(item.color);
+                //
+                //                element.innerText = text.join(", ");
+                //            }
+                //        }
+                //    }
+                //});
 
             }
         };
@@ -149,7 +224,28 @@ angular.module('dellUiComponents')
                 });
             }
         };
-    });
+    })
+
+
+    .directive('responsiveDataItem', function($timeout){
+        // Runs during compile
+        return {
+            restrict: 'C',
+            link: function($scope, $element, iAttrs, controller ) {
+
+                $(document).ready(function() {
+                    $('table.responsive-data-table').DataTable( {
+                        dom: 'C<"clear">lfrtip',
+                        displayLength: 5,
+                        paging: false,
+                        scrollY:"300px",
+                        scrollX: true
+                    });
+                });
+
+            }
+        };
+    })
 
 
 
