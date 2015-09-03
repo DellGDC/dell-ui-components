@@ -62,7 +62,7 @@ angular.module('dellUiComponents')
         };
     })
 
-    .directive('responsiveDataTable', function($timeout){
+    .directive('tableResponsiveColumns', function($timeout){
         // Runs during compile
         return {
             restrict: 'C',
@@ -96,62 +96,15 @@ angular.module('dellUiComponents')
 
                     function pios(pio) {
                         var div = document.createElement('div');
+                        //var spanContent = div.innerHTML;
                         div.setAttribute('id', pio.id);
-                        div.innerHTML = pio.address + '<br />' + pio.city + pio.state + pio.zip;
-                        document.body.appendChild(div);
+                        //div.innerHTML = pio.address + '<br />' + pio.city + pio.state + pio.zip;
+                        $('.something').append('pio.address ' + '<br />' + 'pio.city + pio.state + pio.zip');
+
+                        //document.body.appendChild(div);
                     }
                 });
 
-
-                //$(document).ready(function() {
-                //    var data = [
-                //        {
-                //            "word": "hello",
-                //            "favnumber": "0070",
-                //            "item": "item1",
-                //            "color": "red"
-                //        },
-                //        {
-                //            "word": "hello world",
-                //            "favnumber": "0233070",
-                //            "item": "item2",
-                //            "color": "blue"
-                //        },
-                //        {
-                //            "word": "hello mom",
-                //            "favnumber": "0070",
-                //            "item": "item3",
-                //            "color": "pink"
-                //        },
-                //        {
-                //            "word": "hello dad",
-                //            "favnumber": "0070",
-                //            "item": "item4",
-                //            "color": "silver"
-                //        }
-                //    ];
-                //
-                //    var items = document.querySelectorAll('[data-item]');
-                //
-                //    for (var e in items) {
-                //        var element = items[e];
-                //        var name = element.getAttribute('data-item');
-                //
-                //        for (var i in data) {
-                //            var item = data[i];
-                //
-                //            if (name == item.item) {
-                //                var text = [];
-                //                text.push(item.word);
-                //                text.push(item.favnumber);
-                //                text.push(item.item);
-                //                text.push(item.color);
-                //
-                //                element.innerText = text.join(", ");
-                //            }
-                //        }
-                //    }
-                //});
 
             }
         };
@@ -245,7 +198,7 @@ angular.module('dellUiComponents')
 
             }
         };
-    })
+    });
 
 
 
