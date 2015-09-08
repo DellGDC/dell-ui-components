@@ -62,6 +62,26 @@ angular.module('dellUiComponents')
         };
     })
 
+    .directive('responsiveDataTable', function($timeout){
+        // Runs during compile
+        return {
+            restrict: 'C',
+            link: function($scope, $element, iAttrs, controller ) {
+
+                $(document).ready(function() {
+                    $('table.responsive-data-table').DataTable( {
+                        dom: 'C<"clear">lfrtip',
+                        displayLength: 5,
+                        paging: false,
+                        scrollY:"300px",
+                        scrollX: true
+                    });
+                });
+
+            }
+        };
+    })
+
     .directive('tableResponsiveColumns', function($timeout){
         // Runs during compile
         return {
@@ -70,39 +90,46 @@ angular.module('dellUiComponents')
 
                 $(document).ready(function() {
 
-                    var piosData = [{
+                    var Data = [{
                         id: 'a',
-                        address: '7886 Dublin Blvd',
-                        city: 'Dublin, ',
-                        state: 'CA ',
-                        zip: '94568'
+                        company_name: 'Boeing Aerospace',
+                        solution_name: 'Server Rack Bo245 ',
+                        solution_id: '1234567825',
+                        owner: 'Michael Kirk',
+                        last_edited: '03/15/15  14:28',
+                        list_price: '$3,657.95',
+                        version_creator: '10',
+                        customer_number: '234517',
+                        reference_number: '13598',
+                        quote_number: '342123'
                     }, {
                         id: 'b',
-                        address: '1 Stoneridge Mall Space',
-                        city: 'Pleasanton, ',
-                        state: 'CA ',
-                        zip: '94568'
+                        company_name: 'General Motors',
+                        solution_name: 'Server Rack AsS9840 ',
+                        solution_id: '1234567825',
+                        owner: 'Tim Donnell',
+                        last_edited: '05/02/15  12:34',
+                        list_price: '$5,667.95',
+                        version_creator: '10',
+                        customer_number: '33242545',
+                        reference_number: '224567',
+                        quote_number: '200291'
                     }, {
                         id: 'c',
-                        address: '1120 Stoneridge Mall Drive',
-                        city: 'Pleasanton, ',
-                        state: 'CA ',
-                        zip: '94568'
+                        company_name: 'Home Depot',
+                        solution_name: 'Server Rack Def345 ',
+                        solution_id: '1234567825',
+                        owner: 'Sharron McCaw',
+                        last_edited: '01/04/15  10:24',
+                        list_price: '$12,667.95',
+                        version_creator: '6',
+                        customer_number: '133567872',
+                        reference_number: '579432',
+                        quote_number: '721113'
                     }];
 
-                    piosData.forEach(function(pio) {
-                        pios(pio);
-                    });
 
-                    function pios(pio) {
-                        var div = document.createElement('div');
-                        //var spanContent = div.innerHTML;
-                        div.setAttribute('id', pio.id);
-                        //div.innerHTML = pio.address + '<br />' + pio.city + pio.state + pio.zip;
-                        $('.something').append('pio.address ' + '<br />' + 'pio.city + pio.state + pio.zip');
 
-                        //document.body.appendChild(div);
-                    }
                 });
 
 
