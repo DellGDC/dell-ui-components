@@ -88,7 +88,6 @@ angular.module('dellUiComponents')
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
 
-                $(document).ready(function() {
 
                     var Data = [{
                         id: 'a',
@@ -128,9 +127,64 @@ angular.module('dellUiComponents')
                         quote_number: '721113'
                     }];
 
+                /* Formatting function for row details - modify as you need */
+                function format ( d ) {
+                    // `d` is the original data object for the row
+                    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                        '<tr>'+
+                        '<td>Full name:</td>'+
+                        '<td>'+d.name+'</td>'+
+                        '</tr>'+
+                        '<tr>'+
+                        '<td>Extension number:</td>'+
+                        '<td>'+d.extn+'</td>'+
+                        '</tr>'+
+                        '<tr>'+
+                        '<td>Extra info:</td>'+
+                        '<td>And any further details here (images etc)...</td>'+
+                        '</tr>'+
+                        '</table>';
+                }
 
+                    var table = $('table.table-responsive-columns').DataTable( {
+                        "ajax": "../components/tables/data.json",
+                        "columns": [
+                            {
+                                "className":      'details-control',
+                                "orderable":      false,
+                                "data":           null,
+                                "defaultContent": ''
+                            },
+                            { "data": "name" },
+                            { "data": "position" },
+                            { "data": "office" },
+                            { "data": "salary" }
+                        ],
+                        "order": [[1, 'asc']],
+                        dom: 'C<"clear">lfrtip',
+                        displayLength: 5,
+                        paging: false,
+                        scrollY:"300px",
+                        scrollX: true
+                    });
 
-                });
+                    // Add event listener for opening and closing details
+                    $('.table-responsive-columns tbody').on('click', 'td.details-control', function () {
+                        var tr = $(this).closest('tr');
+                        var row = table.row( tr );
+
+                        if ( row.child.isShown() ) {
+                            // This row is already open - close it
+                            row.child.hide();
+                            tr.removeClass('shown');
+                        }
+                        else {
+                            // Open this row
+                            row.child( format(row.data()) ).show();
+                            tr.addClass('shown');
+                        }
+                    });
+
 
 
             }
