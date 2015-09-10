@@ -15,6 +15,9 @@ angular.module('dellUiComponents')
         return {
             restrict: 'A',
             link: function ($scope, $element, iAttrs, controller) {
+
+
+                //------------ Bo's code --------------
                 var affixConfig = {offset:{}},
                     offset,
                     target_id,
@@ -89,12 +92,11 @@ angular.module('dellUiComponents')
                     $(target_id).find('.nav a[href^=#]').on('click', function(e){
                         e.preventDefault();
                         $("body").animate({
-                            //scrollTop: $($(e.currentTarget).attr('href')).offset().top - 100
-                            scrollTop: $($(e.currentTarget).attr('href')).offset().top
-
+                            scrollTop: $($(e.currentTarget).attr('href')).offset().top - 70
                         }, animation);
                     });
                 }
+                //------------ Bo's code --------------
 
 
             }
