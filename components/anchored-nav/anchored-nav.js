@@ -16,18 +16,30 @@ angular.module('dellUiComponents')
             restrict: 'CA',
             link: function ($scope, $element, iAttrs, controller) {
 
-                    var waypoint = new Waypoint({
-                        element: document.getElementById('context-example'),
-                        handler: function() {
-                            alert('Context example triggered');
-                        }
-                    });
+                    //var waypoint = new Waypoint({
+                    //    element: document.getElementById('context-example'),
+                    //    handler: function() {
+                    //        alert('Context example triggered');
+                    //    }
+                    //});
 
 
                 var sticky = new Waypoint.Sticky({
                     element: $('.nav-sticky')[0]
                 });
 
+                $(document).ready(function(){
+                    $('a[href^="#"]').on('click',function (e) {
+                        e.preventDefault();
+
+                        var target = this.hash;
+                        var $target = $(target);
+
+                        $('html, body').stop().animate({
+                            'scrollTop': $target.offset().top - 100
+                        }, 900, 'swing');
+                    });
+                });
 
 
 
