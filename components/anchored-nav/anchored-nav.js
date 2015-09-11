@@ -11,7 +11,7 @@
 
 angular.module('dellUiComponents')
 
-    .directive('spy', function($timeout, waypoint) {
+    .directive('spy', function($timeout) {
         return {
             restrict: 'CA',
             link: function ($scope, $element, iAttrs, controller) {
@@ -32,9 +32,9 @@ angular.module('dellUiComponents')
                 //    }
                 //});
                 //
-                //var sticky = new Waypoint.Sticky({
-                //    element: $('.nav-sticky')[0]
-                //});
+                var sticky = new Waypoint.Sticky({
+                    element: $('.nav-sticky')[0]
+                });
 
 
 
