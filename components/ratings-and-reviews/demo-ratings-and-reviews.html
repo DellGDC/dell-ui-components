@@ -1,56 +1,205 @@
-<section ng-controller="ratingsAndReviewsCtrl" id="ratings-and-reviews-html-example">
 
     <div class="container">
+        <div class="row">    
+            <div class="col-md-9">
+<!-- /-----------------/ Cut and Paste this section /-----------------/ -->   
 
-        <h2>Ratings-And-Reviews Demo</h2>
-        <div class="ratings-and-reviews">
-            <!-- example html for Ratings-And-Reviews component -->
-            <!-- data-user-rating is for the current user and accepts a whole number   -->
-            <!-- data-review-stars is for historical rating and an empty string ("[]") -->
-            <!-- for no ratings or a comma separated list ("[4,12,32,45,56]") used to  -->
-            <!-- calculate the rating and fill the histogram. Order is 1star to 5star  -->
-            <!-- data-histogram turns the histogram on ("yes") or off ("no")           -->
-            <h3 class="top-offset-40">Star Ratings (No Reviews)</h3>
-            <div class="ratingBlock" data-user-rating="0" data-review-stars='' data-histogram="no"></div>
-            <h3 class="top-offset-40">Star Ratings (Reviews)</h3>
-            <div class="ratingBlock" data-user-rating="5" data-review-stars='[2,6,12,34,7]' data-histogram="no"></div>
-            <h3 class="top-offset-40">Star Ratings (Reviews w/Histogram)</h3>
-            <div class="ratingBlock" data-user-rating="5" data-review-stars='[12,12,23,54,107]' data-histogram="yes"></div>
-        </div>
-
-        <!-- example html for Recommendation Ratio component -->
-        <div>
-        	<h3 class="top-offset-40">Recommendation Ratio</h3>
-        	<div class="recoRatio" data-recs="74" data-total="91"></div>
-        </div>
-
-        <!-- example html for Customer Review component -->
-       	<div>
-		<h3 class="top-offset-40">Customer Review Quote</h3>
-        	<div class="revQuote" data-quote="When I received the XPS 16 I was so surprised at how thin, sharp, and stylish the XPS 16 was." data-attribution="jevester, September 24, 2009"></div>
-        </div>
-
-        <!-- example html for Like / Dislike component -->
-        <div>
-			<h3 class="top-offset-40">Like / Dislike</h3>
-			Was this review helpful?
-        	<div class="likeDislike" data-yes="74" data-no="6"></div>
-        	<span class="text-blue">Report review</span>
-        	<div class="nonlink"></div>
-        </div>
-
-        <!-- example html for Like / Dislike component -->
-        <div>
-			<h3 class="top-offset-40">Individual Ratings</h3>
-			<div class="ind-rating-block pull-left">
-				<div class="ratingBlock" data-user-rating="5" data-review-stars='[2,6,12,34,7]' data-histogram="no"></div>
-				<div class="individual-rating pull-left" data-rating-label="Features" data-user-rating="4.4"></div>
-				<div class="individual-rating pull-left" data-rating-label="Performance" data-user-rating="4.4"></div>
-				<div class="individual-rating pull-left" data-rating-label="Value" data-user-rating="5"></div>
-				<div class="individual-rating pull-left" data-rating-label="Customer Service" data-user-rating="4.1"></div>
-				<div class="individual-rating pull-left" data-rating-label="Operating System" data-user-rating="4.1"></div>
-			</div>
+                <section ng-controller="ratingsAndReviewsCtrl" id="ratings-and-reviews-html-example">
+                    <h2>Ratings-And-Reviews Demo</h2>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3>Star Ratings (Reviews w/Histogram)</h3>
+                            <div class="row">
+                                <div class="hidden-xs col-sm-6 col-md-6">
+                                    <div class="ratingBlock" data-user-rating="5" data-review-stars='[12,12,23,54,107]' data-histogram="yes"></div>
+                                </div>
+                                <div class="visible-xs col-xs-12">
+                                    <div class="ratingBlock" data-user-rating="5" data-review-stars='[12,12,23,54,107]' data-histogram="no"></div>
+                                </div>
+                                <div class="hidden-xs col-sm-6 col-md-6"></div>
+                            </div>
+                            <hr/>
+                            <h2>Ratings-And-Reviews Demo</h2>
+                            <div class="ratings-and-reviews">
+                                    <!-- example html for Ratings-And-Reviews component -->
+                                    <!-- data-user-rating is for the current user and accepts a whole number   -->
+                                    <!-- data-review-stars is for historical rating and an empty string ("[]") -->
+                                    <!-- for no ratings or a comma separated list ("[4,12,32,45,56]") used to  -->
+                                    <!-- calculate the rating and fill the histogram. Order is 1star to 5star  -->
+                                    <!-- data-histogram turns the histogram on ("yes") or off ("no")           -->
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <h3 class="top-offset-20">Star Ratings (No Reviews)</h3>
+                                        <div class="ratingBlock" data-user-rating="0" data-review-stars='' data-histogram="no"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <h3 class="top-offset-30">Star Ratings (Reviews)</h3>
+                                        <div class="ratingBlock" data-user-rating="5" data-review-stars='[2,6,12,34,7]' data-histogram="no"></div>
+                                    </div>
+                                    <div class="hidden-xs col-sm-6 col-md-6"></div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <!-- example html for Recommendation Ratio component -->
+                            <h3 class="top-offset-20">Recommendation Ratio</h3>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="recoRatio" data-recs="74" data-total="91"></div>
+                                </div>
+                                <div class="hidden-xs col-sm-6 col-md-6"></div>
+                            </div>
+                            <hr/>
+                            <!-- example html for Customer Review component -->
+                            <h3 class="top-offset-20">Customer Review Quote</h3>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="revQuote" data-quote="When I received the XPS 16 I was so surprised at how thin, sharp, and stylish the XPS 16 was." data-attribution="jevester, September 24, 2009"></div>
+                                </div>
+                                <div class="hidden-xs col-sm-6 col-md-6"></div>
+                            </div>
+                            <hr/>
+                            <!-- example html for Like / Dislike component -->
+                            <h3 class="top-offset-20">Like / Dislike</h3>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <p>Was this review helpful?</p>
+                                    <div class="likeDislike" data-yes="74" data-no="6"></div>
+                                    <span class="text-blue">Report review</span>
+                                    <div class="nonlink"></div>
+                                </div>
+                                <div class="hidden-xs col-sm-6 col-md-6"></div>
+                            </div>
+                            <hr/>
+                            <!-- example html for Like / Dislike component -->
+                            <h3 class="top-offset-20">Individual Ratings</h3>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="ind-rating-block pull-left">
+                                        <div class="ratingBlock" data-user-rating="5" data-review-stars='[2,6,12,34,7]' data-histogram="no"></div>
+                                        <div class="individual-rating pull-left" data-rating-label="Features" data-user-rating="4.4"></div>
+                                        <div class="individual-rating pull-left" data-rating-label="Performance" data-user-rating="4.4"></div>
+                                        <div class="individual-rating pull-left" data-rating-label="Value" data-user-rating="5"></div>
+                                        <div class="individual-rating pull-left" data-rating-label="Customer Service" data-user-rating="4.1"></div>
+                                        <div class="individual-rating pull-left" data-rating-label="Operating System" data-user-rating="4.1"></div>
+                                    </div>
+                                </div>
+                                <div class="hidden-xs col-sm-6 col-md-6"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                <hr/>
+<!-- /-/-/-/-/-/-/-/-/-/-/-[ User Profile EXAMPLE ]-/-/-/-/-/-/-/-/-/-/-/ -->                
+                <section ng-controller="ratingsAndReviewsCtrlExampleLayout" id="ratings-and-reviews-html-example">
+                    <h3 class="top-offset-20">User Profile</h3>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-xs-6 col-sm-4 col-md-2">
+                                                <i class="icon-large-useraccount"></i>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-8 col-md-10">
+                                                <h4><a href="/#">Mark555</a></h4>
+                                                <span>New York, NY</span>
+                                            </div>
+                                        </div>
+                                        <div class="row top-offset-10">
+                                            <div class="col-sm-1">
+                                                <i class="icon-small-star text-gray-medium"></i>
+                                            </div>
+                                            <div class="col-sm-11">
+                                                <a href="/#"><u>Featured Review</u></a>
+                                            </div>
+                                        </div>
+                                        <div class="row top-offset-10">
+                                            <div class="col-sm-1">
+                                                <i class="icon-small-award text-gray-medium"></i>
+                                            </div>
+                                            <div class="col-sm-11">
+                                                <a href="/#"><u>Verified Buyer</u></a>
+                                            </div>
+                                        </div>
+                                        <div class="row top-offset-20">
+                                            <div class="col-sm-12">
+                                                <div><strong>Duration of product use:</strong></div>
+                                                <div>less than a month</div>
+                                            </div>
+                                        </div>
+                                        <div class="row top-offset-20">
+                                            <div class="col-sm-12">
+                                                <div><strong>Level of expertise:</strong></div>
+                                                <div>Expert</div>
+                                            </div>
+                                        </div>
+                                        <div class="row top-offset-20">
+                                            <div class="col-sm-12">
+                                                <div><strong>I use my PC for:</strong></div>
+                                                <div>Everyday Computing</div>
+                                            </div>
+                                        </div>
+                                        <div class="row top-offset-20">
+                                            <div class="col-sm-12">
+                                                <div><strong>Your Lifestyle:</strong></div>
+                                                <div>Professional</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+<!-- /-----------------/ Cut and Paste this section - END /-----------------/ -->                
+            </div>
+            <div id="leftCol" class="col-md-3"  style="position: relative; top: 35px">
+                    <div id="side-bar-menu" class="hidden-sx">
+                        <div id="sidebar-component-parent" class="well">
+                            <h4 class="bottom-offset-0">Variations</h4>
+                            <ul class="list-unstyled sidebar-component nav">
+                                <li class="active">
+                                    <a class="component-item" href="#/" data-ga-event-action="" data-ga-event-category="variations1" data-ga-event-trigger="click">Variation 1</a>
+                                </li>
+                                <li class="active">
+                                    <a class="component-item" href="#/" data-ga-event-action="" data-ga-event-category="variations2" data-ga-event-trigger="click">Variation 2</a>
+                                </li>
+                                <li class="active">
+                                    <a class="component-item" href="#/" data-ga-event-action="" data-ga-event-category="variations3" data-ga-event-trigger="click">Variation 3</a>
+                                </li>
+                            </ul>
+                            <hr>
+                            <ul class="list-unstyled variations-list sidebar-component nav tab-links">
+                                <li>
+                                    <a class="component-item tab-link" href="#additional-notes" data-ga-event-action="link clicked" data-ga-event-category="additional notes" data-ga-event-trigger="click">Additional notes</a>
+                                </li>
+                                <li>
+                                    <a class="component-item tab-link" href="#archive-history" data-ga-event-action="link clicked" data-ga-event-category="archive history" data-ga-event-trigger="click">Archive history</a>
+                                </li>
+                            </ul>
+                            <hr>
+                            <div>
+                                <h4 class="bottom-offset-0">Tags</h4>
+                                <hr class="top-offset-5 bottom-offset-10">
+                                <ul class="list-inline">
+                                    <li>
+                                    <a class="btn btn-default btn-xs bottom-offset-5" href="#/" data-ga-event-action="validate" data-ga-event-category="tags" data-ga-event-trigger="click">Tag1</a>
+                                    </li>
+                                    <li>
+                                    <a class="btn btn-default btn-xs bottom-offset-5" href="#/" data-ga-event-action="validation" data-ga-event-category="tags" data-ga-event-trigger="click">Tag2</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br>
+                            <div class="well bold-12">
+                                <span class="text-blue icon-small-star"></span>
+                                <span>NOTE:  This is just for layout and Demo so the left column is laidout correct.</span>
+                            </div>    
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 
-</section>

@@ -1,5 +1,5 @@
 
-angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootScope) {
+angular.module('demo').controller('ratingsAndReviewsCtrlExampleLayout',function($scope,$rootScope) {
 	// this is for functionality related to demo code
 	var block = 0;
 	var s=0;
