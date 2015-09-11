@@ -24,17 +24,11 @@ angular.module('dellUiComponents')
                     });
 
 
-
-                //var waypoint = new Waypoint({
-                //    element: document.getElementById('new-operator'),
-                //    handler: function(direction) {
-                //        alert(this.id + ' hit')
-                //    }
-                //});
-                //
                 var sticky = new Waypoint.Sticky({
                     element: $('.nav-sticky')[0]
                 });
+
+
 
 
 
