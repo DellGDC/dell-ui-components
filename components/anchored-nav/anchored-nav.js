@@ -44,6 +44,44 @@ angular.module('dellUiComponents')
 
 
 
+                // Get section or article by href
+                function getRelatedContent(el){
+                    return $($(el).attr('href'));
+                }
+                // Get link by section or article id
+                function getRelatedNavigation(el){
+                    return $('nav a[href=#'+$(el).attr('id')+']');
+                }
+
+
+
+
+
+                // Just for showing
+                var wpDefaults={
+                    context: window,
+                    continuous: true,
+                    enabled: true,
+                    horizontal: false,
+                    offset: 0,
+                    triggerOnce: false
+                };
+                $('section,article')
+                    .waypoint(function(direction) {
+                        getRelatedNavigation(this).toggleClass('active', direction === 'down');
+                    }, {
+                        offset: '90%'
+                    })
+                    .waypoint(function(direction) {
+                        getRelatedNavigation(this).toggleClass('active', direction === 'up');
+                    }, {
+                        offset: function() {
+                            return -$(this).height();
+                        }
+                    });
+
+
+
                 //------------ Bo's code --------------
                 //var affixConfig = {offset:{}},
                 //    offset,
