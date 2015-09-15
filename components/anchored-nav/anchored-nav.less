@@ -3,15 +3,8 @@
  *------------------------------------------------------------------------------------------
  */
 
-
 .navbar-anchored {
-    //&.affix {
-    //    position: fixed;
-    //    top: 0;
-    //    right: 0;
-    //    left: 0;
-    //    z-index: 2000;
-    //}
+
     li {
         background: -moz-linear-gradient(top,#fff 8%,#efefef 100%);
         background: -webkit-gradient(linear,left top,left bottom,color-stop(8%,#fff),color-stop(100%,#efefef));
@@ -36,7 +29,6 @@
         }
 
         &.active {
-            //width: 104%;
             border-top: 4px solid #007db8;
             padding-top: 6px;
             padding-bottom: 9px;
@@ -62,9 +54,7 @@
         > li {
             display: table-cell;
             float: none;
-            //width: 1%;
             > a {
-                //border: none;
                 width: 100%;
                 margin-left: -1px;
                 text-align: center;
@@ -82,14 +72,12 @@
             }
 
             &.active > a {
-                //border: none;
                 margin-left: -1px;
                 padding: 10px 15px;
                 width: 100%;
 
                 &:hover,
                 &:focus {
-                    //border: none;
                     width: 100%;
                     margin-left: -1px;
                     padding: 10px 15px;
@@ -102,11 +90,9 @@
 
             &:first-child {
                 margin-left: -1px;
-                //border-top: 1px solid @nav-tabs-border-color;
             }
             &:last-child {
                 margin-left: -1px;
-                //border-bottom: 1px solid @nav-tabs-border-color;
             }
         }
     }
