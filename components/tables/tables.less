@@ -64,6 +64,71 @@ table.dataTable td,table.dataTable th {
 
 
 // =========== adding bootstrap sort icons  ==========
+//table.dataTable {
+//    clear: both;
+//    margin-top: 6px !important;
+//    margin-bottom: 6px !important;
+//    max-width: none !important;
+//    thead {
+//        .sorting:after {
+//            //opacity: 0.2;
+//            content: "\e150";
+//            color: @dell-blue;
+//        }
+//        .sorting_asc:after {
+//            content: "\e155";
+//            color: @dell-blue;
+//        }
+//        .sorting_desc:after {
+//            content: "\e156";
+//            color: @dell-blue;
+//        }
+//        & > tr {
+//            & > th {
+//                padding-right: 30px;
+//            }
+//        }
+//    }
+//    th:active {
+//        outline: none;
+//    }
+//}
+//
+//table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc,table.dataTable thead .sorting_asc_disabled,table.dataTable thead .sorting_desc_disabled {
+//    cursor: pointer;
+//    position: relative;
+//}
+//table.dataTable thead .sorting:after,table.dataTable thead .sorting_asc:after,table.dataTable thead .sorting_desc:after {
+//    position: absolute;
+//    top: 8px;
+//    right: 8px;
+//    display: block;
+//    font-family: 'Glyphicons Halflings';
+//    opacity: 0.8;
+//}
+//div.dataTables_scrollBody table.dataTable thead .sorting:after,div.dataTables_scrollBody table.dataTable thead .sorting_asc:after,div.dataTables_scrollBody table.dataTable thead .sorting_desc:after {
+//    display: none;
+//}
+//table.dataTable thead .sorting_asc_disabled:after,table.dataTable thead .sorting_desc_disabled:after {
+//    color: #eee;
+//}
+//table.dataTable.table-condensed {
+//    thead {
+//        & > tr {
+//            & > th {
+//                padding-right: 20px;
+//            }
+//        }
+//    }
+//}
+//table.dataTable.table-condensed thead .sorting:after,table.dataTable.table-condensed thead .sorting_asc:after,table.dataTable.table-condensed thead .sorting_desc:after {
+//    top: 6px;
+//    right: 6px;
+//}
+// =========== /adding bootstrap sort icons  ==========
+
+
+// =========== adding FontAwesome sort icons  ==========
 table.dataTable {
     clear: both;
     margin-top: 6px !important;
@@ -72,20 +137,20 @@ table.dataTable {
     thead {
         .sorting:after {
             //opacity: 0.2;
-            content: "\e150";
-            color: @dell-blue;
+            content: "\f0dc";
+            color: #5AABD1;
         }
         .sorting_asc:after {
-            content: "\e155";
+            content: "\f0de";
             color: @dell-blue;
         }
         .sorting_desc:after {
-            content: "\e156";
+            content: "\f0dd";
             color: @dell-blue;
         }
         & > tr {
             & > th {
-                padding-right: 30px;
+                padding-right: 20px;
             }
         }
     }
@@ -100,10 +165,10 @@ table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTabl
 }
 table.dataTable thead .sorting:after,table.dataTable thead .sorting_asc:after,table.dataTable thead .sorting_desc:after {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 10px;
+    right: 3px;
     display: block;
-    font-family: 'Glyphicons Halflings';
+    font-family: 'FontAwesome';
     opacity: 0.8;
 }
 div.dataTables_scrollBody table.dataTable thead .sorting:after,div.dataTables_scrollBody table.dataTable thead .sorting_asc:after,div.dataTables_scrollBody table.dataTable thead .sorting_desc:after {
@@ -125,7 +190,11 @@ table.dataTable.table-condensed thead .sorting:after,table.dataTable.table-conde
     top: 6px;
     right: 6px;
 }
-// =========== adding bootstrap sort icons  ==========
+// =========== /adding FontAwesome sort icons  ==========
+
+
+
+
 
 div.dataTables_scrollHead {
     table {
@@ -337,7 +406,7 @@ table.dataTable tfoot th {
 }
 table.dataTable thead th,
 table.dataTable thead td {
-    padding: 10px 18px;
+    padding: 10px 5px;
     border-bottom: 1px solid @dell-gray;
 }
 table.dataTable thead th:active,
