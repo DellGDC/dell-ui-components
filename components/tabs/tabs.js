@@ -17,26 +17,35 @@ angular.module('dellUiComponents')
                 tabs = [],
                 totalWidth = 0,
                 visibleIndex,
+                widthLeftToTheRight,
                 widthOfVisibleTabs = $element.parent().width()-60,
                 widthOfPartiallyHiddenTab,
                 homePosition = 29,
                 offsetTotal = 29,
                 leftPosition = 29,
                 isHome = false,
+                isTooFar = false,
                 leftMostTab = {},
                 nextTab;
 
-                $element.css("left", "29px");
+                
 
                 _.each(tabObjs, function(t,index){
                     totalWidth = totalWidth + $(t).width() + 1;
                     var tObj = {
                         index: index,
+                        label: _.str.clean($(t).text()),
                         offset: offsetTotal,
                         width: $(t).width(),
-                        visibility: 0
+                        visibility: 1
                     };
-                    offsetTotal = offsetTotal - tObj.width - 1;
+                    
+                    if(tabObjs.length === index + 1) {
+                        console.log("offset total",offsetTotal, totalWidth, tObj);
+                    } else {
+                        offsetTotal = offsetTotal - tObj.width - 1;
+                    }
+
                     console.log(leftPosition,$element.css("left"));
 
                     if(totalWidth < containerWidth) {
@@ -48,57 +57,104 @@ angular.module('dellUiComponents')
 
                 leftMostTab = tabs[0];
 
+                function slideIt(backDirection) {
 
+                    var indexOffset = 1;
+                    if(backDirection) {
+                        indexOffset = -1;
+                        isToofar = false;
+                    }
+
+                    leftPosition = parseInt($element.css('left'));
+
+
+                    if(!leftMostTab) {
+                        leftMostTab = tabs[0];
+                    }
+
+                    isHome = homePosition === leftPosition;
+                    
+
+
+                    if(backDirection) {
+                        leftMostTab.visibility = 1;
+                    } else {
+                        leftMostTab.visibility = 0;
+                    } 
+
+                    leftMostTab = tabs[leftMostTab.index + indexOffset];
+
+
+                    widthLeftToTheRight = _.reduce(
+                        _.pluck(
+                            _.filter(tabs, function(tb){ 
+                                return tb.visibility === 1; 
+                            }),'width'
+                        ),
+                        function(memo, num){ 
+                            return memo + num; 
+                        },
+                    0);
+                    widthLeftToTheRight = widthLeftToTheRight + _.last(tabs).width;
+
+
+
+                    isToofar = widthLeftToTheRight < containerWidth;
+
+
+                    
+                    if(leftMostTab) {
+                        console.log(_.pluck(_.filter(tabs, function(tb){ 
+                                return tb.visibility === 0; 
+                            }),"label"));
+                        if(isToofar) {
+
+
+                            leftPosition = leftMostTab.offset+ containerWidth - widthLeftToTheRight  + 30 - tabs.length + 6;
+                            console.log("leftPosition", leftPosition);
+
+                            $element.parent().find('> .next').addClass('disabled');   
+                        } else {
+                            $element.parent().find('> .next').removeClass('disabled');
+                            leftPosition = leftMostTab.offset;
+                        }                        
+                        $element.css('left',leftPosition + "px");
+                    } else {
+                        isHome = true;
+                    }
+
+                    if(isHome) {
+                        $element.parent().find('> .prev').addClass('disabled');
+                    } else {
+                        $element.parent().find('> .prev').removeClass('disabled');
+                    }  
+
+                }
                 
-                $element.width(totalWidth+200);
+                
                 $scope.isOverflow = totalWidth > containerWidth;
                 if($scope.isOverflow) {
+                    $element.width(totalWidth+200);
+                    $element.css("left", "29px");
+
                     $element.parent().addClass('nav-tabs-overflow-container');
                     $element.before('<div class="prev disabled"><a href="javascript:;"><i class="icon-ui-arrowleft"></i></a></div>');
                     $element.after('<div class="next"><a href="javascript:;"><i class="icon-ui-arrowright"></i></a></div>');
 
-                    function slideIt(backDirection) {
-
-                        var indexOffset = 1;
-                        if(backDirection) {
-                            indexOffset = -1;
-                        }
-
-                        leftPosition = parseInt($element.css('left'));
-
-                        console.log("bad?",totalWidth-leftMostTab.offset < widthOfVisibleTabs);
-
-
-                        if(!leftMostTab) {
-                            leftMostTab = tabs[0];
-                        }
-                        isHome = homePosition === leftPosition;
-
-                        leftMostTab = tabs[leftMostTab.index + indexOffset];
-                        if(leftMostTab) {
-                            leftPosition = leftMostTab.offset;
-
-                            $element.css('left',leftPosition + "px");
-                                                      
-                        } else {
-                            isHome = true;
-                        }
-
-                        if(isHome) {
-                            $element.parent().find('> .prev').addClass('disabled');
-                        } else {
-                            $element.parent().find('> .prev').removeClass('disabled');
-                        }  
-
-                    }
-                    $element.parent().find('> .prev').on('click',function(){
-                            console.log("prev click happened");
+                    
+                    $element.parent().find('> .prev').on('click',function(e){
+                        console.log("prev click happened");
+                        if(!$(e.currentTarget).hasClass('disabled')) {
                             slideIt(true);
+                        }
+                            
 
                     });
-                    $element.parent().find('> .next').on('click',function(){
+                    $element.parent().find('> .next').on('click',function(e){
 
-                        slideIt();
+                        if(!$(e.currentTarget).hasClass('disabled')) {
+                            slideIt();
+                        }
 
                         //find out which tab is left most
                        //widthOfPartiallyHiddenTab = $(tabs[visibleIndex + 1]).width();
