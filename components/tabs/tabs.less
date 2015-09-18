@@ -3,14 +3,88 @@
 // *------------------------------------------------------------------------------------------
 // */
 
-//============== update to Dell-bootstrap-ui
+@offcanvas-transition-timing: .25s;
+
+//TODO update to Dell-bootstrap-ui
 .nav-tabs>li.active>a,
 .nav-tabs>li.active>a:focus,
 .nav-tabs>li.active>a:hover {
-    width: 100%;
-    margin-left: 0;
+    width: 102%;
+    margin-left: -1%;
 }
 
+.nav-tabs.pull-right {
+    position:relative;
+    z-index:1;
+    + .tab-content {
+        position:relative;
+        top:-11px;
+        padding-top:10px;
+        z-index:0;
+        clear:both;
+        border-top: 1px solid @dell-gray-stroke;
+    }
+}
+
+//END of update to Dell-bootstrap-ui
+
+
+
+.nav-tabs-overflow-container {
+    overflow-x: hidden;
+    > div.prev,
+    > div.next {
+        display:none;
+    }
+    @media (min-width: @screen-sm-min) {
+        position:relative;
+        > div.prev,
+        > div.next {
+            display:block;
+            background:@body-bg;
+            border:1px solid @dell-gray-stroke;
+            z-index:1;
+            width:30px;
+            a {
+                height: 40px;
+                padding:12px 6px 8px;
+                display:block;
+                &:hover,
+                &:active,
+                &:focus {
+                    background:@dell-highlight-blue;
+                }
+            }
+            &.disabled a {
+                color:@dell-gray;
+                &:hover {
+                    background:@body-bg;
+                }
+            }
+            position:absolute;
+        }
+        > div.prev {
+            left:0;
+        }
+        > div.next {
+            right:0;
+            top: 0;
+            z-index: 1;
+        }
+        > .nav-tabs {
+            height: 42px;
+            position:relative;
+            left:29px;
+            -webkit-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+            -moz-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+            o-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+            transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+
+        }
+    }
+
+
+}
 
 @media (min-width: 520px) and (max-width: @screen-xs-max) {
     .nav-tabs {
@@ -19,7 +93,8 @@
         margin-left: -15px;
         margin-right: -15px;
         > li {
-            background: @white;
+            background: @body-bg;
+            filter:none;
             width: 105%;
             border: 1px solid @nav-tabs-border-color;
             margin-bottom: -1px;
@@ -40,7 +115,7 @@
                 color: @dell-blue;
             }
             &.active {
-                background: @white;
+                background: @body-bg;
                 border-bottom-color: transparent;
                 overflow: hidden;
                 > a,
@@ -57,6 +132,7 @@
                 }
                 a:hover {
                     background: @dell-highlight-blue;
+                    cursor:pointer;
                 }
                 &:last-child {
                     margin-left: -1px;
@@ -330,9 +406,6 @@
         margin-bottom: 0 !important;
     }
 
-    .row-offcanvas-right .nav-tabs > li> a > .icon-ui-arrowright {
-        float:right;
-    }
 
     .tab-image {
         width: 90px;
@@ -348,20 +421,26 @@
 
 
 
-    /*
-     * Tab Off Canvas
-     * --------------------------------------------------
-     */
-    @media screen and (max-width: 767px) {
-        .row-offcanvas {
-            position: relative;
-            -webkit-transition: all .25s ease-out;
-            -o-transition: all .25s ease-out;
-            transition: all .25s ease-out;
+/*
+ * Tab Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width:  @screen-xs-max) {
+    .row-offcanvas {
+        position: relative;
+        .tab-pane.fade {
+            opacity:1;
+        }
+        .tab-content > .tab-pane > .row {
+            margin-left: 0;
+            margin-right: 0;
         }
 
-        .row-offcanvas-right {
-            right: 0;
+        &.row-offcanvas-right {
+            left: 0;
+            -webkit-transition: all @offcanvas-transition-timing @ease-in-out-expo;
+            -o-transition: all @offcanvas-transition-timing @ease-in-out-expo;
+            transition: all @offcanvas-transition-timing @ease-in-out-expo;
             [data-toggle="offcanvas"] {
                 text-align:left;
                 padding: 10px;
@@ -371,10 +450,41 @@
                     position: relative;
                 }
             }
+            &.active {
+                left:-100%;
+            }
+
+            .nav-tabs > li> a > .icon-ui-arrowright {
+                float:right;
+            }
+
+            .tab-content {
+                position: fixed;
+                top: 0;
+                left: 100%;
+                width: 100%;
+                z-index:1000;
+                // animation goes here
+                -webkit-transition: all @offcanvas-transition-timing @ease-in-out-expo;
+                -o-transition: all @offcanvas-transition-timing @ease-in-out-expo;
+                transition: all @offcanvas-transition-timing @ease-in-out-expo;
+                &.active {
+                    left: 0;
+                }
+                .tab-pane {
+                    min-height: 3000px;
+                    background: @body-bg;
+                }
+            }
         }
 
-        .row-offcanvas-left {
-            left: 0;
+        &.row-offcanvas-left {
+            position:relative;
+            z-index: 1;
+            right: 0;
+            -webkit-transition: all @offcanvas-transition-timing @ease-in-out-expo;
+            -o-transition: all @offcanvas-transition-timing @ease-in-out-expo;
+            transition: all @offcanvas-transition-timing @ease-in-out-expo;
             [data-toggle="offcanvas"] {
                 text-align:right;
                 padding: 10px;
@@ -384,121 +494,111 @@
                     position: relative;
                 }
             }
-        }
-        .nav-tabs > li > a {
-            position:relative;
-            padding-right:25px;
-            > .icon-ui-arrowright {
-                position: absolute;
-                top: 50%;
-                transform: translate(0, -50%);
-                right:2%;
-            }
-
-            > .icon-ui-arrowleft {
-                position: absolute;
-                top: 50%;
-                transform: translate(0, -50%);
-                left:2%;
-            }
-        }
-
-
-
-        .row-offcanvas-right
-        .sidebar-offcanvas {
-            //        right: -50%; /* 6 columns */
-            right: 108%;
-            position: fixed;
-            top: 0;
-            width: 102%;
-            left: -100%;
-            -webkit-transition: all .25s ease-out;
-            -o-transition: all .25s ease-out;
-            transition: all .25s ease-out;
-        }
-
-        .row-offcanvas-left
-        .sidebar-offcanvas {
-            left: -50%; /* 6 columns */
-        }
-
-
-        .row-offcanvas-left .tab-content {
-            position: fixed;
-            top: 0;
-            left: 100%;
-            width: 102%;
-            background: @body-bg;
-            height: 3000px;
-            // animation goes here
-            -webkit-transition: all .25s ease-out;
-            -o-transition: all .25s ease-out;
-            transition: all .25s ease-out;
             &.active {
-                left: 0;
+                right:-108%;
+                z-index: 1000;
             }
 
-        }
-
-        .row-offcanvas-right .tab-content {
-            position: fixed;
-            top: 0;
-            right: 100%;
-            width: 102%;
-            z-index:1000;
-
-            // animation goes here
-            -webkit-transition: all .25s ease-out;
-            -o-transition: all .25s ease-out;
-            transition: all .25s ease-out;
-            &.active {
-                right: 0;
-            }
-            .tab-pane {
-                min-height: 3000px;
+            .tab-content {
+                position: fixed;
+                top: -11px;
+                left: -100%;
+                width: 100%;
                 background: @body-bg;
+                height: 3000px;
+                // animation goes here
+                -webkit-transition: all @offcanvas-transition-timing @ease-in-out-expo;
+                -o-transition: all @offcanvas-transition-timing @ease-in-out-expo;
+                transition: all @offcanvas-transition-timing @ease-in-out-expo;
+                &.active {
+                    left: 0;
+                }
+                .tab-pane {
+                    min-height: 3000px;
+                    background: @body-bg;
+                }
             }
-        }
-        .row-offcanvas .nav-centered + .tab-content {
-            top: -11px;
+
+            .nav-tabs {
+                &.pull-left {
+                    + .tab-content {
+                        top: -11px;
+                    }
+                }
+                > li> a {
+                    width:100%;
+                    margin-left: 10px;
+                    padding-left:30px;
+                    text-align: right !important;
+                    padding-right:25px;
+                    > .icon-ui-arrowleft {
+                        float:left;
+                    }
+                }
+            }
+
         }
 
-        .row-offcanvas-left.active {
-            left: 50%; /* 6 columns */
+    }
+
+
+
+    .nav-tabs > li > a {
+        position:relative;
+        padding-right:25px;
+        > .icon-ui-arrowright {
+            position: absolute;
+            top: 50%;
+            transform:translate(0,-50%);
+            -ms-transform:translate(0,-50%);
+            right:2%;
         }
-        .tab-content .row {
-            margin-left: 15px;
-            margin-right: 15px;
-        }
-        .offcanvas-back-btn {
-            &.well {
-                height: 45px;
-                padding: 5px 20px 10px 30px;
-            }
-            &:before, {
-                color: @dell-blue;
-                font-family:    'icon-ui';
-                content: none !important;
-                position: absolute;
-                left: 30px;
-                padding-top: 7px;
-            }
-            > .btn-link {
-                text-decoration: none;
-            }
-            .btn {
-                padding: 6px 0 !important;
-            }
-            [class^=icon] {
-                top: 2px;
-                position: relative;
-            }
-        }
-        .tab-image {
-            padding-bottom: 10px;
+        > .icon-ui-arrowleft {
+            position: absolute;
+            top: 50%;
+            transform:translate(0,-50%);
+            -ms-transform:translate(0,-50%);
+            left:2%;
         }
     }
+
+
+    .row-offcanvas .nav-centered + .tab-content {
+        top: -11px;
+    }
+
+    // .row-offcanvas-left.active {
+    //     left: 50%; /* 6 columns */
+    // }
+
+    .offcanvas-back-btn {
+        &.well {
+            height: 45px;
+            padding: 5px 20px 10px 30px;
+        }
+        &:before, {
+            color: @dell-blue;
+            font-family:    'icon-ui';
+            content: none !important;
+            position: absolute;
+            left: 30px;
+            padding-top: 7px;
+        }
+        > .btn-link {
+            text-decoration: none;
+        }
+        .btn {
+            padding: 6px 0 !important;
+        }
+        [class^=icon] {
+            top: 2px;
+            position: relative;
+        }
+    }
+    .tab-image {
+        padding-bottom: 10px;
+    }
+}
 
 
 
@@ -626,6 +726,5 @@
     }
   }
 }
-
 
 
