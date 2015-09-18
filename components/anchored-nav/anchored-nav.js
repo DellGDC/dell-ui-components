@@ -13,6 +13,16 @@ angular.module('dellUiComponents')
                     element: $('.nav-sticky')[0]
                 });
 
+                var waypoints = $('.waypoint').waypoint(function(direction) {
+                    //alert(this.element.id + ' hit 10% from top of window');
+                    if ($($element).find('.nav li').hasClass('active')) {
+                        $('.nav li').removeClass('active');
+                        $(this).parent().addClass('active');
+                    }
+                }, {
+                    offset: '10%'
+                });
+
                 $($element).find('.nav a[href^=#]').on('click',function (e) {
                     e.preventDefault();
 
@@ -28,6 +38,9 @@ angular.module('dellUiComponents')
                         $(this).parent().addClass('active');
                     }
                 });
+
+
+
 
                 //------------ Bo's code --------------
                 //var affixConfig = {offset:{}},
