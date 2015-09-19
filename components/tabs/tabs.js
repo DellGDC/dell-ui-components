@@ -18,7 +18,7 @@ angular.module('dellUiComponents')
                 totalWidth = 0,
                 visibleIndex,
                 widthLeftToTheRight,
-                widthOfVisibleTabs = $element.parent().width()-58, // <== CHANGED THIS  (29 * 2)
+                widthOfVisibleTabs = $element.parent().width()-58,// <== CHANGED THIS to (29 * 2) for subtracting arrow buttons, was 60
                 widthOfPartiallyHiddenTab,
                 homePosition = 29,
                 offsetTotal = 29,
@@ -62,7 +62,7 @@ angular.module('dellUiComponents')
                     var indexOffset = 1;
                     if(backDirection) {
                         indexOffset = -1;
-                        isToofar = false;
+                       // isToofar = false; CHANGED THIS it wasn't resetting the variable
                     }
 
                     leftPosition = parseInt($element.css('left'));
@@ -96,32 +96,30 @@ angular.module('dellUiComponents')
                         },
                     0);
 
-                    // CHANGED THIS BECAUSE IT REQUIRED THE LAST CLICK (LAST TAB) TO GO PAST THE FLUSH POINT
+                    // CHANGED THIS because it made the last click (last tab) go past the flush point
                     //widthLeftToTheRight = widthLeftToTheRight + _.last(tabs).width;
-                    widthLeftToTheRight = widthLeftToTheRight;
 
-
-
-                    isToofar = widthLeftToTheRight < containerWidth;
-                    console.log ("isToofar", isToofar, widthLeftToTheRight, containerWidth);
-
+                    //CHANGED THIS to a condition that resets isToofar to false after tabs are set flush right, otherwise the first click on previous won't work
+                    if (isToofar) {
+                        isToofar = false;
+                    } else {
+                        isToofar = widthLeftToTheRight < containerWidth;
+                    }
 
                     if(leftMostTab) {
-                    /*    console.log(_.pluck(_.filter(tabs, function(tb){
+                        console.log("pluck", _.pluck(_.filter(tabs, function(tb){
                                 return tb.visibility === 0;
-                            }),"label"));*/
-                        console.log("leftMostTab", leftMostTab);
+                            }),"label"));
+                        //console.log("leftMostTab", leftMostTab);
                         if(isToofar) {
-                            console.log ("isToofar 2", isToofar, widthLeftToTheRight, containerWidth);
-                            //CHANGED THIS TO THE SIMPLE EQUATION I INITIALLY SHOWED YOU ON MY WHITE BOARD
-                           // leftPosition = leftMostTab.offset + containerWidth - widthLeftToTheRight  + 29 - tabs.length + 2;
-                            console.log("total width", totalWidth, "container width", containerWidth);
-                            leftPosition =  (containerWidth - totalWidth) - 29;
 
-
+                            //CHANGED THIS to the simple equation I initially showed you on my whiteboard
+                            // leftPosition = leftMostTab.offset + containerWidth - widthLeftToTheRight  + 29 - tabs.length + 2;
+                            leftPosition = (containerWidth - totalWidth) - 29;
                             $element.parent().find('> .next').addClass('disabled');
 
                         } else {
+                            console.log("MADE IT HERE");
                             $element.parent().find('> .next').removeClass('disabled');
                             leftPosition = leftMostTab.offset;
                         }
@@ -154,7 +152,6 @@ angular.module('dellUiComponents')
                         if(!$(e.currentTarget).hasClass('disabled')) {
                             slideIt(true);
                         }
-
 
                     });
                     $element.parent().find('> .next').on('click',function(e){
