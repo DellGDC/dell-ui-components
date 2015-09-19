@@ -18,7 +18,7 @@ angular.module('dellUiComponents')
                 totalWidth = 0,
                 visibleIndex,
                 widthLeftToTheRight,
-                widthOfVisibleTabs = $element.parent().width()-60,
+                widthOfVisibleTabs = $element.parent().width()-58, // <== CHANGED THIS  (29 * 2)
                 widthOfPartiallyHiddenTab,
                 homePosition = 29,
                 offsetTotal = 29,
@@ -28,10 +28,10 @@ angular.module('dellUiComponents')
                 leftMostTab = {},
                 nextTab;
 
-                
+
 
                 _.each(tabObjs, function(t,index){
-                    totalWidth = totalWidth + $(t).width() + 1;
+                    totalWidth = totalWidth + $(t).width() +1;
                     var tObj = {
                         index: index,
                         label: _.str.clean($(t).text()),
@@ -39,14 +39,14 @@ angular.module('dellUiComponents')
                         width: $(t).width(),
                         visibility: 1
                     };
-                    
+                   // console.log("tabs list", tObj);
                     if(tabObjs.length === index + 1) {
-                        console.log("offset total",offsetTotal, totalWidth, tObj);
+                       // console.log("offset total",offsetTotal, totalWidth, tObj);
                     } else {
                         offsetTotal = offsetTotal - tObj.width - 1;
                     }
 
-                    console.log(leftPosition,$element.css("left"));
+                   // console.log(leftPosition,$element.css("left"));
 
                     if(totalWidth < containerWidth) {
                         visibleIndex = index;
@@ -56,9 +56,9 @@ angular.module('dellUiComponents')
                 });
 
                 leftMostTab = tabs[0];
-
+                var isToofar;
                 function slideIt(backDirection) {
-
+                    console.log("slide it");
                     var indexOffset = 1;
                     if(backDirection) {
                         indexOffset = -1;
@@ -73,51 +73,58 @@ angular.module('dellUiComponents')
                     }
 
                     isHome = homePosition === leftPosition;
-                    
+
 
 
                     if(backDirection) {
                         leftMostTab.visibility = 1;
                     } else {
                         leftMostTab.visibility = 0;
-                    } 
+                    }
 
                     leftMostTab = tabs[leftMostTab.index + indexOffset];
 
 
                     widthLeftToTheRight = _.reduce(
                         _.pluck(
-                            _.filter(tabs, function(tb){ 
-                                return tb.visibility === 1; 
+                            _.filter(tabs, function(tb){
+                                return tb.visibility === 1;
                             }),'width'
                         ),
-                        function(memo, num){ 
-                            return memo + num; 
+                        function(memo, num){
+                            return memo + num;
                         },
                     0);
-                    widthLeftToTheRight = widthLeftToTheRight + _.last(tabs).width;
+
+                    // CHANGED THIS BECAUSE IT REQUIRED THE LAST CLICK (LAST TAB) TO GO PAST THE FLUSH POINT
+                    //widthLeftToTheRight = widthLeftToTheRight + _.last(tabs).width;
+                    widthLeftToTheRight = widthLeftToTheRight;
 
 
 
                     isToofar = widthLeftToTheRight < containerWidth;
+                    console.log ("isToofar", isToofar, widthLeftToTheRight, containerWidth);
 
 
-                    
                     if(leftMostTab) {
-                        console.log(_.pluck(_.filter(tabs, function(tb){ 
-                                return tb.visibility === 0; 
-                            }),"label"));
+                    /*    console.log(_.pluck(_.filter(tabs, function(tb){
+                                return tb.visibility === 0;
+                            }),"label"));*/
+                        console.log("leftMostTab", leftMostTab);
                         if(isToofar) {
+                            console.log ("isToofar 2", isToofar, widthLeftToTheRight, containerWidth);
+                            //CHANGED THIS TO THE SIMPLE EQUATION I INITIALLY SHOWED YOU ON MY WHITE BOARD
+                           // leftPosition = leftMostTab.offset + containerWidth - widthLeftToTheRight  + 29 - tabs.length + 2;
+                            console.log("total width", totalWidth, "container width", containerWidth);
+                            leftPosition =  (containerWidth - totalWidth) - 29;
 
 
-                            leftPosition = leftMostTab.offset+ containerWidth - widthLeftToTheRight  + 30 - tabs.length + 6;
-                            console.log("leftPosition", leftPosition);
+                            $element.parent().find('> .next').addClass('disabled');
 
-                            $element.parent().find('> .next').addClass('disabled');   
                         } else {
                             $element.parent().find('> .next').removeClass('disabled');
                             leftPosition = leftMostTab.offset;
-                        }                        
+                        }
                         $element.css('left',leftPosition + "px");
                     } else {
                         isHome = true;
@@ -127,11 +134,11 @@ angular.module('dellUiComponents')
                         $element.parent().find('> .prev').addClass('disabled');
                     } else {
                         $element.parent().find('> .prev').removeClass('disabled');
-                    }  
+                    }
 
                 }
-                
-                
+
+
                 $scope.isOverflow = totalWidth > containerWidth;
                 if($scope.isOverflow) {
                     $element.width(totalWidth+200);
@@ -141,13 +148,13 @@ angular.module('dellUiComponents')
                     $element.before('<div class="prev disabled"><a href="javascript:;"><i class="icon-ui-arrowleft"></i></a></div>');
                     $element.after('<div class="next"><a href="javascript:;"><i class="icon-ui-arrowright"></i></a></div>');
 
-                    
+
                     $element.parent().find('> .prev').on('click',function(e){
-                        console.log("prev click happened");
+                        //console.log("prev click happened");
                         if(!$(e.currentTarget).hasClass('disabled')) {
                             slideIt(true);
                         }
-                            
+
 
                     });
                     $element.parent().find('> .next').on('click',function(e){
@@ -177,7 +184,7 @@ angular.module('dellUiComponents')
                     });
                     $element.find('[data-toggle=offcanvas]').on("click",function(){
                         $element.toggleClass('active');
-                    });                    
+                    });
                 }
             }
         };
