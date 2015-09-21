@@ -13,33 +13,71 @@ angular.module('dellUiComponents')
                     element: $('.nav-sticky')[0]
                 });
 
-                var waypoints = $('.waypoint').waypoint(function(direction) {
-                    //alert(this.element.id + ' hit 10% from top of window');
-                    if ($($element).find('.nav li').hasClass('active')) {
-                        $('.nav li').removeClass('active');
-                        $(this).parent().addClass('active');
-                    }
-                }, {
-                    offset: '10%'
-                });
-
-                $($element).find('.nav a[href^=#]').on('click',function (e) {
-                    e.preventDefault();
-
-                    var target = this.hash;
-                    var $target = $(target);
-
-                    $('html, body').stop().animate({
-                        'scrollTop': $target.offset().top - 100
-                    }, 900, 'swing');
-
-                    if ($($element).find('.nav li').hasClass('active')) {
-                        $('.nav li').removeClass('active');
-                        $(this).parent().addClass('active');
-                    }
-                });
+                //var waypoints = $('.waypoint').waypoint(function(direction) {
+                //    alert(this.element.id + ' hit 10% from top of window');
+                //}, {
+                //    offset: '10%'
+                //});
 
 
+//-- working code for on.click ------
+//                $($element).find('.nav a[href^=#]').on('click',function (e) {
+//                    e.preventDefault();
+//
+//                    var target = this.hash;
+//                    var $target = $(target);
+//
+//                    $('html, body').stop().animate({
+//                        'scrollTop': $target.offset().top - 100
+//                    }, 900, 'swing');
+//
+//                    if ($($element).find('.nav li').hasClass('active')) {
+//                        $('.nav li').removeClass('active');
+//                        $(this).parent().addClass('active');
+//                    }
+//
+//
+//                });
+
+//-- working code for on.click ------
+
+                var target_id = $($element).find('.nav a[href^=#]');
+
+                if (target_id) {
+                    $(target_id).on('click',function (e) {
+                        e.preventDefault();
+
+                        var target = this.hash;
+                        var $target = $(target);
+
+                        $('html, body').stop().animate({
+                            'scrollTop': $target.offset().top - 100
+                        }, 900, 'swing');
+
+                        if ($($element).find('.nav li').hasClass('active')) {
+                            $('.nav li').removeClass('active');
+                            $(this).parent().addClass('active');
+                        }
+
+                    });
+                }
+
+                if (target_id) {
+                    var $waypoint = $('.waypoint');
+
+                    $waypoint.waypoint(function (direction) {
+                        if (direction === 'down'){
+                            $('.nav a[href^=#]').find('.nav li').hasClass('active');
+                            $('.nav li').removeClass('active');
+                            $(this).parent().next().addClass('active');
+                        } else {
+                            //$(this).parent().addClass('active');
+
+                        }
+
+                        console.log('Waypoint!!!!!!!!');
+                    }, {offset:'10%'});
+                }
 
 
                 //------------ Bo's code --------------
