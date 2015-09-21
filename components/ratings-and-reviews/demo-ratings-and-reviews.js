@@ -50,7 +50,7 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 			totalRatings = (s[0]+s[1]+s[2]+s[3]+s[4]); //total number of ratings
 			ratingAverage = ((s[0]+(s[1]*2)+(s[2]*3)+(s[3]*4)+(s[4]*5))/totalRatings).toFixed(1);// get average and store it
 //inject content on the page
-			$(this).html( "<div class='row'><div class='hidden-xs col-sm-5 col-md-4'><div class='starbox yesRatings'><span data-rate='1'><i class='icon-small-favorite-0'></i></span><span data-rate='2'><i class='icon-small-favorite-0'></i></span><span data-rate='3'><i class='icon-small-favorite-0'></i></span><span data-rate='4'><i class='icon-small-favorite-0'></i></span><span data-rate='5'><i class='icon-small-favorite-0'></i></span></div></div><div class='visible-xs col-xs-6 col-xs-offset-3'><div class='starbox yesRatings text-center'><span data-rate='1'><i class='icon-small-favorite-0'></i></span><span data-rate='2'><i class='icon-small-favorite-0'></i></span><span data-rate='3'><i class='icon-small-favorite-0'></i></span><span data-rate='4'><i class='icon-small-favorite-0'></i></span><span data-rate='5'><i class='icon-small-favorite-0'></i></span></div></div><div class='hidden-xs col-sm-4 col-md-4'><span class='reviewText cursor text-blue bold-12'>"+totalRatings+" Ratings</span></div><div class='visible-xs col-xs-4 col-xs-offset-4 text-center'><span class='reviewText-smallMedia cursor text-blue bold-12'>"+totalRatings+" Ratings</span></div><div class='hidden-xs hidden-sm col-md-4'><span class='reviewText cursor text-blue bold-12'>Write your review</span></div><div class='visible-sm col-sm-12 hidden-md'><span class='reviewText-smallMedia cursor text-blue bold-12'>Write your review</span></div></div>" );
+			$(this).html( "<div class='row'><div class='col-xs-7 col-sm-8 col-md-6'><div class='pull-left starbox yesRatings'><span data-rate='1'><i class='icon-small-favorite-0'></i></span><span data-rate='2'><i class='icon-small-favorite-0'></i></span><span data-rate='3'><i class='icon-small-favorite-0'></i></span><span data-rate='4'><i class='icon-small-favorite-0'></i></span><span data-rate='5'><i class='icon-small-favorite-0'></i></span></div><span class='pull-left reviewText cursor text-blue bold-12'>"+totalRatings+" Ratings</span></div><div class='col-xs-5 col-sm-4 col-md-6'><span class='reviewText cursor text-blue bold-12'>Write your review</span></div></div>" );
 			$(this).data('userRating', ratingAverage);
 
 			//set current user rating stars
@@ -59,7 +59,7 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 			renderStars(a, $(this), $( this ).data('userRating'));
 		}	else {
 			//nope, no data... just render the blank stars
-			$(this).html( '<div style="width:100%;" class="pull-left"><div class="starbox pull-left"><span data-rate="1"><i class="icon-small-favorite-0"></i></span><span data-rate="2"><i class="icon-small-favorite-0"></i></span><span data-rate="3"><i class="icon-small-favorite-0"></i></span><span data-rate="4"><i class="icon-small-favorite-0"></i></span><span data-rate="5"><i class="icon-small-favorite-0"></i></span></div><div class="pull-left reviewText"><div class="linkStyle text-blue">Write your review</div></div>' );
+			$(this).html( '<div style="width:100%;" class="pull-left"><div class="starbox pull-left"><span data-rate="1"><i class="icon-small-favorite-0"></i></span><span data-rate="2"><i class="icon-small-favorite-0"></i></span><span data-rate="3"><i class="icon-small-favorite-0"></i></span><span data-rate="4"><i class="icon-small-favorite-0"></i></span><span data-rate="5"><i class="icon-small-favorite-0"></i></span></div><div class="pull-left reviewText"><div class="linkStyle text-blue bold-12">Write your review</div></div>' );
 			a = "span:nth-child("+Math.floor(parseInt($( this ).data('userRating')))+")";
 			//render stars
 			renderStars(a, $(this), $( this ).data('userRating'));
@@ -73,7 +73,7 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 
 	// iterate through Customer Quote divs on the page
 	$(".revQuote").each(function() {
-		$(this).html( '<p style="font-size:15px;">"'+$( this ).data('quote')+'"</p><span style="font-size:12px;">- '+$( this ).data('attribution')+"</span>");
+		$(this).html( '<h4>"'+$( this ).data('quote')+'"</h4><p>- '+$( this ).data('attribution')+"</p>");
 	});
 
 //star rating hover function

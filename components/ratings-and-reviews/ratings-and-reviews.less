@@ -13,6 +13,13 @@
 	height: 250px;
 }
 */
+.bold-12 {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 500;
+    padding-top: 4px;
+    padding-left: 10px;
+}
 .nonlink {
 	width:	43px;
 	height:	22px;
@@ -70,9 +77,10 @@ h4 {
 .icon-small-favorite-100, .icon-small-favorite-0 {
 	width: 21px;
 	margin: 1px 0;
+	background-position: -283px -43px;
 }
 .icon-small-favorite-0 {
-    background-position: -280px -13px;
+    background-position: -283px -13px;
 }
 
 .cursor {
@@ -82,7 +90,7 @@ h4 {
 .barG {
 	height: 24px;
 	width: 100%;
-	//background-color: #eee;
+	background-color: #eee;
 	border:1px solid #aaa;
 }
 
@@ -91,7 +99,8 @@ h4 {
 }
 
 .histogramBlock table, .histogramBlock th, .histogramBlock td {
-    border: 8px solid @white;
+    border-top: 8px solid @white;
+    border-bottom: 8px solid @white;
     border-collapse: collapse;
 }
 
@@ -105,5 +114,11 @@ h4 {
 	.reviewText-smallMedia {
 		position: relative;
 		top: -5px;
+	}
+}
+@media (max-width: @screen-xs-max) {
+
+	.icon-small-favorite-100, .icon-small-favorite-0 {
+		width: 20px;
 	}
 }
