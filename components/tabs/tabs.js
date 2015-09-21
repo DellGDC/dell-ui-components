@@ -58,7 +58,7 @@ angular.module('dellUiComponents')
                 leftMostTab = tabs[0];
                 var isToofar;
                 function slideIt(backDirection) {
-                    console.log("slide it");
+                    //console.log("slide it");
                     var indexOffset = 1;
                     if(backDirection) {
                         indexOffset = -1;
