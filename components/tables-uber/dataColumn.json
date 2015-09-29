@@ -2,6 +2,8 @@
     "data": [
 
         {
+            "DT_RowId": "row_1",
+            "active": "0",
             "Company_name": "Boeing Aerospace",
             "Solution_name": "Server Rack Bo245",
             "Solution_ID": "1234567825",
@@ -12,6 +14,8 @@
             "Reference_number": "NTBYB90",
             "Quote_number": "8422-AWS2"
         },{
+            "DT_RowId": "row_2",
+            "active": "0",
             "Company_name": "Microsoft",
             "Solution_name": "Server Rack 59467",
             "Solution_ID": "232214",
@@ -22,6 +26,8 @@
             "Reference_number": "RTB879",
             "Quote_number": "3234f55-AWS2"
         },{
+            "DT_RowId": "row_3",
+            "active": "0",
             "Company_name": "Ford Auto",
             "Solution_name": "Server Rack AW34534",
             "Solution_ID": "98693202",
@@ -31,8 +37,9 @@
             "Customer_number": "683995770",
             "Reference_number": "SOME783",
             "Quote_number": "323325-424e"
-        },
-        {
+        },{
+            "DT_RowId": "row_4",
+            "active": "0",
             "Company_name": "Time Warner",
             "Solution_name": "Server Rack GT&932021",
             "Solution_ID": "1234567825",
@@ -43,6 +50,8 @@
             "Reference_number": "NTBYB90",
             "Quote_number": "3432-AWS2"
         },{
+            "DT_RowId": "row_5",
+            "active": "0",
             "Company_name": "Chrysler",
             "Solution_name": "Server Rack 59467",
             "Solution_ID": "232214",
@@ -53,6 +62,8 @@
             "Reference_number": "RTB879",
             "Quote_number": "113-4534"
         },{
+            "DT_RowId": "row_6",
+            "active": "0",
             "Company_name": "Hyundai",
             "Solution_name": "Server Rack AW34534",
             "Solution_ID": "98693202",
@@ -62,8 +73,9 @@
             "Customer_number": "683995770",
             "Reference_number": "HYIDEP78364",
             "Quote_number": "8978990r-wer3"
-        }
-        ,{
+        },{
+            "DT_RowId": "row_7",
+            "active": "0",
             "Company_name": "AT&T",
             "Solution_name": "Server Rack 3232WES",
             "Solution_ID": "ERB99802",
@@ -74,6 +86,8 @@
             "Reference_number": "TEse53420",
             "Quote_number": "werwer-cji5"
         },{
+            "DT_RowId": "row_8",
+            "active": "0",
             "Company_name": "PBS",
             "Solution_name": "Server Rack 24245d",
             "Solution_ID": "4564522",
@@ -84,6 +98,8 @@
             "Reference_number": "RTB879",
             "Quote_number": "c443fw5-55342"
         },{
+            "DT_RowId": "row_9",
+            "active": "0",
             "Company_name": "Comcast",
             "Solution_name": "Server Rack AW34534",
             "Solution_ID": "98693202",
@@ -93,8 +109,9 @@
             "Customer_number": "683995770",
             "Reference_number": "SOMwfE783",
             "Quote_number": "1123-werwf35g"
-        }
-        ,{
+        },{
+            "DT_RowId": "row_10",
+            "active": "0",
             "Company_name": "Ricola",
             "Solution_name": "Server Rack 3232WES",
             "Solution_ID": "ERB99802",
@@ -105,6 +122,8 @@
             "Reference_number": "Gruto7910",
             "Quote_number": "1123-333d"
         },{
+            "DT_RowId": "row_11",
+            "active": "0",
             "Company_name": "NorthStar",
             "Solution_name": "Server Rack 24245d",
             "Solution_ID": "4564522",
@@ -115,6 +134,8 @@
             "Reference_number": "RTB879",
             "Quote_number": "c44243fw5-55342"
         },{
+            "DT_RowId": "row_12",
+            "active": "0",
             "Company_name": "Jones Cable",
             "Solution_name": "Server Rack AW34534",
             "Solution_ID": "98693202",
@@ -124,8 +145,9 @@
             "Customer_number": "683995770",
             "Reference_number": "SSSjlk980",
             "Quote_number": "1123-asdq3x"
-        }
-        ,{
+        },{
+            "DT_RowId": "row_13",
+            "active": "0",
             "Company_name": "Proctor & Gamble",
             "Solution_name": "Server Rack 3232WES",
             "Solution_ID": "ERB99802",
@@ -136,6 +158,8 @@
             "Reference_number": "NAME87690-2",
             "Quote_number": "1123-4t3d2"
         },{
+            "DT_RowId": "row_14",
+            "active": "0",
             "Company_name": "Boeing Aerospace",
             "Solution_name": "Server Rack Bo245",
             "Solution_ID": "1234567825",
@@ -146,6 +170,8 @@
             "Reference_number": "NTBYB90",
             "Quote_number": "8422-AWS2"
         },{
+            "DT_RowId": "row_15",
+            "active": "0",
             "Company_name": "Microsoft",
             "Solution_name": "Server Rack 59467",
             "Solution_ID": "232214",
@@ -156,6 +182,8 @@
             "Reference_number": "RTB879",
             "Quote_number": "994GR02-34345"
         },{
+            "DT_RowId": "row_16",
+            "active": "0",
             "Company_name": "Sony",
             "Solution_name": "Server Rack AW34534",
             "Solution_ID": "98693202",
@@ -165,8 +193,9 @@
             "Customer_number": "683995770",
             "Reference_number": "VET424ll",
             "Quote_number": "1123-SSDS"
-        },
-        {
+        },{
+            "DT_RowId": "row_17",
+            "active": "0",
             "Company_name": "Time Warner",
             "Solution_name": "Server Rack GT&932021",
             "Solution_ID": "1234567825",
@@ -177,6 +206,8 @@
             "Reference_number": "NTBYB90",
             "Quote_number": "3432-AWS2"
         },{
+            "DT_RowId": "row_18",
+            "active": "0",
             "Company_name": "Federal Credit Union",
             "Solution_name": "Server Rack 59467",
             "Solution_ID": "232214",
@@ -187,6 +218,8 @@
             "Reference_number": "RTB879",
             "Quote_number": "992402-4555g"
         },{
+            "DT_RowId": "row_19",
+            "active": "0",
             "Company_name": "Hyundai",
             "Solution_name": "Server Rack AW34534",
             "Solution_ID": "98693202",
@@ -198,6 +231,8 @@
             "Quote_number": "77yi8766"
         }
         ,{
+            "DT_RowId": "row_20",
+            "active": "0",
             "Company_name": "Jump and Serve",
             "Solution_name": "Server Rack 445334",
             "Solution_ID": "3442er",
@@ -208,6 +243,8 @@
             "Reference_number": "HGGY6689",
             "Quote_number": "34234-wf433f"
         },{
+            "DT_RowId": "row_21",
+            "active": "0",
             "Company_name": "Recon",
             "Solution_name": "Server Rack 24245d",
             "Solution_ID": "449038dk",
@@ -218,6 +255,8 @@
             "Reference_number": "RTdf44B879",
             "Quote_number": "c44243fw5-55342"
         },{
+            "DT_RowId": "row_22",
+            "active": "0",
             "Company_name": "ServerPro",
             "Solution_name": "Server Rack AW34534",
             "Solution_ID": "98693202",
@@ -229,6 +268,8 @@
             "Quote_number": "1123-werwf35g"
         }
         ,{
+            "DT_RowId": "row_23",
+            "active": "0",
             "Company_name": "SUnivision",
             "Solution_name": "Server Rack 3232WES",
             "Solution_ID": "ERB99802",
@@ -239,6 +280,8 @@
             "Reference_number": "HIGFH122",
             "Quote_number": "1123-333d"
         },{
+            "DT_RowId": "row_24",
+            "active": "0",
             "Company_name": "NPR",
             "Solution_name": "Server Rack 24245d",
             "Solution_ID": "4564522",
@@ -249,6 +292,8 @@
             "Reference_number": "RTB879",
             "Quote_number": "c44243fw5-55342"
         },{
+            "DT_RowId": "row_24",
+            "active": "0",
             "Company_name": "Kool-Aid",
             "Solution_name": "Server Rack e442234",
             "Solution_ID": "3553234",
@@ -258,8 +303,9 @@
             "Customer_number": "3234254",
             "Reference_number": "3fcct43",
             "Quote_number": "1123-asd332q3x"
-        }
-        ,{
+        },{
+            "DT_RowId": "row_25",
+            "active": "0",
             "Company_name": "CMT",
             "Solution_name": "Server  3232WES",
             "Solution_ID": "ERB99802",

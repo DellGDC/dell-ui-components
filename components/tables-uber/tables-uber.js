@@ -26,23 +26,51 @@ angular.module('dellUiComponents')
                 } else {
                     tableData = {
                         "ajax": "components/tables-uber/dataColumn.json",
+
                         "columns": [
-                            //{
-                            //    "data": "item",
-                            //    "className": "editable"
-                            //},
 
+                            {
+                                "data": "Company_name",
+                                "sClass":"editable"
+                            },
+                            {
+                                "data": "Solution_name",
+                                "sClass":"editable"
+                            },
 
-                            {"data": "Company_name"},
-                            {"data": "Solution_name"},
-                            {"data": "Solution_ID"},
-                            {"data": "Owner"},
-                            {"data": "Last_edited"},
-                            {"data": "List_price"},
-                            {"data": "Customer_number"},
-                            {"data": "Reference_number"},
-                            {"data": "Quote_number"}
+                            {
+                                "data": "Solution_ID",
+                                "sClass":"editable"
+                            },
+                            {
+                                "data": "Owner",
+                                "sClass":"editable"
+                            },
+                            {
+                                "data": "Last_edited",
+                                "sClass":"editable"
+                            },
+                            {
+                                "data": "List_price",
+                                "sClass":"editable"
+                            },
+                            {
+                                "data": "Customer_number",
+                                "sClass":"editable"
+                            },
+                            {
+                                "data": "Reference_number",
+                                "sClass":"editable"
+                            },
+                            {
+                                "data": "Quote_number",
+                                "sClass":"editable"
+                            }
                         ],
+                        //select: {
+                        //    style:    'os',
+                        //    selector: 'td:first-child'
+                        //},
                         "pagingType": "simple",
                         "language": {
                             "paginate": {
@@ -54,18 +82,12 @@ angular.module('dellUiComponents')
                     };
                 }
 
-                //$('.pagination > li').click(function() { console.log("hi there!")});
-
-                //$('.pagination > a').click(function() {
-                //    $('.table-editable').fnReloadAjax('dataColumn.json');
-                //});
 
                 table = $element.DataTable(tableData);
 
                 if($element.hasClass('table-editable')) {
                     $timeout(function(){
                         console.log("editable table here");
-                        $element.find('td').addClass('editable');
                         $element.find('td.editable').attr("contenteditable",true);
                         $element.find('td.editable').on('blur',function(e){
                             var newData = $(e.currentTarget).text(), data = table.cell( this ).data();
@@ -73,17 +95,10 @@ angular.module('dellUiComponents')
                                 console.log( 'You edited '+data+' and changed it to '+newData,table);
                             }
                         } );
-                    });
+                    },100);
                 }
-
 
             }
         };
     });
-
-
-
-
-
-
 
