@@ -67,7 +67,7 @@ angular.module('dellUiComponents')
                     "columns": [
 
                         {
-                            return:'<input type="checkbox">',
+                            "data":''
                         },
 
                         {
