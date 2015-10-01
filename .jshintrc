@@ -27,6 +27,8 @@
         "xdescribe": true,
         "xit": true,
         "Eve": true,
-        "spyOn": true
+        "spyOn": true,
+        "Waypoint": true,
+        "alert": true
     }
 }
