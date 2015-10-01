@@ -50,7 +50,7 @@ angular.module('demo').controller('ratingsAndReviewsCtrl',function($scope,$rootS
 			totalRatings = (s[0]+s[1]+s[2]+s[3]+s[4]); //total number of ratings
 			ratingAverage = ((s[0]+(s[1]*2)+(s[2]*3)+(s[3]*4)+(s[4]*5))/totalRatings).toFixed(1);// get average and store it
 //inject content on the page
-			$(this).html( "<div class='row'><div class='col-xs-7 col-sm-7'><div class='pull-left starbox yesRatings'><span data-rate='1'><i class='icon-small-favorite-0'></i></span><span data-rate='2'><i class='icon-small-favorite-0'></i></span><span data-rate='3'><i class='icon-small-favorite-0'></i></span><span data-rate='4'><i class='icon-small-favorite-0'></i></span><span data-rate='5'><i class='icon-small-favorite-0'></i></span></div><span class='pull-left reviewText cursor text-blue bold-12'>"+totalRatings+" Ratings</span></div><div class='col-xs-5 col-sm-5 col-md-7'><span class='reviewText cursor text-blue bold-12'>Write your review</span></div></div>" );
+			$(this).html( "<div class='row'><div class='col-xs-12 col-sm-7'><div class='pull-left starbox yesRatings'><span data-rate='1'><i class='icon-small-favorite-0'></i></span><span data-rate='2'><i class='icon-small-favorite-0'></i></span><span data-rate='3'><i class='icon-small-favorite-0'></i></span><span data-rate='4'><i class='icon-small-favorite-0'></i></span><span data-rate='5'><i class='icon-small-favorite-0'></i></span></div><span class='pull-left reviewText cursor text-blue bold-12'>"+totalRatings+" Ratings</span><span class='reviewText cursor text-blue bold-12 pull-right'>Write your review</span></div></div>" );
 			$(this).data('userRating', ratingAverage);
 
 			//set current user rating stars
