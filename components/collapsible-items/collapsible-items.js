@@ -16,7 +16,7 @@ angular.module('dellUiComponents')
                     var parentLi = $(e.currentTarget).parents('li')[0],
                         allListItems = $element.find('li'),
                         rowWidth= 0,
-                        rowMaxWidth = Math.abs($('.container').css('width').replace(/px/,'')),
+                        rowMaxWidth = Math.abs($element.parent().innerWidth() - $element.parent().css('padding-left').replace(/px/,'') - $element.parent().css('padding-right').replace(/px/,'')),
                         targetFound,
                         done,
                         content;
@@ -44,7 +44,6 @@ angular.module('dellUiComponents')
                                     }
 
                                     rowWidth = rowWidth + itemWidth;
-                                    console.log("item width", itemWidth, rowWidth, rowMaxWidth);
 
                                     if (rowWidth >= rowMaxWidth || index === allListItems.length -1) {
 
@@ -77,7 +76,6 @@ angular.module('dellUiComponents')
                 });
 
                 //---------------------------------------------
-                console.log('++++++++++++++++++++ It Fired',$scope, $element, iAttrs, controller );
             }
         };
     });
