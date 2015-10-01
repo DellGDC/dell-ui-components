@@ -2375,7 +2375,7 @@ a {
   background: #cce5f1;
 }
 .ms-drop input[type="checkbox"] {
-  vertical-align: middle;
+  vertical-align: top;
 }
 .ms-drop .ms-no-results {
   display: none;
@@ -3092,22 +3092,24 @@ a {
   left: 0.5em;
   margin-right: -50%;
 }
-.tap-to-load {
-  height: 34px;
-  color: #007db8;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
-  border: 1px solid #ccc;
-  padding: 6px 12px;
-  background: #eee;
-}
-.tap-to-load.disabled {
-  color: #aaaaaa;
-  border: 1px solid #e4e4e4;
-}
 .load-more li {
   display: none;
+}
+.pager .btn-load-more {
+  display: block;
+  width: 100%;
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
+  border-radius: 1px;
+}
+.pager .btn-load-more:hover {
+  background-color: #f3f3f3;
+  text-decoration: none;
+}
+.pager .btn-load-more:active,
+.pager .btn-load-more:focus {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 /*
  * Popovers component theme overrides
@@ -4126,10 +4128,10 @@ table.table-responsive td:before {
 .hide-expanded,
 .collapsed .show-collapsed {
   display: block;
-  -webkit-transition: height .3.5s ease;
-  -moz-transition: height .3.5s ease;
-  -o-transition: height .3.5s ease;
-  transition: height .3.5s ease;
+  -webkit-transition: height .3 .5s ease;
+  -moz-transition: height .3 .5s ease;
+  -o-transition: height .3 .5s ease;
+  transition: height .3 .5s ease;
 }
 .hide-expanded:focus,
 .collapsed .show-collapsed:focus {
@@ -4138,10 +4140,10 @@ table.table-responsive td:before {
 .collapsed .hide-expanded,
 .show-collapsed {
   display: none;
-  -webkit-transition: height .3.5s ease;
-  -moz-transition: height .3.5s ease;
-  -o-transition: height .3.5s ease;
-  transition: height .3.5s ease;
+  -webkit-transition: height .3 .5s ease;
+  -moz-transition: height .3 .5s ease;
+  -o-transition: height .3 .5s ease;
+  transition: height .3 .5s ease;
 }
 .collapsed .hide-expanded:focus,
 .show-collapsed:focus {
@@ -4149,10 +4151,10 @@ table.table-responsive td:before {
 }
 .collapse {
   overflow: hidden;
-  -webkit-transition: height .3.5s ease;
-  -moz-transition: height .3.5s ease;
-  -o-transition: height .3.5s ease;
-  transition: height .3.5s ease;
+  -webkit-transition: height .3 .5s ease;
+  -moz-transition: height .3 .5s ease;
+  -o-transition: height .3 .5s ease;
+  transition: height .3 .5s ease;
 }
 [data-toggle="collapse"].collapsed .when-expanded {
   display: none;
@@ -4265,6 +4267,95 @@ table.table-responsive td:before {
 [data-toggle=list-truncated] .show-collapsed,
 [data-toggle=list-truncated] .collapsed .show-collapsed {
   padding: 6px 10px 10px 0;
+}
+.content-gallery {
+  list-style: none;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding: 0;
+  overflow: hidden;
+}
+.content-gallery li {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.content-gallery-container {
+  margin-bottom: 20px;
+}
+.content-gallery .content-gallery-details {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+.content-gallery .details-container {
+  display: none;
+  margin-top: -15px;
+}
+.content-gallery .details-container .close {
+  margin: 0 5px 0 0;
+  position: relative;
+  font-size: 22px !important;
+  font-weight: bold;
+}
+.content-gallery .details-container .close .icon-ui-close {
+  font-size: 22px !important;
+  font-weight: bold;
+}
+.content-gallery .details-container .gallery {
+  padding: 15px 15px 15px 15px;
+  background: #eeeeee;
+  margin-top: 0;
+}
+.content-gallery .show-collapsed,
+.content-gallery .open .hide-expanded {
+  display: block;
+  padding: 0;
+}
+.content-gallery .hide-expanded,
+.content-gallery .open .show-collapsed {
+  display: none;
+  padding: 0;
+}
+.content-gallery li[class^=col-].open:after {
+  top: auto;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #eeeeee;
+  border-width: 15px;
+  left: 50%;
+  margin: -30px 0 0 -15px;
+}
+@media (max-width: 767px) {
+  .content-gallery .open + li + li {
+    clear: both;
+  }
+}
+@media (max-width: 767px) {
+  .content-gallery-container {
+    margin-bottom: 40px;
+  }
+  .content-gallery .details-container {
+    margin-top: 0;
+  }
+  .content-gallery .details-container .close {
+    margin: 0 5px 0 0;
+    position: relative;
+    font-size: 22px !important;
+    font-weight: bold;
+  }
+  .content-gallery .details-container .close .icon-ui-close {
+    font-size: 22px !important;
+    font-weight: bold;
+  }
+  .content-gallery .details-container .gallery {
+    padding: 15px 15px 15px 15px;
+    background: #eeeeee;
+    margin-top: 0;
+  }
 }
 /*
  * Content-Teaser component theme overrides
