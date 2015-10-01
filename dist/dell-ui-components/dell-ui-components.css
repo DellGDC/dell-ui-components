@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Components v1.0.7 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.9 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -4766,6 +4766,116 @@ table.table-responsive td:before {
   position: absolute;
   top: 0px;
   left: 0px;
+}
+/*
+ * Anchored_nav component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+.navbar-anchored li {
+  background: -moz-linear-gradient(top, #ffffff 8%, #efefef 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(8%, #ffffff), color-stop(100%, #efefef));
+  background: -webkit-linear-gradient(top, #ffffff 8%, #efefef 100%);
+  background: -o-linear-gradient(top, #ffffff 8%, #efefef 100%);
+  background: -ms-linear-gradient(top, #ffffff 8%, #efefef 100%);
+  background: linear-gradient(to bottom, #ffffff 8%, #efefef 100%);
+  border: 1px solid #cccccc;
+  margin-bottom: -1px;
+  margin-left: -1px;
+  height: auto;
+}
+.navbar-anchored li:hover {
+  background: #cce5f1;
+  color: #007db8;
+}
+.navbar-anchored li > a:hover,
+.navbar-anchored li > a:focus {
+  border-color: transparent !important;
+  background-color: transparent !important;
+}
+.navbar-anchored li.active {
+  border-top: 4px solid #007db8;
+  padding-top: 6px;
+  padding-bottom: 9px;
+  margin-left: -2%;
+  border-bottom: 0;
+  background: #ffffff;
+}
+.navbar-anchored li.active > a,
+.navbar-anchored li.active > a:hover {
+  color: #444444;
+}
+.nav-anchored-justified {
+  width: 100%;
+  border-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  display: table;
+}
+.nav-anchored-justified > li {
+  display: table-cell;
+  float: none;
+}
+.nav-anchored-justified > li > a {
+  width: 100%;
+  margin-left: -1px;
+  text-align: center;
+}
+.nav-anchored-justified > li > a,
+.nav-anchored-justified > li > a:hover {
+  margin-bottom: -1px;
+  border-top: none !important;
+  border-color: transparent;
+  margin-left: -1px;
+  background: 0;
+}
+.nav-anchored-justified > li:visited {
+  background: none;
+}
+.nav-anchored-justified > li.active > a {
+  margin-left: -1px;
+  padding: 10px 15px;
+  width: 100%;
+}
+.nav-anchored-justified > li.active > a:hover,
+.nav-anchored-justified > li.active > a:focus {
+  width: 100%;
+  margin-left: -1px;
+  padding: 10px 15px;
+  background: none;
+}
+.nav-anchored-justified > li.active > a:visited {
+  background: none;
+}
+.nav-anchored-justified > li:first-child {
+  margin-left: -1px;
+}
+.nav-anchored-justified > li:last-child {
+  margin-left: -1px;
+}
+.nav-anchored.affix {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+@media (max-width: 767px) {
+  .nav-anchored.affix {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .nav-anchored.affix {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .nav-anchored.affix {
+    width: 940px;
+  }
+}
+@media (min-width: 1200px) {
+  .nav-anchored.affix {
+    width: 1140px;
+  }
 }
 /* Add Component LESS Above */
 .tooltip {

@@ -28056,7 +28056,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           is: function (val) {
             return typeof val === 'string';
           },
-          pattern: /[^\/]*/
+          pattern: /[^/]*/
         },
         int: {
           encode: valToString,
@@ -28110,7 +28110,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           decode: angular.fromJson,
           is: angular.isObject,
           equals: angular.equals,
-          pattern: /[^\/]*/
+          pattern: /[^/]*/
         },
         any: {
           encode: angular.identity,
@@ -44038,644 +44038,430 @@ if (!console) {
   };
 }(jQuery));
 /*!
- * jQuery Transit - CSS3 transitions and transformations
- * (c) 2011-2014 Rico Sta. Cruz
- * MIT Licensed.
- *
- * http://ricostacruz.com/jquery.transit
- * http://github.com/rstacruz/jquery.transit
- */
-/* jshint expr: true */
-;
-(function (root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define(['../jquery/jquery'], factory);
-  } else if (typeof exports === 'object') {
-    module.exports = factory(require('jquery'));
-  } else {
-    factory(root.jQuery);
+Waypoints - 4.0.0
+Copyright © 2011-2015 Caleb Troughton
+Licensed under the MIT license.
+https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
+*/
+!function () {
+  'use strict';
+  function t(o) {
+    if (!o)
+      throw new Error('No options passed to Waypoint constructor');
+    if (!o.element)
+      throw new Error('No element option passed to Waypoint constructor');
+    if (!o.handler)
+      throw new Error('No handler option passed to Waypoint constructor');
+    this.key = 'waypoint-' + e, this.options = t.Adapter.extend({}, t.defaults, o), this.element = this.options.element, this.adapter = new t.Adapter(this.element), this.callback = o.handler, this.axis = this.options.horizontal ? 'horizontal' : 'vertical', this.enabled = this.options.enabled, this.triggerPoint = null, this.group = t.Group.findOrCreate({
+      name: this.options.group,
+      axis: this.axis
+    }), this.context = t.Context.findOrCreateByElement(this.options.context), t.offsetAliases[this.options.offset] && (this.options.offset = t.offsetAliases[this.options.offset]), this.group.add(this), this.context.add(this), i[this.key] = this, e += 1;
   }
-}(this, function ($) {
-  $.transit = {
-    version: '0.9.12',
-    propertyMap: {
-      marginLeft: 'margin',
-      marginRight: 'margin',
-      marginBottom: 'margin',
-      marginTop: 'margin',
-      paddingLeft: 'padding',
-      paddingRight: 'padding',
-      paddingBottom: 'padding',
-      paddingTop: 'padding'
+  var e = 0, i = {};
+  t.prototype.queueTrigger = function (t) {
+    this.group.queueTrigger(this, t);
+  }, t.prototype.trigger = function (t) {
+    this.enabled && this.callback && this.callback.apply(this, t);
+  }, t.prototype.destroy = function () {
+    this.context.remove(this), this.group.remove(this), delete i[this.key];
+  }, t.prototype.disable = function () {
+    return this.enabled = !1, this;
+  }, t.prototype.enable = function () {
+    return this.context.refresh(), this.enabled = !0, this;
+  }, t.prototype.next = function () {
+    return this.group.next(this);
+  }, t.prototype.previous = function () {
+    return this.group.previous(this);
+  }, t.invokeAll = function (t) {
+    var e = [];
+    for (var o in i)
+      e.push(i[o]);
+    for (var n = 0, r = e.length; r > n; n++)
+      e[n][t]();
+  }, t.destroyAll = function () {
+    t.invokeAll('destroy');
+  }, t.disableAll = function () {
+    t.invokeAll('disable');
+  }, t.enableAll = function () {
+    t.invokeAll('enable');
+  }, t.refreshAll = function () {
+    t.Context.refreshAll();
+  }, t.viewportHeight = function () {
+    return window.innerHeight || document.documentElement.clientHeight;
+  }, t.viewportWidth = function () {
+    return document.documentElement.clientWidth;
+  }, t.adapters = [], t.defaults = {
+    context: window,
+    continuous: !0,
+    enabled: !0,
+    group: 'default',
+    horizontal: !1,
+    offset: 0
+  }, t.offsetAliases = {
+    'bottom-in-view': function () {
+      return this.context.innerHeight() - this.adapter.outerHeight();
     },
-    enabled: true,
-    useTransitionEnd: false
-  };
-  var div = document.createElement('div');
-  var support = {};
-  // Helper function to get the proper vendor property name.
-  // (`transition` => `WebkitTransition`)
-  function getVendorPropertyName(prop) {
-    // Handle unprefixed versions (FF16+, for example)
-    if (prop in div.style)
-      return prop;
-    var prefixes = [
-        'Moz',
-        'Webkit',
-        'O',
-        'ms'
-      ];
-    var prop_ = prop.charAt(0).toUpperCase() + prop.substr(1);
-    for (var i = 0; i < prefixes.length; ++i) {
-      var vendorProp = prefixes[i] + prop_;
-      if (vendorProp in div.style) {
-        return vendorProp;
+    'right-in-view': function () {
+      return this.context.innerWidth() - this.adapter.outerWidth();
+    }
+  }, window.Waypoint = t;
+}(), function () {
+  'use strict';
+  function t(t) {
+    window.setTimeout(t, 1000 / 60);
+  }
+  function e(t) {
+    this.element = t, this.Adapter = n.Adapter, this.adapter = new this.Adapter(t), this.key = 'waypoint-context-' + i, this.didScroll = !1, this.didResize = !1, this.oldScroll = {
+      x: this.adapter.scrollLeft(),
+      y: this.adapter.scrollTop()
+    }, this.waypoints = {
+      vertical: {},
+      horizontal: {}
+    }, t.waypointContextKey = this.key, o[t.waypointContextKey] = this, i += 1, this.createThrottledScrollHandler(), this.createThrottledResizeHandler();
+  }
+  var i = 0, o = {}, n = window.Waypoint, r = window.onload;
+  e.prototype.add = function (t) {
+    var e = t.options.horizontal ? 'horizontal' : 'vertical';
+    this.waypoints[e][t.key] = t, this.refresh();
+  }, e.prototype.checkEmpty = function () {
+    var t = this.Adapter.isEmptyObject(this.waypoints.horizontal), e = this.Adapter.isEmptyObject(this.waypoints.vertical);
+    t && e && (this.adapter.off('.waypoints'), delete o[this.key]);
+  }, e.prototype.createThrottledResizeHandler = function () {
+    function t() {
+      e.handleResize(), e.didResize = !1;
+    }
+    var e = this;
+    this.adapter.on('resize.waypoints', function () {
+      e.didResize || (e.didResize = !0, n.requestAnimationFrame(t));
+    });
+  }, e.prototype.createThrottledScrollHandler = function () {
+    function t() {
+      e.handleScroll(), e.didScroll = !1;
+    }
+    var e = this;
+    this.adapter.on('scroll.waypoints', function () {
+      (!e.didScroll || n.isTouch) && (e.didScroll = !0, n.requestAnimationFrame(t));
+    });
+  }, e.prototype.handleResize = function () {
+    n.Context.refreshAll();
+  }, e.prototype.handleScroll = function () {
+    var t = {}, e = {
+        horizontal: {
+          newScroll: this.adapter.scrollLeft(),
+          oldScroll: this.oldScroll.x,
+          forward: 'right',
+          backward: 'left'
+        },
+        vertical: {
+          newScroll: this.adapter.scrollTop(),
+          oldScroll: this.oldScroll.y,
+          forward: 'down',
+          backward: 'up'
+        }
+      };
+    for (var i in e) {
+      var o = e[i], n = o.newScroll > o.oldScroll, r = n ? o.forward : o.backward;
+      for (var s in this.waypoints[i]) {
+        var a = this.waypoints[i][s], l = o.oldScroll < a.triggerPoint, h = o.newScroll >= a.triggerPoint, p = l && h, u = !l && !h;
+        (p || u) && (a.queueTrigger(r), t[a.group.id] = a.group);
       }
     }
-  }
-  // Helper function to check if transform3D is supported.
-  // Should return true for Webkits and Firefox 10+.
-  function checkTransform3dSupport() {
-    div.style[support.transform] = '';
-    div.style[support.transform] = 'rotateY(90deg)';
-    return div.style[support.transform] !== '';
-  }
-  var isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-  // Check for the browser's transitions support.
-  support.transition = getVendorPropertyName('transition');
-  support.transitionDelay = getVendorPropertyName('transitionDelay');
-  support.transform = getVendorPropertyName('transform');
-  support.transformOrigin = getVendorPropertyName('transformOrigin');
-  support.filter = getVendorPropertyName('Filter');
-  support.transform3d = checkTransform3dSupport();
-  var eventNames = {
-      'transition': 'transitionend',
-      'MozTransition': 'transitionend',
-      'OTransition': 'oTransitionEnd',
-      'WebkitTransition': 'webkitTransitionEnd',
-      'msTransition': 'MSTransitionEnd'
+    for (var c in t)
+      t[c].flushTriggers();
+    this.oldScroll = {
+      x: e.horizontal.newScroll,
+      y: e.vertical.newScroll
     };
-  // Detect the 'transitionend' event needed.
-  var transitionEnd = support.transitionEnd = eventNames[support.transition] || null;
-  // Populate jQuery's `$.support` with the vendor prefixes we know.
-  // As per [jQuery's cssHooks documentation](http://api.jquery.com/jQuery.cssHooks/),
-  // we set $.support.transition to a string of the actual property name used.
-  for (var key in support) {
-    if (support.hasOwnProperty(key) && typeof $.support[key] === 'undefined') {
-      $.support[key] = support[key];
-    }
-  }
-  // Avoid memory leak in IE.
-  div = null;
-  // ## $.cssEase
-  // List of easing aliases that you can use with `$.fn.transition`.
-  $.cssEase = {
-    '_default': 'ease',
-    'in': 'ease-in',
-    'out': 'ease-out',
-    'in-out': 'ease-in-out',
-    'snap': 'cubic-bezier(0,1,.5,1)',
-    'easeInCubic': 'cubic-bezier(.550,.055,.675,.190)',
-    'easeOutCubic': 'cubic-bezier(.215,.61,.355,1)',
-    'easeInOutCubic': 'cubic-bezier(.645,.045,.355,1)',
-    'easeInCirc': 'cubic-bezier(.6,.04,.98,.335)',
-    'easeOutCirc': 'cubic-bezier(.075,.82,.165,1)',
-    'easeInOutCirc': 'cubic-bezier(.785,.135,.15,.86)',
-    'easeInExpo': 'cubic-bezier(.95,.05,.795,.035)',
-    'easeOutExpo': 'cubic-bezier(.19,1,.22,1)',
-    'easeInOutExpo': 'cubic-bezier(1,0,0,1)',
-    'easeInQuad': 'cubic-bezier(.55,.085,.68,.53)',
-    'easeOutQuad': 'cubic-bezier(.25,.46,.45,.94)',
-    'easeInOutQuad': 'cubic-bezier(.455,.03,.515,.955)',
-    'easeInQuart': 'cubic-bezier(.895,.03,.685,.22)',
-    'easeOutQuart': 'cubic-bezier(.165,.84,.44,1)',
-    'easeInOutQuart': 'cubic-bezier(.77,0,.175,1)',
-    'easeInQuint': 'cubic-bezier(.755,.05,.855,.06)',
-    'easeOutQuint': 'cubic-bezier(.23,1,.32,1)',
-    'easeInOutQuint': 'cubic-bezier(.86,0,.07,1)',
-    'easeInSine': 'cubic-bezier(.47,0,.745,.715)',
-    'easeOutSine': 'cubic-bezier(.39,.575,.565,1)',
-    'easeInOutSine': 'cubic-bezier(.445,.05,.55,.95)',
-    'easeInBack': 'cubic-bezier(.6,-.28,.735,.045)',
-    'easeOutBack': 'cubic-bezier(.175, .885,.32,1.275)',
-    'easeInOutBack': 'cubic-bezier(.68,-.55,.265,1.55)'
-  };
-  // ## 'transform' CSS hook
-  // Allows you to use the `transform` property in CSS.
-  //
-  //     $("#hello").css({ transform: "rotate(90deg)" });
-  //
-  //     $("#hello").css('transform');
-  //     //=> { rotate: '90deg' }
-  //
-  $.cssHooks['transit:transform'] = {
-    get: function (elem) {
-      return $(elem).data('transform') || new Transform();
-    },
-    set: function (elem, v) {
-      var value = v;
-      if (!(value instanceof Transform)) {
-        value = new Transform(value);
-      }
-      // We've seen the 3D version of Scale() not work in Chrome when the
-      // element being scaled extends outside of the viewport.  Thus, we're
-      // forcing Chrome to not use the 3d transforms as well.  Not sure if
-      // translate is affectede, but not risking it.  Detection code from
-      // http://davidwalsh.name/detecting-google-chrome-javascript
-      if (support.transform === 'WebkitTransform' && !isChrome) {
-        elem.style[support.transform] = value.toString(true);
-      } else {
-        elem.style[support.transform] = value.toString();
-      }
-      $(elem).data('transform', value);
-    }
-  };
-  // Add a CSS hook for `.css({ transform: '...' })`.
-  // In jQuery 1.8+, this will intentionally override the default `transform`
-  // CSS hook so it'll play well with Transit. (see issue #62)
-  $.cssHooks.transform = { set: $.cssHooks['transit:transform'].set };
-  // ## 'filter' CSS hook
-  // Allows you to use the `filter` property in CSS.
-  //
-  //     $("#hello").css({ filter: 'blur(10px)' });
-  //
-  $.cssHooks.filter = {
-    get: function (elem) {
-      return elem.style[support.filter];
-    },
-    set: function (elem, value) {
-      elem.style[support.filter] = value;
-    }
-  };
-  // jQuery 1.8+ supports prefix-free transitions, so these polyfills will not
-  // be necessary.
-  if ($.fn.jquery < '1.8') {
-    // ## 'transformOrigin' CSS hook
-    // Allows the use for `transformOrigin` to define where scaling and rotation
-    // is pivoted.
-    //
-    //     $("#hello").css({ transformOrigin: '0 0' });
-    //
-    $.cssHooks.transformOrigin = {
-      get: function (elem) {
-        return elem.style[support.transformOrigin];
+  }, e.prototype.innerHeight = function () {
+    return this.element == this.element.window ? n.viewportHeight() : this.adapter.innerHeight();
+  }, e.prototype.remove = function (t) {
+    delete this.waypoints[t.axis][t.key], this.checkEmpty();
+  }, e.prototype.innerWidth = function () {
+    return this.element == this.element.window ? n.viewportWidth() : this.adapter.innerWidth();
+  }, e.prototype.destroy = function () {
+    var t = [];
+    for (var e in this.waypoints)
+      for (var i in this.waypoints[e])
+        t.push(this.waypoints[e][i]);
+    for (var o = 0, n = t.length; n > o; o++)
+      t[o].destroy();
+  }, e.prototype.refresh = function () {
+    var t, e = this.element == this.element.window, i = e ? void 0 : this.adapter.offset(), o = {};
+    this.handleScroll(), t = {
+      horizontal: {
+        contextOffset: e ? 0 : i.left,
+        contextScroll: e ? 0 : this.oldScroll.x,
+        contextDimension: this.innerWidth(),
+        oldScroll: this.oldScroll.x,
+        forward: 'right',
+        backward: 'left',
+        offsetProp: 'left'
       },
-      set: function (elem, value) {
-        elem.style[support.transformOrigin] = value;
+      vertical: {
+        contextOffset: e ? 0 : i.top,
+        contextScroll: e ? 0 : this.oldScroll.y,
+        contextDimension: this.innerHeight(),
+        oldScroll: this.oldScroll.y,
+        forward: 'down',
+        backward: 'up',
+        offsetProp: 'top'
       }
     };
-    // ## 'transition' CSS hook
-    // Allows you to use the `transition` property in CSS.
-    //
-    //     $("#hello").css({ transition: 'all 0 ease 0' });
-    //
-    $.cssHooks.transition = {
-      get: function (elem) {
-        return elem.style[support.transition];
-      },
-      set: function (elem, value) {
-        elem.style[support.transition] = value;
+    for (var r in t) {
+      var s = t[r];
+      for (var a in this.waypoints[r]) {
+        var l, h, p, u, c, d = this.waypoints[r][a], f = d.options.offset, w = d.triggerPoint, y = 0, g = null == w;
+        d.element !== d.element.window && (y = d.adapter.offset()[s.offsetProp]), 'function' == typeof f ? f = f.apply(d) : 'string' == typeof f && (f = parseFloat(f), d.options.offset.indexOf('%') > -1 && (f = Math.ceil(s.contextDimension * f / 100))), l = s.contextScroll - s.contextOffset, d.triggerPoint = y + l - f, h = w < s.oldScroll, p = d.triggerPoint >= s.oldScroll, u = h && p, c = !h && !p, !g && u ? (d.queueTrigger(s.backward), o[d.group.id] = d.group) : !g && c ? (d.queueTrigger(s.forward), o[d.group.id] = d.group) : g && s.oldScroll >= d.triggerPoint && (d.queueTrigger(s.forward), o[d.group.id] = d.group);
       }
+    }
+    return n.requestAnimationFrame(function () {
+      for (var t in o)
+        o[t].flushTriggers();
+    }), this;
+  }, e.findOrCreateByElement = function (t) {
+    return e.findByElement(t) || new e(t);
+  }, e.refreshAll = function () {
+    for (var t in o)
+      o[t].refresh();
+  }, e.findByElement = function (t) {
+    return o[t.waypointContextKey];
+  }, window.onload = function () {
+    r && r(), e.refreshAll();
+  }, n.requestAnimationFrame = function (e) {
+    var i = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || t;
+    i.call(window, e);
+  }, n.Context = e;
+}(), function () {
+  'use strict';
+  function t(t, e) {
+    return t.triggerPoint - e.triggerPoint;
+  }
+  function e(t, e) {
+    return e.triggerPoint - t.triggerPoint;
+  }
+  function i(t) {
+    this.name = t.name, this.axis = t.axis, this.id = this.name + '-' + this.axis, this.waypoints = [], this.clearTriggerQueues(), o[this.axis][this.name] = this;
+  }
+  var o = {
+      vertical: {},
+      horizontal: {}
+    }, n = window.Waypoint;
+  i.prototype.add = function (t) {
+    this.waypoints.push(t);
+  }, i.prototype.clearTriggerQueues = function () {
+    this.triggerQueues = {
+      up: [],
+      down: [],
+      left: [],
+      right: []
+    };
+  }, i.prototype.flushTriggers = function () {
+    for (var i in this.triggerQueues) {
+      var o = this.triggerQueues[i], n = 'up' === i || 'left' === i;
+      o.sort(n ? e : t);
+      for (var r = 0, s = o.length; s > r; r += 1) {
+        var a = o[r];
+        (a.options.continuous || r === o.length - 1) && a.trigger([i]);
+      }
+    }
+    this.clearTriggerQueues();
+  }, i.prototype.next = function (e) {
+    this.waypoints.sort(t);
+    var i = n.Adapter.inArray(e, this.waypoints), o = i === this.waypoints.length - 1;
+    return o ? null : this.waypoints[i + 1];
+  }, i.prototype.previous = function (e) {
+    this.waypoints.sort(t);
+    var i = n.Adapter.inArray(e, this.waypoints);
+    return i ? this.waypoints[i - 1] : null;
+  }, i.prototype.queueTrigger = function (t, e) {
+    this.triggerQueues[e].push(t);
+  }, i.prototype.remove = function (t) {
+    var e = n.Adapter.inArray(t, this.waypoints);
+    e > -1 && this.waypoints.splice(e, 1);
+  }, i.prototype.first = function () {
+    return this.waypoints[0];
+  }, i.prototype.last = function () {
+    return this.waypoints[this.waypoints.length - 1];
+  }, i.findOrCreate = function (t) {
+    return o[t.axis][t.name] || new i(t);
+  }, n.Group = i;
+}(), function () {
+  'use strict';
+  function t(t) {
+    this.$element = e(t);
+  }
+  var e = window.jQuery, i = window.Waypoint;
+  e.each([
+    'innerHeight',
+    'innerWidth',
+    'off',
+    'offset',
+    'on',
+    'outerHeight',
+    'outerWidth',
+    'scrollLeft',
+    'scrollTop'
+  ], function (e, i) {
+    t.prototype[i] = function () {
+      var t = Array.prototype.slice.call(arguments);
+      return this.$element[i].apply(this.$element, t);
+    };
+  }), e.each([
+    'extend',
+    'inArray',
+    'isEmptyObject'
+  ], function (i, o) {
+    t[o] = e[o];
+  }), i.adapters.push({
+    name: 'jquery',
+    Adapter: t
+  }), i.Adapter = t;
+}(), function () {
+  'use strict';
+  function t(t) {
+    return function () {
+      var i = [], o = arguments[0];
+      return t.isFunction(arguments[0]) && (o = t.extend({}, arguments[1]), o.handler = arguments[0]), this.each(function () {
+        var n = t.extend({}, o, { element: this });
+        'string' == typeof n.context && (n.context = t(this).closest(n.context)[0]), i.push(new e(n));
+      }), i;
     };
   }
-  // ## Other CSS hooks
-  // Allows you to rotate, scale and translate.
-  registerCssHook('scale');
-  registerCssHook('scaleX');
-  registerCssHook('scaleY');
-  registerCssHook('translate');
-  registerCssHook('rotate');
-  registerCssHook('rotateX');
-  registerCssHook('rotateY');
-  registerCssHook('rotate3d');
-  registerCssHook('perspective');
-  registerCssHook('skewX');
-  registerCssHook('skewY');
-  registerCssHook('x', true);
-  registerCssHook('y', true);
-  // ## Transform class
-  // This is the main class of a transformation property that powers
-  // `$.fn.css({ transform: '...' })`.
-  //
-  // This is, in essence, a dictionary object with key/values as `-transform`
-  // properties.
-  //
-  //     var t = new Transform("rotate(90) scale(4)");
-  //
-  //     t.rotate             //=> "90deg"
-  //     t.scale              //=> "4,4"
-  //
-  // Setters are accounted for.
-  //
-  //     t.set('rotate', 4)
-  //     t.rotate             //=> "4deg"
-  //
-  // Convert it to a CSS string using the `toString()` and `toString(true)` (for WebKit)
-  // functions.
-  //
-  //     t.toString()         //=> "rotate(90deg) scale(4,4)"
-  //     t.toString(true)     //=> "rotate(90deg) scale3d(4,4,0)" (WebKit version)
-  //
-  function Transform(str) {
-    if (typeof str === 'string') {
-      this.parse(str);
-    }
-    return this;
+  var e = window.Waypoint;
+  window.jQuery && (window.jQuery.fn.waypoint = t(window.jQuery)), window.Zepto && (window.Zepto.fn.waypoint = t(window.Zepto));
+}();
+/*!
+Waypoints Sticky Element Shortcut - 4.0.0
+Copyright © 2011-2015 Caleb Troughton
+Licensed under the MIT license.
+https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
+*/
+!function () {
+  'use strict';
+  function t(s) {
+    this.options = e.extend({}, i.defaults, t.defaults, s), this.element = this.options.element, this.$element = e(this.element), this.createWrapper(), this.createWaypoint();
   }
-  Transform.prototype = {
-    setFromString: function (prop, val) {
-      var args = typeof val === 'string' ? val.split(',') : val.constructor === Array ? val : [val];
-      args.unshift(prop);
-      Transform.prototype.set.apply(this, args);
-    },
-    set: function (prop) {
-      var args = Array.prototype.slice.apply(arguments, [1]);
-      if (this.setter[prop]) {
-        this.setter[prop].apply(this, args);
-      } else {
-        this[prop] = args.join(',');
-      }
-    },
-    get: function (prop) {
-      if (this.getter[prop]) {
-        return this.getter[prop].apply(this);
-      } else {
-        return this[prop] || 0;
-      }
-    },
-    setter: {
-      rotate: function (theta) {
-        this.rotate = unit(theta, 'deg');
-      },
-      rotateX: function (theta) {
-        this.rotateX = unit(theta, 'deg');
-      },
-      rotateY: function (theta) {
-        this.rotateY = unit(theta, 'deg');
-      },
-      scale: function (x, y) {
-        if (y === undefined) {
-          y = x;
-        }
-        this.scale = x + ',' + y;
-      },
-      skewX: function (x) {
-        this.skewX = unit(x, 'deg');
-      },
-      skewY: function (y) {
-        this.skewY = unit(y, 'deg');
-      },
-      perspective: function (dist) {
-        this.perspective = unit(dist, 'px');
-      },
-      x: function (x) {
-        this.set('translate', x, null);
-      },
-      y: function (y) {
-        this.set('translate', null, y);
-      },
-      translate: function (x, y) {
-        if (this._translateX === undefined) {
-          this._translateX = 0;
-        }
-        if (this._translateY === undefined) {
-          this._translateY = 0;
-        }
-        if (x !== null && x !== undefined) {
-          this._translateX = unit(x, 'px');
-        }
-        if (y !== null && y !== undefined) {
-          this._translateY = unit(y, 'px');
-        }
-        this.translate = this._translateX + ',' + this._translateY;
-      }
-    },
-    getter: {
-      x: function () {
-        return this._translateX || 0;
-      },
-      y: function () {
-        return this._translateY || 0;
-      },
-      scale: function () {
-        var s = (this.scale || '1,1').split(',');
-        if (s[0]) {
-          s[0] = parseFloat(s[0]);
-        }
-        if (s[1]) {
-          s[1] = parseFloat(s[1]);
-        }
-        // "2.5,2.5" => 2.5
-        // "2.5,1" => [2.5,1]
-        return s[0] === s[1] ? s[0] : s;
-      },
-      rotate3d: function () {
-        var s = (this.rotate3d || '0,0,0,0deg').split(',');
-        for (var i = 0; i <= 3; ++i) {
-          if (s[i]) {
-            s[i] = parseFloat(s[i]);
-          }
-        }
-        if (s[3]) {
-          s[3] = unit(s[3], 'deg');
-        }
-        return s;
-      }
-    },
-    parse: function (str) {
-      var self = this;
-      str.replace(/([a-zA-Z0-9]+)\((.*?)\)/g, function (x, prop, val) {
-        self.setFromString(prop, val);
-      });
-    },
-    toString: function (use3d) {
-      var re = [];
-      for (var i in this) {
-        if (this.hasOwnProperty(i)) {
-          // Don't use 3D transformations if the browser can't support it.
-          if (!support.transform3d && (i === 'rotateX' || i === 'rotateY' || i === 'perspective' || i === 'transformOrigin')) {
-            continue;
-          }
-          if (i[0] !== '_') {
-            if (use3d && i === 'scale') {
-              re.push(i + '3d(' + this[i] + ',1)');
-            } else if (use3d && i === 'translate') {
-              re.push(i + '3d(' + this[i] + ',0)');
-            } else {
-              re.push(i + '(' + this[i] + ')');
+  var e = window.jQuery, i = window.Waypoint;
+  t.prototype.createWaypoint = function () {
+    var t = this.options.handler;
+    this.waypoint = new i(e.extend({}, this.options, {
+      element: this.wrapper,
+      handler: e.proxy(function (e) {
+        var i = this.options.direction.indexOf(e) > -1, s = i ? this.$element.outerHeight(!0) : '';
+        this.$wrapper.height(s), this.$element.toggleClass(this.options.stuckClass, i), t && t.call(this, e);
+      }, this)
+    }));
+  }, t.prototype.createWrapper = function () {
+    this.options.wrapper && this.$element.wrap(this.options.wrapper), this.$wrapper = this.$element.parent(), this.wrapper = this.$wrapper[0];
+  }, t.prototype.destroy = function () {
+    this.$element.parent()[0] === this.wrapper && (this.waypoint.destroy(), this.$element.removeClass(this.options.stuckClass), this.options.wrapper && this.$element.unwrap());
+  }, t.defaults = {
+    wrapper: '<div class="sticky-wrapper" />',
+    stuckClass: 'stuck',
+    direction: 'down right'
+  }, i.Sticky = t;
+}();
+/*!
+Waypoints Inview Shortcut - 4.0.0
+Copyright © 2011-2015 Caleb Troughton
+Licensed under the MIT license.
+https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
+*/
+!function () {
+  'use strict';
+  function t() {
+  }
+  function e(t) {
+    this.options = i.Adapter.extend({}, e.defaults, t), this.axis = this.options.horizontal ? 'horizontal' : 'vertical', this.waypoints = [], this.element = this.options.element, this.createWaypoints();
+  }
+  var i = window.Waypoint;
+  e.prototype.createWaypoints = function () {
+    for (var t = {
+          vertical: [
+            {
+              down: 'enter',
+              up: 'exited',
+              offset: '100%'
+            },
+            {
+              down: 'entered',
+              up: 'exit',
+              offset: 'bottom-in-view'
+            },
+            {
+              down: 'exit',
+              up: 'entered',
+              offset: 0
+            },
+            {
+              down: 'exited',
+              up: 'enter',
+              offset: function () {
+                return -this.adapter.outerHeight();
+              }
             }
-          }
-        }
-      }
-      return re.join(' ');
+          ],
+          horizontal: [
+            {
+              right: 'enter',
+              left: 'exited',
+              offset: '100%'
+            },
+            {
+              right: 'entered',
+              left: 'exit',
+              offset: 'right-in-view'
+            },
+            {
+              right: 'exit',
+              left: 'entered',
+              offset: 0
+            },
+            {
+              right: 'exited',
+              left: 'enter',
+              offset: function () {
+                return -this.adapter.outerWidth();
+              }
+            }
+          ]
+        }, e = 0, i = t[this.axis].length; i > e; e++) {
+      var n = t[this.axis][e];
+      this.createWaypoint(n);
     }
-  };
-  function callOrQueue(self, queue, fn) {
-    if (queue === true) {
-      self.queue(fn);
-    } else if (queue) {
-      self.queue(queue, fn);
-    } else {
-      self.each(function () {
-        fn.call(this);
-      });
-    }
-  }
-  // ### getProperties(dict)
-  // Returns properties (for `transition-property`) for dictionary `props`. The
-  // value of `props` is what you would expect in `$.css(...)`.
-  function getProperties(props) {
-    var re = [];
-    $.each(props, function (key) {
-      key = $.camelCase(key);
-      // Convert "text-align" => "textAlign"
-      key = $.transit.propertyMap[key] || $.cssProps[key] || key;
-      key = uncamel(key);
-      // Convert back to dasherized
-      // Get vendor specify propertie
-      if (support[key])
-        key = uncamel(support[key]);
-      if ($.inArray(key, re) === -1) {
-        re.push(key);
-      }
-    });
-    return re;
-  }
-  // ### getTransition()
-  // Returns the transition string to be used for the `transition` CSS property.
-  //
-  // Example:
-  //
-  //     getTransition({ opacity: 1, rotate: 30 }, 500, 'ease');
-  //     //=> 'opacity 500ms ease, -webkit-transform 500ms ease'
-  //
-  function getTransition(properties, duration, easing, delay) {
-    // Get the CSS properties needed.
-    var props = getProperties(properties);
-    // Account for aliases (`in` => `ease-in`).
-    if ($.cssEase[easing]) {
-      easing = $.cssEase[easing];
-    }
-    // Build the duration/easing/delay attributes for it.
-    var attribs = '' + toMS(duration) + ' ' + easing;
-    if (parseInt(delay, 10) > 0) {
-      attribs += ' ' + toMS(delay);
-    }
-    // For more properties, add them this way:
-    // "margin 200ms ease, padding 200ms ease, ..."
-    var transitions = [];
-    $.each(props, function (i, name) {
-      transitions.push(name + ' ' + attribs);
-    });
-    return transitions.join(', ');
-  }
-  // ## $.fn.transition
-  // Works like $.fn.animate(), but uses CSS transitions.
-  //
-  //     $("...").transition({ opacity: 0.1, scale: 0.3 });
-  //
-  //     // Specific duration
-  //     $("...").transition({ opacity: 0.1, scale: 0.3 }, 500);
-  //
-  //     // With duration and easing
-  //     $("...").transition({ opacity: 0.1, scale: 0.3 }, 500, 'in');
-  //
-  //     // With callback
-  //     $("...").transition({ opacity: 0.1, scale: 0.3 }, function() { ... });
-  //
-  //     // With everything
-  //     $("...").transition({ opacity: 0.1, scale: 0.3 }, 500, 'in', function() { ... });
-  //
-  //     // Alternate syntax
-  //     $("...").transition({
-  //       opacity: 0.1,
-  //       duration: 200,
-  //       delay: 40,
-  //       easing: 'in',
-  //       complete: function() { /* ... */ }
-  //      });
-  //
-  $.fn.transition = $.fn.transit = function (properties, duration, easing, callback) {
-    var self = this;
-    var delay = 0;
-    var queue = true;
-    var theseProperties = $.extend(true, {}, properties);
-    // Account for `.transition(properties, callback)`.
-    if (typeof duration === 'function') {
-      callback = duration;
-      duration = undefined;
-    }
-    // Account for `.transition(properties, options)`.
-    if (typeof duration === 'object') {
-      easing = duration.easing;
-      delay = duration.delay || 0;
-      queue = typeof duration.queue === 'undefined' ? true : duration.queue;
-      callback = duration.complete;
-      duration = duration.duration;
-    }
-    // Account for `.transition(properties, duration, callback)`.
-    if (typeof easing === 'function') {
-      callback = easing;
-      easing = undefined;
-    }
-    // Alternate syntax.
-    if (typeof theseProperties.easing !== 'undefined') {
-      easing = theseProperties.easing;
-      delete theseProperties.easing;
-    }
-    if (typeof theseProperties.duration !== 'undefined') {
-      duration = theseProperties.duration;
-      delete theseProperties.duration;
-    }
-    if (typeof theseProperties.complete !== 'undefined') {
-      callback = theseProperties.complete;
-      delete theseProperties.complete;
-    }
-    if (typeof theseProperties.queue !== 'undefined') {
-      queue = theseProperties.queue;
-      delete theseProperties.queue;
-    }
-    if (typeof theseProperties.delay !== 'undefined') {
-      delay = theseProperties.delay;
-      delete theseProperties.delay;
-    }
-    // Set defaults. (`400` duration, `ease` easing)
-    if (typeof duration === 'undefined') {
-      duration = $.fx.speeds._default;
-    }
-    if (typeof easing === 'undefined') {
-      easing = $.cssEase._default;
-    }
-    duration = toMS(duration);
-    // Build the `transition` property.
-    var transitionValue = getTransition(theseProperties, duration, easing, delay);
-    // Compute delay until callback.
-    // If this becomes 0, don't bother setting the transition property.
-    var work = $.transit.enabled && support.transition;
-    var i = work ? parseInt(duration, 10) + parseInt(delay, 10) : 0;
-    // If there's nothing to do...
-    if (i === 0) {
-      var fn = function (next) {
-        self.css(theseProperties);
-        if (callback) {
-          callback.apply(self);
-        }
-        if (next) {
-          next();
-        }
-      };
-      callOrQueue(self, queue, fn);
-      return self;
-    }
-    // Save the old transitions of each element so we can restore it later.
-    var oldTransitions = {};
-    var run = function (nextCall) {
-      var bound = false;
-      // Prepare the callback.
-      var cb = function () {
-        if (bound) {
-          self.unbind(transitionEnd, cb);
-        }
-        if (i > 0) {
-          self.each(function () {
-            this.style[support.transition] = oldTransitions[this] || null;
-          });
-        }
-        if (typeof callback === 'function') {
-          callback.apply(self);
-        }
-        if (typeof nextCall === 'function') {
-          nextCall();
-        }
-      };
-      if (i > 0 && transitionEnd && $.transit.useTransitionEnd) {
-        // Use the 'transitionend' event if it's available.
-        bound = true;
-        self.bind(transitionEnd, cb);
-      } else {
-        // Fallback to timers if the 'transitionend' event isn't supported.
-        window.setTimeout(cb, i);
-      }
-      // Apply transitions.
-      self.each(function () {
-        if (i > 0) {
-          this.style[support.transition] = transitionValue;
-        }
-        $(this).css(theseProperties);
-      });
-    };
-    // Defer running. This allows the browser to paint any pending CSS it hasn't
-    // painted yet before doing the transitions.
-    var deferredRun = function (next) {
-      this.offsetWidth = this.offsetWidth;
-      // force a repaint
-      run(next);
-    };
-    // Use jQuery's fx queue.
-    callOrQueue(self, queue, deferredRun);
-    // Chainability.
-    return this;
-  };
-  function registerCssHook(prop, isPixels) {
-    // For certain properties, the 'px' should not be implied.
-    if (!isPixels) {
-      $.cssNumber[prop] = true;
-    }
-    $.transit.propertyMap[prop] = support.transform;
-    $.cssHooks[prop] = {
-      get: function (elem) {
-        var t = $(elem).css('transit:transform');
-        return t.get(prop);
-      },
-      set: function (elem, value) {
-        var t = $(elem).css('transit:transform');
-        t.setFromString(prop, value);
-        $(elem).css({ 'transit:transform': t });
-      }
-    };
-  }
-  // ### uncamel(str)
-  // Converts a camelcase string to a dasherized string.
-  // (`marginLeft` => `margin-left`)
-  function uncamel(str) {
-    return str.replace(/([A-Z])/g, function (letter) {
-      return '-' + letter.toLowerCase();
-    });
-  }
-  // ### unit(number, unit)
-  // Ensures that number `number` has a unit. If no unit is found, assume the
-  // default is `unit`.
-  //
-  //     unit(2, 'px')          //=> "2px"
-  //     unit("30deg", 'rad')   //=> "30deg"
-  //
-  function unit(i, units) {
-    if (typeof i === 'string' && !i.match(/^[\-0-9\.]+$/)) {
-      return i;
-    } else {
-      return '' + i + units;
-    }
-  }
-  // ### toMS(duration)
-  // Converts given `duration` to a millisecond string.
-  //
-  // toMS('fast') => $.fx.speeds[i] => "200ms"
-  // toMS('normal') //=> $.fx.speeds._default => "400ms"
-  // toMS(10) //=> '10ms'
-  // toMS('100ms') //=> '100ms'
-  //
-  function toMS(duration) {
-    var i = duration;
-    // Allow string durations like 'fast' and 'slow', without overriding numeric values.
-    if (typeof i === 'string' && !i.match(/^[\-0-9\.]+/)) {
-      i = $.fx.speeds[i] || $.fx.speeds._default;
-    }
-    return unit(i, 'ms');
-  }
-  // Export some functions for testable-ness.
-  $.transit.getTransitionValue = getTransition;
-  return $;
-}));
+  }, e.prototype.createWaypoint = function (t) {
+    var e = this;
+    this.waypoints.push(new i({
+      context: this.options.context,
+      element: this.options.element,
+      enabled: this.options.enabled,
+      handler: function (t) {
+        return function (i) {
+          e.options[t[i]].call(e, i);
+        };
+      }(t),
+      offset: t.offset,
+      horizontal: this.options.horizontal
+    }));
+  }, e.prototype.destroy = function () {
+    for (var t = 0, e = this.waypoints.length; e > t; t++)
+      this.waypoints[t].destroy();
+    this.waypoints = [];
+  }, e.prototype.disable = function () {
+    for (var t = 0, e = this.waypoints.length; e > t; t++)
+      this.waypoints[t].disable();
+  }, e.prototype.enable = function () {
+    for (var t = 0, e = this.waypoints.length; e > t; t++)
+      this.waypoints[t].enable();
+  }, e.defaults = {
+    context: window,
+    enabled: !0,
+    enter: t,
+    entered: t,
+    exit: t,
+    exited: t
+  }, i.Inview = e;
+}();
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 });
@@ -46586,12 +46372,88 @@ angular.module('demo').controller('contactDrawerPLayDemoCtrl', [
   function ($scope, $rootScope, $sce) {
   }
 ]);
+angular.module('demo').controller('anchoredNavCtrl', [
+  '$scope',
+  '$rootScope',
+  function ($scope, $rootScope) {
+  }
+]);
+angular.module('demo').controller('anchoredNavPLayDemoCtrl', [
+  '$scope',
+  '$rootScope',
+  '$sce',
+  function ($scope, $rootScope, $sce) {
+  }
+]);
+/**
+ * Created by Clint_Batte on 5/18/2015.
+ */
+angular.module('dellUiComponents').directive('navAnchored', [
+  '$timeout',
+  function ($timeout) {
+    return {
+      restrict: 'CA',
+      link: function ($scope, $element, iAttrs, controller) {
+        var sticky = new Waypoint.Sticky({
+            element: $element,
+            stuckClass: 'affix',
+            wrapper: 'nav-tabs-affix'
+          });
+        var waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [];
+        console.log(waypointObjs);
+        function clearActiveTab() {
+          $element.find('> li').removeClass('active');
+        }
+        if (waypointObjs) {
+          $(waypointObjs).on('click', function (e) {
+            //Setting up a click listener on each tab
+            e.preventDefault();
+            var target = $($(e.currentTarget).attr('href'));
+            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 100 }, 900, 'swing');
+            if ($element.find('> li').hasClass('active')) {
+              clearActiveTab();
+              $(e.currentTarget).parent().addClass('active');
+            }
+          });
+          _.each(waypointObjs, function (w, index) {
+            var target = $($(w).attr('href')), targetWaypoint = new Waypoint.Inview({
+                element: target,
+                enter: function (direction) {
+                  if (direction === 'up') {
+                    clearActiveTab();
+                    $('[href=' + this.element.selector + ']').parent().addClass('active');
+                    console.log('Enter triggered with direction ' + direction, this.element);
+                  }
+                },
+                entered: function (direction) {
+                  console.log('Entered triggered with direction ' + direction, this.element);
+                },
+                exit: function (direction) {
+                  console.log('Exit triggered with direction ' + direction, this.element.selector);
+                },
+                exited: function (direction) {
+                  if (direction === 'down') {
+                    clearActiveTab();
+                    $('[href=' + this.element.selector + ']').parent().next().addClass('active');
+                    console.log('Exited triggered with direction ' + direction, this.element);
+                  }
+                }
+              });
+            console.log(targetWaypoint);
+          });
+        }
+      }
+    };
+  }
+]);
 angular.module('dellUiComponents').run([
   '$templateCache',
   function ($templateCache) {
     'use strict';
     $templateCache.put('components/alerts/demo-alerts.html', '<section ng-controller=alertsCtrl id=alerts-html-example><div class=container><h2>Alerts Demo</h2><h3 class=bottom-offset-20>Alert types</h3><div class="alert alert-warning"><p><strong>User Errors:</strong>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p></div><div class="row bottom-offset-20"><div class="col-xs-12 col-md-4"><div class="alert alert-success alert-collapsible"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-2>\xd7</button><p class=show-expanded><strong>Success Alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Information Alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></div><h3 class="top-offset-40 bottom-offset-20">Informational alerts</h3><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Informational alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-info alert-collapsible"><button type=button class=close data-toggle=collapse data-target=".cssDataTargetDismiss-5 ">\xd7</button><div class=show-expanded><h4>Informational alerts example with a title.</h4><p>Information alerts display important information for the page. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Informational alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>first</strong> dismissed alert</p></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Additional alert example.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>second</strong> dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Success alerts</h3><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Success alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title.</h4><p><strong>Success alerts:</strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Indicates the task has been completed successfully. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div><h3 class="top-offset-40 bottom-offset-20">User Error</h3><div class="alert alert-warning alert-collapsible"><p class=show-expanded><strong>User Errors:</strong> A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class=alert-warning><h4>User Errors example with a title and multiple links.</h4><p class=bottom-offset-0>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Dismissible informational alert example with title.</h4><p class=bottom-offset-0>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas scelerisque porttitor.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Catastrophic Error</h3><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div><div class="alert alert-error"><h4>Catastrophic Errors example with a title</h4><p>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></section>');
     $templateCache.put('components/alerts/demo-play-alerts.html', '<section ng-controller=alertsPLayDemoCtrl id=alerts-play-demo><div class=container><h2>Alerts Builder</h2><div></div></div></section>');
+    $templateCache.put('components/anchored-nav/demo-anchored-nav.html', '<section ng-controller=anchoredNavCtrl id=anchored-nav-html-example><div class=container><h2>Anchored Nav Demo</h2><div class=row><h3 class="col-xs-12 top-offset-60">Affixed Tabs</h3></div></div><nav class="navbar navbar-anchored hidden-xs"><div class=container><ul id=nav-achored-example class="nav navbar-nav nav-anchored nav-anchored-justified"><li class=active><a href=#section1>Section 1 much longer title to see if wrapping is working</a></li><li><a href=#section2>Section 2</a></li><li><a href=#section3>Section 3</a></li><li><a href=#section4>Section 4</a></li></ul></div></nav><div class=container><section id=section1 class=bottom-offset-30><h3 class=text-blue><a href=javascript:;>Section 1</a></h3><div class="row bottom-offset-20"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div></section><hr class="hr-gray-light"><section id=section2 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 2</a></h3><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section><hr class="hr-gray-light"><section id=section3 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 3</a></h3><div class="row bottom-offset-20"><p class=col-sm-8>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><img src=http://placehold.it/175x125 class="img-responsive col-sm-4 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div></section><hr class="hr-gray-light"><section id=section4 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 4</a></h3><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section></div></section>');
+    $templateCache.put('components/anchored-nav/demo-play-anchored-nav.html', '<section ng-controller=anchoredNavPLayDemoCtrl id=anchored-nav-play-demo><div class=container><h2>Anchored_nav Builder</h2><div></div></div></section>');
     $templateCache.put('components/announcements/demo-announcements.html', '<section ng-controller=announcementsCtrl id=announcements-html-example><div class=container><h2>Announcements Demo</h2><div><h3>Default announcement (Bootstrap blockquote)</h3><blockquote><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Right justified announcement (Bootstrap blockquote - pull right)</h3><blockquote class=pull-right><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with links</h3><p>An Announcement can include a maximum of 2 links. Links are stacked vertically</p><div class="bottom-offset-10 clearfix"><h3>Colored bar with title and call to action link</h3><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li></ul></blockquote></div><div class="bottom-offset-10 clearfix"><h3>Colored bar with two call to action links</h3><blockquote class=blockquote-blue><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li><li><a href=javascript:;>Register now for free</a></li></ul></blockquote></div></div><h3>Announcements with color treatment (Bootstrap enhancement)</h3><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-green><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-purple><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-berry><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-dark-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with icon treatment (Dell specific enhancement)</h3><blockquote class=blockquote-icon><div class=blockquote-dell-dpa></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div></blockquote><h3>Right justified announcements with icon treatment (Dell specific enhancement)</h3><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-dpa pull-right"></div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-advantage pull-right"></div><div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div></blockquote></div></section>');
     $templateCache.put('components/announcements/demo-play-announcements.html', '<section ng-controller=announcementsPLayDemoCtrl id=announcements-play-demo><div class=container><h2>Announcements Builder</h2><div><h4>Rendered Example</h4><div id=announcement-play-code ng-bind-html=renderingHTML></div><h4>Rendered HTML Code</h4><div class=play-code><button to-clipboard clipboard-target=#announcement-play-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code>{{playHtmlCode}}</code></pre></div><hr><div class=row><div class=col-sm-5><h4>Customize</h4><div class=form-group><label for=text-label-input>ID</label><div><input type=text class=form-control id=sample-announcement-id placeholder=optional ng-model=sampleAnnouncementConfig.id></div></div><div class=form-group><label for=sample-announcement-type>Type</label><select class=form-control id=sample-announcement-type ng-model=sampleAnnouncementConfig.type><option value=blue>Blue (Default)</option><option value=purple>Purple</option><option value=green>Green</option><option value=orange>Orange</option><option value=berry>Berry</option><option value=dark-blue>Dark blue</option><option value=red>Red</option><option value=red-dark>Dark red</option><option value=gray>Gray</option><option value=gray-dark>Dark gray</option><option value=icon>Icon</option></select></div><div class=form-group ng-if="sampleAnnouncementConfig.type===\'icon\'"><label for=sample-announcement-icon>Icon</label><select class=form-control id=sample-announcement-icon ng-model=sampleAnnouncementConfig.icon><option value=dell-advantage-star>Star (Default)</option><option value=dpa-card>Dell Prefered Card</option></select></div><div class=form-group><label for=text-label-input>Title</label><div><input type=text class=form-control id=sample-announcement-title placeholder=optional ng-model=sampleAnnouncementConfig.title></div></div><div class=form-group><label for=textarea>Body text</label><textarea id=sample-announcement-body class=form-control rows=5 ng-model=sampleAnnouncementConfig.body></textarea></div><div class=form-group><label for=text-label-input>First Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_0.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_0.url></div></div><div class=form-group><label for=text-label-input>Second Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_1.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_1.url></div></div></div><div class=col-sm-7><prototype-code-title></prototype-code-title><div ng-if=sampleAnnouncementConfig.id><h5>HTML code</h5><div class=play-code><button to-clipboard clipboard-target=#announcement-sherpa-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code id=announcement-sherpa-code>&lt;blockquote id="{{sampleSherpaConfig.id | _.str: \'dasherize\'}}" class="blockquote-{{sampleSherpaConfig.type}}"&gt;\r' + '\n' + '\t&lt;h4 msg="title_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/h4&gt;\r' + '\n' + '\t&lt;p msg="text_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/p&gt;\r' + '\n' + '&lt;/blockquote&gt;</code></pre></div><h5>Textkeys to add to messages file</h5><div class=play-code ng-if=textkeysToAdd><button to-clipboard clipboard-target=#announcement-sherpa-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-keys>{{textkeysToAdd}}</code></pre></div><pre ng-if=!textkeysToAdd>None specified until custom body or title is entered.</pre><h5>Resource keys to add to resources file</h5><div class=play-code ng-if=resourcesToAdd><button to-clipboard clipboard-target=#announcement-sherpa-resource-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-resource-keys>{{resourcesToAdd}}</code></pre></div><pre ng-if=!resourcesToAdd>None specified until cta is specified.</pre></div><p ng-if=!sampleAnnouncementConfig.id>Must enter id to see Sherpa code</p></div></div></div></div></section>');
     $templateCache.put('components/banner/demo-banner.html', '<section><div class=container><h2>Banners</h2></div><div class=container-fluid><div class=banner><div class=img-responsive-constrained><img src=http://placehold.it/1400x472 alt=1400x472 class=img-responsive></div><div class="banner-inside pull-left"><h5 class="hidden-xs hidden-sm">Sample event title</h5><h2 class="hidden-xs text-blue">Sample Headline ipsum dolor.</h2><p>Mauris in ultricies leo, fermentum consectetur ligula hoppen santorum.</p><p class=visible-lg-block><small>Sample Legal text for placement only.</small></p><p><a href=javascript:; class="btn btn-primary pull-left hidden-xs">Sample CTA</a> <a href=javascript:; class="pull-left visible-xs">Sample CTA</a></p></div></div></div></section>');
