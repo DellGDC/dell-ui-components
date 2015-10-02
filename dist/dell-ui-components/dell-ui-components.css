@@ -4040,6 +4040,21 @@ table.table-responsive td:before {
 [class^=icon][data-toggle="tooltip"] {
   border: none;
 }
+.contextual-help .form-label {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-left: 5px;
+  padding-top: 8px;
+  text-align: right;
+  top: 0;
+}
+.contextual-help [class^=icon][data-toggle="tooltip"] {
+  border: none;
+}
+.contextual-help [data-toggle="tooltip"] {
+  border-bottom: none !important;
+  color: #007db8;
+}
 /*
  * Typography component theme overrides
  *------------------------------------------------------------------------------------------
