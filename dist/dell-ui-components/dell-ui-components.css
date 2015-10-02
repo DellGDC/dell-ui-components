@@ -368,7 +368,7 @@ a {
   padding: 0 20px 30px 20px;
 }
 .carousel.carousel-filmstrip .carousel-inner {
-  padding: 10px  40px;
+  padding: 30px  40px;
 }
 .carousel.carousel-filmstrip .carousel-control {
   top: 38%;
@@ -498,7 +498,7 @@ a {
 @media (min-width: 1200px) {
   .carousel .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 45%;
     padding-right: 45%;
     margin-left: auto;
@@ -536,7 +536,7 @@ a {
     padding: 0 15px 30px 15px;
   }
   .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
+    padding: 10px  40px 30px 40px;
   }
   .carousel.carousel-filmstrip .carousel-control {
     top: 31%;
@@ -576,7 +576,7 @@ a {
   }
   .carousel .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 45%;
     padding-right: 45%;
     margin-left: auto;
@@ -654,7 +654,7 @@ a {
   }
   .carousel .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 40%;
     padding-right: 40%;
     margin-left: auto;
@@ -748,7 +748,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 37%;
     padding-right: 37%;
     margin-left: auto;
@@ -826,7 +826,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 37%;
     padding-right: 37%;
     margin-left: auto;
@@ -904,7 +904,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 37%;
     padding-right: 37%;
     margin-left: auto;
@@ -982,7 +982,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 36%;
     padding-right: 36%;
     margin-left: auto;
@@ -1060,7 +1060,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 34%;
     padding-right: 34%;
     margin-left: auto;
@@ -1135,7 +1135,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 35%;
     padding-right: 35%;
     margin-left: auto;
@@ -1210,7 +1210,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 34%;
     padding-right: 34%;
     margin-left: auto;
@@ -1285,7 +1285,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 32%;
     padding-right: 32%;
     margin-left: auto;
@@ -1360,7 +1360,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 32%;
     padding-right: 32%;
     margin-left: auto;
@@ -1426,7 +1426,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 26%;
     padding-right: 26%;
     margin-left: auto;
@@ -1492,7 +1492,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 20%;
     padding-right: 20%;
     margin-left: auto;
@@ -1558,7 +1558,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 15%;
     padding-right: 15%;
     margin-left: auto;
@@ -1624,7 +1624,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 0%;
     padding-right: 0%;
     margin-left: auto;
@@ -1690,7 +1690,7 @@ a {
   }
   .slick-dots {
     position: relative;
-    bottom: -20px;
+    bottom: -10px;
     padding-left: 7%;
     padding-right: 7%;
     margin-left: auto;
