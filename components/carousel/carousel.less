@@ -41,11 +41,11 @@
         .carousel-inner {
             padding: 10px 40px 30px 40px;
             overflow: inherit;
-
         }
         .carousel-control {
-            top:38%;
-
+            top:25%;
+            position: absolute;
+            margin-top: -5px;
             &.left {
                 left: -5px;
                 &:before {
@@ -73,7 +73,9 @@
             overflow: inherit;
         }
         .carousel-control {
-            top:70px;
+            top:25%;
+            position: absolute;
+            margin-top: -5px;
 
             &.left {
                 left: -8px;
@@ -178,90 +180,43 @@
     }
 }
 
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: @screen-lg-min) {
-    .carousel {
-        .slick-dots {
-            position: relative;
-            bottom: -5px;
-            display: block !important;
-            list-style: none;
-            text-align: center;
-            padding: 0;
-            width: 100%;
-            button {
-                width: 14px;
-                height: 6px;
-                margin: 0 5px;
-                border-radius: 2px;
-                border: none;
-                background: #cccccc;
-            }
-            > .slick-active > button{
-                background: #444444;
-                width: 14px;
-                height: 6px;
-                margin: 0 5px;
-                border-radius: 2px;
-                border: none;
-                outline: none;
-            }
-            li {
-                position: relative;
-                display: inline-block;
-            }
+.carousel {
+    .slick-dots {
+        position: relative;
+        bottom: -5px;
+        display: block !important;
+        list-style: none;
+        text-align: center;
+        padding: 0;
+        width: 100%;
+        button {
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            background: #cccccc;
         }
-        .carousel img {
-            vertical-align: middle;
-            margin-left: auto;
-            margin-right: auto;
+        > .slick-active > button{
+            background: #444444;
+            width: 14px;
+            height: 6px;
+            margin: 0 5px;
+            border-radius: 2px;
+            border: none;
+            outline: none;
+        }
+        li {
+            position: relative;
+            display: inline-block;
         }
     }
-}
-
-
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-    .carousel {
-        .slick-dots {
-            position: relative;
-            bottom: -5px;
-            display: block !important;
-            list-style: none;
-            text-align: center;
-            padding: 0;
-            width: 100%;
-            button {
-                width: 14px;
-                height: 6px;
-                margin: 0 5px;
-                border-radius: 2px;
-                border: none;
-                background: #cccccc;
-            }
-            > .slick-active > button{
-                background: #444444;
-                width: 14px;
-                height: 6px;
-                margin: 0 5px;
-                border-radius: 2px;
-                border: none;
-                outline: none;
-            }
-            li {
-                position: relative;
-                display: inline-block;
-            }
-        }
-        .carousel img {
-            vertical-align: middle;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .carousel img {
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
-
 
 
 // Slick CSS
