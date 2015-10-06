@@ -424,10 +424,12 @@ a {
   padding: 0 20px 30px 20px;
 }
 .carousel.carousel-filmstrip .carousel-inner {
-  padding: 30px  40px;
+  padding: 10px 40px 30px 40px;
+  overflow: inherit;
 }
 .carousel.carousel-filmstrip .carousel-control {
-  top: 38%;
+  position: absolute;
+  vertical-align: middle;
 }
 .carousel.carousel-filmstrip .carousel-control.left {
   left: -5px;
@@ -441,19 +443,17 @@ a {
 .carousel.carousel-filmstrip .carousel-control.right:after {
   font-size: 40px;
 }
-.carousel.carousel-filmstrip .item,
-.carousel.carousel-filmstrip .carousel-inner .item {
-  margin-left: 10px;
-  margin-right: 10px;
-}
 .carousel.carousel-filmstrip-arrow-only {
   padding: 0 20px 30px 20px;
 }
 .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-  padding: 10px  40px;
+  padding: 10px 40px;
+  overflow: inherit;
 }
 .carousel.carousel-filmstrip-arrow-only .carousel-control {
-  top: 70px;
+  top: 45%;
+  position: absolute;
+  vertical-align: middle;
 }
 .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
   left: -8px;
@@ -467,22 +467,210 @@ a {
 .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
   font-size: 40px;
 }
-.carousel.carousel-filmstrip-arrow-only .item,
-.carousel.carousel-filmstrip-arrow-only .carousel-inner .item {
+@media (min-width: 1200px) {
+  .carousel.carousel-filmstrip .carousel-control {
+    top: 35%;
+    margin-top: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left:before {
+    font-size: 40px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right:after {
+    font-size: 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 15%;
+    position: absolute;
+    vertical-align: middle;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 40px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 40px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .carousel.carousel-filmstrip .carousel-control {
+    top: 30%;
+    margin-top: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left:before {
+    font-size: 38px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right:after {
+    font-size: 38px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 10%;
+    position: absolute;
+    vertical-align: middle;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 38px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 38px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .carousel.carousel-filmstrip .carousel-control {
+    top: 25%;
+    margin-top: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left:before {
+    font-size: 33px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right:after {
+    font-size: 33px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 5%;
+    position: absolute;
+    vertical-align: middle;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 33px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 33px;
+  }
+}
+@media (max-width: 767px) {
+  .carousel.carousel-filmstrip .carousel-control {
+    top: 20%;
+    margin-top: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left:before {
+    font-size: 30px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right:after {
+    font-size: 30px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 4%;
+    position: absolute;
+    vertical-align: middle;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 30px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 30px;
+  }
+}
+@media (max-width: 599px) {
+  .carousel.carousel-filmstrip .carousel-control {
+    top: 28%;
+    margin-top: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left {
+    left: -5px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.left:before {
+    font-size: 30px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right:after {
+    font-size: 30px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 6%;
+    position: absolute;
+    vertical-align: middle;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 30px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 30px;
+  }
+}
+@media (max-width: 480px) {
+  .carousel.carousel-filmstrip .carousel-control.left:before {
+    display: none;
+  }
+  .carousel.carousel-filmstrip .carousel-control.right:after {
+    display: none;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control {
+    top: 12%;
+    position: absolute;
+    vertical-align: middle;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
+    left: -8px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
+    font-size: 30px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
+    right: -15px;
+  }
+  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
+    font-size: 30px;
+  }
+}
+.carousel .item,
+.carousel .carousel-inner .item {
   margin-left: 10px;
   margin-right: 10px;
-}
-.carousel .carousel-caption {
-  position: absolute;
-  left: 15%;
-  right: 15%;
-  bottom: 20px;
-  z-index: 10;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  color: #fff;
-  text-align: left;
-  text-shadow: none;
 }
 .carousel .carousel-indicators li {
   width: 14px;
@@ -496,1342 +684,40 @@ a {
   padding: 0 0 30px;
   position: relative;
 }
-.carousel.carousel-gallery .carousel-caption {
-  position: absolute;
-  left: auto;
-  right: auto;
-  bottom: 0;
-  padding: 20px 60px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.6);
+.carousel .slick-dots {
+  position: relative;
+  bottom: -5px;
+  display: block !important;
+  list-style: none;
+  text-align: center;
+  padding: 0;
   width: 100%;
-  color: #444444;
-  text-align: left;
 }
-.carousel.carousel-gallery .carousel-caption.pull-right {
-  max-width: 40%;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
-  position: absolute;
-  text-align: left;
-  top: 0;
-  right: 0;
-  padding-right: 60px;
-  padding-left: 20px;
-  min-height: 430px;
+.carousel .slick-dots button {
+  width: 14px;
+  height: 6px;
+  margin: 0 5px;
+  border-radius: 2px;
+  border: none;
+  background: #cccccc;
 }
-.carousel.carousel-gallery .carousel-caption.pull-left {
-  max-width: 40%;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
-  position: absolute;
-  text-align: left;
-  top: 0;
-  left: 0;
-  padding-top: 40px;
-  padding-left: 60px;
-  padding-right: 20px;
-  min-height: 430px;
+.carousel .slick-dots > .slick-active > button {
+  background: #444444;
+  width: 14px;
+  height: 6px;
+  margin: 0 5px;
+  border-radius: 2px;
+  border: none;
+  outline: none;
 }
-.carousel.carousel-gallery .carousel-caption.no-arrows.pull-left {
-  max-width: 40%;
-  max-height: 65%;
-  min-height: 0;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 10px;
-  position: absolute;
-  text-align: left;
-  top: 20px;
-  left: 20px;
-  padding-top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+.carousel .slick-dots li {
+  position: relative;
+  display: inline-block;
 }
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .carousel .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 45%;
-    padding-right: 45%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .carousel .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .carousel .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 1025px) and (max-width: 1199px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 15px 30px 15px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px 30px 40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 31%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 15px 30px 15px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 45px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 45%;
-    padding-right: 45%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .carousel .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .carousel .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 992px) and (max-width: 1024px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 15px 30px 15px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 31%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 15px 30px 15px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 45px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 40%;
-    padding-right: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .carousel .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .carousel .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .carousel-inner {
-    position: relative;
-    overflow: hidden;
-    width: 110%;
-    margin-left: -5%;
-    margin-right: -5%;
-  }
-  .carousel .carousel-control {
-    top: 36%;
-  }
-  .carousel .carousel-control.left {
-    left: -20px;
-  }
-  .carousel .carousel-control.right {
-    right: -30px;
-  }
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 28%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 30px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 37%;
-    padding-right: 37%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 741px) and (max-width: 767px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 28%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 30px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 37%;
-    padding-right: 37%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 701px) and (max-width: 740px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 24%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 28px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 37%;
-    padding-right: 37%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 650px) and (max-width: 700px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 20%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 18px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 36%;
-    padding-right: 36%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 600px) and (max-width: 649px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 18%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 18px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 34%;
-    padding-right: 34%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 566px) and (max-width: 599px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 33%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 55px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -5px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 34px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 34px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 35%;
-    padding-right: 35%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 541px) and (max-width: 565px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 33%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 50px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -5px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 34px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 34px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 34%;
-    padding-right: 34%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 520px) and (max-width: 540px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 28%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 45px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -5px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 34px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 34px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 32%;
-    padding-right: 32%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 480px) and (max-width: 519px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control {
-    top: 28%;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left {
-    left: -3px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right {
-    right: -14px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    font-size: 32px;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 30px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -5px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 34px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 34px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 32%;
-    padding-right: 32%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 421px) and (max-width: 479px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    display: none;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    display: none;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 60px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -5px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 34px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 34px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 26%;
-    padding-right: 26%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 375px) and (max-width: 420px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    display: none;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    display: none;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 55px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -8px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 28px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 28px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 20%;
-    padding-right: 20%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 340px) and (max-width: 374px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    display: none;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    display: none;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 50px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -8px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 28px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 28px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 15%;
-    padding-right: 15%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 311px) and (max-width: 339px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    display: none;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    display: none;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 33px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -8px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 28px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 28px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 0%;
-    padding-right: 0%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (min-width: 295px) and (max-width: 310px) {
-  .carousel.carousel-filmstrip {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip .carousel-control.left:before {
-    display: none;
-  }
-  .carousel.carousel-filmstrip .carousel-control.right:after {
-    display: none;
-  }
-  .carousel.carousel-filmstrip-arrow-only {
-    padding: 0 20px 30px 20px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-inner {
-    padding: 10px  40px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control {
-    top: 33px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left {
-    left: -8px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.left:before {
-    font-size: 28px;
-  }
-  .carousel.carousel-filmstrip-arrow-only .carousel-control.right:after {
-    font-size: 28px;
-  }
-  .slick-dots {
-    position: relative;
-    bottom: -10px;
-    padding-left: 7%;
-    padding-right: 7%;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 15;
-    list-style: none;
-    text-align: center;
-    display: inline-flex !important;
-  }
-  .slick-dots button {
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    background: #cccccc;
-  }
-  .slick-dots > .slick-active > button {
-    background: #444444;
-    width: 14px;
-    height: 6px;
-    margin: 0 5px;
-    border-radius: 2px;
-    border: none;
-    outline: none;
-  }
-  .carousel img {
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-@media (max-width: 767px) {
-  .carousel .well-banner {
-    max-height: 65%;
-    min-width: 105%;
-    min-height: 40%;
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 0px;
-    background: #eeeeee;
-    border: 0 solid transparent;
-    border-radius: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    top: 0;
-    left: 0;
-    position: relative;
-  }
-  .carousel .well-banner a {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .carousel .well-banner a h3 {
-    margin-bottom: 0;
-  }
-  .carousel-inner {
-    position: relative;
-    overflow: hidden;
-    width: 110%;
-    margin-left: -5%;
-    margin-right: -5%;
-  }
-}
-@media (min-width: 580px) and (max-width: 768px) {
-  .carousel .well-banner {
-    max-height: 65%;
-    min-width: 105%;
-    min-height: 40%;
-    padding-left: 35px;
-    padding-right: 35px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 0;
-    background: #eeeeee;
-    border: 0 solid transparent;
-    border-radius: 15px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    top: 0;
-    left: 0;
-    position: relative;
-  }
+.carousel .carousel img {
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* Slider */
 .slick-slider {
