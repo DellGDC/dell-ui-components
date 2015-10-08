@@ -20,6 +20,7 @@ angular.module('dellUiComponents')
                         targetFound,
                         done,
                         content;
+                    //bodyMinusContainer = $('body' - $element.innerWidth());
 
                     if ($(parentLi).hasClass('open')){
                         $element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function() {
@@ -53,14 +54,16 @@ angular.module('dellUiComponents')
                                             $(i).after('<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">×</button></span>' + content + '</div></li>');
                                             $('.details-container').attr('display', 'block').slideDown(450);
 
-                                            //$('.details-container .close, .details-container, .content-gallery-show-more' ).on('click', function (e) {
-                                            $('.close, body, .content-gallery-show-more, .container' ).on('click', function (e) {
-
+                                            $('body, li.details-container .close').on('click', function(e){
                                                 e.preventDefault();
                                                 $element.find('li.details-container').attr('display', 'none').slideUp(450).delay(500).queue(function() {
                                                     $(this).remove();
                                                 });
                                                 $element.find('.open').removeClass('open');
+                                            });
+
+                                            $('.details-container').on('click', function(e) {
+                                                e.stopPropagation();
                                             });
 
                                             done = true;
