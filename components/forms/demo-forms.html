@@ -909,7 +909,7 @@
 
 
         <hr class="top-offset-40"/>
-<!-- Date selector -->        
+<!-- Date selector -->
         <h3>Date Selector Demo</h3>
         <div class="bottom-offset-40">
             <div class="row">
@@ -928,13 +928,15 @@
                                                 </span>
                                             </div>
                                         </div>
-                                    </div>    
+                                    </div>
                                 </div>
                                 <p>MM/DD/YYYY</p>
                             </div>
                             <script type="text/javascript">
                                 $(function () {
-                                    $('#datetimepicker1').datetimepicker();
+                                    $('#datetimepicker1').datetimepicker({
+                                        format:'MM/DD/YYYY'
+                                    });
                                 });
                             </script>
                         </div>
@@ -942,7 +944,7 @@
                 </div>
             </div>
         </div>
-  
+
 <br>
 <br>
 <br>
