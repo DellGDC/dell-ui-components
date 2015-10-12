@@ -21,6 +21,7 @@
      "icons",
      "lists",
      "labels-and-badges",
+     "masthead",
      "modals",
      "offsets",
      "pagers",
@@ -36,4 +37,5 @@
      "date-selector",
      "search-and-navigation",
      "anchored-nav"
+
 ]
