@@ -183,5 +183,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 #1.0.5 - Fixed carousels slider dots disappearing in DesLib, added Content-teasers, additional colors, banners, grid example patterns. Moved progress bar and pagination demo.js to non-demo.js files. added code patch for forms.less
 #1.0.6 - Updated Value Props so the content aligns left in mobile XS view, updated tool-tip hover and removed underline onconnect with dell component, made fix on show/hide toggle in XS view, updated grouped form to view in DesLib. Restructured package to remove development files from distribution.
 #1.0.7 Changes to tabs and cleaned up README instructions 
+#1.0.8 Changes to tables, breadcrumbs, show/hide, addition of contact drawer
 ...
 ```

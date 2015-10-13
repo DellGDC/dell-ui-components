@@ -10,12 +10,13 @@
  */
 
 
+//Requires jQuery and Eve.js
 
-(function($){
+(function($,Eve){
 	Eve.scope('.contact-drawer', function() {
 	    this.listen('.contact-drawer-cta', 'click', function(e) {
 	      $(e.currentTarget).parent().toggleClass('open');
 	    });
 	});
-})(jQuery);
+})(jQuery,Eve);
 

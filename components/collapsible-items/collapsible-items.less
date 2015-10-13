@@ -3,14 +3,13 @@
  *------------------------------------------------------------------------------------------
  */
 
-
 .hide-expanded,
 .collapsed .show-collapsed {
     display: block;
-    -webkit-transition: height .3.5s ease;
-    -moz-transition:    height .3.5s ease;
-    -o-transition:      height .3.5s ease;
-    transition:         height .3.5s ease;
+    -webkit-transition: height .3 .5s ease;
+    -moz-transition: height .3 .5s ease;
+    -o-transition: height .3 .5s ease;
+    transition: height .3 .5s ease;
 
     &:focus {
         outline: none;
@@ -19,10 +18,10 @@
 
 .collapsed .hide-expanded, .show-collapsed {
     display: none;
-    -webkit-transition: height .3.5s ease;
-    -moz-transition:    height .3.5s ease;
-    -o-transition:      height .3.5s ease;
-    transition:         height .3.5s ease;
+    -webkit-transition: height .3 .5s ease;
+    -moz-transition: height .3 .5s ease;
+    -o-transition: height .3 .5s ease;
+    transition: height .3 .5s ease;
 
     &:focus {
         outline: none;
@@ -30,23 +29,22 @@
 }
 
 .collapse {
-    overflow:           hidden;
-    -webkit-transition: height .3.5s ease;
-    -moz-transition:    height .3.5s ease;
-    -o-transition:      height .3.5s ease;
-    transition:         height .3.5s ease;
+    overflow: hidden;
+    -webkit-transition: height .3 .5s ease;
+    -moz-transition: height .3 .5s ease;
+    -o-transition: height .3 .5s ease;
+    transition: height .3 .5s ease;
 }
-
 
 //data-toggle
 //------------------------------------------------------------------------------------------
 [data-toggle="collapse"] {
     &.collapsed {
         .when-expanded {
-            display:none;
+            display: none;
         }
         .when-collapsed {
-            display:inherit;
+            display: inherit;
         }
         //fixes to caret when used in a collapsible toggle
         .caret {
@@ -58,10 +56,10 @@
         }
     }
     .when-expanded {
-        display:inherit;
+        display: inherit;
     }
     .when-collapsed {
-        display:none;
+        display: none;
     }
 }
 
@@ -84,7 +82,7 @@
 //social links show/hide
 //----------------------------------------------------------------------
 
-.inline-image-content-links  {
+.inline-image-content-links {
     min-height: 20px;
     margin-bottom: 10px;
 
@@ -121,7 +119,7 @@
     }
 }
 
-@media (min-width: 290px) and (max-width: @screen-xs-max){
+@media (min-width: 290px) and (max-width: @screen-xs-max) {
     .image-content-links {
         > li {
             display: none;
@@ -144,8 +142,6 @@
         }
     }
 }
-
-
 
 //extreme mobile viewports
 @media (max-width: 289px) {
@@ -172,5 +168,133 @@
     }
 }
 
+.list-truncated {
+    overflow: hidden;
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+    line-height: 30px;
+}
+
+[data-toggle=list-truncated] {
+    .hide-expanded,
+    .show-collapsed,
+    .collapsed
+    .show-collapsed {
+        padding: 6px 10px 10px 0;
+    }
+}
+
+// -------------- Content Gallery Show/Hide --------------------
+// -------------------------------------------------------------
+
+.content-gallery {
+    list-style: none;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 0;
+    overflow:hidden;
+    li {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    &-container {
+        margin-bottom: 20px;
+    }
+
+    .content-gallery-details {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .details-container {
+        display: none;
+        margin-top: -15px;
+        .close {
+            margin: 0 5px 0 0;
+            position: relative;
+            font-size: 22px !important;
+            font-weight: bold;
+            .icon-ui-close {
+                font-size: 22px !important;
+                font-weight: bold;
+            }
+        }
+        .gallery {
+            padding: 15px 15px 15px 15px;
+            background: @dell-gray-light;
+            margin-top: 0;
+        }
+    }
+
+    .show-collapsed,
+    .open .hide-expanded {
+        display: block;
+        padding: 0;
+    }
+
+    .hide-expanded,
+    .open .show-collapsed {
+        display: none;
+        padding: 0;
+    }
+
+    li[class^=col-]{
+        &.open {
+            &:after {
+                top: auto;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                border-bottom-color: @dell-gray-light;
+                border-width: 15px;
+                left: 50%;
+                margin: -30px 0 0 -15px;
+
+            }
+        }
+    }
+    @media (max-width: @screen-xs-max) {
+        .open + li + li {
+            clear: both;
+        }
+
+    }
+
+}
+
+
+@media (max-width: @screen-xs-max) {
+    .content-gallery {
+
+        &-container {
+            margin-bottom: 40px;
+        }
+
+        .details-container {
+            margin-top: 0;
+            .close {
+                margin: 0 5px 0 0;
+                position: relative;
+                font-size: 22px !important;
+                font-weight: bold;
+                .icon-ui-close {
+                    font-size: 22px !important;
+                    font-weight: bold;
+                }
+            }
+            .gallery {
+                padding: 15px 15px 15px 15px;
+                background: @dell-gray-light;
+                margin-top: 0;
+            }
+        }
+
+    }
+}
 
 

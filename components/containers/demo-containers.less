@@ -2,6 +2,66 @@
 
 #containers-html-example {
 
+    .well-colors (@body-bg, @text-color, @headings-color, @link-color) {
+        background-color: @body-bg;
+        color: @text-color;
+        border-radius: 0;
+        h2, h3, h4, h5, h6 {
+            color: @headings-color;
+        }
+        .panel-heading {
+            h2, h3, h4, h5, h6 {
+                margin: 0;
+                padding-left: 10px;
+            }
+            background: @headings-color;
+
+            color: @white !important;
+        }
+        h4.well-title, h4.container-title {
+            //container-title for backward compatibility but should be deprecated
+            display: inline-block;
+            top: -25px;
+            margin-bottom: -20px;
+            padding: 5px 15px;
+            position: relative;
+            color: @white;
+            background-color: @headings-color;
+            vertical-align: baseline;
+            white-space: nowrap;
+
+        }
+    }
+
+
+
+
+    /* dell-blue-20-percent */
+    .dell-blue-20-percent,
+    .well-dell-blue-20-percent {
+        .well-colors (@dell-highlight-blue, @white, @white, @white)
+    }
+
+    .dell-blue-20-percent-stroke,
+    .well-dell-blue-20-percent-stroke,
+    .panel-dell-blue-20-percent-stroke {
+        .well-colors (@white, @text-color, @dell-highlight-blue, @link-color);
+        border: 1px solid @dell-highlight-blue;
+    }
+
+    /* Online Alert Yellow */
+    .alert-yellow,
+    .well-alert-yellow {
+        .well-colors (@dell-alert-yellow, @white, @white, @white)
+    }
+
+    .alert-yellow-stroke,
+    .well-alert-yellow-stroke,
+    .panel-alert-yellow-stroke {
+        .well-colors (@white, @text-color,@dell-alert-yellow, @link-color);
+        border: 1px solid @dell-alert-yellow;
+    }
+
 
 }
 
