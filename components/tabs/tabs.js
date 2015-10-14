@@ -26,7 +26,8 @@ angular.module('dellUiComponents')
                 isHome = false,
                 isTooFar = false,
                 leftMostTab = {},
-                nextTab;
+                nextTab,
+                maxTabHeight = 42;
 
 
 
@@ -37,14 +38,19 @@ angular.module('dellUiComponents')
                         label: _.str.clean($(t).text()),
                         offset: offsetTotal,
                         width: $(t).width(),
+                        height: $(t).height(),
                         visibility: 1
                     };
-                   // console.log("tabs list", tObj);
+                   
                     if(tabObjs.length === index + 1) {
                        // console.log("offset total",offsetTotal, totalWidth, tObj);
                     } else {
                         offsetTotal = offsetTotal - tObj.width - 1;
                     }
+                    if(tObj.height > maxTabHeight) {
+                       maxTabHeight = tObj.height;
+                    }
+
 
                    // console.log(leftPosition,$element.css("left"));
 
@@ -54,7 +60,7 @@ angular.module('dellUiComponents')
                     }
                     tabs.push(tObj);
                 });
-
+                
                 leftMostTab = tabs[0];
                 var isToofar;
                 function slideIt(backDirection) {
@@ -145,6 +151,12 @@ angular.module('dellUiComponents')
                     $element.parent().addClass('nav-tabs-overflow-container');
                     $element.before('<div class="prev disabled"><a href="javascript:;"><i class="icon-ui-arrowleft"></i></a></div>');
                     $element.after('<div class="next"><a href="javascript:;"><i class="icon-ui-arrowright"></i></a></div>');
+                    if(maxTabHeight > 42) {
+                        $element.css("height", maxTabHeight+"px");
+                        $element.find("li").css("height", maxTabHeight+"px");
+                        $element.parent().find(".prev,.next").find("a").css("height", (maxTabHeight-2)+"px");
+                        $element.parent().find(".prev,.next").find("a").css("padding-top", (maxTabHeight/2 - 8)+"px");
+                    }
 
 
                     $element.parent().find('> .prev').on('click',function(e){
