@@ -838,13 +838,25 @@
             }
         }
 
+    }
+    .datepicker-days, .datepicker-months, .datepicker-years {
         thead tr:first-child th {
+            border-radius: 0;
             &:hover {
                 background: none 0 0 @dell-blue !important;
                 color: #fff !important;
             }
         }
-
+        .prev.theader, .next.theader, .picker-switch.theader {
+                border-radius: 0;
+                background: none 0 0 @dell-blue !important;
+                color: #fff !important;
+            }
+        .day, .month, .year {
+            &:hover {
+                background: none 0 0 @dell-highlight-blue;
+            }
+        }    
     }
 
     li.picker-switch {display: none;}
@@ -854,3 +866,37 @@
         width: 50%;
     }
 }*/
+
+
+.date-selector {
+    input {
+    border-right: 0;
+    }
+
+    .icon-small-calendar {
+        color: @dell-blue;
+    }
+
+}
+.bootstrap-datetimepicker-widget {
+    border: 1px solid @dell-gray-stroke;
+    top: -15px;
+    right: -20px;
+}
+
+#datetimepicker1 {
+    .caret {
+        display: none;
+    }
+}
+
+/* ---|--DatePicker media query for sm and xs--|--- */
+@media (max-width: @screen-sm-max) {
+
+        .bootstrap-datetimepicker-widget {
+            top: 33px;
+            right: 0;
+        }
+
+
+    }

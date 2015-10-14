@@ -470,14 +470,27 @@
                     throw new Error('datetimepicker component should be placed within a relative positioned container');
                 }
 
-                widget.css({
-                    bottom: vertical === 'bottom' ? 'auto' : position.top + element.outerHeight() - (parent === element ? 35 : position.bottom),
-                    top: vertical === 'top' ? position.top + element.outerHeight() : 'auto',
-                    left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
-                    right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 266 : position.right)
-                });
-            },
 
+                if (window.resize > 1024) {
+                    if (window.width() > 1024) {  
+                        widget.css({
+                            bottom: vertical === 'bottom' ? 'auto' : position.top + element.outerHeight() - (parent === element ? 30 : position.bottom),
+                            top: vertical === 'top' ? position.top + element.outerHeight() : 'auto',
+                            left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
+                            right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 266 : position.right)
+                        });
+                    }
+
+                    if (window.width() <= 1024) {   
+                        widget.css({
+                            bottom: vertical === 'bottom' ? 'auto' : position.top + element.outerHeight() - (parent === element ? 200 : position.bottom),
+                            top: vertical === 'top' ? position.top + element.outerHeight() : 'auto',
+                            left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
+                            right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 0 : position.right)
+                        });
+                    }   
+                }
+            },
             notifyEvent = function (e) {
                 if (e.type === 'dp.change' && ((e.date && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate))) {
                     return;
@@ -2033,7 +2046,7 @@
 
             options.widgetParent = widgetParent;
             if (widget) {
-                hide();
+                // hide();
                 show();
             }
             return picker;
@@ -2382,11 +2395,11 @@
         enabledDates: false,
         icons: {
             // time: 'glyphicon glyphicon-time',
-            date: 'glyphicon glyphicon-calendar',
+            date: 'icon-small-calendar',
             up: 'glyphicon glyphicon-chevron-up',
             down: 'glyphicon glyphicon-chevron-down',
-            previous: 'glyphicon glyphicon-chevron-left',
-            next: 'glyphicon glyphicon-chevron-right',
+            previous: 'icon-ui-arrowleft',
+            next: 'icon-ui-arrowright',
             today: 'glyphicon glyphicon-screenshot',
             clear: 'glyphicon glyphicon-trash',
             close: 'glyphicon glyphicon-remove'
@@ -2433,7 +2446,7 @@
         },
         widgetParent: null,
         ignoreReadonly: false,
-        keepOpen: true,
+        keepOpen: false,
         focusOnShow: true,
         inline: false,
         keepInvalid: false,
@@ -2549,4 +2562,9 @@
         enabledHours: false,
         viewDate: false
     };
+
+
+
 }));
+
+
