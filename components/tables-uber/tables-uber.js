@@ -130,6 +130,13 @@ angular.module('dellUiComponents')
                     }
                 });
 
+
+                // Handle reload on click event
+                $('ul.pagination a').on('click', function(){
+                    console.log('i was clicked');
+
+                });
+
                 // Handle click on checkbox
                 $('#table-uber tbody').on('click', 'input[type="checkbox"]', function(e){
                     var $row = $(this).closest('tr');
@@ -220,10 +227,17 @@ angular.module('dellUiComponents')
                     },100);
                 }
 
-                //Handle re-run event
-                //$('li#table-uber_next').on('click', function(e){
-                //    console.log('i was clicked');
-                //});
+                //var tableReload = $('#table-uber').DataTable;
+                //if($element.hasClass('table-editable')) {
+                //    $timeout(function(){
+                //        $element.find('ul.pagination a').on('click', function(e){
+                //            console.log('i was clicked');
+                //        });
+                //    },100);
+                //}
+                //Handle reload event
+
+
             }
         };
     });
