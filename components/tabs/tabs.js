@@ -60,11 +60,8 @@ angular.module('dellUiComponents')
                     }
                     tabs.push(tObj);
                 });
-                
-                leftMostTab = tabs[0];
-                var isToofar;
-                function slideIt(backDirection) {
-                    //console.log("slide it");
+                function slideIt(backDirection,tabInContext) {
+
                     var indexOffset = 1;
                     if(backDirection) {
                         indexOffset = -1;
@@ -113,9 +110,9 @@ angular.module('dellUiComponents')
                     }
 
                     if(leftMostTab) {
-                        console.log("pluck", _.pluck(_.filter(tabs, function(tb){
-                                return tb.visibility === 0;
-                            }),"label"));
+                        //console.log("pluck", _.pluck(_.filter(tabs, function(tb){
+                        //        return tb.visibility === 0;
+                        //   }),"label"));
                         //console.log("leftMostTab", leftMostTab);
                         if(isToofar) {
 
@@ -128,6 +125,14 @@ angular.module('dellUiComponents')
                             console.log("MADE IT HERE");
                             $element.parent().find('> .next').removeClass('disabled');
                             leftPosition = leftMostTab.offset;
+                        }
+                        if(tabInContext && !isToofar){
+                            //if this the last tab on the right do nothing different
+                            if(tabInContext.index !== tabs.length-1) {
+                                //not the last tab on the right need to adjust the left offset
+                                leftPosition = tabInContext.tabContainerWidth - tabInContext.rightMostPoint -60 ;
+                                console.log("need to adjust leftMostTab ",tabInContext.tabContainerWidth - tabInContext.rightMostPoint - 60);
+                            }
                         }
                         $element.css('left',leftPosition + "px");
                     } else {
@@ -142,9 +147,14 @@ angular.module('dellUiComponents')
 
                 }
 
-
+                
+                leftMostTab = tabs[0];
+                var isToofar;
                 $scope.isOverflow = totalWidth > containerWidth;
                 if($scope.isOverflow) {
+
+
+
                     $element.width(totalWidth+200);
                     $element.css("left", "29px");
 
@@ -152,13 +162,27 @@ angular.module('dellUiComponents')
                     $element.before('<div class="prev disabled"><a href="javascript:;"><i class="icon-ui-arrowleft"></i></a></div>');
                     $element.after('<div class="next"><a href="javascript:;"><i class="icon-ui-arrowright"></i></a></div>');
                     if(maxTabHeight > 42) {
-                        $element.css("height", maxTabHeight+"px");
-                        $element.find("li").find("a").css("height", maxTabHeight+"px");
+                        $element.css("height", (maxTabHeight+2)+"px");
+                        $element.find("> li").find("a").css("height", maxTabHeight+"px");
                         $element.parent().find(".prev,.next").find("a").css("height", (maxTabHeight)+"px");
                         $element.parent().find(".prev,.next").find("a").css("padding-top", (maxTabHeight/2 - 8)+"px");
                     }
 
+                    $element.find('> li').on('click',function(e){
+                        var t = {
+                                self: e.currentTarget,
+                                rightMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth,
+                                tabContainerWidth: $(e.currentTarget).parents('.nav-tabs-overflow-container').width(),
+                                tabContainerOffset: $(e.currentTarget).parent()[0].offsetLeft,
+                                index: $(e.currentTarget).index()
+                            };
 
+                        if((t.tabContainerWidth - t.rightMostPoint) - t.tabContainerOffset < 30) {
+                            console.log("should move to the left by ", t.tabContainerOffset, (t.tabContainerWidth - t.rightMostPoint) - t.tabContainerOffset < 30, "ne value = ",(t.tabContainerWidth - t.rightMostPoint -30) - t.tabContainerOffset);
+                            //$(thisTab).parent().css("left",(tabContainerWidth - rightMostPoint -30) + tabContainerOffset);
+                            slideIt(false,t);
+                        }
+                    });
                     $element.parent().find('> .prev').on('click',function(e){
                         //console.log("prev click happened");
                         if(!$(e.currentTarget).hasClass('disabled')) {
