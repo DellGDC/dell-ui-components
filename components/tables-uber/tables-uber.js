@@ -1,3 +1,5 @@
+
+
 /**
  * Created by Clint_Batte on 9/9/2015.
  */
@@ -180,6 +182,7 @@ angular.module('dellUiComponents')
                     e.stopPropagation();
                 });
 
+
                 // Handle table draw event
                 table.on('draw', function(){
                     // Update state of "Select all" control
@@ -216,6 +219,11 @@ angular.module('dellUiComponents')
                         } );
                     },100);
                 }
+
+                //Handle re-run event
+                //$('li#table-uber_next').on('click', function(e){
+                //    console.log('i was clicked');
+                //});
             }
         };
     });
