@@ -153,8 +153,8 @@ angular.module('dellUiComponents')
                     $element.after('<div class="next"><a href="javascript:;"><i class="icon-ui-arrowright"></i></a></div>');
                     if(maxTabHeight > 42) {
                         $element.css("height", maxTabHeight+"px");
-                        $element.find("li").css("height", maxTabHeight+"px");
-                        $element.parent().find(".prev,.next").find("a").css("height", (maxTabHeight-2)+"px");
+                        $element.find("li").find("a").css("height", maxTabHeight+"px");
+                        $element.parent().find(".prev,.next").find("a").css("height", (maxTabHeight)+"px");
                         $element.parent().find(".prev,.next").find("a").css("padding-top", (maxTabHeight/2 - 8)+"px");
                     }
 
