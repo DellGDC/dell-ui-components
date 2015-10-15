@@ -112,29 +112,28 @@ angular.module('dellUiComponents')
                         }
                     ],
                     'order': [1, 'asc'],
-                    'rowCallback': function(row, data, dataIndex){
-                        // Get row ID
-                        var rowId = data[0];
-
-                        // If row ID is in the list of selected row IDs
-                        if($.inArray(rowId, rows_selected) !== -1){
-                            $(row).find('input[type="checkbox"]').prop('checked', true);
-                            $(row).addClass('selected');
-                        }
-                    },
+                    //'rowCallback': function(row, data, dataIndex){
+                    //    // Get row ID
+                    //    var rowId = data[0];
+                    //
+                    //    // If row ID is in the list of selected row IDs
+                    //    if($.inArray(rowId, rows_selected) !== -1){
+                    //        $(row).find('input[type="checkbox"]').prop('checked', true);
+                    //        $(row).addClass('selected');
+                    //    }
+                    //},
                     "pagingType": "simple",
                     "language": {
                         "paginate": {
                             "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
                             "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
                         }
+                    },
+                    "fnDrawCallback": function() {
+                        //bind the click handler script to the newly created elements held in the table
+                        $('ul.pagination a').bind('click',dataReloadClick);
+                        console.log('i was clicked');
                     }
-                    //,
-                    //"fnDrawCallback": function() {
-                    //    //bind the click handler script to the newly created elements held in the table
-                    //    $('ul.pagination a').bind('click',dataReloadClick);
-                    //    console.log('i was clicked');
-                    //}
                 });
 
 
@@ -155,7 +154,7 @@ angular.module('dellUiComponents')
                     if(this.checked && index === -1){
                         rows_selected.push(rowId);
 
-                        // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+                    // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
                     } else if (!this.checked && index !== -1){
                         rows_selected.splice(index, 1);
                     }
@@ -169,7 +168,7 @@ angular.module('dellUiComponents')
                     // Update state of "Select all" control
                     updateDataTableSelectAllCtrl(table);
 
-                    // Prevent click event from propagating to parent
+                    //Prevent click event from propagating to parent
                     e.stopPropagation();
                 });
 
@@ -177,6 +176,7 @@ angular.module('dellUiComponents')
                 $('#table-uber').on('click', 'tbody td, thead th:first-child', function(e){
                     $(this).parent().find('input[type="checkbox"]').trigger('click');
                 });
+
 
                 // Handle click on "Select all" control
                 $('#table-uber thead input[name="select_all"]').on('click', function(e){
@@ -245,20 +245,20 @@ angular.module('dellUiComponents')
                     }
 
                 //onClick handler function
-                //function dataReloadClick(e) {
-                //    e.preventDefault();
-                //    //$(this).load('components/tables-uber/dataColumn.json');
-                //    $timeout(function(){
-                //        console.log("editable table here");
-                //        $element.find('td.editable').attr("contenteditable",true);
-                //        $element.find('td.editable').on('blur',function(e){
-                //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
-                //            if(data !== newData) {
-                //                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
-                //            }
-                //        } );
-                //    },100)
-                //}
+                function dataReloadClick(e) {
+                    e.preventDefault();
+                    //$(this).load('components/tables-uber/dataColumn.json');
+                    $timeout(function(){
+                        console.log("editable table here");
+                        $element.find('td.editable').attr("contenteditable",true);
+                        $element.find('td.editable').on('blur',function(e){
+                            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
+                            if(data !== newData) {
+                                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+                            }
+                        } );
+                    },100)
+                }
 
             }
         };
