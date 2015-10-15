@@ -27,7 +27,8 @@ angular.module('dellUiComponents')
                 isTooFar = false,
                 leftMostTab = {},
                 nextTab,
-                maxTabHeight = 42;
+                maxTabHeight = 42,
+                changeHeight;
 
 
 
@@ -62,10 +63,11 @@ angular.module('dellUiComponents')
                 });
                 function slideIt(backDirection,tabInContext) {
 
-                    var indexOffset = 1;
+                    var indexOffset = 1,
+                        isToofar;
+
                     if(backDirection) {
                         indexOffset = -1;
-                       // isToofar = false; CHANGED THIS it wasn't resetting the variable
                     }
 
                     leftPosition = parseInt($element.css('left'));
@@ -105,17 +107,17 @@ angular.module('dellUiComponents')
                     //CHANGED THIS to a condition that resets isToofar to false after tabs are set flush right, otherwise the first click on previous won't work
                     if (isToofar) {
                         isToofar = false;
+                    } else if(tabInContext) {
+                        if(tabInContext.lastTab) {
+                            isToofar = true;
+                        }
                     } else {
                         isToofar = widthLeftToTheRight < containerWidth;
                     }
 
                     if(leftMostTab) {
-                        //console.log("pluck", _.pluck(_.filter(tabs, function(tb){
-                        //        return tb.visibility === 0;
-                        //   }),"label"));
-                        //console.log("leftMostTab", leftMostTab);
-                        if(isToofar) {
 
+                        if(isToofar) {
                             //CHANGED THIS to the simple equation I initially showed you on my whiteboard
                             // leftPosition = leftMostTab.offset + containerWidth - widthLeftToTheRight  + 29 - tabs.length + 2;
                             leftPosition = (containerWidth - totalWidth) - 29;
@@ -149,11 +151,11 @@ angular.module('dellUiComponents')
 
                 
                 leftMostTab = tabs[0];
-                var isToofar;
+                
                 $scope.isOverflow = totalWidth > containerWidth;
                 if($scope.isOverflow) {
 
-
+                    //need to set up for xs breakpoint
 
                     $element.width(totalWidth+200);
                     $element.css("left", "29px");
@@ -161,26 +163,60 @@ angular.module('dellUiComponents')
                     $element.parent().addClass('nav-tabs-overflow-container');
                     $element.before('<div class="prev disabled"><a href="javascript:;"><i class="icon-ui-arrowleft"></i></a></div>');
                     $element.after('<div class="next"><a href="javascript:;"><i class="icon-ui-arrowright"></i></a></div>');
-                    if(maxTabHeight > 42) {
-                        $element.css("height", (maxTabHeight+2)+"px");
-                        $element.find("> li").find("a").css("height", maxTabHeight+"px");
-                        $element.parent().find(".prev,.next").find("a").css("height", (maxTabHeight)+"px");
-                        $element.parent().find(".prev,.next").find("a").css("padding-top", (maxTabHeight/2 - 8)+"px");
+                    
+                    changeHeight = function(h){
+                        if(h) {
+                            $element.css("height", (h+2)+"px");
+                            $element.find("> li").find("a").css("height", h+"px");
+                            $element.parent().find(".prev,.next").find("a").css("height", (h)+"px");
+                            $element.parent().find(".prev,.next").find("a").css("padding-top", (h/2 - 8)+"px");                            
+                        } else {
+                            $element.removeAttr("style");
+                            $element.find("> li").find("a").removeAttr("style");
+                            $element.parent().find(".prev,.next").find("a").removeAttr("style");  
+                        }
+                    };
+
+                    if(maxTabHeight > 42 && !$rootScope.bp.isXS) {
+                        changeHeight(maxTabHeight);
+                    } else {
+                        changeHeight();
                     }
+                    $rootScope.$watch('bp', function(bp){
+                        if(bp.isXS) {
+                            changeHeight();
+                        } else {
+                            changeHeight(maxTabHeight);
+                        }
+                    });
 
                     $element.find('> li').on('click',function(e){
                         var t = {
                                 self: e.currentTarget,
                                 rightMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth,
+                                leftMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth - $(e.currentTarget).width() - 2,
                                 tabContainerWidth: $(e.currentTarget).parents('.nav-tabs-overflow-container').width(),
                                 tabContainerOffset: $(e.currentTarget).parent()[0].offsetLeft,
                                 index: $(e.currentTarget).index()
                             };
+                            console.log("tab clicked",t);
 
                         if((t.tabContainerWidth - t.rightMostPoint) - t.tabContainerOffset < 30) {
-                            console.log("should move to the left by ", t.tabContainerOffset, (t.tabContainerWidth - t.rightMostPoint) - t.tabContainerOffset < 30, "ne value = ",(t.tabContainerWidth - t.rightMostPoint -30) - t.tabContainerOffset);
-                            //$(thisTab).parent().css("left",(tabContainerWidth - rightMostPoint -30) + tabContainerOffset);
-                            slideIt(false,t);
+                            
+                            if(t.index === tabs.length-1) {
+                                // last tab, make sure it is not already at the end
+                                if(t.rightMostPoint + t.tabContainerOffset + 28 < t.tabContainerWidth) {
+                                    slideIt(false,t); 
+                                } else if(t.rightMostPoint + t.tabContainerOffset + 28 > t.tabContainerWidth) {
+                                    t.lastTab = true; //let slide function that it is the last tab
+                                    slideIt(false,t); 
+                                } //otherwise if it is right on the last spot dont slide it
+                            } else {
+                              slideIt(false,t);  
+                            }
+                        } else if(t.leftMostPoint + t.tabContainerOffset < 0) {
+                            console.log("should slide backwards ", t);
+                            slideIt(true);  
                         }
                     });
                     $element.parent().find('> .prev').on('click',function(e){
