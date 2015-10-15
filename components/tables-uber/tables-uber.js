@@ -52,6 +52,7 @@ angular.module('dellUiComponents')
                     }
                 }
 
+
                 // Array holding selected row IDs
                 var rows_selected = [];
                 var tableData;
@@ -127,15 +128,14 @@ angular.module('dellUiComponents')
                             "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
                             "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
                         }
+                    },
+                    "drawCallback": function() {
+                        //bind the click handler script to the newly created elements held in the table
+                        $('ul.pagination a').bind('click',dataReloadClick);
+                        console.log('i was clicked');
                     }
                 });
 
-
-                // Handle reload on click event
-                $('ul.pagination a').on('click', function(){
-                    console.log('i was clicked');
-
-                });
 
                 // Handle click on checkbox
                 $('#table-uber tbody').on('click', 'input[type="checkbox"]', function(e){
@@ -227,15 +227,10 @@ angular.module('dellUiComponents')
                     },100);
                 }
 
-                //var tableReload = $('#table-uber').DataTable;
-                //if($element.hasClass('table-editable')) {
-                //    $timeout(function(){
-                //        $element.find('ul.pagination a').on('click', function(e){
-                //            console.log('i was clicked');
-                //        });
-                //    },100);
-                //}
-                //Handle reload event
+                //onClick handler function
+                function dataReloadClick() {
+                    $(this).load('components/tables-uber/dataColumn.json');
+                }
 
 
             }
