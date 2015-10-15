@@ -68,6 +68,11 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         if ($(selector  + " li:visible").size() === size_li) {
                             $(element).hide();
                         }
+                        var $this = $(this);
+                        $this.button('loading');
+                        setTimeout(function() {
+                            $this.button('reset');
+                        }, 1500);
                     });
                     break;
                 case "list-truncated":

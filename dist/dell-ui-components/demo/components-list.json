@@ -1,6 +1,7 @@
 [
      "alerts",
      "announcements",
+     "anchored-nav",
      "banner",
      "breadcrumbs",
      "standard-buttons",
@@ -33,5 +34,6 @@
      "typography",
      "ratings-and-reviews",
      "date-selector",
-     "search-and-navigation"
+     "search-and-navigation",
+     "anchored-nav"
 ]
