@@ -128,12 +128,13 @@ angular.module('dellUiComponents')
                             "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
                             "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
                         }
-                    },
-                    "drawCallback": function() {
-                        //bind the click handler script to the newly created elements held in the table
-                        $('ul.pagination a').bind('click',dataReloadClick);
-                        console.log('i was clicked');
                     }
+                    //,
+                    //"fnDrawCallback": function() {
+                    //    //bind the click handler script to the newly created elements held in the table
+                    //    $('ul.pagination a').bind('click',dataReloadClick);
+                    //    console.log('i was clicked');
+                    //}
                 });
 
 
@@ -213,228 +214,52 @@ angular.module('dellUiComponents')
                 });
 
 
+                //var inputTable = $element.DataTable(tableData);
+                //if($element.hasClass('table-editable')) {
+                //    $timeout(function(){
+                //        console.log("editable table here");
+                //        $element.find('td.editable').attr("contenteditable",true);
+                //        $element.find('td.editable').on('blur',function(e){
+                //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
+                //            if(data !== newData) {
+                //                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+                //            }
+                //        } );
+                //    },100);
+                //}
+
+
+
                 var inputTable = $element.DataTable(tableData);
-                if($element.hasClass('table-editable')) {
-                    $timeout(function(){
-                        console.log("editable table here");
-                        $element.find('td.editable').attr("contenteditable",true);
-                        $element.find('td.editable').on('blur',function(e){
-                            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
-                            if(data !== newData) {
-                                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
-                            }
-                        } );
-                    },100);
-                }
+                    if($element.hasClass('table-editable')) {
+                        $timeout(function(){
+                            console.log("editable table here");
+                            $element.find('td.editable').attr("contenteditable",true);
+                            $element.find('td.editable').on('blur',function(e){
+                                var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
+                                if(data !== newData) {
+                                    console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+                                }
+                            } );
+                        },100);
+                    }
 
                 //onClick handler function
-                function dataReloadClick() {
-                    $(this).load('components/tables-uber/dataColumn.json');
-                }
-
+                //function dataReloadClick(e) {
+                //    e.preventDefault();
+                //    //$(this).load('components/tables-uber/dataColumn.json');
+                //    $timeout(function(){
+                //        console.log("editable table here");
+                //        $element.find('td.editable').attr("contenteditable",true);
+                //        $element.find('td.editable').on('blur',function(e){
+                //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
+                //            if(data !== newData) {
+                //                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+                //            }
+                //        } );
+                //    },100)
+                //}
 
             }
         };
     });
-
-// ==================== old old code =============================
-
-//.directive('tableResponsiveColumns', function($timeout){
-//    // Runs during compile
-//    return {
-//        restrict: 'C',
-//        link: function($scope, $element, iAttrs, controller ) {
-//
-//            var tableData, table;
-//            if(iAttrs.tableData) {
-//                tableData = JSON.parse(iAttrs.tableData);
-//            } else {
-//                tableData = {
-//                    "ajax": "components/tables-uber/dataColumn.json",
-//                    'columnDefs': [{
-//                        'targets': 0,
-//                        'searchable':false,
-//                        'orderable':false,
-//                        'className': 'dt-body-center',
-//                        'render': function (data, type, full, meta){
-//                            return '<input type="checkbox">';
-//                        }
-//                    }],
-//                    "columns": [
-//
-//                        {
-//                            "data": "Company_name",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Solution_name",
-//                            "sClass":"editable"
-//                        },
-//
-//                        {
-//                            "data": "Solution_ID",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Owner",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Last_edited",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "List_price",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Customer_number",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Reference_number",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Quote_number",
-//                            "sClass":"editable"
-//                        }
-//                    ],
-//                    'order': [1, 'asc'],
-//                    'rowCallback': function(row, data, dataIndex){
-//                        // Get row ID
-//                        var rowId = data[0];
-//
-//                        // If row ID is in the list of selected row IDs
-//                        if($.inArray(rowId, rows_selected) !== -1){
-//                            $(row).find('input[type="checkbox"]').prop('checked', true);
-//                            $(row).addClass('selected');
-//                        }
-//                    },
-//                    "pagingType": "simple",
-//                    "language": {
-//                        "paginate": {
-//                            "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
-//                            "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
-//                        }
-//                    }
-//
-//
-//                };
-//            }
-//
-//
-//            table = $element.DataTable(tableData);
-//
-//            if($element.hasClass('table-editable')) {
-//                $timeout(function(){
-//                    console.log("editable table here");
-//                    $element.find('td.editable').attr("contenteditable",true);
-//                    $element.find('td.editable').on('blur',function(e){
-//                        var newData = $(e.currentTarget).text(), data = table.cell( this ).data();
-//                        if(data !== newData) {
-//                            console.log( 'You edited '+data+' and changed it to '+newData,table);
-//                        }
-//                    } );
-//                },100);
-//            }
-//
-//
-//
-//        }
-//    };
-//});
-
-
-
-// ==================== old old code =============================
-
-//.directive('tableResponsiveColumns', function($timeout){
-//    // Runs during compile
-//    return {
-//        restrict: 'C',
-//        link: function($scope, $element, iAttrs, controller ) {
-//
-//            var tableData, table;
-//            if(iAttrs.tableData) {
-//                tableData = JSON.parse(iAttrs.tableData);
-//            } else {
-//                tableData = {
-//                    "ajax": "components/tables-uber/dataColumn.json",
-//
-//                    "columns": [
-//
-//                        {
-//                            "data": "Company_name",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Solution_name",
-//                            "sClass":"editable"
-//                        },
-//
-//                        {
-//                            "data": "Solution_ID",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Owner",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Last_edited",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "List_price",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Customer_number",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Reference_number",
-//                            "sClass":"editable"
-//                        },
-//                        {
-//                            "data": "Quote_number",
-//                            "sClass":"editable"
-//                        }
-//                    ],
-//                    //select: {
-//                    //    style:    'os',
-//                    //    selector: 'td:first-child'
-//                    //},
-//                    "pagingType": "simple",
-//                    "language": {
-//                        "paginate": {
-//                            "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
-//                            "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
-//                        }
-//                    }
-//
-//                };
-//            }
-//
-//
-//            table = $element.DataTable(tableData);
-//
-//            if($element.hasClass('table-editable')) {
-//                $timeout(function(){
-//                    console.log("editable table here");
-//                    $element.find('td.editable').attr("contenteditable",true);
-//                    $element.find('td.editable').on('blur',function(e){
-//                        var newData = $(e.currentTarget).text(), data = table.cell( this ).data();
-//                        if(data !== newData) {
-//                            console.log( 'You edited '+data+' and changed it to '+newData,table);
-//                        }
-//                    } );
-//                },100);
-//            }
-//
-//
-//
-//        }
-//    };
-//});
