@@ -28,40 +28,41 @@ angular.module('dellUiComponents')
                 leftMostTab = {},
                 nextTab,
                 maxTabHeight = 42,
-                changeHeight;
+                changeHeight,
+                initTabs = function() {
+
+                    _.each(tabObjs, function(t,index){
+                        totalWidth = totalWidth + $(t).width() +1;
+                        var tObj = {
+                            index: index,
+                            label: _.str.clean($(t).text()),
+                            offset: offsetTotal,
+                            width: $(t).width(),
+                            height: $(t).height(),
+                            visibility: 1
+                        };
+                       
+                        if(tabObjs.length === index + 1) {
+                           // console.log("offset total",offsetTotal, totalWidth, tObj);
+                        } else {
+                            offsetTotal = offsetTotal - tObj.width - 1;
+                        }
+                        if(tObj.height > maxTabHeight) {
+                           maxTabHeight = tObj.height;
+                        }
 
 
+                       // console.log(leftPosition,$element.css("left"));
 
-                _.each(tabObjs, function(t,index){
-                    totalWidth = totalWidth + $(t).width() +1;
-                    var tObj = {
-                        index: index,
-                        label: _.str.clean($(t).text()),
-                        offset: offsetTotal,
-                        width: $(t).width(),
-                        height: $(t).height(),
-                        visibility: 1
-                    };
-                   
-                    if(tabObjs.length === index + 1) {
-                       // console.log("offset total",offsetTotal, totalWidth, tObj);
-                    } else {
-                        offsetTotal = offsetTotal - tObj.width - 1;
-                    }
-                    if(tObj.height > maxTabHeight) {
-                       maxTabHeight = tObj.height;
-                    }
+                        if(totalWidth < containerWidth) {
+                            visibleIndex = index;
+                           // widthOfVisibleTabs = widthOfVisibleTabs + $(t).width() + 1;
+                        }
+                        tabs.push(tObj);
+                    });    
 
-
-                   // console.log(leftPosition,$element.css("left"));
-
-                    if(totalWidth < containerWidth) {
-                        visibleIndex = index;
-                       // widthOfVisibleTabs = widthOfVisibleTabs + $(t).width() + 1;
-                    }
-                    tabs.push(tObj);
-                });
-                function slideIt(backDirection,tabInContext) {
+                },
+                slideIt = function(backDirection,tabInContext) {
 
                     var indexOffset = 1,
                         isToofar;
@@ -101,10 +102,6 @@ angular.module('dellUiComponents')
                         },
                     0);
 
-                    // CHANGED THIS because it made the last click (last tab) go past the flush point
-                    //widthLeftToTheRight = widthLeftToTheRight + _.last(tabs).width;
-
-                    //CHANGED THIS to a condition that resets isToofar to false after tabs are set flush right, otherwise the first click on previous won't work
                     if (isToofar) {
                         isToofar = false;
                     } else if(tabInContext) {
@@ -116,10 +113,7 @@ angular.module('dellUiComponents')
                     }
 
                     if(leftMostTab) {
-
                         if(isToofar) {
-                            //CHANGED THIS to the simple equation I initially showed you on my whiteboard
-                            // leftPosition = leftMostTab.offset + containerWidth - widthLeftToTheRight  + 29 - tabs.length + 2;
                             leftPosition = (containerWidth - totalWidth) - 29;
                             $element.parent().find('> .next').addClass('disabled');
 
@@ -147,12 +141,14 @@ angular.module('dellUiComponents')
                         $element.parent().find('> .prev').removeClass('disabled');
                     }
 
-                }
+                };
 
+                initTabs();
                 
                 leftMostTab = tabs[0];
                 
                 $scope.isOverflow = totalWidth > containerWidth;
+
                 if($scope.isOverflow) {
 
                     //need to set up for xs breakpoint
@@ -171,7 +167,7 @@ angular.module('dellUiComponents')
                             $element.parent().find(".prev,.next").find("a").css("height", (h)+"px");
                             $element.parent().find(".prev,.next").find("a").css("padding-top", (h/2 - 8)+"px");                            
                         } else {
-                            $element.removeAttr("style");
+                            $element.removeAttr("style").width(totalWidth+200);
                             $element.find("> li").find("a").removeAttr("style");
                             $element.parent().find(".prev,.next").find("a").removeAttr("style");  
                         }
@@ -190,7 +186,7 @@ angular.module('dellUiComponents')
                         }
                     });
 
-                    $element.find('> li').on('click',function(e){
+                    tabObjs.on('click',function(e){
                         var t = {
                                 self: e.currentTarget,
                                 rightMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth,
