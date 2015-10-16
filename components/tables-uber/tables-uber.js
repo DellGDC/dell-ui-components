@@ -122,18 +122,19 @@ angular.module('dellUiComponents')
                     //        $(row).addClass('selected');
                     //    }
                     //},
-                    "pagingType": "simple",
-                    "language": {
-                        "paginate": {
-                            "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
-                            "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
+                    'pagingType': "simple",
+                    'language': {
+                        'paginate': {
+                            'next': "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
+                            'previous': "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
                         }
                     },
-                    "fnDrawCallback": function() {
+                    'fnDrawCallback': function() {
                         //bind the click handler script to the newly created elements held in the table
                         $('ul.pagination a').bind('click',dataReloadClick);
                         console.log('i was clicked');
-                    }
+                    },
+                    'responsive': true,
                 });
 
 
@@ -257,7 +258,7 @@ angular.module('dellUiComponents')
                                 console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
                             }
                         } );
-                    },100)
+                    },100);
                 }
 
             }
