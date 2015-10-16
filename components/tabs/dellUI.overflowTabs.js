@@ -12,10 +12,7 @@
         base.$el.data("dellUIoverflowTab", base);
         
         base.init = function(){
-
-            console.log('in base init',base);
             // Put your initialization code here
-            base.$el.parent().addClass("nav-tabs-overflow-container");
         };
         
         // Sample Function, Uncomment to use
