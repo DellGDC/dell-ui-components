@@ -60,7 +60,7 @@ angular.module('dellUiComponents')
                     "ajax": "components/tables-uber/dataColumn.json",
                     'columnDefs': [{
                         'targets': 0,
-                        'searchable':false,
+                        'searchable':true,
                         'orderable':false,
                         'className': 'dt-body-center',
                         'render': function (data, type, full, meta){
@@ -174,9 +174,9 @@ angular.module('dellUiComponents')
                 });
 
                 // Handle click on table cells with checkboxes
-                $('#table-uber').on('click', 'tbody td, thead th:first-child', function(e){
-                    $(this).parent().find('input[type="checkbox"]').trigger('click');
-                });
+                //$('#table-uber').on('click', 'tbody td, thead th:first-child', function(e){
+                //    $(this).parent().find('input[type="checkbox"]').trigger('click');
+                //});
 
 
                 // Handle click on "Select all" control
