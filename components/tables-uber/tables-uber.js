@@ -133,6 +133,9 @@ angular.module('dellUiComponents')
                         //bind the click handler script to the newly created elements held in the table
                         $('ul.pagination a').bind('click',dataReloadClick);
                         console.log('i was clicked');
+
+                        $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
+                        console.log('i was sorted');
                     },
                     'responsive': true,
                 });
