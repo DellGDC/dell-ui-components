@@ -1,5 +1,5 @@
 (function($){
-    $.dellUIoverflowTab = function(el){
+    $.dellUIoverflowTab = function(el,options){
         // To avoid scope issues, use 'base' instead of 'this'
         // to reference this class from internal events and functions.
         var base = this;
@@ -10,40 +10,47 @@
         
         // Add a reverse reference to the DOM object
         base.$el.data("dellUIoverflowTab", base);
-        
-        base.init = function(){
-            // Put your initialization code here
-        };
-        
-        // Sample Function, Uncomment to use
-        // base.functionName = function(paramaters){
-        // 
-        // };
-        
-        // Run initializer
-        base.init();
+
+    };
+
+    $.dellUIoverflowTab.defaultOptions = {
+        defaultHeight:42,
+        pagerWidth:29,
+        xsMax: 750,
+        smMin: 751,
+        smMax: 975,
+        mdMin: 974,
+        mdMax: 1141,
+        iconClasses: {
+            left:"glyphicon glyphicon-menu-left",
+            right:"glyphicon glyphicon-menu-right"
+        }
     };
     
+
     
-    $.fn.dellUIoverflowTab = function(){
+    $.fn.dellUIoverflowTab = function(options){
+        if(options) {
+            $.dellUIoverflowTab.defaultOptions = $.extend($.dellUIoverflowTab.defaultOptions, options);
+        }
+        
         return this.each(function(){
             (new $.dellUIoverflowTab(this));
-
-            // HAVE YOUR PLUGIN DO STUFF HERE
-            var element = $(this),
+            var options = $.dellUIoverflowTab.defaultOptions,
+                element = $(this),
                 containerWidth = element.parent().width(),
                 tabObjs = element.find('> li'),
                 tabs = [],
                 totalWidth = 0,
                 widthLeftToTheRight,
-                homePosition = 29,
-                offsetTotal = 29,
-                leftPosition = 29,
+                homePosition = options.pagerWidth,
+                offsetTotal = options.pagerWidth,
+                leftPosition = options.pagerWidth,
                 isHome = false,
                 isTooFar = false,
                 leftMostTab = {},
                 nextTab,
-                maxTabHeight = 42,
+                maxTabHeight = options.defaultHeight,
                 changeHeight,
                 breakpoint = function() {
                     var window_size = $(window).width(),
@@ -54,13 +61,13 @@
                             isLG: false
                         };        
                     switch(true) {
-                        case (window_size < 750):
+                        case (window_size < options.xsMax):
                             breakpoint.isXS = true;
                             break;
-                        case (window_size > 751 && window_size < 975):
+                        case (window_size > options.smMin && window_size < options.smMax):
                             breakpoint.isSM = true;
                             break;
-                        case (window_size > 974 && window_size < 1141):
+                        case (window_size > options.mdMin && window_size < options.mdMax):
                             breakpoint.isMD = true;
                             break;
                         default:
@@ -81,6 +88,8 @@
                             height: $(t).height(),
                             visibility: 1
                         };
+
+                        //visibility = 0: none 1: fully visible 2: partially visible
                        
                         if(tabObjs.length === index + 1) {
                         } else {
@@ -95,13 +104,17 @@
                     isOverflow = totalWidth > containerWidth;
                 },
                 slideIt = function(backDirection,tabInContext) {
-
                     var indexOffset = 1,
                         isToofar;
 
                     if(backDirection) {
                         indexOffset = -1;
+
+                    } else if(!tabInContext) {
+                        //If next is pressed what is the last visible tab? Set that as tabInContext
+                        console.log(">>>>>>>>> ",tabs,homePosition,leftPosition);
                     }
+
 
                     leftPosition = parseInt(element.css('left'));
 
@@ -173,13 +186,14 @@
                 };
 
             initTabs();
+
             if(isOverflow) { //this should already be overflow but in case it wasn't checked before it got fired
                 element.width(totalWidth+1); //add 1 so that it doesn't drop the last tab to a second line
                 element.css("left", homePosition+"px"); //compensates for the left arrow that will be added
 
                 element.parent().addClass('nav-tabs-overflow-container'); //css wrapper for styling
-                element.before('<div class="prev disabled"><a href="javascript:;"><i class="icon-ui-arrowleft"></i></a></div>'); //left arrow
-                element.after('<div class="next"><a href="javascript:;"><i class="icon-ui-arrowright"></i></a></div>'); //right arrow
+                element.before('<div class="prev disabled"><a href="javascript:;"><i class="'+options.iconClasses.left+'"></i></a></div>'); //left arrow
+                element.after('<div class="next"><a href="javascript:;"><i class="'+options.iconClasses.right+'"></i></a></div>'); //right arrow
                 
                 changeHeight = function(h){
                     if(h) {
@@ -195,7 +209,7 @@
                     }
                 };
 
-                if(maxTabHeight > 42 && !breakpoint().isXS) {
+                if(maxTabHeight > options.defaultHeight && !breakpoint().isXS) {
                     //$rootScope.bp is part of dell-ui-components angular module
                     changeHeight(maxTabHeight);
                 } else {
@@ -221,12 +235,12 @@
                             tabContainerOffset: $(e.currentTarget).parent()[0].offsetLeft,
                             index: $(e.currentTarget).index()
                         };
-                    if((t.tabContainerWidth - t.rightMostPoint) - t.tabContainerOffset < 30) {
+                    if((t.tabContainerWidth - t.rightMostPoint) - t.tabContainerOffset < options.pagerWidth + 1) {
                         if(t.index === tabs.length-1) {
                             // last tab, make sure it is not already at the end
-                            if(t.rightMostPoint + t.tabContainerOffset + 28 < t.tabContainerWidth) {
+                            if(t.rightMostPoint + t.tabContainerOffset + options.pagerWidth - 1 < t.tabContainerWidth) {
                                 slideIt(false,t); //false sets it as a forward move with the tab in context
-                            } else if(t.rightMostPoint + t.tabContainerOffset + 28 > t.tabContainerWidth) {
+                            } else if(t.rightMostPoint + t.tabContainerOffset + options.pagerWidth - 1 > t.tabContainerWidth) {
                                 t.lastTab = true; //let slide function that it is the last tab
                                 slideIt(false,t); //false sets it as a forward move with the tab in context
                             } //otherwise if it is right on the last spot dont slide it
@@ -249,13 +263,6 @@
                     }
                 });
             }
-
-
-
-
-			console.log('plugin place to do stuff',this, this.data);
-	
-		   // END DOING STUFF
 
         });
     };

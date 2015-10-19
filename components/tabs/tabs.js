@@ -11,7 +11,12 @@ angular.module('dellUiComponents')
                         totalWidth = totalWidth + $(t).width() +1;
                     });
                 if(totalWidth > containerWidth) {
-                    $element.dellUIoverflowTab();
+                    $element.dellUIoverflowTab({
+                        iconClasses: {
+                            left: "icon-ui-arrowleft",
+                            right: "icon-ui-arrowright"
+                        }
+                    });
                 }
             }
         };
