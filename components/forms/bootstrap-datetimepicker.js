@@ -334,7 +334,7 @@
             },
 
             getTemplate = function () {
-                var template = $('<div>').addClass('bootstrap-datetimepicker-widget dropdown-menu'),
+                var template = $('<div>').addClass('bootstrap-datetimepicker-widget dropdown-menu showPicker'),
                     dateView = $('<div>').addClass('datepicker').append(getDatePickerTemplate()),
                     // timeView = $('<div>').addClass('timepicker').append(getTimePickerTemplate()),
                     content = $('<ul>').addClass('list-unstyled'),
@@ -470,26 +470,22 @@
                     throw new Error('datetimepicker component should be placed within a relative positioned container');
                 }
 
+                widget.css({
+                    bottom: vertical === 'top' ? 'auto' : position.bottom + element.outerHeight() - (parent === element ? 100 : position.top),
+                    top: vertical === 'top' ? position.bottom + element.outerHeight() : 'auto',
+                    left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
+                    right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 266 : position.right)
+                });
 
-                if (window.resize > 1024) {
-                    if (window.width() > 1024) {  
-                        widget.css({
-                            bottom: vertical === 'bottom' ? 'auto' : position.top + element.outerHeight() - (parent === element ? 30 : position.bottom),
-                            top: vertical === 'top' ? position.top + element.outerHeight() : 'auto',
-                            left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
-                            right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 266 : position.right)
-                        });
-                    }
-
-                    if (window.width() <= 1024) {   
-                        widget.css({
-                            bottom: vertical === 'bottom' ? 'auto' : position.top + element.outerHeight() - (parent === element ? 200 : position.bottom),
-                            top: vertical === 'top' ? position.top + element.outerHeight() : 'auto',
-                            left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
-                            right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 0 : position.right)
-                        });
-                    }   
-                }
+                
+                if($(window).width() <= 1024){
+                    widget.css({
+                        bottom: vertical === 'top' ? 'auto' : position.bottom + element.outerHeight() - (parent === element ? 300 : position.bottom),
+                        top: vertical === 'top' ? position.top + element.outerHeight() : 'auto',
+                        left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
+                        right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 0 : position.right)
+                    }); 
+                }   
             },
             notifyEvent = function (e) {
                 if (e.type === 'dp.change' && ((e.date && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate))) {
@@ -2428,7 +2424,7 @@
             // pickSecond: 'Pick Second',
             // incrementSecond: 'Increment Second',
             // decrementSecond: 'Decrement Second',
-            togglePeriod: 'Toggle Period',
+            //togglePeriod: 'Toggle Period',
             // selectTime: 'Select Time'
         },
         useStrict: false,
@@ -2442,11 +2438,11 @@
         showClose: false,
         widgetPositioning: {
             horizontal: 'right',
-            vertical: 'bottom'
+            vertical: 'top'
         },
         widgetParent: null,
         ignoreReadonly: false,
-        keepOpen: false,
+        keepOpen: true,
         focusOnShow: true,
         inline: false,
         keepInvalid: false,

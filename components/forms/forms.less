@@ -880,7 +880,7 @@
 }
 .bootstrap-datetimepicker-widget {
     border: 1px solid @dell-gray-stroke;
-    top: -15px;
+    top: -2px;
     right: -20px;
 }
 
@@ -889,12 +889,55 @@
         display: none;
     }
 }
+.sr-only {display: none;}
+.bootstrap-datetimepicker-widget table {
+    td.today:before, td.today:after {
+      content: none;
+      display: block;
+      border: 1px solid #337ab7 !important;
+      position: inherit;
+      border-radius: 0;
+  }
+}
+.bootstrap-datetimepicker-widget table td.active.today {
+  content: none !important;
+  background-color: @dell-blue !important;
+  color: #ffffff;
+  text-shadow: 0;
+  border-radius: 0;
+}
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
+  content: none !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  text-shadow: 0;
+  box-shadow:inset 0px 0px 0px 1px @dell-blue;
+  -webkit-box-shadow:inset 0px 0px 0px 1px @dell-blue;
+  -moz-box-shadow:inset 0px 0px 0px 1px @dell-blue;
+  border-radius: 0;
+
+}
+.bootstrap-datetimepicker-widget table td.today {
+    content: none !important;
+    background-color: @dell-blue !important;
+    color: #ffffff;
+    text-shadow: 0;
+    border-radius: 0;
+}
+
+.showPicker {
+    display: block !important;
+    visibility: visible;
+}
+
+
+
 
 /* ---|--DatePicker media query for sm and xs--|--- */
 @media (max-width: @screen-sm-max) {
 
         .bootstrap-datetimepicker-widget {
-            top: 33px;
+            top: 100px;
             right: 0;
         }
 

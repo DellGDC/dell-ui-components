@@ -6,7 +6,7 @@
 @bs-datetimepicker-timepicker-font-size: 1.2em;
 @bs-datetimepicker-active-bg: @btn-primary-bg;
 @bs-datetimepicker-active-color: @btn-primary-color;
-@bs-datetimepicker-border-radius: @border-radius-base;
+/*@bs-datetimepicker-border-radius: @border-radius-base;*/
 @bs-datetimepicker-btn-hover-bg: @gray-lighter;
 @bs-datetimepicker-disabled-color: @gray-light;
 @bs-datetimepicker-alternate-color: @gray-light;
@@ -266,15 +266,10 @@
                 position: relative;
 
                 &:before {
-                    content: '';
-                    display: inline-block;
-                    border: solid transparent;
-                    border-width: 0 0 7px 7px;
-                    border-bottom-color: @bs-datetimepicker-active-bg;
-                    border-top-color: @bs-datetimepicker-secondary-border-color-rgba;
-                    position: absolute;
-                    bottom: 4px;
-                    right: 4px;
+                      background-color: @dell-blue;
+                      color: #000000;
+                      text-shadow: 0;
+                      border-radius: 0;
                 }
             }
 
