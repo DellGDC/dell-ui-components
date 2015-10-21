@@ -27,27 +27,19 @@
     width: 38em;
   }
 }
-/*
 .bootstrap-datetimepicker-widget.dropdown-menu:before,
 .bootstrap-datetimepicker-widget.dropdown-menu:after {
   content: none !important;
   display: none;
   position: inherit;
   border: 0 !important;
-}*/
-.bootstrap-datetimepicker-widget.dropdown-menu.bottom,
-.bootstrap-datetimepicker-widget.dropdown-menu.top {
-<<<<<<< .mine
-
-
-
-=======
-  &:before, :after {
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before,
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:after,
+.bootstrap-datetimepicker-widget.dropdown-menu.top:before,
+.bootstrap-datetimepicker-widget.dropdown-menu.top:after {
     display: none;
-  }
->>>>>>> .theirs
-  display: none;
-  border: 0 !important;
+    /*border: 0 !important;*/
 }
 /*.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
   border-left: 7px solid transparent;
@@ -201,7 +193,7 @@
   margin: -1px;
   padding: 0;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip: none /*rect(0, 0, 0, 0);*/
   border: 0;
   content: "Clear the picker";
 }
@@ -212,10 +204,10 @@
   margin: -1px;
   padding: 0;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip: none /*rect(0, 0, 0, 0);*/
   border: 1px solid @dell-blue;
   background: none 0 0 transparent;
-  content: "Set the date to today";
+  content: "";
 }
 .bootstrap-datetimepicker-widget .picker-switch {
   text-align: center;
@@ -327,7 +319,7 @@
 }
 .bootstrap-datetimepicker-widget table td.today:before {
   /*content: '';*/
-  display: block;
+  display: none;
   border: solid #337ab7 !important;
   border-width: 0;
   border-bottom-color: #337ab7;

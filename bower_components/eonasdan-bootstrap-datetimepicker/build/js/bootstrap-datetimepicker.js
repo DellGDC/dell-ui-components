@@ -334,11 +334,11 @@
             },
 
             getTemplate = function () {
-                var template = $('<div>').addClass('bootstrap-datetimepicker-widget dropdown-menu showPicker'),
+                var template = $('<div>').addClass('bootstrap-datetimepicker-widget dropdown-menu'),
                     dateView = $('<div>').addClass('datepicker').append(getDatePickerTemplate()),
                     // timeView = $('<div>').addClass('timepicker').append(getTimePickerTemplate()),
                     content = $('<ul>').addClass('list-unstyled'),
-                    toolbar = $('<li>').addClass('picker-switch' + (options.collapse ? ' accordion-toggle' : '')).append(getToolbar());
+                    //toolbar = $('<li>').addClass('picker-switch' + (options.collapse ? ' accordion-toggle' : '')).append(getToolbar());
 
                 if (options.inline) {
                     template.removeClass('dropdown-menu');
@@ -359,7 +359,7 @@
                     template.append(
                         $('<div>').addClass('row')
                             .append(dateView.addClass('col-md-6'))
-                            // .append(timeView.addClass('col-md-6'))
+                            .append(timeView.addClass('col-md-6'))
                     );
                     if (options.toolbarPlacement === 'bottom') {
                         template.append(toolbar);
@@ -376,9 +376,9 @@
                 if (options.toolbarPlacement === 'default') {
                     content.append(toolbar);
                 }
-                // if (hasTime()) {
-                //     content.append($('<li>').addClass((options.collapse && hasDate() ? 'collapse' : '')).append(timeView));
-                // }
+                if (hasTime()) {
+                    content.append($('<li>').addClass((options.collapse && hasDate() ? 'collapse' : '')).append(timeView));
+                }
                 if (options.toolbarPlacement === 'bottom') {
                     content.append(toolbar);
                 }
@@ -429,11 +429,11 @@
 
                 // Top and bottom logic
                 if (vertical === '') {
-                    if (offset.top + widget.height() >= $(window).height() + $(window).scrollTop() &&
+                    if (offset.top + widget.height() * 1.5 >= $(window).height() + $(window).scrollTop() &&
                         widget.height() + element.outerHeight() < offset.top) {
                         vertical = 'top';
                     } else {
-                        vertical = 'top';
+                        vertical = 'bottom';
                     }
                 }
 
@@ -471,22 +471,13 @@
                 }
 
                 widget.css({
-                    bottom: vertical === 'top' ? 'auto' : position.bottom + element.outerHeight() - (parent === element ? 100 : position.top),
-                    top: vertical === 'top' ? position.bottom + element.outerHeight() : 'auto',
+                    top: vertical === 'top' ? 'auto' : position.top + element.outerHeight(),
+                    bottom: vertical === 'top' ? position.top + element.outerHeight() : 'auto',
                     left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
-                    right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 266 : position.right)
+                    right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 0 : position.left)
                 });
-
-                
-                if($(window).width() <= 1024){
-                    widget.css({
-                        bottom: vertical === 'top' ? 'auto' : position.bottom + element.outerHeight() - (parent === element ? 300 : position.bottom),
-                        top: vertical === 'top' ? position.top + element.outerHeight() : 'auto',
-                        left: horizontal === 'left' ? (parent === element ? 0 : position.left) : 'auto',
-                        right: horizontal === 'left' ? 'auto' : parent.outerWidth() - element.outerWidth() - (parent === element ? 0 : position.right)
-                    }); 
-                }   
             },
+
             notifyEvent = function (e) {
                 if (e.type === 'dp.change' && ((e.date && e.date.isSame(e.oldDate)) || (!e.date && !e.oldDate))) {
                     return;
@@ -2042,7 +2033,7 @@
 
             options.widgetParent = widgetParent;
             if (widget) {
-                // hide();
+                hide();
                 show();
             }
             return picker;
@@ -2263,7 +2254,7 @@
                 throw new TypeError('enabledHours() expects an array parameter');
             }
             options.enabledHours = indexGivenHours(hours);
-            options.disabledHours = true;
+            options.disabledHours = false;
             if (options.useCurrent && !options.keepInvalid) {
                 var tries = 0;
                 while (!isValid(date, 'h')) {
@@ -2390,13 +2381,13 @@
         disabledDates: false,
         enabledDates: false,
         icons: {
-            // time: 'glyphicon glyphicon-time',
-            date: 'icon-small-calendar',
+            time: 'glyphicon glyphicon-time',
+            date: 'glyphicon glyphicon-calendar',
             up: 'glyphicon glyphicon-chevron-up',
             down: 'glyphicon glyphicon-chevron-down',
-            previous: 'icon-ui-arrowleft',
-            next: 'icon-ui-arrowright',
-            //today: 'glyphicon glyphicon-screenshot',
+            previous: 'glyphicon glyphicon-chevron-left',
+            next: 'glyphicon glyphicon-chevron-right',
+            today: 'glyphicon glyphicon-screenshot',
             clear: 'glyphicon glyphicon-trash',
             close: 'glyphicon glyphicon-remove'
         },
@@ -2415,17 +2406,17 @@
             nextDecade: 'Next Decade',
             prevCentury: 'Previous Century',
             nextCentury: 'Next Century',
-            // pickHour: 'Pick Hour',
-            // incrementHour: 'Increment Hour',
-            // decrementHour: 'Decrement Hour',
-            // pickMinute: 'Pick Minute',
-            // incrementMinute: 'Increment Minute',
-            // decrementMinute: 'Decrement Minute',
-            // pickSecond: 'Pick Second',
-            // incrementSecond: 'Increment Second',
-            // decrementSecond: 'Decrement Second',
-            //togglePeriod: 'Toggle Period',
-            // selectTime: 'Select Time'
+            pickHour: 'Pick Hour',
+            incrementHour: 'Increment Hour',
+            decrementHour: 'Decrement Hour',
+            pickMinute: 'Pick Minute',
+            incrementMinute: 'Increment Minute',
+            decrementMinute: 'Decrement Minute',
+            pickSecond: 'Pick Second',
+            incrementSecond: 'Increment Second',
+            decrementSecond: 'Decrement Second',
+            togglePeriod: 'Toggle Period',
+            selectTime: 'Select Time'
         },
         useStrict: false,
         sideBySide: false,
@@ -2438,11 +2429,11 @@
         showClose: false,
         widgetPositioning: {
             horizontal: 'right',
-            vertical: 'top'
+            vertical: 'bottom'
         },
         widgetParent: null,
         ignoreReadonly: false,
-        keepOpen: true,
+        keepOpen: false,
         focusOnShow: true,
         inline: false,
         keepInvalid: false,
@@ -2558,9 +2549,4 @@
         enabledHours: false,
         viewDate: false
     };
-
-
-
 }));
-
-
