@@ -839,7 +839,7 @@
         }
 
     }
-    .datepicker-days, .datepicker-months, .datepicker-years {
+    .datepicker-days, .datepicker-months, .datepicker-years, .datepicker-decades {
         thead tr:first-child th {
             border-radius: 0;
             &:hover {
@@ -852,7 +852,7 @@
                 background: none 0 0 @dell-blue !important;
                 color: #fff !important;
             }
-        .day, .month, .year {
+        .day, .month, .year, .decades {
             &:hover {
                 background: none 0 0 @dell-highlight-blue;
             }
@@ -899,14 +899,7 @@
       border-radius: 0;
   }
 }
-.bootstrap-datetimepicker-widget table td.active.today {
-  content: none !important;
-  background-color: @dell-blue !important;
-  color: #ffffff;
-  text-shadow: 0;
-  border-radius: 0;
-}
-.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
+.bootstrap-datetimepicker-widget table td.active:hover {
   content: none !important;
   background-color: #ffffff !important;
   color: #000000 !important;
@@ -917,16 +910,39 @@
   border-radius: 0;
 
 }
-.bootstrap-datetimepicker-widget table td.today {
+.bootstrap-datetimepicker-widget table td.active {
     content: none !important;
     background-color: @dell-blue !important;
     color: #ffffff;
     text-shadow: 0;
     border-radius: 0;
+
+}
+.bootstrap-datetimepicker-widget table td.active.today {
+  content: none !important;
+  background-color: @dell-blue !important;
+  color: #ffffff !important;
+  text-shadow: 0;
+  border-radius: 0;
+}
+.bootstrap-datetimepicker-widget table td.today {
+    /*content: none !important;
+    background-color: @dell-blue !important;
+    color: #ffffff;
+    text-shadow: 0;
+    border-radius: 0;*/
+    content: none !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    text-shadow: 0;
+    box-shadow:inset 0px 0px 0px 1px @dell-blue;
+    -webkit-box-shadow:inset 0px 0px 0px 1px @dell-blue;
+    -moz-box-shadow:inset 0px 0px 0px 1px @dell-blue;
+    border-radius: 0;
 }
 
 .showPicker {
-    display: block !important;
+    display: inline-block !important;
     visibility: visible;
 }
 
