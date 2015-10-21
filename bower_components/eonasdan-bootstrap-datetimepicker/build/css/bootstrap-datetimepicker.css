@@ -26,16 +26,17 @@
     width: 38em;
   }
 }
+/*
 .bootstrap-datetimepicker-widget.dropdown-menu:before,
 .bootstrap-datetimepicker-widget.dropdown-menu:after {
   content: '';
   display: block;
   position: absolute;
-}
+}*/
 .bootstrap-datetimepicker-widget.dropdown-menu.bottom,
 .bootstrap-datetimepicker-widget.dropdown-menu.top {
   &:before, :after {
-    display: done;
+    display: none;
   }
   display: none;
 }
