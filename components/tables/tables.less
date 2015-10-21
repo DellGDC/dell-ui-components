@@ -462,14 +462,27 @@ table.dataTable thead .sorting_desc_disabled {
 
 table.dataTable tbody tr.selected {
     //background-color: #B0BED9;
-    background: deeppink;
 }
 
 table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected {
     //background-color: #abb9d3;
     //background: #CCE5F1;
-    background: deeppink;
 }
+
+.table-striped tbody>tr:nth-child(odd).selected>td,
+.table-striped tbody>tr:nth-child(odd).selected>th,
+.table-striped tbody>tr:nth-child(even).selected>td,
+.table-striped tbody>tr:nth-child(even).selected>th{
+    background-color: #CCE5F1;
+    border-top: 0;
+}
+
+//table.dataTable.stripe tbody tr.odd.selected,
+//table.dataTable.display tbody tr.odd.selected {
+//    background: #CCE5F1;
+//}
+
+
 
 table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
     //background-color: #a9b7d1;
