@@ -43,7 +43,7 @@
 
 .glyphicon-calendar:before {
     content: "\e109";
-}*/
+}
 
 .btn {
     display: inline-block;
@@ -64,7 +64,7 @@
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
-    border-radius: 0; /*4px*/
+    border-radius: 0; 
 }
 
 .collapse {
@@ -79,7 +79,7 @@
     position: absolute;
     left: 0;
     z-index: 1000;
-    display: none;
+    display: inline-block;
     float: left;
     min-width: 160px;
     padding: 5px 0;
@@ -92,7 +92,7 @@
     background-clip: padding-box;
     border: 1px solid #ccc;
     border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: 0; /*4px*/
+    border-radius: 0;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
@@ -100,4 +100,4 @@
 .list-unstyled {
     padding-left: 0;
     list-style: none;
-}
+}*/

@@ -340,9 +340,9 @@
                     content = $('<ul>').addClass('list-unstyled'),
                     //toolbar = $('<li>').addClass('picker-switch' + (options.collapse ? ' accordion-toggle' : '')).append(getToolbar());
 
-                if (options.inline) {
-                    template.removeClass('dropdown-menu');
-                }
+                // if (options.inline) {
+                //     template.removeClass('dropdown-menu');
+                // }
 
                 if (use24Hours) {
                     template.addClass('usetwentyfour');

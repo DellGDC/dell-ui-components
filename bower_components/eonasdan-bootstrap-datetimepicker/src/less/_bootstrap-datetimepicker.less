@@ -38,9 +38,10 @@
         }
 
         &:before, &:after {
-            content: '';
+            content: none;
             display: inline-block;
             position: absolute;
+            border: 0 !important;
         }
 
         /*&.bottom {
@@ -66,7 +67,8 @@
             &:before {
                 border-left: 7px solid transparent;
                 border-right: 7px solid transparent;
-                border-top: 7px solid @bs-datetimepicker-secondary-border-color;
+                
+                : 7px solid @bs-datetimepicker-secondary-border-color;
                 border-top-color: @bs-datetimepicker-secondary-border-color-rgba;
                 bottom: -7px;
                 left: 6px;
@@ -159,7 +161,7 @@
 
     .btn[data-action="today"]::after {
         .sr-only();
-        content: "Set the date to today";
+        content: none;
     }
 
     .picker-switch {
@@ -167,7 +169,7 @@
 
         &::after {
             .sr-only();
-            content: "Toggle Date and Time Screens";
+            content: none;
         }
 
         td {
@@ -236,12 +238,12 @@
             line-height: 54px;
             width: 54px;
 
-            &.cw {
+            /*&.cw {
                 font-size: .8em;
                 height: 20px;
                 line-height: 20px;
                 color: @bs-datetimepicker-alternate-color;
-            }
+            }*/
 
             &.day {
                 height: 20px;
@@ -270,6 +272,7 @@
                       color: #000000;
                       text-shadow: 0;
                       border-radius: 0;
+                      border: 0 !important;
                 }
             }
 
@@ -345,3 +348,4 @@
         cursor: pointer;
     }
 }
+
