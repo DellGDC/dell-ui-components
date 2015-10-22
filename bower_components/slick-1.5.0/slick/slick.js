@@ -52,9 +52,13 @@
                 centerMode: false,
                 centerPadding: '50px',
                 cssEase: 'ease',
+                //customPaging: function(slider, i) {
+                //    return '<button type="button" data-role="none">' + (i + 1) + '</button>';
+                //},
                 customPaging: function(slider, i) {
-                    return '<button type="button" data-role="none">' + (i + 1) + '</button>';
+                    return '<button type="button" data-role="none"></button>';
                 },
+
                 dots: true,
                 dotsClass: 'slick-dots',
                 draggable: true,
