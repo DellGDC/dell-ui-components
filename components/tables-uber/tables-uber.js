@@ -112,16 +112,7 @@ angular.module('dellUiComponents')
                         }
                     ],
                     'order': [1, 'asc'],
-                    //'rowCallback': function(row, data, dataIndex){
-                    //    // Get row ID
-                    //    var rowId = data[0];
-                    //
-                    //    // If row ID is in the list of selected row IDs
-                    //    if($.inArray(rowId, rows_selected) !== -1){
-                    //        $(row).find('input[type="checkbox"]').prop('checked', true);
-                    //        $(row).addClass('selected');
-                    //    }
-                    //},
+                    "dom": 'C<"clear">lfrtip',
                     'pagingType': "simple",
                     'language': {
                         'paginate': {
