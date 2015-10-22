@@ -29,6 +29,10 @@
                     border-bottom:none;
                     a {
                         padding-left:10px;
+                        &:focus {
+                            outline:@white solid thin;
+                            text-decoration: none;
+                        }
                     }
                     &:first-child {
                         a {
@@ -37,10 +41,6 @@
                     }
                 }
             }
-        }
-        ul a:focus {
-            outline:@white solid thin;
-            text-decoration: none;
         }
     }
 }
