@@ -2,52 +2,45 @@
 
 #footer-html-example {
     .footer-menu {
-        position:relative;
-        font-size:11px;
-        font-weight:normal;
-        color: @white;
         border-top: 1px solid @dell-highlight-blue;
         border-bottom: 1px solid @dell-highlight-blue;
         background: @dell-blue;
-        ul.menu-links {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        ul {
+            margin:0 auto 0 auto;
             li {
-                margin:0;
-                padding:0;
+                border-bottom:1px solid #5eb0d7;
                 a {
                     display:block;
                     color: @white;
-                    text-decoration: none;
-                    padding: 12px 10px 10px 10px;
+                    padding: 12px 10px 10px 0;
                     &:hover {
                         color: @dell-dark-blue;
                     }
                 }
-            }
-            li:first-child {
-                a {
-                    padding-left:0;
+                &:last-child {
+                    border-bottom:none;
                 }
             }
         }
-        ul.menu-links a:focus {
+        @media (min-width: @screen-sm-min) {
+            ul {
+                li {
+                    display:inline-block;
+                    border-bottom:none;
+                    a {
+                        padding-left:10px;
+                    }
+                    &:first-child {
+                        a {
+                            padding-left:0;
+                        }
+                    }
+                }
+            }
+        }
+        ul.footer-menu-links a:focus {
             outline:@white solid thin;
             text-decoration: none;
-        }
-        ul.menu-links.mobile-lines {
-            li {
-                padding:0;
-                border-bottom:1px solid #5eb0d7;
-                a {
-                    padding: 12px 10px 10px 0;
-                }
-            }
-            li:last-child {
-                border-bottom:0 solid #5eb0d7;
-                float:left;
-            }
         }
     }
 }
