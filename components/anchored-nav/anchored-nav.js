@@ -9,6 +9,15 @@ angular.module('dellUiComponents')
             restrict: 'CA',
             link: function ($scope, $element, iAttrs, controller) {
 
+                function fixWidth() {
+                    $element.css('width',$element.parent().width()+1).css('left',$element.parent().offset().left+1/2);
+                }
+                fixWidth();
+
+                $(window).resize(function(){
+                    fixWidth();
+                });
+
 
                 var sticky = new Waypoint.Sticky({
                     element: $element,
@@ -18,7 +27,7 @@ angular.module('dellUiComponents')
 
                 var waypointObjs = $element.find('> li > a[href^=#]'),
                 waypoints=[];
-                //console.log(waypointObjs);
+                console.log(waypointObjs);
 
                 function clearActiveTab() {
                     $element.find('> li').removeClass('active');
@@ -52,26 +61,15 @@ angular.module('dellUiComponents')
                                 if(direction === 'up') {
                                     clearActiveTab();
                                     $("[href="+this.element.selector+"]").parent().addClass("active");
-                                //console.log('Enter triggered with direction ' + direction,this.element);
                                 }
-                            },
-                            entered: function(direction) {
-                                    //console.log('Entered triggered with direction ' + direction,this.element);
-                            },
-                            exit: function(direction) {
-                                
-                                //console.log('Exit triggered with direction ' + direction,this.element.selector);
                             },
                             exited: function(direction) {
                                 if(direction === 'down'){
                                     clearActiveTab();
                                     $("[href="+this.element.selector+"]").parent().next().addClass("active");
-                                    //console.log('Exited triggered with direction ' + direction,this.element);
                                 }
                             }
-                        });
-                        //console.log(targetWaypoint);
-                        
+                        });                       
                     });
 
                 }
@@ -80,7 +78,6 @@ angular.module('dellUiComponents')
         };
 
     });
-
 
 
 
