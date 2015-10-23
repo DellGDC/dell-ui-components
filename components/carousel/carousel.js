@@ -35,7 +35,7 @@ angular.module('dellUiComponents')
                                 slidesToShow: 4,
                                 slidesToScroll: 1,
                                 infinite: true,
-                                dots: true
+                                //dots: true
                             }
                         },
                         {

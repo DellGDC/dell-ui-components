@@ -1,56 +1,495 @@
-<section ng-controller="ratingsAndReviewsCtrl" id="ratings-and-reviews-html-example">
 
     <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section ng-controller="ratingsAndReviewsDemoCtrl" id="ratings-and-reviews-html-example">
+                    <h2>Ratings-And-Reviews Demo</h2>
 
-        <h2>Ratings-And-Reviews Demo</h2>
-        <div class="ratings-and-reviews">
-            <!-- example html for Ratings-And-Reviews component -->
-            <!-- data-user-rating is for the current user and accepts a whole number   -->
-            <!-- data-review-stars is for historical rating and an empty string ("[]") -->
-            <!-- for no ratings or a comma separated list ("[4,12,32,45,56]") used to  -->
-            <!-- calculate the rating and fill the histogram. Order is 1star to 5star  -->
-            <!-- data-histogram turns the histogram on ("yes") or off ("no")           -->
-            <h3 class="top-offset-40">Star Ratings (No Reviews)</h3>
-            <div class="ratingBlock" data-user-rating="0" data-review-stars='' data-histogram="no"></div>
-            <h3 class="top-offset-40">Star Ratings (Reviews)</h3>
-            <div class="ratingBlock" data-user-rating="5" data-review-stars='[2,6,12,34,7]' data-histogram="no"></div>
-            <h3 class="top-offset-40">Star Ratings (Reviews w/Histogram)</h3>
-            <div class="ratingBlock" data-user-rating="5" data-review-stars='[12,12,23,54,107]' data-histogram="yes"></div>
-        </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>Star Ratings (with reviews & no histogram)</h3>
+                            <!-- / Cut and Paste this section Star Ratings (with reviews & no histogram / -->
+                            <ul class="ratings">
+                                <li>
+                                    <ul class="rating-stars">
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-60"></i></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">200 ratings</a>
+                                </li>
+                                <li class="pull-right">
+                                    <a href="javascript:;">Write a review</a>
+                                </li>
+                            </ul>
+                            <!-- / End of cut and Paste this section Star Ratings (Reviews w/Histogram) / -->
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>Star Ratings (no reviews & no histogram)</h3>
+                            <!-- / Cut and Paste this section Star Ratings (with reviews & no histogram / -->
+                            <ul class="ratings">
+                                <li>
+                                    <ul class="rating-stars">
+                                        <li><i class="icon-small-favorite-0"></i></li>
+                                        <li><i class="icon-small-favorite-0"></i></li>
+                                        <li><i class="icon-small-favorite-0"></i></li>
+                                        <li><i class="icon-small-favorite-0"></i></li>
+                                        <li><i class="icon-small-favorite-0"></i></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">Write a review</a>
+                                </li>
+                            </ul>
+                            <!-- / End of cut and Paste this section Star Ratings (Reviews w/Histogram) / -->
+                        </div>
 
-        <!-- example html for Recommendation Ratio component -->
-        <div>
-        	<h3 class="top-offset-40">Recommendation Ratio</h3>
-        	<div class="recoRatio" data-recs="74" data-total="91"></div>
-        </div>
+                    </div>
 
-        <!-- example html for Customer Review component -->
-       	<div>
-		<h3 class="top-offset-40">Customer Review Quote</h3>
-        	<div class="revQuote" data-quote="When I received the XPS 16 I was so surprised at how thin, sharp, and stylish the XPS 16 was." data-attribution="jevester, September 24, 2009"></div>
-        </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3>Star Ratings (Reviews w/Histogram)</h3>
+                            <!-- / Cut and Paste this section Star Ratings (Reviews w/Histogram) / -->
+                            <ul class="ratings">
+                                <li>
+                                    <ul class="rating-stars">
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-60"></i></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">200 ratings</a>
+                                </li>
+                                <li class="pull-right">
+                                    <a href="javascript:;">Write a review</a>
+                                </li>
+                            </ul>
+                            <p>4.6 out of 5</p>
 
-        <!-- example html for Like / Dislike component -->
-        <div>
-			<h3 class="top-offset-40">Like / Dislike</h3>
-			Was this review helpful?
-        	<div class="likeDislike" data-yes="74" data-no="6"></div>
-        	<span class="text-blue">Report review</span>
-        	<div class="nonlink"></div>
-        </div>
+                            <div class="ratings-histogram">
+                                <div class="row">
+                                    <div class="col-xs-2">5&nbsp;stars</div>
+                                    <div class="col-xs-9">
+                                        <div class="progress">
+                                            <div class="bar" style="width: 51%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1">107</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">4&nbsp;stars</div>
+                                    <div class="col-xs-9">
+                                        <div class="progress">
+                                            <div class="bar" style="width: 25%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1">54</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">3&nbsp;stars</div>
+                                    <div class="col-xs-9">
+                                        <div class="progress">
+                                            <div class="bar" style="width: 11%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1">23</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">2&nbsp;stars</div>
+                                    <div class="col-xs-9">
+                                        <div class="progress">
+                                            <div class="bar" style="width: 5%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1">12</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2">1&nbsp;stars</div>
+                                    <div class="col-xs-9">
+                                        <div class="progress">
+                                            <div class="bar" style="width: 5%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1">12</div>
+                                </div>
+                            </div>
+                            <!-- / End of cut and Paste this section Star Ratings (Reviews w/Histogram) / -->
+                        </div>
+                    </div>
 
-        <!-- example html for Like / Dislike component -->
-        <div>
-			<h3 class="top-offset-40">Individual Ratings</h3>
-			<div class="ind-rating-block pull-left">
-				<div class="ratingBlock" data-user-rating="5" data-review-stars='[2,6,12,34,7]' data-histogram="no"></div>
-				<div class="individual-rating pull-left" data-rating-label="Features" data-user-rating="4.4"></div>
-				<div class="individual-rating pull-left" data-rating-label="Performance" data-user-rating="4.4"></div>
-				<div class="individual-rating pull-left" data-rating-label="Value" data-user-rating="5"></div>
-				<div class="individual-rating pull-left" data-rating-label="Customer Service" data-user-rating="4.1"></div>
-				<div class="individual-rating pull-left" data-rating-label="Operating System" data-user-rating="4.1"></div>
-			</div>
+                    <hr/>
+
+                    <h3>Recomendation Ratio</h3>
+                    <!-- / Cut and Paste this section Recomendation Ratio / -->
+                    <p>
+                        <strong>74</strong> out of <strong>91</strong> (81%) people would recommend this product to a friend.
+                    </p>
+                    <!-- / End of cut and Paste this section Recomendation Ratio / -->
+
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <h3>Customer Review Quote</h3>
+                            <!-- / Cut and Paste this section Customer Review Quote / -->
+                            <blockquote>
+                                <h3>When I received the XPS 16 I was so surprised at how thin, sharp, and stylish it was.
+                                </h3>
+                                <footer>jevester, September 24, 2009</footer>
+                            </blockquote>
+
+                            <!-- / End of cut and Paste this section Customer Review Quote / -->
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <h3>Customer review example</h3>
+                    <!-- / Cut and Paste this section Customer review example / -->
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div>
+                                <!-- individual ratings -->
+                                <ul class="ratings">
+                                    <li>
+                                        <ul class="rating-stars">
+                                            <li><i class="icon-small-favorite-100"></i></li>
+                                            <li><i class="icon-small-favorite-100"></i></li>
+                                            <li><i class="icon-small-favorite-100"></i></li>
+                                            <li><i class="icon-small-favorite-100"></i></li>
+                                            <li><i class="icon-small-favorite-60"></i></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;">200 ratings</a>
+                                    </li>
+                                    <li class="pull-right">
+                                        <a href="javascript:;">Write a review</a>
+                                    </li>
+                                </ul>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <p>
+                                            <span>Features</span>
+                                            <span class="pull-right">4.4/5</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <span>Performance</span>
+                                            <span class="pull-right">4.6/5</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <span>Value</span>
+                                            <span class="pull-right">5/5</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <span>Customer Service</span>
+                                            <span class="pull-right">3.9/5</span>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <span>Operating System</span>
+                                            <span class="pull-right">4.1/5</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- user profile -->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <i class="icon-large-useraccount"></i>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <h4>
+                                                <a href="javascript:;">
+                                                    Mark555
+                                                </a>
+                                            </h4>
+                                            <p>New York, NY</p>
+                                        </div>
+                                    </div>
+                                    <p>
+                                       <i class="icon-small-star text-gray-medium"></i> 
+                                       <a href="javascript:;">Featured review</a>
+                                       <br/>
+
+                                       <i class="icon-small-award text-gray-medium"></i> 
+                                       <a href="javascript:;">Verified buyer</a>
+                                    </p>
+                                    <p>
+                                        <strong>Duration of product use:</strong>
+                                        <br/>
+                                        less than a month
+                                    <p>
+                                        <strong>Level of expertise:</strong>
+                                        <br/>
+                                        Expert
+                                    <p>
+                                        <strong>I use my PC for:</strong>
+                                        <br/>
+                                        Everyday Computing
+                                    <p>
+                                        <strong>Your Lifestyle:</strong>
+                                        <br/>
+                                        Professional
+                                    </p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <h4>this is an awesome laptop!</h4>
+                            <p><small>June 4, 2015</small></p>
+                            <p>
+                                <i class="icon-sm-checkmark text-blue"></i> <strong>Yes, I would recommend this product</strong>
+                            </p>
+                            
+
+                            <p>I've had this dell laptop for 6 months and it is wonderful. Easy to set up and use with windows 8.1. And I'm not very computer savvy. I used dell support a couple of times but other than that, I did the rest on my own.</p>
+                            <p>The other day I was using my dell laptop at our kitchen island/breakfast bar and I had it plugged in to charge. My sandal caught the cord when I stood up and the laptop flew up in the air and 5 feet away, and proceeded to smash to the floor. The keyboard fell out as the laptop was in the open position. It landed in an inverted "V".</p>
+
+                            <p>Very, very frantic I picked it and the keyboard up. The laptop did not have a scratch on it. My husband re-plugged the ribbon wire for the keyboard and put it back in. 
+                                <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#review-example-more" aria-expanded="true">
+                                    <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>show more</span>
+                                </a>
+                            </p>
+
+
+                            <div id="review-example-more" class="collapse">
+                                <p>The laptop and keyboard worked. No chips. No cracks at all. It works perfectly.</p>
+
+                                <p>This is such a durable laptop. I cannot express the force that this laptop took. When I heard it land...I thought it was broken for sure.</p>
+
+                                <p>I would highly recommend it for home or office use. I'm so glad to have chosen the dell inspiron 5000.
+                                    <a href="javascript:;" data-toggle="collapse" data-target="#review-example-more" aria-expanded="true">
+                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangleup"></i>show less</span>
+                                    </a>
+
+                                </p>
+                            </div>
+                            <p>Was this review helpful?</p>
+                            <p>
+                                <button type="button" class="btn btn-default">Yes (74)</button>
+                                <button type="button" class="btn btn-default">No (6)</button>
+                            </p>
+                            <p><a href="javascript:;">Report review</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" title="" data-original-title="Connect with Facebook" class="icon-social-facebook"></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" title="" data-original-title="Connect with Twitter" class="icon-social-twitter"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- / end of cut and Paste this section Customer review / -->
+
+<!--
+
+                    <h3>Like / Dislike</h3>
+                    <!-- / Cut and Paste this section Like / Dislike / --
+                    <p>Was this review helpful?</p>
+                    <p>
+                        <button type="button" class="btn btn-default">Yes (74)</button>
+                        <button type="button" class="btn btn-default">No (6)</button>
+                    </p>
+                    <p><a href="javascript:;">Report review</p>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" title="" data-original-title="Connect with Facebook" class="icon-social-facebook"></a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" title="" data-original-title="Connect with Twitter" class="icon-social-twitter"></a>
+                        </li>
+                    </ul>
+                    <!-- / End of cut and Paste this section Like / Dislike / --
+
+                    <hr/>
+                    <h3>Individual Ratings</h3>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <!-- / Cut and Paste this section Individual Ratings / --
+                            <ul class="ratings">
+                                <li>
+                                    <ul class="rating-stars">
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-100"></i></li>
+                                        <li><i class="icon-small-favorite-60"></i></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">200 ratings</a>
+                                </li>
+                                <li class="pull-right">
+                                    <a href="javascript:;">Write a review</a>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <p>
+                                        <span>Features</span>
+                                        <span class="pull-right">4.4/5</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>Performance</span>
+                                        <span class="pull-right">4.6/5</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>Value</span>
+                                        <span class="pull-right">5/5</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>Customer Service</span>
+                                        <span class="pull-right">3.9/5</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>Operating System</span>
+                                        <span class="pull-right">4.1/5</span>
+                                    </p>
+                                </li>
+                            </ul>
+
+
+
+                            <!-- / End of cut and Paste this section Individual Ratings / --
+                        </div>
+                    </div>
+
+                    <hr/>
+                    <h3>User profile</h3>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <!-- / Cut and Paste this section Individual Ratings / --
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <i class="icon-large-useraccount"></i>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <h4>
+                                                <a href="javascript:;">
+                                                    Mark555
+                                                </a>
+                                            </h4>
+                                            <p>New York, NY</p>
+                                        </div>
+                                    </div>
+                                    <p>
+                                       <i class="icon-small-star text-gray-medium"></i> 
+                                       <a href="javascript:;">Featured review</a>
+                                    </p>
+                                    <p>
+                                       <i class="icon-small-award text-gray-medium"></i> 
+                                       <a href="javascript:;">Verified buyer</a>
+                                    </p>
+                                    <p>
+                                        <strong>Duration of product use:</strong>
+                                        <br/>
+                                        less than a month
+                                    <p>
+                                        <strong>Level of expertise:</strong>
+                                        <br/>
+                                        Expert
+                                    <p>
+                                        <strong>I use my PC for:</strong>
+                                        <br/>
+                                        Everyday Computing
+                                    <p>
+                                        <strong>Your Lifestyle:</strong>
+                                        <br/>
+                                        Professional
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- / End of cut and Paste this section Individual Ratings / --
+                        </div>
+                    </div>
+-->
+                    <hr/>
+
+            </div>
+            <div id="leftCol" class="col-md-3"  style="position: relative; top: 35px">
+                    <div id="side-bar-menu" class="hidden-sx">
+                        <div id="sidebar-component-parent" class="well">
+                            <h4 class="bottom-offset-0">Variations</h4>
+                            <ul class="list-unstyled sidebar-component nav">
+                                <li class="active">
+                                    <a class="component-item" href="#/" data-ga-event-action="" data-ga-event-category="variations1" data-ga-event-trigger="click">Variation 1</a>
+                                </li>
+                                <li class="active">
+                                    <a class="component-item" href="#/" data-ga-event-action="" data-ga-event-category="variations2" data-ga-event-trigger="click">Variation 2</a>
+                                </li>
+                                <li class="active">
+                                    <a class="component-item" href="#/" data-ga-event-action="" data-ga-event-category="variations3" data-ga-event-trigger="click">Variation 3</a>
+                                </li>
+                            </ul>
+                            <hr>
+                            <ul class="list-unstyled variations-list sidebar-component nav tab-links">
+                                <li>
+                                    <a class="component-item tab-link" href="#additional-notes" data-ga-event-action="link clicked" data-ga-event-category="additional notes" data-ga-event-trigger="click">Additional notes</a>
+                                </li>
+                                <li>
+                                    <a class="component-item tab-link" href="#archive-history" data-ga-event-action="link clicked" data-ga-event-category="archive history" data-ga-event-trigger="click">Archive history</a>
+                                </li>
+                            </ul>
+                            <hr>
+                            <div>
+                                <h4 class="bottom-offset-0">Tags</h4>
+                                <hr class="top-offset-5 bottom-offset-10">
+                                <ul class="list-inline">
+                                    <li>
+                                    <a class="btn btn-default btn-xs bottom-offset-5" href="#/" data-ga-event-action="validate" data-ga-event-category="tags" data-ga-event-trigger="click">Tag1</a>
+                                    </li>
+                                    <li>
+                                    <a class="btn btn-default btn-xs bottom-offset-5" href="#/" data-ga-event-action="validation" data-ga-event-category="tags" data-ga-event-trigger="click">Tag2</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br>
+                            <div class="well bold-12">
+                                <span class="text-blue icon-small-star"></span>
+                                <span>NOTE:  This is just for layout and Demo so the left column is laidout correct.</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
 
-</section>
