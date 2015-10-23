@@ -186,5 +186,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 #1.0.8 Changes to tables, breadcrumbs, show/hide, addition of contact drawer
 #1.0.9 Changes to carousel (dots and css), collapsible items (added content gallery), social media icons, edits to blockquote icon positioning, added contextual help component
 #1.0.10 Updated to dell-ui-bootstrap 1.2.2 which includes updates to icon font files and added icon-ui-handle
+#1.0.11 Updated tabs, anchored nav, ratings and reviews
 ...
 ```

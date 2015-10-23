@@ -10,7 +10,7 @@
 //            $.scrollTo($(e.currentTarget).attr('href'),800,  {axis:'y'});
 //
 //            //$.scrollTo($(e.currentTarget).attr('href'),800,  {axis:'y'});
-//            console.log('hello, I was clicked');
+//            //console.log('hello, I was clicked');
 //        });
 //    });
 //})(jQuery,Eve);

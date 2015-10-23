@@ -56536,7 +56536,49 @@ var KeyTable;
 }(window, document));
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
-});
+}).run([
+  '$rootScope',
+  function ($rootScope) {
+    $rootScope.safeApply = function (fn) {
+      var phase = $rootScope.$$phase;
+      if (phase === '$apply' || phase === '$digest') {
+        if (fn && typeof fn === 'function') {
+          fn();
+        }
+      } else {
+        this.$apply(fn);
+      }
+    };
+    function calculateBreakPointStatus() {
+      var window_size = $(window).width();
+      $rootScope.bp = {
+        isXS: false,
+        isSM: false,
+        isMD: false,
+        isLG: false
+      };
+      switch (true) {
+      case window_size < 750:
+        $rootScope.bp.isXS = true;
+        break;
+      case window_size > 751 && window_size < 975:
+        $rootScope.bp.isSM = true;
+        break;
+      case window_size > 974 && window_size < 1141:
+        $rootScope.bp.isMD = true;
+        break;
+      default:
+        $rootScope.bp.isLG = true;
+        break;
+      }
+    }
+    calculateBreakPointStatus();
+    $(window).resize(function () {
+      calculateBreakPointStatus();
+      $rootScope.safeApply();
+    });
+  }
+]);
 angular.module('dellUiComponents').directive('toggle', function () {
   return {
     restrict: 'A',
@@ -56572,14 +56614,15 @@ angular.module('dellUiComponents').directive('toggle', function () {
         $(element).on('click', function (event) {
           event.preventDefault();
           $(element).parents('.row-offcanvas').find('.tab-content').removeClass('active');
+          $(element).parents('.row-offcanvas').removeClass('active');
         });
         break;
       case 'tab':
         $(element).on('click', function (event) {
           event.preventDefault();
           $(this).tab('show');
-          console.log($(this).parents('.row-offcanvas').html());
           $(this).parents('.row-offcanvas').find('.tab-content').addClass('active');
+          $(this).parents('.row-offcanvas').addClass('active');
         });
         break;
       case 'collapse':
@@ -56639,24 +56682,25 @@ angular.module('dellUiComponents').directive('toggle', function () {
     }
   };
 });
-angular.module('dellUiComponents').directive('divHeightEqualize', [
-  '$timeout',
-  function ($timeout) {
-    // Runs during compile
-    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
-    return {
-      restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
-        $(function () {
-          $('.tab-center-equalize').matchHeight();
-        });
-        $(function () {
-          $('.tab-justify-equalize').matchHeight();
+angular.module('dellUiComponents').directive('navTabs', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, iAttrs, controller) {
+      var containerWidth = $element.parent().width(), tabObjs = $element.find('> li'), totalWidth = 0;
+      _.each(tabObjs, function (t, index) {
+        totalWidth = totalWidth + $(t).width() + 1;
+      });
+      if (totalWidth > containerWidth) {
+        $element.dellUIoverflowTab({
+          iconClasses: {
+            left: 'icon-ui-arrowleft',
+            right: 'icon-ui-arrowright'
+          }
         });
       }
-    };
-  }
-]);
+    }
+  };
+});
 //asumes that angular-ui-bootstrap is loaded
 angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition']).controller('CarouselController', [
   '$scope',
@@ -57336,7 +57380,7 @@ angular.module('dellUiComponents').directive('interactiveProgressBar', [
             if ($scope.fakeAnimationValue < 100) {
               $scope.fakeAnimationValue = $scope.fakeAnimationValue + 1;
               $scope.fakeAnimationSteps = Math.round($scope.fakeAnimationValue / 20);
-              console.log($scope.fakeAnimationValue, $scope.fakeAnimationSteps);
+              //console.log($scope.fakeAnimationValue,$scope.fakeAnimationSteps);
               $scope.stripeAnimate = 'active';
               $scope.fakeAnimation();
             }
@@ -57347,7 +57391,7 @@ angular.module('dellUiComponents').directive('interactiveProgressBar', [
           $scope.fakeAnimationId = undefined;
           $scope.stripeAnimate = '';
         };
-        console.log('hello timeout');
+        //console.log('hello timeout');
         $scope.resetFakeAnimation = function () {
           $scope.fakeAnimationValue = 0;
           $scope.fakeAnimation();
@@ -57431,7 +57475,7 @@ angular.module('dellUiComponents').directive('contentGallery', [
                   rowWidth = rowWidth + itemWidth;
                   if (rowWidth >= rowMaxWidth || index === allListItems.length - 1) {
                     if (targetFound) {
-                      console.log('Found target and inserting!!!');
+                      //console.log("Found target and inserting!!!");
                       $(i).after('<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">\xd7</button></span>' + content + '</div></li>');
                       $('.details-container').attr('display', 'block').slideDown(450);
                       $('body, li.details-container .close').on('click', function (e) {
@@ -57712,9 +57756,8 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
             'fnDrawCallback': function () {
               //bind the click handler script to the newly created elements held in the table
               $('ul.pagination a').bind('click', dataReloadClick);
-              console.log('i was clicked');
-              $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);
-              console.log('i was sorted');
+              //console.log('i was clicked');
+              $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);  //console.log('i was sorted');
             },
             'responsive': true
           });
@@ -57774,12 +57817,12 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
         //var inputTable = $element.DataTable(tableData);
         //if($element.hasClass('table-editable')) {
         //    $timeout(function(){
-        //        console.log("editable table here");
+        //        //console.log("editable table here");
         //        $element.find('td.editable').attr("contenteditable",true);
         //        $element.find('td.editable').on('blur',function(e){
         //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
         //            if(data !== newData) {
-        //                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+        //                //console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
         //            }
         //        } );
         //    },100);
@@ -57787,12 +57830,11 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
         var inputTable = $element.DataTable(tableData);
         if ($element.hasClass('table-editable')) {
           $timeout(function () {
-            console.log('editable table here');
+            //console.log("editable table here");
             $element.find('td.editable').attr('contenteditable', true);
             $element.find('td.editable').on('blur', function (e) {
               var newData = $(e.currentTarget).text(), data = inputTable.cell(this).data();
               if (data !== newData) {
-                console.log('You edited ' + data + ' and changed it to ' + newData, inputTable);
               }
             });
           }, 100);
@@ -57802,12 +57844,11 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
           e.preventDefault();
           //$(this).load('components/tables-uber/dataColumn.json');
           $timeout(function () {
-            console.log('editable table here');
+            //console.log("editable table here");
             $element.find('td.editable').attr('contenteditable', true);
             $element.find('td.editable').on('blur', function (e) {
               var newData = $(e.currentTarget).text(), data = inputTable.cell(this).data();
               if (data !== newData) {
-                console.log('You edited ' + data + ' and changed it to ' + newData, inputTable);
               }
             });
           }, 100);
@@ -57838,16 +57879,6 @@ angular.module('demo').config([
 angular.module('demo').run([
   '$rootScope',
   function ($rootScope) {
-    $rootScope.safeApply = function (fn) {
-      var phase = $rootScope.$$phase;
-      if (phase === '$apply' || phase === '$digest') {
-        if (fn && typeof fn === 'function') {
-          fn();
-        }
-      } else {
-        this.$apply(fn);
-      }
-    };
     _.str = s;
   }
 ]);
@@ -58042,7 +58073,7 @@ angular.module('demo').controller('announcementsPLayDemoCtrl', [
       }
       $scope.playHtmlCode = '<blockquote class="blockquote-' + $scope.sampleAnnouncementConfig.type + '"' + announcementId + '>' + iconHTML + titleText + bodyHTML + ctaLinks + '\n</blockquote>';
       $scope.renderingHTML = $sce.trustAsHtml($scope.playHtmlCode);
-      console.log('$scope.renderingHTML', $scope.renderingHTML);
+      //console.log("$scope.renderingHTML",$scope.renderingHTML);
       $scope.sampleSherpaConfig = _.clone($scope.sampleAnnouncementConfig);
       delete $scope.sampleSherpaConfig.body;
       delete $scope.sampleSherpaConfig.title;
@@ -58352,6 +58383,218 @@ angular.module('demo').controller('tablesPLayDemoCtrl', [
   function ($scope, $rootScope, $sce) {
   }
 ]);
+(function ($) {
+  $.dellUIoverflowTab = function (el, options) {
+    // To avoid scope issues, use 'base' instead of 'this'
+    // to reference this class from internal events and functions.
+    var base = this;
+    // Access to jQuery and DOM versions of element
+    base.$el = $(el);
+    base.el = el;
+    // Add a reverse reference to the DOM object
+    base.$el.data('dellUIoverflowTab', base);
+  };
+  $.dellUIoverflowTab.defaultOptions = {
+    defaultHeight: 42,
+    pagerWidth: 29,
+    xsMax: 750,
+    smMin: 751,
+    smMax: 975,
+    mdMin: 974,
+    mdMax: 1141,
+    iconClasses: {
+      left: 'glyphicon glyphicon-menu-left',
+      right: 'glyphicon glyphicon-menu-right'
+    }
+  };
+  $.fn.dellUIoverflowTab = function (options) {
+    if (options) {
+      $.dellUIoverflowTab.defaultOptions = $.extend($.dellUIoverflowTab.defaultOptions, options);
+    }
+    return this.each(function () {
+      new $.dellUIoverflowTab(this);
+      var options = $.dellUIoverflowTab.defaultOptions, element = $(this), containerWidth = element.parent().width(), tabObjs = element.find('> li'), tabs = [], totalWidth = 0, widthLeftToTheRight, homePosition = options.pagerWidth, offsetTotal = options.pagerWidth, leftPosition = options.pagerWidth, isHome = false, isTooFar = false, leftMostTab = {}, nextTab, maxTabHeight = options.defaultHeight, changeHeight, breakpoint = function () {
+          var window_size = $(window).width(), breakpoint = {
+              isXS: false,
+              isSM: false,
+              isMD: false,
+              isLG: false
+            };
+          switch (true) {
+          case window_size < options.xsMax:
+            breakpoint.isXS = true;
+            break;
+          case window_size > options.smMin && window_size < options.smMax:
+            breakpoint.isSM = true;
+            break;
+          case window_size > options.mdMin && window_size < options.mdMax:
+            breakpoint.isMD = true;
+            break;
+          default:
+            breakpoint.isLG = true;
+            break;
+          }
+          return breakpoint;
+        }, isOverflow = false, initTabs = function () {
+          _.each(tabObjs, function (t, index) {
+            totalWidth = totalWidth + $(t).width() + 1;
+            var tObj = {
+                index: index,
+                offset: offsetTotal,
+                width: $(t).width(),
+                height: $(t).height(),
+                visibility: 1
+              };
+            //visibility = 0: none 1: fully visible 2: partially visible
+            if (tabObjs.length === index + 1) {
+            } else {
+              offsetTotal = offsetTotal - tObj.width - 1;
+            }
+            if (tObj.height > maxTabHeight) {
+              maxTabHeight = tObj.height;
+            }
+            tabs.push(tObj);
+          });
+          leftMostTab = tabs[0];
+          isOverflow = totalWidth > containerWidth;
+        }, slideIt = function (backDirection, tabInContext) {
+          var indexOffset = 1, isToofar;
+          if (backDirection) {
+            indexOffset = -1;
+          } else if (!tabInContext) {
+          }
+          leftPosition = parseInt(element.css('left'));
+          if (!leftMostTab) {
+            leftMostTab = tabs[0];
+          }
+          isHome = homePosition === leftPosition;
+          if (backDirection) {
+            leftMostTab.visibility = 1;
+          } else {
+            leftMostTab.visibility = 0;
+          }
+          leftMostTab = tabs[leftMostTab.index + indexOffset];
+          widthLeftToTheRight = _.reduce(_.pluck(_.filter(tabs, function (tb) {
+            return tb.visibility === 1;
+          }), 'width'), function (memo, num) {
+            return memo + num;
+          }, 0);
+          if (isToofar) {
+            isToofar = false;
+          } else if (tabInContext) {
+            if (tabInContext.lastTab) {
+              isToofar = true;
+            }
+          } else {
+            isToofar = widthLeftToTheRight < containerWidth;
+          }
+          if (leftMostTab) {
+            if (isToofar) {
+              leftPosition = containerWidth - totalWidth - homePosition;
+              element.parent().find('> .next').addClass('disabled');
+            } else {
+              element.parent().find('> .next').removeClass('disabled');
+              leftPosition = leftMostTab.offset;
+            }
+            if (tabInContext && !isToofar) {
+              //if this the last tab on the right do nothing different
+              if (tabInContext.index !== tabs.length - 1) {
+                //not the last tab on the right need to adjust the left offset
+                leftPosition = tabInContext.tabContainerWidth - tabInContext.rightMostPoint - 60;
+              }
+            }
+            element.css('left', leftPosition + 'px');
+          } else {
+            isHome = true;
+          }
+          if (isHome) {
+            element.parent().find('> .prev').addClass('disabled');
+          } else {
+            element.parent().find('> .prev').removeClass('disabled');
+          }
+        };
+      initTabs();
+      if (isOverflow) {
+        //this should already be overflow but in case it wasn't checked before it got fired
+        element.width(totalWidth + 1);
+        //add 1 so that it doesn't drop the last tab to a second line
+        element.css('left', homePosition + 'px');
+        //compensates for the left arrow that will be added
+        element.parent().addClass('nav-tabs-overflow-container');
+        //css wrapper for styling
+        element.before('<div class="prev disabled"><a href="javascript:;"><i class="' + options.iconClasses.left + '"></i></a></div>');
+        //left arrow
+        element.after('<div class="next"><a href="javascript:;"><i class="' + options.iconClasses.right + '"></i></a></div>');
+        //right arrow
+        changeHeight = function (h) {
+          if (h) {
+            element.css('height', h + 2 + 'px');
+            //2 pixels account for top and bottom border
+            element.find('> li').find('a').css('height', h + 'px');
+            element.parent().find('.prev,.next').find('a').css('height', h + 'px');
+            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)                            
+          } else {
+            //if no height is provided everything is reset.
+            element.removeAttr('style').width(totalWidth + 200);
+            //removes height and resets width
+            element.find('> li').find('a').removeAttr('style');
+            //removes height
+            element.parent().find('.prev,.next').find('a').removeAttr('style');  //removes height
+          }
+        };
+        if (maxTabHeight > options.defaultHeight && !breakpoint().isXS) {
+          //$rootScope.bp is part of dell-ui-components angular module
+          changeHeight(maxTabHeight);
+        } else {
+          changeHeight();
+        }
+        //set up a window change watch here
+        $(window).resize(function () {
+          if (breakpoint().isXS) {
+            changeHeight();  //if it is mobile (xs) clear all height values
+          } else {
+            changeHeight(maxTabHeight);
+          }
+        });
+        tabObjs.on('click', function (e) {
+          var t = {
+              rightMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth,
+              leftMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth - $(e.currentTarget).width() - 2,
+              tabContainerWidth: $(e.currentTarget).parents('.nav-tabs-overflow-container').width(),
+              tabContainerOffset: $(e.currentTarget).parent()[0].offsetLeft,
+              index: $(e.currentTarget).index()
+            };
+          if (t.tabContainerWidth - t.rightMostPoint - t.tabContainerOffset < options.pagerWidth + 1) {
+            if (t.index === tabs.length - 1) {
+              // last tab, make sure it is not already at the end
+              if (t.rightMostPoint + t.tabContainerOffset + options.pagerWidth - 1 < t.tabContainerWidth) {
+                slideIt(false, t);  //false sets it as a forward move with the tab in context
+              } else if (t.rightMostPoint + t.tabContainerOffset + options.pagerWidth - 1 > t.tabContainerWidth) {
+                t.lastTab = true;
+                //let slide function that it is the last tab
+                slideIt(false, t);  //false sets it as a forward move with the tab in context
+              }  //otherwise if it is right on the last spot dont slide it
+            } else {
+              slideIt(false, t);  //false sets it as a forward move with the tab in context
+            }
+          } else if (t.leftMostPoint + t.tabContainerOffset < 0) {
+            slideIt(true);  //true sets it as a backward move
+          }
+        });
+        element.parent().find('> .prev').on('click', function (e) {
+          if (!$(e.currentTarget).hasClass('disabled')) {
+            slideIt(true);  //true sets it as a backward move
+          }
+        });
+        element.parent().find('> .next').on('click', function (e) {
+          if (!$(e.currentTarget).hasClass('disabled')) {
+            slideIt();  //no argument (false) sets it as a forward move
+          }
+        });
+      }
+    });
+  };
+}(jQuery));
 angular.module('demo').controller('tabsCtrl', [
   '$scope',
   '$rootScope',
@@ -58439,7 +58682,6 @@ angular.module('demo').controller('contentTeaserCtrl', [
     //this is for functionality related to demo code
     $scope.viewAll = {};
     $scope.$watch('viewAll', function (newValue) {
-      console.log(newValue);
     });
   }
 ]);
@@ -58725,7 +58967,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             wrapper: 'nav-tabs-affix'
           });
         var waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [];
-        console.log(waypointObjs);
+        //console.log(waypointObjs);
         function clearActiveTab() {
           $element.find('> li').removeClass('active');
         }
@@ -58746,25 +58988,20 @@ angular.module('dellUiComponents').directive('navAnchored', [
                 enter: function (direction) {
                   if (direction === 'up') {
                     clearActiveTab();
-                    $('[href=' + this.element.selector + ']').parent().addClass('active');
-                    console.log('Enter triggered with direction ' + direction, this.element);
+                    $('[href=' + this.element.selector + ']').parent().addClass('active');  //console.log('Enter triggered with direction ' + direction,this.element);
                   }
                 },
                 entered: function (direction) {
-                  console.log('Entered triggered with direction ' + direction, this.element);
                 },
                 exit: function (direction) {
-                  console.log('Exit triggered with direction ' + direction, this.element.selector);
                 },
                 exited: function (direction) {
                   if (direction === 'down') {
                     clearActiveTab();
-                    $('[href=' + this.element.selector + ']').parent().next().addClass('active');
-                    console.log('Exited triggered with direction ' + direction, this.element);
+                    $('[href=' + this.element.selector + ']').parent().next().addClass('active');  //console.log('Exited triggered with direction ' + direction,this.element);
                   }
                 }
-              });
-            console.log(targetWaypoint);
+              });  //console.log(targetWaypoint);
           });
         }
       }
@@ -58855,7 +59092,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/tables/demo-play-tables.html', '<section ng-controller=tablesPLayDemoCtrl id=tables-play-demo><div class=container><h2>Tables Builder</h2><div></div></div></section>');
     $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><h3 class="bottom-offset-5 top-offset-60">Data Tables - Simple</h3><div class=bottom-offset-60><div class=table-responsive><table class="table table-hover"><thead><tr><th>Date</th><th>Order</th><th>Product</th><th>Description</th><th>Status</th><th>Delivery</th><th>Tracking</th></tr></thead><tbody><tr><th scope=row>03/19/15</th><td>#42568</td><td><a href=javascript:;>Optiplex 9020</a></td><td>OptiPlex 9020-Dell\u2019s premium business-class desktop.</td><td>In process</td><td>03/22/15</td><td>TBD</td></tr><tr><th scope=row>03/22/15</th><td>#77475</td><td><a href=javascript:;>OptiPlex 7020</a></td><td>Mainstream performance, and advanced security and manageability.</td><td>Shipping</td><td>04/05/15</td><td><a href=javascript:;>#de467ft53s</a></td></tr><tr><th scope=row>03/24/15</th><td>#44356</td><td><a href=javascript:;>OptiPlex XE2</a></td><td>Long-term computing solution and highly durable OptiPlex XE2</td><td>Out for Delivery</td><td>04/08/15</td><td><a href=javascript:;>#0U812-90210s</a></td></tr></tbody></table></div></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Simple w/ optional zebra striping</h3><div class=bottom-offset-60><div class=table-responsive><table class="table table-hover table-striped"><thead><tr><th>&nbsp;</th><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:1</td><td><a href=javascript:;>value 1:2</a></td><td>value 1:3</td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td></tr><tr><th scope=row>2</th><td>value 2:1</td><td>value 2:2</td><td><a href=javascript:;>value 2:3</a></td><td>value 2:4</td><td>value 2:5</td><td>value 2:6</td></tr><tr><th scope=row>3</th><td>value 3:1</td><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td></tr></tbody></table></div></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Responsive Simple Table</h3><div class=bottom-offset-60><div id=responsive-simple-table><table class="table table-hover table-striped table-responsive"><thead data-rtcontainerbreakpoint=1000><tr><th>Date</th><th>Order</th><th>Product</th><th>Description</th><th>Status</th><th>Delivery</th><th>Tracking</th></tr></thead><tbody><tr><td scope=row><strong>03/19/15</strong></td><td>#42568</td><td><a href=javascript:;>Optiplex 9020</a></td><td>OptiPlex 9020-Dell\u2019s premium business-class desktop.</td><td>In process</td><td>03/22/15</td><td>TBD</td></tr><tr><td scope=row><strong>03/22/15</strong></td><td>#77475</td><td><a href=javascript:;>OptiPlex 7020</a></td><td>Mainstream performance, and advanced security and manageability.</td><td>Shipping</td><td>04/05/15</td><td><a href=javascript:;>#de467ft53s</a></td></tr><tr><td scope=row><strong>03/24/15</strong></td><td>#44356</td><td><a href=javascript:;>OptiPlex XE2</a></td><td>Long-term computing solution and highly durable OptiPlex XE2</td><td>Out for Delivery</td><td>04/08/15</td><td><a href=javascript:;>#0U812-90210s</a></td></tr></tbody></table></div></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Carousel (Fixed 1st Column)</h3><div class=bottom-offset-60><table class="table table-hover table-striped table-fixed-column table-column" cellspacing=0 width=100%><thead><tr><th>First name</th><th>Last name</th><th>Position</th><th>Office</th><th>Age</th><th>Start date</th><th>Salary</th><th>Extn.</th><th>E-mail</th></tr></thead><tbody><tr><td>Tiger</td><td>Nixon</td><td>System Architect</td><td>Edinburgh</td><td>61</td><td>2011/04/25</td><td>$320,800</td><td>5421</td><td>t.nixon@datatables.net</td></tr><tr><td>Garrett</td><td>Winters</td><td>Accountant</td><td>Tokyo</td><td>63</td><td>2011/07/25</td><td>$170,750</td><td>8422</td><td>g.winters@datatables.net</td></tr><tr><td>Ashton</td><td>Cox</td><td>Junior Technical Author</td><td>San Francisco</td><td>66</td><td>2009/01/12</td><td>$86,000</td><td>1562</td><td>a.cox@datatables.net</td></tr><tr><td>Cedric</td><td>Kelly</td><td>Senior Javascript Developer</td><td>Edinburgh</td><td>22</td><td>2012/03/29</td><td>$433,060</td><td>6224</td><td>c.kelly@datatables.net</td></tr><tr><td>Airi</td><td>Satou</td><td>Accountant</td><td>Tokyo</td><td>33</td><td>2008/11/28</td><td>$162,700</td><td>5407</td><td>a.satou@datatables.net</td></tr><tr><td>Brielle</td><td>Williamson</td><td>Integration Specialist</td><td>New York</td><td>61</td><td>2012/12/02</td><td>$372,000</td><td>4804</td><td>b.williamson@datatables.net</td></tr><tr><td>Herrod</td><td>Chandler</td><td>Sales Assistant</td><td>San Francisco</td><td>59</td><td>2012/08/06</td><td>$137,500</td><td>9608</td><td>h.chandler@datatables.net</td></tr><tr><td>Rhona</td><td>Davidson</td><td>Integration Specialist</td><td>Tokyo</td><td>55</td><td>2010/10/14</td><td>$327,900</td><td>6200</td><td>r.davidson@datatables.net</td></tr><tr><td>Colleen</td><td>Hurst</td><td>Javascript Developer</td><td>San Francisco</td><td>39</td><td>2009/09/15</td><td>$205,500</td><td>2360</td><td>c.hurst@datatables.net</td></tr><tr><td>Sonya</td><td>Frost</td><td>Software Engineer</td><td>Edinburgh</td><td>23</td><td>2008/12/13</td><td>$103,600</td><td>1667</td><td>s.frost@datatables.net</td></tr><tr><td>Jena</td><td>Gaines</td><td>Office Manager</td><td>London</td><td>30</td><td>2008/12/19</td><td>$90,560</td><td>3814</td><td>j.gaines@datatables.net</td></tr><tr><td>Quinn</td><td>Flynn</td><td>Support Lead</td><td>Edinburgh</td><td>22</td><td>2013/03/03</td><td>$342,000</td><td>9497</td><td>q.flynn@datatables.net</td></tr><tr><td>Charde</td><td>Marshall</td><td>Regional Director</td><td>San Francisco</td><td>36</td><td>2008/10/16</td><td>$470,600</td><td>6741</td><td>c.marshall@datatables.net</td></tr><tr><td>Haley</td><td>Kennedy</td><td>Senior Marketing Designer</td><td>London</td><td>43</td><td>2012/12/18</td><td>$313,500</td><td>3597</td><td>h.kennedy@datatables.net</td></tr><tr><td>Tatyana</td><td>Fitzpatrick</td><td>Regional Director</td><td>London</td><td>19</td><td>2010/03/17</td><td>$385,750</td><td>1965</td><td>t.fitzpatrick@datatables.net</td></tr><tr><td>Michael</td><td>Silva</td><td>Marketing Designer</td><td>London</td><td>66</td><td>2012/11/27</td><td>$198,500</td><td>1581</td><td>m.silva@datatables.net</td></tr><tr><td>Paul</td><td>Byrd</td><td>Chief Financial Officer (CFO)</td><td>New York</td><td>64</td><td>2010/06/09</td><td>$725,000</td><td>3059</td><td>p.byrd@datatables.net</td></tr><tr><td>Gloria</td><td>Little</td><td>Systems Administrator</td><td>New York</td><td>59</td><td>2009/04/10</td><td>$237,500</td><td>1721</td><td>g.little@datatables.net</td></tr><tr><td>Bradley</td><td>Greer</td><td>Software Engineer</td><td>London</td><td>41</td><td>2012/10/13</td><td>$132,000</td><td>2558</td><td>b.greer@datatables.net</td></tr><tr><td>Dai</td><td>Rios</td><td>Personnel Lead</td><td>Edinburgh</td><td>35</td><td>2012/09/26</td><td>$217,500</td><td>2290</td><td>d.rios@datatables.net</td></tr><tr><td>Jenette</td><td>Caldwell</td><td>Development Lead</td><td>New York</td><td>30</td><td>2011/09/03</td><td>$345,000</td><td>1937</td><td>j.caldwell@datatables.net</td></tr><tr><td>Yuri</td><td>Berry</td><td>Chief Marketing Officer (CMO)</td><td>New York</td><td>40</td><td>2009/06/25</td><td>$675,000</td><td>6154</td><td>y.berry@datatables.net</td></tr><tr><td>Caesar</td><td>Vance</td><td>Pre-Sales Support</td><td>New York</td><td>21</td><td>2011/12/12</td><td>$106,450</td><td>8330</td><td>c.vance@datatables.net</td></tr><tr><td>Doris</td><td>Wilder</td><td>Sales Assistant</td><td>Sidney</td><td>23</td><td>2010/09/20</td><td>$85,600</td><td>3023</td><td>d.wilder@datatables.net</td></tr><tr><td>Angelica</td><td>Ramos</td><td>Chief Executive Officer (CEO)</td><td>London</td><td>47</td><td>2009/10/09</td><td>$1,200,000</td><td>5797</td><td>a.ramos@datatables.net</td></tr><tr><td>Gavin</td><td>Joyce</td><td>Developer</td><td>Edinburgh</td><td>42</td><td>2010/12/22</td><td>$92,575</td><td>8822</td><td>g.joyce@datatables.net</td></tr><tr><td>Jennifer</td><td>Chang</td><td>Regional Director</td><td>Singapore</td><td>28</td><td>2010/11/14</td><td>$357,650</td><td>9239</td><td>j.chang@datatables.net</td></tr><tr><td>Brenden</td><td>Wagner</td><td>Software Engineer</td><td>San Francisco</td><td>28</td><td>2011/06/07</td><td>$206,850</td><td>1314</td><td>b.wagner@datatables.net</td></tr><tr><td>Fiona</td><td>Green</td><td>Chief Operating Officer (COO)</td><td>San Francisco</td><td>48</td><td>2010/03/11</td><td>$850,000</td><td>2947</td><td>f.green@datatables.net</td></tr><tr><td>Shou</td><td>Itou</td><td>Regional Marketing</td><td>Tokyo</td><td>20</td><td>2011/08/14</td><td>$163,000</td><td>8899</td><td>s.itou@datatables.net</td></tr><tr><td>Michelle</td><td>House</td><td>Integration Specialist</td><td>Sidney</td><td>37</td><td>2011/06/02</td><td>$95,400</td><td>2769</td><td>m.house@datatables.net</td></tr><tr><td>Suki</td><td>Burks</td><td>Developer</td><td>London</td><td>53</td><td>2009/10/22</td><td>$114,500</td><td>6832</td><td>s.burks@datatables.net</td></tr><tr><td>Prescott</td><td>Bartlett</td><td>Technical Author</td><td>London</td><td>27</td><td>2011/05/07</td><td>$145,000</td><td>3606</td><td>p.bartlett@datatables.net</td></tr><tr><td>Gavin</td><td>Cortez</td><td>Team Leader</td><td>San Francisco</td><td>22</td><td>2008/10/26</td><td>$235,500</td><td>2860</td><td>g.cortez@datatables.net</td></tr><tr><td>Martena</td><td>Mccray</td><td>Post-Sales support</td><td>Edinburgh</td><td>46</td><td>2011/03/09</td><td>$324,050</td><td>8240</td><td>m.mccray@datatables.net</td></tr><tr><td>Unity</td><td>Butler</td><td>Marketing Designer</td><td>San Francisco</td><td>47</td><td>2009/12/09</td><td>$85,675</td><td>5384</td><td>u.butler@datatables.net</td></tr><tr><td>Howard</td><td>Hatfield</td><td>Office Manager</td><td>San Francisco</td><td>51</td><td>2008/12/16</td><td>$164,500</td><td>7031</td><td>h.hatfield@datatables.net</td></tr><tr><td>Hope</td><td>Fuentes</td><td>Secretary</td><td>San Francisco</td><td>41</td><td>2010/02/12</td><td>$109,850</td><td>6318</td><td>h.fuentes@datatables.net</td></tr><tr><td>Vivian</td><td>Harrell</td><td>Financial Controller</td><td>San Francisco</td><td>62</td><td>2009/02/14</td><td>$452,500</td><td>9422</td><td>v.harrell@datatables.net</td></tr><tr><td>Timothy</td><td>Mooney</td><td>Office Manager</td><td>London</td><td>37</td><td>2008/12/11</td><td>$136,200</td><td>7580</td><td>t.mooney@datatables.net</td></tr><tr><td>Jackson</td><td>Bradshaw</td><td>Director</td><td>New York</td><td>65</td><td>2008/09/26</td><td>$645,750</td><td>1042</td><td>j.bradshaw@datatables.net</td></tr><tr><td>Olivia</td><td>Liang</td><td>Support Engineer</td><td>Singapore</td><td>64</td><td>2011/02/03</td><td>$234,500</td><td>2120</td><td>o.liang@datatables.net</td></tr><tr><td>Bruno</td><td>Nash</td><td>Software Engineer</td><td>London</td><td>38</td><td>2011/05/03</td><td>$163,500</td><td>6222</td><td>b.nash@datatables.net</td></tr><tr><td>Sakura</td><td>Yamamoto</td><td>Support Engineer</td><td>Tokyo</td><td>37</td><td>2009/08/19</td><td>$139,575</td><td>9383</td><td>s.yamamoto@datatables.net</td></tr><tr><td>Thor</td><td>Walton</td><td>Developer</td><td>New York</td><td>61</td><td>2013/08/11</td><td>$98,540</td><td>8327</td><td>t.walton@datatables.net</td></tr><tr><td>Finn</td><td>Camacho</td><td>Support Engineer</td><td>San Francisco</td><td>47</td><td>2009/07/07</td><td>$87,500</td><td>2927</td><td>f.camacho@datatables.net</td></tr><tr><td>Serge</td><td>Baldwin</td><td>Data Coordinator</td><td>Singapore</td><td>64</td><td>2012/04/09</td><td>$138,575</td><td>8352</td><td>s.baldwin@datatables.net</td></tr><tr><td>Zenaida</td><td>Frank</td><td>Software Engineer</td><td>New York</td><td>63</td><td>2010/01/04</td><td>$125,250</td><td>7439</td><td>z.frank@datatables.net</td></tr><tr><td>Zorita</td><td>Serrano</td><td>Software Engineer</td><td>San Francisco</td><td>56</td><td>2012/06/01</td><td>$115,000</td><td>4389</td><td>z.serrano@datatables.net</td></tr><tr><td>Jennifer</td><td>Acosta</td><td>Junior Javascript Developer</td><td>Edinburgh</td><td>43</td><td>2013/02/01</td><td>$75,650</td><td>3431</td><td>j.acosta@datatables.net</td></tr><tr><td>Cara</td><td>Stevens</td><td>Sales Assistant</td><td>New York</td><td>46</td><td>2011/12/06</td><td>$145,600</td><td>3990</td><td>c.stevens@datatables.net</td></tr><tr><td>Hermione</td><td>Butler</td><td>Regional Director</td><td>London</td><td>47</td><td>2011/03/21</td><td>$356,250</td><td>1016</td><td>h.butler@datatables.net</td></tr><tr><td>Lael</td><td>Greer</td><td>Systems Administrator</td><td>London</td><td>21</td><td>2009/02/27</td><td>$103,500</td><td>6733</td><td>l.greer@datatables.net</td></tr><tr><td>Jonas</td><td>Alexander</td><td>Developer</td><td>San Francisco</td><td>30</td><td>2010/07/14</td><td>$86,500</td><td>8196</td><td>j.alexander@datatables.net</td></tr><tr><td>Shad</td><td>Decker</td><td>Regional Director</td><td>Edinburgh</td><td>51</td><td>2008/11/13</td><td>$183,000</td><td>6373</td><td>s.decker@datatables.net</td></tr><tr><td>Michael</td><td>Bruce</td><td>Javascript Developer</td><td>Singapore</td><td>29</td><td>2011/06/27</td><td>$183,000</td><td>5384</td><td>m.bruce@datatables.net</td></tr><tr><td>Donna</td><td>Snider</td><td>Customer Support</td><td>New York</td><td>27</td><td>2011/01/25</td><td>$112,000</td><td>4226</td><td>d.snider@datatables.net</td></tr></tbody></table></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Responsive (Sorting )</h3><div class=bottom-offset-60><table id=example-rdt class="table table-striped table-hover responsive-data-table display" cellspacing=0 width=100%><thead><tr><th>First name</th><th>Last name</th><th>Position</th><th>Office</th><th>Age</th><th>Start date</th><th>Salary</th><th>Extn.</th></tr></thead><tbody><tr><td>Tiger</td><td>Nixon</td><td>System Architect</td><td>Edinburgh</td><td>61</td><td>2011/04/25</td><td>$320,800</td><td>5421</td></tr><tr><td>Garrett</td><td>Winters</td><td>Accountant</td><td>Tokyo</td><td>63</td><td>2011/07/25</td><td>$170,750</td><td>8422</td></tr><tr><td>Ashton</td><td>Cox</td><td>Junior Technical Author</td><td>San Francisco</td><td>66</td><td>2009/01/12</td><td>$86,000</td><td>1562</td></tr><tr><td>Cedric</td><td>Kelly</td><td>Senior Javascript Developer</td><td>Edinburgh</td><td>22</td><td>2012/03/29</td><td>$433,060</td><td>6224</td></tr><tr><td>Airi</td><td>Satou</td><td>Accountant</td><td>Tokyo</td><td>33</td><td>2008/11/28</td><td>$162,700</td><td>5407</td></tr><tr><td>Brielle</td><td>Williamson</td><td>Integration Specialist</td><td>New York</td><td>61</td><td>2012/12/02</td><td>$372,000</td><td>4804</td></tr><tr><td>Herrod</td><td>Chandler</td><td>Sales Assistant</td><td>San Francisco</td><td>59</td><td>2012/08/06</td><td>$137,500</td><td>9608</td></tr><tr><td>Rhona</td><td>Davidson</td><td>Integration Specialist</td><td>Tokyo</td><td>55</td><td>2010/10/14</td><td>$327,900</td><td>6200</td></tr><tr><td>Colleen</td><td>Hurst</td><td>Javascript Developer</td><td>San Francisco</td><td>39</td><td>2009/09/15</td><td>$205,500</td><td>2360</td></tr><tr><td>Sonya</td><td>Frost</td><td>Software Engineer</td><td>Edinburgh</td><td>23</td><td>2008/12/13</td><td>$103,600</td><td>1667</td></tr><tr><td>Jena</td><td>Gaines</td><td>Office Manager</td><td>London</td><td>30</td><td>2008/12/19</td><td>$90,560</td><td>3814</td></tr><tr><td>Quinn</td><td>Flynn</td><td>Support Lead</td><td>Edinburgh</td><td>22</td><td>2013/03/03</td><td>$342,000</td><td>9497</td></tr><tr><td>Charde</td><td>Marshall</td><td>Regional Director</td><td>San Francisco</td><td>36</td><td>2008/10/16</td><td>$470,600</td><td>6741</td></tr><tr><td>Haley</td><td>Kennedy</td><td>Senior Marketing Designer</td><td>London</td><td>43</td><td>2012/12/18</td><td>$313,500</td><td>3597</td></tr><tr><td>Tatyana</td><td>Fitzpatrick</td><td>Regional Director</td><td>London</td><td>19</td><td>2010/03/17</td><td>$385,750</td><td>1965</td></tr><tr><td>Michael</td><td>Silva</td><td>Marketing Designer</td><td>London</td><td>66</td><td>2012/11/27</td><td>$198,500</td><td>1581</td></tr><tr><td>Paul</td><td>Byrd</td><td>Chief Financial Officer (CFO)</td><td>New York</td><td>64</td><td>2010/06/09</td><td>$725,000</td><td>3059</td></tr><tr><td>Gloria</td><td>Little</td><td>Systems Administrator</td><td>New York</td><td>59</td><td>2009/04/10</td><td>$237,500</td><td>1721</td></tr><tr><td>Bradley</td><td>Greer</td><td>Software Engineer</td><td>London</td><td>41</td><td>2012/10/13</td><td>$132,000</td><td>2558</td></tr><tr><td>Dai</td><td>Rios</td><td>Personnel Lead</td><td>Edinburgh</td><td>35</td><td>2012/09/26</td><td>$217,500</td><td>2290</td></tr><tr><td>Jenette</td><td>Caldwell</td><td>Development Lead</td><td>New York</td><td>30</td><td>2011/09/03</td><td>$345,000</td><td>1937</td></tr><tr><td>Yuri</td><td>Berry</td><td>Chief Marketing Officer (CMO)</td><td>New York</td><td>40</td><td>2009/06/25</td><td>$675,000</td><td>6154</td></tr><tr><td>Caesar</td><td>Vance</td><td>Pre-Sales Support</td><td>New York</td><td>21</td><td>2011/12/12</td><td>$106,450</td><td>8330</td></tr><tr><td>Doris</td><td>Wilder</td><td>Sales Assistant</td><td>Sidney</td><td>23</td><td>2010/09/20</td><td>$85,600</td><td>3023</td></tr><tr><td>Angelica</td><td>Ramos</td><td>Chief Executive Officer (CEO)</td><td>London</td><td>47</td><td>2009/10/09</td><td>$1,200,000</td><td>5797</td></tr><tr><td>Gavin</td><td>Joyce</td><td>Developer</td><td>Edinburgh</td><td>42</td><td>2010/12/22</td><td>$92,575</td><td>8822</td></tr><tr><td>Jennifer</td><td>Chang</td><td>Regional Director</td><td>Singapore</td><td>28</td><td>2010/11/14</td><td>$357,650</td><td>9239</td></tr><tr><td>Brenden</td><td>Wagner</td><td>Software Engineer</td><td>San Francisco</td><td>28</td><td>2011/06/07</td><td>$206,850</td><td>1314</td></tr><tr><td>Fiona</td><td>Green</td><td>Chief Operating Officer (COO)</td><td>San Francisco</td><td>48</td><td>2010/03/11</td><td>$850,000</td><td>2947</td></tr><tr><td>Shou</td><td>Itou</td><td>Regional Marketing</td><td>Tokyo</td><td>20</td><td>2011/08/14</td><td>$163,000</td><td>8899</td></tr><tr><td>Michelle</td><td>House</td><td>Integration Specialist</td><td>Sidney</td><td>37</td><td>2011/06/02</td><td>$95,400</td><td>2769</td></tr><tr><td>Suki</td><td>Burks</td><td>Developer</td><td>London</td><td>53</td><td>2009/10/22</td><td>$114,500</td><td>6832</td></tr><tr><td>Prescott</td><td>Bartlett</td><td>Technical Author</td><td>London</td><td>27</td><td>2011/05/07</td><td>$145,000</td><td>3606</td></tr><tr><td>Gavin</td><td>Cortez</td><td>Team Leader</td><td>San Francisco</td><td>22</td><td>2008/10/26</td><td>$235,500</td><td>2860</td></tr><tr><td>Martena</td><td>Mccray</td><td>Post-Sales support</td><td>Edinburgh</td><td>46</td><td>2011/03/09</td><td>$324,050</td><td>8240</td></tr><tr><td>Unity</td><td>Butler</td><td>Marketing Designer</td><td>San Francisco</td><td>47</td><td>2009/12/09</td><td>$85,675</td><td>5384</td></tr><tr><td>Howard</td><td>Hatfield</td><td>Office Manager</td><td>San Francisco</td><td>51</td><td>2008/12/16</td><td>$164,500</td><td>7031</td></tr><tr><td>Hope</td><td>Fuentes</td><td>Secretary</td><td>San Francisco</td><td>41</td><td>2010/02/12</td><td>$109,850</td><td>6318</td></tr><tr><td>Vivian</td><td>Harrell</td><td>Financial Controller</td><td>San Francisco</td><td>62</td><td>2009/02/14</td><td>$452,500</td><td>9422</td></tr><tr><td>Timothy</td><td>Mooney</td><td>Office Manager</td><td>London</td><td>37</td><td>2008/12/11</td><td>$136,200</td><td>7580</td></tr><tr><td>Jackson</td><td>Bradshaw</td><td>Director</td><td>New York</td><td>65</td><td>2008/09/26</td><td>$645,750</td><td>1042</td></tr><tr><td>Olivia</td><td>Liang</td><td>Support Engineer</td><td>Singapore</td><td>64</td><td>2011/02/03</td><td>$234,500</td><td>2120</td></tr><tr><td>Bruno</td><td>Nash</td><td>Software Engineer</td><td>London</td><td>38</td><td>2011/05/03</td><td>$163,500</td><td>6222</td></tr><tr><td>Sakura</td><td>Yamamoto</td><td>Support Engineer</td><td>Tokyo</td><td>37</td><td>2009/08/19</td><td>$139,575</td><td>9383</td></tr><tr><td>Thor</td><td>Walton</td><td>Developer</td><td>New York</td><td>61</td><td>2013/08/11</td><td>$98,540</td><td>8327</td></tr><tr><td>Finn</td><td>Camacho</td><td>Support Engineer</td><td>San Francisco</td><td>47</td><td>2009/07/07</td><td>$87,500</td><td>2927</td></tr><tr><td>Serge</td><td>Baldwin</td><td>Data Coordinator</td><td>Singapore</td><td>64</td><td>2012/04/09</td><td>$138,575</td><td>8352</td></tr><tr><td>Zenaida</td><td>Frank</td><td>Software Engineer</td><td>New York</td><td>63</td><td>2010/01/04</td><td>$125,250</td><td>7439</td></tr><tr><td>Zorita</td><td>Serrano</td><td>Software Engineer</td><td>San Francisco</td><td>56</td><td>2012/06/01</td><td>$115,000</td><td>4389</td></tr><tr><td>Jennifer</td><td>Acosta</td><td>Junior Javascript Developer</td><td>Edinburgh</td><td>43</td><td>2013/02/01</td><td>$75,650</td><td>3431</td></tr><tr><td>Cara</td><td>Stevens</td><td>Sales Assistant</td><td>New York</td><td>46</td><td>2011/12/06</td><td>$145,600</td><td>3990</td></tr><tr><td>Hermione</td><td>Butler</td><td>Regional Director</td><td>London</td><td>47</td><td>2011/03/21</td><td>$356,250</td><td>1016</td></tr><tr><td>Lael</td><td>Greer</td><td>Systems Administrator</td><td>London</td><td>21</td><td>2009/02/27</td><td>$103,500</td><td>6733</td></tr><tr><td>Jonas</td><td>Alexander</td><td>Developer</td><td>San Francisco</td><td>30</td><td>2010/07/14</td><td>$86,500</td><td>8196</td></tr><tr><td>Shad</td><td>Decker</td><td>Regional Director</td><td>Edinburgh</td><td>51</td><td>2008/11/13</td><td>$183,000</td><td>6373</td></tr><tr><td>Michael</td><td>Bruce</td><td>Javascript Developer</td><td>Singapore</td><td>29</td><td>2011/06/27</td><td>$183,000</td><td>5384</td></tr><tr><td>Donna</td><td>Snider</td><td>Customer Support</td><td>New York</td><td>27</td><td>2011/01/25</td><td>$112,000</td><td>4226</td></tr></tbody></table></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Responsive (Complex)</h3><div class=bottom-offset-60><table id=example-complex class="table table-striped table-hover table-complex display" cellspacing=0 width=100%><thead><tr><th></th><th>Name</th><th>Position</th><th>Office</th><th>Salary</th></tr></thead></table></div></div></section>');
     $templateCache.put('components/tabs/demo-play-tabs.html', '<section ng-controller=tabsPLayDemoCtrl id=tabs-play-demo><div class=container><h2>Tabs Builder</h2><div></div></div></section>');
-    $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs"><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages <i class="icon-ui-arrowright visible-xs-block"></i></a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings <i class="icon-ui-arrowright visible-xs-block"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</div></div><div role=tabpanel class="tab-pane fade" id=profile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. Vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</div></div><div role=tabpanel class="tab-pane fade" id=messages><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</div></div><div role=tabpanel class="tab-pane fade" id=settings><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</div></div></div></div></div><div class=row><h3 class="col-xs-12 top-offset-60">Tabs <small>(justified)</small></h3></div><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#long-example aria-controls=long-example role=tab data-toggle=tab>Example to show the auto adjusted tab height. <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#automobile aria-controls=Automobile role=tab data-toggle=tab>Automobile<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#boats aria-controls=Boats role=tab data-toggle=tab>Boats<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#planes aria-controls=Planes role=tab data-toggle=tab>Planes<i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=long-example><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Long example Aute gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div><div role=tabpanel class="tab-pane fade" id=automobile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Automobile magna biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div><div role=tabpanel class="tab-pane fade" id=boats><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Boats nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div><div role=tabpanel class="tab-pane fade" id=planes><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Planes biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div><div class=row><h3 class="col-xs-12 top-offset-60">Tabs <small>(centered)</small></h3></div><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-centered" role=tablist><li role=presentation class=active><a href=#inspiron role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Inspiron Laptops</h4><p class=text-gray-dark>For home and home office</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#latitude role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Latitude Laptops</h4><p class=text-gray-dark>For business-class security and reliability</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#vostro role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Vostro Laptops</h4><p class=text-gray-dark>For small business computing</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#XPS role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>XPS Laptops</h4><p class=text-gray-dark>For the ultimate experience</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#precision role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Dell Precision Mobile Workstation\'s</h4><p class=text-gray-dark>For professional creators</p><i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=inspiron><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Inspiron gluten-free freegan, elit odio assumenda bespoke sapiente Shoreditch in hashtag. Actually semiotics sed High Life retro, narwhal ugh try-hard pop-up PBR&B fap PBR paleo fanny pack aliquip. Direct trade occaecat McSweeney\'s aute tattooed voluptate.</div></div><div role=tabpanel class="tab-pane fade" id=latitude><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Latitude biodiesel lomo, fap meh messenger bag fingerstache fashion axe. Vinyl art party Marfa assumenda, pariatur locavore sartorial chillwave High Life laborum Williamsburg flannel whatever.</div></div><div role=tabpanel class="tab-pane fade" id=vostro><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Vostro nisi officia Kickstarter Portland, Tumblr Wes Anderson shabby chic cardigan enim actually 90\'s American Apparel assumenda four dollar toast.</div></div><div role=tabpanel class="tab-pane fade" id=XPS><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>XPS biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div><div role=tabpanel class="tab-pane fade" id=precision><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><div class=col-xs-12>Precision biodiesel artisan, proident Vice fugiat lo-fi incididunt sartorial ullamco heirloom asymmetrical assumenda irony salvia. Ex twee health goth assumenda flannel chia.</div></div></div></div></div></div></section>');
+    $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs"><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings <i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</p></div><div role=tabpanel class="tab-pane fade" id=profile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</p></div><div role=tabpanel class="tab-pane fade" id=messages><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</p></div><div role=tabpanel class="tab-pane fade" id=settings><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</p></div></div></div></div><hr><h3>Tabs <small>(overflow: more tabs than the container width can handle)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs" id=overflow-tabs-example><li role=presentation class=active><a href=#overflow-1 aria-controls=home role=tab data-toggle=tab>Home <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-2 aria-controls=profile role=tab data-toggle=tab>Profile <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-3 aria-controls=messages role=tab data-toggle=tab>Messages <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-4 aria-controls=settings role=tab data-toggle=tab>Settings <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-5 aria-controls=more-stuff role=tab data-toggle=tab>Sed at sapien turpis <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-6 aria-controls=even-more-stuff role=tab data-toggle=tab>Nulla iaculis rhoncus <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-7 aria-controls=too-much-stuff role=tab data-toggle=tab>Curabitur eleifend <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-8 aria-controls=way-too-much-stuff role=tab data-toggle=tab>Sociis natoque penatibus <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-9 aria-controls=absolutely-way-too-much-stuff role=tab data-toggle=tab>Morbi sed sagittis puru <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-10 aria-controls=this-needs-to-stop role=tab data-toggle=tab>Nam sed velit vel tortor suscipit egestas <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-11 aria-controls=seriously-stop role=tab data-toggle=tab>Etiam tincidunt ut<br>ante sed ultrices <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-12 aria-controls=ok-done role=tab data-toggle=tab>Sed condimentum interdum est nec imperdiet <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-13 aria-controls=ok-done role=tab data-toggle=tab>Sed quis egestas libero <i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=overflow-1><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-2><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-3><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-4><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-5><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Sed at sapien turpis. Ut at nulla eget ligula facilisis feugiat. Mauris egestas erat tortor, sit amet blandit enim sollicitudin eu. Curabitur malesuada metus est, vel bibendum tortor mollis id. Nunc efficitur non quam quis porttitor. Nam odio tellus, efficitur et suscipit a, rutrum quis magna. Fusce luctus leo ut justo fringilla, in pellentesque nisl fringilla. Aliquam ullamcorper ex et nunc egestas, eget venenatis magna varius. Morbi in tortor eu quam ullamcorper porta sed at nisi. Sed sed sapien eros. Praesent rutrum purus ut libero feugiat cursus. Fusce in justo lorem. Phasellus consequat felis sapien, sit amet tempor mi hendrerit sed. Nullam nulla eros, condimentum quis elit tristique, convallis blandit sem.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-6><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Nulla iaculis rhoncus lacus ac dictum. Aenean ut sem mi. Quisque nec sapien porta, iaculis justo eu, feugiat mi. Proin vel tellus in nulla pretium dignissim sit amet pulvinar justo. Donec ac tempus eros. Morbi pretium turpis diam, id imperdiet nibh tempor sed. In scelerisque eros quis ultricies hendrerit. Aenean aliquam ante sed metus rhoncus, eget ornare libero imperdiet. Nam erat nunc, vestibulum vel lacinia nec, ultrices nec justo. Curabitur interdum massa leo, vel tempor velit accumsan quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris felis augue, porttitor ut lacinia id, volutpat at lorem. Phasellus accumsan vestibulum odio, sit amet elementum ex rhoncus eu.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-7><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Curabitur eleifend, ligula sed commodo imperdiet, odio quam pellentesque nulla, ornare ullamcorper lorem augue vel sapien. Ut pretium, ligula eu elementum semper, ipsum dui auctor eros, eget tincidunt est arcu nec arcu. Sed sapien odio, mollis et elit in, dapibus viverra orci. Duis nec lacus ut libero molestie bibendum at at justo. Integer blandit massa nec elit aliquet, nec commodo metus semper. Donec lectus tortor, dapibus eu sodales at, dictum a nibh. Duis in justo et nibh placerat sodales in eget magna.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-8><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sit amet eros egestas, rhoncus enim suscipit, aliquam leo. Vestibulum non porta risus. Phasellus sit amet mattis purus. Aenean arcu mi, consequat vel faucibus et, tincidunt ut lectus. Curabitur eget tincidunt augue. Praesent id pellentesque elit. Ut ultricies, ligula quis faucibus finibus, dolor massa fringilla eros, ac porttitor odio nisl at enim. Nullam condimentum lobortis massa nec pellentesque. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-9><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Morbi sed sagittis purus. Pellentesque pretium tortor eget aliquam faucibus. Sed vestibulum scelerisque consequat. Maecenas commodo pellentesque auctor. Proin sed eros sit amet felis condimentum maximus. Quisque in nibh lacinia elit consectetur ultrices nec et dolor. Fusce tempus nisi vitae lectus accumsan sollicitudin. Donec non tempus erat. Aliquam semper eleifend ornare. Nulla elementum dignissim libero sit amet tincidunt. Ut mattis mi neque, vel fermentum enim elementum vel. Vivamus lobortis congue massa a hendrerit. Morbi sed aliquam mauris, non ultrices ipsum.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-10><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Nam sed velit vel tortor suscipit egestas. Vestibulum lobortis felis et elit facilisis lobortis. Quisque at nulla eleifend, rhoncus tortor id, convallis leo. Donec malesuada ex nibh, et auctor libero consequat porta. Donec a elementum metus. Morbi dolor elit, gravida id elementum nec, ullamcorper at lorem. In sodales turpis eu nisl aliquet, in mollis mi efficitur. Cras sagittis pharetra dapibus. Pellentesque lacinia a tortor sit amet mattis. Suspendisse potenti. Nullam id lacus diam. Mauris laoreet elit a orci tincidunt dignissim. Quisque tristique ex vitae libero commodo, a suscipit mi consequat. Donec sed rutrum augue. Nullam ornare condimentum tempus.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-11><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Etiam tincidunt ut ante sed ultrices. Proin vitae vulputate arcu. Nulla vehicula scelerisque tincidunt. Pellentesque a sollicitudin nulla, quis pellentesque libero. In pharetra, urna et lobortis scelerisque, ipsum mi commodo massa, vel cursus lectus dolor sit amet lectus. Curabitur eget lobortis nibh. Nulla rhoncus orci tincidunt, porta sapien ut, cursus tellus. Quisque pretium nisi sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam felis odio, fermentum ac laoreet sit amet, tempor eu nisl. Phasellus sed augue eu lectus dictum ornare in ut tortor.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-12><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Sed condimentum interdum est nec imperdiet. Proin eu purus blandit, finibus felis id, ultrices magna. Curabitur consectetur dolor sit amet tellus ultricies, in auctor turpis lacinia. Donec sagittis ligula commodo, vehicula sapien at, eleifend mauris. Vestibulum ac elit eget nibh vulputate efficitur sit amet at orci. Ut sit amet pulvinar nunc. Praesent condimentum eu felis non tincidunt. Duis malesuada turpis vel elit vulputate, a fermentum erat tincidunt.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-13><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Sed quis egestas libero. Suspendisse lobortis viverra velit, vel lacinia justo consequat vel. Proin ipsum elit, ultricies non erat quis, auctor molestie lacus. Phasellus sodales commodo eros, id ullamcorper tellus posuere ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent quis suscipit urna. Sed porta odio ligula, a varius eros hendrerit nec. Cras et ante in sem tempor pretium sit amet vitae odio. Vivamus efficitur tortor id metus eleifend pellentesque. Cras semper mi enim, at dapibus turpis fermentum eu. Fusce porta scelerisque elit vitae tincidunt.</p></div></div></div></div><hr><h3>Tabs <small>(justified)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#long-example aria-controls=long-example role=tab data-toggle=tab>Example to show the auto adjusted tab height. <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#automobile aria-controls=Automobile role=tab data-toggle=tab>Automobile<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#boats aria-controls=Boats role=tab data-toggle=tab>Boats<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#planes aria-controls=Planes role=tab data-toggle=tab>Planes<i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=long-example><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Long example ipsum dolor sit amet, consectetur adipiscing elit. Curabitur semper vulputate justo, nec fermentum ante pellentesque at. Aliquam erat volutpat. Mauris vehicula rhoncus velit vitae scelerisque.</p></div><div role=tabpanel class="tab-pane fade" id=automobile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Automobile et metus at urna auctor varius. Cras mattis tincidunt eros facilisis efficitur. Nam ullamcorper faucibus neque nec eleifend.</p></div><div role=tabpanel class="tab-pane fade" id=boats><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Boats sapien quam, facilisis gravida magna sit amet, dignissim vehicula mauris. Proin tellus purus, condimentum in ex nec, varius malesuada neque.</p></div><div role=tabpanel class="tab-pane fade" id=planes><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Planes condimentum urna sit amet interdum mattis. Vivamus fermentum porttitor libero id faucibus. Duis nec suscipit nisi. Aenean in egestas metus.</p></div></div></div></div><hr><h3>Tabs <small>(centered)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-centered" role=tablist><li role=presentation class=active><a href=#inspiron role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Inspiron Laptops</h4><p class=text-gray-dark>For home and home office</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#latitude role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Latitude Laptops</h4><p class=text-gray-dark>For business-class security and reliability</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#vostro role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Vostro Laptops</h4><p class=text-gray-dark>For small business computing</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#XPS role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>XPS Laptops</h4><p class=text-gray-dark>For the ultimate experience</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#precision role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Dell Precision Mobile Workstation\'s</h4><p class=text-gray-dark>For professional creators</p><i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=inspiron><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Inspiron condimentum urna sit amet interdum mattis. Vivamus fermentum porttitor libero id faucibus. Duis nec suscipit nisi. Aenean in egestas metus.</p></div><div role=tabpanel class="tab-pane fade" id=latitude><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Latitude as et metus at urna auctor varius. Cras mattis tincidunt eros facilisis efficitur. Nam ullamcorper faucibus neque nec eleifend.</p></div><div role=tabpanel class="tab-pane fade" id=vostro><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Vostro estibulum nec pharetra magna, vitae auctor erat. Suspendisse quam enim, bibendum quis ante quis, hendrerit condimentum len.</p></div><div role=tabpanel class="tab-pane fade" id=XPS><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>XPS sollicitudin, metus eget venenatis bibendum, ex neque posuere diam, sed pharetra urna tortor in justo. Maecenas faucibus quam sit amet fermentum sodales.</p></div><div role=tabpanel class="tab-pane fade" id=precision><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Precision vel nibh et risus fringilla molestie. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p></div></div></div></div></div></section>');
     $templateCache.put('components/tooltips/demo-play-tooltips.html', '<section ng-controller=tooltipsPLayDemoCtrl id=tooltips-play-demo><div class=container><h2>Tooltips Builder</h2><div></div></div></section>');
     $templateCache.put('components/tooltips/demo-tooltips.html', '<section ng-controller=tooltipsCtrl id=tooltips-html-example><div class=container><h2 class=bottom-offset-20>Tooltips Demo</h2><ul class="unstyled list-inline"><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Tooltip on bottom with simple filler copy">Tooltip on top</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=right data-original-title="Tooltip on left with simple filler copy">Tooltip on right</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=bottom data-original-title="Tooltip on bottom with simple filler copy">Tooltip on bottom</a></li><li class=top-offset-10><a href=javascript:; data-toggle=tooltip data-container=body data-placement=left data-original-title="Tooltip on left with simple filler copy">Tooltip on left</a></li></ul></div></section>');
     $templateCache.put('components/typography/demo-play-typography.html', '<section ng-controller=typographyPLayDemoCtrl id=typography-play-demo></section>');

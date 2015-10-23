@@ -132,10 +132,10 @@ angular.module('dellUiComponents')
                     'fnDrawCallback': function() {
                         //bind the click handler script to the newly created elements held in the table
                         $('ul.pagination a').bind('click',dataReloadClick);
-                        console.log('i was clicked');
+                        //console.log('i was clicked');
 
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
-                        console.log('i was sorted');
+                        //console.log('i was sorted');
                     },
                     'responsive': true,
                 });
@@ -221,12 +221,12 @@ angular.module('dellUiComponents')
                 //var inputTable = $element.DataTable(tableData);
                 //if($element.hasClass('table-editable')) {
                 //    $timeout(function(){
-                //        console.log("editable table here");
+                //        //console.log("editable table here");
                 //        $element.find('td.editable').attr("contenteditable",true);
                 //        $element.find('td.editable').on('blur',function(e){
                 //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
                 //            if(data !== newData) {
-                //                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+                //                //console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
                 //            }
                 //        } );
                 //    },100);
@@ -237,12 +237,12 @@ angular.module('dellUiComponents')
                 var inputTable = $element.DataTable(tableData);
                     if($element.hasClass('table-editable')) {
                         $timeout(function(){
-                            console.log("editable table here");
+                            //console.log("editable table here");
                             $element.find('td.editable').attr("contenteditable",true);
                             $element.find('td.editable').on('blur',function(e){
                                 var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
                                 if(data !== newData) {
-                                    console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+                                    //console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
                                 }
                             } );
                         },100);
@@ -253,12 +253,12 @@ angular.module('dellUiComponents')
                     e.preventDefault();
                     //$(this).load('components/tables-uber/dataColumn.json');
                     $timeout(function(){
-                        console.log("editable table here");
+                        //console.log("editable table here");
                         $element.find('td.editable').attr("contenteditable",true);
                         $element.find('td.editable').on('blur',function(e){
                             var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
                             if(data !== newData) {
-                                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+                                //console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
                             }
                         } );
                     },100);

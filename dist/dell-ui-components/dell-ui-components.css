@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Components v1.0.9 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.11 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -2988,8 +2988,86 @@ div.DTE_Inline input:focus {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
 .nav-tabs > li.active > a:hover {
-  width: 100%;
-  margin-left: 0;
+  width: 102%;
+  margin-left: -1%;
+}
+.nav-tabs.pull-right {
+  position: relative;
+  z-index: 1;
+}
+.nav-tabs.pull-right + .tab-content {
+  position: relative;
+  top: -11px;
+  padding-top: 10px;
+  z-index: 0;
+  clear: both;
+  border-top: 1px solid #cccccc;
+}
+.nav-tabs-overflow-container {
+  overflow-x: hidden;
+}
+.nav-tabs-overflow-container > div.prev,
+.nav-tabs-overflow-container > div.next {
+  display: none;
+}
+@media (max-width: 767px) {
+  .nav-tabs-overflow-container {
+    overflow-x: visible;
+  }
+}
+@media (min-width: 768px) {
+  .nav-tabs-overflow-container {
+    position: relative;
+  }
+  .nav-tabs-overflow-container > div.prev,
+  .nav-tabs-overflow-container > div.next {
+    display: block;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    z-index: 1;
+    width: 30px;
+    position: absolute;
+  }
+  .nav-tabs-overflow-container > div.prev a,
+  .nav-tabs-overflow-container > div.next a {
+    height: 40px;
+    padding: 12px 6px 8px;
+    display: block;
+  }
+  .nav-tabs-overflow-container > div.prev a:hover,
+  .nav-tabs-overflow-container > div.next a:hover,
+  .nav-tabs-overflow-container > div.prev a:active,
+  .nav-tabs-overflow-container > div.next a:active,
+  .nav-tabs-overflow-container > div.prev a:focus,
+  .nav-tabs-overflow-container > div.next a:focus {
+    background: #cce5f1;
+  }
+  .nav-tabs-overflow-container > div.prev.disabled a,
+  .nav-tabs-overflow-container > div.next.disabled a {
+    color: #aaaaaa;
+  }
+  .nav-tabs-overflow-container > div.prev.disabled a:hover,
+  .nav-tabs-overflow-container > div.next.disabled a:hover {
+    background: #ffffff;
+  }
+  .nav-tabs-overflow-container > div.prev {
+    left: 0;
+  }
+  .nav-tabs-overflow-container > div.next {
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
+  .nav-tabs-overflow-container > .nav-tabs {
+    height: 42px;
+    position: relative;
+    left: 29px;
+    -webkit-transition: all 300ms cubic-bezier(1, 0, 0, 1);
+    -moz-transition: all 300ms cubic-bezier(1, 0, 0, 1);
+    o-transition: all 300ms cubic-bezier(1, 0, 0, 1);
+    transition: all 300ms cubic-bezier(1, 0, 0, 1);
+    /* easeInOutExpo */
+  }
 }
 @media (min-width: 520px) and (max-width: 767px) {
   .nav-tabs {
@@ -3000,6 +3078,7 @@ div.DTE_Inline input:focus {
   }
   .nav-tabs > li {
     background: #ffffff;
+    filter: none;
     width: 105%;
     border: 1px solid #cccccc;
     margin-bottom: -1px;
@@ -3037,6 +3116,7 @@ div.DTE_Inline input:focus {
   }
   .nav-tabs > li.active a:hover {
     background: #cce5f1;
+    cursor: pointer;
   }
   .nav-tabs > li.active:last-child {
     margin-left: -1px;
@@ -3276,9 +3356,6 @@ div.DTE_Inline input:focus {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  .row-offcanvas-right .nav-tabs > li > a > .icon-ui-arrowright {
-    float: right;
-  }
   .tab-image {
     width: 90px;
     margin-right: 20px;
@@ -3288,39 +3365,109 @@ div.DTE_Inline input:focus {
   }
 }
 /*
-     * Tab Off Canvas
-     * --------------------------------------------------
-     */
+ * Tab Off Canvas
+ * --------------------------------------------------
+ */
 @media screen and (max-width: 767px) {
   .row-offcanvas {
     position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -o-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
   }
-  .row-offcanvas-right {
-    right: 0;
+  .row-offcanvas .tab-pane.fade {
+    opacity: 1;
   }
-  .row-offcanvas-right [data-toggle="offcanvas"] {
+  .row-offcanvas .tab-content > .tab-pane > .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .row-offcanvas.row-offcanvas-right {
+    left: 0;
+    -webkit-transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+    -o-transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+    transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+  }
+  .row-offcanvas.row-offcanvas-right [data-toggle="offcanvas"] {
     text-align: left;
     padding: 10px;
     margin-bottom: 10px;
   }
-  .row-offcanvas-right [data-toggle="offcanvas"] .icon-ui-arrowleft {
+  .row-offcanvas.row-offcanvas-right [data-toggle="offcanvas"] .icon-ui-arrowleft {
     top: 2px;
     position: relative;
   }
-  .row-offcanvas-left {
+  .row-offcanvas.row-offcanvas-right.active {
+    left: -100%;
+  }
+  .row-offcanvas.row-offcanvas-right .nav-tabs > li > a > .icon-ui-arrowright {
+    float: right;
+  }
+  .row-offcanvas.row-offcanvas-right .tab-content {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    z-index: 1000;
+    -webkit-transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+    -o-transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+    transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+  }
+  .row-offcanvas.row-offcanvas-right .tab-content.active {
     left: 0;
   }
-  .row-offcanvas-left [data-toggle="offcanvas"] {
+  .row-offcanvas.row-offcanvas-right .tab-content .tab-pane {
+    min-height: 3000px;
+    background: #ffffff;
+  }
+  .row-offcanvas.row-offcanvas-left {
+    position: relative;
+    z-index: 1;
+    right: 0;
+    -webkit-transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+    -o-transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+    transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+  }
+  .row-offcanvas.row-offcanvas-left [data-toggle="offcanvas"] {
     text-align: right;
     padding: 10px;
     margin-bottom: 10px;
   }
-  .row-offcanvas-left [data-toggle="offcanvas"] .icon-ui-arrowright {
+  .row-offcanvas.row-offcanvas-left [data-toggle="offcanvas"] .icon-ui-arrowright {
     top: 2px;
     position: relative;
+  }
+  .row-offcanvas.row-offcanvas-left.active {
+    right: -108%;
+    z-index: 1000;
+  }
+  .row-offcanvas.row-offcanvas-left .tab-content {
+    position: fixed;
+    top: -11px;
+    left: -100%;
+    width: 100%;
+    background: #ffffff;
+    height: 3000px;
+    -webkit-transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+    -o-transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+    transition: all 0.25s cubic-bezier(1, 0, 0, 1);
+  }
+  .row-offcanvas.row-offcanvas-left .tab-content.active {
+    left: 0;
+  }
+  .row-offcanvas.row-offcanvas-left .tab-content .tab-pane {
+    min-height: 3000px;
+    background: #ffffff;
+  }
+  .row-offcanvas.row-offcanvas-left .nav-tabs.pull-left + .tab-content {
+    top: -11px;
+  }
+  .row-offcanvas.row-offcanvas-left .nav-tabs > li > a {
+    width: 100%;
+    margin-left: 10px;
+    padding-left: 30px;
+    text-align: right !important;
+    padding-right: 25px;
+  }
+  .row-offcanvas.row-offcanvas-left .nav-tabs > li > a > .icon-ui-arrowleft {
+    float: left;
   }
   .nav-tabs > li > a {
     position: relative;
@@ -3330,69 +3477,18 @@ div.DTE_Inline input:focus {
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
     right: 2%;
   }
   .nav-tabs > li > a > .icon-ui-arrowleft {
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
     left: 2%;
-  }
-  .row-offcanvas-right .sidebar-offcanvas {
-    right: 108%;
-    position: fixed;
-    top: 0;
-    width: 102%;
-    left: -100%;
-    -webkit-transition: all 0.25s ease-out;
-    -o-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-  .row-offcanvas-left .sidebar-offcanvas {
-    left: -50%;
-    /* 6 columns */
-  }
-  .row-offcanvas-left .tab-content {
-    position: fixed;
-    top: 0;
-    left: 100%;
-    width: 102%;
-    background: #ffffff;
-    height: 3000px;
-    -webkit-transition: all 0.25s ease-out;
-    -o-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-  .row-offcanvas-left .tab-content.active {
-    left: 0;
-  }
-  .row-offcanvas-right .tab-content {
-    position: fixed;
-    top: 0;
-    right: 100%;
-    width: 102%;
-    z-index: 1000;
-    -webkit-transition: all 0.25s ease-out;
-    -o-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-  .row-offcanvas-right .tab-content.active {
-    right: 0;
-  }
-  .row-offcanvas-right .tab-content .tab-pane {
-    min-height: 3000px;
-    background: #ffffff;
   }
   .row-offcanvas .nav-centered + .tab-content {
     top: -11px;
-  }
-  .row-offcanvas-left.active {
-    left: 50%;
-    /* 6 columns */
-  }
-  .tab-content .row {
-    margin-left: 15px;
-    margin-right: 15px;
   }
   .offcanvas-back-btn.well {
     height: 45px;

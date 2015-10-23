@@ -82,7 +82,6 @@
                         totalWidth = totalWidth + $(t).width() +1;
                         var tObj = {
                             index: index,
-                            label: _.str.clean($(t).text()),
                             offset: offsetTotal,
                             width: $(t).width(),
                             height: $(t).height(),
@@ -112,7 +111,7 @@
 
                     } else if(!tabInContext) {
                         //If next is pressed what is the last visible tab? Set that as tabInContext
-                        console.log(">>>>>>>>> ",tabs,homePosition,leftPosition);
+                        //console.log(">>>>>>>>> ",tabs,homePosition,leftPosition);
                     }
 
 

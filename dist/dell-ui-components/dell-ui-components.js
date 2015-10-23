@@ -18861,7 +18861,49 @@ var KeyTable;
 }(window, document));
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
-});
+}).run([
+  '$rootScope',
+  function ($rootScope) {
+    $rootScope.safeApply = function (fn) {
+      var phase = $rootScope.$$phase;
+      if (phase === '$apply' || phase === '$digest') {
+        if (fn && typeof fn === 'function') {
+          fn();
+        }
+      } else {
+        this.$apply(fn);
+      }
+    };
+    function calculateBreakPointStatus() {
+      var window_size = $(window).width();
+      $rootScope.bp = {
+        isXS: false,
+        isSM: false,
+        isMD: false,
+        isLG: false
+      };
+      switch (true) {
+      case window_size < 750:
+        $rootScope.bp.isXS = true;
+        break;
+      case window_size > 751 && window_size < 975:
+        $rootScope.bp.isSM = true;
+        break;
+      case window_size > 974 && window_size < 1141:
+        $rootScope.bp.isMD = true;
+        break;
+      default:
+        $rootScope.bp.isLG = true;
+        break;
+      }
+    }
+    calculateBreakPointStatus();
+    $(window).resize(function () {
+      calculateBreakPointStatus();
+      $rootScope.safeApply();
+    });
+  }
+]);
 angular.module('dellUiComponents').directive('toggle', function () {
   return {
     restrict: 'A',
@@ -18897,14 +18939,15 @@ angular.module('dellUiComponents').directive('toggle', function () {
         $(element).on('click', function (event) {
           event.preventDefault();
           $(element).parents('.row-offcanvas').find('.tab-content').removeClass('active');
+          $(element).parents('.row-offcanvas').removeClass('active');
         });
         break;
       case 'tab':
         $(element).on('click', function (event) {
           event.preventDefault();
           $(this).tab('show');
-          console.log($(this).parents('.row-offcanvas').html());
           $(this).parents('.row-offcanvas').find('.tab-content').addClass('active');
+          $(this).parents('.row-offcanvas').addClass('active');
         });
         break;
       case 'collapse':
@@ -18964,24 +19007,25 @@ angular.module('dellUiComponents').directive('toggle', function () {
     }
   };
 });
-angular.module('dellUiComponents').directive('divHeightEqualize', [
-  '$timeout',
-  function ($timeout) {
-    // Runs during compile
-    // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
-    return {
-      restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
-        $(function () {
-          $('.tab-center-equalize').matchHeight();
-        });
-        $(function () {
-          $('.tab-justify-equalize').matchHeight();
+angular.module('dellUiComponents').directive('navTabs', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, iAttrs, controller) {
+      var containerWidth = $element.parent().width(), tabObjs = $element.find('> li'), totalWidth = 0;
+      _.each(tabObjs, function (t, index) {
+        totalWidth = totalWidth + $(t).width() + 1;
+      });
+      if (totalWidth > containerWidth) {
+        $element.dellUIoverflowTab({
+          iconClasses: {
+            left: 'icon-ui-arrowleft',
+            right: 'icon-ui-arrowright'
+          }
         });
       }
-    };
-  }
-]);
+    }
+  };
+});
 //asumes that angular-ui-bootstrap is loaded
 angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition']).controller('CarouselController', [
   '$scope',
@@ -19661,7 +19705,7 @@ angular.module('dellUiComponents').directive('interactiveProgressBar', [
             if ($scope.fakeAnimationValue < 100) {
               $scope.fakeAnimationValue = $scope.fakeAnimationValue + 1;
               $scope.fakeAnimationSteps = Math.round($scope.fakeAnimationValue / 20);
-              console.log($scope.fakeAnimationValue, $scope.fakeAnimationSteps);
+              //console.log($scope.fakeAnimationValue,$scope.fakeAnimationSteps);
               $scope.stripeAnimate = 'active';
               $scope.fakeAnimation();
             }
@@ -19672,7 +19716,7 @@ angular.module('dellUiComponents').directive('interactiveProgressBar', [
           $scope.fakeAnimationId = undefined;
           $scope.stripeAnimate = '';
         };
-        console.log('hello timeout');
+        //console.log('hello timeout');
         $scope.resetFakeAnimation = function () {
           $scope.fakeAnimationValue = 0;
           $scope.fakeAnimation();
@@ -19756,7 +19800,7 @@ angular.module('dellUiComponents').directive('contentGallery', [
                   rowWidth = rowWidth + itemWidth;
                   if (rowWidth >= rowMaxWidth || index === allListItems.length - 1) {
                     if (targetFound) {
-                      console.log('Found target and inserting!!!');
+                      //console.log("Found target and inserting!!!");
                       $(i).after('<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">\xd7</button></span>' + content + '</div></li>');
                       $('.details-container').attr('display', 'block').slideDown(450);
                       $('body, li.details-container .close').on('click', function (e) {
@@ -20037,9 +20081,8 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
             'fnDrawCallback': function () {
               //bind the click handler script to the newly created elements held in the table
               $('ul.pagination a').bind('click', dataReloadClick);
-              console.log('i was clicked');
-              $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);
-              console.log('i was sorted');
+              //console.log('i was clicked');
+              $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);  //console.log('i was sorted');
             },
             'responsive': true
           });
@@ -20099,12 +20142,12 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
         //var inputTable = $element.DataTable(tableData);
         //if($element.hasClass('table-editable')) {
         //    $timeout(function(){
-        //        console.log("editable table here");
+        //        //console.log("editable table here");
         //        $element.find('td.editable').attr("contenteditable",true);
         //        $element.find('td.editable').on('blur',function(e){
         //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
         //            if(data !== newData) {
-        //                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
+        //                //console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
         //            }
         //        } );
         //    },100);
@@ -20112,12 +20155,11 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
         var inputTable = $element.DataTable(tableData);
         if ($element.hasClass('table-editable')) {
           $timeout(function () {
-            console.log('editable table here');
+            //console.log("editable table here");
             $element.find('td.editable').attr('contenteditable', true);
             $element.find('td.editable').on('blur', function (e) {
               var newData = $(e.currentTarget).text(), data = inputTable.cell(this).data();
               if (data !== newData) {
-                console.log('You edited ' + data + ' and changed it to ' + newData, inputTable);
               }
             });
           }, 100);
@@ -20127,12 +20169,11 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
           e.preventDefault();
           //$(this).load('components/tables-uber/dataColumn.json');
           $timeout(function () {
-            console.log('editable table here');
+            //console.log("editable table here");
             $element.find('td.editable').attr('contenteditable', true);
             $element.find('td.editable').on('blur', function (e) {
               var newData = $(e.currentTarget).text(), data = inputTable.cell(this).data();
               if (data !== newData) {
-                console.log('You edited ' + data + ' and changed it to ' + newData, inputTable);
               }
             });
           }, 100);

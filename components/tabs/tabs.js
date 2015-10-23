@@ -1,8 +1,8 @@
 angular.module('dellUiComponents')
-    .directive('navTabs', function($rootScope){
+    .directive('navTabs', function(){
         return {
             restrict: 'C',
-            link: function($scope, $element, iAttrs, controller, transcludeFn) {
+            link: function($scope, $element, iAttrs, controller) {
 
                 var containerWidth = $element.parent().width(),
                     tabObjs = $element.find('> li'),

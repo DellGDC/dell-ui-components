@@ -18,7 +18,7 @@ angular.module('dellUiComponents')
 
                 var waypointObjs = $element.find('> li > a[href^=#]'),
                 waypoints=[];
-                console.log(waypointObjs);
+                //console.log(waypointObjs);
 
                 function clearActiveTab() {
                     $element.find('> li').removeClass('active');
@@ -52,25 +52,25 @@ angular.module('dellUiComponents')
                                 if(direction === 'up') {
                                     clearActiveTab();
                                     $("[href="+this.element.selector+"]").parent().addClass("active");
-                                console.log('Enter triggered with direction ' + direction,this.element);
+                                //console.log('Enter triggered with direction ' + direction,this.element);
                                 }
                             },
                             entered: function(direction) {
-                                    console.log('Entered triggered with direction ' + direction,this.element);
+                                    //console.log('Entered triggered with direction ' + direction,this.element);
                             },
                             exit: function(direction) {
                                 
-                                console.log('Exit triggered with direction ' + direction,this.element.selector);
+                                //console.log('Exit triggered with direction ' + direction,this.element.selector);
                             },
                             exited: function(direction) {
                                 if(direction === 'down'){
                                     clearActiveTab();
                                     $("[href="+this.element.selector+"]").parent().next().addClass("active");
-                                    console.log('Exited triggered with direction ' + direction,this.element);
+                                    //console.log('Exited triggered with direction ' + direction,this.element);
                                 }
                             }
                         });
-                        console.log(targetWaypoint);
+                        //console.log(targetWaypoint);
                         
                     });
 
