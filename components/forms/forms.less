@@ -869,15 +869,35 @@
 
 
 .date-selector {
-    input {
+    
+    /*input {
     border-right: 0;
     }
-
-    .icon-small-calendar {
-        color: @dell-blue;
+    .input-group-addon {
+        background: none 0 0 transparent;
+        border-left: 0;
+        &:active {
+            border: 1px solid @dell-blue;
+            border-left: 0;
+        }*/
+    input{
+        background: none no-repeat 0 0 transparent;
     }
+    .inner-icon { 
+        position: relative; 
+    }
+    .inner-icon .icon-small-calendar {
+      position: absolute;
+      cursor: pointer;
+      color: @dell-blue;
+      padding: 10px;
+    }
+    .add-right .icon-small-calendar { right: 0px;}
+    .add-right input { padding-right: 30px; }
 
 }
+
+
 .bootstrap-datetimepicker-widget {
     /*border: 1px solid @dell-gray-stroke;*/
     top: -2px;
@@ -903,7 +923,29 @@
       border: 0 !important;
   }
 }
-.bootstrap-datetimepicker-widget table td.active:hover {
+
+.bootstrap-datetimepicker-widget table {
+    td.active, td span.active {
+        content: none !important;
+        background-color: @dell-blue !important;
+        color: #ffffff;
+        text-shadow: 0;
+        border-radius: 0;
+        border: 0 !important;
+    }
+    td.active.today:hover, td.active:hover, td span.active:hover, td span.decade:hover {
+      content: none !important;
+      background-color: #ffffff !important;
+      color: #444444 !important;
+      text-shadow: 0;
+      box-shadow:inset 0px 0px 0px 1px @dell-blue;
+      -webkit-box-shadow:inset 0px 0px 0px 1px @dell-blue;
+      -moz-box-shadow:inset 0px 0px 0px 1px @dell-blue;
+      border-radius: 0;
+      border: 0 !important;
+    }
+}
+/*.bootstrap-datetimepicker-widget table td.active:hover {
   content: none !important;
   background-color: #ffffff !important;
   color: #444444 !important;
@@ -913,16 +955,7 @@
   -moz-box-shadow:inset 0px 0px 0px 1px @dell-blue;
   border-radius: 0;
   border: 0 !important;
-
-}
-.bootstrap-datetimepicker-widget table td.active {
-    content: none !important;
-    background-color: @dell-blue !important;
-    color: #ffffff;
-    text-shadow: 0;
-    border-radius: 0;
-    border: 0 !important;
-}
+}*/
 .bootstrap-datetimepicker-widget table td.active.today {
   content: none !important;
   background-color: @dell-blue !important;
@@ -931,6 +964,7 @@
   border-radius: 0;
   border: 0 !important;
 }
+
 .bootstrap-datetimepicker-widget table td.today {
     content: none !important;
     background-color: #ffffff !important;
