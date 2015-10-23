@@ -62,6 +62,7 @@ angular.module('dellUiComponents')
                         'targets': 0,
                         'searchable':true,
                         'orderable':false,
+                        'stateSave': true,
                         'className': 'dt-body-center',
                         'render': function (data, type, full, meta){
                             return '<input type="checkbox">';
@@ -128,7 +129,7 @@ angular.module('dellUiComponents')
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         console.log('i was sorted');
                     },
-                    'responsive': true,
+                    'responsive': true
                 });
 
 
@@ -207,21 +208,6 @@ angular.module('dellUiComponents')
                         );
                     });
                 });
-
-
-                //var inputTable = $element.DataTable(tableData);
-                //if($element.hasClass('table-editable')) {
-                //    $timeout(function(){
-                //        console.log("editable table here");
-                //        $element.find('td.editable').attr("contenteditable",true);
-                //        $element.find('td.editable').on('blur',function(e){
-                //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
-                //            if(data !== newData) {
-                //                console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
-                //            }
-                //        } );
-                //    },100);
-                //}
 
 
 
