@@ -1,5 +1,3 @@
-
-
 /**
  * Created by Clint_Batte on 9/9/2015.
  */
@@ -14,7 +12,6 @@
  */
 
 angular.module('dellUiComponents')
-
 
     .directive('tableResponsiveColumns', function($timeout){
         // Runs during compile
@@ -62,6 +59,7 @@ angular.module('dellUiComponents')
                         'targets': 0,
                         'searchable':true,
                         'orderable':false,
+                        'stateSave': true,
                         'className': 'dt-body-center',
                         'render': function (data, type, full, meta){
                             return '<input type="checkbox">';
@@ -112,16 +110,7 @@ angular.module('dellUiComponents')
                         }
                     ],
                     'order': [1, 'asc'],
-                    //'rowCallback': function(row, data, dataIndex){
-                    //    // Get row ID
-                    //    var rowId = data[0];
-                    //
-                    //    // If row ID is in the list of selected row IDs
-                    //    if($.inArray(rowId, rows_selected) !== -1){
-                    //        $(row).find('input[type="checkbox"]').prop('checked', true);
-                    //        $(row).addClass('selected');
-                    //    }
-                    //},
+                    "dom": 'C<"clear">lfrtip',
                     'pagingType': "simple",
                     'language': {
                         'paginate': {
@@ -137,7 +126,7 @@ angular.module('dellUiComponents')
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         //console.log('i was sorted');
                     },
-                    'responsive': true,
+                    'responsive': true
                 });
 
 
@@ -176,11 +165,6 @@ angular.module('dellUiComponents')
                     e.stopPropagation();
                 });
 
-                // Handle click on table cells with checkboxes
-                //$('#table-uber').on('click', 'tbody td, thead th:first-child', function(e){
-                //    $(this).parent().find('input[type="checkbox"]').trigger('click');
-                //});
-
 
                 // Handle click on "Select all" control
                 $('#table-uber thead input[name="select_all"]').on('click', function(e){
@@ -216,23 +200,6 @@ angular.module('dellUiComponents')
                         );
                     });
                 });
-
-
-                //var inputTable = $element.DataTable(tableData);
-                //if($element.hasClass('table-editable')) {
-                //    $timeout(function(){
-                //        //console.log("editable table here");
-                //        $element.find('td.editable').attr("contenteditable",true);
-                //        $element.find('td.editable').on('blur',function(e){
-                //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
-                //            if(data !== newData) {
-                //                //console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
-                //            }
-                //        } );
-                //    },100);
-                //}
-
-
 
                 var inputTable = $element.DataTable(tableData);
                     if($element.hasClass('table-editable')) {
