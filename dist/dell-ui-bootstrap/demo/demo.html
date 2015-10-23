@@ -1,0 +1,2454 @@
+<div id="dell-ui-bootstrap-demo" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                This is a Bower component for Dell's implementation and theming of Bootstrap CSS only. Bootstrap.js and jQuery are only included for the demo page.
+            </p>
+            <p>
+                Dell specific icon font and Museo for Dell are included for use in Dell related sites but it does not include Bootstrap's glyphicons.
+            </p>
+
+            <section id="alerts-html-example" class="">
+                <div class="">
+                    <h2>Alerts</h2>
+                </div>
+                <div class="alert alert-success" role="alert">
+                    <strong>Success Alerts:</strong>  Indicates the task has been completed successfully.
+                </div>
+                <div class="alert alert-info" role="alert">
+                    <strong>Information Alerts:</strong> Information alerts display important information for the page.
+                </div>
+                <div class="alert alert-warning" role="alert">
+                    <strong>User Errors:</strong> A soft stop, requiring users to take an action before proceeding.
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    <strong>Catastrophic Errors:</strong> A hard stop, meaning users cannot go forward.
+                </div>
+            </section>
+            <section id="announcements-html-example" class="">
+                <div class="bottom-offset-40">
+                    <div class="">
+                        <h2>Announcements (Bootstrap blockquotes)</h2>
+                    </div>
+                    <div id="announcement-default">
+                        <blockquote>
+                            <h4>Lorem ipsum dolor sit amet</h4>
+                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+            <section id="breadcrumb-html-example" class="">
+                <div class="page-header">
+                    <h2>Breadcrumb</h2>
+                </div>
+                <div class="bottom-offset-40">
+                    <div id="breadcrumb-example">
+                        <ul class="breadcrumb">
+                            <li><a href="#"></a><span class="divider"></span></li>
+                            <li><a href="#">Shop for home</a><span class="divider"></span></li>
+                            <li class="active">Laptops &amp; Ultrabooks</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="buttons-html-example" class="">
+                <div class="page-header">
+                    <h2>Buttons</h2>
+                </div>
+                <div>
+                    <table class="table table-striped bottom-offset-40">
+                        <thead>
+                            <tr>
+                                <th>Button</th>
+                                <th>Disabled Button</th>
+                                <th class="hidden-xs">Split button</th>
+                                <th>Dropdown Button</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="button-primary"><a class="btn btn-primary" href="javascript:;">Primary</a></td>
+                                <td id="button-primary-disabled"><a class="btn btn-primary disabled" href="javascript:;">Primary</a></td>
+                                <td id="button-primary-split" class="hidden-xs">
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary" href="javascript:;">Primary</a>
+                                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="javascript:;"><i class="caret"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:;">Action</a></li>
+                                            <li><a href="javascript:;">Another action</a></li>
+                                            <li><a href="javascript:;">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:;">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td id="button-primary-dropdown">
+                                    <div class="btn-group">
+                                        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="javascript:;">Primary <i class="caret"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:;">Action</a></li>
+                                            <li><a href="javascript:;">Another action</a></li>
+                                            <li><a href="javascript:;">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:;">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="button-success"><a class="btn btn-success" href="javascript:;">Success</a></td>
+                                <td id="button-success-disabled"><a class="btn btn-success disabled" href="javascript:;">Success</a></td>
+                                <td id="button-success-split" class="hidden-xs">
+                                    <div class="btn-group">
+                                        <a class="btn btn-success" href="javascript:;">Success</a>
+                                        <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="javascript:;"> <i class="caret"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:;">Action</a></li>
+                                            <li><a href="javascript:;">Another action</a></li>
+                                            <li><a href="javascript:;">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:;">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td id="button-success-dropdown">
+                                    <div class="btn-group">
+                                        <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="javascript:;">Success <i class="caret"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:;">Action</a></li>
+                                            <li><a href="javascript:;">Another action</a></li>
+                                            <li><a href="javascript:;">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:;">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="button-default"><a class="btn btn-default" href="javascript:;">Default</a></td>
+                                <td id="button-default-disabled"><a class="btn btn-default disabled" href="javascript:;">Default</a></td>
+                                <td id="button-default-split" class="hidden-xs">
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" href="javascript:;">Default</a>
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:;"> <i class="caret"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:;">Action</a></li>
+                                            <li><a href="javascript:;">Another action</a></li>
+                                            <li><a href="javascript:;">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:;">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td id="button-default-dropdown">
+                                    <div class="btn-group">
+                                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:;">Default <i class="caret"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:;">Action</a></li>
+                                            <li><a href="javascript:;">Another action</a></li>
+                                            <li><a href="javascript:;">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:;">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="button-primary-link"><a class="btn btn-link" href="javascript:;">Link</a></td>
+                                <td id="button-primary-link-disabled"><a class="btn btn-link disabled" href="javascript:;">Link</a></td>
+                                <td class="hidden-xs"> n/a </td>
+                                <td id="button-primary-link-dropdown">
+                                    <div class="btn-group">
+                                        <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="javascript:;">Link <i class="caret"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:;">Action</a></li>
+                                            <li><a href="javascript:;">Another action</a></li>
+                                            <li><a href="javascript:;">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="javascript:;">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <div class="bottom-offset-20">
+                    <h2>Block Level Buttons
+                        <small>(Sized by the container the button resides in)</small>
+                    </h2>
+                </div>
+                <div id="block-level-button-12">
+                    <div class="row">
+                        <p class="col-xs-12">
+                            <button class="btn btn-primary btn-lg btn-block" type="button">col-xs-12</button>
+                        </p>
+                    </div>
+                </div>
+                <div id="block-level-button-6">
+                    <div class="row">
+                        <p class="col-xs-6">
+                            <button class="btn btn-primary btn-lg btn-block" type="button">col-xs-6</button>
+                        </p>
+                    </div>
+                </div>
+                <div id="block-level-button-4">
+                    <div class="row">
+                        <p class="col-xs-6 col-md-4">
+                            <button class="btn btn-primary btn-lg btn-block" type="button">col-xs-6 col-md-4</button>
+                        </p>
+                    </div>
+                </div>
+                <div id="block-level-button-3">
+                    <div class="row">
+                        <p class="col-xs-4 col-md-3 bottom-offset-20">
+                            <button class="btn btn-lg btn-block btn-primary" type="button">col-xs-4 col-md-3</button>
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <div class="bottom-offset-40">
+                    <h3>Buttons sizes</h3>
+                    <p><button type="button" class="btn btn-default btn-lg hidden">Large button</button></p>
+                    <p id="default-btn-size"><button type="button" class="btn btn-default">Default button</button></p>
+                    <p><button type="button" class="btn btn-default btn-sm hidden">Small button</button></p>
+                    <p id="default-btn-mini"><button type="button" class="btn btn-default btn-xs">Mini button</button></p>
+                </div>
+            </section>
+            <section id="carousel-html-example"class="">
+                <div class="">
+                    <h2>Carousel</h2>
+                </div>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img src="http://placehold.it/1140x430&text=Slide+1" alt="First slide">
+                        </div>
+                        <div class="item">
+                            <img src="http://placehold.it/1140x430&text=Slide+2" alt="Second slide">
+                        </div>
+                        <div class="item">
+                            <img src="http://placehold.it/1140x430&text=Slide+3" alt="Third slide">
+                        </div>
+                    </div>
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                    </ol>
+                </div>
+            </section>
+            <section id="collapsible-items-html-example" class="">
+                <div class="bottom-offset-40">
+                    <div class="">
+                        <h2>Accordion</h2>
+                    </div>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="">
+                                    Collapsible Group Item #1
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Collapsible Group Item #2
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Collapsible Group Item #3
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
+                                <div class="panel-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="containers-html-example">
+                <div class="bottom-offset-40">
+                    <div class="">
+                        <h2>Wells</h2>
+                    </div>
+                    <div id="example-well">
+                        <div class="well">
+                            <p>This is a default Well...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <h2>Panels</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Panel title</h3>
+                            </div>
+                            <div class="panel-body">
+                                Panel content
+                            </div>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Panel title</h3>
+                            </div>
+                            <div class="panel-body">
+                                Panel content
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-4 -->
+                    <div class="col-sm-4">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Panel title</h3>
+                            </div>
+                            <div class="panel-body">
+                                Panel content
+                            </div>
+                        </div>
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Panel title</h3>
+                            </div>
+                            <div class="panel-body">
+                                Panel content
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-4 -->
+                    <div class="col-sm-4">
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Panel title</h3>
+                            </div>
+                            <div class="panel-body">
+                                Panel content
+                            </div>
+                        </div>
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Panel title</h3>
+                            </div>
+                            <div class="panel-body">
+                                Panel content
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-4 -->
+                </div>
+            </section>
+            <section id="forms-html-example" class="">
+                <div class="page-header">
+                    <h2>Forms</h2>
+                </div>
+                <form role="form">
+                    <div class="row bottom-offset-20">
+                        <div id="input-email-address">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="input-email">Email address</label>
+                                    <input type="email" class="form-control" id="input-email" placeholder="*Enter email">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="text-input">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="text-label-input">Text input label</label>
+                                    <div>
+                                        <input type="text" class="form-control" id="text-label-input">
+                                        <p class="help-block">
+                                            In addition to freeform text, any HTML5 text-based input appears like so.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom-offset-20">
+                        <div class="col-xs-12" id="textarea-example">
+                            <div class="form-group">
+                                <label for="textarea">Textarea input label</label>
+                                <textarea id="textarea" class="form-control" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom-offset-20">
+                        <div id="uneditable-input">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="uneditable">Uneditable input</label>
+                                    <span id="uneditable" class="uneditable-input form-control">Some value here</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="disabled-input">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="disabledInput">Disabled input</label>
+                                    <input class="disabled form-control" id="disabledInput" type="text" placeholder="Disabled input here…" disabled="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom-offset-20">
+                        <div id="file-input">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">File input</label>
+                                    <input type="file" id="exampleInputFile">
+                                    <p class="help-block">Example block-level help text here.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="input-with-error">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="inputError">Input with error</label>
+                                    <input type="text" id="inputError" class="form-control alert alert-warning" data-html="true" data-toggle="popover" data-placement="top" data-content="<i class='icon-small-alertnotice text-red pull-left'></i> &nbsp;<strong>'First Name'</strong> should not be empty." data-trigger="hover" data-original-title="" title="" placeholder="*First Name">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row bottom-offset-20">
+                        <div id="input-phone-number">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone number</label>
+                                    <input id="phone" type="text" class="form-control phone-number" placeholder="(555) 111-2222" data-inputmask="'mask': '(999)-999-9999'">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="submit">
+                            <div class="col-xs-12 col-sm-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <p class="help-block">Example of a "Submit" button.</p>
+                            </div>
+                        </div>
+                        <div id="reset">
+                            <div class="col-xs-12 col-sm-3">
+                                <div>
+                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                                <p class="help-block">Example of a bundled "cancel and submit" button.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row bottom-offset-20">
+                        <div class="col-xs-12 col-sm-6 bottom-offset-20">
+                            <h4>Checkboxes</h4>
+                            <div id="checkbox">
+                                <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox" value="option 1">
+                                    Checkbox one
+                                    </label>
+                                </div>
+                                <div class="checkbox disabled bottom-offset-20">
+                                    <label>
+                                    <input type="checkbox" value="value option 2" disabled="">
+                                    Checkbox two is disabled
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 bottom-offset-20">
+                            <h4>Radio Buttons</h4>
+                            <div id="radio-button">
+                                <div class="radio">
+                                    <label>
+                                    <input type="radio" name="optionsRadios" id="options-radio-1" value="option1" checked="">
+                                    Option one radio button
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                    <input type="radio" name="optionsRadios" id="options-radio-2" value="option2">
+                                    Option two radio button
+                                    </label>
+                                </div>
+                                <div class="radio disabled">
+                                    <label>
+                                    <input type="radio" name="optionsRadios" id="options-radio-3" value="option3" disabled="">
+                                    Option three is disabled
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <h4>Inline Checkboxes</h4>
+                            <div id="checkbox-inline">
+                                <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox1" value="option1">1
+                                </label>
+                                <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox2" value="option2">2
+                                </label>
+                                <label class="checkbox-inline ">
+                                <input type="checkbox" id="inlineCheckbox3" value="option3">3
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <h4>Inline Radio Buttons</h4>
+                            <div class="row bottom-offset-40">
+                                <div id="radio-inline">
+                                    <div class="col-xs-12">
+                                        <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+                                        </label>
+                                        <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+                                        </label>
+                                        <label class="radio-inline">
+                                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="bottom-offset-20">Selects</h3>
+                    <div class="row">
+                        <div id="select-list">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="select01">Select list</label>
+                                <select class="form-control" id="select01">
+                                    <option value="
+                                        something
+                                        ">
+                                        something
+                                    </option>
+                                    <option value="
+                                        2
+                                        ">
+                                        2
+                                    </option>
+                                    <option value="
+                                        3
+                                        ">
+                                        3
+                                    </option>
+                                    <option value="
+                                        4
+                                        ">
+                                        4
+                                    </option>
+                                    <option value="
+                                        5
+                                        ">
+                                        5
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="multi-select">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="multiSelect">multi-select</label>
+                                <select multiple="multiple" id="multiSelect">
+                                    <option value="
+                                        1
+                                        ">
+                                        1
+                                    </option>
+                                    <option value="
+                                        2
+                                        ">
+                                        2
+                                    </option>
+                                    <option value="
+                                        3
+                                        ">
+                                        3
+                                    </option>
+                                    <option value="
+                                        4
+                                        ">
+                                        4
+                                    </option>
+                                    <option value="
+                                        5
+                                        ">
+                                        5
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <section id="icons-html-example" class="">
+                <div class="row">
+                    <div class="col-xs-12 bottom-offset-20 top-offset-20">
+                        <div class="icons-gallery">
+                            <div class="page-header">
+                                <h2>UI icons</h2>
+                            </div>
+                            <style>
+                                .icons-gallery-list {
+                                    padding:0;
+                                    margin:0 0 0 -30px;
+                                }
+                                .icons-gallery-list li {
+                                    width: 13.8%;
+                                    display: inline-block;
+                                    margin: 10px 0 10px 30px;
+                                    padding: 20px 5px;
+                                    background: #f9f9f9;
+                                    text-align: center;
+                                    height: 110px;
+                                    vertical-align: top;
+                                }
+                                .icons-gallery-list li span {
+                                    display:block;
+                                }
+                                .icons-gallery-class {
+                                    padding-top:10px;
+                                }
+                            </style>
+                            <ul class="icons-gallery-list">
+                                <!-- ngRepeat: icon in icons['icon-ui'] -->
+                                <li class="">
+                                    <span class="icon-ui-arrowleft "></span>
+                                    <span class="icons-gallery-class">icon-ui-arrowleft</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-arrowright "></span>
+                                    <span class="icons-gallery-class">icon-ui-arrowright</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-close "></span>
+                                    <span class="icons-gallery-class">icon-ui-close</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-closecircle "></span>
+                                    <span class="icons-gallery-class">icon-ui-closecircle</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-collapse "></span>
+                                    <span class="icons-gallery-class">icon-ui-collapse</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-dell "></span>
+                                    <span class="icons-gallery-class">icon-ui-dell</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-expand "></span>
+                                    <span class="icons-gallery-class">icon-ui-expand</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-grid-view "></span>
+                                    <span class="icons-gallery-class">icon-ui-grid-view</span>
+                                </li>
+                                <li class="">
+                                    <span class="icon-ui-handle "></span>
+                                    <span class="icons-gallery-class">icon-ui-handle</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-list-view "></span>
+                                    <span class="icons-gallery-class">icon-ui-list-view</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-menucollapsed "></span>
+                                    <span class="icons-gallery-class">icon-ui-menucollapsed</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-minus "></span>
+                                    <span class="icons-gallery-class">icon-ui-minus</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-pause "></span>
+                                    <span class="icons-gallery-class">icon-ui-pause</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-play "></span>
+                                    <span class="icons-gallery-class">icon-ui-play</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-plus "></span>
+                                    <span class="icons-gallery-class">icon-ui-plus</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-triangledown "></span>
+                                    <span class="icons-gallery-class">icon-ui-triangledown</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-triangleleft "></span>
+                                    <span class="icons-gallery-class">icon-ui-triangleleft</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-triangleright "></span>
+                                    <span class="icons-gallery-class">icon-ui-triangleright</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-triangleup "></span>
+                                    <span class="icons-gallery-class">icon-ui-triangleup</span>
+                                </li>
+
+                                <li class="">
+                                    <span class="icon-ui-loading "></span>
+                                    <span class="icons-gallery-class">icon-ui-loading</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-xs-12 bottom-offset-20 top-offset-20">
+                        <div class="icons-gallery">
+                            <div class="page-header">
+                                <h2>Small icons</h2>
+                            </div>
+                            <ul class="icons-gallery-list">
+
+                                <li>
+                                    <span class="icon-small-360-hinge "></span>
+                                    <span class="icons-gallery-class">icon-small-360-hinge</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-add "></span>
+                                    <span class="icons-gallery-class">icon-small-add</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-alertcomplete "></span>
+                                    <span class="icons-gallery-class">icon-small-alertcomplete</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-alerterror "></span>
+                                    <span class="icons-gallery-class">icon-small-alerterror</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-alertinfo "></span>
+                                    <span class="icons-gallery-class">icon-small-alertinfo</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-alertnotice "></span>
+                                    <span class="icons-gallery-class">icon-small-alertnotice</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-audiocard "></span>
+                                    <span class="icons-gallery-class">icon-small-audiocard</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-audiospeaker "></span>
+                                    <span class="icons-gallery-class">icon-small-audiospeaker</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-award "></span>
+                                    <span class="icons-gallery-class">icon-small-award</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-battery "></span>
+                                    <span class="icons-gallery-class">icon-small-battery</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-bell "></span>
+                                    <span class="icons-gallery-class">icon-small-bell</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-cables "></span>
+                                    <span class="icons-gallery-class">icon-small-cables</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-calculator "></span>
+                                    <span class="icons-gallery-class">icon-small-calculator</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-calendar "></span>
+                                    <span class="icons-gallery-class">icon-small-calendar</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-carryingcase "></span>
+                                    <span class="icons-gallery-class">icon-small-carryingcase</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-cart "></span>
+                                    <span class="icons-gallery-class">icon-small-cart</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-chat "></span>
+                                    <span class="icons-gallery-class">icon-small-chat</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-checkmark "></span>
+                                    <span class="icons-gallery-class">icon-small-checkmark</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-chipset "></span>
+                                    <span class="icons-gallery-class">icon-small-chipset</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-clock "></span>
+                                    <span class="icons-gallery-class">icon-small-clock</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-cloud "></span>
+                                    <span class="icons-gallery-class">icon-small-cloud</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-color "></span>
+                                    <span class="icons-gallery-class">icon-small-color</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-computergeneric "></span>
+                                    <span class="icons-gallery-class">icon-small-computergeneric</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-contact "></span>
+                                    <span class="icons-gallery-class">icon-small-contact</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-copy "></span>
+                                    <span class="icons-gallery-class">icon-small-copy</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-data "></span>
+                                    <span class="icons-gallery-class">icon-small-data</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-deals "></span>
+                                    <span class="icons-gallery-class">icon-small-deals</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-detachable "></span>
+                                    <span class="icons-gallery-class">icon-small-detachable</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-diagnostic "></span>
+                                    <span class="icons-gallery-class">icon-small-diagnostic</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-dimensionsweight "></span>
+                                    <span class="icons-gallery-class">icon-small-dimensionsweight</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-display "></span>
+                                    <span class="icons-gallery-class">icon-small-display</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-download "></span>
+                                    <span class="icons-gallery-class">icon-small-download</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-drivers "></span>
+                                    <span class="icons-gallery-class">icon-small-drivers</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-edit "></span>
+                                    <span class="icons-gallery-class">icon-small-edit</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-employee "></span>
+                                    <span class="icons-gallery-class">icon-small-employee</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-energyefficient "></span>
+                                    <span class="icons-gallery-class">icon-small-energyefficient</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-enterprise "></span>
+                                    <span class="icons-gallery-class">icon-small-enterprise</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-e-value "></span>
+                                    <span class="icons-gallery-class">icon-small-e-value</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-gift-card "></span>
+                                    <span class="icons-gallery-class">icon-small-gift-card</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-globe "></span>
+                                    <span class="icons-gallery-class">icon-small-globe</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-graphics-card "></span>
+                                    <span class="icons-gallery-class">icon-small-graphics-card</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-harddrive "></span>
+                                    <span class="icons-gallery-class">icon-small-harddrive</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-help "></span>
+                                    <span class="icons-gallery-class">icon-small-help</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-house "></span>
+                                    <span class="icons-gallery-class">icon-small-house</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-infrastructure "></span>
+                                    <span class="icons-gallery-class">icon-small-infrastructure</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-inktoner "></span>
+                                    <span class="icons-gallery-class">icon-small-inktoner</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-keyboard "></span>
+                                    <span class="icons-gallery-class">icon-small-keyboard</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-lightbulb "></span>
+                                    <span class="icons-gallery-class">icon-small-lightbulb</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-location "></span>
+                                    <span class="icons-gallery-class">icon-small-location</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-magnifying-glass "></span>
+                                    <span class="icons-gallery-class">icon-small-magnifying-glass</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-mail "></span>
+                                    <span class="icons-gallery-class">icon-small-mail</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-memory "></span>
+                                    <span class="icons-gallery-class">icon-small-memory</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-memorycardreader "></span>
+                                    <span class="icons-gallery-class">icon-small-memorycardreader</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-missingimage "></span>
+                                    <span class="icons-gallery-class">icon-small-missingimage</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-mobile "></span>
+                                    <span class="icons-gallery-class">icon-small-mobile</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-mouse "></span>
+                                    <span class="icons-gallery-class">icon-small-mouse</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-music "></span>
+                                    <span class="icons-gallery-class">icon-small-music</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-network "></span>
+                                    <span class="icons-gallery-class">icon-small-network</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-notebook "></span>
+                                    <span class="icons-gallery-class">icon-small-notebook</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-operatingsystem "></span>
+                                    <span class="icons-gallery-class">icon-small-operatingsystem</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-opticaldrive "></span>
+                                    <span class="icons-gallery-class">icon-small-opticaldrive</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-package "></span>
+                                    <span class="icons-gallery-class">icon-small-package</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-partners "></span>
+                                    <span class="icons-gallery-class">icon-small-partners</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-performance "></span>
+                                    <span class="icons-gallery-class">icon-small-performance</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-phone "></span>
+                                    <span class="icons-gallery-class">icon-small-phone</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-photos "></span>
+                                    <span class="icons-gallery-class">icon-small-photos</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-ports "></span>
+                                    <span class="icons-gallery-class">icon-small-ports</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-powersupply "></span>
+                                    <span class="icons-gallery-class">icon-small-powersupply</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-printer "></span>
+                                    <span class="icons-gallery-class">icon-small-printer</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-processor "></span>
+                                    <span class="icons-gallery-class">icon-small-processor</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-projector "></span>
+                                    <span class="icons-gallery-class">icon-small-projector</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-protection "></span>
+                                    <span class="icons-gallery-class">icon-small-protection</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-recycle "></span>
+                                    <span class="icons-gallery-class">icon-small-recycle</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-refresh "></span>
+                                    <span class="icons-gallery-class">icon-small-refresh</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-rss "></span>
+                                    <span class="icons-gallery-class">icon-small-rss</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-save "></span>
+                                    <span class="icons-gallery-class">icon-small-save</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-scale-out "></span>
+                                    <span class="icons-gallery-class">icon-small-scale-out</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-searchleft "></span>
+                                    <span class="icons-gallery-class">icon-small-searchleft</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-secure "></span>
+                                    <span class="icons-gallery-class">icon-small-secure</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-securesoftware "></span>
+                                    <span class="icons-gallery-class">icon-small-securesoftware</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-server "></span>
+                                    <span class="icons-gallery-class">icon-small-server</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-serverrack "></span>
+                                    <span class="icons-gallery-class">icon-small-serverrack</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-share "></span>
+                                    <span class="icons-gallery-class">icon-small-share</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-shipping "></span>
+                                    <span class="icons-gallery-class">icon-small-shipping</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-socialnetworking "></span>
+                                    <span class="icons-gallery-class">icon-small-socialnetworking</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-software "></span>
+                                    <span class="icons-gallery-class">icon-small-software</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-solutions "></span>
+                                    <span class="icons-gallery-class">icon-small-solutions</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-speakers "></span>
+                                    <span class="icons-gallery-class">icon-small-speakers</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-star "></span>
+                                    <span class="icons-gallery-class">icon-small-star</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-storage "></span>
+                                    <span class="icons-gallery-class">icon-small-storage</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-support "></span>
+                                    <span class="icons-gallery-class">icon-small-support</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-surgeprotection "></span>
+                                    <span class="icons-gallery-class">icon-small-surgeprotection</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-tablet "></span>
+                                    <span class="icons-gallery-class">icon-small-tablet</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-thinclient "></span>
+                                    <span class="icons-gallery-class">icon-small-thinclient</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-touch "></span>
+                                    <span class="icons-gallery-class">icon-small-touch</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-touch-pad "></span>
+                                    <span class="icons-gallery-class">icon-small-touch-pad</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-towergeneric "></span>
+                                    <span class="icons-gallery-class">icon-small-towergeneric</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-trash "></span>
+                                    <span class="icons-gallery-class">icon-small-trash</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-tv "></span>
+                                    <span class="icons-gallery-class">icon-small-tv</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-useraccount "></span>
+                                    <span class="icons-gallery-class">icon-small-useraccount</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-video "></span>
+                                    <span class="icons-gallery-class">icon-small-video</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-videocard "></span>
+                                    <span class="icons-gallery-class">icon-small-videocard</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-virtualization "></span>
+                                    <span class="icons-gallery-class">icon-small-virtualization</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-warranty "></span>
+                                    <span class="icons-gallery-class">icon-small-warranty</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-webcam "></span>
+                                    <span class="icons-gallery-class">icon-small-webcam</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-whitepaper "></span>
+                                    <span class="icons-gallery-class">icon-small-whitepaper</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-wireless "></span>
+                                    <span class="icons-gallery-class">icon-small-wireless</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-zoomin "></span>
+                                    <span class="icons-gallery-class">icon-small-zoomin</span>
+                                </li>
+
+                                <li>
+                                    <span class="icon-small-zoomout "></span>
+                                    <span class="icons-gallery-class">icon-small-zoomout</span>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 bottom-offset-20 top-offset-20">
+                        <div class="icons-gallery">
+                            <div class="page-header">
+                                <h2>Large icons</h2>
+                            </div>
+                            <ul class="icons-gallery-list large">
+                                <li>
+                                    <span class="icon-large-360-hinge "></span>
+                                    <span class="icons-gallery-class">icon-large-360-hinge</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-add "></span>
+                                    <span class="icons-gallery-class">icon-large-add</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-alertcomplete "></span>
+                                    <span class="icons-gallery-class">icon-large-alertcomplete</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-alerterror "></span>
+                                    <span class="icons-gallery-class">icon-large-alerterror</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-alertinfo "></span>
+                                    <span class="icons-gallery-class">icon-large-alertinfo</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-alertnotice "></span>
+                                    <span class="icons-gallery-class">icon-large-alertnotice</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-audicard "></span>
+                                    <span class="icons-gallery-class">icon-large-audicard</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-audiospeaker "></span>
+                                    <span class="icons-gallery-class">icon-large-audiospeaker</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-award "></span>
+                                    <span class="icons-gallery-class">icon-large-award</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-battery "></span>
+                                    <span class="icons-gallery-class">icon-large-battery</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-bell "></span>
+                                    <span class="icons-gallery-class">icon-large-bell</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-cables "></span>
+                                    <span class="icons-gallery-class">icon-large-cables</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-calculator "></span>
+                                    <span class="icons-gallery-class">icon-large-calculator</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-calendar "></span>
+                                    <span class="icons-gallery-class">icon-large-calendar</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-carryingcase "></span>
+                                    <span class="icons-gallery-class">icon-large-carryingcase</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-cart "></span>
+                                    <span class="icons-gallery-class">icon-large-cart</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-chat "></span>
+                                    <span class="icons-gallery-class">icon-large-chat</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-checkmark "></span>
+                                    <span class="icons-gallery-class">icon-large-checkmark</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-chipset "></span>
+                                    <span class="icons-gallery-class">icon-large-chipset</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-clock "></span>
+                                    <span class="icons-gallery-class">icon-large-clock</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-cloud "></span>
+                                    <span class="icons-gallery-class">icon-large-cloud</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-color "></span>
+                                    <span class="icons-gallery-class">icon-large-color</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-computergeneric "></span>
+                                    <span class="icons-gallery-class">icon-large-computergeneric</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-contact "></span>
+                                    <span class="icons-gallery-class">icon-large-contact</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-copy "></span>
+                                    <span class="icons-gallery-class">icon-large-copy</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-data "></span>
+                                    <span class="icons-gallery-class">icon-large-data</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-deals "></span>
+                                    <span class="icons-gallery-class">icon-large-deals</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-detachable "></span>
+                                    <span class="icons-gallery-class">icon-large-detachable</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-diagnostic "></span>
+                                    <span class="icons-gallery-class">icon-large-diagnostic</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-dimensionsweight "></span>
+                                    <span class="icons-gallery-class">icon-large-dimensionsweight</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-display "></span>
+                                    <span class="icons-gallery-class">icon-large-display</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-download "></span>
+                                    <span class="icons-gallery-class">icon-large-download</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-drivers "></span>
+                                    <span class="icons-gallery-class">icon-large-drivers</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-edit "></span>
+                                    <span class="icons-gallery-class">icon-large-edit</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-employee "></span>
+                                    <span class="icons-gallery-class">icon-large-employee</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-energyefficient "></span>
+                                    <span class="icons-gallery-class">icon-large-energyefficient</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-enterprise "></span>
+                                    <span class="icons-gallery-class">icon-large-enterprise</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-e-value "></span>
+                                    <span class="icons-gallery-class">icon-large-e-value</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-giftcard "></span>
+                                    <span class="icons-gallery-class">icon-large-giftcard</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-globe "></span>
+                                    <span class="icons-gallery-class">icon-large-globe</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-graphics-card "></span>
+                                    <span class="icons-gallery-class">icon-large-graphics-card</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-harddrive "></span>
+                                    <span class="icons-gallery-class">icon-large-harddrive</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-help "></span>
+                                    <span class="icons-gallery-class">icon-large-help</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-house "></span>
+                                    <span class="icons-gallery-class">icon-large-house</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-infrastructure "></span>
+                                    <span class="icons-gallery-class">icon-large-infrastructure</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-inktoner "></span>
+                                    <span class="icons-gallery-class">icon-large-inktoner</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-keyboard "></span>
+                                    <span class="icons-gallery-class">icon-large-keyboard</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-lightbulb "></span>
+                                    <span class="icons-gallery-class">icon-large-lightbulb</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-location "></span>
+                                    <span class="icons-gallery-class">icon-large-location</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-magnifying-glass "></span>
+                                    <span class="icons-gallery-class">icon-large-magnifying-glass</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-mail "></span>
+                                    <span class="icons-gallery-class">icon-large-mail</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-memory "></span>
+                                    <span class="icons-gallery-class">icon-large-memory</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-memorycarreader "></span>
+                                    <span class="icons-gallery-class">icon-large-memorycarreader</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-missingimage "></span>
+                                    <span class="icons-gallery-class">icon-large-missingimage</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-mobile "></span>
+                                    <span class="icons-gallery-class">icon-large-mobile</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-mouse "></span>
+                                    <span class="icons-gallery-class">icon-large-mouse</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-music "></span>
+                                    <span class="icons-gallery-class">icon-large-music</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-network "></span>
+                                    <span class="icons-gallery-class">icon-large-network</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-notebook "></span>
+                                    <span class="icons-gallery-class">icon-large-notebook</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-operatingsystem "></span>
+                                    <span class="icons-gallery-class">icon-large-operatingsystem</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-opticaldrive "></span>
+                                    <span class="icons-gallery-class">icon-large-opticaldrive</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-package "></span>
+                                    <span class="icons-gallery-class">icon-large-package</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-partners "></span>
+                                    <span class="icons-gallery-class">icon-large-partners</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-performance "></span>
+                                    <span class="icons-gallery-class">icon-large-performance</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-phone "></span>
+                                    <span class="icons-gallery-class">icon-large-phone</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-photos "></span>
+                                    <span class="icons-gallery-class">icon-large-photos</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-ports "></span>
+                                    <span class="icons-gallery-class">icon-large-ports</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-powersupply "></span>
+                                    <span class="icons-gallery-class">icon-large-powersupply</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-printer "></span>
+                                    <span class="icons-gallery-class">icon-large-printer</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-processor "></span>
+                                    <span class="icons-gallery-class">icon-large-processor</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-projector "></span>
+                                    <span class="icons-gallery-class">icon-large-projector</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-protection "></span>
+                                    <span class="icons-gallery-class">icon-large-protection</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-recycle "></span>
+                                    <span class="icons-gallery-class">icon-large-recycle</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-refresh "></span>
+                                    <span class="icons-gallery-class">icon-large-refresh</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-rss "></span>
+                                    <span class="icons-gallery-class">icon-large-rss</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-save "></span>
+                                    <span class="icons-gallery-class">icon-large-save</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-scale-out "></span>
+                                    <span class="icons-gallery-class">icon-large-scale-out</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-searchleft "></span>
+                                    <span class="icons-gallery-class">icon-large-searchleft</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-secure "></span>
+                                    <span class="icons-gallery-class">icon-large-secure</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-securesoftware "></span>
+                                    <span class="icons-gallery-class">icon-large-securesoftware</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-server "></span>
+                                    <span class="icons-gallery-class">icon-large-server</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-serverrack "></span>
+                                    <span class="icons-gallery-class">icon-large-serverrack</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-share "></span>
+                                    <span class="icons-gallery-class">icon-large-share</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-shipping "></span>
+                                    <span class="icons-gallery-class">icon-large-shipping</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-socialnetworking "></span>
+                                    <span class="icons-gallery-class">icon-large-socialnetworking</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-software "></span>
+                                    <span class="icons-gallery-class">icon-large-software</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-solutions "></span>
+                                    <span class="icons-gallery-class">icon-large-solutions</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-speakers "></span>
+                                    <span class="icons-gallery-class">icon-large-speakers</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-star "></span>
+                                    <span class="icons-gallery-class">icon-large-star</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-storage "></span>
+                                    <span class="icons-gallery-class">icon-large-storage</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-support "></span>
+                                    <span class="icons-gallery-class">icon-large-support</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-surgeprotection "></span>
+                                    <span class="icons-gallery-class">icon-large-surgeprotection</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-tablet "></span>
+                                    <span class="icons-gallery-class">icon-large-tablet</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-thinclient "></span>
+                                    <span class="icons-gallery-class">icon-large-thinclient</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-touch "></span>
+                                    <span class="icons-gallery-class">icon-large-touch</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-touchpad "></span>
+                                    <span class="icons-gallery-class">icon-large-touchpad</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-towergeneric "></span>
+                                    <span class="icons-gallery-class">icon-large-towergeneric</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-trash "></span>
+                                    <span class="icons-gallery-class">icon-large-trash</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-tv "></span>
+                                    <span class="icons-gallery-class">icon-large-tv</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-useraccount "></span>
+                                    <span class="icons-gallery-class">icon-large-useraccount</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-video "></span>
+                                    <span class="icons-gallery-class">icon-large-video</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-videocard "></span>
+                                    <span class="icons-gallery-class">icon-large-videocard</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-virtualization "></span>
+                                    <span class="icons-gallery-class">icon-large-virtualization</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-warranty "></span>
+                                    <span class="icons-gallery-class">icon-large-warranty</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-webcam "></span>
+                                    <span class="icons-gallery-class">icon-large-webcam</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-whitepaper "></span>
+                                    <span class="icons-gallery-class">icon-large-whitepaper</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-wireless "></span>
+                                    <span class="icons-gallery-class">icon-large-wireless</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-zoomin "></span>
+                                    <span class="icons-gallery-class">icon-large-zoomin</span>
+                                </li>
+                                <li>
+                                    <span class="icon-large-zoomout "></span>
+                                    <span class="icons-gallery-class">icon-large-zoomout</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-offset-20 top-offset-20">
+                    <div class="icons-gallery">
+                        <div class="page-header">
+                            <h2>Bootstrap icons</h2>
+                        </div>
+                    </div>
+                    <p class="alert alert-info">All Bootstrap glyphicons are included in this library but usage should always be approved by Dell.com Governance Team.</p>
+                </div>
+            </section>
+            <section id="lists-html-example">
+                <div class="page-header">
+                    <h2>Lists</h2>
+                </div>
+                <!-- Lists -->
+                <div class="bottom-offset-20">
+                    <h3>Unordered lists</h3>
+                    <p>The default style for a list of items in which the order does <em>not</em> explicitly matter.</p>
+                </div>
+                <div id="unordered-list">
+                    <ul>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Consectetur adipiscing elit</li>
+                        <li>Integer molestie lorem at massa</li>
+                        <li>Facilisis in pretium nisl aliquet</li>
+                        <li>
+                            Nulla volutpat aliquam velit
+                            <ul>
+                                <li>Phasellus iaculis neque</li>
+                                <li>Purus sodales ultricies</li>
+                                <li>Vestibulum laoreet porttitor sem</li>
+                                <li>Ac tristique libero volutpat at</li>
+                            </ul>
+                        </li>
+                        <li>Faucibus porta lacus fringilla vel</li>
+                        <li>Aenean sit amet erat nunc</li>
+                        <li>Eget porttitor lorem</li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="bottom-offset-20">
+                    <h3>Ordered</h3>
+                    <p>A list of items in which the order <em>does</em> explicitly matter.</p>
+                </div>
+                <div id="order-list">
+                    <ol>
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Consectetur adipiscing elit</li>
+                        <li>Integer molestie lorem at massa</li>
+                        <li>Facilisis in pretium nisl aliquet</li>
+                        <li>Nulla volutpat aliquam velit</li>
+                        <li>Faucibus porta lacus fringilla vel</li>
+                        <li>Aenean sit amet erat nunc</li>
+                        <li>Eget porttitor lorem</li>
+                    </ol>
+                </div>
+                <hr>
+                <div class="bottom-offset-20">
+                    <h3>Unstyled</h3>
+                </div>
+                <div id="unstyled-list">
+                    <ul class="list-unstyled">
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>Consectetur adipiscing elit</li>
+                        <li>Integer molestie lorem at massa</li>
+                        <li>Facilisis in pretium nisl aliquet</li>
+                        <li>
+                            Nulla volutpat aliquam velit
+                            <ul>
+                                <li>Phasellus iaculis neque</li>
+                                <li>Purus sodales ultricies</li>
+                                <li>Vestibulum laoreet porttitor sem</li>
+                                <li>Ac tristique libero volutpat at</li>
+                            </ul>
+                        </li>
+                        <li>Faucibus porta lacus fringilla vel</li>
+                        <li>Aenean sit amet erat nunc</li>
+                        <li>Eget porttitor lorem</li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="bottom-offset-20">
+                    <h3>Inline</h3>
+                </div>
+                <div id="inline-list">
+                    <ul class="list-inline">
+                        <li>Lorem ipsum</li>
+                        <li>Phasellus iaculis</li>
+                        <li>Nulla volutpat</li>
+                        <li>Happy</li>
+                        <li>Trees</li>
+                    </ul>
+                </div>
+                <hr>
+                <div class="bottom-offset-20">
+                    <h3>Description</h3>
+                    <p>A list of terms with their associated descriptions.</p>
+                </div>
+                <div id="description-lists">
+                    <dl>
+                        <dt>Description lists</dt>
+                        <dd>A description list is perfect for defining terms.</dd>
+                        <dt>Euismod</dt>
+                        <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                        <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                        <dt>Malesuada porta</dt>
+                        <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                    </dl>
+                </div>
+                <hr>
+                <div class="bottom-offset-20">
+                    <h3>Horizontal description</h3>
+                </div>
+                <div id="horizontal-description">
+                    <dl class="dl-horizontal">
+                        <dt>Description lists</dt>
+                        <dd>A description list is perfect for defining terms.</dd>
+                        <dt>Euismod</dt>
+                        <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                        <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                        <dt>Malesuada porta</dt>
+                        <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                        <dt>Felis euismod semper eget lacinia</dt>
+                        <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+                    </dl>
+                </div>
+            </section>
+            <section id="labels-badges-html-example">
+                <!--  copy html description and dropdown -->
+                <div class="page-header">
+                    <h2>Labels and badges</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <h4>Standard labels</h4>
+                        <div class="bs-example">
+                            <div class="bottom-offset-small" id="default-label"><span class="label label-default">Default</span></div>
+                            <div class="bottom-offset-small hide"><span class="label label-primary ">Primary</span></div>
+                            <div class="bottom-offset-small hide"><span class="label label-success ">Success</span></div>
+                            <div class="bottom-offset-small" id="help-label"><span class="label label-info">Info</span></div>
+                            <div class="bottom-offset-small hide"><span class="label label-warning ">Warning</span></div>
+                            <div class="bottom-offset-small hide"><span class="label label-danger ">Danger</span></div>
+                            <div class="bottom-offset-small">* note that only default and info are currently allowed to be used in this theme.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-5">
+                        <h4>Standard badges</h4>
+                        <div class="bs-example">
+                            <ul class="nav nav-pills ">
+                                <li class="active"><a href="javascript:;">Home <span class="badge">42</span></a></li>
+                                <li><a href="javascript:;">Profile</a></li>
+                                <li><a href="javascript:;">Messages <span class="badge">3</span></a></li>
+                            </ul>
+                            <br>
+                            <div id="stacked-badges">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li class="active">
+                                        <a href="javascript:;">
+                                        <span class="badge pull-right">42</span>
+                                        Home
+                                        </a>
+                                    </li>
+                                    <li><a href="javascript:;">Profile</a></li>
+                                    <li>
+                                        <a href="javascript:;">
+                                        <span class="badge pull-right">3</span>
+                                        Messages
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="modals-html-example">
+                <div id="modal-demo-non-mobile">
+                    <div class="page-header">
+                        <h2>Modals</h2>
+                    </div>
+                    <div class="modal" style="position:relative;overflow:auto;display:block;background:darkgrey">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 class="modal-title">Modal title</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>One fine body…</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!-- /.modal -->
+                </div>
+            </section>
+            <section id="pagers-html-example">
+                <div class="bottom-offset-60">
+                    <div id="pager-example-HTML">
+                        <div class="page-header">
+                            <h2>Pagers</h2>
+                        </div>
+                        <div class="bottom-offset-40">
+                            <div id="centered-pager">
+                                <ul class="pager">
+                                    <li><a href="javascript:;"><span aria-hidden="true" class="icon-ui-arrowleft"></span></a></li>
+                                    <li><a href="javascript:;"><span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="pagination-html-example" class="">
+                <h3 class="bottom-offset-40">Centered pagination with page reference</h3>
+                <div class="bottom-offset-40">
+                    <div id="centered-with-page-reference">
+                        <ul class="pager">
+                            <li><a href="javascript:;"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
+                            <li>page&nbsp;<span class="btn disabled">3</span>&nbsp;of 9</li>
+                            <li><a href="javascript:;">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <h3 class="bottom-offset-40">Justified with page reference</h3>
+                <div class="bottom-offset-40">
+                    <div id="justified-with-page-reference">
+                        <ul class="pager">
+                            <li class="previous disabled"><a href="javascript:;"><span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous</a></li>
+                            <li><span class="btn disabled">1 of 9</span></li>
+                            <li class="next"><a href="javascript:;">Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="popovers-html-example" class="">
+                <div class="page-header">
+                    <h2>Popovers</h2>
+                </div>
+                <div class="bottom-offset-40">
+                    <ul class="list-inline">
+                        <li id="popover-on-top" class="top-offset-20">
+                            <div class="popover fade top in" style="display: block;position:relative"><div class="arrow"></div><h3 class="popover-title">Popover on top <button type="button" class="close pull-right visible-phone" data-dismiss="popover"><i class="icon-ui-close"></i></button></h3><div class="popover-content">Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</div></div>
+                        </li>
+                        <li id="popover-on-right" class="top-offset-20">
+                            <div class="popover fade right in" style="display: block;position:relative;left:20px"><div class="arrow"></div><h3 class="popover-title">Popover on right <button type="button" class="close pull-right visible-phone" data-dismiss="popover"><i class="icon-ui-close"></i></button></h3><div class="popover-content">Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</div></div>
+                        </li>
+                    </ul>
+                    <ul class="list-inline">
+                        <li id="popover-on-bottom" class="top-offset-20">
+                            <div class="popover fade bottom in" style="display: block;position:relative"><div class="arrow"></div><h3 class="popover-title">Popover on bottom <button type="button" class="close pull-right visible-phone" data-dismiss="popover"><i class="icon-ui-close"></i></button></h3><div class="popover-content">Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</div></div>
+                        </li>
+                        <li id="popover-on-left" class="top-offset-20">
+                            <div class="popover fade left in" style="display: block;position:relative;left:40px"><div class="arrow"></div><h3 class="popover-title">Popover on left <button type="button" class="close pull-right visible-phone" data-dismiss="popover"><i class="icon-ui-close"></i></button></h3><div class="popover-content">Vivamus sagittis lacus vel augue laoreet rutrum faucibus.</div></div>
+                        </li>
+                    </ul>
+                </div>
+                <style>
+                    @media only screen and (max-width: 767px) {
+                        #popovers-html-example .list-inline {
+                            margin:0;
+                        }
+                        #popovers-html-example .list-inline > li {
+                            padding:0;
+                            width:100%;
+                        }
+                    }
+
+                </style>
+            </section>
+            <section id="progress-bars-html-example">
+                <div class="page-header">
+                    <h2>Progress bars</h2>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span></div>
+                </div>
+                <div class="progress hide">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span></div>
+                </div>
+                <div class="progress hide">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"><span class="sr-only">20% Complete</span></div>
+                </div>
+                <div class="progress hide">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"><span class="sr-only">60% Complete (warning)</span></div>
+                </div>
+                <div class="progress hide">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%"><span class="sr-only">80% Complete (danger)</span></div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"><span class="sr-only">60% Complete</span></div>
+                </div>
+                <div class="progress hide">
+                    <div class="progress-bar progress-bar-success" style="width: 35%"><span class="sr-only">35% Complete (success)</span></div>
+                    <div class="progress-bar progress-bar-warning" style="width: 20%"><span class="sr-only">20% Complete (warning)</span></div>
+                    <div class="progress-bar progress-bar-danger" style="width: 10%"><span class='sr-only'>10% Complete (danger)</span></div>
+                </div>
+                <div>* note that onlyblue bars are currently allowed to be used in this theme.</div>
+            </section>
+            <section id="tables-html-example" class="">
+                <div class="page-header">
+                    <h2>Tables</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@TwBootstrap</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="tabs-html-example" class="">
+                <div class="page-header">
+                    <h2>Tabs</h2>
+                </div>
+                <h3>Default tabs</h3>
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#section-1" data-toggle="tab">
+                            Section 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-2" data-toggle="tab">
+                            Section 2
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-3" data-toggle="tab">
+                            Section 3
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-4" data-toggle="tab">
+                            Section 4
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="section-1">
+                            <p>
+                                Section 1: Phasellus venenatis eros eu eros consequat consequat. In hac habitasse platea dictumst. Ut quis hendrerit nisi. Nulla cursus adipiscing odio, a condimentum justo dapibus ut. Vestibulum in bibendum velit, eget commodo leo.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="section-2">
+                            <p>
+                                Section 2: Proin rhoncus quam et nulla tincidunt, sed mollis felis sagittis. Vivamus nunc diam, varius vitae libero vel, adipiscing adipiscing dui. Sed orci urna, facilisis quis volutpat vel, tempus nec dolor.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="section-3">
+                            <p>
+                                Section 3: Fusce eu vestibulum odio. Maecenas congue leo ultricies sagittis blandit. In id laoreet felis. In eget velit dapibus, egestas justo ut, rutrum sem. Donec eget dui et tortor tincidunt imperdiet at sit amet est. Sed ultricies adipiscing lectus nec porta. Quisque justo augue, porta posuere fringilla non, dictum nec dolor. Sed placerat nulla odio, vel ullamcorper velit ultricies ut. Suspendisse potenti.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="section-4">
+                            <p>
+                                Section 4: Fusce eu vestibulum odio. Maecenas congue leo ultricies sagittis blandit. In id laoreet felis. In eget velit dapibus, egestas justo ut, rutrum sem. Donec eget dui et tortor tincidunt imperdiet at sit amet est. Sed ultricies adipiscing lectus nec porta. Quisque justo augue, porta posuere fringilla non, dictum nec dolor. Sed placerat nulla odio, vel ullamcorper velit ultricies ut. Suspendisse potenti.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Justified tabs</h3>
+                <div class="tabbable">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active">
+                            <a href="#section-5" data-toggle="tab">
+                            Section 1
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-6" data-toggle="tab">
+                            Section 2
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-7" data-toggle="tab">
+                            Section 3
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-8" data-toggle="tab">
+                            Section 4
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="section-5">
+                            <p>
+                                Section 1: Phasellus venenatis eros eu eros consequat consequat. In hac habitasse platea dictumst. Ut quis hendrerit nisi. Nulla cursus adipiscing odio, a condimentum justo dapibus ut. Vestibulum in bibendum velit, eget commodo leo.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="section-6">
+                            <p>
+                                Section 2: Proin rhoncus quam et nulla tincidunt, sed mollis felis sagittis. Vivamus nunc diam, varius vitae libero vel, adipiscing adipiscing dui. Sed orci urna, facilisis quis volutpat vel, tempus nec dolor.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="section-7">
+                            <p>
+                                Section 3: Fusce eu vestibulum odio. Maecenas congue leo ultricies sagittis blandit. In id laoreet felis. In eget velit dapibus, egestas justo ut, rutrum sem. Donec eget dui et tortor tincidunt imperdiet at sit amet est. Sed ultricies adipiscing lectus nec porta. Quisque justo augue, porta posuere fringilla non, dictum nec dolor. Sed placerat nulla odio, vel ullamcorper velit ultricies ut. Suspendisse potenti.
+                            </p>
+                        </div>
+                        <div class="tab-pane fade" id="section-8">
+                            <p>
+                                Section 4: Fusce eu vestibulum odio. Maecenas congue leo ultricies sagittis blandit. In id laoreet felis. In eget velit dapibus, egestas justo ut, rutrum sem. Donec eget dui et tortor tincidunt imperdiet at sit amet est. Sed ultricies adipiscing lectus nec porta. Quisque justo augue, porta posuere fringilla non, dictum nec dolor. Sed placerat nulla odio, vel ullamcorper velit ultricies ut. Suspendisse potenti.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="tooltips-html-example">
+                <div class="page-header">
+                    <h2>Tooltips</h2>
+                </div>
+                <style>
+                    .tooltips-html-example .tooltip {
+                        position: relative;
+                        display: inline-block;
+                        margin: 10px 20px;
+                        opacity: 1;
+                    }
+                </style>
+                <div class="tooltips-html-example">
+                    <div class="tooltip left" role="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                        Tooltip on the left
+                      </div>
+                    </div>
+                    <div class="tooltip top" role="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                        Tooltip on the top
+                      </div>
+                    </div>
+                    <div class="tooltip bottom" role="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                        Tooltip on the bottom
+                      </div>
+                    </div>
+                    <div class="tooltip right" role="tooltip">
+                      <div class="tooltip-arrow"></div>
+                      <div class="tooltip-inner">
+                        Tooltip on the right
+                      </div>
+                    </div>
+                    <p>Tooltip trigger should have a <span data-toggle="tooltip">dashed line.</span></p>
+                  </div>
+            </section>
+            <section id="typography">
+                <div class="top-offset-40">
+                    <h2>Typography</h2>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div id="h1-example" class="hide">
+                                    <h1>Heading 1</h1>
+                                </div>
+                                <h1 class="visible-lg">
+                                H1 : 32px/40px</h2>
+                                <h1 class="visible-md">
+                                H1 : 32px/40px</h2>
+                                <h1 class="visible-sm">
+                                H1 : 30px/36px</h2>
+                                <h1 class="visible-xs">
+                                H1 : 24px/28px</h2>
+                                <p><small>Font-family: museo-sans-for-dell-300</small></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="h2-example" class="hide">
+                                    <h2>Heading 2</h2>
+                                </div>
+                                <h2 class="visible-lg">H2 : 28px/32px</h2>
+                                <h2 class="visible-md">H2 : 28px/32px</h2>
+                                <h2 class="visible-sm">H2 : 26px/30px</h2>
+                                <h2 class="visible-xs">H2 : 20px/24px</h2>
+                                <p><small>Font-family: Museo Sans for Dell 300</small></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="h3-example" class="hide">
+                                    <h3>Heading 3</h3>
+                                </div>
+                                <h3 class="visible-lg">H3 : 20px/24px</h3>
+                                <h3 class="visible-md">H3 : 20px/24px</h3>
+                                <h3 class="visible-sm">H3 : 20px/24px</h3>
+                                <h3 class="visible-xs">H3 : 17px/20px</h3>
+                                <p><small>Font-family: Museo Sans for Dell 300</small></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="h4-example" class="hide">
+                                    <h4>Heading 4</h4>
+                                </div>
+                                <h4 class="visible-lg">H4 : 18px/22px</h4>
+                                <h4 class="visible-md">H4 : 18px/22px</h4>
+                                <h4 class="visible-sm">H4 : 18px/22px</h4>
+                                <h4 class="visible-xs">H4 : 16px/20px</h4>
+                                <p><small>Font-family: Trebuchet MS</small></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="h5-example" class="hide">
+                                    <h5>Heading 5</h5>
+                                </div>
+                                <h5 class="visible-lg">H5 : 16px/20px</h5>
+                                <h5 class="visible-md">H5 : 16px/20px</h5>
+                                <h5 class="visible-sm">H5 : 16px/20px</h5>
+                                <h5 class="visible-xs">H5 : 14px/20px</h5>
+                                <p><small>Font-family: Trebuchet MS</small></p>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div>
+                    <h3>Example body text <small>(default)</small></h3>
+                    <div id="example-body-text">
+                        <p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                        </p>
+                    </div>
+                    <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo
+                        luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.
+                    </p>
+                </div>
+                <div class="top-offset-30">
+                    <h3>Example small text <small>(fine print)</small></h3>
+                    <div>
+                        <p id="example-small-body-text">
+                            <small>This copy is meant to be treated as fine print. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis
+                            parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                            </small>
+                        </p>
+                        <p>
+                            <small>This copy is meant to be treated as fine print. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non
+                            commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                <div class="bottom-offset-40">
+                    <h3>Example bold copy</h3>
+                    <div class="well well-small bottom-offset-40">
+                        <div id="strong-text">
+                            <strong>Text rendered as bold text</strong>
+                        </div>
+                    </div>
+                    <h3>Example italicized copy</h3>
+                    <div class="well well-small bottom-offset-40">
+                        <div id="italic-text">
+                            <em>Text rendered as italicized text</em>
+                        </div>
+                    </div>
+                </div>
+                <h3>Example strikethrough</h3>
+                <div class="well well-small bottom-offset-40">
+                    <div id="strikethrough-text">
+                        <p class="strike-through">This is an example of strikethrough text.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -34,9 +34,13 @@ ul.ratings {
 	.progress {
 		margin-bottom:10px;
 	}
-	.row {
+	> .row {
+		margin:0;
+		[class*=col-] {
+			margin-bottom:0 !important;
+		}
 		> div:last-child {
-			margin-left:-20px;
+			margin-left:-10px !important;
 		}
 	}
 }
