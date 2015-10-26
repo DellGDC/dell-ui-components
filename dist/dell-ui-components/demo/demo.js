@@ -56534,6 +56534,357 @@ var KeyTable;
     'datatables'
   ], A) : 'object' === typeof exports ? A(require('jquery'), require('datatables')) : jQuery && !jQuery.fn.dataTable.KeyTable && A(jQuery, jQuery.fn.dataTable);
 }(window, document));
+/*!
+ ColReorder 1.1.3
+ ©2010-2014 SpryMedia Ltd - datatables.net/license
+*/
+(function (o, r, s) {
+  function p(d) {
+    for (var f = [], a = 0, b = d.length; a < b; a++)
+      f[d[a]] = a;
+    return f;
+  }
+  function l(d, f, a) {
+    f = d.splice(f, 1)[0];
+    d.splice(a, 0, f);
+  }
+  function q(d, f, a) {
+    for (var b = [], e = 0, h = d.childNodes.length; e < h; e++)
+      1 == d.childNodes[e].nodeType && b.push(d.childNodes[e]);
+    f = b[f];
+    null !== a ? d.insertBefore(f, b[a]) : d.appendChild(f);
+  }
+  o = function (d) {
+    d.fn.dataTableExt.oApi.fnColReorder = function (a, b, e) {
+      var h = d.fn.dataTable.Api ? !0 : !1, c, g, f, m, n = a.aoColumns.length, i, j;
+      i = function (a, b, c) {
+        if (a[b]) {
+          var e = a[b].split('.'), d = e.shift();
+          isNaN(1 * d) || (a[b] = c[1 * d] + '.' + e.join('.'));
+        }
+      };
+      if (b != e)
+        if (0 > b || b >= n)
+          this.oApi._fnLog(a, 1, 'ColReorder \'from\' index is out of bounds: ' + b);
+        else if (0 > e || e >= n)
+          this.oApi._fnLog(a, 1, 'ColReorder \'to\' index is out of bounds: ' + e);
+        else {
+          f = [];
+          c = 0;
+          for (g = n; c < g; c++)
+            f[c] = c;
+          l(f, b, e);
+          var k = p(f);
+          c = 0;
+          for (g = a.aaSorting.length; c < g; c++)
+            a.aaSorting[c][0] = k[a.aaSorting[c][0]];
+          if (null !== a.aaSortingFixed) {
+            c = 0;
+            for (g = a.aaSortingFixed.length; c < g; c++)
+              a.aaSortingFixed[c][0] = k[a.aaSortingFixed[c][0]];
+          }
+          c = 0;
+          for (g = n; c < g; c++) {
+            j = a.aoColumns[c];
+            f = 0;
+            for (m = j.aDataSort.length; f < m; f++)
+              j.aDataSort[f] = k[j.aDataSort[f]];
+            h && (j.idx = k[j.idx]);
+          }
+          h && d.each(a.aLastSort, function (b, c) {
+            a.aLastSort[b].src = k[c.src];
+          });
+          c = 0;
+          for (g = n; c < g; c++)
+            j = a.aoColumns[c], 'number' == typeof j.mData ? (j.mData = k[j.mData], a.oApi._fnColumnOptions(a, c, {})) : d.isPlainObject(j.mData) && (i(j.mData, '_', k), i(j.mData, 'filter', k), i(j.mData, 'sort', k), i(j.mData, 'type', k), a.oApi._fnColumnOptions(a, c, {}));
+          if (a.aoColumns[b].bVisible) {
+            f = this.oApi._fnColumnIndexToVisible(a, b);
+            m = null;
+            for (c = e < b ? e : e + 1; null === m && c < n;)
+              m = this.oApi._fnColumnIndexToVisible(a, c), c++;
+            i = a.nTHead.getElementsByTagName('tr');
+            c = 0;
+            for (g = i.length; c < g; c++)
+              q(i[c], f, m);
+            if (null !== a.nTFoot) {
+              i = a.nTFoot.getElementsByTagName('tr');
+              c = 0;
+              for (g = i.length; c < g; c++)
+                q(i[c], f, m);
+            }
+            c = 0;
+            for (g = a.aoData.length; c < g; c++)
+              null !== a.aoData[c].nTr && q(a.aoData[c].nTr, f, m);
+          }
+          l(a.aoColumns, b, e);
+          l(a.aoPreSearchCols, b, e);
+          c = 0;
+          for (g = a.aoData.length; c < g; c++)
+            i = a.aoData[c], h ? (i.anCells && l(i.anCells, b, e), 'dom' !== i.src && d.isArray(i._aData) && l(i._aData, b, e)) : (d.isArray(i._aData) && l(i._aData, b, e), l(i._anHidden, b, e));
+          c = 0;
+          for (g = a.aoHeader.length; c < g; c++)
+            l(a.aoHeader[c], b, e);
+          if (null !== a.aoFooter) {
+            c = 0;
+            for (g = a.aoFooter.length; c < g; c++)
+              l(a.aoFooter[c], b, e);
+          }
+          h && new d.fn.dataTable.Api(a).rows().invalidate();
+          c = 0;
+          for (g = n; c < g; c++)
+            d(a.aoColumns[c].nTh).off('click.DT'), this.oApi._fnSortAttachListener(a, a.aoColumns[c].nTh, c);
+          d(a.oInstance).trigger('column-reorder', [
+            a,
+            {
+              iFrom: b,
+              iTo: e,
+              aiInvertMapping: k
+            }
+          ]);
+        }
+    };
+    var f = function (a, b) {
+      var e;
+      d.fn.dataTable.Api ? e = new d.fn.dataTable.Api(a).settings()[0] : a.fnSettings ? e = a.fnSettings() : 'string' === typeof a ? d.fn.dataTable.fnIsDataTable(d(a)[0]) && (e = d(a).eq(0).dataTable().fnSettings()) : a.nodeName && 'table' === a.nodeName.toLowerCase() ? d.fn.dataTable.fnIsDataTable(a.nodeName) && (e = d(a.nodeName).dataTable().fnSettings()) : a instanceof jQuery ? d.fn.dataTable.fnIsDataTable(a[0]) && (e = a.eq(0).dataTable().fnSettings()) : e = a;
+      if (e._colReorder)
+        throw 'ColReorder already initialised on table #' + e.nTable.id;
+      var h = d.fn.dataTable.camelToHungarian;
+      h && (h(f.defaults, f.defaults, !0), h(f.defaults, b || {}));
+      this.s = {
+        dt: null,
+        init: d.extend(!0, {}, f.defaults, b),
+        fixed: 0,
+        fixedRight: 0,
+        reorderCallback: null,
+        mouse: {
+          startX: -1,
+          startY: -1,
+          offsetX: -1,
+          offsetY: -1,
+          target: -1,
+          targetIndex: -1,
+          fromIndex: -1
+        },
+        aoTargets: []
+      };
+      this.dom = {
+        drag: null,
+        pointer: null
+      };
+      this.s.dt = e;
+      this.s.dt._colReorder = this;
+      this._fnConstruct();
+      e.oApi._fnCallbackReg(e, 'aoDestroyCallback', d.proxy(this._fnDestroy, this), 'ColReorder');
+      return this;
+    };
+    f.prototype = {
+      fnReset: function () {
+        for (var a = [], b = 0, e = this.s.dt.aoColumns.length; b < e; b++)
+          a.push(this.s.dt.aoColumns[b]._ColReorder_iOrigCol);
+        this._fnOrderColumns(a);
+        return this;
+      },
+      fnGetCurrentOrder: function () {
+        return this.fnOrder();
+      },
+      fnOrder: function (a) {
+        if (a === s) {
+          for (var a = [], b = 0, e = this.s.dt.aoColumns.length; b < e; b++)
+            a.push(this.s.dt.aoColumns[b]._ColReorder_iOrigCol);
+          return a;
+        }
+        this._fnOrderColumns(p(a));
+        return this;
+      },
+      _fnConstruct: function () {
+        var a = this, b = this.s.dt.aoColumns.length, e;
+        this.s.init.iFixedColumns && (this.s.fixed = this.s.init.iFixedColumns);
+        this.s.fixedRight = this.s.init.iFixedColumnsRight ? this.s.init.iFixedColumnsRight : 0;
+        this.s.init.fnReorderCallback && (this.s.reorderCallback = this.s.init.fnReorderCallback);
+        for (e = 0; e < b; e++)
+          e > this.s.fixed - 1 && e < b - this.s.fixedRight && this._fnMouseListener(e, this.s.dt.aoColumns[e].nTh), this.s.dt.aoColumns[e]._ColReorder_iOrigCol = e;
+        this.s.dt.oApi._fnCallbackReg(this.s.dt, 'aoStateSaveParams', function (b, c) {
+          a._fnStateSave.call(a, c);
+        }, 'ColReorder_State');
+        var d = null;
+        this.s.init.aiOrder && (d = this.s.init.aiOrder.slice());
+        this.s.dt.oLoadedState && ('undefined' != typeof this.s.dt.oLoadedState.ColReorder && this.s.dt.oLoadedState.ColReorder.length == this.s.dt.aoColumns.length) && (d = this.s.dt.oLoadedState.ColReorder);
+        if (d)
+          if (a.s.dt._bInitComplete)
+            b = p(d), a._fnOrderColumns.call(a, b);
+          else {
+            var c = !1;
+            this.s.dt.aoDrawCallback.push({
+              fn: function () {
+                if (!a.s.dt._bInitComplete && !c) {
+                  c = true;
+                  var b = p(d);
+                  a._fnOrderColumns.call(a, b);
+                }
+              },
+              sName: 'ColReorder_Pre'
+            });
+          }
+        else
+          this._fnSetColumnIndexes();
+      },
+      _fnOrderColumns: function (a) {
+        if (a.length != this.s.dt.aoColumns.length)
+          this.s.dt.oInstance.oApi._fnLog(this.s.dt, 1, 'ColReorder - array reorder does not match known number of columns. Skipping.');
+        else {
+          for (var b = 0, e = a.length; b < e; b++) {
+            var h = d.inArray(b, a);
+            b != h && (l(a, h, b), this.s.dt.oInstance.fnColReorder(h, b));
+          }
+          ('' !== this.s.dt.oScroll.sX || '' !== this.s.dt.oScroll.sY) && this.s.dt.oInstance.fnAdjustColumnSizing(!1);
+          this.s.dt.oInstance.oApi._fnSaveState(this.s.dt);
+          this._fnSetColumnIndexes();
+          null !== this.s.reorderCallback && this.s.reorderCallback.call(this);
+        }
+      },
+      _fnStateSave: function (a) {
+        var b, e, h, c = this.s.dt.aoColumns;
+        a.ColReorder = [];
+        if (a.aaSorting) {
+          for (b = 0; b < a.aaSorting.length; b++)
+            a.aaSorting[b][0] = c[a.aaSorting[b][0]]._ColReorder_iOrigCol;
+          var f = d.extend(!0, [], a.aoSearchCols);
+          b = 0;
+          for (e = c.length; b < e; b++)
+            h = c[b]._ColReorder_iOrigCol, a.aoSearchCols[h] = f[b], a.abVisCols[h] = c[b].bVisible, a.ColReorder.push(h);
+        } else if (a.order) {
+          for (b = 0; b < a.order.length; b++)
+            a.order[b][0] = c[a.order[b][0]]._ColReorder_iOrigCol;
+          f = d.extend(!0, [], a.columns);
+          b = 0;
+          for (e = c.length; b < e; b++)
+            h = c[b]._ColReorder_iOrigCol, a.columns[h] = f[b], a.ColReorder.push(h);
+        }
+      },
+      _fnMouseListener: function (a, b) {
+        var e = this;
+        d(b).on('mousedown.ColReorder', function (a) {
+          a.preventDefault();
+          e._fnMouseDown.call(e, a, b);
+        });
+      },
+      _fnMouseDown: function (a, b) {
+        var e = this, f = d(a.target).closest('th, td').offset(), c = parseInt(d(b).attr('data-column-index'), 10);
+        c !== s && (this.s.mouse.startX = a.pageX, this.s.mouse.startY = a.pageY, this.s.mouse.offsetX = a.pageX - f.left, this.s.mouse.offsetY = a.pageY - f.top, this.s.mouse.target = this.s.dt.aoColumns[c].nTh, this.s.mouse.targetIndex = c, this.s.mouse.fromIndex = c, this._fnRegions(), d(r).on('mousemove.ColReorder', function (a) {
+          e._fnMouseMove.call(e, a);
+        }).on('mouseup.ColReorder', function (a) {
+          e._fnMouseUp.call(e, a);
+        }));
+      },
+      _fnMouseMove: function (a) {
+        if (null === this.dom.drag) {
+          if (5 > Math.pow(Math.pow(a.pageX - this.s.mouse.startX, 2) + Math.pow(a.pageY - this.s.mouse.startY, 2), 0.5))
+            return;
+          this._fnCreateDragNode();
+        }
+        this.dom.drag.css({
+          left: a.pageX - this.s.mouse.offsetX,
+          top: a.pageY - this.s.mouse.offsetY
+        });
+        for (var b = !1, e = this.s.mouse.toIndex, d = 1, c = this.s.aoTargets.length; d < c; d++)
+          if (a.pageX < this.s.aoTargets[d - 1].x + (this.s.aoTargets[d].x - this.s.aoTargets[d - 1].x) / 2) {
+            this.dom.pointer.css('left', this.s.aoTargets[d - 1].x);
+            this.s.mouse.toIndex = this.s.aoTargets[d - 1].to;
+            b = !0;
+            break;
+          }
+        b || (this.dom.pointer.css('left', this.s.aoTargets[this.s.aoTargets.length - 1].x), this.s.mouse.toIndex = this.s.aoTargets[this.s.aoTargets.length - 1].to);
+        this.s.init.bRealtime && e !== this.s.mouse.toIndex && (this.s.dt.oInstance.fnColReorder(this.s.mouse.fromIndex, this.s.mouse.toIndex), this.s.mouse.fromIndex = this.s.mouse.toIndex, this._fnRegions());
+      },
+      _fnMouseUp: function () {
+        d(r).off('mousemove.ColReorder mouseup.ColReorder');
+        null !== this.dom.drag && (this.dom.drag.remove(), this.dom.pointer.remove(), this.dom.drag = null, this.dom.pointer = null, this.s.dt.oInstance.fnColReorder(this.s.mouse.fromIndex, this.s.mouse.toIndex), this._fnSetColumnIndexes(), ('' !== this.s.dt.oScroll.sX || '' !== this.s.dt.oScroll.sY) && this.s.dt.oInstance.fnAdjustColumnSizing(!1), this.s.dt.oInstance.oApi._fnSaveState(this.s.dt), null !== this.s.reorderCallback && this.s.reorderCallback.call(this));
+      },
+      _fnRegions: function () {
+        var a = this.s.dt.aoColumns;
+        this.s.aoTargets.splice(0, this.s.aoTargets.length);
+        this.s.aoTargets.push({
+          x: d(this.s.dt.nTable).offset().left,
+          to: 0
+        });
+        for (var b = 0, e = 0, f = a.length; e < f; e++)
+          e != this.s.mouse.fromIndex && b++, a[e].bVisible && this.s.aoTargets.push({
+            x: d(a[e].nTh).offset().left + d(a[e].nTh).outerWidth(),
+            to: b
+          });
+        0 !== this.s.fixedRight && this.s.aoTargets.splice(this.s.aoTargets.length - this.s.fixedRight);
+        0 !== this.s.fixed && this.s.aoTargets.splice(0, this.s.fixed);
+      },
+      _fnCreateDragNode: function () {
+        var a = '' !== this.s.dt.oScroll.sX || '' !== this.s.dt.oScroll.sY, b = this.s.dt.aoColumns[this.s.mouse.targetIndex].nTh, e = b.parentNode, f = e.parentNode, c = f.parentNode, g = d(b).clone();
+        this.dom.drag = d(c.cloneNode(!1)).addClass('DTCR_clonedTable').append(d(f.cloneNode(!1)).append(d(e.cloneNode(!1)).append(g[0]))).css({
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: d(b).outerWidth(),
+          height: d(b).outerHeight()
+        }).appendTo('body');
+        this.dom.pointer = d('<div></div>').addClass('DTCR_pointer').css({
+          position: 'absolute',
+          top: a ? d('div.dataTables_scroll', this.s.dt.nTableWrapper).offset().top : d(this.s.dt.nTable).offset().top,
+          height: a ? d('div.dataTables_scroll', this.s.dt.nTableWrapper).height() : d(this.s.dt.nTable).height()
+        }).appendTo('body');
+      },
+      _fnDestroy: function () {
+        var a, b;
+        a = 0;
+        for (b = this.s.dt.aoDrawCallback.length; a < b; a++)
+          if ('ColReorder_Pre' === this.s.dt.aoDrawCallback[a].sName) {
+            this.s.dt.aoDrawCallback.splice(a, 1);
+            break;
+          }
+        d(this.s.dt.nTHead).find('*').off('.ColReorder');
+        d.each(this.s.dt.aoColumns, function (a, b) {
+          d(b.nTh).removeAttr('data-column-index');
+        });
+        this.s = this.s.dt._colReorder = null;
+      },
+      _fnSetColumnIndexes: function () {
+        d.each(this.s.dt.aoColumns, function (a, b) {
+          d(b.nTh).attr('data-column-index', a);
+        });
+      }
+    };
+    f.defaults = {
+      aiOrder: null,
+      bRealtime: !1,
+      iFixedColumns: 0,
+      iFixedColumnsRight: 0,
+      fnReorderCallback: null
+    };
+    f.version = '1.1.3';
+    d.fn.dataTable.ColReorder = f;
+    d.fn.DataTable.ColReorder = f;
+    'function' == typeof d.fn.dataTable && 'function' == typeof d.fn.dataTableExt.fnVersionCheck && d.fn.dataTableExt.fnVersionCheck('1.9.3') ? d.fn.dataTableExt.aoFeatures.push({
+      fnInit: function (a) {
+        var b = a.oInstance;
+        a._colReorder ? b.oApi._fnLog(a, 1, 'ColReorder attempted to initialise twice. Ignoring second') : (b = a.oInit, new f(a, b.colReorder || b.oColReorder || {}));
+        return null;
+      },
+      cFeature: 'R',
+      sFeature: 'ColReorder'
+    }) : alert('Warning: ColReorder requires DataTables 1.9.3 or greater - www.datatables.net/download');
+    d.fn.dataTable.Api && (d.fn.dataTable.Api.register('colReorder.reset()', function () {
+      return this.iterator('table', function (a) {
+        a._colReorder.fnReset();
+      });
+    }), d.fn.dataTable.Api.register('colReorder.order()', function (a) {
+      return a ? this.iterator('table', function (b) {
+        b._colReorder.fnOrder(a);
+      }) : this.context.length ? this.context[0]._colReorder.fnOrder() : null;
+    }));
+    return f;
+  };
+  'function' === typeof define && define.amd ? define([
+    'jquery',
+    'datatables'
+  ], o) : 'object' === typeof exports ? o(require('jquery'), require('datatables')) : jQuery && !jQuery.fn.dataTable.ColReorder && o(jQuery, jQuery.fn.dataTable);
+}(window, document));
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 }).run([
@@ -57969,6 +58320,7 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
                 'targets': 0,
                 'searchable': true,
                 'orderable': false,
+                'stateSave': true,
                 'className': 'dt-body-center',
                 'render': function (data, type, full, meta) {
                   return '<input type="checkbox">';
@@ -58017,6 +58369,7 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
               1,
               'asc'
             ],
+            'dom': 'C<"clear">lfrtip',
             'pagingType': 'simple',
             'language': {
               'paginate': {
@@ -58057,10 +58410,6 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
           //Prevent click event from propagating to parent
           e.stopPropagation();
         });
-        // Handle click on table cells with checkboxes
-        //$('#table-uber').on('click', 'tbody td, thead th:first-child', function(e){
-        //    $(this).parent().find('input[type="checkbox"]').trigger('click');
-        //});
         // Handle click on "Select all" control
         $('#table-uber thead input[name="select_all"]').on('click', function (e) {
           if (this.checked) {
@@ -58085,19 +58434,6 @@ angular.module('dellUiComponents').directive('tableResponsiveColumns', [
             $(form).append($('<input>').attr('type', 'hidden').attr('name', 'id[]').val(rowId));
           });
         });
-        //var inputTable = $element.DataTable(tableData);
-        //if($element.hasClass('table-editable')) {
-        //    $timeout(function(){
-        //        //console.log("editable table here");
-        //        $element.find('td.editable').attr("contenteditable",true);
-        //        $element.find('td.editable').on('blur',function(e){
-        //            var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
-        //            if(data !== newData) {
-        //                //console.log( 'You edited '+data+' and changed it to '+newData,inputTable);
-        //            }
-        //        } );
-        //    },100);
-        //}
         var inputTable = $element.DataTable(tableData);
         if ($element.hasClass('table-editable')) {
           $timeout(function () {
@@ -59030,7 +59366,7 @@ angular.module('dellUiComponents').run([
     'use strict';
     $templateCache.put('components/alerts/demo-alerts.html', '<section ng-controller=alertsCtrl id=alerts-html-example><div class=container><h2>Alerts Demo</h2><h3 class=bottom-offset-20>Alert types</h3><div class="alert alert-warning"><p><strong>User Errors:</strong>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p></div><div class="row bottom-offset-20"><div class="col-xs-12 col-md-4"><div class="alert alert-success alert-collapsible"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-2>\xd7</button><p class=show-expanded><strong>Success Alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Information Alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></div><h3 class="top-offset-40 bottom-offset-20">Informational alerts</h3><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Informational alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-info alert-collapsible"><button type=button class=close data-toggle=collapse data-target=".cssDataTargetDismiss-5 ">\xd7</button><div class=show-expanded><h4>Informational alerts example with a title.</h4><p>Information alerts display important information for the page. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Informational alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>first</strong> dismissed alert</p></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Additional alert example.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>second</strong> dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Success alerts</h3><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Success alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title.</h4><p><strong>Success alerts:</strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Indicates the task has been completed successfully. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div><h3 class="top-offset-40 bottom-offset-20">User Error</h3><div class="alert alert-warning alert-collapsible"><p class=show-expanded><strong>User Errors:</strong> A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class=alert-warning><h4>User Errors example with a title and multiple links.</h4><p class=bottom-offset-0>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Dismissible informational alert example with title.</h4><p class=bottom-offset-0>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas scelerisque porttitor.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Catastrophic Error</h3><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div><div class="alert alert-error"><h4>Catastrophic Errors example with a title</h4><p>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></section>');
     $templateCache.put('components/alerts/demo-play-alerts.html', '<section ng-controller=alertsPLayDemoCtrl id=alerts-play-demo><div class=container><h2>Alerts Builder</h2><div></div></div></section>');
-    $templateCache.put('components/anchored-nav/demo-anchored-nav.html', '<section ng-controller=anchoredNavCtrl id=anchored-nav-html-example><div class=container><h2>Anchored Nav Demo</h2><div class=row><h3 class="col-xs-12 top-offset-60">Affixed Tabs</h3></div></div><div class=container><div class=row><div class=col-sm-9><nav class="navbar hidden-xs"><ul id=nav-achored-example class="nav navbar-nav nav-anchored"><li class=active><a href=#section1>Section 1</a></li><li><a href=#section2>Section 2</a></li><li><a href=#section3>Section 3</a></li><li><a href=#section4>Section 4</a></li></ul></nav><section id=section1 class=bottom-offset-30><h3 class=text-blue><a href=javascript:;>Section 1</a></h3><div class="row bottom-offset-20"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div></section><hr class="hr-gray-light"><section id=section2 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 2</a></h3><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section><hr class="hr-gray-light"><section id=section3 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 3</a></h3><div class="row bottom-offset-20"><p class=col-sm-8>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><img src=http://placehold.it/175x125 class="img-responsive col-sm-4 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div></section><hr class="hr-gray-light"><section id=section4 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 4</a></h3><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section></div><div class=col-sm-3><div class=well style=height:1000px>Sidebar</div></div></div></div></section>');
+    $templateCache.put('components/anchored-nav/demo-anchored-nav.html', '<section ng-controller=anchoredNavCtrl id=anchored-nav-html-example><div class=container><h2>Anchored Nav Demo</h2><div class=row><h3 class="col-xs-12 top-offset-60">Affixed Tabs</h3></div></div><div class=container><div class=row><div class=col-sm-9><nav class="navbar hidden-xs"><ul id=nav-achored-example class="nav navbar-nav nav-anchored"><li class=active><a href=#section1>Section 1</a></li><li><a href=#section2>Section 2</a></li><li><a href=#section3>Section 3</a></li><li><a href=#section4>Section 4</a></li></ul></nav><section id=section1 class=bottom-offset-30><h3 class=text-blue><a href=javascript:;>Section 1</a></h3><div class="row bottom-offset-20"><div class=col-sm-9><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div><div class=col-sm-3><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"></div></div><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div></section><hr class="hr-gray-light"><section id=section2 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 2</a></h3><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section><hr class="hr-gray-light"><section id=section3 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 3</a></h3><div class="row bottom-offset-20"><p class=col-sm-8>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><img src=http://placehold.it/175x125 class="img-responsive col-sm-4 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div></section><hr class="hr-gray-light"><section id=section4 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 4</a></h3><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section></div><div class=col-sm-3><div class=well style=height:1000px>Sidebar</div></div></div></div></section>');
     $templateCache.put('components/anchored-nav/demo-play-anchored-nav.html', '<section ng-controller=anchoredNavPLayDemoCtrl id=anchored-nav-play-demo><div class=container><h2>Anchored_nav Builder</h2><div></div></div></section>');
     $templateCache.put('components/announcements/demo-announcements.html', '<section ng-controller=announcementsCtrl id=announcements-html-example><div class=container><h2>Announcements Demo</h2><div><h3>Default announcement (Bootstrap blockquote)</h3><blockquote><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Right justified announcement (Bootstrap blockquote - pull right)</h3><blockquote class=pull-right><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with links</h3><p>An Announcement can include a maximum of 2 links. Links are stacked vertically</p><div class="bottom-offset-10 clearfix"><h3>Colored bar with title and call to action link</h3><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li></ul></blockquote></div><div class="bottom-offset-10 clearfix"><h3>Colored bar with two call to action links</h3><blockquote class=blockquote-blue><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li><li><a href=javascript:;>Register now for free</a></li></ul></blockquote></div></div><h3>Announcements with color treatment (Bootstrap enhancement)</h3><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-green><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-purple><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-berry><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-dark-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with icon treatment (Dell specific enhancement)</h3><blockquote class=blockquote-icon><div class=blockquote-dell-dpa></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with icon treatment (in a well) (Dell specific enhancement)</h3><div class="well well-white well-white-stroke"><blockquote class=blockquote-icon><div class=blockquote-dell-dpa></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-advantage pull-right"></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Right justified announcements with icon treatment (Dell specific enhancement)</h3><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-dpa pull-right"></div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-advantage pull-right"></div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div></section>');
     $templateCache.put('components/announcements/demo-play-announcements.html', '<section ng-controller=announcementsPLayDemoCtrl id=announcements-play-demo><div class=container><h2>Announcements Builder</h2><div><h4>Rendered Example</h4><div id=announcement-play-code ng-bind-html=renderingHTML></div><h4>Rendered HTML Code</h4><div class=play-code><button to-clipboard clipboard-target=#announcement-play-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code>{{playHtmlCode}}</code></pre></div><hr><div class=row><div class=col-sm-5><h4>Customize</h4><div class=form-group><label for=text-label-input>ID</label><div><input type=text class=form-control id=sample-announcement-id placeholder=optional ng-model=sampleAnnouncementConfig.id></div></div><div class=form-group><label for=sample-announcement-type>Type</label><select class=form-control id=sample-announcement-type ng-model=sampleAnnouncementConfig.type><option value=blue>Blue (Default)</option><option value=purple>Purple</option><option value=green>Green</option><option value=orange>Orange</option><option value=berry>Berry</option><option value=dark-blue>Dark blue</option><option value=red>Red</option><option value=red-dark>Dark red</option><option value=gray>Gray</option><option value=gray-dark>Dark gray</option><option value=icon>Icon</option></select></div><div class=form-group ng-if="sampleAnnouncementConfig.type===\'icon\'"><label for=sample-announcement-icon>Icon</label><select class=form-control id=sample-announcement-icon ng-model=sampleAnnouncementConfig.icon><option value=dell-advantage-star>Star (Default)</option><option value=dpa-card>Dell Prefered Card</option></select></div><div class=form-group><label for=text-label-input>Title</label><div><input type=text class=form-control id=sample-announcement-title placeholder=optional ng-model=sampleAnnouncementConfig.title></div></div><div class=form-group><label for=textarea>Body text</label><textarea id=sample-announcement-body class=form-control rows=5 ng-model=sampleAnnouncementConfig.body></textarea></div><div class=form-group><label for=text-label-input>First Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_0.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_0.url></div></div><div class=form-group><label for=text-label-input>Second Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_1.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_1.url></div></div></div><div class=col-sm-7><prototype-code-title></prototype-code-title><div ng-if=sampleAnnouncementConfig.id><h5>HTML code</h5><div class=play-code><button to-clipboard clipboard-target=#announcement-sherpa-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code id=announcement-sherpa-code>&lt;blockquote id="{{sampleSherpaConfig.id | _.str: \'dasherize\'}}" class="blockquote-{{sampleSherpaConfig.type}}"&gt;\r' + '\n' + '\t&lt;h4 msg="title_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/h4&gt;\r' + '\n' + '\t&lt;p msg="text_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/p&gt;\r' + '\n' + '&lt;/blockquote&gt;</code></pre></div><h5>Textkeys to add to messages file</h5><div class=play-code ng-if=textkeysToAdd><button to-clipboard clipboard-target=#announcement-sherpa-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-keys>{{textkeysToAdd}}</code></pre></div><pre ng-if=!textkeysToAdd>None specified until custom body or title is entered.</pre><h5>Resource keys to add to resources file</h5><div class=play-code ng-if=resourcesToAdd><button to-clipboard clipboard-target=#announcement-sherpa-resource-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-resource-keys>{{resourcesToAdd}}</code></pre></div><pre ng-if=!resourcesToAdd>None specified until cta is specified.</pre></div><p ng-if=!sampleAnnouncementConfig.id>Must enter id to see Sherpa code</p></div></div></div></div></section>');
