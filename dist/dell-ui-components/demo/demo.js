@@ -56579,6 +56579,218 @@ angular.module('dellUiComponents').config(function () {
     });
   }
 ]);
+(function ($) {
+  $.dellUIoverflowTab = function (el, options) {
+    // To avoid scope issues, use 'base' instead of 'this'
+    // to reference this class from internal events and functions.
+    var base = this;
+    // Access to jQuery and DOM versions of element
+    base.$el = $(el);
+    base.el = el;
+    // Add a reverse reference to the DOM object
+    base.$el.data('dellUIoverflowTab', base);
+  };
+  $.dellUIoverflowTab.defaultOptions = {
+    defaultHeight: 42,
+    pagerWidth: 29,
+    xsMax: 750,
+    smMin: 751,
+    smMax: 975,
+    mdMin: 974,
+    mdMax: 1141,
+    iconClasses: {
+      left: 'glyphicon glyphicon-menu-left',
+      right: 'glyphicon glyphicon-menu-right'
+    }
+  };
+  $.fn.dellUIoverflowTab = function (options) {
+    if (options) {
+      $.dellUIoverflowTab.defaultOptions = $.extend($.dellUIoverflowTab.defaultOptions, options);
+    }
+    return this.each(function () {
+      new $.dellUIoverflowTab(this);
+      var options = $.dellUIoverflowTab.defaultOptions, element = $(this), containerWidth = element.parent().width(), tabObjs = element.find('> li'), tabs = [], totalWidth = 0, widthLeftToTheRight, homePosition = options.pagerWidth, offsetTotal = options.pagerWidth, leftPosition = options.pagerWidth, isHome = false, isTooFar = false, leftMostTab = {}, nextTab, maxTabHeight = options.defaultHeight, changeHeight, breakpoint = function () {
+          var window_size = $(window).width(), breakpoint = {
+              isXS: false,
+              isSM: false,
+              isMD: false,
+              isLG: false
+            };
+          switch (true) {
+          case window_size < options.xsMax:
+            breakpoint.isXS = true;
+            break;
+          case window_size > options.smMin && window_size < options.smMax:
+            breakpoint.isSM = true;
+            break;
+          case window_size > options.mdMin && window_size < options.mdMax:
+            breakpoint.isMD = true;
+            break;
+          default:
+            breakpoint.isLG = true;
+            break;
+          }
+          return breakpoint;
+        }, isOverflow = false, initTabs = function () {
+          _.each(tabObjs, function (t, index) {
+            totalWidth = totalWidth + $(t).width() + 1;
+            var tObj = {
+                index: index,
+                offset: offsetTotal,
+                width: $(t).width(),
+                height: $(t).height(),
+                visibility: 1
+              };
+            //visibility = 0: none 1: fully visible 2: partially visible
+            if (tabObjs.length === index + 1) {
+            } else {
+              offsetTotal = offsetTotal - tObj.width - 1;
+            }
+            if (tObj.height > maxTabHeight) {
+              maxTabHeight = tObj.height;
+            }
+            tabs.push(tObj);
+          });
+          leftMostTab = tabs[0];
+          isOverflow = totalWidth > containerWidth;
+        }, slideIt = function (backDirection, tabInContext) {
+          var indexOffset = 1, isToofar;
+          if (backDirection) {
+            indexOffset = -1;
+          } else if (!tabInContext) {
+          }
+          leftPosition = parseInt(element.css('left'));
+          if (!leftMostTab) {
+            leftMostTab = tabs[0];
+          }
+          isHome = homePosition === leftPosition;
+          if (backDirection) {
+            leftMostTab.visibility = 1;
+          } else {
+            leftMostTab.visibility = 0;
+          }
+          leftMostTab = tabs[leftMostTab.index + indexOffset];
+          widthLeftToTheRight = _.reduce(_.pluck(_.filter(tabs, function (tb) {
+            return tb.visibility === 1;
+          }), 'width'), function (memo, num) {
+            return memo + num;
+          }, 0);
+          if (isToofar) {
+            isToofar = false;
+          } else if (tabInContext) {
+            if (tabInContext.lastTab) {
+              isToofar = true;
+            }
+          } else {
+            isToofar = widthLeftToTheRight < containerWidth;
+          }
+          if (leftMostTab) {
+            if (isToofar) {
+              leftPosition = containerWidth - totalWidth - homePosition;
+              element.parent().find('> .next').addClass('disabled');
+            } else {
+              element.parent().find('> .next').removeClass('disabled');
+              leftPosition = leftMostTab.offset;
+            }
+            if (tabInContext && !isToofar) {
+              //if this the last tab on the right do nothing different
+              if (tabInContext.index !== tabs.length - 1) {
+                //not the last tab on the right need to adjust the left offset
+                leftPosition = tabInContext.tabContainerWidth - tabInContext.rightMostPoint - 60;
+              }
+            }
+            element.css('left', leftPosition + 'px');
+          } else {
+            isHome = true;
+          }
+          if (isHome) {
+            element.parent().find('> .prev').addClass('disabled');
+          } else {
+            element.parent().find('> .prev').removeClass('disabled');
+          }
+        };
+      initTabs();
+      if (isOverflow) {
+        //this should already be overflow but in case it wasn't checked before it got fired
+        element.width(totalWidth + 1);
+        //add 1 so that it doesn't drop the last tab to a second line
+        element.css('left', homePosition + 'px');
+        //compensates for the left arrow that will be added
+        element.parent().addClass('nav-tabs-overflow-container');
+        //css wrapper for styling
+        element.before('<div class="prev disabled"><a href="javascript:;"><i class="' + options.iconClasses.left + '"></i></a></div>');
+        //left arrow
+        element.after('<div class="next"><a href="javascript:;"><i class="' + options.iconClasses.right + '"></i></a></div>');
+        //right arrow
+        changeHeight = function (h) {
+          if (h) {
+            element.css('height', h + 2 + 'px');
+            //2 pixels account for top and bottom border
+            element.find('> li').find('a').css('height', h + 'px');
+            element.parent().find('.prev,.next').find('a').css('height', h + 'px');
+            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)                            
+          } else {
+            //if no height is provided everything is reset.
+            element.removeAttr('style').width(totalWidth + 200);
+            //removes height and resets width
+            element.find('> li').find('a').removeAttr('style');
+            //removes height
+            element.parent().find('.prev,.next').find('a').removeAttr('style');  //removes height
+          }
+        };
+        if (maxTabHeight > options.defaultHeight && !breakpoint().isXS) {
+          //$rootScope.bp is part of dell-ui-components angular module
+          changeHeight(maxTabHeight);
+        } else {
+          changeHeight();
+        }
+        //set up a window change watch here
+        $(window).resize(function () {
+          if (breakpoint().isXS) {
+            changeHeight();  //if it is mobile (xs) clear all height values
+          } else {
+            changeHeight(maxTabHeight);
+          }
+        });
+        tabObjs.on('click', function (e) {
+          var t = {
+              rightMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth,
+              leftMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth - $(e.currentTarget).width() - 2,
+              tabContainerWidth: $(e.currentTarget).parents('.nav-tabs-overflow-container').width(),
+              tabContainerOffset: $(e.currentTarget).parent()[0].offsetLeft,
+              index: $(e.currentTarget).index()
+            };
+          if (t.tabContainerWidth - t.rightMostPoint - t.tabContainerOffset < options.pagerWidth + 1) {
+            if (t.index === tabs.length - 1) {
+              // last tab, make sure it is not already at the end
+              if (t.rightMostPoint + t.tabContainerOffset + options.pagerWidth - 1 < t.tabContainerWidth) {
+                slideIt(false, t);  //false sets it as a forward move with the tab in context
+              } else if (t.rightMostPoint + t.tabContainerOffset + options.pagerWidth - 1 > t.tabContainerWidth) {
+                t.lastTab = true;
+                //let slide function that it is the last tab
+                slideIt(false, t);  //false sets it as a forward move with the tab in context
+              }  //otherwise if it is right on the last spot dont slide it
+            } else {
+              slideIt(false, t);  //false sets it as a forward move with the tab in context
+            }
+          } else if (t.leftMostPoint + t.tabContainerOffset < 0) {
+            slideIt(true);  //true sets it as a backward move
+          }
+        });
+        element.parent().find('> .prev').on('click', function (e) {
+          if (!$(e.currentTarget).hasClass('disabled')) {
+            slideIt(true);  //true sets it as a backward move
+          }
+        });
+        element.parent().find('> .next').on('click', function (e) {
+          if (!$(e.currentTarget).hasClass('disabled')) {
+            slideIt();  //no argument (false) sets it as a forward move
+          }
+        });
+      }
+    });
+  };
+}(jQuery));
 angular.module('dellUiComponents').directive('toggle', function () {
   return {
     restrict: 'A',
@@ -57503,6 +57715,65 @@ angular.module('dellUiComponents').directive('contentGallery', [
   }
 ]);
 /**
+ * Created by Clint_Batte on 5/18/2015.
+ */
+angular.module('dellUiComponents').directive('navAnchored', [
+  '$timeout',
+  function ($timeout) {
+    return {
+      restrict: 'CA',
+      link: function ($scope, $element, iAttrs, controller) {
+        function fixWidth() {
+          $element.css('width', $element.parent().width() + 1).css('left', $element.parent().offset().left + 1 / 2);
+        }
+        fixWidth();
+        $(window).resize(function () {
+          fixWidth();
+        });
+        var sticky = new Waypoint.Sticky({
+            element: $element,
+            stuckClass: 'affix',
+            wrapper: 'nav-tabs-affix'
+          });
+        var waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [];
+        console.log(waypointObjs);
+        function clearActiveTab() {
+          $element.find('> li').removeClass('active');
+        }
+        if (waypointObjs) {
+          $(waypointObjs).on('click', function (e) {
+            //Setting up a click listener on each tab
+            e.preventDefault();
+            var target = $($(e.currentTarget).attr('href'));
+            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 100 }, 900, 'swing');
+            if ($element.find('> li').hasClass('active')) {
+              clearActiveTab();
+              $(e.currentTarget).parent().addClass('active');
+            }
+          });
+          _.each(waypointObjs, function (w, index) {
+            var target = $($(w).attr('href')), targetWaypoint = new Waypoint.Inview({
+                element: target,
+                enter: function (direction) {
+                  if (direction === 'up') {
+                    clearActiveTab();
+                    $('[href=' + this.element.selector + ']').parent().addClass('active');
+                  }
+                },
+                exited: function (direction) {
+                  if (direction === 'down') {
+                    clearActiveTab();
+                    $('[href=' + this.element.selector + ']').parent().next().addClass('active');
+                  }
+                }
+              });
+          });
+        }
+      }
+    };
+  }
+]);
+/**
  * Created by Clint_Batte on 7/14/2015.
  */
 /* ======================================================================================
@@ -58383,218 +58654,6 @@ angular.module('demo').controller('tablesPLayDemoCtrl', [
   function ($scope, $rootScope, $sce) {
   }
 ]);
-(function ($) {
-  $.dellUIoverflowTab = function (el, options) {
-    // To avoid scope issues, use 'base' instead of 'this'
-    // to reference this class from internal events and functions.
-    var base = this;
-    // Access to jQuery and DOM versions of element
-    base.$el = $(el);
-    base.el = el;
-    // Add a reverse reference to the DOM object
-    base.$el.data('dellUIoverflowTab', base);
-  };
-  $.dellUIoverflowTab.defaultOptions = {
-    defaultHeight: 42,
-    pagerWidth: 29,
-    xsMax: 750,
-    smMin: 751,
-    smMax: 975,
-    mdMin: 974,
-    mdMax: 1141,
-    iconClasses: {
-      left: 'glyphicon glyphicon-menu-left',
-      right: 'glyphicon glyphicon-menu-right'
-    }
-  };
-  $.fn.dellUIoverflowTab = function (options) {
-    if (options) {
-      $.dellUIoverflowTab.defaultOptions = $.extend($.dellUIoverflowTab.defaultOptions, options);
-    }
-    return this.each(function () {
-      new $.dellUIoverflowTab(this);
-      var options = $.dellUIoverflowTab.defaultOptions, element = $(this), containerWidth = element.parent().width(), tabObjs = element.find('> li'), tabs = [], totalWidth = 0, widthLeftToTheRight, homePosition = options.pagerWidth, offsetTotal = options.pagerWidth, leftPosition = options.pagerWidth, isHome = false, isTooFar = false, leftMostTab = {}, nextTab, maxTabHeight = options.defaultHeight, changeHeight, breakpoint = function () {
-          var window_size = $(window).width(), breakpoint = {
-              isXS: false,
-              isSM: false,
-              isMD: false,
-              isLG: false
-            };
-          switch (true) {
-          case window_size < options.xsMax:
-            breakpoint.isXS = true;
-            break;
-          case window_size > options.smMin && window_size < options.smMax:
-            breakpoint.isSM = true;
-            break;
-          case window_size > options.mdMin && window_size < options.mdMax:
-            breakpoint.isMD = true;
-            break;
-          default:
-            breakpoint.isLG = true;
-            break;
-          }
-          return breakpoint;
-        }, isOverflow = false, initTabs = function () {
-          _.each(tabObjs, function (t, index) {
-            totalWidth = totalWidth + $(t).width() + 1;
-            var tObj = {
-                index: index,
-                offset: offsetTotal,
-                width: $(t).width(),
-                height: $(t).height(),
-                visibility: 1
-              };
-            //visibility = 0: none 1: fully visible 2: partially visible
-            if (tabObjs.length === index + 1) {
-            } else {
-              offsetTotal = offsetTotal - tObj.width - 1;
-            }
-            if (tObj.height > maxTabHeight) {
-              maxTabHeight = tObj.height;
-            }
-            tabs.push(tObj);
-          });
-          leftMostTab = tabs[0];
-          isOverflow = totalWidth > containerWidth;
-        }, slideIt = function (backDirection, tabInContext) {
-          var indexOffset = 1, isToofar;
-          if (backDirection) {
-            indexOffset = -1;
-          } else if (!tabInContext) {
-          }
-          leftPosition = parseInt(element.css('left'));
-          if (!leftMostTab) {
-            leftMostTab = tabs[0];
-          }
-          isHome = homePosition === leftPosition;
-          if (backDirection) {
-            leftMostTab.visibility = 1;
-          } else {
-            leftMostTab.visibility = 0;
-          }
-          leftMostTab = tabs[leftMostTab.index + indexOffset];
-          widthLeftToTheRight = _.reduce(_.pluck(_.filter(tabs, function (tb) {
-            return tb.visibility === 1;
-          }), 'width'), function (memo, num) {
-            return memo + num;
-          }, 0);
-          if (isToofar) {
-            isToofar = false;
-          } else if (tabInContext) {
-            if (tabInContext.lastTab) {
-              isToofar = true;
-            }
-          } else {
-            isToofar = widthLeftToTheRight < containerWidth;
-          }
-          if (leftMostTab) {
-            if (isToofar) {
-              leftPosition = containerWidth - totalWidth - homePosition;
-              element.parent().find('> .next').addClass('disabled');
-            } else {
-              element.parent().find('> .next').removeClass('disabled');
-              leftPosition = leftMostTab.offset;
-            }
-            if (tabInContext && !isToofar) {
-              //if this the last tab on the right do nothing different
-              if (tabInContext.index !== tabs.length - 1) {
-                //not the last tab on the right need to adjust the left offset
-                leftPosition = tabInContext.tabContainerWidth - tabInContext.rightMostPoint - 60;
-              }
-            }
-            element.css('left', leftPosition + 'px');
-          } else {
-            isHome = true;
-          }
-          if (isHome) {
-            element.parent().find('> .prev').addClass('disabled');
-          } else {
-            element.parent().find('> .prev').removeClass('disabled');
-          }
-        };
-      initTabs();
-      if (isOverflow) {
-        //this should already be overflow but in case it wasn't checked before it got fired
-        element.width(totalWidth + 1);
-        //add 1 so that it doesn't drop the last tab to a second line
-        element.css('left', homePosition + 'px');
-        //compensates for the left arrow that will be added
-        element.parent().addClass('nav-tabs-overflow-container');
-        //css wrapper for styling
-        element.before('<div class="prev disabled"><a href="javascript:;"><i class="' + options.iconClasses.left + '"></i></a></div>');
-        //left arrow
-        element.after('<div class="next"><a href="javascript:;"><i class="' + options.iconClasses.right + '"></i></a></div>');
-        //right arrow
-        changeHeight = function (h) {
-          if (h) {
-            element.css('height', h + 2 + 'px');
-            //2 pixels account for top and bottom border
-            element.find('> li').find('a').css('height', h + 'px');
-            element.parent().find('.prev,.next').find('a').css('height', h + 'px');
-            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)                            
-          } else {
-            //if no height is provided everything is reset.
-            element.removeAttr('style').width(totalWidth + 200);
-            //removes height and resets width
-            element.find('> li').find('a').removeAttr('style');
-            //removes height
-            element.parent().find('.prev,.next').find('a').removeAttr('style');  //removes height
-          }
-        };
-        if (maxTabHeight > options.defaultHeight && !breakpoint().isXS) {
-          //$rootScope.bp is part of dell-ui-components angular module
-          changeHeight(maxTabHeight);
-        } else {
-          changeHeight();
-        }
-        //set up a window change watch here
-        $(window).resize(function () {
-          if (breakpoint().isXS) {
-            changeHeight();  //if it is mobile (xs) clear all height values
-          } else {
-            changeHeight(maxTabHeight);
-          }
-        });
-        tabObjs.on('click', function (e) {
-          var t = {
-              rightMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth,
-              leftMostPoint: e.currentTarget.offsetLeft + e.currentTarget.offsetWidth - $(e.currentTarget).width() - 2,
-              tabContainerWidth: $(e.currentTarget).parents('.nav-tabs-overflow-container').width(),
-              tabContainerOffset: $(e.currentTarget).parent()[0].offsetLeft,
-              index: $(e.currentTarget).index()
-            };
-          if (t.tabContainerWidth - t.rightMostPoint - t.tabContainerOffset < options.pagerWidth + 1) {
-            if (t.index === tabs.length - 1) {
-              // last tab, make sure it is not already at the end
-              if (t.rightMostPoint + t.tabContainerOffset + options.pagerWidth - 1 < t.tabContainerWidth) {
-                slideIt(false, t);  //false sets it as a forward move with the tab in context
-              } else if (t.rightMostPoint + t.tabContainerOffset + options.pagerWidth - 1 > t.tabContainerWidth) {
-                t.lastTab = true;
-                //let slide function that it is the last tab
-                slideIt(false, t);  //false sets it as a forward move with the tab in context
-              }  //otherwise if it is right on the last spot dont slide it
-            } else {
-              slideIt(false, t);  //false sets it as a forward move with the tab in context
-            }
-          } else if (t.leftMostPoint + t.tabContainerOffset < 0) {
-            slideIt(true);  //true sets it as a backward move
-          }
-        });
-        element.parent().find('> .prev').on('click', function (e) {
-          if (!$(e.currentTarget).hasClass('disabled')) {
-            slideIt(true);  //true sets it as a backward move
-          }
-        });
-        element.parent().find('> .next').on('click', function (e) {
-          if (!$(e.currentTarget).hasClass('disabled')) {
-            slideIt();  //no argument (false) sets it as a forward move
-          }
-        });
-      }
-    });
-  };
-}(jQuery));
 angular.module('demo').controller('tabsCtrl', [
   '$scope',
   '$rootScope',
@@ -58952,62 +59011,6 @@ angular.module('demo').controller('anchoredNavPLayDemoCtrl', [
   function ($scope, $rootScope, $sce) {
   }
 ]);
-/**
- * Created by Clint_Batte on 5/18/2015.
- */
-angular.module('dellUiComponents').directive('navAnchored', [
-  '$timeout',
-  function ($timeout) {
-    return {
-      restrict: 'CA',
-      link: function ($scope, $element, iAttrs, controller) {
-        var sticky = new Waypoint.Sticky({
-            element: $element,
-            stuckClass: 'affix',
-            wrapper: 'nav-tabs-affix'
-          });
-        var waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [];
-        //console.log(waypointObjs);
-        function clearActiveTab() {
-          $element.find('> li').removeClass('active');
-        }
-        if (waypointObjs) {
-          $(waypointObjs).on('click', function (e) {
-            //Setting up a click listener on each tab
-            e.preventDefault();
-            var target = $($(e.currentTarget).attr('href'));
-            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 100 }, 900, 'swing');
-            if ($element.find('> li').hasClass('active')) {
-              clearActiveTab();
-              $(e.currentTarget).parent().addClass('active');
-            }
-          });
-          _.each(waypointObjs, function (w, index) {
-            var target = $($(w).attr('href')), targetWaypoint = new Waypoint.Inview({
-                element: target,
-                enter: function (direction) {
-                  if (direction === 'up') {
-                    clearActiveTab();
-                    $('[href=' + this.element.selector + ']').parent().addClass('active');  //console.log('Enter triggered with direction ' + direction,this.element);
-                  }
-                },
-                entered: function (direction) {
-                },
-                exit: function (direction) {
-                },
-                exited: function (direction) {
-                  if (direction === 'down') {
-                    clearActiveTab();
-                    $('[href=' + this.element.selector + ']').parent().next().addClass('active');  //console.log('Exited triggered with direction ' + direction,this.element);
-                  }
-                }
-              });  //console.log(targetWaypoint);
-          });
-        }
-      }
-    };
-  }
-]);
 angular.module('demo').controller('tablesUberCtrl', [
   '$scope',
   '$rootScope',
@@ -59027,7 +59030,7 @@ angular.module('dellUiComponents').run([
     'use strict';
     $templateCache.put('components/alerts/demo-alerts.html', '<section ng-controller=alertsCtrl id=alerts-html-example><div class=container><h2>Alerts Demo</h2><h3 class=bottom-offset-20>Alert types</h3><div class="alert alert-warning"><p><strong>User Errors:</strong>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p></div><div class="row bottom-offset-20"><div class="col-xs-12 col-md-4"><div class="alert alert-success alert-collapsible"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-2>\xd7</button><p class=show-expanded><strong>Success Alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Information Alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></div><h3 class="top-offset-40 bottom-offset-20">Informational alerts</h3><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Informational alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-info alert-collapsible"><button type=button class=close data-toggle=collapse data-target=".cssDataTargetDismiss-5 ">\xd7</button><div class=show-expanded><h4>Informational alerts example with a title.</h4><p>Information alerts display important information for the page. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Informational alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>first</strong> dismissed alert</p></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Additional alert example.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>second</strong> dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Success alerts</h3><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Success alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title.</h4><p><strong>Success alerts:</strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Indicates the task has been completed successfully. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div><h3 class="top-offset-40 bottom-offset-20">User Error</h3><div class="alert alert-warning alert-collapsible"><p class=show-expanded><strong>User Errors:</strong> A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class=alert-warning><h4>User Errors example with a title and multiple links.</h4><p class=bottom-offset-0>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Dismissible informational alert example with title.</h4><p class=bottom-offset-0>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas scelerisque porttitor.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Catastrophic Error</h3><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div><div class="alert alert-error"><h4>Catastrophic Errors example with a title</h4><p>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></section>');
     $templateCache.put('components/alerts/demo-play-alerts.html', '<section ng-controller=alertsPLayDemoCtrl id=alerts-play-demo><div class=container><h2>Alerts Builder</h2><div></div></div></section>');
-    $templateCache.put('components/anchored-nav/demo-anchored-nav.html', '<section ng-controller=anchoredNavCtrl id=anchored-nav-html-example><div class=container><h2>Anchored Nav Demo</h2><div class=row><h3 class="col-xs-12 top-offset-60">Affixed Tabs</h3></div></div><nav class="navbar navbar-anchored hidden-xs"><div class=container><ul id=nav-achored-example class="nav navbar-nav nav-anchored nav-anchored-justified"><li class=active><a href=#section1>Section 1 much longer title to see if wrapping is working</a></li><li><a href=#section2>Section 2</a></li><li><a href=#section3>Section 3</a></li><li><a href=#section4>Section 4</a></li></ul></div></nav><div class=container><section id=section1 class=bottom-offset-30><h3 class=text-blue><a href=javascript:;>Section 1</a></h3><div class="row bottom-offset-20"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div></section><hr class="hr-gray-light"><section id=section2 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 2</a></h3><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section><hr class="hr-gray-light"><section id=section3 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 3</a></h3><div class="row bottom-offset-20"><p class=col-sm-8>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><img src=http://placehold.it/175x125 class="img-responsive col-sm-4 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div></section><hr class="hr-gray-light"><section id=section4 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 4</a></h3><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section></div></section>');
+    $templateCache.put('components/anchored-nav/demo-anchored-nav.html', '<section ng-controller=anchoredNavCtrl id=anchored-nav-html-example><div class=container><h2>Anchored Nav Demo</h2><div class=row><h3 class="col-xs-12 top-offset-60">Affixed Tabs</h3></div></div><div class=container><div class=row><div class=col-sm-9><nav class="navbar hidden-xs"><ul id=nav-achored-example class="nav navbar-nav nav-anchored"><li class=active><a href=#section1>Section 1</a></li><li><a href=#section2>Section 2</a></li><li><a href=#section3>Section 3</a></li><li><a href=#section4>Section 4</a></li></ul></nav><section id=section1 class=bottom-offset-30><h3 class=text-blue><a href=javascript:;>Section 1</a></h3><div class="row bottom-offset-20"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div></section><hr class="hr-gray-light"><section id=section2 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 2</a></h3><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section><hr class="hr-gray-light"><section id=section3 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 3</a></h3><div class="row bottom-offset-20"><p class=col-sm-8>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><img src=http://placehold.it/175x125 class="img-responsive col-sm-4 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div></section><hr class="hr-gray-light"><section id=section4 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 4</a></h3><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section></div><div class=col-sm-3><div class=well style=height:1000px>Sidebar</div></div></div></div></section>');
     $templateCache.put('components/anchored-nav/demo-play-anchored-nav.html', '<section ng-controller=anchoredNavPLayDemoCtrl id=anchored-nav-play-demo><div class=container><h2>Anchored_nav Builder</h2><div></div></div></section>');
     $templateCache.put('components/announcements/demo-announcements.html', '<section ng-controller=announcementsCtrl id=announcements-html-example><div class=container><h2>Announcements Demo</h2><div><h3>Default announcement (Bootstrap blockquote)</h3><blockquote><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Right justified announcement (Bootstrap blockquote - pull right)</h3><blockquote class=pull-right><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with links</h3><p>An Announcement can include a maximum of 2 links. Links are stacked vertically</p><div class="bottom-offset-10 clearfix"><h3>Colored bar with title and call to action link</h3><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li></ul></blockquote></div><div class="bottom-offset-10 clearfix"><h3>Colored bar with two call to action links</h3><blockquote class=blockquote-blue><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li><li><a href=javascript:;>Register now for free</a></li></ul></blockquote></div></div><h3>Announcements with color treatment (Bootstrap enhancement)</h3><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-green><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-purple><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-berry><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-dark-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with icon treatment (Dell specific enhancement)</h3><blockquote class=blockquote-icon><div class=blockquote-dell-dpa></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with icon treatment (in a well) (Dell specific enhancement)</h3><div class="well well-white well-white-stroke"><blockquote class=blockquote-icon><div class=blockquote-dell-dpa></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-advantage pull-right"></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Right justified announcements with icon treatment (Dell specific enhancement)</h3><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-dpa pull-right"></div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-advantage pull-right"></div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div></section>');
     $templateCache.put('components/announcements/demo-play-announcements.html', '<section ng-controller=announcementsPLayDemoCtrl id=announcements-play-demo><div class=container><h2>Announcements Builder</h2><div><h4>Rendered Example</h4><div id=announcement-play-code ng-bind-html=renderingHTML></div><h4>Rendered HTML Code</h4><div class=play-code><button to-clipboard clipboard-target=#announcement-play-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code>{{playHtmlCode}}</code></pre></div><hr><div class=row><div class=col-sm-5><h4>Customize</h4><div class=form-group><label for=text-label-input>ID</label><div><input type=text class=form-control id=sample-announcement-id placeholder=optional ng-model=sampleAnnouncementConfig.id></div></div><div class=form-group><label for=sample-announcement-type>Type</label><select class=form-control id=sample-announcement-type ng-model=sampleAnnouncementConfig.type><option value=blue>Blue (Default)</option><option value=purple>Purple</option><option value=green>Green</option><option value=orange>Orange</option><option value=berry>Berry</option><option value=dark-blue>Dark blue</option><option value=red>Red</option><option value=red-dark>Dark red</option><option value=gray>Gray</option><option value=gray-dark>Dark gray</option><option value=icon>Icon</option></select></div><div class=form-group ng-if="sampleAnnouncementConfig.type===\'icon\'"><label for=sample-announcement-icon>Icon</label><select class=form-control id=sample-announcement-icon ng-model=sampleAnnouncementConfig.icon><option value=dell-advantage-star>Star (Default)</option><option value=dpa-card>Dell Prefered Card</option></select></div><div class=form-group><label for=text-label-input>Title</label><div><input type=text class=form-control id=sample-announcement-title placeholder=optional ng-model=sampleAnnouncementConfig.title></div></div><div class=form-group><label for=textarea>Body text</label><textarea id=sample-announcement-body class=form-control rows=5 ng-model=sampleAnnouncementConfig.body></textarea></div><div class=form-group><label for=text-label-input>First Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_0.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_0.url></div></div><div class=form-group><label for=text-label-input>Second Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_1.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_1.url></div></div></div><div class=col-sm-7><prototype-code-title></prototype-code-title><div ng-if=sampleAnnouncementConfig.id><h5>HTML code</h5><div class=play-code><button to-clipboard clipboard-target=#announcement-sherpa-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code id=announcement-sherpa-code>&lt;blockquote id="{{sampleSherpaConfig.id | _.str: \'dasherize\'}}" class="blockquote-{{sampleSherpaConfig.type}}"&gt;\r' + '\n' + '\t&lt;h4 msg="title_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/h4&gt;\r' + '\n' + '\t&lt;p msg="text_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/p&gt;\r' + '\n' + '&lt;/blockquote&gt;</code></pre></div><h5>Textkeys to add to messages file</h5><div class=play-code ng-if=textkeysToAdd><button to-clipboard clipboard-target=#announcement-sherpa-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-keys>{{textkeysToAdd}}</code></pre></div><pre ng-if=!textkeysToAdd>None specified until custom body or title is entered.</pre><h5>Resource keys to add to resources file</h5><div class=play-code ng-if=resourcesToAdd><button to-clipboard clipboard-target=#announcement-sherpa-resource-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-resource-keys>{{resourcesToAdd}}</code></pre></div><pre ng-if=!resourcesToAdd>None specified until cta is specified.</pre></div><p ng-if=!sampleAnnouncementConfig.id>Must enter id to see Sherpa code</p></div></div></div></div></section>');

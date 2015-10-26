@@ -8,7 +8,7 @@ angular.module('dellUiComponents')
         return {
             restrict: 'CA',
             link: function ($scope, $element, iAttrs, controller) {
-
+                
                 function fixWidth() {
                     $element.css('width',$element.parent().width()+1).css('left',$element.parent().offset().left+1/2);
                 }

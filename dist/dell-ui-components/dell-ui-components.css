@@ -4512,7 +4512,16 @@ ul.ratings:after {
  * Anchored_nav component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.navbar-anchored li {
+.nav-anchored {
+  width: 100%;
+  border-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  display: table;
+}
+.nav-anchored > li {
+  display: table-cell;
+  float: none;
   background: -moz-linear-gradient(top, #ffffff 8%, #efefef 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(8%, #ffffff), color-stop(100%, #efefef));
   background: -webkit-linear-gradient(top, #ffffff 8%, #efefef 100%);
@@ -4521,19 +4530,30 @@ ul.ratings:after {
   background: linear-gradient(to bottom, #ffffff 8%, #efefef 100%);
   border: 1px solid #cccccc;
   margin-bottom: -1px;
-  margin-left: -1px;
   height: auto;
 }
-.navbar-anchored li:hover {
-  background: #cce5f1;
-  color: #007db8;
+.nav-anchored > li > a {
+  width: 100%;
+  text-align: center;
+  margin-bottom: -1px;
+  border-top: none !important;
+  border-color: transparent;
+  margin-left: -1px;
+  background: 0;
 }
-.navbar-anchored li > a:hover,
-.navbar-anchored li > a:focus {
+.nav-anchored > li > a:hover,
+.nav-anchored > li > a:focus {
   border-color: transparent !important;
   background-color: transparent !important;
 }
-.navbar-anchored li.active {
+.nav-anchored > li:hover {
+  background: #cce5f1;
+  color: #007db8;
+}
+.nav-anchored > li:visited {
+  background: none;
+}
+.nav-anchored > li.active {
   border-top: 4px solid #007db8;
   padding-top: 6px;
   padding-bottom: 9px;
@@ -4541,82 +4561,34 @@ ul.ratings:after {
   border-bottom: 0;
   background: #ffffff;
 }
-.navbar-anchored li.active > a,
-.navbar-anchored li.active > a:hover {
+.nav-anchored > li.active > a {
+  margin-left: -1px;
+  padding: 10px 15px;
+  width: 100%;
+}
+.nav-anchored > li.active > a:hover,
+.nav-anchored > li.active > a:focus {
+  width: 100%;
+  margin-left: -1px;
+  padding: 10px 15px;
+  background: none;
+}
+.nav-anchored > li.active > a:hover {
   color: #444444;
 }
-.nav-anchored-justified {
-  width: 100%;
-  border-bottom: 0;
-  margin-left: 0;
-  margin-right: 0;
-  display: table;
-}
-.nav-anchored-justified > li {
-  display: table-cell;
-  float: none;
-}
-.nav-anchored-justified > li > a {
-  width: 100%;
-  margin-left: -1px;
-  text-align: center;
-}
-.nav-anchored-justified > li > a,
-.nav-anchored-justified > li > a:hover {
-  margin-bottom: -1px;
-  border-top: none !important;
-  border-color: transparent;
-  margin-left: -1px;
-  background: 0;
-}
-.nav-anchored-justified > li:visited {
+.nav-anchored > li.active > a:visited {
   background: none;
 }
-.nav-anchored-justified > li.active > a {
-  margin-left: -1px;
-  padding: 10px 15px;
-  width: 100%;
-}
-.nav-anchored-justified > li.active > a:hover,
-.nav-anchored-justified > li.active > a:focus {
-  width: 100%;
-  margin-left: -1px;
-  padding: 10px 15px;
-  background: none;
-}
-.nav-anchored-justified > li.active > a:visited {
-  background: none;
-}
-.nav-anchored-justified > li:first-child {
+.nav-anchored > li:first-child {
   margin-left: -1px;
 }
-.nav-anchored-justified > li:last-child {
+.nav-anchored > li:last-child {
   margin-left: -1px;
 }
 .nav-anchored.affix {
   position: fixed;
   top: 0;
   z-index: 999;
-}
-@media (max-width: 767px) {
-  .nav-anchored.affix {
-    width: 100%;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .nav-anchored.affix {
-    width: 720px;
-  }
-}
-@media (min-width: 992px) and (max-width: 1199px) {
-  .nav-anchored.affix {
-    width: 940px;
-  }
-}
-@media (min-width: 1200px) {
-  .nav-anchored.affix {
-    width: 1140px;
-  }
 }
 /* Add Component LESS Above */
 .tooltip {
