@@ -4,7 +4,8 @@
         <h2 class="bottom-offset-30">Modals Demo</h2>
 
 
-        <button class="btn btn-default" data-toggle="modal" data-target="#modal-example">
+
+        <button class="btn btn-default" data-toggle="modal" data-target="#modal-example" data-backdrop="static" data-keyboard="false">
             Launch demo modal
         </button>
 
@@ -29,6 +30,14 @@
             </div>
         </div>
         <!--/modal-->
+
+        <!-- dev guidance -->
+            <blockquote class="blockquote-red top-offset-40">
+                <code>data-backdrop="static"</code> <code>data-keyboard="false"</code> are used to prevent a click on the backdrop or esc key to dismiss the modal. Remove these if you want these to be able to dismiss the modal.
+
+            </blockquote>
+
+        <!-- end of dev guidance -->
 
 
     </div>
