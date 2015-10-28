@@ -541,6 +541,8 @@ return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
         link: function($scope, $element, $attrs) {
             var inputField = $element.find('input'),
+                calendarIcon = $element.find('.icon-small-calendar'),
+                calendarWidget,
                 inputFieldWidth = inputField.width(),
                 inputFieldOffset = inputField.offset(), 
                 viewPortWidth = $(window).width(),            
@@ -575,21 +577,26 @@ return {
 
             inputField.on("dp.show",function (e) {
 
+                calendarWidget = $element.find('.bootstrap-datetimepicker-widget'); //have to repeat this because it is destroyed everytime focus is gone
+
                 //check to see if the right side is big enough for the widget
                 if(inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
-                    $element.find('.bootstrap-datetimepicker-widget').removeClass('pull-right');
+                    calendarWidget.removeClass('pull-right');
                 } else {
-                    $element.find('.bootstrap-datetimepicker-widget').addClass('pull-right');
+                    calendarWidget.addClass('pull-right');
                 }
 
                 //check to see if the bottom side is big enough for the widget
                 if(inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
                     //dateSelectorConfig.widgetPositioning.vertical = "top";
-                    $element.find('.bootstrap-datetimepicker-widget').removeClass('bottom').addClass('top');
+                    calendarWidget.removeClass('bottom').addClass('top');
                 } else {
-                    $element.find('.bootstrap-datetimepicker-widget').removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
+                    calendarWidget.removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
                 }              
 
+            });
+            calendarIcon.on("click",function (e) {
+                inputField.focus();                
             });
 
 /*            inputField.on("blur",function (e) {

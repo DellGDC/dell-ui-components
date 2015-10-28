@@ -817,6 +817,9 @@
     .icon-small-calendar {
         position:absolute;
         top: 3px;
+        @media (max-width: @screen-xs-max) {
+            top: 40px; //TODO this assumes that the label for date is full width
+        }
         right: 4px;
         padding: 5px;
         color: @dell-blue;
@@ -828,9 +831,6 @@
             -moz-border-radius:    @border-radius-small;
             border-radius:         @border-radius-small;
         }
-    }
-    label {
-        float:left;
     }
     .help-block {
         position:absolute;
@@ -851,6 +851,9 @@
         }
         &.top {
             top: -264px !important;
+            @media (max-width: @screen-xs-max) {
+                top: -225px !important; //TODO this assumes that the label for date is full width
+            }
             bottom: auto !important;
             position:absolute;
             &.pull-right {
@@ -882,6 +885,11 @@
                 &.day {
                     width: 34px; //otherwise the colum with active is about 4 pixels wider
                 }
+                span {
+                    -webkit-border-radius: @border-radius-small;
+                    -moz-border-radius:    @border-radius-small;
+                    border-radius:         @border-radius-small;
+                }
             }
             .picker-switch {
                 border-radius: 0;
@@ -908,11 +916,13 @@
                 text-shadow: none;
                 &.active {
                     background: @dell-blue;
+                    color: @white;
                 }
                 &:hover {
                     background: @dell-highlight-blue;
-                    &.active {
-                        color: @text-color;
+                    color: @text-color;
+                     &.active {
+                        color: @white;
                     }
                 }
             }
