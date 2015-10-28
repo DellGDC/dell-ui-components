@@ -2,7 +2,47 @@
 *banner component .LESS
 *------------------------------------------------------------------------------------------
 */
+.jumbotron {
+    margin: 0px;
+    padding: 0px;
+    max-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    > .img-responsive {
+        width:100%;
+        position:absolute;
+    }
+    .well {
+        margin-top: 20px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius:    5px;
+        border-radius:         5px;
+        overflow:hidden;
+    }
+}
 
+
+@media (max-width: @screen-sm-max) {
+
+    .jumbotron {
+        > .img-responsive {
+            position:relative;
+        }
+        .well {
+            background:none;
+            border:none;
+            box-shadow: none;
+            margin-top: 10px;
+        }
+    }
+}
+
+
+
+
+
+/* -------old....needed to be more bootstrap style------ */
+/*
 .banner {
     position: relative;
     .img-responsive-constrained {
@@ -76,3 +116,4 @@
         position: relative;
     }
 }
+*/

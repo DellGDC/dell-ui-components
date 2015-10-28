@@ -20410,9 +20410,8 @@ angular.module('dellUiComponents').directive('navAnchored', [
             element: $element,
             stuckClass: 'affix',
             wrapper: 'nav-tabs-affix'
-          });
-        var waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [];
-        console.log(waypointObjs);
+          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false;
+        //console.log(waypointObjs);
         function clearActiveTab() {
           $element.find('> li').removeClass('active');
         }
@@ -20421,25 +20420,34 @@ angular.module('dellUiComponents').directive('navAnchored', [
             //Setting up a click listener on each tab
             e.preventDefault();
             var target = $($(e.currentTarget).attr('href'));
-            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 100 }, 900, 'swing');
+            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 60 }, 900, 'swing');
             if ($element.find('> li').hasClass('active')) {
               clearActiveTab();
               $(e.currentTarget).parent().addClass('active');
+              triggerClicked = true;
             }
           });
           _.each(waypointObjs, function (w, index) {
             var target = $($(w).attr('href')), targetWaypoint = new Waypoint.Inview({
                 element: target,
-                enter: function (direction) {
-                  if (direction === 'up') {
+                entered: function (direction) {
+                  if (direction === 'up' && !triggerClicked) {
                     clearActiveTab();
                     $('[href=' + this.element.selector + ']').parent().addClass('active');
+                  } else {
+                    $timeout(function () {
+                      triggerClicked = false;
+                    }, 900);  //wait for the annimation to be done
                   }
                 },
                 exited: function (direction) {
-                  if (direction === 'down') {
+                  if (direction === 'down' && !triggerClicked) {
                     clearActiveTab();
                     $('[href=' + this.element.selector + ']').parent().next().addClass('active');
+                  } else {
+                    $timeout(function () {
+                      triggerClicked = false;
+                    }, 900);  //wait for the annimation to be done
                   }
                 }
               });

@@ -1976,6 +1976,11 @@ fieldset[disabled] a.btn.btn-primary {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   }
 }
+input:focus + [role="modal"] {
+  display: block;
+  position: absolute;
+  top: 100%;
+}
 /*
  * Offsets component theme overrides
  *------------------------------------------------------------------------------------------
@@ -2076,6 +2081,11 @@ fieldset[disabled] a.btn.btn-primary {
 }
 .popover.left > .arrow {
   left: 113% !important;
+}
+input:focus + [role="popover"] {
+  display: block;
+  position: absolute;
+  top: 100%;
 }
 /*
  * Responsive-Utilities component theme overrides
@@ -3818,6 +3828,12 @@ ul.ColVis_collection li:first-of-type {
 [class^=icon][data-toggle="tooltip"] {
   border: none;
 }
+a[data-toggle="tooltip"] {
+  padding-bottom: 0;
+}
+img[data-toggle="tooltip"] {
+  border: none;
+}
 .contextual-help .form-label {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -3832,6 +3848,11 @@ ul.ColVis_collection li:first-of-type {
 .contextual-help [data-toggle="tooltip"] {
   border-bottom: none !important;
   color: #007db8;
+}
+input:focus + [role="tooltip"] {
+  display: block;
+  position: absolute;
+  top: 100%;
 }
 /*
  * Typography component theme overrides
