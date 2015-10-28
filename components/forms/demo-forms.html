@@ -911,57 +911,27 @@
         <hr class="top-offset-40"/>
 <!-- Date selector -->
         <h3>Date Selector Demo</h3>
-        <div class="bottom-offset-40">
+        <form class="form-compressed" role="form">
             <div class="row">
-                <div class="col-md-9">
-                    <div class="ng-scope" ng-controller="DatepickerDemoCtrl">
-                        <h4>Select date</h4>
-                        <div class="row">
-                            <div class="col-md-9 date-selector">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class='input-group date add-right inner-icon' id='datetimepicker1'>
-                                                <i class="icon-small-calendar"></i>
-                                                <input type='text' class="form-control datepickerbutton" />
-                                                    <!-- <span class="input-group-addon">
-                                                        <i class="icon-small-calendar"></i>
-                                                    </span> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>MM/DD/YYYY</p>
-                            </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker1').datetimepicker({
-                                        format:'MM/DD/YYYY'
-                                    });
-
-
-
-                                    // $('#datetimepicker1').datetimepicker({
-                                    //     format:'MM/DD/YYYY'
-                                    // });
-                                });
-                            </script>
+                <div class="form-group date-selector" id="date-selector-example">
+                    <label class="col-sm-2 form-label" for="date-selector-input">Date</label>
+                    <div class="col-sm-3">
+                        <div class="">
+                            <input type="text" class="form-control" id="date-selector-input">
+                            <i class="icon-small-calendar"></i>
+                            <p class="help-block">
+                                mm/dd/yyyy
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+        </form>
+        <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
+        <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
+        <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
+        <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
+        <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
     </div>
 
 

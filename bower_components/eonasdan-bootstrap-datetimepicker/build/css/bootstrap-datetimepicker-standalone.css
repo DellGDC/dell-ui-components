@@ -3,7 +3,7 @@
  * version : 4.17.37
  * https://github.com/Eonasdan/bootstrap-datetimepicker/
  */
-/*@font-face {
+@font-face {
     font-family: 'Glyphicons Halflings';
     src: url('../fonts/glyphicons-halflings-regular.eot');
     src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
@@ -64,7 +64,7 @@
     user-select: none;
     background-image: none;
     border: 1px solid transparent;
-    border-radius: 0; 
+    border-radius: 4px;
 }
 
 .collapse {
@@ -79,7 +79,7 @@
     position: absolute;
     left: 0;
     z-index: 1000;
-    display: inline-block;
+    display: none;
     float: left;
     min-width: 160px;
     padding: 5px 0;
@@ -92,7 +92,7 @@
     background-clip: padding-box;
     border: 1px solid #ccc;
     border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: 0;
+    border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
     box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
@@ -100,4 +100,4 @@
 .list-unstyled {
     padding-left: 0;
     list-style: none;
-}*/
+}

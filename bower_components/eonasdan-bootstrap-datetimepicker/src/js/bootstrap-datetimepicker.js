@@ -236,85 +236,85 @@
                 ];
             },
 
-            // getTimePickerMainTemplate = function () {
-            //     var topRow = $('<tr>'),
-            //         middleRow = $('<tr>'),
-            //         bottomRow = $('<tr>');
+            getTimePickerMainTemplate = function () {
+                var topRow = $('<tr>'),
+                    middleRow = $('<tr>'),
+                    bottomRow = $('<tr>');
 
-            //     if (isEnabled('h')) {
-            //         topRow.append($('<td>')
-            //             .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.incrementHour}).addClass('btn').attr('data-action', 'incrementHours')
-            //                 .append($('<span>').addClass(options.icons.up))));
-            //         middleRow.append($('<td>')
-            //             .append($('<span>').addClass('timepicker-hour').attr({'data-time-component':'hours', 'title': options.tooltips.pickHour}).attr('data-action', 'showHours')));
-            //         bottomRow.append($('<td>')
-            //             .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.decrementHour}).addClass('btn').attr('data-action', 'decrementHours')
-            //                 .append($('<span>').addClass(options.icons.down))));
-            //     }
-            //     if (isEnabled('m')) {
-            //         if (isEnabled('h')) {
-            //             topRow.append($('<td>').addClass('separator'));
-            //             middleRow.append($('<td>').addClass('separator').html(':'));
-            //             bottomRow.append($('<td>').addClass('separator'));
-            //         }
-            //         topRow.append($('<td>')
-            //             .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.incrementMinute}).addClass('btn').attr('data-action', 'incrementMinutes')
-            //                 .append($('<span>').addClass(options.icons.up))));
-            //         middleRow.append($('<td>')
-            //             .append($('<span>').addClass('timepicker-minute').attr({'data-time-component': 'minutes', 'title': options.tooltips.pickMinute}).attr('data-action', 'showMinutes')));
-            //         bottomRow.append($('<td>')
-            //             .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.decrementMinute}).addClass('btn').attr('data-action', 'decrementMinutes')
-            //                 .append($('<span>').addClass(options.icons.down))));
-            //     }
-            //     if (isEnabled('s')) {
-            //         if (isEnabled('m')) {
-            //             topRow.append($('<td>').addClass('separator'));
-            //             middleRow.append($('<td>').addClass('separator').html(':'));
-            //             bottomRow.append($('<td>').addClass('separator'));
-            //         }
-            //         topRow.append($('<td>')
-            //             .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.incrementSecond}).addClass('btn').attr('data-action', 'incrementSeconds')
-            //                 .append($('<span>').addClass(options.icons.up))));
-            //         middleRow.append($('<td>')
-            //             .append($('<span>').addClass('timepicker-second').attr({'data-time-component': 'seconds', 'title': options.tooltips.pickSecond}).attr('data-action', 'showSeconds')));
-            //         bottomRow.append($('<td>')
-            //             .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.decrementSecond}).addClass('btn').attr('data-action', 'decrementSeconds')
-            //                 .append($('<span>').addClass(options.icons.down))));
-            //     }
+                if (isEnabled('h')) {
+                    topRow.append($('<td>')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.incrementHour}).addClass('btn').attr('data-action', 'incrementHours')
+                            .append($('<span>').addClass(options.icons.up))));
+                    middleRow.append($('<td>')
+                        .append($('<span>').addClass('timepicker-hour').attr({'data-time-component':'hours', 'title': options.tooltips.pickHour}).attr('data-action', 'showHours')));
+                    bottomRow.append($('<td>')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.decrementHour}).addClass('btn').attr('data-action', 'decrementHours')
+                            .append($('<span>').addClass(options.icons.down))));
+                }
+                if (isEnabled('m')) {
+                    if (isEnabled('h')) {
+                        topRow.append($('<td>').addClass('separator'));
+                        middleRow.append($('<td>').addClass('separator').html(':'));
+                        bottomRow.append($('<td>').addClass('separator'));
+                    }
+                    topRow.append($('<td>')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.incrementMinute}).addClass('btn').attr('data-action', 'incrementMinutes')
+                            .append($('<span>').addClass(options.icons.up))));
+                    middleRow.append($('<td>')
+                        .append($('<span>').addClass('timepicker-minute').attr({'data-time-component': 'minutes', 'title': options.tooltips.pickMinute}).attr('data-action', 'showMinutes')));
+                    bottomRow.append($('<td>')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.decrementMinute}).addClass('btn').attr('data-action', 'decrementMinutes')
+                            .append($('<span>').addClass(options.icons.down))));
+                }
+                if (isEnabled('s')) {
+                    if (isEnabled('m')) {
+                        topRow.append($('<td>').addClass('separator'));
+                        middleRow.append($('<td>').addClass('separator').html(':'));
+                        bottomRow.append($('<td>').addClass('separator'));
+                    }
+                    topRow.append($('<td>')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.incrementSecond}).addClass('btn').attr('data-action', 'incrementSeconds')
+                            .append($('<span>').addClass(options.icons.up))));
+                    middleRow.append($('<td>')
+                        .append($('<span>').addClass('timepicker-second').attr({'data-time-component': 'seconds', 'title': options.tooltips.pickSecond}).attr('data-action', 'showSeconds')));
+                    bottomRow.append($('<td>')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title': options.tooltips.decrementSecond}).addClass('btn').attr('data-action', 'decrementSeconds')
+                            .append($('<span>').addClass(options.icons.down))));
+                }
 
-            //     if (!use24Hours) {
-            //         topRow.append($('<td>').addClass('separator'));
-            //         middleRow.append($('<td>')
-            //             .append($('<button>').addClass('btn btn-primary').attr({'data-action': 'togglePeriod', tabindex: '-1', 'title': options.tooltips.togglePeriod})));
-            //         bottomRow.append($('<td>').addClass('separator'));
-            //     }
+                if (!use24Hours) {
+                    topRow.append($('<td>').addClass('separator'));
+                    middleRow.append($('<td>')
+                        .append($('<button>').addClass('btn btn-primary').attr({'data-action': 'togglePeriod', tabindex: '-1', 'title': options.tooltips.togglePeriod})));
+                    bottomRow.append($('<td>').addClass('separator'));
+                }
 
-            //     return $('<div>').addClass('timepicker-picker')
-            //         .append($('<table>').addClass('table-condensed')
-            //             .append([topRow, middleRow, bottomRow]));
-            // },
+                return $('<div>').addClass('timepicker-picker')
+                    .append($('<table>').addClass('table-condensed')
+                        .append([topRow, middleRow, bottomRow]));
+            },
 
-            // getTimePickerTemplate = function () {
-            //     var hoursView = $('<div>').addClass('timepicker-hours')
-            //             .append($('<table>').addClass('table-condensed')),
-            //         minutesView = $('<div>').addClass('timepicker-minutes')
-            //             .append($('<table>').addClass('table-condensed')),
-            //         secondsView = $('<div>').addClass('timepicker-seconds')
-            //             .append($('<table>').addClass('table-condensed')),
-            //         ret = [getTimePickerMainTemplate()];
+            getTimePickerTemplate = function () {
+                var hoursView = $('<div>').addClass('timepicker-hours')
+                        .append($('<table>').addClass('table-condensed')),
+                    minutesView = $('<div>').addClass('timepicker-minutes')
+                        .append($('<table>').addClass('table-condensed')),
+                    secondsView = $('<div>').addClass('timepicker-seconds')
+                        .append($('<table>').addClass('table-condensed')),
+                    ret = [getTimePickerMainTemplate()];
 
-            //     if (isEnabled('h')) {
-            //         ret.push(hoursView);
-            //     }
-            //     if (isEnabled('m')) {
-            //         ret.push(minutesView);
-            //     }
-            //     if (isEnabled('s')) {
-            //         ret.push(secondsView);
-            //     }
+                if (isEnabled('h')) {
+                    ret.push(hoursView);
+                }
+                if (isEnabled('m')) {
+                    ret.push(minutesView);
+                }
+                if (isEnabled('s')) {
+                    ret.push(secondsView);
+                }
 
-            //     return ret;
-            // },
+                return ret;
+            },
 
             getToolbar = function () {
                 var row = [];
@@ -336,13 +336,13 @@
             getTemplate = function () {
                 var template = $('<div>').addClass('bootstrap-datetimepicker-widget dropdown-menu'),
                     dateView = $('<div>').addClass('datepicker').append(getDatePickerTemplate()),
-                    // timeView = $('<div>').addClass('timepicker').append(getTimePickerTemplate()),
+                    timeView = $('<div>').addClass('timepicker').append(getTimePickerTemplate()),
                     content = $('<ul>').addClass('list-unstyled'),
-                    //toolbar = $('<li>').addClass('picker-switch' + (options.collapse ? ' accordion-toggle' : '')).append(getToolbar());
+                    toolbar = $('<li>').addClass('picker-switch' + (options.collapse ? ' accordion-toggle' : '')).append(getToolbar());
 
-                // if (options.inline) {
-                //     template.removeClass('dropdown-menu');
-                // }
+                if (options.inline) {
+                    template.removeClass('dropdown-menu');
+                }
 
                 if (use24Hours) {
                     template.addClass('usetwentyfour');
@@ -428,7 +428,7 @@
                 }
 
                 // Top and bottom logic
-                if (vertical === '') {
+                if (vertical === 'auto') {
                     if (offset.top + widget.height() * 1.5 >= $(window).height() + $(window).scrollTop() &&
                         widget.height() + element.outerHeight() < offset.top) {
                         vertical = 'top';
@@ -2428,8 +2428,8 @@
         showClear: false,
         showClose: false,
         widgetPositioning: {
-            horizontal: 'right',
-            vertical: 'bottom'
+            horizontal: 'auto',
+            vertical: 'auto'
         },
         widgetParent: null,
         ignoreReadonly: false,

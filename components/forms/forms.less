@@ -762,6 +762,7 @@
 
 //================ email validation =====================
 
+//TODO these should be scoped to the component not be global like this
 .ui-tooltip, .arrow:after {
     background: black;
     border: 2px solid white;
@@ -808,190 +809,135 @@
 }
 
 
-/* --------|DATEPICKER CSS|-------- */
 
-.bootstrap-datetimepicker-widget {
-
-    &.dropdown-menu {
+/* date-selector */
+.date-selector {
+    position:relative;
+    //width: 15em;
+    .icon-small-calendar {
+        position:absolute;
+        top: 3px;
+        right: 4px;
+        padding: 5px;
+        color: @dell-blue;
+        cursor: pointer;
+        float:right;
+        &:hover {
+            background: @dell-highlight-blue;
+            -webkit-border-radius: @border-radius-small;
+            -moz-border-radius:    @border-radius-small;
+            border-radius:         @border-radius-small;
+        }
+    }
+    label {
+        float:left;
+    }
+    .help-block {
+        position:absolute;
+    }
+    .bootstrap-datetimepicker-widget {
         margin: 2px 0;
         padding: 4px;
-        width: 13.5em;
-    }
+        width: 210px;
+        -webkit-border-radius: @border-radius-small;
+        -moz-border-radius:    @border-radius-small;
+        border-radius:         @border-radius-small;
 
-    table {
-
-        font-family: "Trebuchet MS",Roboto,"Segoe UI","Helvetica Neue","Meiryo UI Reg","メイリオ Reg","MS UI Gothic Reg","Hiragino Kaku Gothic Reg","ヒラギノ角ゴ Pro W3 Reg","Microsoft YaHei","微软雅黑","Hiragino Sans GB","Microsoft JhengHei","微軟正黑體","Malgun Gothic",Gulim,Tahoma,"Arial Unicode",sans-serif;
-        font-size: 14px;
-
-        thead {
-
-            tr:first-child {
-                background: none 0 0 @dell-blue;
-                color: #fff;
-
-                /*th {
-                    &:hover {
-                        background: none 0 0 @dell-blue;
-                        color: #fff;
-                    }
-                }*/
+        font-size: @font-size-base;
+        &.pull-right {
+            top:-36px !important;
+            left:220px !important;
+            position:relative;
+        }
+        &.top {
+            top: -264px !important;
+            bottom: auto !important;
+            position:absolute;
+            &.pull-right {
+                position:relative;
+                top: -254px !important;
             }
         }
-
-    }
-    .datepicker-days, .datepicker-months, .datepicker-years, .datepicker-decades {
-        thead tr:first-child th {
-            border-radius: 0;
-            &:hover {
-                background: none 0 0 @dell-blue !important;
-                color: #fff !important;
-            }
+        &:before,&:after {
+            //the caret
+            display:none;
         }
-        .prev.theader, .next.theader, .picker-switch.theader {
+        table {
+            border: 0;
+        }
+        .datepicker-days, 
+        .datepicker-months, 
+        .datepicker-years, 
+        .datepicker-decades {
+            thead > tr:first-child > th {
+                &:hover {
+                    background: @dell-blue;
+                    color: #fff;
+                }
+            }
+            td {
+                -webkit-border-radius: @border-radius-small;
+                -moz-border-radius:    @border-radius-small;
+                border-radius:         @border-radius-small;
+                &.day {
+                    width: 34px; //otherwise the colum with active is about 4 pixels wider
+                }
+            }
+            .picker-switch {
                 border-radius: 0;
-                background: none 0 0 @dell-blue !important;
-                color: #fff !important;
+                background: @dell-blue;
+                color: #fff;
             }
-        .day, .month, .year, .decades {
-            &:hover {
-                background: none 0 0 @dell-highlight-blue;
+            .prev {
+                
+                -webkit-border-radius: @border-radius-small 0 0 @border-radius-small;
+                -moz-border-radius:    @border-radius-small 0 0 @border-radius-small;
+                border-radius:         @border-radius-small 0 0 @border-radius-small;
+
+                background: @dell-blue;
+                color: #fff;
             }
-        }    
-    }
+            .next {
+                -webkit-border-radius: 0 @border-radius-small @border-radius-small 0;
+                -moz-border-radius:    0 @border-radius-small @border-radius-small 0;
+                border-radius:         0 @border-radius-small @border-radius-small 0;
+                background: @dell-blue;
+                color: #fff;
+            }
+            .day, .month, .year, .decades {
+                text-shadow: none;
+                &.active {
+                    background: @dell-blue;
+                }
+                &:hover {
+                    background: @dell-highlight-blue;
+                    &.active {
+                        color: @text-color;
+                    }
+                }
+            }
+            .today {
+                border: 1px solid @dell-blue;
+                &.active {
+                    background: @dell-blue;
+                }
+                &:before {
+                    display:none;
+                }
+            }
 
-    li.picker-switch {display: none;}
-}
-/*#datetimepicker1 {
-    input {
-        width: 50%;
-    }
-}*/
-
-
-.date-selector {
-    
-    /*input {
-    border-right: 0;
-    }
-    .input-group-addon {
-        background: none 0 0 transparent;
-        border-left: 0;
-        &:active {
-            border: 1px solid @dell-blue;
-            border-left: 0;
-        }*/
-    input{
-        background: none no-repeat 0 0 transparent;
-    }
-    .inner-icon { 
-        position: relative; 
-    }
-    .inner-icon .icon-small-calendar {
-      position: absolute;
-      cursor: pointer;
-      color: @dell-blue;
-      padding: 10px;
-    }
-    .add-right .icon-small-calendar { right: 0px;}
-    .add-right input { padding-right: 30px; }
-
-}
-
-
-.bootstrap-datetimepicker-widget {
-    /*border: 1px solid @dell-gray-stroke;*/
-    top: -2px;
-    right: -20px;
-    border: 0 !important;
-    box-shadow:inset 0px 0px 0px 1px @dell-gray-stroke;
-    -webkit-box-shadow:inset 0px 0px 0px 1px @dell-gray-stroke;
-    -moz-box-shadow:inset 0px 0px 0px 1px @dell-gray-stroke;
-}
-
-#datetimepicker1 {
-    .caret {
-        display: none;
-    }
-}
-.sr-only {display: none;}
-.bootstrap-datetimepicker-widget table {
-    td.today:before, td.today:after {
-      content: none;
-      display: block;
-      position: inherit;
-      border-radius: 0;
-      border: 0 !important;
-  }
-}
-
-.bootstrap-datetimepicker-widget table {
-    td.active, td span.active {
-        content: none !important;
-        background-color: @dell-blue !important;
-        color: #ffffff;
-        text-shadow: 0;
-        border-radius: 0;
-        border: 0 !important;
-    }
-    td.active.today:hover, td.active:hover, td span.active:hover, td span.decade:hover {
-      content: none !important;
-      background-color: #ffffff !important;
-      color: #444444 !important;
-      text-shadow: 0;
-      box-shadow:inset 0px 0px 0px 1px @dell-blue;
-      -webkit-box-shadow:inset 0px 0px 0px 1px @dell-blue;
-      -moz-box-shadow:inset 0px 0px 0px 1px @dell-blue;
-      border-radius: 0;
-      border: 0 !important;
-    }
-}
-/*.bootstrap-datetimepicker-widget table td.active:hover {
-  content: none !important;
-  background-color: #ffffff !important;
-  color: #444444 !important;
-  text-shadow: 0;
-  box-shadow:inset 0px 0px 0px 1px @dell-blue;
-  -webkit-box-shadow:inset 0px 0px 0px 1px @dell-blue;
-  -moz-box-shadow:inset 0px 0px 0px 1px @dell-blue;
-  border-radius: 0;
-  border: 0 !important;
-}*/
-.bootstrap-datetimepicker-widget table td.active.today {
-  content: none !important;
-  background-color: @dell-blue !important;
-  color: #ffffff !important;
-  text-shadow: 0;
-  border-radius: 0;
-  border: 0 !important;
-}
-
-.bootstrap-datetimepicker-widget table td.today {
-    content: none !important;
-    background-color: #ffffff !important;
-    color: #444444 !important;
-    text-shadow: 0;
-    box-shadow:inset 0px 0px 0px 1px @dell-blue;
-    -webkit-box-shadow:inset 0px 0px 0px 1px @dell-blue;
-    -moz-box-shadow:inset 0px 0px 0px 1px @dell-blue;
-    border-radius: 0;
-    border: 0 !important;
-}
-
-.showPicker {
-    display: inline-block !important;
-    visibility: visible;
-}
-
-
-
-
-/* ---|--DatePicker media query for sm and xs--|--- */
-@media (max-width: @screen-sm-max) {
-
-        .bootstrap-datetimepicker-widget {
-            top: 100px;
-            right: 0;
         }
 
-
+        li.picker-switch {display: none;}
     }
+}
+
+
+
+
+
+
+
+
+
+

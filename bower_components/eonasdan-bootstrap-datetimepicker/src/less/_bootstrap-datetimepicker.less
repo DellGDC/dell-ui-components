@@ -6,7 +6,7 @@
 @bs-datetimepicker-timepicker-font-size: 1.2em;
 @bs-datetimepicker-active-bg: @btn-primary-bg;
 @bs-datetimepicker-active-color: @btn-primary-color;
-/*@bs-datetimepicker-border-radius: @border-radius-base;*/
+@bs-datetimepicker-border-radius: @border-radius-base;
 @bs-datetimepicker-btn-hover-bg: @gray-lighter;
 @bs-datetimepicker-disabled-color: @gray-light;
 @bs-datetimepicker-alternate-color: @gray-light;
@@ -19,7 +19,7 @@
     list-style: none;
 
     &.dropdown-menu {
-        margin: 0;
+        margin: 2px 0;
         padding: 4px;
         width: 19em;
 
@@ -38,13 +38,12 @@
         }
 
         &:before, &:after {
-            content: none;
+            content: '';
             display: inline-block;
             position: absolute;
-            border: 0 !important;
         }
 
-        /*&.bottom {
+        &.bottom {
             &:before {
                 border-left: 7px solid transparent;
                 border-right: 7px solid transparent;
@@ -67,8 +66,7 @@
             &:before {
                 border-left: 7px solid transparent;
                 border-right: 7px solid transparent;
-                
-                : 7px solid @bs-datetimepicker-secondary-border-color;
+                border-top: 7px solid @bs-datetimepicker-secondary-border-color;
                 border-top-color: @bs-datetimepicker-secondary-border-color-rgba;
                 bottom: -7px;
                 left: 6px;
@@ -81,7 +79,7 @@
                 bottom: -6px;
                 left: 7px;
             }
-        }*/
+        }
 
         &.pull-right {
             &:before {
@@ -161,7 +159,7 @@
 
     .btn[data-action="today"]::after {
         .sr-only();
-        content: none;
+        content: "Set the date to today";
     }
 
     .picker-switch {
@@ -169,7 +167,7 @@
 
         &::after {
             .sr-only();
-            content: none;
+            content: "Toggle Date and Time Screens";
         }
 
         td {
@@ -195,12 +193,12 @@
         & td,
         & th {
             text-align: center;
-            /*border-radius: @bs-datetimepicker-border-radius;*/
+            border-radius: @bs-datetimepicker-border-radius;
         }
 
         & th {
-            height: 15px;
-            line-height: 18px;
+            height: 20px;
+            line-height: 20px;
             width: 20px;
 
             &.picker-switch {
@@ -238,12 +236,12 @@
             line-height: 54px;
             width: 54px;
 
-            /*&.cw {
+            &.cw {
                 font-size: .8em;
                 height: 20px;
                 line-height: 20px;
                 color: @bs-datetimepicker-alternate-color;
-            }*/
+            }
 
             &.day {
                 height: 20px;
@@ -268,11 +266,15 @@
                 position: relative;
 
                 &:before {
-                      background-color: @dell-blue;
-                      color: #000000;
-                      text-shadow: 0;
-                      border-radius: 0;
-                      border: 0 !important;
+                    content: '';
+                    display: inline-block;
+                    border: solid transparent;
+                    border-width: 0 0 7px 7px;
+                    border-bottom-color: @bs-datetimepicker-active-bg;
+                    border-top-color: @bs-datetimepicker-secondary-border-color-rgba;
+                    position: absolute;
+                    bottom: 4px;
+                    right: 4px;
                 }
             }
 
@@ -346,10 +348,5 @@
 .input-group.date {
     & .input-group-addon {
         cursor: pointer;
-        :focus {
-            border: 1px solid @dell-blue;
-            border-left: 1px solid #ffffff;
-        }
     }
 }
-

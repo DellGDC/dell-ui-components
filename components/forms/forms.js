@@ -535,38 +535,72 @@ return {
         }
     };
 })
+.directive('dateSelector', function(){
+    // Runs during compile
+    return {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, $element, $attrs) {
+            var inputField = $element.find('input'),
+                inputFieldWidth = inputField.width(),
+                inputFieldOffset = inputField.offset(), 
+                viewPortWidth = $(window).width(),            
+                viewPortHeight = $(window).height(),            
+                dateSelectorConfig = {
+                    icons: {
+                        time: 'icon-small-clock',
+                        date: 'icon-small-calendar',
+                        up: 'glyphicon glyphicon-chevron-up',
+                        down: 'glyphicon glyphicon-chevron-down',
+                        previous: 'glyphicon glyphicon-chevron-left',
+                        next: 'glyphicon glyphicon-chevron-right',
+                        today: 'icon-small-software',
+                        clear: 'icon-small-trash',
+                        close: 'icon-ui-close'
+                    },
+                    keepOpen:true,
+                    widgetPositioning: {
+                        horizontal:'right',
+                        vertical: typeof $attrs.position !== 'undefined' ? $attrs.position : 'bottom'
+                    },
+                    format: typeof $attrs.format !== 'undefined' ? $attrs.format : 'MM/DD/YYYY'
+                };
 
-.controller('DatepickerDemoCtrl', function ($scope) {
-        $scope.today = function() {
-            $scope.dt = new Date();
-        };
-        // $scope.today();
 
-        $scope.clear = function () {
-            $scope.dt = null;
-        };
 
-        // Disable weekend selection
-        $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-        };
 
-        $scope.toggleMin = function() {
-            $scope.minDate = $scope.minDate ? null : new Date();
-        };
-        // $scope.toggleMin();
 
-        $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
 
-            $scope.opened = true;
-        };
+            //TODO, check to see if the field is at the bottom of the viewport and position it on top
+            inputField.datetimepicker(dateSelectorConfig);
 
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-        };
+            inputField.on("dp.show",function (e) {
 
-        $("thead > tr > th").addClass("theader");
-    });
+                //check to see if the right side is big enough for the widget
+                if(inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
+                    $element.find('.bootstrap-datetimepicker-widget').removeClass('pull-right');
+                } else {
+                    $element.find('.bootstrap-datetimepicker-widget').addClass('pull-right');
+                }
+
+                //check to see if the bottom side is big enough for the widget
+                if(inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
+                    //dateSelectorConfig.widgetPositioning.vertical = "top";
+                    $element.find('.bootstrap-datetimepicker-widget').removeClass('bottom').addClass('top');
+                } else {
+                    $element.find('.bootstrap-datetimepicker-widget').removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
+                }              
+
+            });
+
+/*            inputField.on("blur",function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                inputField.data("DateTimePicker").show();
+            });*/
+
+
+
+
+        }
+    };
+});
