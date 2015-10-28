@@ -16,7 +16,7 @@ angular.module('dellUiComponents')
                         if($scope.fakeAnimationValue < 100) {
                             $scope.fakeAnimationValue = $scope.fakeAnimationValue + 1;
                             $scope.fakeAnimationSteps = Math.round($scope.fakeAnimationValue/20);
-                            console.log($scope.fakeAnimationValue,$scope.fakeAnimationSteps);
+                            //console.log($scope.fakeAnimationValue,$scope.fakeAnimationSteps);
                             $scope.stripeAnimate = "active";
                             $scope.fakeAnimation();
                         }
@@ -29,7 +29,7 @@ angular.module('dellUiComponents')
                     $scope.stripeAnimate = "";
                 };
 
-                console.log('hello timeout');
+                //console.log('hello timeout');
                 $scope.resetFakeAnimation = function() {
                     $scope.fakeAnimationValue = 0;
                     $scope.fakeAnimation();

@@ -4,9 +4,6 @@
  */
 
 
-// TODO needs to be moved to dell-ui-bootstrap
-
-
 // Base class
 .tooltip {
     position: absolute;
@@ -136,3 +133,35 @@
     border:none;
 }
 
+a[data-toggle="tooltip"] {
+    padding-bottom: 0;
+}
+
+img[data-toggle="tooltip"] {
+    border:none;
+}
+
+.contextual-help {
+    .form-label {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        padding-left: 5px;
+        padding-top: 8px;
+        text-align: right;
+        top: 0;
+    }
+    [class^=icon][data-toggle="tooltip"] {
+        border:none;
+    }
+    [data-toggle="tooltip"] {
+        border-bottom: none !important;
+        color: @dell-blue;
+    }
+}
+
+
+input:focus + [role="tooltip"] {
+    display: block;
+    position: absolute;
+    top: 100%;
+}

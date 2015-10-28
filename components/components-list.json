@@ -1,6 +1,7 @@
 [
      "alerts",
      "announcements",
+     "anchored-nav",
      "banner",
      "breadcrumbs",
      "standard-buttons",
@@ -28,6 +29,7 @@
      "responsive-utilities",
      "progress-bars",
      "tables",
+     "tables-uber",
      "tabs",
      "tooltips",
      "typography",

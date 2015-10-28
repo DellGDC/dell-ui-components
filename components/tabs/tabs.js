@@ -1,19 +1,23 @@
 angular.module('dellUiComponents')
-
-    .directive('divHeightEqualize', function($timeout){
-        // Runs during compile
-        // requires bower_components/slick-1.5.0/slick/slick.js which is bundled in dell-ui-components.js
+    .directive('navTabs', function(){
         return {
             restrict: 'C',
-            link: function($scope, $element, iAttrs, controller ) {
+            link: function($scope, $element, iAttrs, controller) {
 
-                $(function() {
-                    $('.tab-center-equalize').matchHeight();
-                });
-
-                $(function() {
-                    $('.tab-justify-equalize').matchHeight();
-                });
+                var containerWidth = $element.parent().width(),
+                    tabObjs = $element.find('> li'),
+                    totalWidth = 0;
+                    _.each(tabObjs, function(t,index){
+                        totalWidth = totalWidth + $(t).width() +1;
+                    });
+                if(totalWidth > containerWidth) {
+                    $element.dellUIoverflowTab({
+                        iconClasses: {
+                            left: "icon-ui-arrowleft",
+                            right: "icon-ui-arrowright"
+                        }
+                    });
+                }
             }
         };
     });
