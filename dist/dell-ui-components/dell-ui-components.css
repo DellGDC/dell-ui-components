@@ -4137,8 +4137,6 @@ ul.ratings ul.rating-stars {
   list-style: none;
   margin-left: -5px;
   margin-right: 10px;
-  position: relative;
-  top: -1px;
 }
 ul.ratings ul.rating-stars > li {
   float: left;
@@ -4160,6 +4158,11 @@ ul.ratings:after {
 }
 .ratings-histogram > .row > div:last-child {
   margin-left: -10px !important;
+}
+blockquote.blockquote-unstyled {
+  background: none;
+  border: none;
+  padding-left: 0;
 }
 /*
 //Collapsible-Items component theme overrides
@@ -4626,6 +4629,7 @@ ul.ratings:after {
   -moz-border-radius: 5px;
   border-radius: 5px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.92);
 }
 @media (max-width: 991px) {
   .jumbotron > .img-responsive {
