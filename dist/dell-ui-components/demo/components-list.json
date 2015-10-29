@@ -21,6 +21,7 @@
      "icons",
      "lists",
      "labels-and-badges",
+     "masthead",
      "modals",
      "offsets",
      "pagers",
@@ -35,4 +36,5 @@
      "typography",
      "ratings-and-reviews",
      "search-and-navigation"
+
 ]

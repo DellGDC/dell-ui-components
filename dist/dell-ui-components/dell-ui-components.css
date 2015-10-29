@@ -4612,12 +4612,164 @@ blockquote.blockquote-unstyled {
 *banner component .LESS
 *------------------------------------------------------------------------------------------
 */
+@media (min-width: 992px) {
+  .jumbotron h1,
+  .jumbotron .h1 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .jumbotron h2,
+  .jumbotron .h2 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+  .jumbotron h3.feature,
+  .jumbotron .h3.feature {
+    font-family: 'museo-sans-for-dell-300', 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .jumbotron h3,
+  .jumbotron .h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .jumbotron h4,
+  .jumbotron .h4 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .jumbotron h5,
+  .jumbotron .h5 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .jumbotron .bold-16 {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .jumbotron .bold-14 {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .jumbotron .bold-12 {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: bold;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .jumbotron h1,
+  .jumbotron .h1 {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .jumbotron h2,
+  .jumbotron .h2 {
+    font-size: 26px;
+    line-height: 30px;
+  }
+  .jumbotron h3.feature,
+  .jumbotron .h3.feature {
+    font-family: 'museo-sans-for-dell-300', 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+    font-size: 22px;
+    line-height: 26px;
+  }
+  .jumbotron h3,
+  .jumbotron .h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .jumbotron h4,
+  .jumbotron .h4 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .jumbotron h5,
+  .jumbotron .h5 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .jumbotron .bold-16 {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .jumbotron .bold-14 {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .jumbotron .bold-12 {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: bold;
+  }
+}
+@media (max-width: 767px) {
+  .jumbotron h1,
+  .jumbotron .h1 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .jumbotron h2,
+  .jumbotron .h2 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .jumbotron h3.feature,
+  .jumbotron .h3.feature {
+    font-family: 'museo-sans-for-dell-300', 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .jumbotron h3,
+  .jumbotron .h3 {
+    font-size: 17px;
+    line-height: 20px;
+  }
+  .jumbotron h4,
+  .jumbotron .h4 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .jumbotron h5,
+  .jumbotron .h5 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .jumbotron .bold-16 {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .jumbotron .bold-14 {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+  .jumbotron .bold-12 {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: bold;
+  }
+}
+.jumbotron p {
+  font-size: 14px;
+}
+.jumbotron p small {
+  font-size: 85%;
+  line-height: 15px;
+}
 .jumbotron {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   max-height: 600px;
   width: 100%;
   overflow: hidden;
+  background: none;
 }
 .jumbotron > .img-responsive {
   width: 100%;
@@ -4639,7 +4791,13 @@ blockquote.blockquote-unstyled {
     background: none;
     border: none;
     box-shadow: none;
-    margin-top: 10px;
+    margin-top: 0;
+  }
+  .jumbotron [class^=col] {
+    background: #eeeeee;
+  }
+  .jumbotron .container {
+    width: 100%;
   }
 }
 /* -------old....needed to be more bootstrap style------ */
@@ -4707,7 +4865,7 @@ blockquote.blockquote-unstyled {
         -moz-border-radius: 15px;
         -ms-border-radius: 5px;
         border-radius: 0;
-        background: #ffffff;
+        background: @white;
         background: @dell-gray-light;
         color: #444444;
         -ms-text-shadow: none;
@@ -4860,6 +5018,56 @@ blockquote.blockquote-unstyled {
   position: fixed;
   top: 0;
   z-index: 999;
+}
+/*
+ * Masthead component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+masthead > .navbar {
+  background: #007db8;
+  color: #ffffff;
+  border: none;
+  border-bottom: 1px solid #008ed2;
+  height: 66px;
+  margin-left: 0;
+  display: block;
+  position: relative;
+}
+@media (max-width: 767px) {
+  masthead > .navbar {
+    height: 50px;
+    margin-left: 15px;
+  }
+}
+masthead > .navbar a {
+  color: #ffffff;
+}
+masthead > .navbar .navbar-header .navbar-brand {
+  height: 66px;
+}
+@media (max-width: 767px) {
+  masthead > .navbar .navbar-header .navbar-brand {
+    height: 50px;
+  }
+}
+masthead > .navbar .navbar-header .navbar-brand .icon-ui-dell {
+  position: relative;
+  top: -2px;
+  font-size: 42px;
+}
+@media (max-width: 767px) {
+  masthead > .navbar .navbar-header .navbar-brand .icon-ui-dell {
+    top: -5px;
+    font-size: 30px;
+  }
+}
+masthead .masthead-shadow {
+  content: "";
+  width: 100%;
+  height: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  margin: -26px auto 0;
+  z-index: 500;
 }
 /* Add Component LESS Above */
 .tooltip {
