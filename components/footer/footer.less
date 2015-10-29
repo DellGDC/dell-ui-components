@@ -3,48 +3,6 @@
  *------------------------------------------------------------------------------------------
  */
 
-.footer-menu {
-    border-top: 1px solid @dell-highlight-blue;
-    border-bottom: 1px solid @dell-highlight-blue;
-    background: @dell-blue;
-    ul {
-        margin:0 auto 0 auto;
-        li {
-            border-bottom:1px solid darken(@dell-highlight-blue, 28%);
-            a {
-                display:block;
-                color: @white;
-                padding: 12px 10px 10px 0;
-                &:hover {
-                    text-decoration:underline;
-                }
-            }
-            &:last-child {
-                border-bottom:none;
-            }
-        }
-    }
-    @media (min-width: @screen-sm-min) {
-        ul {
-            li {
-                display:inline-block;
-                border-bottom:none;
-                a {
-                    padding-left:10px;
-                    &:focus {
-                        outline:@white solid thin;
-                        text-decoration: none;
-                    }
-                }
-                &:first-child {
-                    a {
-                        padding-left:0;
-                    }
-                }
-            }
-        }
-    }
-}
 footer.navbar {
     border: 0;
     border-top: 1px solid @dell-highlight-blue;
@@ -63,6 +21,8 @@ footer.navbar {
                 line-height: 15px; //same as p small
                 &:hover {
                     text-decoration:underline;
+                    background: @dell-blue;
+                    color: @dell-highlight-blue;
                 }
             }
             &:last-child {
