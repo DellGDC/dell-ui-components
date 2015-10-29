@@ -1140,6 +1140,50 @@ fieldset[disabled] a.btn.btn-primary {
  * Footer component theme overrides
  *------------------------------------------------------------------------------------------
  */
+footer.navbar {
+  border: 0;
+  border-top: 1px solid #cce5f1;
+  border-bottom: 1px solid #cce5f1;
+  background: #007db8;
+  min-height: auto;
+}
+footer.navbar ul.navbar-nav {
+  margin: 0 auto 0 auto;
+}
+footer.navbar ul.navbar-nav li {
+  border-bottom: 1px solid #5cacd2;
+}
+footer.navbar ul.navbar-nav li a {
+  display: block;
+  color: #ffffff;
+  padding: 12px 13px 10px 0;
+  font-size: 12px;
+  line-height: 15px;
+}
+footer.navbar ul.navbar-nav li a:hover {
+  text-decoration: underline;
+  background: #007db8;
+  color: #cce5f1;
+}
+footer.navbar ul.navbar-nav li:last-child {
+  border-bottom: none;
+}
+@media (min-width: 768px) {
+  footer.navbar ul.navbar-nav li {
+    display: inline-block;
+    border-bottom: none;
+  }
+  footer.navbar ul.navbar-nav li a {
+    padding-left: 10px;
+  }
+  footer.navbar ul.navbar-nav li a:focus {
+    outline: #ffffff solid thin;
+    text-decoration: none;
+  }
+  footer.navbar ul.navbar-nav li:first-child a {
+    padding-left: 0;
+  }
+}
 /*
  * Forms component theme overrides
  *------------------------------------------------------------------------------------------
@@ -1323,7 +1367,7 @@ fieldset[disabled] a.btn.btn-primary {
   background: #cce5f1;
 }
 .ms-drop input[type="checkbox"] {
-  vertical-align: top;
+  vertical-align: middle;
 }
 .ms-drop .ms-no-results {
   display: none;
@@ -1868,6 +1912,220 @@ fieldset[disabled] a.btn.btn-primary {
 .arrow.top:after {
   bottom: -20px;
   top: auto;
+}
+/* date-selector */
+.date-selector {
+  position: relative;
+}
+.date-selector .icon-small-calendar {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  padding: 5px;
+  color: #007db8;
+  cursor: pointer;
+  float: right;
+}
+@media (max-width: 767px) {
+  .date-selector .icon-small-calendar {
+    top: 40px;
+  }
+}
+.date-selector .icon-small-calendar:hover {
+  background: #cce5f1;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+}
+.date-selector .help-block {
+  position: absolute;
+}
+.date-selector .bootstrap-datetimepicker-widget {
+  margin: 2px 0;
+  padding: 4px;
+  width: 210px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+  font-size: 14px;
+}
+.date-selector .bootstrap-datetimepicker-widget.pull-right {
+  top: -36px !important;
+  left: 220px !important;
+  position: relative;
+}
+.date-selector .bootstrap-datetimepicker-widget.top {
+  top: -264px !important;
+  bottom: auto !important;
+  position: absolute;
+}
+@media (max-width: 767px) {
+  .date-selector .bootstrap-datetimepicker-widget.top {
+    top: -225px !important;
+  }
+}
+.date-selector .bootstrap-datetimepicker-widget.top.pull-right {
+  position: relative;
+  top: -254px !important;
+}
+.date-selector .bootstrap-datetimepicker-widget:before,
+.date-selector .bootstrap-datetimepicker-widget:after {
+  display: none;
+}
+.date-selector .bootstrap-datetimepicker-widget table {
+  border: 0;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days thead > tr:first-child > th:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months thead > tr:first-child > th:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years thead > tr:first-child > th:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades thead > tr:first-child > th:hover {
+  background: #007db8;
+  color: #fff;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days td,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months td,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years td,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades td {
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days td.day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months td.day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years td.day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades td.day {
+  width: 34px;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days td span,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months td span,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years td span,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades td span {
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .picker-switch,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .picker-switch,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .picker-switch,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .picker-switch {
+  border-radius: 0;
+  background: #007db8;
+  color: #fff;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .prev,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .prev,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .prev,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .prev {
+  -webkit-border-radius: 1px 0 0 1px;
+  -moz-border-radius: 1px 0 0 1px;
+  border-radius: 1px 0 0 1px;
+  background: #007db8;
+  color: #fff;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .next,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .next,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .next,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .next {
+  -webkit-border-radius: 0 1px 1px 0;
+  -moz-border-radius: 0 1px 1px 0;
+  border-radius: 0 1px 1px 0;
+  background: #007db8;
+  color: #fff;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .month,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .month,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .month,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .year,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .year,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .year,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades {
+  text-shadow: none;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .day.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .day.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .day.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .month.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .month.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .month.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .year.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .year.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .year.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades.active {
+  background: #007db8;
+  color: #ffffff;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .day:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .day:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .day:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .month:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .month:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .month:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .year:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .year:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .year:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades:hover {
+  background: #cce5f1;
+  color: #444444;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .day:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .day:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .day:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .month:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .month:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .month:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .year:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .year:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .year:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades:hover.active {
+  color: #ffffff;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .today,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .today,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .today,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today {
+  border: 1px solid #007db8;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .today.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .today.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .today.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today.active {
+  background: #007db8;
+}
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .today:before,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .today:before,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .today:before,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today:before {
+  display: none;
+}
+.date-selector .bootstrap-datetimepicker-widget li.picker-switch {
+  display: none;
 }
 /*
  * Icons component theme overrides
@@ -4344,79 +4602,6 @@ ul.ratings:after {
   }
 }
 /*
- * Date-Selector component theme overrides
- *------------------------------------------------------------------------------------------
- */
-.date-selector .input-group-btn .btn-default {
-  background-color: #ffffff;
-}
-.date-selector .theader {
-  background-color: #007db8;
-}
-.date-selector .input-group {
-  width: 300px;
-}
-.date-selector .dropdown-menu {
-  border-radius: 5px;
-  padding: 5px;
-}
-.date-selector th > .btn-block {
-  font-size: 1.2em;
-}
-.date-selector table,
-.date-selector th,
-.date-selector td,
-.date-selector .btn-block {
-  height: 33px;
-}
-.date-selector table,
-.date-selector th,
-.date-selector td {
-  border: 0px;
-}
-.date-selector thead > tr > th > .pull-right {
-  padding-bottom: 5px;
-  width: 35px;
-  height: 33px;
-  color: #ffffff;
-}
-.date-selector thead > tr > th > button {
-  color: #ffffff;
-}
-.date-selector thead > tr > th > .pull-left {
-  padding-bottom: 5px;
-  width: 35px;
-  height: 33px;
-  color: #ffffff;
-}
-.date-selector table tbody button:hover {
-  color: #444444;
-  background-color: #cce5f1 !important;
-  border: 0px solid #ffffff;
-}
-.date-selector tbody .btn-default {
-  color: #444444;
-  background-color: #ffffff;
-  border-color: #ffffff;
-}
-.date-selector .btn.disabled,
-.date-selector .btn[disabled],
-.date-selector fieldset[disabled] .btn {
-  background-color: #ffffff;
-  border-color: #ffffff;
-}
-.date-selector thead .btn-default {
-  color: #ffffff;
-  background-color: #007db8;
-  border: 0px;
-}
-.date-selector thead tr {
-  background-color: #007db8;
-}
-.date-selector thead .h6 {
-  background-color: #ffffff;
-}
-/*
  * Search-And-Navigation component theme overrides
  *------------------------------------------------------------------------------------------
  */
@@ -4424,70 +4609,111 @@ ul.ratings:after {
 *banner component .LESS
 *------------------------------------------------------------------------------------------
 */
-.banner {
-  position: relative;
-}
-.banner .img-responsive-constrained {
+.jumbotron {
+  margin: 0px;
+  padding: 0px;
   max-height: 600px;
-}
-.banner .img-responsive-constrained .img-responsive {
-  display: block;
   width: 100%;
-}
-.container-fluid .banner {
-  margin-left: -15px;
-  margin-right: -15px;
-  max-height: 600px !important;
   overflow: hidden;
 }
-.banner-inside {
-  left: 0;
-  top: 20px;
-  width: 45%;
-  margin-left: 20px;
-  padding: 5px 20px 20px 20px;
-  vertical-align: middle;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 5px;
-  border-radius: 5px;
-  background: #ffffff;
-  background: rgba(600, 600, 600, 0.92);
-  color: #444444;
-  -ms-text-shadow: none;
-  text-shadow: none;
-  right: auto;
-  bottom: auto;
+.jumbotron > .img-responsive {
+  width: 100%;
   position: absolute;
 }
-@media (min-width: 767px) and (max-width: 991px) {
-  .banner-inside {
-    padding: 20px;
+.jumbotron .well {
+  margin-top: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+@media (max-width: 991px) {
+  .jumbotron > .img-responsive {
+    position: relative;
+  }
+  .jumbotron .well {
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin-top: 10px;
   }
 }
-@media (max-width: 767px) {
-  .banner-inside {
+/* -------old....needed to be more bootstrap style------ */
+/*
+.banner {
+    position: relative;
+    .img-responsive-constrained {
+        max-height: 600px;
+        .img-responsive {
+        display: block;
+        width: 100%;
+        }
+    }
+}
+
+
+.container-fluid {
+    .banner {
+        margin-left: -15px;
+        margin-right: -15px;
+        max-height: 600px !important;
+        overflow: hidden;
+    }
+}
+
+.banner-inside {
     left: 0;
-    top: 0;
-    width: 100%;
-    max-width: none;
-    margin-left: 0;
-    padding: 10px 20px 10px 20px;
+    top: 20px;
+    width: 45%;
+    //max-width: 420px;
+    margin-left: 20px;
+    padding: 5px 20px 20px 20px;
     vertical-align: middle;
     -webkit-border-radius: 10px;
     -moz-border-radius: 15px;
     -ms-border-radius: 5px;
-    border-radius: 0;
-    background: #ffffff;
-    background: #eeeeee;
-    color: #444444;
+    border-radius: 5px;
+    background: @white;
+    background: rgba(600,600,600,.92);
+    color: @dell-gray-dark;
     -ms-text-shadow: none;
     text-shadow: none;
     right: auto;
     bottom: auto;
-    position: relative;
-  }
+    position: absolute;
 }
+
+
+@media (min-width: @screen-xs-max) and (max-width: @screen-sm-max) {
+    .banner-inside {
+        padding: 20px;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .banner-inside {
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: none;
+        margin-left: 0;
+        padding: 10px 20px 10px 20px;
+        vertical-align: middle;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 5px;
+        border-radius: 0;
+        background: #ffffff;
+        background: @dell-gray-light;
+        color: #444444;
+        -ms-text-shadow: none;
+        text-shadow: none;
+        right: auto;
+        bottom: auto;
+        position: relative;
+    }
+}
+*/
 /*
  * Contact-Drawer component theme overrides
  *------------------------------------------------------------------------------------------
