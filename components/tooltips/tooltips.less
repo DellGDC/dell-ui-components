@@ -151,3 +151,65 @@
         color: @dell-blue;
     }
 }
+/* ----------| Tooltip Change to Modal based on the sm and xs media query |---------- */
+
+@media (max-width: @screen-sm-max) {
+
+        .tooltip {
+            bottom: 0;
+            left: 0;
+            outline: 0 none;
+            overflow: hidden;
+            position: fixed;
+            right: 0;
+            top: 0;
+            z-index: 1050;
+
+            /*background-color: @modal-backdrop-bg !important;
+            bottom: 0;
+            display: block;
+            left: 0;
+            outline: 0 none;
+            overflow: hidden;
+            position: fixed;
+            right: 0;
+            top: 0;*/
+            z-index: 1050;
+            border: 0 !important;
+            border-radius: 0 !important;
+           /* opacity: 1 !important
+            transition: opacity 0.15s linear 0s !important;*/
+            background: rgba(0, 0, 0, 0) none repeat scroll 0 0 !important;
+
+            &.top, &.right, &.left, &.bottom    { 
+                /*bottom: 0 !important;*/
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important; 
+                margin: 0 auto; 
+                padding: 0;
+            }
+        }
+        /*.fade {
+            transition: opacity 0.15s linear 0s !important;
+        }*/
+
+        .tooltip-inner {
+
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+            background-clip: padding-box !important;
+            background-color: #fff !important;
+            border: 1px solid rgba(0, 0, 0, 0.2) !important;
+            border-radius: 5px !important;
+            outline: 0 none !important;
+            position: relative !important;
+            width: 50% !important;
+            position: absolute !important;
+            left: 25%;
+            right: 25%;
+            top: 10% !important;
+        }
+        .tooltip-arrow {
+            display: none !important;
+        }
+    }
