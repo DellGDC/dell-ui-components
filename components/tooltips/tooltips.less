@@ -133,6 +133,13 @@
     border:none;
 }
 
+a[data-toggle="tooltip"] {
+    padding-bottom: 0;
+}
+
+img[data-toggle="tooltip"] {
+    border:none;
+}
 
 .contextual-help {
     .form-label {
@@ -150,4 +157,11 @@
         border-bottom: none !important;
         color: @dell-blue;
     }
+}
+
+
+input:focus + [role="tooltip"] {
+    display: block;
+    position: absolute;
+    top: 100%;
 }

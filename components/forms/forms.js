@@ -1,4 +1,4 @@
-/**
+/*
  * Created by Clint_Batte on 3/24/2015.
  */
 angular.module('dellUiComponents')
@@ -534,5 +534,80 @@ return {
             $scope.emptyName = $attributes.emptyName || '*State';
         }
     };
-});
+})
+.directive('dateSelector', function(){
+    // Runs during compile
+    return {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, $element, $attrs) {
+            var inputField = $element.find('input'),
+                calendarIcon = $element.find('.icon-small-calendar'),
+                calendarWidget,
+                inputFieldWidth = inputField.width(),
+                inputFieldOffset = inputField.offset(), 
+                viewPortWidth = $(window).width(),            
+                viewPortHeight = $(window).height(),            
+                dateSelectorConfig = {
+                    icons: {
+                        time: 'icon-small-clock',
+                        date: 'icon-small-calendar',
+                        up: 'glyphicon glyphicon-chevron-up',
+                        down: 'glyphicon glyphicon-chevron-down',
+                        previous: 'glyphicon glyphicon-chevron-left',
+                        next: 'glyphicon glyphicon-chevron-right',
+                        today: 'icon-small-software',
+                        clear: 'icon-small-trash',
+                        close: 'icon-ui-close'
+                    },
+                    keepOpen:true,
+                    widgetPositioning: {
+                        horizontal:'right',
+                        vertical: typeof $attrs.position !== 'undefined' ? $attrs.position : 'bottom'
+                    },
+                    format: typeof $attrs.format !== 'undefined' ? $attrs.format : 'MM/DD/YYYY'
+                };
 
+
+
+
+
+
+            //TODO, check to see if the field is at the bottom of the viewport and position it on top
+            inputField.datetimepicker(dateSelectorConfig);
+
+            inputField.on("dp.show",function (e) {
+
+                calendarWidget = $element.find('.bootstrap-datetimepicker-widget'); //have to repeat this because it is destroyed everytime focus is gone
+
+                //check to see if the right side is big enough for the widget
+                if(inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
+                    calendarWidget.removeClass('pull-right');
+                } else {
+                    calendarWidget.addClass('pull-right');
+                }
+
+                //check to see if the bottom side is big enough for the widget
+                if(inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
+                    //dateSelectorConfig.widgetPositioning.vertical = "top";
+                    calendarWidget.removeClass('bottom').addClass('top');
+                } else {
+                    calendarWidget.removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
+                }              
+
+            });
+            calendarIcon.on("click",function (e) {
+                inputField.focus();                
+            });
+
+/*            inputField.on("blur",function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                inputField.data("DateTimePicker").show();
+            });*/
+
+
+
+
+        }
+    };
+});

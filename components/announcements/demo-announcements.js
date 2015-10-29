@@ -121,7 +121,7 @@ angular.module('demo').controller('announcementsPLayDemoCtrl',function($scope,$r
 				ctaLinks+
 				'\n</blockquote>';
 			$scope.renderingHTML = $sce.trustAsHtml($scope.playHtmlCode);
-			console.log("$scope.renderingHTML",$scope.renderingHTML);
+			//console.log("$scope.renderingHTML",$scope.renderingHTML);
 			$scope.sampleSherpaConfig = _.clone($scope.sampleAnnouncementConfig);
 			delete $scope.sampleSherpaConfig.body;
 			delete $scope.sampleSherpaConfig.title;

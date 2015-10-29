@@ -8,17 +8,26 @@ angular.module('dellUiComponents')
         return {
             restrict: 'CA',
             link: function ($scope, $element, iAttrs, controller) {
+                
+                function fixWidth() {
+                    $element.css('width',$element.parent().width()+1).css('left',$element.parent().offset().left+1/2);
+                }
+                fixWidth();
+
+                $(window).resize(function(){
+                    fixWidth();
+                });
 
 
                 var sticky = new Waypoint.Sticky({
                     element: $element,
                     stuckClass: "affix",
                     wrapper: "nav-tabs-affix"
-                });
-
-                var waypointObjs = $element.find('> li > a[href^=#]'),
-                waypoints=[];
-                console.log(waypointObjs);
+                }),
+                waypointObjs = $element.find('> li > a[href^=#]'),
+                waypoints=[],
+                triggerClicked = false;
+                //console.log(waypointObjs);
 
                 function clearActiveTab() {
                     $element.find('> li').removeClass('active');
@@ -32,12 +41,13 @@ angular.module('dellUiComponents')
                         var target = $($(e.currentTarget).attr("href"));
 
                         $('html, body').stop().animate({
-                            'scrollTop': target.offset().top - 100
+                            'scrollTop': target.offset().top - 60
                         }, 900, 'swing');
 
                         if ($element.find('> li').hasClass('active')) {
                             clearActiveTab();
                             $(e.currentTarget).parent().addClass('active');
+                            triggerClicked = true;
                         }
 
                     });
@@ -46,32 +56,27 @@ angular.module('dellUiComponents')
                         var target = $($(w).attr('href')),
                         targetWaypoint = new Waypoint.Inview({
                             element: target,
-                            enter: function(direction) {
-
-
-                                if(direction === 'up') {
+                            entered: function(direction) {
+                                if(direction === 'up' && !triggerClicked) {
                                     clearActiveTab();
                                     $("[href="+this.element.selector+"]").parent().addClass("active");
-                                console.log('Enter triggered with direction ' + direction,this.element);
+                                } else {
+                                    $timeout(function(){
+                                        triggerClicked = false;
+                                    },900);//wait for the annimation to be done
                                 }
-                            },
-                            entered: function(direction) {
-                                    console.log('Entered triggered with direction ' + direction,this.element);
-                            },
-                            exit: function(direction) {
-                                
-                                console.log('Exit triggered with direction ' + direction,this.element.selector);
                             },
                             exited: function(direction) {
-                                if(direction === 'down'){
+                                if(direction === 'down' && !triggerClicked) {
                                     clearActiveTab();
                                     $("[href="+this.element.selector+"]").parent().next().addClass("active");
-                                    console.log('Exited triggered with direction ' + direction,this.element);
+                                } else {
+                                    $timeout(function(){
+                                        triggerClicked = false;
+                                    },900); //wait for the annimation to be done
                                 }
                             }
-                        });
-                        console.log(targetWaypoint);
-                        
+                        });                       
                     });
 
                 }
@@ -80,7 +85,6 @@ angular.module('dellUiComponents')
         };
 
     });
-
 
 
 
