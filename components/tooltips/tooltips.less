@@ -44,6 +44,7 @@ a[data-toggle="tooltip"] {
             border: 0 !important;
             border-radius: 0 !important;
             background: rgba(0, 0, 0, .5) !important;
+            padding:0;
 
             &.top, &.right, &.left, &.bottom    { 
                 /*bottom: 0 !important;*/
@@ -51,12 +52,8 @@ a[data-toggle="tooltip"] {
                 left: 0 !important;
                 right: 0 !important; 
                 margin: 0 auto; 
-                padding: 0;
             }
         }
-        /*.fade {
-            transition: opacity 0.15s linear 0s !important;
-        }*/
 
         .tooltip-inner {
 
@@ -69,6 +66,24 @@ a[data-toggle="tooltip"] {
             position: relative !important;
             width: 50% !important;
             margin:10% auto 0 auto;
+            padding:10px 15px;
+            &:before {
+                content: "\e602";
+                position:absolute;
+                right:5px;
+                top:5px;
+                font-family: 'icon-ui';
+                font-size: 10px;
+                speak: none;
+                font-style: normal;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+                /* Better Font Rendering =========== */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
         }
         .tooltip-arrow {
             display: none !important;
