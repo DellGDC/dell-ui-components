@@ -30,7 +30,7 @@ angular.module('dellUiComponents').directive('toggle', function () {
                     }
                     break;
                 case "tooltip":
-                    $(element).tooltip();
+                    //$(element).tooltip();
                     break;
                 case "offcanvas":
                     $(element).on('click', function (event) {
