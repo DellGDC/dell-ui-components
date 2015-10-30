@@ -12,6 +12,22 @@ a[data-toggle="tooltip"] {
     padding-bottom: 0;
 }
 
+
+.tooltip {
+    //TODO fixes to go in DUB
+
+  &.top {
+    margin-top: 0;
+  }
+  &.left {
+    margin-left: -10px;
+    margin-top: 5px;
+  }
+  &.right {
+    margin-top: 5px;
+  }
+
+}
 /* ----------| Tooltip Change to Modal based on the sm and xs media query |---------- */
 
 @media (max-width: @screen-sm-max) {

@@ -4,7 +4,7 @@ angular.module('demo').controller('contentTeaserCtrl',function($scope,$rootScope
 
     $scope.viewAll = {};
     $scope.$watch('viewAll', function( newValue ){
-        console.log( newValue );
+        //console.log( newValue );
     });
 
 });

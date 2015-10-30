@@ -1,0 +1,21 @@
+{
+  "name": "tablesorter",
+  "dependencies": {
+    "jquery": ">=1.2.6"
+  },
+  "main": [
+    "dist/js/jquery.tablesorter.combined.js"
+  ],
+  "homepage": "https://github.com/Mottie/tablesorter",
+  "version": "2.22.3",
+  "_release": "2.22.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.22.3",
+    "commit": "0e611bc6a89597795e16d2097949c7adf2b29e89"
+  },
+  "_source": "git://github.com/Mottie/tablesorter.git",
+  "_target": "~2.22.3",
+  "_originalSource": "jquery.tablesorter",
+  "_direct": true
+}

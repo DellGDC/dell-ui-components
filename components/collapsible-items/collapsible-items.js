@@ -49,7 +49,7 @@ angular.module('dellUiComponents')
                                     if (rowWidth >= rowMaxWidth || index === allListItems.length -1) {
 
                                         if (targetFound) {
-                                            console.log("Found target and inserting!!!");
+                                            //console.log("Found target and inserting!!!");
 
                                             $(i).after('<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">×</button></span>' + content + '</div></li>');
                                             $('.details-container').attr('display', 'block').slideDown(450);

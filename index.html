@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
     <link href="bower_components/dell-ui-bootstrap/dell-ui-bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" data-concat="dellUiComponentsLess"/>
     <link href="components/dell-ui-components.less" type="text/css" rel="stylesheet/less" data-concat="dellUiComponentsLess">
     <link href="app.less" type="text/css" rel="stylesheet/less" data-concat="demoLess">
 </head>
@@ -33,10 +35,24 @@
   <script src="bower_components/matchHeight/jquery.matchHeight.js" data-concat="dellUiComponentsJs"></script>
   <script src="bower_components/bootstrap-slider/js/bootstrap-slider.js" data-concat="dellUiComponentsJs"></script>
   <script src="bower_components/Eve.js/eve.min.js" data-concat="dellUiComponentsJs"></script>
-  <script src="bower_components/rt-Responsive-Tables/jquery.rtResponsiveTables.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/rt-Responsive-Tables/jquery.rtResponsiveTables.js" data-concat="dellUiComponentsJs"></script>   
+  <script type="text/javascript" src="/bower_components/moment/min/moment.min.js" data-concat="dellUiComponentsJs"></script>
+  <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js" data-concat="dellUiComponentsJs"></script>
   <script src="bower_components/waypoints/lib/jquery.waypoints.min.js" data-concat="dellUiComponentsJs"></script>
   <script src="bower_components/waypoints/lib/shortcuts/sticky.min.js" data-concat="dellUiComponentsJs"></script>
   <script src="bower_components/waypoints/lib/shortcuts/inview.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/media/js/jquery.dataTables.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/media/js/DataTables_bootstrap3.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/FixedHeader/js/dataTables.fixedHeader.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/FixedColumns/js/dataTables.fixedColumns.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/Responsive/js/dataTables.responsive.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/Buttons/js/dataTables.buttons.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/ColVis/js/dataTables.colVis.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/Select/js/dataTables.select.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/KeyTable/js/dataTables.keyTable.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/ColReorder/js/dataTables.colReorder.min.js" data-concat="dellUiComponentsJs"></script>
+
+
 
   <!-- Add New Bower Component JS Above -->
 
@@ -72,6 +88,7 @@
   <script src="components/responsive-utilities/demo-responsive-utilities.js" data-concat="demoJs"></script>
   <script src="components/progress-bars/demo-progress-bars.js" data-concat="demoJs"></script>
   <script src="components/tables/demo-tables.js" data-concat="demoJs"></script>
+  <script src="components/tabs/dellUI.overflowTabs.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/tabs/demo-tabs.js" data-concat="demoJs"></script>
   <script src="components/tooltips/demo-tooltips.js" data-concat="demoJs"></script>
   <script src="components/typography/demo-typography.js" data-concat="demoJs"></script>
@@ -82,20 +99,22 @@
   <script src="components/carousel/carousel.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/forms/forms.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/content-teaser/demo-content-teaser.js" data-concat="demoJs"></script>
-  <script src="components/date-selector/demo-date-selector.js" data-concat="demoJs"></script>
   <script src="components/search-and-navigation/demo-search-and-navigation.js" data-concat="demoJs"></script>
   <script src="components/alerts/directive-alert-collapsible.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/tables/directive-table-responsive.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/content-teaser/content-teaser.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/pagination/pagination.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/progress-bars/progress-bars.js" data-concat="dellUiComponentsJs"></script>
-  <script src="components/ratings-and-reviews/ratings-and-reviews.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/directives/directive-equalize-height.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/contact-drawer/demo-contact-drawer.js" data-concat="demoJs"></script>
   <script src="components/contact-drawer/contact-drawer.js" data-concat="dellUiComponentsJs"></script>
   <script src="components/collapsible-items/collapsible-items.js"  data-concat="dellUiComponentsJs"></script>
   <script src="components/anchored-nav/demo-anchored-nav.js" data-concat="demoJs"></script>
-  <script src="components/anchored-nav/anchored-nav.js" data-concat="demoJs"></script>
+  <script src="components/anchored-nav/anchored-nav.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/tables-uber/demo-tables-uber.js" data-concat="demoJs"></script>
+  <script src="components/tables/tables.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/tables-uber/tables-uber.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/masthead/demo-masthead.js" data-concat="demoJs"></script>
   <!-- Add New Component JS Above -->
 
   <div>
