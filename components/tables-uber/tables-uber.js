@@ -53,7 +53,7 @@ angular.module('dellUiComponents')
                 // Array holding selected row IDs
                 var rows_selected = [];
                 var tableData;
-                var table = $('#table-uber').DataTable({
+                var table = $element.DataTable({
                     "ajax": "components/tables-uber/dataColumn.json",
                     'columnDefs': [{
                         'targets': 0,
