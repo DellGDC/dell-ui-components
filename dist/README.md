@@ -175,11 +175,14 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.11** - October 28, 2015:
-  - Added overflow tabs
-  - Updated anchored nav with scroll spy
-  - Updated ratings and reviews
-  - Added date selector
+**1.0.11** - November 3, 2015:
+  - Updated Ratings and Reviews
+  - Added Date Selector
+  - Added Overflow tabs
+  - Added Anchored Tab Navigation with scroll spy
+  - Added Simplified Footer
+  - Added Simplifiead Masthead
+  - Fixed bug in Tooltips
 
 
 ### Older versions:
