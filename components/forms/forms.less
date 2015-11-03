@@ -762,6 +762,7 @@
 
 //================ email validation =====================
 
+//TODO these should be scoped to the component not be global like this
 .ui-tooltip, .arrow:after {
     background: black;
     border: 2px solid white;
@@ -806,5 +807,143 @@
     bottom: -20px;
     top: auto;
 }
+
+
+
+/* date-selector */
+.date-selector {
+    position:relative;
+    //width: 15em;
+    .icon-small-calendar {
+        position:absolute;
+        top: 3px;
+        @media (max-width: @screen-xs-max) {
+            top: 40px; //TODO this assumes that the label for date is full width
+        }
+        right: 4px;
+        padding: 5px;
+        color: @dell-blue;
+        cursor: pointer;
+        float:right;
+        &:hover {
+            background: @dell-highlight-blue;
+            -webkit-border-radius: @border-radius-small;
+            -moz-border-radius:    @border-radius-small;
+            border-radius:         @border-radius-small;
+        }
+    }
+    .help-block {
+        position:absolute;
+    }
+    .bootstrap-datetimepicker-widget {
+        margin: 2px 0;
+        padding: 4px;
+        width: 210px;
+        -webkit-border-radius: @border-radius-small;
+        -moz-border-radius:    @border-radius-small;
+        border-radius:         @border-radius-small;
+
+        font-size: @font-size-base;
+        &.pull-right {
+            top:-2px !important;
+            right:-220px !important;
+        }
+        &.top {
+            top: -264px !important;
+            @media (max-width: @screen-xs-max) {
+                top: -225px !important; //TODO this assumes that the label for date is full width
+            }
+            bottom: auto !important;
+            position:absolute;
+            &.pull-right {
+                //position:relative;
+                top: -220px !important;
+            }
+        }
+        &:before,&:after {
+            //the caret
+            display:none;
+        }
+        table {
+            border: 0;
+        }
+        .datepicker-days, 
+        .datepicker-months, 
+        .datepicker-years, 
+        .datepicker-decades {
+            thead > tr:first-child > th {
+                &:hover {
+                    background: @dell-blue;
+                    color: #fff;
+                }
+            }
+            td {
+                -webkit-border-radius: @border-radius-small;
+                -moz-border-radius:    @border-radius-small;
+                border-radius:         @border-radius-small;
+                &.day {
+                    width: 34px; //otherwise the colum with active is about 4 pixels wider
+                }
+                span {
+                    -webkit-border-radius: @border-radius-small;
+                    -moz-border-radius:    @border-radius-small;
+                    border-radius:         @border-radius-small;
+                }
+            }
+            .picker-switch {
+                border-radius: 0;
+                background: @dell-blue;
+                color: #fff;
+            }
+            .prev {
+                
+                -webkit-border-radius: @border-radius-small 0 0 @border-radius-small;
+                -moz-border-radius:    @border-radius-small 0 0 @border-radius-small;
+                border-radius:         @border-radius-small 0 0 @border-radius-small;
+
+                background: @dell-blue;
+                color: #fff;
+            }
+            .next {
+                -webkit-border-radius: 0 @border-radius-small @border-radius-small 0;
+                -moz-border-radius:    0 @border-radius-small @border-radius-small 0;
+                border-radius:         0 @border-radius-small @border-radius-small 0;
+                background: @dell-blue;
+                color: #fff;
+            }
+            .day, .month, .year, .decades {
+                text-shadow: none;
+                &.active {
+                    background: @dell-blue;
+                    color: @white;
+                }
+                &:hover {
+                    background: @dell-highlight-blue;
+                    color: @text-color;
+                     &.active {
+                        color: @white;
+                    }
+                }
+            }
+            .today {
+                border: 1px solid @dell-blue;
+                &.active {
+                    background: @dell-blue;
+                }
+                &:before {
+                    display:none;
+                }
+            }
+
+        }
+
+        li.picker-switch {display: none;}
+    }
+}
+
+
+
+
+
 
 

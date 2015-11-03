@@ -1,6 +1,7 @@
 [
      "alerts",
      "announcements",
+     "anchored-nav",
      "banner",
      "breadcrumbs",
      "standard-buttons",
@@ -20,6 +21,7 @@
      "icons",
      "lists",
      "labels-and-badges",
+     "masthead",
      "modals",
      "offsets",
      "pagers",
@@ -28,10 +30,11 @@
      "responsive-utilities",
      "progress-bars",
      "tables",
+     "tables-uber",
      "tabs",
      "tooltips",
      "typography",
      "ratings-and-reviews",
-     "date-selector",
      "search-and-navigation"
+
 ]

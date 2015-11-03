@@ -172,17 +172,28 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 * To prevent a script or link tag from being removed from the finalized `index.html`, use a `data-remove="false"` attribute.
 
 
-### Version history:
+### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
+
+**1.0.11** - October 28, 2015:
+  - Added overflow tabs
+  - Updated anchored nav with scroll spy
+  - Updated ratings and reviews
+
+
+### Older versions:
+
 ```
-#1.0.0 - Initial publish of components
-#1.0.1 - Upgraded to Bootstrap 3.3.1 and had minor fixes
-#1.0.2 - Upgraded to Bootstrap 3.3.4 and had minor fixes
-#1.0.3 - Fixed issues with broken images.
-#1.0.4 - Fixed issues accordions not displaying in wells correctly. Fixed tool-tip transparent background. Fix offsets examples.
-#1.0.5 - Fixed carousels slider dots disappearing in DesLib, added Content-teasers, additional colors, banners, grid example patterns. Moved progress bar and pagination demo.js to non-demo.js files. added code patch for forms.less
-#1.0.6 - Updated Value Props so the content aligns left in mobile XS view, updated tool-tip hover and removed underline onconnect with dell component, made fix on show/hide toggle in XS view, updated grouped form to view in DesLib. Restructured package to remove development files from distribution.
-#1.0.7 Changes to tabs and cleaned up README instructions 
-#1.0.8 Changes to tables, breadcrumbs, show/hide, addition of contact drawer
+- 1.0.10 Updated to dell-ui-bootstrap 1.2.2 which includes updates to icon font files and added icon-ui-handle
+- 1.0.9 Changes to carousel (dots and css), collapsible items (added content gallery), social media icons, edits to blockquote icon positioning, added contextual help component
+- 1.0.8 Changes to tables, breadcrumbs, show/hide, addition of contact drawer
+- 1.0.7 Changes to tabs and cleaned up README instructions 
+- 1.0.6 - Updated Value Props so the content aligns left in mobile XS view, updated tool-tip hover and removed underline onconnect with dell component, made fix on show/hide toggle in XS view, updated grouped form to view in DesLib. Restructured package to remove development files from distribution.
+- 1.0.5 - Fixed carousels slider dots disappearing in DesLib, added Content-teasers, additional colors, banners, grid example patterns. Moved progress bar and pagination demo.js to non-demo.js files. added code patch for forms.less
+- 1.0.4 - Fixed issues accordions not displaying in wells correctly. Fixed tool-tip transparent background. Fix offsets examples.
+- 1.0.3 - Fixed issues with broken images.
+- 1.0.2 - Upgraded to Bootstrap 3.3.4 and had minor fixes
+- 1.0.1 - Upgraded to Bootstrap 3.3.1 and had minor fixes
+- 1.0.0 - Initial publish of components
 ...
 ```
