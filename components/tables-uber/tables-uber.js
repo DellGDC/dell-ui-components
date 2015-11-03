@@ -13,7 +13,7 @@
 
 angular.module('dellUiComponents')
 
-    .directive('tableResponsiveColumns', function($timeout){
+    .directive('tableExpandableRow', function($timeout){
         // Runs during compile
         return {
             restrict: 'C',
@@ -50,11 +50,46 @@ angular.module('dellUiComponents')
                 }
 
 
+                /* Formatting function for row details - modify as you need */
+                function format ( d ) {
+                    // `d` is the original data object for the row
+                    return  '<row>'+
+                                '<div class="col-xs-12 col-sm-6">'+
+                                    '<div><p class="col-xs-6 col-sm-4 text-gray-medium"><small>Contact Number</small></p><p><small>'+d.Contact_number+'</small></p></div>'+
+                                    '<div><p class="col-xs-6 col-sm-4 text-gray-medium"><small>Extension</small></p><p><small>'+d.Extension+'</small></p></div>'+
+                                    '<div><p class="col-xs-6 col-sm-4 text-gray-medium"><small>Customer_since</small></p><p><small>'+d.Customer_since+'</small></p></div>'+
+                                    '<div><p class="col-xs-6 col-sm-4 text-gray-medium"><small>Location</small></p><p><small>'+d.Location+'</small></p></div>'+
+                                '</div>'+
+                                '<div class="col-xs-12 col-sm-6">'+
+                                    '<div><p class="col-xs-6 col-sm-4 text-gray-medium"><small>Purchase_details</small></p><p><small>'+d.Purchase_details+'</small></p></div>'+
+                                    '<div><p class="col-xs-6 col-sm-4 text-gray-medium"><small>Sales_notes</small></p><p><small>'+d.Sales_notes+'</small></p></div>'+
+                                '</div>'+
+                            '</row>';
+
+                    //'<table>'+
+                    //'<tr class="">'+
+                    //'<td><p class="">Full Name</p><p>'+d.name+'</p></td>'+
+                    //'<td><p class="">Extension Number</p><p>'+d.extn+'</p></td>'+
+                    //'<td><p class="">Extra Stuff</p><p>More data</p></td>'+
+                    //'<td><p class="">Favorite Fruit</p><p>Apple</p></td>'+
+                    //'<td><p class="">Last Book Read</p><p>The Martian</p></td>'+
+                    //'<td><p class="">Car Make</p><p>Subaru</p></td>'+
+                    //'<td><p class="">Car Model</p><p>WRX</p></td>'+
+                    //'<td><p class="">Car Year</p><p>2015</p></td>'+
+                    //'<td><p class="">Baseball Team</p><p>Astros</p></td>'+
+                    //'<td><p class="">Basketball Team</p><p>Spurs</p></td>'+
+                    //'<td><p class="">Favorite City</p><p>Prague</p></td>'+
+                    //'</tr>'+
+                    //'</table>';
+                }
+
+
+
                 // Array holding selected row IDs
                 var rows_selected = [];
                 var tableData;
                 var table = $element.DataTable({
-                    "ajax": "components/tables-uber/dataColumn.json",
+                    "ajax": "components/tables-uber/data-responsive.json",
                     'columnDefs': [{
                         'targets': 0,
                         'searchable':true,
@@ -110,7 +145,7 @@ angular.module('dellUiComponents')
                         }
                     ],
                     'order': [1, 'asc'],
-                    "dom": 'C<"clear">lfrtip',
+                    //"dom": 'C<"clear">lfrtip',
                     'pagingType': "simple",
                     'language': {
                         'paginate': {
@@ -126,7 +161,7 @@ angular.module('dellUiComponents')
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         //console.log('i was sorted');
                     },
-                    'responsive': true
+                    'responsive': false
                 });
 
 
@@ -230,6 +265,23 @@ angular.module('dellUiComponents')
                         } );
                     },100);
                 }
+
+                // Add event listener for opening and closing details
+                $('#example tbody').on('click', 'td.details-control', function () {
+                    var tr = $(this).closest('tr');
+                    var row = table.row( tr );
+
+                    if ( row.child.isShown() ) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        // Open this row
+                        row.child( format(row.data()) ).show();
+                        tr.addClass('shown');
+                    }
+                } );
 
             }
         };
