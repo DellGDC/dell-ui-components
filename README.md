@@ -179,6 +179,7 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   - Added overflow tabs
   - Updated anchored nav with scroll spy
   - Updated ratings and reviews
+  - Added date selector
 
 
 ### Older versions:
