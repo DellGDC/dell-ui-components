@@ -2,7 +2,16 @@
  * Content-Teaser component theme overrides
  *------------------------------------------------------------------------------------------
  */
+.teaser-row-link {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background: white;
 
+    span {
+        color: @dell-blue;
+    }
+}
 
 .stacked-detail-links  {
     min-height: 20px;
@@ -35,6 +44,11 @@
         margin-bottom: -5px;
     }
 }
+
+h5, p {
+    color: #444444;
+}
+
 
 @media (max-width: @screen-xs-max) {
    .detail-links {
