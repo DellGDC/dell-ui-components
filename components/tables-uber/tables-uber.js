@@ -173,7 +173,7 @@ angular.module('dellUiComponents')
 
 
                 // Handle click on checkbox
-                $('#table-uber tbody').on('click', 'input[type="checkbox"]', function(e){
+                $element.find('tbody').on('click', 'input[type="checkbox"]', function(e){
                     var $row = $(this).closest('tr');
 
                     // Get row data
@@ -209,11 +209,11 @@ angular.module('dellUiComponents')
 
 
                 // Handle click on "Select all" control
-                $('#table-uber thead input[name="select_all"]').on('click', function(e){
+                $element.find('thead input[name="select_all"]').on('click', function(e){
                     if(this.checked){
-                        $('#table-uber tbody input[type="checkbox"]:not(:checked)').trigger('click');
+                        $element.find('tbody input[type="checkbox"]:not(:checked)').trigger('click');
                     } else {
-                        $('#table-uber tbody input[type="checkbox"]:checked').trigger('click');
+                        $element.find('tbody input[type="checkbox"]:checked').trigger('click');
                     }
 
                     // Prevent click event from propagating to parent
@@ -274,7 +274,7 @@ angular.module('dellUiComponents')
                 }
 
                 // Add event listener for opening and closing details
-                $('#table-expandable tbody').on('click', 'td.details-control', function () {
+                $element.find('tbody').on('click', 'td.details-control', function () {
                     var tr = $(this).closest('tr');
                     var row = table.row( tr );
 
@@ -416,7 +416,7 @@ angular.module('dellUiComponents')
 
 
                 // Handle click on checkbox
-                $('#table-uber tbody').on('click', 'input[type="checkbox"]', function(e){
+                $element.find('tbody').on('click', 'input[type="checkbox"]', function(e){
                     var $row = $(this).closest('tr');
 
                     // Get row data
@@ -452,11 +452,11 @@ angular.module('dellUiComponents')
 
 
                 // Handle click on "Select all" control
-                $('#table-uber thead input[name="select_all"]').on('click', function(e){
+                $element.find('thead input[name="select_all"]').on('click', function(e){
                     if(this.checked){
-                        $('#table-uber tbody input[type="checkbox"]:not(:checked)').trigger('click');
+                        $element.find('tbody input[type="checkbox"]:not(:checked)').trigger('click');
                     } else {
-                        $('#table-uber tbody input[type="checkbox"]:checked').trigger('click');
+                        $element.find('tbody input[type="checkbox"]:checked').trigger('click');
                     }
 
                     // Prevent click event from propagating to parent
