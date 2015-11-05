@@ -74,7 +74,7 @@ angular.module('dellUiComponents')
                                         '</div>'+
                                         '<div class="col-xs-3">'+
                                             '<p class="text-gray-medium">Owner</p>'+
-                                            '<p>'+d.Owner+'</p>' +
+                                            '<p><a href="javascript:;">'+d.Owner+'</a></p>' +
                                         '</div>'+
                                         '<div class="col-xs-3">'+
                                             '<p class="text-gray-medium">Last Edited</p>'+
@@ -82,11 +82,11 @@ angular.module('dellUiComponents')
                                         '</div>'+
                                         '<div class="col-xs-3">'+
                                             '<p class="text-gray-medium">Customer Number</p>'+
-                                            '<p>'+d.Customer_number+'</p>' +
+                                            '<p><a href="javascript:;">'+d.Customer_number+'</a></p>' +
                                         '</div>'+
                                         '<div class="col-xs-3">'+
                                             '<p class="text-gray-medium">Reference Number</p>'+
-                                            '<p>'+d.Reference_number+'</p>' +
+                                            '<p><a href="javascript:;">'+d.Reference_number+'</a></p>' +
                                         '</div>'+
                                     '</div>'+
                                 '</div>'+
