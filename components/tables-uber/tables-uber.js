@@ -72,8 +72,30 @@ angular.module('dellUiComponents')
                                             '<p class="text-gray-medium">Location</p>'+
                                             '<p>'+d.Location+'</p>' +
                                         '</div>'+
+                                        '<div class="col-xs-3">'+
+                                            '<p class="text-gray-medium">Owner</p>'+
+                                            '<p>'+d.Owner+'</p>' +
+                                        '</div>'+
+                                        '<div class="col-xs-3">'+
+                                            '<p class="text-gray-medium">Last Edited</p>'+
+                                            '<p>'+d.Last_edited+'</p>' +
+                                        '</div>'+
+                                        '<div class="col-xs-3">'+
+                                            '<p class="text-gray-medium">Customer Number</p>'+
+                                            '<p>'+d.Customer_number+'</p>' +
+                                        '</div>'+
+                                        '<div class="col-xs-3">'+
+                                            '<p class="text-gray-medium">Reference Number</p>'+
+                                            '<p>'+d.Reference_number+'</p>' +
+                                        '</div>'+
                                     '</div>'+
                                 '</div>'+
+                        '<div class="row">'+
+                            '<div class="col-xs-12">'+
+                                '<hr class="hr-gray bottom-offset-20">'+
+                            '</div>'+
+                        '</div>'+
+
                                 '<div class="row">'+
                                     '<div class="col-xs-12">'+
                                         '<div class="col-xs-6">'+
@@ -112,38 +134,16 @@ angular.module('dellUiComponents')
                         {
                             "data":''
                         },
-
                         {
                             "data": "Company_name",
                             "sClass":"editable"
                         },
                         {
-                            "data": "Solution_name",
-                            "sClass":"editable"
-                        },
-
-                        {
                             "data": "Solution_ID",
                             "sClass":"editable"
                         },
                         {
-                            "data": "Owner",
-                            "sClass":"editable"
-                        },
-                        {
-                            "data": "Last_edited",
-                            "sClass":"editable"
-                        },
-                        {
                             "data": "List_price",
-                            "sClass":"editable"
-                        },
-                        {
-                            "data": "Customer_number",
-                            "sClass":"editable"
-                        },
-                        {
-                            "data": "Reference_number",
                             "sClass":"editable"
                         },
                         {
@@ -152,7 +152,7 @@ angular.module('dellUiComponents')
                         }
                     ],
                     'order': [1, 'asc'],
-                    //"dom": 'C<"clear">lfrtip',
+                    "dom": 'C<"clear">lfrtip',
                     'pagingType': "simple",
                     'language': {
                         'paginate': {
