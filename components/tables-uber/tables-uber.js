@@ -56,54 +56,54 @@ angular.module('dellUiComponents')
                     return  '<row>'+
                                 '<div class="row">'+
                                     '<div class="col-xs-12">'+
-                                        '<div class="col-xs-3">' +
-                                            '<p class="text-gray-medium">Contact Number</p>'+
+                                        '<div class="col-xs-6 col-sm-3">' +
+                                            '<p class="text-gray-medium small">Contact Number</p>'+
                                             '<p>'+d.Contact_number+'</p>'+
                                         '</div>'+
-                                        '<div class="col-xs-3">' +
-                                            '<p class="text-gray-medium">Extension</p>'+
+                                        '<div class="col-xs-6 col-sm-3">' +
+                                            '<p class="text-gray-medium small">Extension</p>'+
                                             '<p>'+d.Extension+'</p>'+
                                         '</div>'+
-                                        '<div class="col-xs-3">'+
-                                            '<p class="text-gray-medium">Customer Since</p>'+
+                                        '<div class="col-xs-6 col-sm-3">'+
+                                            '<p class="text-gray-medium small">Customer Since</p>'+
                                             '<p>'+d.Customer_since+'</p>' +
                                         '</div>'+
-                                        '<div class="col-xs-3">'+
-                                            '<p class="text-gray-medium">Location</p>'+
+                                        '<div class="col-xs-6 col-sm-3">'+
+                                            '<p class="text-gray-medium small">Location</p>'+
                                             '<p>'+d.Location+'</p>' +
                                         '</div>'+
-                                        '<div class="col-xs-3">'+
-                                            '<p class="text-gray-medium">Owner</p>'+
+                                        '<div class="col-xs-6 col-sm-3">'+
+                                            '<p class="text-gray-medium small">Owner</p>'+
                                             '<p><a href="javascript:;">'+d.Owner+'</a></p>' +
                                         '</div>'+
-                                        '<div class="col-xs-3">'+
-                                            '<p class="text-gray-medium">Last Edited</p>'+
+                                        '<div class="col-xs-6 col-sm-3">'+
+                                            '<p class="text-gray-medium small">Last Edited</p>'+
                                             '<p>'+d.Last_edited+'</p>' +
                                         '</div>'+
-                                        '<div class="col-xs-3">'+
-                                            '<p class="text-gray-medium">Customer Number</p>'+
+                                        '<div class="col-xs-6 col-sm-3">'+
+                                            '<p class="text-gray-medium small">Customer Number</p>'+
                                             '<p><a href="javascript:;">'+d.Customer_number+'</a></p>' +
                                         '</div>'+
-                                        '<div class="col-xs-3">'+
-                                            '<p class="text-gray-medium">Reference Number</p>'+
+                                        '<div class="col-xs-6 col-sm-3">'+
+                                            '<p class="text-gray-medium small">Reference Number</p>'+
                                             '<p><a href="javascript:;">'+d.Reference_number+'</a></p>' +
                                         '</div>'+
                                     '</div>'+
                                 '</div>'+
-                        '<div class="row">'+
-                            '<div class="col-xs-12">'+
-                                '<hr class="hr-gray bottom-offset-20">'+
-                            '</div>'+
-                        '</div>'+
+                                '<div class="row">'+
+                                    '<div class="col-xs-12">'+
+                                        '<hr class="hr-gray bottom-offset-20">'+
+                                    '</div>'+
+                                '</div>'+
 
                                 '<div class="row">'+
                                     '<div class="col-xs-12">'+
                                         '<div class="col-xs-6">'+
-                                            '<p class="text-gray-medium">Purchase Details</p>'+
+                                            '<p class="text-gray-medium small">Purchase Details</p>'+
                                             '<p>'+d.Purchase_details+'</p>' +
                                         '</div>'+
                                         '<div class="col-xs-6">'+
-                                            '<p class=" text-gray-medium">Sales Notes</p>'+
+                                            '<p class=" text-gray-medium small">Sales Notes</p>'+
                                             '<p>'+d.Sales_notes+'</p>'+
                                         '</div>'+
                                     '</div>'+
