@@ -82,22 +82,21 @@
                                 </div>
                                 <!--  <div class="footer-gallery-empty" ng-if="homepage || bp.isXS"></div>-->
                                 <div class="gallery-shadow-section" ></div>
-                                <div class=" container  "><!--container-fluid SM--> <!-- ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }"-->
-                                    <ul class="nav navbar-nav about-links">
+                                <div class="container">
+                                    <ul class="nav navbar-nav about-links"><!--container-fluid SM--> <!-- ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }"-->
                                         <li><a href="javascript:;" tabindex="11">About Dell</a></li>
                                         <li><a href="javascript:;" tabindex="12">PartnerDirect</a></li>
                                         <li><a href="javascript:;" tabindex="13">TechCenter</a></li>
                                         <li><a href="javascript:;" tabindex="14">Premier</a></li>
                                         <li><a href="javascript:;" tabindex="15">Community</a></li>
                                         <li class="country-selector btn-group dropup">
-                                                <a href="#" class="dropdown-toggle " data-toggle="dropdown" tabindex="16"><img src="components/footer/us.gif" class="flag"/> United States&nbsp;</a>
-                                                <ul class="dropdown-menu">
-                                                    <li >
-                                                        <a href="javascript:;" ng-if="country.code === 'br'" ng-click="resetPrototype($event,'pt_BR')">{{country.label}}</a>
-                                                        <a href="javascript:;" ng-if="country.code === 'us'" ng-click="resetPrototype($event,'en')">{{country.label}}</a>
-                                                    </li>
-                                                </ul>
-
+                                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" tabindex="16"><img src="components/footer/us.gif" class="flag"/> United States&nbsp;</a>
+                                            <ul class="dropdown-menu">
+                                                <li >
+                                                    <a href="javascript:;" ng-if="country.code === 'br'" ng-click="resetPrototype($event,'pt_BR')">{{country.label}}</a>
+                                                    <a href="javascript:;" ng-if="country.code === 'us'" ng-click="resetPrototype($event,'en')">{{country.label}}</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </div>
@@ -105,9 +104,8 @@
                             <div class="navbar footer-menu ">
                                 <div class=" footer-top-section" >
                                     <div class="footer-shadow-section"></div>
-                                  <!--  <div ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }">-->
-                                    <div class="container"><!--container-fluid SM--> <!-- ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }"-->
-                                        <ul class="nav navbar-nav">
+                                    <div class="container ">
+                                        <ul class="nav navbar-nav"> <!--  <div ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }">-->
                                             <li class=" language no-brasil" >
                                                 <ul>
                                                     <li><a href="javascript:;" tabindex="15">English</a></li>
@@ -133,9 +131,7 @@
                                 </div>
                             </div>
                         </footer>
-
                         <!-- end of code example -->
-
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
@@ -144,22 +140,8 @@
                             <div class="description">Use for the maximum required footer functionality/content for dell.com pages. </div>
                         </div>
                     </div>
+                </div>
             </div>
-
-         </div>
-
-           <!-- <div class="col-md-3">
-                <div class="well"> sidebar </div>
-            </div>-->
-
-
         </div>
     </div>
-
-
-
-
-
-
-
 </section>
