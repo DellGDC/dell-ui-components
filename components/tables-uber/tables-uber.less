@@ -30,8 +30,55 @@ table .table-responsive-columns {
     th {
         line-height: 15px !important;
     }
-
+    th:first-child {
+        &.details-control.sorting:after,
+        &.details-control.sorting_asc:after,
+        &.details-control.sorting_desc:after{
+            display: none;
+        }
+    }
 }
+
+
+//change position of sorting icon css
+
+table.dataTable thead th {
+    background: transparent !important;
+    white-space: nowrap;
+}
+
+table.dataTable thead span.sort-icon {
+    display: inline-block;
+    margin-left: 10px;
+    font-family: 'FontAwesome';
+    background: pink;
+}
+
+table.dataTable thead .sorting span:after {
+    content: "\f0dc";
+    color: #5AABD1;
+}
+table.dataTable thead .sorting_asc span:after {
+    content: "\f0de";
+    color: @dell-blue;
+}
+table.dataTable thead .sorting_desc span:after {
+    content: "\f0dd";
+    color: @dell-blue;
+}
+
+table.dataTable thead .sorting_asc_disabled span:after {
+    content: "\f0de";
+    color: @dell-gray-light;
+}
+table.dataTable thead .sorting_desc_disabled span:after {
+    content: "\f0dd";
+    color: @dell-gray-light;
+}
+
+
+// ======================
+
 
 
 td.dt-body-center input[type="checkbox"] {

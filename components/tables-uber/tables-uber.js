@@ -122,7 +122,7 @@ angular.module('dellUiComponents')
                     'columnDefs': [{
                         'targets': 0,
                         'searchable':true,
-                        'orderable':false,
+                        'orderable':true,
                         'stateSave': true,
                         'className': 'details-control',
                         'render': function (data, type, full, meta){
@@ -169,6 +169,11 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
                     'responsive': false
+                });
+
+                //change the position of the sorting toggle arrows
+                table.columns().iterator( 'column', function (ctx, idx) {
+                    $( table.column(idx).header() ).append('<span class="sort-icon"/>');
                 });
 
 
