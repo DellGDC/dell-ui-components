@@ -25,10 +25,6 @@
 
                     <!-- end of code example -->
 
-
-
-
-
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
@@ -40,13 +36,117 @@
 
                 </div>
 
-
-
-
             </div>
             <div class="col-md-3">
                 <div class="well"> sidebar </div>
             </div>
+
+
+        </div>
+
+       <!-- Universal Footer-->
+        <h3>Universal Footer</h3>
+        <div class="row">
+
+
+                <div equalizer="group" class="equalize well well-white text-gray-medium well-white-stroke">
+                    <div class="center-component component-code" id="navigation-footer-simplified-footer">
+                        <!-- code example for universal footer -->
+
+                            <footer class="navbar footer-about gray-light">
+                                <div class="footer-gallery">
+                                    <div class="container">
+                                        <div  class="col-xs-12 col-sm-4 col-md-4 col-lg-4 gallery-item ">
+                                            <i class="icon-large-shipping"></i>
+                                            <a href="javascript:;">
+                                                <h5>Free shipping, free returns.</h5>
+                                                <p class="text-gray-dark">Shop now with free shipping and no-cost returns.</p>
+                                            </a>
+                                        </div>
+                                        <div  class="col-xs-12 col-sm-4 col-md-4 col-lg-4 gallery-item ">
+                                            <i class="icon-large-calculator"></i>
+                                            <a href="javascript:;">
+                                                <h5>Fast. Easy. Financing.*</h5>
+                                                <p class="text-gray-dark">Dell Preferred Account<sup>TM</sup> makes purchasing easier.</p>
+                                            </a>
+                                        </div>
+                                        <div  class="col-xs-12 col-sm-4 col-md-4 col-lg-4 gallery-item ">
+                                            <i class="icon-large-giftcard"></i>
+                                            <a href="javascript:;">
+                                                <h5>Dell Advantage Loyalty Program.</h5>
+                                                <p class="text-gray-dark"> Here's how much we appreciate our customers.</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                              <!--  <div class="footer-gallery-empty" ng-if="homepage || bp.isXS"></div>-->
+                                <div class="gallery-shadow-section" ></div>
+                                <div class=" container about-links "><!--container-fluid SM--> <!-- ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }"-->
+                                    <ul class="list-unstyled">
+                                        <li><a href="javascript:;" tabindex="11">About Dell</a></li>
+                                        <li><a href="javascript:;" tabindex="12">PartnerDirect</a></li>
+                                        <li><a href="javascript:;" tabindex="13">TechCenter</a></li>
+                                        <li><a href="javascript:;" tabindex="14">Premier</a></li>
+                                        <li><a href="javascript:;" tabindex="15">Community</a></li>
+                                    </ul>
+                                    <div class="country-selector btn-group dropup">
+                                        <a href="#" class="dropdown-toggle " data-toggle="dropdown" tabindex="16"><img src="components/footer/us.gif" class="flag"/> United States&nbsp;</a>
+                                        <ul class="dropdown-menu">
+                                            <li >
+                                                <a href="javascript:;" ng-if="country.code === 'br'" ng-click="resetPrototype($event,'pt_BR')">{{country.label}}</a>
+                                                <a href="javascript:;" ng-if="country.code === 'us'" ng-click="resetPrototype($event,'en')">{{country.label}}</a>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </footer>
+                            <footer class="navbar footer-menu">
+                                <div class=" footer-top-section" >
+                                    <div class="footer-shadow-section"></div>
+                                  <!--  <div ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }">-->
+                                    <div class="container"><!--container-fluid SM--> <!-- ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }"-->
+                                        <ul class=" language no-brasil" >
+                                            <li><a href="javascript:;" tabindex="15">English</a></li>
+                                            <li><a href="javascript:;" tabindex="16">Spanish</a></li>
+                                        </ul>
+                                        <ul class="nav navbar-nav">
+                                            <li><a href="javascript:;" tabindex="17">&copy;2015 Dell</a></li>
+                                            <li><a href="javascript:;" tabindex="18">Terms &amp; Conditions</a></li>
+                                            <li><a href="javascript:;" tabindex="19">Privacy</a></li>
+                                            <li><a href="javascript:;" tabindex="20">Ads &amp; Emails</a></li>
+                                            <li><a href="javascript:;" tabindex="21">Contact</a></li>
+                                            <li><a href="javascript:;" tabindex="22">Site Map</a></li>
+                                            <li><a href="javascript:;" tabindex="23">Feedback</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="footer-shadow-section "></div>
+                                <div class="footer-bottom-section">
+                                    <div class="disclaimer container"><!--container-fluid SM--> <!-- ng-class="{'container': !bp.isXS && !bp.isSM,'container-fluid': bp.isXS || bp.isSM }"-->
+                                        <p>*DELL PREFERRED ACCOUNT (DPA): Offered to U.S. residents by WebBank, who determines qualifications for and terms of credit. Promotion eligibility varies and is determined by WebBank. Taxes, shipping, and other charges are extra and vary.</p>
+                                        <p>Offers subject to change, not combinable with all other offers. Taxes, shipping, handling and other fees apply. U.S. Dell Home new purchases only. Free shipping and handling offer available in Continental (except Alaska) U.S. only. Availability of electronics and accessories varies and quantities may be limited. Dell reserves the right to cancel orders arising from pricing or other errors.</p>
+                                    </div>
+                                </div>
+                            </footer>
+
+
+                        <!-- end of code example -->
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <hr class="rule-break hr-gray-light">
+                            <h5 class="fragment-title">Universal Footer</h5>
+                            <div class="description">Use for the maximum required footer functionality/content for dell.com pages. </div>
+                        </div>
+                    </div>
+
+                </div>
+
+           <!-- <div class="col-md-3">
+                <div class="well"> sidebar </div>
+            </div>-->
 
 
         </div>
