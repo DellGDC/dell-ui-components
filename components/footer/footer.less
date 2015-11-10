@@ -187,14 +187,11 @@ footer.navbar.universal-footer {
                             display:block;
                         }
                     }
-
                 }
-
             }
         }
         @media (min-width:@screen-sm-min) {
             ul.navbar-nav.about-links   {
-                position:relative;
                 margin:0;
                 padding:6px 0 6px 0;
                 width:100%;
@@ -206,8 +203,6 @@ footer.navbar.universal-footer {
                     padding:4px 0 0 0;
                     border-bottom:none;
                     a {
-                        display:block;
-                        color:@dell-gray-dark;
                         padding:6px 20px 6px 0;
                         &:hover {
                             color:@dell-dark-blue;
@@ -218,42 +213,8 @@ footer.navbar.universal-footer {
                     float:right;
                     top:2px;
                     text-align:right;
-                    ul {
-                        padding:0;
-                        margin:0;
-                        li {
-                            display:block;
-                        }
-                    }
-
-                    a {
-                        color:@dell-gray-dark;
-                        text-decoration:none;
-                        font-size:12px;
-                        padding:3px 0 3px 0;
-                    }
-                    a:focus {
-                        outline:@dell-blue solid thin;
-                    }
-                    .flag {
-                        width:24px;
-                        margin:0 3px 3px 0;
-                    }
-                    .dropdown-toggle:after {
-                        position:relative;
-                        font-family:'icon-ui';
-                        content:"\e60e";
-                        top:1px;
-                    }
                     .dropdown-menu {
-                        line-height:1em;
-                        overflow-y:scroll;
-                        overflow-x:hidden;
-                        height:268px;
-                        width:224px;
-                        position:absolute;
                         left:-90px;
-                        background:@white;
                         li {
                             padding:0 0 0 10px;
                         }
@@ -276,9 +237,8 @@ footer.navbar.universal-footer {
                 li.language {
                     float:left;
                     text-align:left;
-                    margin-left:0;
-                    margin-bottom:12px;
-                    padding-left:0;
+                    margin:0 0 12px 0;
+                    padding:0;
                     width:100%;
                     border-bottom:1px solid darken(@dell-highlight-blue, 28%);
                     ul {
@@ -329,7 +289,6 @@ footer.navbar.universal-footer {
                         position:relative;
                         display:inline-block;
                         margin:0;
-                        padding:0;
                         width:auto;
                         border-bottom:none;
                         float:right;
