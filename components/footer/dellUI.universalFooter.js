@@ -26,8 +26,6 @@
         return this.each(function(){
             (new $.dellUIuniversalFooter(this));
             var options = $.dellUIuniversalFooter.defaultOptions,
-            element = $(this),
-            containerWidth = element.parent().width(),
             breakpoint = function() {
                 var window_size = $(window).width(),
                     breakpoint = {
@@ -81,17 +79,11 @@
                 $.getJSON( "components/footer/footerData.json", function( data ) {
                     var items = [];
                     $.each( data, function() {
-                        console.log("data", data);
                         var countryData = data;
-                        console.log("countryData", countryData);
-                        console.log("countries", countryData.countries);
                         $.each( countryData.countries, function(key, value) {
-                             console.log("key", value);
                             var countryInfo = value;
-                           /*  items.push( "<a id='" + countryInfo.label + "'>" + countryInfo.lable + "</a>" );*/
                             items.push( "<li><a href='javascript;'>" + countryInfo.label + "</a></li>" );
                         });
-                        console.log('items', items);
                     });
                     $('.country-names').append(items);
                 });
