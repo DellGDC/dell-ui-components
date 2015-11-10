@@ -62,11 +62,12 @@ footer.navbar.universal-footer {
         .footer-gallery {
             position:relative;
             border-bottom:1px solid darken(@dell-gray-light, 7%);
+            background-color:@dell-gray-light;
             z-index:120;
             .gallery-item {
                 padding:20px 15px 10px 15px;
-                background-color:@dell-gray-light;
                 border-right:1px solid darken(@dell-gray-light, 7%);
+                border-bottom:none;
                 border-radius:0;
                 text-align:center;
                 cursor:pointer;
@@ -127,6 +128,13 @@ footer.navbar.universal-footer {
             li:last-child {
                 border-bottom:none;
             }
+            li.country-selector {
+                a {
+                    &:hover {
+                        text-decoration:none;
+                    }
+                }
+            }
         }
         @media (min-width:@screen-sm-min) {
             ul.navbar-nav.about-links   {
@@ -150,7 +158,7 @@ footer.navbar.universal-footer {
                         }
                     }
                 }
-                .country-selector {
+                li.country-selector {
                     float:right;
                     top:2px;
                     text-align:right;
@@ -161,29 +169,12 @@ footer.navbar.universal-footer {
                             display:block;
                         }
                     }
-                    @media (max-width:@screen-xs-max) {
-                        float:left;
-                        position:relative;
-                        top:-5px;
-                        margin:6px 0 6px 0;
-                        width:auto;
-                        text-align:left;
-                        ul {
-                            padding:0;
-                            margin:0;
-                            li {
-                                display:block;
-                            }
-                        }
-                    }
+
                     a {
                         color:@dell-gray-dark;
                         text-decoration:none;
                         font-size:12px;
                         padding:3px 0 3px 0;
-                        &:hover {
-                            text-decoration:none;
-                        }
                     }
                     a:focus {
                         outline:@dell-blue solid thin;
@@ -209,6 +200,21 @@ footer.navbar.universal-footer {
                         background:@white;
                         li {
                             padding:0 0 0 10px;
+                        }
+                    }
+                    @media (max-width:@screen-xs-max) {
+                        float:left;
+                        position:relative;
+                        top:-5px;
+                        margin:6px 0 6px 0;
+                        width:auto;
+                        text-align:left;
+                        ul {
+                            padding:0;
+                            margin:0;
+                            li {
+                                display:block;
+                            }
                         }
                     }
                     @media (min-width:@screen-sm-min) {

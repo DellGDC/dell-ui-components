@@ -10,9 +10,7 @@
 
         // Add a reverse reference to the DOM object
         base.$el.data("dellUIuniversalFooter", base);
-        console.log("JS HAS LOADED");
     };
-
     $.dellUIuniversalFooter.defaultOptions = {
         xsMax: 750,
         smMin: 751,
@@ -21,12 +19,10 @@
         mdMax: 1141,
         dosomething: ""
     };
-
     $.fn.dellUIuniversalFooter = function(options){
         if(options) {
             $.dellUIuniversalFooter.defaultOptions = $.extend($.dellUIuniversalFooter.defaultOptions, options);
         }
-
         return this.each(function(){
             (new $.dellUIuniversalFooter(this));
             var options = $.dellUIuniversalFooter.defaultOptions,
@@ -56,6 +52,15 @@
                 }
                 return breakpoint;
             },
+            responsiveElements = function(){
+                if(breakpoint().isXS) {
+                    $('.footer-gallery').css('display', 'none');
+                    $('.gallery-shadow-section').css('display', 'none');
+                } else {
+                    $('.footer-gallery').css('display', 'block');
+                    $('.gallery-shadow-section').css('display', 'block');
+                }
+            },
             equalizeRows = function() {
                 setTimeout (function() {
                     $('.gallery-item').removeAttr('style');
@@ -73,9 +78,10 @@
                 }, 800);
             };
             equalizeRows();
+            responsiveElements();
             $(window).resize(function() {
-                consol.log("REEEESIZE");
                 equalizeRows();
+                responsiveElements();
             });
         });
     };
