@@ -31,9 +31,9 @@ table .table-responsive-columns {
         line-height: 15px !important;
     }
     th:first-child {
-        &.details-control.sorting:after,
-        &.details-control.sorting_asc:after,
-        &.details-control.sorting_desc:after{
+        &.details-control.sorting span:after,
+        &.details-control.sorting_asc span:after,
+        &.details-control.sorting_desc span:after{
             display: none;
         }
     }
@@ -51,7 +51,6 @@ table.dataTable thead span.sort-icon {
     display: inline-block;
     margin-left: 10px;
     font-family: 'FontAwesome';
-    background: pink;
 }
 
 table.dataTable thead .sorting span:after {
@@ -75,7 +74,6 @@ table.dataTable thead .sorting_desc_disabled span:after {
     content: "\f0dd";
     color: @dell-gray-light;
 }
-
 
 // ======================
 

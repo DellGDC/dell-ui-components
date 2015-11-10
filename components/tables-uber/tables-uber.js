@@ -420,6 +420,12 @@ angular.module('dellUiComponents')
                 });
 
 
+                //change the position of the sorting toggle arrows
+                table.columns().iterator( 'column', function (ctx, idx) {
+                    $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                });
+
+
                 // Handle click on checkbox
                 $element.find('tbody').on('click', 'input[type="checkbox"]', function(e){
                     var $row = $(this).closest('tr');

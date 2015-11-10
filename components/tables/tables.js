@@ -31,6 +31,7 @@ angular.module('dellUiComponents')
                         }
                     });
                     new $.fn.dataTable.FixedHeader( table );
+
                 });
             }
         };
@@ -43,15 +44,20 @@ angular.module('dellUiComponents')
             link: function($scope, $element, iAttrs, controller ) {
 
 
-                $(document).ready(function() {
+
                     var table = $('.table-column').DataTable({
                         scrollY:        "300px",
                         scrollX:        true,
                         scrollCollapse: true,
                         paging:         false
                     });
-                    new $.fn.dataTable.FixedColumns( table );
-                });
+
+                    //change the position of the sorting toggle arrows
+                    table.columns().iterator( 'column', function (ctx, idx) {
+                        $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                    });
+                        new $.fn.dataTable.FixedColumns( table );
+
 
             }
         };
@@ -63,15 +69,18 @@ angular.module('dellUiComponents')
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
 
-                $(document).ready(function() {
-                    $('table.responsive-data-table').DataTable( {
+                    var table = $('table.responsive-data-table').DataTable( {
                         dom: 'C<"clear">lfrtip',
                         displayLength: 5,
                         paging: false,
                         scrollY:"300px",
                         scrollX: true
                     });
-                });
+
+                    //change the position of the sorting toggle arrows
+                    table.columns().iterator( 'column', function (ctx, idx) {
+                        $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                    });
             }
         };
     })
@@ -102,7 +111,6 @@ angular.module('dellUiComponents')
                         '</table>';
                 }
 
-                $(document).ready(function() {
                     var table = $('table.table-complex').DataTable( {
                         "ajax": "../components/tables/data.json",
                         "columns": [
@@ -125,6 +133,11 @@ angular.module('dellUiComponents')
                         scrollX: true
                     });
 
+                    //change the position of the sorting toggle arrows
+                    table.columns().iterator( 'column', function (ctx, idx) {
+                        $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                    });
+
                     // Add event listener for opening and closing details
                     $('.table-complex tbody').on('click', 'td.details-control', function () {
                         var tr = $(this).closest('tr');
@@ -141,7 +154,6 @@ angular.module('dellUiComponents')
                             tr.addClass('shown');
                         }
                     });
-                });
             }
         };
     })
