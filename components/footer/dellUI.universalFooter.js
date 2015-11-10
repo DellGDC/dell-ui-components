@@ -10,7 +10,7 @@
 
         // Add a reverse reference to the DOM object
         base.$el.data("dellUIuniversalFooter", base);
-
+        console.log("JS HAS LOADED");
     };
 
     $.dellUIuniversalFooter.defaultOptions = {
@@ -19,13 +19,8 @@
         smMax: 975,
         mdMin: 974,
         mdMax: 1141,
-        iconClasses: {
-            left:"glyphicon glyphicon-menu-left",
-            right:"glyphicon glyphicon-menu-right"
-        }
+        dosomething: ""
     };
-
-
 
     $.fn.dellUIuniversalFooter = function(options){
         if(options) {
@@ -79,6 +74,7 @@
             };
             equalizeRows();
             $(window).resize(function() {
+                consol.log("REEEESIZE");
                 equalizeRows();
             });
         });

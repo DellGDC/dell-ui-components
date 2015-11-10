@@ -10,7 +10,7 @@ footer.navbar {
     border-top: 1px solid @dell-highlight-blue;
     border-bottom: 1px solid @dell-highlight-blue;
     background: @dell-blue;
-    min-height: auto;
+    min-height: 0;
     z-index:0;
     ul.navbar-nav {
         margin:0 auto 0 auto;
@@ -24,7 +24,7 @@ footer.navbar {
                 line-height: 15px; //same as p small
                 &:hover {
                     text-decoration:underline;
-                    background: @dell-blue;
+                    background: transparent;
                     color: @dell-highlight-blue;
                 }
             }
@@ -49,376 +49,296 @@ footer.navbar {
             }
         }
     }
-
 }
-footer.navbar.footer-about {
-    position:relative;
-    border:0;
-    margin-bottom:0;
-    border-top:1px solid  darken(@dell-gray-light, 7%);
-    border-bottom:1px solid @dell-highlight-blue;
-    background:@dell-gray-light;
-    min-height:auto;
-    z-index:100;
-    .footer-gallery {
+footer.navbar.universal-footer {
+    border-top:1px solid darken(@dell-gray-light, 7%);
+    .footer-about {
         position:relative;
-        text-align:center;
-        border-bottom: 1px solid  darken(@dell-gray-light, 7%);
-        background-color:@dell-gray-light;
-        z-index:120;
-        div {
-            border-right: 1px solid  darken(@dell-gray-light, 7%);
-        }
-        .gallery-item {
-            padding:20px 15px 10px 15px;
-            background-color:@dell-gray-light;
-            border-radius:0;
-            cursor:pointer;
-            &:hover {
-                background-color:@white;
+        border:0;
+        margin-bottom:0;
+        border-bottom:1px solid @dell-highlight-blue;
+        background:@dell-gray-light;
+        min-height:0;
+        z-index:100;
+        .footer-gallery {
+            position:relative;
+            border-bottom:1px solid darken(@dell-gray-light, 7%);
+            z-index:120;
+            .gallery-item {
+                padding:20px 15px 10px 15px;
+                background-color:@dell-gray-light;
+                border-right:1px solid darken(@dell-gray-light, 7%);
+                border-radius:0;
+                text-align:center;
+                cursor:pointer;
+                &:hover {
+                    background-color:@white;
+                }
+            }
+            .gallery-item:first-child {
+                padding-left:30px;
+            }
+            .gallery-item:last-child {
+                padding-right:30px;
+            }
+            div:last-child {
+                border:none;
+            }
+            h5 {
+                color:@dell-gray-dark;
+                margin-top:10px;
+                margin-bottom:5px;
+            }
+            p {
+                font-size:12px;
+            }
+            i {
+                padding:0;
+                margin:0;
+            }
+            .icon-large-shipping, .icon-large-calculator, .icon-large-giftcard {
+                font-size:36px;
+                padding:0;
+                margin:0;
+                color:@dell-blue;
             }
         }
-        .gallery-item:first-child {
-            padding-left: 30px;
+        .footer-gallery-empty {
+            position:relative;
+            height:20px;
+            width:100%;
+            background-color:@white;
+            border-bottom:1px solid darken(@dell-gray-light, 7%);
+            z-index:135;
         }
-        .gallery-item:last-child {
-            padding-right: 30px;
-        }
-        div:last-child {
-            border: none;
-        }
-        h5 {
-            color:@dell-gray-dark;
-            margin-top:10px;
-            margin-bottom:5px;
-        }
-        p{
-            font-size:12px;
-        }
-        i {
-            padding:0;
-            margin:0;
-        }
-        .icon-large-shipping, .icon-large-calculator, .icon-large-giftcard {
-            font-size:36px;
-            padding:0;
-            margin:0;
-            color:@dell-blue;
-        }
-    }
-    .footer-gallery-empty {
-        position:relative;
-        height:20px;
-        width:100%;
-        background-color:@white;
-        border-bottom: 1px solid  darken(@dell-gray-light, 7%);
-        z-index:135;
-    }
-    .about-links {
-        position:relative;
-        ul {
+        ul.navbar-nav.about-links  {
             position:relative;
             background-color:transparent;
             width:auto;
             z-index:140;
             li {
-                padding:10px 0 10px 0;
+                padding: 0;
                 border-bottom:1px solid @dell-gray;
                 a {
-                    color:#444444;
+                    font-size:@font-size-base;
+                    color:@dell-gray-dark;
                 }
                 &:hover {
                     text-decoration:underline;
                 }
             }
+            li:last-child {
+                border-bottom:none;
+            }
         }
-        @media (min-width: @screen-sm-min) {
-            ul {
+        @media (min-width:@screen-sm-min) {
+            ul.navbar-nav.about-links   {
                 position:relative;
                 background-color:transparent;
                 z-index:140;
                 margin:0;
                 padding:6px 0 6px 0;
-                width:80%;
+                width:100%;
                 height:44px;
-                float:left;
                 li {
                     display:inline-block;
                     margin:0;
-                    padding:0;
+                    padding:4px 0 0 0;
                     border-bottom:none;
                     a {
                         display:block;
                         color:@dell-gray-dark;
-                        padding: 6px 20px 6px 0;
+                        padding:6px 20px 6px 0;
                         &:hover {
                             color:@dell-dark-blue;
                         }
                     }
                 }
-            }
-        }
-        .country-selector {
-            float:right;
-            top:12px;
-            width:20%;
-            text-align:right;
-            ul {
-                padding:0;
-                margin:0;
-                li {
-                    display:block;
-                }
-            }
-            @media  (max-width : @screen-xs-max) {
-                float:left;
-                position:relative;
-                top: -5px;
-                margin:6px 0 6px 0;
-                width:auto;
-                text-align:left;
-                ul {
-                    padding:0;
-                    margin:0;
-                    li {
-                        display:block;
+                .country-selector {
+                    float:right;
+                    top:2px;
+                    text-align:right;
+                    ul {
+                        padding:0;
+                        margin:0;
+                        li {
+                            display:block;
+                        }
                     }
-                }
-            }
-
-            a {
-                color: @dell-gray-dark;
-                text-decoration: none;
-                font-size:12px;
-                padding:3px 0 3px 0;
-            }
-            a:focus {
-                outline:@dell-blue solid thin;
-            }
-            .flag {
-                width: 24px;
-                margin: 0 3px 3px 0;
-            }
-            .dropdown-toggle:after {
-                position: relative;
-                font-family: 'icon-ui';
-                content: "\e60e";
-                top: 1px;
-            }
-            .dropdown-menu {
-                line-height:1em;
-                overflow-y: scroll;
-                overflow-x:hidden;
-                height:268px;
-                width:224px;
-                position:absolute;
-                right:0;
-                background:@white;
-                li {
-                    padding: 0 0 0 10px;
-                }
-            }
-            @media (min-width: @screen-sm-min) {
-                .dropdown-menu {
-                    left:-70px;
-                }
-            }
-            @media (min-width: @screen-md-min) {
-                .dropdown-menu {
-                    left:-30px;
-                }
-            }
-            @media (min-width: @screen-lg-min) {
-                .dropdown-menu {
-                    left:9px;
+                    @media (max-width:@screen-xs-max) {
+                        float:left;
+                        position:relative;
+                        top:-5px;
+                        margin:6px 0 6px 0;
+                        width:auto;
+                        text-align:left;
+                        ul {
+                            padding:0;
+                            margin:0;
+                            li {
+                                display:block;
+                            }
+                        }
+                    }
+                    a {
+                        color:@dell-gray-dark;
+                        text-decoration:none;
+                        font-size:12px;
+                        padding:3px 0 3px 0;
+                    }
+                    a:focus {
+                        outline:@dell-blue solid thin;
+                    }
+                    .flag {
+                        width:24px;
+                        margin:0 3px 3px 0;
+                    }
+                    .dropdown-toggle:after {
+                        position:relative;
+                        font-family:'icon-ui';
+                        content:"\e60e";
+                        top:1px;
+                    }
+                    .dropdown-menu {
+                        line-height:1em;
+                        overflow-y:scroll;
+                        overflow-x:hidden;
+                        height:268px;
+                        width:224px;
+                        position:absolute;
+                        right:0;
+                        background:@white;
+                        li {
+                            padding:0 0 0 10px;
+                        }
+                    }
+                    @media (min-width:@screen-sm-min) {
+                        .dropdown-menu {
+                            left:-70px;
+                        }
+                    }
+                    @media (min-width:@screen-md-min) {
+                        .dropdown-menu {
+                            left:-30px;
+                        }
+                    }
+                    @media (min-width:@screen-lg-min) {
+                        .dropdown-menu {
+                            left:9px;
+                        }
+                    }
                 }
             }
         }
     }
-}
-footer.navbar.footer-menu {
-    margin:0;
-    padding:0;
-    position:relative;
-    z-index:0;
-    .footer-top-section {
-        position: relative;
-        background: @dell-blue;
-        border-bottom: 1px solid lighten(@dell-blue, 3%); // TODO
-        z-index: 0;
-        ul:first-child {
-            width:auto;
-        }
-        ul:last-child {
-            width:auto;
-        }
-        ul {
-            margin:0 auto 0 auto;
-            li {
-                border-bottom:1px solid #5eb0d7;
-                a {
-                    display:block;
-                    color: @white;
-                    padding: 12px 0 12px 0;
-                }
-                &:last-child {
-                    border-bottom:none;
-                }
-                &:hover {
-                    text-decoration:underline;
-                }
-            }
-        }
-        .menu-container {
-            display:block;
-        }
-        ul.language {
-            float: left;
-            text-align: left;
-            margin-left: 0;
-            margin-bottom:12px;
-            padding-left: 0;
-            width: 100%;
-            border-bottom:1px solid #5eb0d7;
-
-            li {
-                display:inline-block;
-                list-style:none;
-                border:none;
-            }
-            li:first-child a {
-                padding-right:5px;
-            }
-            li:first-child a:after {
-                content:"|";
-                padding-left:10px;
-            }
-            li:last-child:before{
-                padding-left:0;
-            }
-        }
-        @media (min-width: @screen-sm-min) {
-            ul:first-child {
-                width:20%;
-            }
-            ul:last-child {
-                width:80%;
-            }
-            ul {
-                display:inline-block;
-                float:left;
-                padding-top:10px;
-                padding-bottom:6px;
-                li {
-                    display:inline-block;
-                    border-bottom:none;
-                    a {
-                        padding-top:6px;
-                        padding-bottom:6px;
-                        &:focus {
-                            outline:@white solid thin;
-                        }
+    .navbar.footer-menu {
+        margin:0;
+        padding:0;
+        position:relative;
+        z-index:0;
+        .footer-top-section {
+            position:relative;
+            background:@dell-blue;
+            border-bottom:1px solid lighten(@dell-blue, 3%);
+            z-index:0;
+            ul.navbar-nav {
+                li.language {
+                    float:left;
+                    text-align:left;
+                    margin-left:0;
+                    margin-bottom:12px;
+                    padding-left:0;
+                    width:100%;
+                    border-bottom:1px solid #5eb0d7;
+                    ul {
+                        margin-left:0;
+                        padding-left:0;
                     }
-                    &:first-child {
-                        a {
-                            padding-left:0;
-                        }
+                    ul li {
+                        display:inline-block;
+                        list-style:none;
+                        border:none;
                     }
-                }
-            }
-            .menu-container {
-                display:inline-block;
-            }
-            ul.language {
-                position:relative;
-                display:inline-block;
-                margin-left: 0;
-                margin-bottom:0;
-                width: auto;
-                border-bottom:none;
-                float:right;
-                text-align:right;
-                li {
-                    border:none;
-                    &:first-child a, :last-child a {
-                        padding-right:0;
+                    ul li:first-child a {
+                        padding-right:5px;
                     }
-                }
-                li:first-child a:after {
-                    content:"|";
-                    padding-left:10px;
-                }
-                li:last-child {
-                    a {
+                    ul li:first-child a:after {
+                        content:"|";
                         padding-left:10px;
                     }
-                }
-            }
-        }
-    }
-    .footer-bottom-section {
-        color: @white;
-        position: relative;
-        z-index: 0;
-        .disclaimer {
-            padding-top:25px;
-            padding-bottom:20px;
-            font-size:11px;
-            line-height:1.6em;
-            letter-spacing:.04em;
-            font-weight:200;
-            color:@dell-highlight-blue;
-            opacity:.6;
-        }
-    }
-}
-footer.navbar.footer-menu {
-    position:relative;
-    border: 0;
-    border-top: 1px solid @dell-highlight-blue;
-    border-bottom: 1px solid @dell-highlight-blue;
-    background: @dell-blue;
-    min-height: auto;
-    z-index:0;
-    ul.navbar-nav {
-        margin:0 auto 0 auto;
-        li {
-            border-bottom:1px solid darken(@dell-highlight-blue, 28%);
-            a {
-                display:block;
-                color: @white;
-                padding: 12px 13px 10px 0;
-                font-size: @font-size-small;
-                line-height: 15px; //same as p small
-                &:hover {
-                    text-decoration:underline;
-                    background: @dell-blue;
-                    color: @dell-highlight-blue;
-                }
-            }
-            &:last-child {
-                border-bottom:none;
-            }
-            @media (min-width: @screen-sm-min) {
-                display:inline-block;
-                border-bottom:none;
-                a {
-                    padding-right:20px;
-                    &:focus {
-                        outline:@white solid thin;
-                        text-decoration: none;
-                    }
-                }
-                &:first-child {
-                    a {
+                    ul li:last-child:before {
                         padding-left:0;
                     }
                 }
             }
+            @media (min-width:@screen-sm-min) {
+                ul.navbar-nav {
+                    margin: 0;
+                    padding: 6px 0 6px 0;
+                    width: 100%;
+                    height: 44px;
+                    width:100%;
+                    li {
+                        display:inline-block;
+                        border-bottom:none;
+                        padding:4px 0 0 0;
+                        a {
+                            padding:6px 20px 6px 0;
+                            &:focus {
+                                outline:@white solid thin;
+                            }
+                        }
+                        &:first-child {
+                            a {
+                                padding-left:0;
+                            }
+                        }
+                    }
+                    li.language {
+                        position:relative;
+                        display:inline-block;
+                        margin:0;
+                        padding:0;
+                        width:auto;
+                        border-bottom:none;
+                        float:right;
+                        text-align:right;
+                        ul li {
+                            border:none;
+                            &:first-child a, :last-child a {
+                                padding-right:0;
+                            }
+                        }
+                        ul li:first-child a:after {
+                            content:"|";
+                            padding-left:10px;
+                        }
+                        ul li:last-child {
+                            a {
+                                padding-right:0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .footer-bottom-section {
+            color:@white;
+            position:relative;
+            z-index:0;
+            .disclaimer {
+                padding-top:25px;
+                padding-bottom:20px;
+                font-size:11px;
+                line-height:1.6em;
+                letter-spacing:.04em;
+                font-weight:200;
+                color:@dell-highlight-blue;
+                opacity:.6;
+            }
         }
     }
 }
-
 .gallery-shadow-section {
     content: "";
     width: 80%;
