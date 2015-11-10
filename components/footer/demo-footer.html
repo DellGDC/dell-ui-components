@@ -90,12 +90,9 @@
                                         <li><a href="javascript:;" tabindex="14">Premier</a></li>
                                         <li><a href="javascript:;" tabindex="15">Community</a></li>
                                         <li class="country-selector btn-group dropup">
-                                            <a href="#" class="dropdown-toggle " data-toggle="dropdown" tabindex="16"><img src="components/footer/us.gif" class="flag"/> United States&nbsp;</a>
-                                            <ul class="dropdown-menu">
-                                                <li >
-                                                    <a href="javascript:;" ng-if="country.code === 'br'" ng-click="resetPrototype($event,'pt_BR')">{{country.label}}</a>
-                                                    <a href="javascript:;" ng-if="country.code === 'us'" ng-click="resetPrototype($event,'en')">{{country.label}}</a>
-                                                </li>
+                                            <a href="javascript:;" class="dropdown-toggle " data-toggle="dropdown" tabindex="16"><img src="components/footer/us.gif" class="flag"/> United States&nbsp;</a>
+                                            <ul class="dropdown-menu country-names">
+
                                             </ul>
                                         </li>
                                     </ul>

@@ -1,34 +1,5 @@
 {
-  "main_items": [
-    "copyright",
-    "terms",
-    "privacy",
-    "ads_emails",
-    "contact",
-    "site_map",
-    "feedback"
-  ],
-  "gallery_items": [
-    "shipping",
-    "financing",
-    "loyalty"
-  ],
-  "icon_items": [
-     "shipping",
-     "calculator",
-     "giftcard"
-  ],
-   "about_items": [
-      "dell",
-      "partnerdirect",
-      "techcenter",
-      "premier",
-      "community"
-   ],
-    "language_items": [
-        "English",
-        "Spanish"
-    ],
+
   "countries": [
     {
         "code": "aa",

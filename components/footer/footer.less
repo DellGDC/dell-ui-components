@@ -129,11 +129,67 @@ footer.navbar.universal-footer {
                 border-bottom:none;
             }
             li.country-selector {
-                a {
-                    &:hover {
-                        text-decoration:none;
+                float:right;
+                top:2px;
+                text-align:right;
+                ul {
+                    padding:0;
+                    margin:0;
+                    li {
+                        display:block;
+                        border:none;
                     }
                 }
+
+                a {
+                    color:@dell-gray-dark;
+                    text-decoration:none;
+                    font-size:12px;
+                    padding:3px 0 3px 0;
+                }
+                a:focus {
+                    outline:@dell-blue solid thin;
+                    background-color:transparent;
+                }
+                .flag {
+                    width:24px;
+                    margin:0 3px 3px 0;
+                }
+                .dropdown-toggle:after {
+                    position:relative;
+                    font-family:'icon-ui';
+                    content:"\e60e";
+                    top:1px;
+                }
+                .dropdown-menu {
+                    line-height:1em;
+                    overflow-y:scroll;
+                    overflow-x:hidden;
+                    height:268px;
+                    width:224px;
+                    position:absolute;
+                    left:0;
+                    background:@white;
+                    li {
+                        padding:0 0 0 10px;
+                    }
+                }
+                @media (max-width:@screen-xs-max) {
+                    float:left;
+                    position:relative;
+                    margin:6px 0 6px 0;
+                    width:auto;
+                    text-align:left;
+                    ul {
+                        padding:0;
+                        margin:0;
+                        li {
+                            display:block;
+                        }
+                    }
+
+                }
+
             }
         }
         @media (min-width:@screen-sm-min) {
@@ -196,40 +252,10 @@ footer.navbar.universal-footer {
                         height:268px;
                         width:224px;
                         position:absolute;
-                        right:0;
+                        left:-90px;
                         background:@white;
                         li {
                             padding:0 0 0 10px;
-                        }
-                    }
-                    @media (max-width:@screen-xs-max) {
-                        float:left;
-                        position:relative;
-                        top:-5px;
-                        margin:6px 0 6px 0;
-                        width:auto;
-                        text-align:left;
-                        ul {
-                            padding:0;
-                            margin:0;
-                            li {
-                                display:block;
-                            }
-                        }
-                    }
-                    @media (min-width:@screen-sm-min) {
-                        .dropdown-menu {
-                            left:-70px;
-                        }
-                    }
-                    @media (min-width:@screen-md-min) {
-                        .dropdown-menu {
-                            left:-30px;
-                        }
-                    }
-                    @media (min-width:@screen-lg-min) {
-                        .dropdown-menu {
-                            left:9px;
                         }
                     }
                 }
