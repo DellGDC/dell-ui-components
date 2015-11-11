@@ -40,6 +40,28 @@ table .table-responsive-columns {
 }
 
 
+// input placement
+
+@media (max-width: @screen-xs-max) {
+    div.dataTables_filter {
+        input {
+            display: inline-block;
+            width: 100%;
+            margin-right: -15px;
+            margin-left: 15px;
+        }
+
+        label {
+            font-weight: normal;
+            white-space: nowrap;
+            text-align: left;
+            padding: 10px 0 10px 0;
+            float: left;
+        }
+    }
+}
+
+
 //change position of sorting icon css
 
 table.dataTable thead th {
@@ -90,3 +112,13 @@ ul.ColVis_collection li:first-of-type {
 }
 
 
+table.DTCR_clonedTable {
+    background-color:rgba(255,255,255,0.7);
+    z-index:202
+}
+
+div.DTCR_pointer {
+    width:1px;
+    background-color:#0259C4;
+    z-index:201
+}

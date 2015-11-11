@@ -56,6 +56,30 @@ angular.module('dellUiComponents')
                     return  '<row>'+
                                 '<div class="row">'+
                                     '<div class="col-xs-12">'+
+                            //repeated herders visible in XS only
+                                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
+                                            '<p class="text-gray-medium small">Solution ID</p>'+
+                                            '<p><a href="javascript:;">'+d.Solution_ID+'</a></p>' +
+                                        '</div>'+
+                                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
+                                            '<p class="text-gray-medium small">List Price</p>'+
+                                            '<p><a href="javascript:;">'+d.List_price+'</a></p>' +
+                                        '</div>'+
+                                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
+                                            '<p class="text-gray-medium small">List Price</p>'+
+                                            '<p><a href="javascript:;">'+d.List_price+'</a></p>' +
+                                        '</div>'+
+                                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
+                                            '<p class="text-gray-medium small">Quote Number</p>'+
+                                            '<p><a href="javascript:;">'+d.Quote_number+'</a></p>' +
+                                        '</div>'+
+                                        '<div class="row">'+
+                                            '<div class="col-xs-12 visible-xs-block">'+
+                                                '<hr class="hr-gray top-offset-10">'+
+                                            '</div>'+
+                                        '</div>'+
+
+
                                         '<div class="col-xs-6 col-sm-3">' +
                                             '<p class="text-gray-medium small">Contact Number</p>'+
                                             '<p>'+d.Contact_number+'</p>'+
@@ -84,15 +108,13 @@ angular.module('dellUiComponents')
                                             '<p class="text-gray-medium small">Customer Number</p>'+
                                             '<p><a href="javascript:;">'+d.Customer_number+'</a></p>' +
                                         '</div>'+
-                                        '<div class="col-xs-6 col-sm-3">'+
-                                            '<p class="text-gray-medium small">Reference Number</p>'+
-                                            '<p><a href="javascript:;">'+d.Reference_number+'</a></p>' +
-                                        '</div>'+
+
+
                                     '</div>'+
                                 '</div>'+
                                 '<div class="row">'+
                                     '<div class="col-xs-12">'+
-                                        '<hr class="hr-gray bottom-offset-20">'+
+                                        '<hr class="hr-gray top-offset-10">'+
                                     '</div>'+
                                 '</div>'+
 
@@ -129,6 +151,9 @@ angular.module('dellUiComponents')
                             return '<input type="checkbox">';
                         }
                     }],
+                    responsive: {
+                        details: false
+                    },
                     "columns": [
 
                         {
@@ -167,11 +192,11 @@ angular.module('dellUiComponents')
 
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         //console.log('i was sorted');
-                    },
-                    'responsive': false
+                    }
+
                 });
 
-                //change the position of the sorting toggle arrows
+                 //change the position of the sorting toggle arrows
                 table.columns().iterator( 'column', function (ctx, idx) {
                     $( table.column(idx).header() ).append('<span class="sort-icon"/>');
                 });
@@ -417,12 +442,6 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
                     'responsive': true
-                });
-
-
-                //change the position of the sorting toggle arrows
-                table.columns().iterator( 'column', function (ctx, idx) {
-                    $( table.column(idx).header() ).append('<span class="sort-icon"/>');
                 });
 
 

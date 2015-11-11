@@ -56,9 +56,8 @@ angular.module('dellUiComponents')
                     table.columns().iterator( 'column', function (ctx, idx) {
                         $( table.column(idx).header() ).append('<span class="sort-icon"/>');
                     });
-                        new $.fn.dataTable.FixedColumns( table );
 
-
+                    new $.fn.dataTable.FixedColumns( table );
             }
         };
     })
