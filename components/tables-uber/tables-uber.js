@@ -193,6 +193,7 @@ angular.module('dellUiComponents')
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         //console.log('i was sorted');
                     }
+                    //"dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">'
 
                 });
 
@@ -319,6 +320,19 @@ angular.module('dellUiComponents')
                         tr.addClass('shown');
                     }
                 } );
+
+                $element.each(function(){
+                    var datatable = $(this);
+                    // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+                    var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+                    search_input.attr('placeholder', 'Search');
+                    search_input.addClass('form-control ');
+                    // LENGTH - Inline-Form control
+                    var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+                    length_sel.addClass('form-control input-sm');
+
+                    search_input.addClass('form-control input-sm col-xs-12');
+                });
 
             }
         };
