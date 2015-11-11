@@ -59,19 +59,19 @@ angular.module('dellUiComponents')
                             //repeated herders visible in XS only
                                         '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
                                             '<p class="text-gray-medium small">Company Name</p>'+
-                                            '<p><a href="javascript:;">'+d.Company_name+'</a></p>' +
+                                            '<p>'+d.Company_name+'</p>' +
                                         '</div>'+
                                         '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
                                             '<p class="text-gray-medium small">Solution ID</p>'+
-                                            '<p><a href="javascript:;">'+d.Solution_ID+'</a></p>' +
+                                            '<p><a href="javascript:;" class="btn-link">'+d.Solution_ID+'</a></p>' +
                                         '</div>'+
                                         '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
                                             '<p class="text-gray-medium small">List Price</p>'+
-                                            '<p><a href="javascript:;">'+d.List_price+'</a></p>' +
+                                            '<p>'+d.List_price+'</p>' +
                                         '</div>'+
                                         '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
                                             '<p class="text-gray-medium small">Quote Number</p>'+
-                                            '<p><a href="javascript:;">'+d.Quote_number+'</a></p>' +
+                                            '<p><a href="javascript:;" class="btn-link">'+d.Quote_number+'</a></p>' +
                                         '</div>'+
                                         '<div class="row">'+
                                             '<div class="col-xs-12 visible-xs-block">'+
@@ -98,7 +98,7 @@ angular.module('dellUiComponents')
                                         '</div>'+
                                         '<div class="col-xs-6 col-sm-3">'+
                                             '<p class="text-gray-medium small">Owner</p>'+
-                                            '<p><a href="javascript:;">'+d.Owner+'</a></p>' +
+                                            '<p><a href="javascript:;" class="btn-link">'+d.Owner+'</a></p>' +
                                         '</div>'+
                                         '<div class="col-xs-6 col-sm-3">'+
                                             '<p class="text-gray-medium small">Last Edited</p>'+
@@ -106,7 +106,7 @@ angular.module('dellUiComponents')
                                         '</div>'+
                                         '<div class="col-xs-6 col-sm-3">'+
                                             '<p class="text-gray-medium small">Customer Number</p>'+
-                                            '<p><a href="javascript:;">'+d.Customer_number+'</a></p>' +
+                                            '<p><a href="javascript:;" class="btn-link">'+d.Customer_number+'</a></p>' +
                                         '</div>'+
 
 
