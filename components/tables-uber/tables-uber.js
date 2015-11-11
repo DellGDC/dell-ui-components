@@ -58,12 +58,12 @@ angular.module('dellUiComponents')
                                     '<div class="col-xs-12">'+
                             //repeated herders visible in XS only
                                         '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
-                                            '<p class="text-gray-medium small">Solution ID</p>'+
-                                            '<p><a href="javascript:;">'+d.Solution_ID+'</a></p>' +
+                                            '<p class="text-gray-medium small">Company Name</p>'+
+                                            '<p><a href="javascript:;">'+d.Company_name+'</a></p>' +
                                         '</div>'+
                                         '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
-                                            '<p class="text-gray-medium small">List Price</p>'+
-                                            '<p><a href="javascript:;">'+d.List_price+'</a></p>' +
+                                            '<p class="text-gray-medium small">Solution ID</p>'+
+                                            '<p><a href="javascript:;">'+d.Solution_ID+'</a></p>' +
                                         '</div>'+
                                         '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
                                             '<p class="text-gray-medium small">List Price</p>'+
