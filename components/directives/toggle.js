@@ -75,6 +75,7 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         }, 1500);
                     });
                     break;
+// -------Content Teaser------- //                    
                 case "list-truncated":
                     var target = attributes.target;
                     if (!target) {

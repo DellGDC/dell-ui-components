@@ -5,8 +5,8 @@
 .teaser-row-link {
     width: 100%;
     height: 100%;
-    display: inline-block;
-    background: white;
+    /*display: inline-block;
+    background: white;*/
 
     span {
         color: @dell-blue;
@@ -105,6 +105,10 @@ h5, p {
     padding: 10px 20px;
     margin-left: -15px;
     margin-right: -15px;
+
+    p {
+        margin: 0;
+    }
 }
 
 
@@ -126,6 +130,13 @@ h5, p {
         }
     }
 }
+
+.detail-links.view-all {
+        > li {
+            display: block;
+        }
+    }
+
 
 .content-toggle {
     margin-top: -15px;
