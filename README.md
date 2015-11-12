@@ -1,5 +1,7 @@
 
 ##Dell UI Components Bower Package
+*Our Museo sans for Dell font is approved per our legal contract for web based use. When using the font online or in any way, it is imperative that we take caution to secure the font. More specifically, while a web user’s browser will temporarily download our font to a user’s system to render a page, we must never build materials that allow the users or a third party to access or use our font. The regional brand fonts fall onto the responsibility of each region for procuring the licenses as needed to for coverage, and securing the fonts.*
+
 
 # Installation
 
