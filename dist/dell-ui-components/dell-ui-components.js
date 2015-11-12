@@ -22515,60 +22515,69 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       $scope.emptyName = $attributes.emptyName || '*State';
     }
   };
-}).directive('dateSelector', function () {
-  // Runs during compile
-  return {
-    restrict: 'C',
-    link: function ($scope, $element, $attrs) {
-      var inputField = $element.find('input'), calendarIcon = $element.find('.icon-small-calendar'), calendarWidget, inputFieldWidth = inputField.width(), inputFieldOffset = inputField.offset(), viewPortWidth = $(window).width(), viewPortHeight = $(window).height(), dateSelectorConfig = {
-          icons: {
-            time: 'icon-small-clock',
-            date: 'icon-small-calendar',
-            up: 'glyphicon glyphicon-chevron-up',
-            down: 'glyphicon glyphicon-chevron-down',
-            previous: 'glyphicon glyphicon-chevron-left',
-            next: 'glyphicon glyphicon-chevron-right',
-            today: 'icon-small-software',
-            clear: 'icon-small-trash',
-            close: 'icon-ui-close'
-          },
-          keepOpen: true,
-          widgetPositioning: {
-            horizontal: 'right',
-            vertical: typeof $attrs.position !== 'undefined' ? $attrs.position : 'bottom'
-          },
-          format: typeof $attrs.format !== 'undefined' ? $attrs.format : 'MM/DD/YYYY'
-        };
-      //TODO, check to see if the field is at the bottom of the viewport and position it on top
-      inputField.datetimepicker(dateSelectorConfig);
-      inputField.on('dp.show', function (e) {
-        calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
-        //have to repeat this because it is destroyed everytime focus is gone
-        //check to see if the right side is big enough for the widget
-        if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
-          calendarWidget.removeClass('pull-right');
-        } else {
-          calendarWidget.addClass('pull-right');
-        }
-        //check to see if the bottom side is big enough for the widget
-        if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
-          //dateSelectorConfig.widgetPositioning.vertical = "top";
-          calendarWidget.removeClass('bottom').addClass('top');
-        } else {
-          calendarWidget.removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
-        }
-      });
-      calendarIcon.on('click', function (e) {
-        inputField.focus();
-      });
-      inputField.on('blur', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        inputField.data('DateTimePicker').show();
-      });
-    }
-  };
-});
+}).directive('dateSelector', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, $attrs) {
+        var inputField = $element.find('input'), calendarIcon = $element.find('.icon-small-calendar'), calendarWidget, inputFieldWidth = inputField.width(), inputFieldOffset = inputField.offset(), viewPortWidth = $(window).width(), viewPortHeight = $(window).height(), dateSelectorConfig = {
+            icons: {
+              time: 'icon-small-clock',
+              date: 'icon-small-calendar',
+              up: 'glyphicon glyphicon-chevron-up',
+              down: 'glyphicon glyphicon-chevron-down',
+              previous: 'glyphicon glyphicon-chevron-left',
+              next: 'glyphicon glyphicon-chevron-right',
+              today: 'icon-small-software',
+              clear: 'icon-small-trash',
+              close: 'icon-ui-close'
+            },
+            keepOpen: true,
+            widgetPositioning: {
+              horizontal: 'right',
+              vertical: typeof $attrs.position !== 'undefined' ? $attrs.position : 'bottom'
+            },
+            format: typeof $attrs.format !== 'undefined' ? $attrs.format : 'MM/DD/YYYY'
+          };
+        //TODO, check to see if the field is at the bottom of the viewport and position it on top
+        inputField.datetimepicker(dateSelectorConfig);
+        inputField.on('dp.show', function (e) {
+          calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
+          //have to repeat this because it is destroyed everytime focus is gone
+          //check to see if the right side is big enough for the widget
+          if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
+            calendarWidget.removeClass('pull-right');
+          } else {
+            calendarWidget.addClass('pull-right');
+          }
+          //check to see if the bottom side is big enough for the widget
+          if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
+            //dateSelectorConfig.widgetPositioning.vertical = "top";
+            calendarWidget.removeClass('bottom').addClass('top');
+          } else {
+            calendarWidget.removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
+          }
+          calendarWidget.find('.datepicker tr > td.day').on('click', function () {
+            $timeout(function () {
+              inputField.data('DateTimePicker').hide();
+            });
+          });
+        });
+        calendarIcon.on('click', function (e) {
+          inputField.focus();
+        });
+        ///*
+        inputField.on('blur', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          inputField.data('DateTimePicker').show();
+        });  //*/
+      }
+    };
+  }
+]);
 angular.module('dellUiComponents').directive('alertCollapsible', function () {
   return {
     restrict: 'C',
@@ -22673,7 +22682,7 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
         var selector = $attrs.equalizeHeight;
         if (selector) {
           $timeout(function () {
-            $(selector).matchHeight();
+            $(selector).matchHeight({ property: 'min-height' });
           }, 500);
         } else {
           console.error('equalize-height usage error. Must include css selector to identify objects to equalize. Example: cequalize-height=".classname"');
