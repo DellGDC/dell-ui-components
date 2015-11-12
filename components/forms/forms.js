@@ -535,7 +535,7 @@ return {
         }
     };
 })
-.directive('dateSelector', function(){
+.directive('dateSelector', function($timeout){
     // Runs during compile
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
@@ -592,20 +592,28 @@ return {
                     calendarWidget.removeClass('bottom').addClass('top');
                 } else {
                     calendarWidget.removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
-                }              
+                }         
+
+                calendarWidget.find(".datepicker tr > td.day").on("click",function(){
+                    $timeout(function(){
+                        inputField.data("DateTimePicker").hide();
+                    });
+                    
+                });
 
             });
             calendarIcon.on("click",function (e) {
                 inputField.focus();                
             });
-
+/*
             inputField.on("blur",function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 inputField.data("DateTimePicker").show();
             });
+*/
 
-
+            
 
 
         }
