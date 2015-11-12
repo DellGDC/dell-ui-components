@@ -321,20 +321,28 @@ angular.module('dellUiComponents')
                     }
                 } );
 
+
+                // change positioning of search bar
                 $element.each(function(){
                     var datatable = $(this);
+                    // find the search label
+                    var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+                    search_label.addClass('hide-text');
+
+
                     // SEARCH - Add the placeholder for Search and Turn this into in-line form control
                     var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
                     search_input.attr('placeholder', 'Search');
-                    search_input.addClass('form-control ');
+                    search_input.addClass('form-control col-xs-12 col-sm-4');
+
                     // LENGTH - Inline-Form control
+                    // code below for select
                     var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
                     length_sel.addClass('form-control input-sm');
 
-                    search_input.addClass('form-control input-sm col-xs-12');
                 });
 
-            }
+                         }
         };
     })
 
