@@ -8,7 +8,6 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         $('[data-toggle="popover"]').popover('destroy');
                     };
                     if (attributes.trigger === "hover") {
-
                         $(element).mouseover(function (event) {
                             event.preventDefault();
                             destroy();
@@ -20,8 +19,13 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         });
                         $(element).click(function (event) {
                             event.preventDefault();
-                            destroy();
-                            $(this).popover('show');
+                            if($(this).attr('aria-describedby')) {
+                                destroy();
+                            } else {
+                                destroy();
+                                $(this).popover('show');
+                            }
+                            
                             $('[data-dismiss="popover"]').bind('click', function (event) {
                                 event.preventDefault();
                                 destroy();
