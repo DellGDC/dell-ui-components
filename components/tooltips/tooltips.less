@@ -34,31 +34,29 @@ button[data-toggle="tooltip"] {
 
 @media (max-width: @screen-sm-max) {
 
-        .tooltip {
-            bottom: 0;
-            left: 0;
-            outline: 0 none;
-            overflow: hidden;
-            position: fixed;
-            right: 0;
-            top: 0;
-            z-index: 1050;
-            border: 0 !important;
-            border-radius: 0 !important;
-            background: rgba(0, 0, 0, .5) !important;
-            padding:0;
+    .tooltip.in {
+        bottom: 0;
+        left: 0;
+        outline: 0 none;
+        overflow: hidden;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1050;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: rgba(0, 0, 0, .5) !important;
+        padding:0;
 
-            &.top, &.right, &.left, &.bottom    { 
-                /*bottom: 0 !important;*/
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important; 
-                margin: 0 auto; 
-            }
+        &.top, &.right, &.left, &.bottom    { 
+            /*bottom: 0 !important;*/
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important; 
+            margin: 0 auto; 
         }
 
         .tooltip-inner {
-
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
             background-clip: padding-box !important;
             background-color: #fff !important;
@@ -91,3 +89,4 @@ button[data-toggle="tooltip"] {
             display: none !important;
         }
     }
+}

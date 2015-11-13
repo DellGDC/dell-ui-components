@@ -1,5 +1,6 @@
+@import "../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css";
 /*!
- * Dell-UI-Components v1.0.11 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.12 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -1868,51 +1869,6 @@ footer.navbar ul.navbar-nav li:last-child {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff89cdef', endColorstr='#ff81bfde', GradientType=0);
   opacity: 1;
 }
-.ui-tooltip,
-.arrow:after {
-  background: black;
-  border: 2px solid white;
-}
-.ui-tooltip {
-  padding: 10px 20px;
-  color: white;
-  border-radius: 20px;
-  font: bold 14px "Helvetica Neue", Sans-Serif;
-  text-transform: uppercase;
-  box-shadow: 0 0 7px black;
-}
-.arrow {
-  width: 70px;
-  height: 16px;
-  overflow: hidden;
-  position: absolute;
-  left: 50%;
-  margin-left: -35px;
-  bottom: -16px;
-}
-.arrow.top {
-  top: -16px;
-  bottom: auto;
-}
-.arrow.left {
-  left: 20%;
-}
-.arrow:after {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: -20px;
-  width: 25px;
-  height: 25px;
-  box-shadow: 6px 5px 9px -9px #000000;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.arrow.top:after {
-  bottom: -20px;
-  top: auto;
-}
 /* date-selector */
 .date-selector {
   position: relative;
@@ -2327,22 +2283,6 @@ input:focus + [role="modal"] {
  * Popovers component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.popover .close {
-  font-size: 16px;
-  line-height: 1;
-  padding-left: 5px;
-}
-.popover.right > .arrow {
-  left: 24px !important;
-}
-.popover.left > .arrow {
-  left: 113% !important;
-}
-input:focus + [role="popover"] {
-  display: block;
-  position: absolute;
-  top: 100%;
-}
 /*
  * Responsive-Utilities component theme overrides
  *------------------------------------------------------------------------------------------
@@ -3979,7 +3919,7 @@ button[data-toggle="tooltip"] {
 }
 /* ----------| Tooltip Change to Modal based on the sm and xs media query |---------- */
 @media (max-width: 991px) {
-  .tooltip {
+  .tooltip.in {
     bottom: 0;
     left: 0;
     outline: 0 none;
@@ -3993,17 +3933,17 @@ button[data-toggle="tooltip"] {
     background: rgba(0, 0, 0, 0.5) !important;
     padding: 0;
   }
-  .tooltip.top,
-  .tooltip.right,
-  .tooltip.left,
-  .tooltip.bottom {
+  .tooltip.in.top,
+  .tooltip.in.right,
+  .tooltip.in.left,
+  .tooltip.in.bottom {
     /*bottom: 0 !important;*/
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     margin: 0 auto;
   }
-  .tooltip-inner {
+  .tooltip.in .tooltip-inner {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
     background-clip: padding-box !important;
     background-color: #fff !important;
@@ -4015,7 +3955,7 @@ button[data-toggle="tooltip"] {
     margin: 10% auto 0 auto;
     padding: 10px 15px;
   }
-  .tooltip-inner:before {
+  .tooltip.in .tooltip-inner:before {
     content: "\e602";
     position: absolute;
     right: 5px;
@@ -4032,7 +3972,7 @@ button[data-toggle="tooltip"] {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  .tooltip-arrow {
+  .tooltip.in .tooltip-arrow {
     display: none !important;
   }
 }
