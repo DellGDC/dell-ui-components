@@ -21806,8 +21806,12 @@ angular.module('dellUiComponents').directive('toggle', function () {
           $(element).popover({ trigger: 'manual' });
           $(element).click(function (event) {
             event.preventDefault();
-            destroy();
-            $(this).popover('show');
+            if ($(this).attr('aria-describedby')) {
+              destroy();
+            } else {
+              destroy();
+              $(this).popover('show');
+            }
             $('[data-dismiss="popover"]').bind('click', function (event) {
               event.preventDefault();
               destroy();
@@ -22567,13 +22571,13 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         });
         calendarIcon.on('click', function (e) {
           inputField.focus();
-        });
-        ///*
-        inputField.on('blur', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          inputField.data('DateTimePicker').show();
-        });  //*/
+        });  /*
+            inputField.on("blur",function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                inputField.data("DateTimePicker").show();
+            });
+*/
       }
     };
   }

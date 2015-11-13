@@ -605,13 +605,13 @@ return {
             calendarIcon.on("click",function (e) {
                 inputField.focus();                
             });
-///*
+/*
             inputField.on("blur",function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 inputField.data("DateTimePicker").show();
             });
-//*/
+*/
 
             
 
