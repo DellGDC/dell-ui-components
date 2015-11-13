@@ -4627,6 +4627,10 @@ blockquote.blockquote-unstyled {
   font-size: 85%;
   line-height: 15px;
 }
+.container .jumbotron,
+.container-fluid .jumbotron {
+  border-radius: 0;
+}
 .jumbotron {
   margin: 0;
   padding: 0;
