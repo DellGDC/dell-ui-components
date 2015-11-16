@@ -80,6 +80,11 @@ angular.module('dellUiComponents')
                                         '</div>'+
 
 
+                                        '<div class="col-xs-12">'+
+                                            '<h2 class="text-blue">Account Details</h2>'+
+                                        '</div>'+
+
+
                                         '<div class="col-xs-6 col-sm-3">' +
                                             '<p class="text-gray-medium small">Contact Number</p>'+
                                             '<p>'+d.Contact_number+'</p>'+
@@ -108,8 +113,6 @@ angular.module('dellUiComponents')
                                             '<p class="text-gray-medium small">Customer Number</p>'+
                                             '<p><a href="javascript:;" class="btn-link">'+d.Customer_number+'</a></p>' +
                                         '</div>'+
-
-
                                     '</div>'+
                                 '</div>'+
                                 '<div class="row">'+
@@ -119,6 +122,11 @@ angular.module('dellUiComponents')
                                 '</div>'+
 
                                 '<div class="row">'+
+
+                                    '<div class="col-xs-12">'+
+                                        '<h2 class="text-blue col-xs-12">Additional Notes</h2>'+
+                                    '</div>'+
+
                                     '<div class="col-xs-12">'+
                                         '<div class="col-xs-6">'+
                                             '<p class="text-gray-medium small">Purchase Details</p>'+
@@ -192,8 +200,11 @@ angular.module('dellUiComponents')
 
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         //console.log('i was sorted');
+                    },
+                    'colVis': {
+                        "buttonText": "<span aria-hidden=\"true\" class=\"glyphicon glyphicon-option-vertical\" style\"font-size:10px !important\"><\/span>&nbsp;Column"
                     }
-                    //"dom":' <"search"f><"top"l>rt<"bottom"ip><"clear">'
+
 
                 });
 
@@ -338,11 +349,11 @@ angular.module('dellUiComponents')
                     // LENGTH - Inline-Form control
                     // code below for select
                     var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
-                    length_sel.addClass('form-control input-sm');
+                    length_sel.addClass('form-control');
 
                 });
 
-                         }
+             }
         };
     })
 
@@ -567,6 +578,26 @@ angular.module('dellUiComponents')
                         } );
                     },100);
                 }
+
+                // change positioning of search bar
+                $element.each(function(){
+                    var datatable = $(this);
+                    // find the search label
+                    var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+                    search_label.addClass('hide-text');
+
+
+                    // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+                    var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+                    search_input.attr('placeholder', 'Search');
+                    search_input.addClass('form-control col-xs-12 col-sm-4');
+
+                    // LENGTH - Inline-Form control
+                    // code below for select
+                    var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+                    length_sel.addClass('form-control');
+
+                });
 
             }
         };

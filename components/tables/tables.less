@@ -899,20 +899,16 @@ div.ColVis {
 button.ColVis_Button,
 ul.ColVis_collection li {
     position: relative;
-    float: left;
-    padding: 5px 8px;
-    border: 1px solid #999;
+    //float: left;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
     cursor: pointer;
     *cursor: hand;
-    font-size: 0.88em;
-    color: black !important;
+    color: @btn-default-color !important;
     white-space: nowrap;
     background: @dell-gray-light;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
-    border-radius: 2px;
+    border-radius: none;
     -webkit-box-shadow: 1px 1px 3px #ccc;
     -moz-box-shadow: 1px 1px 3px #ccc;
     -ms-box-shadow: 1px 1px 3px #ccc;
@@ -962,6 +958,7 @@ div.ColVis_collectionBackground {
     height: 100%;
     width: 100%;
     background-color: black;
+    opacity: 0.5 !important;
     z-index: 1100;
 }
 
