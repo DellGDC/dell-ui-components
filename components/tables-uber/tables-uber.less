@@ -56,6 +56,14 @@ div.dataTables_paginate {
     text-indent: -9999px;
 }
 
+// search glyph-icon
+div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
+    right: 24px;
+    top: 8px;
+    position: relative;
+    z-index: 20;
+}
+
 @media (max-width: @screen-xs-max) {
     div.dataTables_filter {
         label {
@@ -65,7 +73,15 @@ div.dataTables_paginate {
             padding: 10px 0 10px 0;
             float: right;
             width: 100%;
-            margin-top: -10px;
+            margin-top: -20px;
+        }
+
+        i.icon-small-magnifying-glass.text-blue {
+            float: right;
+            right: 10px;
+            top: 24px;
+            position: relative;
+            z-index: 20;
         }
     }
     .form-inline .form-control {
@@ -103,11 +119,18 @@ div.dataTables_paginate {
         padding-bottom: 10px;
     }
 
+
 }
 
 input.form-control.input-sm.col-xs-12.col-sm-4 {
     height: 31px !important;
 }
+
+.ColVis_Button i.glyphicon.glyphicon-option-horizontal.text-blue {
+    padding-top: 3px;
+}
+
+
 
 
 //change position of sorting icon css
@@ -144,6 +167,7 @@ table.dataTable thead .sorting_desc_disabled span:after {
     content: "\f0dd";
     color: @dell-gray-light;
 }
+
 
 // ======================
 

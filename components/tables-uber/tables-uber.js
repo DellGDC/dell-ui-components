@@ -81,7 +81,7 @@ angular.module('dellUiComponents')
 
 
                                         '<div class="col-xs-12">'+
-                                            '<h2 class="text-blue">Account Details</h2>'+
+                                            '<h3 class="text-blue">Account Details</h3>'+
                                         '</div>'+
 
 
@@ -124,7 +124,7 @@ angular.module('dellUiComponents')
                                 '<div class="row">'+
 
                                     '<div class="col-xs-12">'+
-                                        '<h2 class="text-blue col-xs-12">Additional Notes</h2>'+
+                                        '<h3 class="text-blue col-xs-12">Additional Notes</h3>'+
                                     '</div>'+
 
                                     '<div class="col-xs-12">'+
@@ -201,10 +201,10 @@ angular.module('dellUiComponents')
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         //console.log('i was sorted');
                     },
-                    'colVis': {
-                        "buttonText": "<span aria-hidden=\"true\" class=\"glyphicon glyphicon-option-vertical\" style\"font-size:10px !important\"><\/span>&nbsp;Column"
-                    }
-
+                    //'colVis': {
+                        //"buttonText": "<span aria-hidden=\"true\" class=\"glyphicon glyphicon-option-vertical\" style\"font-size:10px !important\"><\/span>&nbsp;Column"
+                    //},
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
 
                 });
 
@@ -338,13 +338,14 @@ angular.module('dellUiComponents')
                     var datatable = $(this);
                     // find the search label
                     var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
-                    search_label.addClass('hide-text');
+                    //search_label.addClass('hide-text');
 
 
                     // SEARCH - Add the placeholder for Search and Turn this into in-line form control
                     var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
                     search_input.attr('placeholder', 'Search');
                     search_input.addClass('form-control col-xs-12 col-sm-4');
+
 
                     // LENGTH - Inline-Form control
                     // code below for select
@@ -475,6 +476,7 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
                     'responsive': true
+
                 });
 
 
@@ -598,6 +600,8 @@ angular.module('dellUiComponents')
                     length_sel.addClass('form-control');
 
                 });
+
+
 
             }
         };
