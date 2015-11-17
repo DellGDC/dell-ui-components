@@ -31,9 +31,9 @@ table .table-responsive-columns {
         line-height: 15px !important;
     }
     th:first-child {
-        &.details-control.sorting span:after,
-        &.details-control.sorting_asc span:after,
-        &.details-control.sorting_desc span:after{
+        &.details-control.sorting span:before,
+        &.details-control.sorting_asc span:before,
+        &.details-control.sorting_desc span:before{
             display: none;
         }
     }
@@ -147,24 +147,24 @@ table.dataTable thead span.sort-icon {
     font-family: 'FontAwesome';
 }
 
-table.dataTable thead .sorting span:after {
+table.dataTable thead .sorting span:before {
     content: "\f0dc";
     color: #5AABD1;
 }
-table.dataTable thead .sorting_asc span:after {
+table.dataTable thead .sorting_asc span:before {
     content: "\f0de";
     color: @dell-blue;
 }
-table.dataTable thead .sorting_desc span:after {
+table.dataTable thead .sorting_desc span:before {
     content: "\f0dd";
     color: @dell-blue;
 }
 
-table.dataTable thead .sorting_asc_disabled span:after {
+table.dataTable thead .sorting_asc_disabled span:before {
     content: "\f0de";
     color: @dell-gray-light;
 }
-table.dataTable thead .sorting_desc_disabled span:after {
+table.dataTable thead .sorting_desc_disabled span:before {
     content: "\f0dd";
     color: @dell-gray-light;
 }

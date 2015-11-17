@@ -43,6 +43,8 @@ div.dataTables_paginate {
 }
 table.dataTable input{
     vertical-align: top;
+    //float: right;
+    //margin-right: 30px;
 }
 
 // ========== modified ============
@@ -839,11 +841,19 @@ td.details-control {
     font-family: icon-ui;
     opacity: 0.8;
     background: none !important;
-    &:after {
+    &:before {
         content: "\e610";
         color: @dell-blue;
+        padding: 0 5px 0 0;
     }
 }
+
+th.details-control {
+    input[type="checkbox"] {
+        margin-left: 24px;
+    }
+}
+
 tr.shown td.details-control {
     position: relative;
     top: 0;
@@ -852,7 +862,7 @@ tr.shown td.details-control {
     font-family: icon-ui;
     opacity: 0.8;
     background: none !important;
-    &:after {
+    &:before {
         content: "\e60e";
         color: @dell-blue;
     }
