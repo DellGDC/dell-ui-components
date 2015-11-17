@@ -201,9 +201,7 @@ angular.module('dellUiComponents')
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         //console.log('i was sorted');
                     },
-                    //'colVis': {
-                        //"buttonText": "<span aria-hidden=\"true\" class=\"glyphicon glyphicon-option-vertical\" style\"font-size:10px !important\"><\/span>&nbsp;Column"
-                    //},
+
                     'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
 
                 });
@@ -338,7 +336,7 @@ angular.module('dellUiComponents')
                     var datatable = $(this);
                     // find the search label
                     var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
-                    //search_label.addClass('hide-text');
+                    search_label.addClass('hide-text');
 
 
                     // SEARCH - Add the placeholder for Search and Turn this into in-line form control
@@ -410,6 +408,7 @@ angular.module('dellUiComponents')
                         'orderable':false,
                         'stateSave': true,
                         'className': 'dt-body-center',
+
                         'render': function (data, type, full, meta){
                             return '<input type="checkbox">';
                         }
@@ -475,9 +474,15 @@ angular.module('dellUiComponents')
                         $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click',dataReloadClick);
                         //console.log('i was sorted');
                     },
-                    'responsive': true
-
+                    'responsive': true,
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
                 });
+
+                //change the position of the sorting toggle arrows
+                table.columns().iterator( 'column', function (ctx, idx) {
+                    $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                });
+
 
 
                 // Handle click on checkbox
@@ -581,6 +586,24 @@ angular.module('dellUiComponents')
                     },100);
                 }
 
+                // Add event listener for opening and closing details
+                $element.find('tbody').on('click', 'td.details-control', function () {
+                    var tr = $(this).closest('tr');
+                    var row = table.row( tr );
+                    //var format = format;
+
+                    if ( row.child.isShown() ) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        // Open this row
+                        row.child( format(row.data()) ).show();
+                        tr.addClass('shown');
+                    }
+                });
+
                 // change positioning of search bar
                 $element.each(function(){
                     var datatable = $(this);
@@ -594,14 +617,13 @@ angular.module('dellUiComponents')
                     search_input.attr('placeholder', 'Search');
                     search_input.addClass('form-control col-xs-12 col-sm-4');
 
+
                     // LENGTH - Inline-Form control
                     // code below for select
                     var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
                     length_sel.addClass('form-control');
 
                 });
-
-
 
             }
         };
