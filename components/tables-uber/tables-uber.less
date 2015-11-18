@@ -53,7 +53,7 @@ div.dataTables_paginate {
 .dt-form-inline {
     .form-control {
         display: inline-block;
-        width: auto !important;
+        width: 135px !important;
         vertical-align: top;
         margin-right: 10px;
         height: 30px;
@@ -147,10 +147,6 @@ input.form-control.input-sm.col-xs-12.col-sm-4 {
     padding-top: 3px;
 }
 
-th.dt-body-center input[type="checkbox"] {
-    margin-left: 24px;
-}
-
 
 
 
@@ -194,12 +190,26 @@ table.dataTable thead .sorting_desc_disabled span:before {
 
 // ======================
 
+th.dt-body-center input[type="checkbox"] {
+    margin-left: 5px;
+}
 
+.collapsed th.dt-body-center input[type="checkbox"] {
+    margin-left: 24px;
+}
 
-td.dt-body-center input[type="checkbox"] {
+//td.dt-body-center input[type="checkbox"] {
+//    display: inline-block;
+//    margin-bottom: 0;
+//    vertical-align: top;
+//    margin-left: 24px;
+//}
+
+.collapsed td.dt-body-center input[type="checkbox"] {
     display: inline-block;
     margin-bottom: 0;
     vertical-align: top;
+    margin-left: 5px;
 }
 
 ul.ColVis_collection li:first-of-type {
