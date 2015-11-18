@@ -59462,113 +59462,126 @@ angular.module('dellUiComponents').config(function () {
     });
   };
 }(jQuery));
-angular.module('dellUiComponents').directive('toggle', function () {
-  return {
-    restrict: 'A',
-    link: function ($scope, element, attributes, controller) {
-      switch (attributes.toggle) {
-      case 'popover':
-        var destroy = function () {
-          $('[data-toggle="popover"]').popover('destroy');
-        };
-        if (attributes.trigger === 'hover') {
-          $(element).mouseover(function (event) {
-            event.preventDefault();
-            destroy();
-            $(this).popover('show');
-          });
-        } else {
-          $(element).popover({ trigger: 'manual' });
-          $(element).click(function (event) {
-            event.preventDefault();
-            if ($(this).attr('aria-describedby')) {
-              destroy();
-            } else {
-              destroy();
-              $(this).popover('show');
-            }
-            $('[data-dismiss="popover"]').bind('click', function (event) {
+angular.module('dellUiComponents').directive('toggle', [
+  '$rootScope',
+  function ($rootScope) {
+    return {
+      restrict: 'A',
+      link: function ($scope, $element, $attrs, controller) {
+        switch ($attrs.toggle) {
+        case 'popover':
+          var destroy = function () {
+            $('[data-toggle="popover"]').popover('destroy');
+          };
+          if ($attrs.trigger === 'hover') {
+            $element.mouseover(function (event) {
               event.preventDefault();
               destroy();
+              $(this).popover('show');
             });
-          });
-        }
-        break;
-      case 'tooltip':
-        $(element).tooltip();
-        break;
-      case 'offcanvas':
-        $(element).on('click', function (event) {
-          event.preventDefault();
-          $(element).parents('.row-offcanvas').find('.tab-content').removeClass('active');
-          $(element).parents('.row-offcanvas').removeClass('active');
-        });
-        break;
-      case 'tab':
-        $(element).on('click', function (event) {
-          event.preventDefault();
-          $(this).tab('show');
-          $(this).parents('.row-offcanvas').find('.tab-content').addClass('active');
-          $(this).parents('.row-offcanvas').addClass('active');
-        });
-        break;
-      case 'collapse':
-        $(element).on('click', function (event) {
-          event.preventDefault();
-        });
-        break;
-      case 'load-more':
-        var selector = attributes.target, size_li = $(selector + ' li').size(), x = 3;
-        if (!selector) {
-          console.error('You must use data-target when using data-toggle="load-more". ');
-        }
-        $(selector + ' li:lt(' + x + ')').show();
-        $(element).click(function () {
-          x = x + 5 <= size_li ? x + 5 : size_li;
-          $(selector + ' li:lt(' + x + ')').fadeIn(1500);
-          if ($(selector + ' li:visible').size() === size_li) {
-            $(element).hide();
+          } else {
+            $element.popover({ trigger: 'manual' });
+            $element.click(function (event) {
+              event.preventDefault();
+              if ($(this).attr('aria-describedby')) {
+                destroy();
+              } else {
+                destroy();
+                $(this).popover('show');
+              }
+              $('[data-dismiss="popover"]').bind('click', function (event) {
+                event.preventDefault();
+                destroy();
+              });
+            });
           }
-          var $this = $(this);
-          $this.button('loading');
-          setTimeout(function () {
-            $this.button('reset');
-          }, 1500);
-        });
-        break;
-      case 'list-truncated':
-        var target = attributes.target;
-        if (!target) {
-          target = $(element).prev();
-        }
-        if ($(target).find('li').length <= 5) {
-          $(element).hide();
-        } else {
-          var maxHeight = 0, minHeight = 0;
-          _.each($(target).find('li'), function (listItem, index) {
-            if (index < 5) {
-              minHeight = minHeight + $(listItem).height();
+          break;
+        case 'tooltip':
+          $element.tooltip();
+          $element.on('click', function () {
+            if ($rootScope.bp.isXS) {
+              $element.tooltip('show');
             }
-            maxHeight = maxHeight + $(listItem).height();
           });
-          $(target).height(minHeight);
-          $(element).on('click', function () {
-            var height = minHeight;
-            if ($(element).hasClass('collapsed')) {
-              height = maxHeight;
+          $element.on('mouseenter', function () {
+            if ($rootScope.bp.isXS) {
+              $element.tooltip('hide');
             }
-            $(element).toggleClass('collapsed');
-            $(target).animate({ height: height }, {
-              duration: 300,
-              specialEasing: { height: 'swing' }
+          });
+          break;
+        case 'offcanvas':
+          $element.on('click', function (event) {
+            event.preventDefault();
+            $element.parents('.row-offcanvas').find('.tab-content').removeClass('active');
+            $element.parents('.row-offcanvas').removeClass('active');
+          });
+          break;
+        case 'tab':
+          $element.on('click', function (event) {
+            event.preventDefault();
+            $(this).tab('show');
+            $(this).parents('.row-offcanvas').find('.tab-content').addClass('active');
+            $(this).parents('.row-offcanvas').addClass('active');
+          });
+          break;
+        case 'collapse':
+          $element.on('click', function (event) {
+            event.preventDefault();
+          });
+          break;
+        case 'load-more':
+          var selector = $attrs.target, size_li = $(selector + ' li').size(), x = 3;
+          if (!selector) {
+            console.error('You must use data-target when using data-toggle="load-more". ');
+          }
+          $(selector + ' li:lt(' + x + ')').show();
+          $element.click(function () {
+            x = x + 5 <= size_li ? x + 5 : size_li;
+            $(selector + ' li:lt(' + x + ')').fadeIn(1500);
+            if ($(selector + ' li:visible').size() === size_li) {
+              $element.hide();
+            }
+            var $this = $(this);
+            $this.button('loading');
+            setTimeout(function () {
+              $this.button('reset');
+            }, 1500);
+          });
+          break;
+        case 'list-truncated':
+          var target = $attrs.target;
+          if (!target) {
+            target = $element.prev();
+          }
+          if ($(target).find('li').length <= 5) {
+            $element.hide();
+          } else {
+            var maxHeight = 0, minHeight = 0;
+            _.each($(target).find('li'), function (listItem, index) {
+              if (index < 5) {
+                minHeight = minHeight + $(listItem).height();
+              }
+              maxHeight = maxHeight + $(listItem).height();
             });
-          });
+            $(target).height(minHeight);
+            $element.on('click', function () {
+              var height = minHeight;
+              if ($element.hasClass('collapsed')) {
+                height = maxHeight;
+              }
+              $element.toggleClass('collapsed');
+              $(target).animate({ height: height }, {
+                duration: 300,
+                specialEasing: { height: 'swing' }
+              });
+            });
+          }
+          break;
         }
-        break;
       }
-    }
-  };
-});
+    };
+  }
+]);
 angular.module('dellUiComponents').directive('navTabs', function () {
   return {
     restrict: 'C',
@@ -61784,7 +61797,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/progress-bars/demo-play-progress-bars.html', '<section ng-controller=progressBarsPLayDemoCtrl id=progress-bars-play-demo><div class=container><h2>Progress-Bars Builder</h2><div></div></div></section>');
     $templateCache.put('components/progress-bars/demo-progress-bars.html', '<section ng-controller=progressBarsCtrl id=progress-bars-html-example><div class=container><h2>Progress-Bars Demo</h2><div class=row><div class="col-md-6 bottom-offset-20"><h4>Default</h4><div class=progress><div class=bar style="width: 60%"></div></div><h4>Default with percentage</h4><div class=progress><div class=bar style="width: 60%">60%</div></div></div></div><div class=bottom-offset-60><h4>Default progress status</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></a><div class="bar bar-progress" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status: Disabled</h4><div class="progress progress-status"><div href=javascript:; class="bar bar-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></div><div class="bar bar-progress-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status 2-Step minimum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 50%"><span class="hidden-xs hidden-sm">Payment</span></a><div class="bar bar-incomplete" style="width: 50%"><span class="hidden-xs hidden-sm">Verify &amp; submit order</span></div></div></div><div class=bottom-offset-60><h4>Progress status 6-Step maximum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 1</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 2</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 3</span></a><div class="bar bar-progress" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 4</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 5</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 6</span></div></div></div><div class=bottom-offset-60><h4>Animated Striped</h4><p>Add <code>.active</code> to <code>.progress-bar-striped</code> to animate the stripes right to left. Not available in IE9 and below.</p><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=45 aria-valuemin=0 aria-valuemax=100 style="width: 45%"><span class=sr-only>45% Complete</span></div></div></div><div class=bottom-offset-60><h4>Striped progress</h4><div ng-init=fakeAnimation() class=interactive-progress-bar><div class="pull-right progress-counter hidden-xs"><h4 class=pull-right>{{fakeAnimationValue}}%</h4></div><div class="progress bottom-offset-5"><div ng-class=stripeAnimate class="progress-bar progress-bar-striped" role=progressbar aria-valuenow={{fakeAnimationValue}} aria-valuemin=0 aria-valuemax=100 style="width: {{fakeAnimationValue}}%"></div></div><div><p class=pull-left>Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p><div class="btn-group pull-right fake-animation-controls"><button type=reset class="btn btn-default" ng-click=resetFakeAnimation() ng-if="fakeAnimationValue !== 100">Cancel</button> <button type=submit class="btn btn-primary" ng-click=pauseFakeAnimation() ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button> <button type=submit class="btn btn-primary" ng-click=fakeAnimation() ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button> <button type=submit class="btn btn-primary" ng-if="fakeAnimationValue === 100" ng-click=resetFakeAnimation()>Ok</button></div></div></div></div><div class=bottom-offset-60><h4>Striped progress</h4><div class=btn-toolbar><div class=btn-group id=button-default-dropdown><a class="btn btn-default dropdown-toggle btn-progress" data-toggle=dropdown href=javascript:; aria-expanded=false>Step 5 of 9: Lorem ispum</a><ul class=dropdown-menu><li class=completed><a href=javascript:;>Step 1 of 9: Lorem ispum</a></li><li class=completed><a href=javascript:;>Step 2 of 9: Lorem ispum</a></li><li class=completed><a href=javascript:;>Step 3 of 9: Lorem ispum</a></li><li class=completed><a href=javascript:;>Step 4 of 9: Lorem ispum</a></li><li class=active><a href=javascript:;>Step 5 of 9: Lorem ispum</a></li><li class=disabled><a href=javascript:;>Step 6 of 9: Lorem ispum</a></li><li class=disabled><a href=javascript:;>Step 7 of 9: Lorem ispum</a></li><li class=disabled><a href=javascript:;>Step 8 of 9: Lorem ispum</a></li><li class=disabled><a href=javascript:;>Step 9 of 9: Lorem ispum</a></li><li><a href=javascript:;>Summary</a></li></ul></div><div class=btn-group><a class="btn btn-primary" href=javascript:;>Next</a></div><div class=btn-group><a class="btn btn-link" href=javascript:;>Exit</a></div></div></div></div></section>');
     $templateCache.put('components/ratings-and-reviews/demo-play-ratings-and-reviews.html', '<section ng-controller=ratingsAndReviewsPLayDemoCtrl id=ratings-and-reviews-play-demo><div class=container><h2>Ratings-And-Reviews Builder</h2><div></div></div></section>');
-    $templateCache.put('components/ratings-and-reviews/demo-ratings-and-reviews.html', '<div class=container><div class=row><div class=col-md-9><section ng-controller=ratingsAndReviewsDemoCtrl id=ratings-and-reviews-html-example><h2>Ratings-And-Reviews Demo</h2><div class=row><div class=col-sm-6><h3>Star Ratings (with reviews & no histogram)</h3><ul class=ratings><li><ul class=rating-stars><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-60></i></li></ul></li><li><a href=javascript:;>200 ratings</a></li><li class=pull-right><a href=javascript:;>Write a review</a></li></ul></div></div><hr><div class=row><div class=col-sm-6><h3>Star Ratings (no reviews & no histogram)</h3><ul class=ratings><li><ul class=rating-stars><li><i class=icon-small-favorite-0></i></li><li><i class=icon-small-favorite-0></i></li><li><i class=icon-small-favorite-0></i></li><li><i class=icon-small-favorite-0></i></li><li><i class=icon-small-favorite-0></i></li></ul></li><li><a href=javascript:;>Write a review</a></li></ul></div></div><hr><div class=row><div class=col-sm-6><h3>Star Ratings (Reviews w/Histogram)</h3><ul class=ratings><li><ul class=rating-stars><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-60></i></li></ul></li><li><a href=javascript:;>200 ratings</a></li><li class=pull-right><a href=javascript:;>Write a review</a></li></ul><p>4.6 out of 5</p><div class=ratings-histogram><div class=row><div class=col-xs-2>5&nbsp;stars</div><div class=col-xs-9><div class=progress><div class=bar style="width: 51%"></div></div></div><div class=col-xs-1>107</div></div><div class=row><div class=col-xs-2>4&nbsp;stars</div><div class=col-xs-9><div class=progress><div class=bar style="width: 25%"></div></div></div><div class=col-xs-1>54</div></div><div class=row><div class=col-xs-2>3&nbsp;stars</div><div class=col-xs-9><div class=progress><div class=bar style="width: 11%"></div></div></div><div class=col-xs-1>23</div></div><div class=row><div class=col-xs-2>2&nbsp;stars</div><div class=col-xs-9><div class=progress><div class=bar style="width: 5%"></div></div></div><div class=col-xs-1>12</div></div><div class=row><div class=col-xs-2>1&nbsp;stars</div><div class=col-xs-9><div class=progress><div class=bar style="width: 5%"></div></div></div><div class=col-xs-1>12</div></div></div></div></div><hr><h3>Recomendation Ratio</h3><p><strong>74</strong> out of <strong>91</strong> (81%) people would recommend this product to a friend.</p><hr><div class=row><div class=col-sm-6><h3>Customer Review Quote</h3><blockquote class=blockquote-unstyled><h3>When I received the XPS 16 I was so surprised at how thin, sharp, and stylish it was.</h3><footer>jevester, September 24, 2009</footer></blockquote></div></div><hr><h3>Customer review example</h3><div class=row><div class=col-sm-5><div><ul class=ratings><li><ul class=rating-stars><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-60></i></li></ul></li><li><a href=javascript:;>200 ratings</a></li><li class=pull-right><a href=javascript:;>Write a review</a></li></ul><ul class=list-unstyled><li><p><span>Features</span> <span class=pull-right>4.4/5</span></p></li><li><p><span>Performance</span> <span class=pull-right>4.6/5</span></p></li><li><p><span>Value</span> <span class=pull-right>5/5</span></p></li><li><p><span>Customer Service</span> <span class=pull-right>3.9/5</span></p></li><li><p><span>Operating System</span> <span class=pull-right>4.1/5</span></p></li></ul></div><div class="panel panel-default"><div class=panel-body><div class=row><div class=col-sm-2><i class=icon-large-useraccount></i></div><div class=col-sm-10><h4><a href=javascript:;>Mark555</a></h4><p>New York, NY</p></div></div><p><i class="icon-small-star text-gray-medium"></i> <a href=javascript:;>Featured review</a><br><i class="icon-small-award text-gray-medium"></i> <a href=javascript:;>Verified buyer</a></p><p><strong>Duration of product use:</strong><br>less than a month</p><p><strong>Level of expertise:</strong><br>Expert</p><p><strong>I use my PC for:</strong><br>Everyday Computing</p><p><strong>Your Lifestyle:</strong><br>Professional</p></div></div></div><div class=col-sm-7><h4>this is an awesome laptop!</h4><p><small>June 4, 2015</small></p><p><i class="icon-sm-checkmark text-blue"></i> <strong>Yes, I would recommend this product</strong></p><p>I\'ve had this dell laptop for 6 months and it is wonderful. Easy to set up and use with windows 8.1. And I\'m not very computer savvy. I used dell support a couple of times but other than that, I did the rest on my own.</p><p>The other day I was using my dell laptop at our kitchen island/breakfast bar and I had it plugged in to charge. My sandal caught the cord when I stood up and the laptop flew up in the air and 5 feet away, and proceeded to smash to the floor. The keyboard fell out as the laptop was in the open position. It landed in an inverted "V".</p><p>Very, very frantic I picked it and the keyboard up. The laptop did not have a scratch on it. My husband re-plugged the ribbon wire for the keyboard and put it back in. <a href=javascript:; class=collapsed data-toggle=collapse data-target=#review-example-more aria-expanded=true><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>show more</span></a></p><div id=review-example-more class=collapse><p>The laptop and keyboard worked. No chips. No cracks at all. It works perfectly.</p><p>This is such a durable laptop. I cannot express the force that this laptop took. When I heard it land...I thought it was broken for sure.</p><p>I would highly recommend it for home or office use. I\'m so glad to have chosen the dell inspiron 5000. <a href=javascript:; data-toggle=collapse data-target=#review-example-more aria-expanded=true><span class=hide-expanded><i aria-hidden=true class=icon-ui-triangleup></i>show less</span></a></p></div><p>Was this review helpful?</p><p><button type=button class="btn btn-default">Yes (74)</button> <button type=button class="btn btn-default">No (6)</button></p><p><a href=javascript:;>Report review</a></p><ul class=list-inline><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Connect with Facebook" class=icon-social-facebook></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Connect with Twitter" class=icon-social-twitter></a></li></ul></div></div><hr></section></div><div id=leftCol class=col-md-3 style="position: relative; top: 35px"><div id=side-bar-menu class=hidden-sx><div id=sidebar-component-parent class=well><h4 class=bottom-offset-0>Variations</h4><ul class="list-unstyled sidebar-component nav"><li class=active><a class=component-item href="#/" data-ga-event-action="" data-ga-event-category=variations1 data-ga-event-trigger=click>Variation 1</a></li><li class=active><a class=component-item href="#/" data-ga-event-action="" data-ga-event-category=variations2 data-ga-event-trigger=click>Variation 2</a></li><li class=active><a class=component-item href="#/" data-ga-event-action="" data-ga-event-category=variations3 data-ga-event-trigger=click>Variation 3</a></li></ul><hr><ul class="list-unstyled variations-list sidebar-component nav tab-links"><li><a class="component-item tab-link" href=#additional-notes data-ga-event-action="link clicked" data-ga-event-category="additional notes" data-ga-event-trigger=click>Additional notes</a></li><li><a class="component-item tab-link" href=#archive-history data-ga-event-action="link clicked" data-ga-event-category="archive history" data-ga-event-trigger=click>Archive history</a></li></ul><hr><div><h4 class=bottom-offset-0>Tags</h4><hr class="top-offset-5 bottom-offset-10"><ul class=list-inline><li><a class="btn btn-default btn-xs bottom-offset-5" href="#/" data-ga-event-action=validate data-ga-event-category=tags data-ga-event-trigger=click>Tag1</a></li><li><a class="btn btn-default btn-xs bottom-offset-5" href="#/" data-ga-event-action=validation data-ga-event-category=tags data-ga-event-trigger=click>Tag2</a></li></ul></div><br><div class="well bold-12"><span class="text-blue icon-small-star"></span> <span>NOTE: This is just for layout and Demo so the left column is laidout correct.</span></div></div></div></div></div></div>');
+    $templateCache.put('components/ratings-and-reviews/demo-ratings-and-reviews.html', '<div class=container><div class=row><div class=col-md-9><section ng-controller=ratingsAndReviewsDemoCtrl id=ratings-and-reviews-html-example><h2>Ratings-And-Reviews Demo</h2><div class=row><div class=col-sm-6><h3>Star Ratings (with reviews & no histogram)</h3><ul class=ratings><li><ul class=rating-stars><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-60></i></li></ul></li><li class=pull-right><a href=javascript:; class=btn-link>200 ratings</a></li><li class=pull-right><a href=javascript:; class=btn-link>Write a review</a></li></ul></div></div><hr><div class=row><div class=col-sm-6><h3>Star Ratings (no reviews & no histogram)</h3><ul class=ratings><li><ul class=rating-stars><li><i class=icon-small-favorite-0></i></li><li><i class=icon-small-favorite-0></i></li><li><i class=icon-small-favorite-0></i></li><li><i class=icon-small-favorite-0></i></li><li><i class=icon-small-favorite-0></i></li></ul></li><li class=pull-right><a href=javascript:; class=btn-link>Write a review</a></li></ul></div></div><hr><div class=row><div class=col-sm-6><h3>Star Ratings (Reviews w/Histogram)</h3><ul class=ratings><li><ul class=rating-stars><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-60></i></li></ul></li><li class=pull-right><a href=javascript:; class=btn-link>200 ratings</a></li><li class=pull-right><a href=javascript:; class=btn-link>Write a review</a></li></ul><p>4.6 out of 5</p><div class=ratings-histogram><div class=row><div class=col-xs-3>5&nbsp;stars</div><div class=col-xs-7><div class=progress><div class=bar style="width: 51%"></div></div></div><div class=col-xs-1>107</div></div><div class=row><div class=col-xs-3>4&nbsp;stars</div><div class=col-xs-7><div class=progress><div class=bar style="width: 25%"></div></div></div><div class=col-xs-1>54</div></div><div class=row><div class=col-xs-3>3&nbsp;stars</div><div class=col-xs-7><div class=progress><div class=bar style="width: 11%"></div></div></div><div class=col-xs-1>23</div></div><div class=row><div class=col-xs-3>2&nbsp;stars</div><div class=col-xs-7><div class=progress><div class=bar style="width: 5%"></div></div></div><div class=col-xs-1>12</div></div><div class=row><div class=col-xs-3>1&nbsp;stars</div><div class=col-xs-7><div class=progress><div class=bar style="width: 5%"></div></div></div><div class=col-xs-1>12</div></div></div></div></div><hr><h3>Recomendation Ratio</h3><p><strong>74</strong> out of <strong>91</strong> (81%) people would recommend this product to a friend.</p><hr><div class=row><div class=col-sm-6><h3>Customer Review Quote</h3><blockquote class=blockquote-unstyled><h3>When I received the XPS 16 I was so surprised at how thin, sharp, and stylish it was.</h3><footer>jevester, September 24, 2009</footer></blockquote></div></div><hr><h3>Customer review example</h3><div class=row><div class=col-sm-5><div><ul class=ratings><li><ul class=rating-stars><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-100></i></li><li><i class=icon-small-favorite-60></i></li></ul></li><li class=pull-right><a href=javascript:; class=btn-link>200 ratings</a></li><li class=pull-right><a href=javascript:; class=btn-link>Write a review</a></li></ul><ul class=list-unstyled><li><p><span>Features</span> <span class=pull-right>4.4/5</span></p></li><li><p><span>Performance</span> <span class=pull-right>4.6/5</span></p></li><li><p><span>Value</span> <span class=pull-right>5/5</span></p></li><li><p><span>Customer Service</span> <span class=pull-right>3.9/5</span></p></li><li><p><span>Operating System</span> <span class=pull-right>4.1/5</span></p></li></ul></div><div class="panel panel-default"><div class=panel-body><div class=row><div class=col-sm-2><i class=icon-large-useraccount></i></div><div class=col-sm-10><h4><a href=javascript:;>Mark555</a></h4><p>New York, NY</p></div></div><p><i class="icon-small-star text-gray-medium"></i> <a href=javascript:; class=btn-link>Featured review</a><br><i class="icon-small-award text-gray-medium"></i> <a href=javascript:; class=btn-link>Verified buyer</a></p><p><strong>Duration of product use:</strong><br>less than a month</p><p><strong>Level of expertise:</strong><br>Expert</p><p><strong>I use my PC for:</strong><br>Everyday Computing</p><p><strong>Your Lifestyle:</strong><br>Professional</p></div></div></div><div class=col-sm-7><h4>this is an awesome laptop!</h4><p><small>June 4, 2015</small></p><p><i class="icon-sm-checkmark text-blue"></i> <strong>Yes, I would recommend this product</strong></p><p>I\'ve had this dell laptop for 6 months and it is wonderful. Easy to set up and use with windows 8.1. And I\'m not very computer savvy. I used dell support a couple of times but other than that, I did the rest on my own.</p><p>The other day I was using my dell laptop at our kitchen island/breakfast bar and I had it plugged in to charge. My sandal caught the cord when I stood up and the laptop flew up in the air and 5 feet away, and proceeded to smash to the floor. The keyboard fell out as the laptop was in the open position. It landed in an inverted "V".</p><p>Very, very frantic I picked it and the keyboard up. The laptop did not have a scratch on it. My husband re-plugged the ribbon wire for the keyboard and put it back in. <a href=javascript:; class=collapsed data-toggle=collapse data-target=#review-example-more aria-expanded=true><span class=show-collapsed><i aria-hidden=true class=icon-ui-triangleright></i>show more</span></a></p><div id=review-example-more class=collapse><p>The laptop and keyboard worked. No chips. No cracks at all. It works perfectly.</p><p>This is such a durable laptop. I cannot express the force that this laptop took. When I heard it land...I thought it was broken for sure.</p><p>I would highly recommend it for home or office use. I\'m so glad to have chosen the dell inspiron 5000. <a href=javascript:; data-toggle=collapse data-target=#review-example-more aria-expanded=true><span class=hide-expanded><i aria-hidden=true class=icon-ui-triangleup></i>show less</span></a></p></div><p>Was this review helpful?</p><p><button type=button class="btn btn-default">Yes (74)</button> <button type=button class="btn btn-default">No (6)</button></p><p><a href=javascript:; class=btn-link>Report review</a></p><ul class=list-inline><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Connect with Facebook" class=icon-social-facebook></a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=top data-original-title="Connect with Twitter" class=icon-social-twitter></a></li></ul></div></div><hr></section></div><div id=leftCol class=col-md-3 style="position: relative; top: 35px"><div id=side-bar-menu class=hidden-sx><div id=sidebar-component-parent class=well><h4 class=bottom-offset-0>Variations</h4><ul class="list-unstyled sidebar-component nav"><li class=active><a class=component-item href="#/" data-ga-event-action="" data-ga-event-category=variations1 data-ga-event-trigger=click>Variation 1</a></li><li class=active><a class=component-item href="#/" data-ga-event-action="" data-ga-event-category=variations2 data-ga-event-trigger=click>Variation 2</a></li><li class=active><a class=component-item href="#/" data-ga-event-action="" data-ga-event-category=variations3 data-ga-event-trigger=click>Variation 3</a></li></ul><hr><ul class="list-unstyled variations-list sidebar-component nav tab-links"><li><a class="component-item tab-link" href=#additional-notes data-ga-event-action="link clicked" data-ga-event-category="additional notes" data-ga-event-trigger=click>Additional notes</a></li><li><a class="component-item tab-link" href=#archive-history data-ga-event-action="link clicked" data-ga-event-category="archive history" data-ga-event-trigger=click>Archive history</a></li></ul><hr><div><h4 class=bottom-offset-0>Tags</h4><hr class="top-offset-5 bottom-offset-10"><ul class=list-inline><li><a class="btn btn-default btn-xs bottom-offset-5" href="#/" data-ga-event-action=validate data-ga-event-category=tags data-ga-event-trigger=click>Tag1</a></li><li><a class="btn btn-default btn-xs bottom-offset-5" href="#/" data-ga-event-action=validation data-ga-event-category=tags data-ga-event-trigger=click>Tag2</a></li></ul></div><br><div class="well bold-12"><span class="text-blue icon-small-star"></span> <span>NOTE: This is just for layout and Demo so the left column is laidout correct.</span></div></div></div></div></div></div>');
     $templateCache.put('components/responsive-utilities/demo-play-responsive-utilities.html', '<section ng-controller=responsiveUtilitiesPLayDemoCtrl id=responsive-utilities-play-demo><div class=container><h2>Responsive-Utilities Builder</h2><div></div></div></section>');
     $templateCache.put('components/responsive-utilities/demo-responsive-utilities.html', '<section ng-controller=responsiveUtilitiesCtrl id=responsive-utilities-html-example><div class=container><h2 class=bottom-offset-30>Responsive-Utilities Demo</h2><div class=bottom-offset-30><h3>Available classes</h3><p>Use a single or combination of the available classes for toggling content across viewport breakpoints.</p><div><table class="table table-bordered table-striped"><thead><tr><th></th><th>Extra small devices<br><small>Phones (&lt;768px)</small></th><th>Small devices<br><small>Tablets (\u2265768px)</small></th><th>Medium devices<br><small>Desktops (\u2265992px)</small></th><th>Large devices<br><small>Desktops (\u22651200px)</small></th></tr></thead><tbody><tr><td><code>.visible-xs-*</code></td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td></tr><tr><td><code>.visible-sm-*</code></td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td></tr><tr><td><code>.visible-md-*</code></td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr><tr><td><code>.visible-lg-*</code></td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr></tbody><tbody><tr><td><code>.hidden-xs</code></td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td></tr><tr><td><code>.hidden-sm</code></td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td></tr><tr><td><code>.hidden-md</code></td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr><tr><td><code>.hidden-lg</code></td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr></tbody></table></div></div><div><h3>Print classes</h3><p>Similar to the regular responsive classes, use these for toggling content for print.</p><div class=table-responsive><table class="table table-bordered table-striped responsive-utilities"><thead><tr><td>Class</td><td>Browser</td><td>Print</td></tr></thead><tbody><tr><td><code>.visible-print</code></td><td class=is-hidden>Hidden</td><td class=is-visible>Visible</td></tr><tr><td><code>.hidden-print</code></td><td class=is-visible>Visible</td><td class=is-hidden>Hidden</td></tr></tbody></table></div></div></div></section>');
     $templateCache.put('components/search-and-navigation/demo-play-search-and-navigation.html', '<section ng-controller=searchAndNavigationPLayDemoCtrl id=search-and-navigation-play-demo><div class=container><h2>Search-And-Navigation Builder</h2><div></div></div></section>');
