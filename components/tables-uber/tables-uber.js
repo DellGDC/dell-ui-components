@@ -409,6 +409,7 @@ angular.module('dellUiComponents')
                         'stateSave': true,
                         'className': 'dt-body-center',
 
+
                         'render': function (data, type, full, meta){
                             return '<input type="checkbox">';
                         }
@@ -590,7 +591,7 @@ angular.module('dellUiComponents')
                 $element.find('tbody').on('click', 'td.details-control', function () {
                     var tr = $(this).closest('tr');
                     var row = table.row( tr );
-                    //var format = format;
+                    var format = format;
 
                     if ( row.child.isShown() ) {
                         // This row is already open - close it

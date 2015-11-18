@@ -650,34 +650,30 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
     padding-left: 10px;
     cursor: pointer;
 }
+
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-    top: 0px;
-    left: 2px;
-    height: 16px;
-    width: 16px;
-    display: block;
-    position: relative;
-    font-family: 'FontAwesome';
-    content: '\f0de';
+    content: "\e610";
     color: #007db8;
-    //border: 2px solid white;
-    //border-radius: 16px;
-    text-align: center;
-    line-height: 14px;
-    //box-shadow: 0 0 3px #444;
-    box-sizing: content-box;
-    padding-left: 2px;
-    padding-bottom: 15px;
-    //background-color: #31b131;
+    padding: 0 3px 0 0;
+    position: relative;
+    top: 0;
+    right: 0;
+    display: block;
+    font-family: icon-ui;
+    opacity: 0.8;
+    background: none !important;
+    float: left;
 }
+
+
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child.dataTables_empty:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_empty:before {
     display: none;
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
-    content: "\f0dd";;
+    content: "\e60e";
     color: #007db8;
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr.child td:before {
@@ -733,7 +729,7 @@ table.dataTable > tbody > tr.child:hover {
     background: transparent !important;
 }
 table.dataTable > tbody > tr.child ul {
-    display: inline-block;
+    display: block;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -750,8 +746,10 @@ table.dataTable > tbody > tr.child ul li:last-child {
 }
 table.dataTable > tbody > tr.child span.dtr-title {
     display: inline-block;
-    min-width: 75px;
-    font-weight: bold;
+    color: #737373!important;
+    font-size: 85%
+    //min-width: 75px;
+    //font-weight: bold;
 }
 
 // ================= Code for the Responsive Simple Table =====================

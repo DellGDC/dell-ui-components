@@ -23,11 +23,26 @@
                 </table>
             </div>
 
-            <h3 class="bottom-offset-5 top-offset-60">
+            <h3 class="bottom-offset-20 top-offset-60">
                 Data Tables - Responsive Collapsing Column
             </h3>
 
             <div class="bottom-offset-60">
+                <form class="form-compressed" role="form">
+                    <div class="row">
+                        <div class="form-group col-xs-12 col-sm-6">
+                            <label for="select01" class="col-xs-6 form-label">Filter by status</label>
+                            <select class="form-control col-xs-6" id="select01">
+                                <option disabled selected> Filter by status </option>
+                                <option> open </option>
+                                <option> waiting on response </option>
+                                <option> pending approval </option>
+                                <option> closed </option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+
                 <table id="table-uber" class="table table-striped table-hover table-responsive-columns table-pagination table-editable">
                     <thead>
                     <tr>

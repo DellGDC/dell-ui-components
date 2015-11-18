@@ -41,7 +41,6 @@ table .table-responsive-columns {
 
 }
 
-
 div.dataTables_wrapper > div.row > div,
 div.dataTables_length,
 div.dataTables_filter,
@@ -51,11 +50,13 @@ div.dataTables_paginate {
 }
 
 
-
-// input placement
-//.hide-text {
-//    text-indent: -9999px;
-//}
+// search glyph-icon
+div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
+    right: 24px;
+    top: 8px;
+    position: relative;
+    z-index: 20;
+}
 
 
 @media (max-width: @screen-xs-max) {
@@ -72,8 +73,8 @@ div.dataTables_paginate {
 
         i.icon-small-magnifying-glass.text-blue {
             float: right;
-            right: 10px;
-            top: 24px;
+            right: 15px;
+            top: 25px;
             position: relative;
             z-index: 20;
         }
@@ -100,8 +101,6 @@ div.dataTables_paginate {
         padding-left: 10px;
         text-align: center !important;
         float: none;
-        //margin-left: auto;
-        //margin-right: auto;
     }
 
     div.dataTables_wrapper > div.row > div,
@@ -124,13 +123,12 @@ input.form-control.input-sm.col-xs-12.col-sm-4 {
     padding-top: 3px;
 }
 
-// search glyph-icon
-div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
-    right: 24px;
-    top: 8px;
-    position: relative;
-    z-index: 20;
+th.dt-body-center input[type="checkbox"] {
+    margin-left: 24px;
 }
+
+
+
 
 
 
