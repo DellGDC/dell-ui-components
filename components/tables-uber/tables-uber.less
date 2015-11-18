@@ -50,7 +50,31 @@ div.dataTables_paginate {
 }
 
 
-// search glyph-icon
+.dt-form-inline {
+    .form-control {
+        display: inline-block;
+        width: auto !important;
+        vertical-align: top;
+        margin-right: 10px;
+        height: 30px;
+        line-height: 30px;
+        padding: 3px 5px;
+    }
+    .form-group {
+        float: left;
+        margin-top: 5px;
+    }
+    .control-label {
+        margin-bottom: 0;
+        vertical-align: middle;
+        text-align: left;
+        float: left;
+        width: auto;
+        padding: 9px 5px 9px 0;
+    }
+}
+
+    // search glyph-icon
 div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
     right: 24px;
     top: 8px;
@@ -66,7 +90,7 @@ div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
             white-space: nowrap;
             text-align: left;
             padding: 10px 0 10px 0;
-            float: right;
+            float: left;
             width: 100%;
             margin-top: -20px;
         }
