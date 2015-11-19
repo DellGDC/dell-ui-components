@@ -450,12 +450,12 @@ angular.module('dellUiComponents')
                             "sClass":"editable"
                         },
                         {
-                            "data": "Reference_number",
+                            "data": "Quote_number",
                             "sClass":"editable"
                         },
                         {
-                            "data": "Quote_number",
-                            "sClass":"editable"
+                            "data": "Status",
+                            "sClass":""
                         }
                     ],
                     'order': [1, 'asc'],
@@ -562,6 +562,8 @@ angular.module('dellUiComponents')
                     $timeout(function(){
                         //console.log("editable table here");
                         $element.find('td.editable').attr("contenteditable",true);
+                        $element.find('td.editable .btn').attr("contenteditable",false);
+
                         $element.find('td.editable').on('blur',function(e){
                             var newData = $(e.currentTarget).text(), data = inputTable.cell( this ).data();
                             if(data !== newData) {
