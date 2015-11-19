@@ -409,7 +409,6 @@ angular.module('dellUiComponents')
                         'stateSave': true,
                         'className': 'dt-body-center',
 
-
                         'render': function (data, type, full, meta){
                             return '<input type="checkbox">';
                         }
@@ -459,7 +458,11 @@ angular.module('dellUiComponents')
                         }
                     ],
                     'order': [1, 'asc'],
-                    "dom": 'C<"clear">lfrtip',
+                    //cant have column visibility if you have column re-order
+                    //"dom": 'C<"clear">lfrtip',
+
+                    //column reorder
+                    dom: 'Rlfrtip',
                     'pagingType': "simple",
                     'language': {
                         'paginate': {
