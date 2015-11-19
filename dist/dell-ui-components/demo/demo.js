@@ -44037,6 +44037,2326 @@ if (!console) {
     return this;
   };
 }(jQuery));
+//! moment.js
+//! version : 2.10.6
+//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
+//! license : MIT
+//! momentjs.com
+!function (a, b) {
+  'object' == typeof exports && 'undefined' != typeof module ? module.exports = b() : 'function' == typeof define && define.amd ? define(b) : a.moment = b();
+}(this, function () {
+  'use strict';
+  function a() {
+    return Hc.apply(null, arguments);
+  }
+  function b(a) {
+    Hc = a;
+  }
+  function c(a) {
+    return '[object Array]' === Object.prototype.toString.call(a);
+  }
+  function d(a) {
+    return a instanceof Date || '[object Date]' === Object.prototype.toString.call(a);
+  }
+  function e(a, b) {
+    var c, d = [];
+    for (c = 0; c < a.length; ++c)
+      d.push(b(a[c], c));
+    return d;
+  }
+  function f(a, b) {
+    return Object.prototype.hasOwnProperty.call(a, b);
+  }
+  function g(a, b) {
+    for (var c in b)
+      f(b, c) && (a[c] = b[c]);
+    return f(b, 'toString') && (a.toString = b.toString), f(b, 'valueOf') && (a.valueOf = b.valueOf), a;
+  }
+  function h(a, b, c, d) {
+    return Ca(a, b, c, d, !0).utc();
+  }
+  function i() {
+    return {
+      empty: !1,
+      unusedTokens: [],
+      unusedInput: [],
+      overflow: -2,
+      charsLeftOver: 0,
+      nullInput: !1,
+      invalidMonth: null,
+      invalidFormat: !1,
+      userInvalidated: !1,
+      iso: !1
+    };
+  }
+  function j(a) {
+    return null == a._pf && (a._pf = i()), a._pf;
+  }
+  function k(a) {
+    if (null == a._isValid) {
+      var b = j(a);
+      a._isValid = !(isNaN(a._d.getTime()) || !(b.overflow < 0) || b.empty || b.invalidMonth || b.invalidWeekday || b.nullInput || b.invalidFormat || b.userInvalidated), a._strict && (a._isValid = a._isValid && 0 === b.charsLeftOver && 0 === b.unusedTokens.length && void 0 === b.bigHour);
+    }
+    return a._isValid;
+  }
+  function l(a) {
+    var b = h(NaN);
+    return null != a ? g(j(b), a) : j(b).userInvalidated = !0, b;
+  }
+  function m(a, b) {
+    var c, d, e;
+    if ('undefined' != typeof b._isAMomentObject && (a._isAMomentObject = b._isAMomentObject), 'undefined' != typeof b._i && (a._i = b._i), 'undefined' != typeof b._f && (a._f = b._f), 'undefined' != typeof b._l && (a._l = b._l), 'undefined' != typeof b._strict && (a._strict = b._strict), 'undefined' != typeof b._tzm && (a._tzm = b._tzm), 'undefined' != typeof b._isUTC && (a._isUTC = b._isUTC), 'undefined' != typeof b._offset && (a._offset = b._offset), 'undefined' != typeof b._pf && (a._pf = j(b)), 'undefined' != typeof b._locale && (a._locale = b._locale), Jc.length > 0)
+      for (c in Jc)
+        d = Jc[c], e = b[d], 'undefined' != typeof e && (a[d] = e);
+    return a;
+  }
+  function n(b) {
+    m(this, b), this._d = new Date(null != b._d ? b._d.getTime() : NaN), Kc === !1 && (Kc = !0, a.updateOffset(this), Kc = !1);
+  }
+  function o(a) {
+    return a instanceof n || null != a && null != a._isAMomentObject;
+  }
+  function p(a) {
+    return 0 > a ? Math.ceil(a) : Math.floor(a);
+  }
+  function q(a) {
+    var b = +a, c = 0;
+    return 0 !== b && isFinite(b) && (c = p(b)), c;
+  }
+  function r(a, b, c) {
+    var d, e = Math.min(a.length, b.length), f = Math.abs(a.length - b.length), g = 0;
+    for (d = 0; e > d; d++)
+      (c && a[d] !== b[d] || !c && q(a[d]) !== q(b[d])) && g++;
+    return g + f;
+  }
+  function s() {
+  }
+  function t(a) {
+    return a ? a.toLowerCase().replace('_', '-') : a;
+  }
+  function u(a) {
+    for (var b, c, d, e, f = 0; f < a.length;) {
+      for (e = t(a[f]).split('-'), b = e.length, c = t(a[f + 1]), c = c ? c.split('-') : null; b > 0;) {
+        if (d = v(e.slice(0, b).join('-')))
+          return d;
+        if (c && c.length >= b && r(e, c, !0) >= b - 1)
+          break;
+        b--;
+      }
+      f++;
+    }
+    return null;
+  }
+  function v(a) {
+    var b = null;
+    if (!Lc[a] && 'undefined' != typeof module && module && module.exports)
+      try {
+        b = Ic._abbr, require('./locale/' + a), w(b);
+      } catch (c) {
+      }
+    return Lc[a];
+  }
+  function w(a, b) {
+    var c;
+    return a && (c = 'undefined' == typeof b ? y(a) : x(a, b), c && (Ic = c)), Ic._abbr;
+  }
+  function x(a, b) {
+    return null !== b ? (b.abbr = a, Lc[a] = Lc[a] || new s(), Lc[a].set(b), w(a), Lc[a]) : (delete Lc[a], null);
+  }
+  function y(a) {
+    var b;
+    if (a && a._locale && a._locale._abbr && (a = a._locale._abbr), !a)
+      return Ic;
+    if (!c(a)) {
+      if (b = v(a))
+        return b;
+      a = [a];
+    }
+    return u(a);
+  }
+  function z(a, b) {
+    var c = a.toLowerCase();
+    Mc[c] = Mc[c + 's'] = Mc[b] = a;
+  }
+  function A(a) {
+    return 'string' == typeof a ? Mc[a] || Mc[a.toLowerCase()] : void 0;
+  }
+  function B(a) {
+    var b, c, d = {};
+    for (c in a)
+      f(a, c) && (b = A(c), b && (d[b] = a[c]));
+    return d;
+  }
+  function C(b, c) {
+    return function (d) {
+      return null != d ? (E(this, b, d), a.updateOffset(this, c), this) : D(this, b);
+    };
+  }
+  function D(a, b) {
+    return a._d['get' + (a._isUTC ? 'UTC' : '') + b]();
+  }
+  function E(a, b, c) {
+    return a._d['set' + (a._isUTC ? 'UTC' : '') + b](c);
+  }
+  function F(a, b) {
+    var c;
+    if ('object' == typeof a)
+      for (c in a)
+        this.set(c, a[c]);
+    else if (a = A(a), 'function' == typeof this[a])
+      return this[a](b);
+    return this;
+  }
+  function G(a, b, c) {
+    var d = '' + Math.abs(a), e = b - d.length, f = a >= 0;
+    return (f ? c ? '+' : '' : '-') + Math.pow(10, Math.max(0, e)).toString().substr(1) + d;
+  }
+  function H(a, b, c, d) {
+    var e = d;
+    'string' == typeof d && (e = function () {
+      return this[d]();
+    }), a && (Qc[a] = e), b && (Qc[b[0]] = function () {
+      return G(e.apply(this, arguments), b[1], b[2]);
+    }), c && (Qc[c] = function () {
+      return this.localeData().ordinal(e.apply(this, arguments), a);
+    });
+  }
+  function I(a) {
+    return a.match(/\[[\s\S]/) ? a.replace(/^\[|\]$/g, '') : a.replace(/\\/g, '');
+  }
+  function J(a) {
+    var b, c, d = a.match(Nc);
+    for (b = 0, c = d.length; c > b; b++)
+      Qc[d[b]] ? d[b] = Qc[d[b]] : d[b] = I(d[b]);
+    return function (e) {
+      var f = '';
+      for (b = 0; c > b; b++)
+        f += d[b] instanceof Function ? d[b].call(e, a) : d[b];
+      return f;
+    };
+  }
+  function K(a, b) {
+    return a.isValid() ? (b = L(b, a.localeData()), Pc[b] = Pc[b] || J(b), Pc[b](a)) : a.localeData().invalidDate();
+  }
+  function L(a, b) {
+    function c(a) {
+      return b.longDateFormat(a) || a;
+    }
+    var d = 5;
+    for (Oc.lastIndex = 0; d >= 0 && Oc.test(a);)
+      a = a.replace(Oc, c), Oc.lastIndex = 0, d -= 1;
+    return a;
+  }
+  function M(a) {
+    return 'function' == typeof a && '[object Function]' === Object.prototype.toString.call(a);
+  }
+  function N(a, b, c) {
+    dd[a] = M(b) ? b : function (a) {
+      return a && c ? c : b;
+    };
+  }
+  function O(a, b) {
+    return f(dd, a) ? dd[a](b._strict, b._locale) : new RegExp(P(a));
+  }
+  function P(a) {
+    return a.replace('\\', '').replace(/\\(\[)|\\(\])|\[([^\]\[]*)\]|\\(.)/g, function (a, b, c, d, e) {
+      return b || c || d || e;
+    }).replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+  }
+  function Q(a, b) {
+    var c, d = b;
+    for ('string' == typeof a && (a = [a]), 'number' == typeof b && (d = function (a, c) {
+        c[b] = q(a);
+      }), c = 0; c < a.length; c++)
+      ed[a[c]] = d;
+  }
+  function R(a, b) {
+    Q(a, function (a, c, d, e) {
+      d._w = d._w || {}, b(a, d._w, d, e);
+    });
+  }
+  function S(a, b, c) {
+    null != b && f(ed, a) && ed[a](b, c._a, c, a);
+  }
+  function T(a, b) {
+    return new Date(Date.UTC(a, b + 1, 0)).getUTCDate();
+  }
+  function U(a) {
+    return this._months[a.month()];
+  }
+  function V(a) {
+    return this._monthsShort[a.month()];
+  }
+  function W(a, b, c) {
+    var d, e, f;
+    for (this._monthsParse || (this._monthsParse = [], this._longMonthsParse = [], this._shortMonthsParse = []), d = 0; 12 > d; d++) {
+      if (e = h([
+          2000,
+          d
+        ]), c && !this._longMonthsParse[d] && (this._longMonthsParse[d] = new RegExp('^' + this.months(e, '').replace('.', '') + '$', 'i'), this._shortMonthsParse[d] = new RegExp('^' + this.monthsShort(e, '').replace('.', '') + '$', 'i')), c || this._monthsParse[d] || (f = '^' + this.months(e, '') + '|^' + this.monthsShort(e, ''), this._monthsParse[d] = new RegExp(f.replace('.', ''), 'i')), c && 'MMMM' === b && this._longMonthsParse[d].test(a))
+        return d;
+      if (c && 'MMM' === b && this._shortMonthsParse[d].test(a))
+        return d;
+      if (!c && this._monthsParse[d].test(a))
+        return d;
+    }
+  }
+  function X(a, b) {
+    var c;
+    return 'string' == typeof b && (b = a.localeData().monthsParse(b), 'number' != typeof b) ? a : (c = Math.min(a.date(), T(a.year(), b)), a._d['set' + (a._isUTC ? 'UTC' : '') + 'Month'](b, c), a);
+  }
+  function Y(b) {
+    return null != b ? (X(this, b), a.updateOffset(this, !0), this) : D(this, 'Month');
+  }
+  function Z() {
+    return T(this.year(), this.month());
+  }
+  function $(a) {
+    var b, c = a._a;
+    return c && -2 === j(a).overflow && (b = c[gd] < 0 || c[gd] > 11 ? gd : c[hd] < 1 || c[hd] > T(c[fd], c[gd]) ? hd : c[id] < 0 || c[id] > 24 || 24 === c[id] && (0 !== c[jd] || 0 !== c[kd] || 0 !== c[ld]) ? id : c[jd] < 0 || c[jd] > 59 ? jd : c[kd] < 0 || c[kd] > 59 ? kd : c[ld] < 0 || c[ld] > 999 ? ld : -1, j(a)._overflowDayOfYear && (fd > b || b > hd) && (b = hd), j(a).overflow = b), a;
+  }
+  function _(b) {
+    a.suppressDeprecationWarnings === !1 && 'undefined' != typeof console && console.warn && console.warn('Deprecation warning: ' + b);
+  }
+  function aa(a, b) {
+    var c = !0;
+    return g(function () {
+      return c && (_(a + '\n' + new Error().stack), c = !1), b.apply(this, arguments);
+    }, b);
+  }
+  function ba(a, b) {
+    od[a] || (_(b), od[a] = !0);
+  }
+  function ca(a) {
+    var b, c, d = a._i, e = pd.exec(d);
+    if (e) {
+      for (j(a).iso = !0, b = 0, c = qd.length; c > b; b++)
+        if (qd[b][1].exec(d)) {
+          a._f = qd[b][0];
+          break;
+        }
+      for (b = 0, c = rd.length; c > b; b++)
+        if (rd[b][1].exec(d)) {
+          a._f += (e[6] || ' ') + rd[b][0];
+          break;
+        }
+      d.match(ad) && (a._f += 'Z'), va(a);
+    } else
+      a._isValid = !1;
+  }
+  function da(b) {
+    var c = sd.exec(b._i);
+    return null !== c ? void (b._d = new Date(+c[1])) : (ca(b), void (b._isValid === !1 && (delete b._isValid, a.createFromInputFallback(b))));
+  }
+  function ea(a, b, c, d, e, f, g) {
+    var h = new Date(a, b, c, d, e, f, g);
+    return 1970 > a && h.setFullYear(a), h;
+  }
+  function fa(a) {
+    var b = new Date(Date.UTC.apply(null, arguments));
+    return 1970 > a && b.setUTCFullYear(a), b;
+  }
+  function ga(a) {
+    return ha(a) ? 366 : 365;
+  }
+  function ha(a) {
+    return a % 4 === 0 && a % 100 !== 0 || a % 400 === 0;
+  }
+  function ia() {
+    return ha(this.year());
+  }
+  function ja(a, b, c) {
+    var d, e = c - b, f = c - a.day();
+    return f > e && (f -= 7), e - 7 > f && (f += 7), d = Da(a).add(f, 'd'), {
+      week: Math.ceil(d.dayOfYear() / 7),
+      year: d.year()
+    };
+  }
+  function ka(a) {
+    return ja(a, this._week.dow, this._week.doy).week;
+  }
+  function la() {
+    return this._week.dow;
+  }
+  function ma() {
+    return this._week.doy;
+  }
+  function na(a) {
+    var b = this.localeData().week(this);
+    return null == a ? b : this.add(7 * (a - b), 'd');
+  }
+  function oa(a) {
+    var b = ja(this, 1, 4).week;
+    return null == a ? b : this.add(7 * (a - b), 'd');
+  }
+  function pa(a, b, c, d, e) {
+    var f, g = 6 + e - d, h = fa(a, 0, 1 + g), i = h.getUTCDay();
+    return e > i && (i += 7), c = null != c ? 1 * c : e, f = 1 + g + 7 * (b - 1) - i + c, {
+      year: f > 0 ? a : a - 1,
+      dayOfYear: f > 0 ? f : ga(a - 1) + f
+    };
+  }
+  function qa(a) {
+    var b = Math.round((this.clone().startOf('day') - this.clone().startOf('year')) / 86400000) + 1;
+    return null == a ? b : this.add(a - b, 'd');
+  }
+  function ra(a, b, c) {
+    return null != a ? a : null != b ? b : c;
+  }
+  function sa(a) {
+    var b = new Date();
+    return a._useUTC ? [
+      b.getUTCFullYear(),
+      b.getUTCMonth(),
+      b.getUTCDate()
+    ] : [
+      b.getFullYear(),
+      b.getMonth(),
+      b.getDate()
+    ];
+  }
+  function ta(a) {
+    var b, c, d, e, f = [];
+    if (!a._d) {
+      for (d = sa(a), a._w && null == a._a[hd] && null == a._a[gd] && ua(a), a._dayOfYear && (e = ra(a._a[fd], d[fd]), a._dayOfYear > ga(e) && (j(a)._overflowDayOfYear = !0), c = fa(e, 0, a._dayOfYear), a._a[gd] = c.getUTCMonth(), a._a[hd] = c.getUTCDate()), b = 0; 3 > b && null == a._a[b]; ++b)
+        a._a[b] = f[b] = d[b];
+      for (; 7 > b; b++)
+        a._a[b] = f[b] = null == a._a[b] ? 2 === b ? 1 : 0 : a._a[b];
+      24 === a._a[id] && 0 === a._a[jd] && 0 === a._a[kd] && 0 === a._a[ld] && (a._nextDay = !0, a._a[id] = 0), a._d = (a._useUTC ? fa : ea).apply(null, f), null != a._tzm && a._d.setUTCMinutes(a._d.getUTCMinutes() - a._tzm), a._nextDay && (a._a[id] = 24);
+    }
+  }
+  function ua(a) {
+    var b, c, d, e, f, g, h;
+    b = a._w, null != b.GG || null != b.W || null != b.E ? (f = 1, g = 4, c = ra(b.GG, a._a[fd], ja(Da(), 1, 4).year), d = ra(b.W, 1), e = ra(b.E, 1)) : (f = a._locale._week.dow, g = a._locale._week.doy, c = ra(b.gg, a._a[fd], ja(Da(), f, g).year), d = ra(b.w, 1), null != b.d ? (e = b.d, f > e && ++d) : e = null != b.e ? b.e + f : f), h = pa(c, d, e, g, f), a._a[fd] = h.year, a._dayOfYear = h.dayOfYear;
+  }
+  function va(b) {
+    if (b._f === a.ISO_8601)
+      return void ca(b);
+    b._a = [], j(b).empty = !0;
+    var c, d, e, f, g, h = '' + b._i, i = h.length, k = 0;
+    for (e = L(b._f, b._locale).match(Nc) || [], c = 0; c < e.length; c++)
+      f = e[c], d = (h.match(O(f, b)) || [])[0], d && (g = h.substr(0, h.indexOf(d)), g.length > 0 && j(b).unusedInput.push(g), h = h.slice(h.indexOf(d) + d.length), k += d.length), Qc[f] ? (d ? j(b).empty = !1 : j(b).unusedTokens.push(f), S(f, d, b)) : b._strict && !d && j(b).unusedTokens.push(f);
+    j(b).charsLeftOver = i - k, h.length > 0 && j(b).unusedInput.push(h), j(b).bigHour === !0 && b._a[id] <= 12 && b._a[id] > 0 && (j(b).bigHour = void 0), b._a[id] = wa(b._locale, b._a[id], b._meridiem), ta(b), $(b);
+  }
+  function wa(a, b, c) {
+    var d;
+    return null == c ? b : null != a.meridiemHour ? a.meridiemHour(b, c) : null != a.isPM ? (d = a.isPM(c), d && 12 > b && (b += 12), d || 12 !== b || (b = 0), b) : b;
+  }
+  function xa(a) {
+    var b, c, d, e, f;
+    if (0 === a._f.length)
+      return j(a).invalidFormat = !0, void (a._d = new Date(NaN));
+    for (e = 0; e < a._f.length; e++)
+      f = 0, b = m({}, a), null != a._useUTC && (b._useUTC = a._useUTC), b._f = a._f[e], va(b), k(b) && (f += j(b).charsLeftOver, f += 10 * j(b).unusedTokens.length, j(b).score = f, (null == d || d > f) && (d = f, c = b));
+    g(a, c || b);
+  }
+  function ya(a) {
+    if (!a._d) {
+      var b = B(a._i);
+      a._a = [
+        b.year,
+        b.month,
+        b.day || b.date,
+        b.hour,
+        b.minute,
+        b.second,
+        b.millisecond
+      ], ta(a);
+    }
+  }
+  function za(a) {
+    var b = new n($(Aa(a)));
+    return b._nextDay && (b.add(1, 'd'), b._nextDay = void 0), b;
+  }
+  function Aa(a) {
+    var b = a._i, e = a._f;
+    return a._locale = a._locale || y(a._l), null === b || void 0 === e && '' === b ? l({ nullInput: !0 }) : ('string' == typeof b && (a._i = b = a._locale.preparse(b)), o(b) ? new n($(b)) : (c(e) ? xa(a) : e ? va(a) : d(b) ? a._d = b : Ba(a), a));
+  }
+  function Ba(b) {
+    var f = b._i;
+    void 0 === f ? b._d = new Date() : d(f) ? b._d = new Date(+f) : 'string' == typeof f ? da(b) : c(f) ? (b._a = e(f.slice(0), function (a) {
+      return parseInt(a, 10);
+    }), ta(b)) : 'object' == typeof f ? ya(b) : 'number' == typeof f ? b._d = new Date(f) : a.createFromInputFallback(b);
+  }
+  function Ca(a, b, c, d, e) {
+    var f = {};
+    return 'boolean' == typeof c && (d = c, c = void 0), f._isAMomentObject = !0, f._useUTC = f._isUTC = e, f._l = c, f._i = a, f._f = b, f._strict = d, za(f);
+  }
+  function Da(a, b, c, d) {
+    return Ca(a, b, c, d, !1);
+  }
+  function Ea(a, b) {
+    var d, e;
+    if (1 === b.length && c(b[0]) && (b = b[0]), !b.length)
+      return Da();
+    for (d = b[0], e = 1; e < b.length; ++e)
+      (!b[e].isValid() || b[e][a](d)) && (d = b[e]);
+    return d;
+  }
+  function Fa() {
+    var a = [].slice.call(arguments, 0);
+    return Ea('isBefore', a);
+  }
+  function Ga() {
+    var a = [].slice.call(arguments, 0);
+    return Ea('isAfter', a);
+  }
+  function Ha(a) {
+    var b = B(a), c = b.year || 0, d = b.quarter || 0, e = b.month || 0, f = b.week || 0, g = b.day || 0, h = b.hour || 0, i = b.minute || 0, j = b.second || 0, k = b.millisecond || 0;
+    this._milliseconds = +k + 1000 * j + 60000 * i + 3600000 * h, this._days = +g + 7 * f, this._months = +e + 3 * d + 12 * c, this._data = {}, this._locale = y(), this._bubble();
+  }
+  function Ia(a) {
+    return a instanceof Ha;
+  }
+  function Ja(a, b) {
+    H(a, 0, 0, function () {
+      var a = this.utcOffset(), c = '+';
+      return 0 > a && (a = -a, c = '-'), c + G(~~(a / 60), 2) + b + G(~~a % 60, 2);
+    });
+  }
+  function Ka(a) {
+    var b = (a || '').match(ad) || [], c = b[b.length - 1] || [], d = (c + '').match(xd) || [
+        '-',
+        0,
+        0
+      ], e = +(60 * d[1]) + q(d[2]);
+    return '+' === d[0] ? e : -e;
+  }
+  function La(b, c) {
+    var e, f;
+    return c._isUTC ? (e = c.clone(), f = (o(b) || d(b) ? +b : +Da(b)) - +e, e._d.setTime(+e._d + f), a.updateOffset(e, !1), e) : Da(b).local();
+  }
+  function Ma(a) {
+    return 15 * -Math.round(a._d.getTimezoneOffset() / 15);
+  }
+  function Na(b, c) {
+    var d, e = this._offset || 0;
+    return null != b ? ('string' == typeof b && (b = Ka(b)), Math.abs(b) < 16 && (b = 60 * b), !this._isUTC && c && (d = Ma(this)), this._offset = b, this._isUTC = !0, null != d && this.add(d, 'm'), e !== b && (!c || this._changeInProgress ? bb(this, Ya(b - e, 'm'), 1, !1) : this._changeInProgress || (this._changeInProgress = !0, a.updateOffset(this, !0), this._changeInProgress = null)), this) : this._isUTC ? e : Ma(this);
+  }
+  function Oa(a, b) {
+    return null != a ? ('string' != typeof a && (a = -a), this.utcOffset(a, b), this) : -this.utcOffset();
+  }
+  function Pa(a) {
+    return this.utcOffset(0, a);
+  }
+  function Qa(a) {
+    return this._isUTC && (this.utcOffset(0, a), this._isUTC = !1, a && this.subtract(Ma(this), 'm')), this;
+  }
+  function Ra() {
+    return this._tzm ? this.utcOffset(this._tzm) : 'string' == typeof this._i && this.utcOffset(Ka(this._i)), this;
+  }
+  function Sa(a) {
+    return a = a ? Da(a).utcOffset() : 0, (this.utcOffset() - a) % 60 === 0;
+  }
+  function Ta() {
+    return this.utcOffset() > this.clone().month(0).utcOffset() || this.utcOffset() > this.clone().month(5).utcOffset();
+  }
+  function Ua() {
+    if ('undefined' != typeof this._isDSTShifted)
+      return this._isDSTShifted;
+    var a = {};
+    if (m(a, this), a = Aa(a), a._a) {
+      var b = a._isUTC ? h(a._a) : Da(a._a);
+      this._isDSTShifted = this.isValid() && r(a._a, b.toArray()) > 0;
+    } else
+      this._isDSTShifted = !1;
+    return this._isDSTShifted;
+  }
+  function Va() {
+    return !this._isUTC;
+  }
+  function Wa() {
+    return this._isUTC;
+  }
+  function Xa() {
+    return this._isUTC && 0 === this._offset;
+  }
+  function Ya(a, b) {
+    var c, d, e, g = a, h = null;
+    return Ia(a) ? g = {
+      ms: a._milliseconds,
+      d: a._days,
+      M: a._months
+    } : 'number' == typeof a ? (g = {}, b ? g[b] = a : g.milliseconds = a) : (h = yd.exec(a)) ? (c = '-' === h[1] ? -1 : 1, g = {
+      y: 0,
+      d: q(h[hd]) * c,
+      h: q(h[id]) * c,
+      m: q(h[jd]) * c,
+      s: q(h[kd]) * c,
+      ms: q(h[ld]) * c
+    }) : (h = zd.exec(a)) ? (c = '-' === h[1] ? -1 : 1, g = {
+      y: Za(h[2], c),
+      M: Za(h[3], c),
+      d: Za(h[4], c),
+      h: Za(h[5], c),
+      m: Za(h[6], c),
+      s: Za(h[7], c),
+      w: Za(h[8], c)
+    }) : null == g ? g = {} : 'object' == typeof g && ('from' in g || 'to' in g) && (e = _a(Da(g.from), Da(g.to)), g = {}, g.ms = e.milliseconds, g.M = e.months), d = new Ha(g), Ia(a) && f(a, '_locale') && (d._locale = a._locale), d;
+  }
+  function Za(a, b) {
+    var c = a && parseFloat(a.replace(',', '.'));
+    return (isNaN(c) ? 0 : c) * b;
+  }
+  function $a(a, b) {
+    var c = {
+        milliseconds: 0,
+        months: 0
+      };
+    return c.months = b.month() - a.month() + 12 * (b.year() - a.year()), a.clone().add(c.months, 'M').isAfter(b) && --c.months, c.milliseconds = +b - +a.clone().add(c.months, 'M'), c;
+  }
+  function _a(a, b) {
+    var c;
+    return b = La(b, a), a.isBefore(b) ? c = $a(a, b) : (c = $a(b, a), c.milliseconds = -c.milliseconds, c.months = -c.months), c;
+  }
+  function ab(a, b) {
+    return function (c, d) {
+      var e, f;
+      return null === d || isNaN(+d) || (ba(b, 'moment().' + b + '(period, number) is deprecated. Please use moment().' + b + '(number, period).'), f = c, c = d, d = f), c = 'string' == typeof c ? +c : c, e = Ya(c, d), bb(this, e, a), this;
+    };
+  }
+  function bb(b, c, d, e) {
+    var f = c._milliseconds, g = c._days, h = c._months;
+    e = null == e ? !0 : e, f && b._d.setTime(+b._d + f * d), g && E(b, 'Date', D(b, 'Date') + g * d), h && X(b, D(b, 'Month') + h * d), e && a.updateOffset(b, g || h);
+  }
+  function cb(a, b) {
+    var c = a || Da(), d = La(c, this).startOf('day'), e = this.diff(d, 'days', !0), f = -6 > e ? 'sameElse' : -1 > e ? 'lastWeek' : 0 > e ? 'lastDay' : 1 > e ? 'sameDay' : 2 > e ? 'nextDay' : 7 > e ? 'nextWeek' : 'sameElse';
+    return this.format(b && b[f] || this.localeData().calendar(f, this, Da(c)));
+  }
+  function db() {
+    return new n(this);
+  }
+  function eb(a, b) {
+    var c;
+    return b = A('undefined' != typeof b ? b : 'millisecond'), 'millisecond' === b ? (a = o(a) ? a : Da(a), +this > +a) : (c = o(a) ? +a : +Da(a), c < +this.clone().startOf(b));
+  }
+  function fb(a, b) {
+    var c;
+    return b = A('undefined' != typeof b ? b : 'millisecond'), 'millisecond' === b ? (a = o(a) ? a : Da(a), +a > +this) : (c = o(a) ? +a : +Da(a), +this.clone().endOf(b) < c);
+  }
+  function gb(a, b, c) {
+    return this.isAfter(a, c) && this.isBefore(b, c);
+  }
+  function hb(a, b) {
+    var c;
+    return b = A(b || 'millisecond'), 'millisecond' === b ? (a = o(a) ? a : Da(a), +this === +a) : (c = +Da(a), +this.clone().startOf(b) <= c && c <= +this.clone().endOf(b));
+  }
+  function ib(a, b, c) {
+    var d, e, f = La(a, this), g = 60000 * (f.utcOffset() - this.utcOffset());
+    return b = A(b), 'year' === b || 'month' === b || 'quarter' === b ? (e = jb(this, f), 'quarter' === b ? e /= 3 : 'year' === b && (e /= 12)) : (d = this - f, e = 'second' === b ? d / 1000 : 'minute' === b ? d / 60000 : 'hour' === b ? d / 3600000 : 'day' === b ? (d - g) / 86400000 : 'week' === b ? (d - g) / 604800000 : d), c ? e : p(e);
+  }
+  function jb(a, b) {
+    var c, d, e = 12 * (b.year() - a.year()) + (b.month() - a.month()), f = a.clone().add(e, 'months');
+    return 0 > b - f ? (c = a.clone().add(e - 1, 'months'), d = (b - f) / (f - c)) : (c = a.clone().add(e + 1, 'months'), d = (b - f) / (c - f)), -(e + d);
+  }
+  function kb() {
+    return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+  }
+  function lb() {
+    var a = this.clone().utc();
+    return 0 < a.year() && a.year() <= 9999 ? 'function' == typeof Date.prototype.toISOString ? this.toDate().toISOString() : K(a, 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]') : K(a, 'YYYYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
+  }
+  function mb(b) {
+    var c = K(this, b || a.defaultFormat);
+    return this.localeData().postformat(c);
+  }
+  function nb(a, b) {
+    return this.isValid() ? Ya({
+      to: this,
+      from: a
+    }).locale(this.locale()).humanize(!b) : this.localeData().invalidDate();
+  }
+  function ob(a) {
+    return this.from(Da(), a);
+  }
+  function pb(a, b) {
+    return this.isValid() ? Ya({
+      from: this,
+      to: a
+    }).locale(this.locale()).humanize(!b) : this.localeData().invalidDate();
+  }
+  function qb(a) {
+    return this.to(Da(), a);
+  }
+  function rb(a) {
+    var b;
+    return void 0 === a ? this._locale._abbr : (b = y(a), null != b && (this._locale = b), this);
+  }
+  function sb() {
+    return this._locale;
+  }
+  function tb(a) {
+    switch (a = A(a)) {
+    case 'year':
+      this.month(0);
+    case 'quarter':
+    case 'month':
+      this.date(1);
+    case 'week':
+    case 'isoWeek':
+    case 'day':
+      this.hours(0);
+    case 'hour':
+      this.minutes(0);
+    case 'minute':
+      this.seconds(0);
+    case 'second':
+      this.milliseconds(0);
+    }
+    return 'week' === a && this.weekday(0), 'isoWeek' === a && this.isoWeekday(1), 'quarter' === a && this.month(3 * Math.floor(this.month() / 3)), this;
+  }
+  function ub(a) {
+    return a = A(a), void 0 === a || 'millisecond' === a ? this : this.startOf(a).add(1, 'isoWeek' === a ? 'week' : a).subtract(1, 'ms');
+  }
+  function vb() {
+    return +this._d - 60000 * (this._offset || 0);
+  }
+  function wb() {
+    return Math.floor(+this / 1000);
+  }
+  function xb() {
+    return this._offset ? new Date(+this) : this._d;
+  }
+  function yb() {
+    var a = this;
+    return [
+      a.year(),
+      a.month(),
+      a.date(),
+      a.hour(),
+      a.minute(),
+      a.second(),
+      a.millisecond()
+    ];
+  }
+  function zb() {
+    var a = this;
+    return {
+      years: a.year(),
+      months: a.month(),
+      date: a.date(),
+      hours: a.hours(),
+      minutes: a.minutes(),
+      seconds: a.seconds(),
+      milliseconds: a.milliseconds()
+    };
+  }
+  function Ab() {
+    return k(this);
+  }
+  function Bb() {
+    return g({}, j(this));
+  }
+  function Cb() {
+    return j(this).overflow;
+  }
+  function Db(a, b) {
+    H(0, [
+      a,
+      a.length
+    ], 0, b);
+  }
+  function Eb(a, b, c) {
+    return ja(Da([
+      a,
+      11,
+      31 + b - c
+    ]), b, c).week;
+  }
+  function Fb(a) {
+    var b = ja(this, this.localeData()._week.dow, this.localeData()._week.doy).year;
+    return null == a ? b : this.add(a - b, 'y');
+  }
+  function Gb(a) {
+    var b = ja(this, 1, 4).year;
+    return null == a ? b : this.add(a - b, 'y');
+  }
+  function Hb() {
+    return Eb(this.year(), 1, 4);
+  }
+  function Ib() {
+    var a = this.localeData()._week;
+    return Eb(this.year(), a.dow, a.doy);
+  }
+  function Jb(a) {
+    return null == a ? Math.ceil((this.month() + 1) / 3) : this.month(3 * (a - 1) + this.month() % 3);
+  }
+  function Kb(a, b) {
+    return 'string' != typeof a ? a : isNaN(a) ? (a = b.weekdaysParse(a), 'number' == typeof a ? a : null) : parseInt(a, 10);
+  }
+  function Lb(a) {
+    return this._weekdays[a.day()];
+  }
+  function Mb(a) {
+    return this._weekdaysShort[a.day()];
+  }
+  function Nb(a) {
+    return this._weekdaysMin[a.day()];
+  }
+  function Ob(a) {
+    var b, c, d;
+    for (this._weekdaysParse = this._weekdaysParse || [], b = 0; 7 > b; b++)
+      if (this._weekdaysParse[b] || (c = Da([
+          2000,
+          1
+        ]).day(b), d = '^' + this.weekdays(c, '') + '|^' + this.weekdaysShort(c, '') + '|^' + this.weekdaysMin(c, ''), this._weekdaysParse[b] = new RegExp(d.replace('.', ''), 'i')), this._weekdaysParse[b].test(a))
+        return b;
+  }
+  function Pb(a) {
+    var b = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
+    return null != a ? (a = Kb(a, this.localeData()), this.add(a - b, 'd')) : b;
+  }
+  function Qb(a) {
+    var b = (this.day() + 7 - this.localeData()._week.dow) % 7;
+    return null == a ? b : this.add(a - b, 'd');
+  }
+  function Rb(a) {
+    return null == a ? this.day() || 7 : this.day(this.day() % 7 ? a : a - 7);
+  }
+  function Sb(a, b) {
+    H(a, 0, 0, function () {
+      return this.localeData().meridiem(this.hours(), this.minutes(), b);
+    });
+  }
+  function Tb(a, b) {
+    return b._meridiemParse;
+  }
+  function Ub(a) {
+    return 'p' === (a + '').toLowerCase().charAt(0);
+  }
+  function Vb(a, b, c) {
+    return a > 11 ? c ? 'pm' : 'PM' : c ? 'am' : 'AM';
+  }
+  function Wb(a, b) {
+    b[ld] = q(1000 * ('0.' + a));
+  }
+  function Xb() {
+    return this._isUTC ? 'UTC' : '';
+  }
+  function Yb() {
+    return this._isUTC ? 'Coordinated Universal Time' : '';
+  }
+  function Zb(a) {
+    return Da(1000 * a);
+  }
+  function $b() {
+    return Da.apply(null, arguments).parseZone();
+  }
+  function _b(a, b, c) {
+    var d = this._calendar[a];
+    return 'function' == typeof d ? d.call(b, c) : d;
+  }
+  function ac(a) {
+    var b = this._longDateFormat[a], c = this._longDateFormat[a.toUpperCase()];
+    return b || !c ? b : (this._longDateFormat[a] = c.replace(/MMMM|MM|DD|dddd/g, function (a) {
+      return a.slice(1);
+    }), this._longDateFormat[a]);
+  }
+  function bc() {
+    return this._invalidDate;
+  }
+  function cc(a) {
+    return this._ordinal.replace('%d', a);
+  }
+  function dc(a) {
+    return a;
+  }
+  function ec(a, b, c, d) {
+    var e = this._relativeTime[c];
+    return 'function' == typeof e ? e(a, b, c, d) : e.replace(/%d/i, a);
+  }
+  function fc(a, b) {
+    var c = this._relativeTime[a > 0 ? 'future' : 'past'];
+    return 'function' == typeof c ? c(b) : c.replace(/%s/i, b);
+  }
+  function gc(a) {
+    var b, c;
+    for (c in a)
+      b = a[c], 'function' == typeof b ? this[c] = b : this['_' + c] = b;
+    this._ordinalParseLenient = new RegExp(this._ordinalParse.source + '|' + /\d{1,2}/.source);
+  }
+  function hc(a, b, c, d) {
+    var e = y(), f = h().set(d, b);
+    return e[c](f, a);
+  }
+  function ic(a, b, c, d, e) {
+    if ('number' == typeof a && (b = a, a = void 0), a = a || '', null != b)
+      return hc(a, b, c, e);
+    var f, g = [];
+    for (f = 0; d > f; f++)
+      g[f] = hc(a, f, c, e);
+    return g;
+  }
+  function jc(a, b) {
+    return ic(a, b, 'months', 12, 'month');
+  }
+  function kc(a, b) {
+    return ic(a, b, 'monthsShort', 12, 'month');
+  }
+  function lc(a, b) {
+    return ic(a, b, 'weekdays', 7, 'day');
+  }
+  function mc(a, b) {
+    return ic(a, b, 'weekdaysShort', 7, 'day');
+  }
+  function nc(a, b) {
+    return ic(a, b, 'weekdaysMin', 7, 'day');
+  }
+  function oc() {
+    var a = this._data;
+    return this._milliseconds = Wd(this._milliseconds), this._days = Wd(this._days), this._months = Wd(this._months), a.milliseconds = Wd(a.milliseconds), a.seconds = Wd(a.seconds), a.minutes = Wd(a.minutes), a.hours = Wd(a.hours), a.months = Wd(a.months), a.years = Wd(a.years), this;
+  }
+  function pc(a, b, c, d) {
+    var e = Ya(b, c);
+    return a._milliseconds += d * e._milliseconds, a._days += d * e._days, a._months += d * e._months, a._bubble();
+  }
+  function qc(a, b) {
+    return pc(this, a, b, 1);
+  }
+  function rc(a, b) {
+    return pc(this, a, b, -1);
+  }
+  function sc(a) {
+    return 0 > a ? Math.floor(a) : Math.ceil(a);
+  }
+  function tc() {
+    var a, b, c, d, e, f = this._milliseconds, g = this._days, h = this._months, i = this._data;
+    return f >= 0 && g >= 0 && h >= 0 || 0 >= f && 0 >= g && 0 >= h || (f += 86400000 * sc(vc(h) + g), g = 0, h = 0), i.milliseconds = f % 1000, a = p(f / 1000), i.seconds = a % 60, b = p(a / 60), i.minutes = b % 60, c = p(b / 60), i.hours = c % 24, g += p(c / 24), e = p(uc(g)), h += e, g -= sc(vc(e)), d = p(h / 12), h %= 12, i.days = g, i.months = h, i.years = d, this;
+  }
+  function uc(a) {
+    return 4800 * a / 146097;
+  }
+  function vc(a) {
+    return 146097 * a / 4800;
+  }
+  function wc(a) {
+    var b, c, d = this._milliseconds;
+    if (a = A(a), 'month' === a || 'year' === a)
+      return b = this._days + d / 86400000, c = this._months + uc(b), 'month' === a ? c : c / 12;
+    switch (b = this._days + Math.round(vc(this._months)), a) {
+    case 'week':
+      return b / 7 + d / 604800000;
+    case 'day':
+      return b + d / 86400000;
+    case 'hour':
+      return 24 * b + d / 3600000;
+    case 'minute':
+      return 1440 * b + d / 60000;
+    case 'second':
+      return 86400 * b + d / 1000;
+    case 'millisecond':
+      return Math.floor(86400000 * b) + d;
+    default:
+      throw new Error('Unknown unit ' + a);
+    }
+  }
+  function xc() {
+    return this._milliseconds + 86400000 * this._days + this._months % 12 * 2592000000 + 31536000000 * q(this._months / 12);
+  }
+  function yc(a) {
+    return function () {
+      return this.as(a);
+    };
+  }
+  function zc(a) {
+    return a = A(a), this[a + 's']();
+  }
+  function Ac(a) {
+    return function () {
+      return this._data[a];
+    };
+  }
+  function Bc() {
+    return p(this.days() / 7);
+  }
+  function Cc(a, b, c, d, e) {
+    return e.relativeTime(b || 1, !!c, a, d);
+  }
+  function Dc(a, b, c) {
+    var d = Ya(a).abs(), e = ke(d.as('s')), f = ke(d.as('m')), g = ke(d.as('h')), h = ke(d.as('d')), i = ke(d.as('M')), j = ke(d.as('y')), k = e < le.s && [
+        's',
+        e
+      ] || 1 === f && ['m'] || f < le.m && [
+        'mm',
+        f
+      ] || 1 === g && ['h'] || g < le.h && [
+        'hh',
+        g
+      ] || 1 === h && ['d'] || h < le.d && [
+        'dd',
+        h
+      ] || 1 === i && ['M'] || i < le.M && [
+        'MM',
+        i
+      ] || 1 === j && ['y'] || [
+        'yy',
+        j
+      ];
+    return k[2] = b, k[3] = +a > 0, k[4] = c, Cc.apply(null, k);
+  }
+  function Ec(a, b) {
+    return void 0 === le[a] ? !1 : void 0 === b ? le[a] : (le[a] = b, !0);
+  }
+  function Fc(a) {
+    var b = this.localeData(), c = Dc(this, !a, b);
+    return a && (c = b.pastFuture(+this, c)), b.postformat(c);
+  }
+  function Gc() {
+    var a, b, c, d = me(this._milliseconds) / 1000, e = me(this._days), f = me(this._months);
+    a = p(d / 60), b = p(a / 60), d %= 60, a %= 60, c = p(f / 12), f %= 12;
+    var g = c, h = f, i = e, j = b, k = a, l = d, m = this.asSeconds();
+    return m ? (0 > m ? '-' : '') + 'P' + (g ? g + 'Y' : '') + (h ? h + 'M' : '') + (i ? i + 'D' : '') + (j || k || l ? 'T' : '') + (j ? j + 'H' : '') + (k ? k + 'M' : '') + (l ? l + 'S' : '') : 'P0D';
+  }
+  var Hc, Ic, Jc = a.momentProperties = [], Kc = !1, Lc = {}, Mc = {}, Nc = /(\[[^\[]*\])|(\\)?(Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Q|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g, Oc = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, Pc = {}, Qc = {}, Rc = /\d/, Sc = /\d\d/, Tc = /\d{3}/, Uc = /\d{4}/, Vc = /[+-]?\d{6}/, Wc = /\d\d?/, Xc = /\d{1,3}/, Yc = /\d{1,4}/, Zc = /[+-]?\d{1,6}/, $c = /\d+/, _c = /[+-]?\d+/, ad = /Z|[+-]\d\d:?\d\d/gi, bd = /[+-]?\d+(\.\d{1,3})?/, cd = /[0-9]*['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+|[\u0600-\u06FF\/]+(\s*?[\u0600-\u06FF]+){1,2}/i, dd = {}, ed = {}, fd = 0, gd = 1, hd = 2, id = 3, jd = 4, kd = 5, ld = 6;
+  H('M', [
+    'MM',
+    2
+  ], 'Mo', function () {
+    return this.month() + 1;
+  }), H('MMM', 0, 0, function (a) {
+    return this.localeData().monthsShort(this, a);
+  }), H('MMMM', 0, 0, function (a) {
+    return this.localeData().months(this, a);
+  }), z('month', 'M'), N('M', Wc), N('MM', Wc, Sc), N('MMM', cd), N('MMMM', cd), Q([
+    'M',
+    'MM'
+  ], function (a, b) {
+    b[gd] = q(a) - 1;
+  }), Q([
+    'MMM',
+    'MMMM'
+  ], function (a, b, c, d) {
+    var e = c._locale.monthsParse(a, d, c._strict);
+    null != e ? b[gd] = e : j(c).invalidMonth = a;
+  });
+  var md = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'), nd = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'), od = {};
+  a.suppressDeprecationWarnings = !1;
+  var pd = /^\s*(?:[+-]\d{6}|\d{4})-(?:(\d\d-\d\d)|(W\d\d$)|(W\d\d-\d)|(\d\d\d))((T| )(\d\d(:\d\d(:\d\d(\.\d+)?)?)?)?([\+\-]\d\d(?::?\d\d)?|\s*Z)?)?$/, qd = [
+      [
+        'YYYYYY-MM-DD',
+        /[+-]\d{6}-\d{2}-\d{2}/
+      ],
+      [
+        'YYYY-MM-DD',
+        /\d{4}-\d{2}-\d{2}/
+      ],
+      [
+        'GGGG-[W]WW-E',
+        /\d{4}-W\d{2}-\d/
+      ],
+      [
+        'GGGG-[W]WW',
+        /\d{4}-W\d{2}/
+      ],
+      [
+        'YYYY-DDD',
+        /\d{4}-\d{3}/
+      ]
+    ], rd = [
+      [
+        'HH:mm:ss.SSSS',
+        /(T| )\d\d:\d\d:\d\d\.\d+/
+      ],
+      [
+        'HH:mm:ss',
+        /(T| )\d\d:\d\d:\d\d/
+      ],
+      [
+        'HH:mm',
+        /(T| )\d\d:\d\d/
+      ],
+      [
+        'HH',
+        /(T| )\d\d/
+      ]
+    ], sd = /^\/?Date\((\-?\d+)/i;
+  a.createFromInputFallback = aa('moment construction falls back to js Date. This is discouraged and will be removed in upcoming major release. Please refer to https://github.com/moment/moment/issues/1407 for more info.', function (a) {
+    a._d = new Date(a._i + (a._useUTC ? ' UTC' : ''));
+  }), H(0, [
+    'YY',
+    2
+  ], 0, function () {
+    return this.year() % 100;
+  }), H(0, [
+    'YYYY',
+    4
+  ], 0, 'year'), H(0, [
+    'YYYYY',
+    5
+  ], 0, 'year'), H(0, [
+    'YYYYYY',
+    6,
+    !0
+  ], 0, 'year'), z('year', 'y'), N('Y', _c), N('YY', Wc, Sc), N('YYYY', Yc, Uc), N('YYYYY', Zc, Vc), N('YYYYYY', Zc, Vc), Q([
+    'YYYYY',
+    'YYYYYY'
+  ], fd), Q('YYYY', function (b, c) {
+    c[fd] = 2 === b.length ? a.parseTwoDigitYear(b) : q(b);
+  }), Q('YY', function (b, c) {
+    c[fd] = a.parseTwoDigitYear(b);
+  }), a.parseTwoDigitYear = function (a) {
+    return q(a) + (q(a) > 68 ? 1900 : 2000);
+  };
+  var td = C('FullYear', !1);
+  H('w', [
+    'ww',
+    2
+  ], 'wo', 'week'), H('W', [
+    'WW',
+    2
+  ], 'Wo', 'isoWeek'), z('week', 'w'), z('isoWeek', 'W'), N('w', Wc), N('ww', Wc, Sc), N('W', Wc), N('WW', Wc, Sc), R([
+    'w',
+    'ww',
+    'W',
+    'WW'
+  ], function (a, b, c, d) {
+    b[d.substr(0, 1)] = q(a);
+  });
+  var ud = {
+      dow: 0,
+      doy: 6
+    };
+  H('DDD', [
+    'DDDD',
+    3
+  ], 'DDDo', 'dayOfYear'), z('dayOfYear', 'DDD'), N('DDD', Xc), N('DDDD', Tc), Q([
+    'DDD',
+    'DDDD'
+  ], function (a, b, c) {
+    c._dayOfYear = q(a);
+  }), a.ISO_8601 = function () {
+  };
+  var vd = aa('moment().min is deprecated, use moment.min instead. https://github.com/moment/moment/issues/1548', function () {
+      var a = Da.apply(null, arguments);
+      return this > a ? this : a;
+    }), wd = aa('moment().max is deprecated, use moment.max instead. https://github.com/moment/moment/issues/1548', function () {
+      var a = Da.apply(null, arguments);
+      return a > this ? this : a;
+    });
+  Ja('Z', ':'), Ja('ZZ', ''), N('Z', ad), N('ZZ', ad), Q([
+    'Z',
+    'ZZ'
+  ], function (a, b, c) {
+    c._useUTC = !0, c._tzm = Ka(a);
+  });
+  var xd = /([\+\-]|\d\d)/gi;
+  a.updateOffset = function () {
+  };
+  var yd = /(\-)?(?:(\d*)\.)?(\d+)\:(\d+)(?:\:(\d+)\.?(\d{3})?)?/, zd = /^(-)?P(?:(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?|([0-9,.]*)W)$/;
+  Ya.fn = Ha.prototype;
+  var Ad = ab(1, 'add'), Bd = ab(-1, 'subtract');
+  a.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+  var Cd = aa('moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.', function (a) {
+      return void 0 === a ? this.localeData() : this.locale(a);
+    });
+  H(0, [
+    'gg',
+    2
+  ], 0, function () {
+    return this.weekYear() % 100;
+  }), H(0, [
+    'GG',
+    2
+  ], 0, function () {
+    return this.isoWeekYear() % 100;
+  }), Db('gggg', 'weekYear'), Db('ggggg', 'weekYear'), Db('GGGG', 'isoWeekYear'), Db('GGGGG', 'isoWeekYear'), z('weekYear', 'gg'), z('isoWeekYear', 'GG'), N('G', _c), N('g', _c), N('GG', Wc, Sc), N('gg', Wc, Sc), N('GGGG', Yc, Uc), N('gggg', Yc, Uc), N('GGGGG', Zc, Vc), N('ggggg', Zc, Vc), R([
+    'gggg',
+    'ggggg',
+    'GGGG',
+    'GGGGG'
+  ], function (a, b, c, d) {
+    b[d.substr(0, 2)] = q(a);
+  }), R([
+    'gg',
+    'GG'
+  ], function (b, c, d, e) {
+    c[e] = a.parseTwoDigitYear(b);
+  }), H('Q', 0, 0, 'quarter'), z('quarter', 'Q'), N('Q', Rc), Q('Q', function (a, b) {
+    b[gd] = 3 * (q(a) - 1);
+  }), H('D', [
+    'DD',
+    2
+  ], 'Do', 'date'), z('date', 'D'), N('D', Wc), N('DD', Wc, Sc), N('Do', function (a, b) {
+    return a ? b._ordinalParse : b._ordinalParseLenient;
+  }), Q([
+    'D',
+    'DD'
+  ], hd), Q('Do', function (a, b) {
+    b[hd] = q(a.match(Wc)[0], 10);
+  });
+  var Dd = C('Date', !0);
+  H('d', 0, 'do', 'day'), H('dd', 0, 0, function (a) {
+    return this.localeData().weekdaysMin(this, a);
+  }), H('ddd', 0, 0, function (a) {
+    return this.localeData().weekdaysShort(this, a);
+  }), H('dddd', 0, 0, function (a) {
+    return this.localeData().weekdays(this, a);
+  }), H('e', 0, 0, 'weekday'), H('E', 0, 0, 'isoWeekday'), z('day', 'd'), z('weekday', 'e'), z('isoWeekday', 'E'), N('d', Wc), N('e', Wc), N('E', Wc), N('dd', cd), N('ddd', cd), N('dddd', cd), R([
+    'dd',
+    'ddd',
+    'dddd'
+  ], function (a, b, c) {
+    var d = c._locale.weekdaysParse(a);
+    null != d ? b.d = d : j(c).invalidWeekday = a;
+  }), R([
+    'd',
+    'e',
+    'E'
+  ], function (a, b, c, d) {
+    b[d] = q(a);
+  });
+  var Ed = 'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'), Fd = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'), Gd = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_');
+  H('H', [
+    'HH',
+    2
+  ], 0, 'hour'), H('h', [
+    'hh',
+    2
+  ], 0, function () {
+    return this.hours() % 12 || 12;
+  }), Sb('a', !0), Sb('A', !1), z('hour', 'h'), N('a', Tb), N('A', Tb), N('H', Wc), N('h', Wc), N('HH', Wc, Sc), N('hh', Wc, Sc), Q([
+    'H',
+    'HH'
+  ], id), Q([
+    'a',
+    'A'
+  ], function (a, b, c) {
+    c._isPm = c._locale.isPM(a), c._meridiem = a;
+  }), Q([
+    'h',
+    'hh'
+  ], function (a, b, c) {
+    b[id] = q(a), j(c).bigHour = !0;
+  });
+  var Hd = /[ap]\.?m?\.?/i, Id = C('Hours', !0);
+  H('m', [
+    'mm',
+    2
+  ], 0, 'minute'), z('minute', 'm'), N('m', Wc), N('mm', Wc, Sc), Q([
+    'm',
+    'mm'
+  ], jd);
+  var Jd = C('Minutes', !1);
+  H('s', [
+    'ss',
+    2
+  ], 0, 'second'), z('second', 's'), N('s', Wc), N('ss', Wc, Sc), Q([
+    's',
+    'ss'
+  ], kd);
+  var Kd = C('Seconds', !1);
+  H('S', 0, 0, function () {
+    return ~~(this.millisecond() / 100);
+  }), H(0, [
+    'SS',
+    2
+  ], 0, function () {
+    return ~~(this.millisecond() / 10);
+  }), H(0, [
+    'SSS',
+    3
+  ], 0, 'millisecond'), H(0, [
+    'SSSS',
+    4
+  ], 0, function () {
+    return 10 * this.millisecond();
+  }), H(0, [
+    'SSSSS',
+    5
+  ], 0, function () {
+    return 100 * this.millisecond();
+  }), H(0, [
+    'SSSSSS',
+    6
+  ], 0, function () {
+    return 1000 * this.millisecond();
+  }), H(0, [
+    'SSSSSSS',
+    7
+  ], 0, function () {
+    return 10000 * this.millisecond();
+  }), H(0, [
+    'SSSSSSSS',
+    8
+  ], 0, function () {
+    return 100000 * this.millisecond();
+  }), H(0, [
+    'SSSSSSSSS',
+    9
+  ], 0, function () {
+    return 1000000 * this.millisecond();
+  }), z('millisecond', 'ms'), N('S', Xc, Rc), N('SS', Xc, Sc), N('SSS', Xc, Tc);
+  var Ld;
+  for (Ld = 'SSSS'; Ld.length <= 9; Ld += 'S')
+    N(Ld, $c);
+  for (Ld = 'S'; Ld.length <= 9; Ld += 'S')
+    Q(Ld, Wb);
+  var Md = C('Milliseconds', !1);
+  H('z', 0, 0, 'zoneAbbr'), H('zz', 0, 0, 'zoneName');
+  var Nd = n.prototype;
+  Nd.add = Ad, Nd.calendar = cb, Nd.clone = db, Nd.diff = ib, Nd.endOf = ub, Nd.format = mb, Nd.from = nb, Nd.fromNow = ob, Nd.to = pb, Nd.toNow = qb, Nd.get = F, Nd.invalidAt = Cb, Nd.isAfter = eb, Nd.isBefore = fb, Nd.isBetween = gb, Nd.isSame = hb, Nd.isValid = Ab, Nd.lang = Cd, Nd.locale = rb, Nd.localeData = sb, Nd.max = wd, Nd.min = vd, Nd.parsingFlags = Bb, Nd.set = F, Nd.startOf = tb, Nd.subtract = Bd, Nd.toArray = yb, Nd.toObject = zb, Nd.toDate = xb, Nd.toISOString = lb, Nd.toJSON = lb, Nd.toString = kb, Nd.unix = wb, Nd.valueOf = vb, Nd.year = td, Nd.isLeapYear = ia, Nd.weekYear = Fb, Nd.isoWeekYear = Gb, Nd.quarter = Nd.quarters = Jb, Nd.month = Y, Nd.daysInMonth = Z, Nd.week = Nd.weeks = na, Nd.isoWeek = Nd.isoWeeks = oa, Nd.weeksInYear = Ib, Nd.isoWeeksInYear = Hb, Nd.date = Dd, Nd.day = Nd.days = Pb, Nd.weekday = Qb, Nd.isoWeekday = Rb, Nd.dayOfYear = qa, Nd.hour = Nd.hours = Id, Nd.minute = Nd.minutes = Jd, Nd.second = Nd.seconds = Kd, Nd.millisecond = Nd.milliseconds = Md, Nd.utcOffset = Na, Nd.utc = Pa, Nd.local = Qa, Nd.parseZone = Ra, Nd.hasAlignedHourOffset = Sa, Nd.isDST = Ta, Nd.isDSTShifted = Ua, Nd.isLocal = Va, Nd.isUtcOffset = Wa, Nd.isUtc = Xa, Nd.isUTC = Xa, Nd.zoneAbbr = Xb, Nd.zoneName = Yb, Nd.dates = aa('dates accessor is deprecated. Use date instead.', Dd), Nd.months = aa('months accessor is deprecated. Use month instead', Y), Nd.years = aa('years accessor is deprecated. Use year instead', td), Nd.zone = aa('moment().zone is deprecated, use moment().utcOffset instead. https://github.com/moment/moment/issues/1779', Oa);
+  var Od = Nd, Pd = {
+      sameDay: '[Today at] LT',
+      nextDay: '[Tomorrow at] LT',
+      nextWeek: 'dddd [at] LT',
+      lastDay: '[Yesterday at] LT',
+      lastWeek: '[Last] dddd [at] LT',
+      sameElse: 'L'
+    }, Qd = {
+      LTS: 'h:mm:ss A',
+      LT: 'h:mm A',
+      L: 'MM/DD/YYYY',
+      LL: 'MMMM D, YYYY',
+      LLL: 'MMMM D, YYYY h:mm A',
+      LLLL: 'dddd, MMMM D, YYYY h:mm A'
+    }, Rd = 'Invalid date', Sd = '%d', Td = /\d{1,2}/, Ud = {
+      future: 'in %s',
+      past: '%s ago',
+      s: 'a few seconds',
+      m: 'a minute',
+      mm: '%d minutes',
+      h: 'an hour',
+      hh: '%d hours',
+      d: 'a day',
+      dd: '%d days',
+      M: 'a month',
+      MM: '%d months',
+      y: 'a year',
+      yy: '%d years'
+    }, Vd = s.prototype;
+  Vd._calendar = Pd, Vd.calendar = _b, Vd._longDateFormat = Qd, Vd.longDateFormat = ac, Vd._invalidDate = Rd, Vd.invalidDate = bc, Vd._ordinal = Sd, Vd.ordinal = cc, Vd._ordinalParse = Td, Vd.preparse = dc, Vd.postformat = dc, Vd._relativeTime = Ud, Vd.relativeTime = ec, Vd.pastFuture = fc, Vd.set = gc, Vd.months = U, Vd._months = md, Vd.monthsShort = V, Vd._monthsShort = nd, Vd.monthsParse = W, Vd.week = ka, Vd._week = ud, Vd.firstDayOfYear = ma, Vd.firstDayOfWeek = la, Vd.weekdays = Lb, Vd._weekdays = Ed, Vd.weekdaysMin = Nb, Vd._weekdaysMin = Gd, Vd.weekdaysShort = Mb, Vd._weekdaysShort = Fd, Vd.weekdaysParse = Ob, Vd.isPM = Ub, Vd._meridiemParse = Hd, Vd.meridiem = Vb, w('en', {
+    ordinalParse: /\d{1,2}(th|st|nd|rd)/,
+    ordinal: function (a) {
+      var b = a % 10, c = 1 === q(a % 100 / 10) ? 'th' : 1 === b ? 'st' : 2 === b ? 'nd' : 3 === b ? 'rd' : 'th';
+      return a + c;
+    }
+  }), a.lang = aa('moment.lang is deprecated. Use moment.locale instead.', w), a.langData = aa('moment.langData is deprecated. Use moment.localeData instead.', y);
+  var Wd = Math.abs, Xd = yc('ms'), Yd = yc('s'), Zd = yc('m'), $d = yc('h'), _d = yc('d'), ae = yc('w'), be = yc('M'), ce = yc('y'), de = Ac('milliseconds'), ee = Ac('seconds'), fe = Ac('minutes'), ge = Ac('hours'), he = Ac('days'), ie = Ac('months'), je = Ac('years'), ke = Math.round, le = {
+      s: 45,
+      m: 45,
+      h: 22,
+      d: 26,
+      M: 11
+    }, me = Math.abs, ne = Ha.prototype;
+  ne.abs = oc, ne.add = qc, ne.subtract = rc, ne.as = wc, ne.asMilliseconds = Xd, ne.asSeconds = Yd, ne.asMinutes = Zd, ne.asHours = $d, ne.asDays = _d, ne.asWeeks = ae, ne.asMonths = be, ne.asYears = ce, ne.valueOf = xc, ne._bubble = tc, ne.get = zc, ne.milliseconds = de, ne.seconds = ee, ne.minutes = fe, ne.hours = ge, ne.days = he, ne.weeks = Bc, ne.months = ie, ne.years = je, ne.humanize = Fc, ne.toISOString = Gc, ne.toString = Gc, ne.toJSON = Gc, ne.locale = rb, ne.localeData = sb, ne.toIsoString = aa('toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)', Gc), ne.lang = Cd, H('X', 0, 0, 'unix'), H('x', 0, 0, 'valueOf'), N('x', _c), N('X', bd), Q('X', function (a, b, c) {
+    c._d = new Date(1000 * parseFloat(a, 10));
+  }), Q('x', function (a, b, c) {
+    c._d = new Date(q(a));
+  }), a.version = '2.10.6', b(Da), a.fn = Od, a.min = Fa, a.max = Ga, a.utc = h, a.unix = Zb, a.months = jc, a.isDate = d, a.locale = w, a.invalid = l, a.duration = Ya, a.isMoment = o, a.weekdays = lc, a.parseZone = $b, a.localeData = y, a.isDuration = Ia, a.monthsShort = kc, a.weekdaysMin = nc, a.defineLocale = x, a.weekdaysShort = mc, a.normalizeUnits = A, a.relativeTimeThreshold = Ec;
+  var oe = a;
+  return oe;
+});
+/*! version : 4.17.37
+ =========================================================
+ bootstrap-datetimejs
+ https://github.com/Eonasdan/bootstrap-datetimepicker
+ Copyright (c) 2015 Jonathan Peterson
+ =========================================================
+ */
+!function (a) {
+  'use strict';
+  if ('function' == typeof define && define.amd)
+    define([
+      'jquery',
+      'moment'
+    ], a);
+  else if ('object' == typeof exports)
+    a(require('jquery'), require('moment'));
+  else {
+    if ('undefined' == typeof jQuery)
+      throw 'bootstrap-datetimepicker requires jQuery to be loaded first';
+    if ('undefined' == typeof moment)
+      throw 'bootstrap-datetimepicker requires Moment.js to be loaded first';
+    a(jQuery, moment);
+  }
+}(function (a, b) {
+  'use strict';
+  if (!b)
+    throw new Error('bootstrap-datetimepicker requires Moment.js to be loaded first');
+  var c = function (c, d) {
+    var e, f, g, h, i, j, k, l = {}, m = !0, n = !1, o = !1, p = 0, q = [
+        {
+          clsName: 'days',
+          navFnc: 'M',
+          navStep: 1
+        },
+        {
+          clsName: 'months',
+          navFnc: 'y',
+          navStep: 1
+        },
+        {
+          clsName: 'years',
+          navFnc: 'y',
+          navStep: 10
+        },
+        {
+          clsName: 'decades',
+          navFnc: 'y',
+          navStep: 100
+        }
+      ], r = [
+        'days',
+        'months',
+        'years',
+        'decades'
+      ], s = [
+        'top',
+        'bottom',
+        'auto'
+      ], t = [
+        'left',
+        'right',
+        'auto'
+      ], u = [
+        'default',
+        'top',
+        'bottom'
+      ], v = {
+        up: 38,
+        38: 'up',
+        down: 40,
+        40: 'down',
+        left: 37,
+        37: 'left',
+        right: 39,
+        39: 'right',
+        tab: 9,
+        9: 'tab',
+        escape: 27,
+        27: 'escape',
+        enter: 13,
+        13: 'enter',
+        pageUp: 33,
+        33: 'pageUp',
+        pageDown: 34,
+        34: 'pageDown',
+        shift: 16,
+        16: 'shift',
+        control: 17,
+        17: 'control',
+        space: 32,
+        32: 'space',
+        t: 84,
+        84: 't',
+        'delete': 46,
+        46: 'delete'
+      }, w = {}, x = function (a) {
+        var c, e, f, g, h, i = !1;
+        return void 0 !== b.tz && void 0 !== d.timeZone && null !== d.timeZone && '' !== d.timeZone && (i = !0), void 0 === a || null === a ? c = i ? b().tz(d.timeZone).startOf('d') : b().startOf('d') : i ? (e = b().tz(d.timeZone).utcOffset(), f = b(a, j, d.useStrict).utcOffset(), f !== e ? (g = b().tz(d.timeZone).format('Z'), h = b(a, j, d.useStrict).format('YYYY-MM-DD[T]HH:mm:ss') + g, c = b(h, j, d.useStrict).tz(d.timeZone)) : c = b(a, j, d.useStrict).tz(d.timeZone)) : c = b(a, j, d.useStrict), c;
+      }, y = function (a) {
+        if ('string' != typeof a || a.length > 1)
+          throw new TypeError('isEnabled expects a single character string parameter');
+        switch (a) {
+        case 'y':
+          return -1 !== i.indexOf('Y');
+        case 'M':
+          return -1 !== i.indexOf('M');
+        case 'd':
+          return -1 !== i.toLowerCase().indexOf('d');
+        case 'h':
+        case 'H':
+          return -1 !== i.toLowerCase().indexOf('h');
+        case 'm':
+          return -1 !== i.indexOf('m');
+        case 's':
+          return -1 !== i.indexOf('s');
+        default:
+          return !1;
+        }
+      }, z = function () {
+        return y('h') || y('m') || y('s');
+      }, A = function () {
+        return y('y') || y('M') || y('d');
+      }, B = function () {
+        var b = a('<thead>').append(a('<tr>').append(a('<th>').addClass('prev').attr('data-action', 'previous').append(a('<span>').addClass(d.icons.previous))).append(a('<th>').addClass('picker-switch').attr('data-action', 'pickerSwitch').attr('colspan', d.calendarWeeks ? '6' : '5')).append(a('<th>').addClass('next').attr('data-action', 'next').append(a('<span>').addClass(d.icons.next)))), c = a('<tbody>').append(a('<tr>').append(a('<td>').attr('colspan', d.calendarWeeks ? '8' : '7')));
+        return [
+          a('<div>').addClass('datepicker-days').append(a('<table>').addClass('table-condensed').append(b).append(a('<tbody>'))),
+          a('<div>').addClass('datepicker-months').append(a('<table>').addClass('table-condensed').append(b.clone()).append(c.clone())),
+          a('<div>').addClass('datepicker-years').append(a('<table>').addClass('table-condensed').append(b.clone()).append(c.clone())),
+          a('<div>').addClass('datepicker-decades').append(a('<table>').addClass('table-condensed').append(b.clone()).append(c.clone()))
+        ];
+      }, C = function () {
+        var b = a('<tr>'), c = a('<tr>'), e = a('<tr>');
+        return y('h') && (b.append(a('<td>').append(a('<a>').attr({
+          href: '#',
+          tabindex: '-1',
+          title: d.tooltips.incrementHour
+        }).addClass('btn').attr('data-action', 'incrementHours').append(a('<span>').addClass(d.icons.up)))), c.append(a('<td>').append(a('<span>').addClass('timepicker-hour').attr({
+          'data-time-component': 'hours',
+          title: d.tooltips.pickHour
+        }).attr('data-action', 'showHours'))), e.append(a('<td>').append(a('<a>').attr({
+          href: '#',
+          tabindex: '-1',
+          title: d.tooltips.decrementHour
+        }).addClass('btn').attr('data-action', 'decrementHours').append(a('<span>').addClass(d.icons.down))))), y('m') && (y('h') && (b.append(a('<td>').addClass('separator')), c.append(a('<td>').addClass('separator').html(':')), e.append(a('<td>').addClass('separator'))), b.append(a('<td>').append(a('<a>').attr({
+          href: '#',
+          tabindex: '-1',
+          title: d.tooltips.incrementMinute
+        }).addClass('btn').attr('data-action', 'incrementMinutes').append(a('<span>').addClass(d.icons.up)))), c.append(a('<td>').append(a('<span>').addClass('timepicker-minute').attr({
+          'data-time-component': 'minutes',
+          title: d.tooltips.pickMinute
+        }).attr('data-action', 'showMinutes'))), e.append(a('<td>').append(a('<a>').attr({
+          href: '#',
+          tabindex: '-1',
+          title: d.tooltips.decrementMinute
+        }).addClass('btn').attr('data-action', 'decrementMinutes').append(a('<span>').addClass(d.icons.down))))), y('s') && (y('m') && (b.append(a('<td>').addClass('separator')), c.append(a('<td>').addClass('separator').html(':')), e.append(a('<td>').addClass('separator'))), b.append(a('<td>').append(a('<a>').attr({
+          href: '#',
+          tabindex: '-1',
+          title: d.tooltips.incrementSecond
+        }).addClass('btn').attr('data-action', 'incrementSeconds').append(a('<span>').addClass(d.icons.up)))), c.append(a('<td>').append(a('<span>').addClass('timepicker-second').attr({
+          'data-time-component': 'seconds',
+          title: d.tooltips.pickSecond
+        }).attr('data-action', 'showSeconds'))), e.append(a('<td>').append(a('<a>').attr({
+          href: '#',
+          tabindex: '-1',
+          title: d.tooltips.decrementSecond
+        }).addClass('btn').attr('data-action', 'decrementSeconds').append(a('<span>').addClass(d.icons.down))))), h || (b.append(a('<td>').addClass('separator')), c.append(a('<td>').append(a('<button>').addClass('btn btn-primary').attr({
+          'data-action': 'togglePeriod',
+          tabindex: '-1',
+          title: d.tooltips.togglePeriod
+        }))), e.append(a('<td>').addClass('separator'))), a('<div>').addClass('timepicker-picker').append(a('<table>').addClass('table-condensed').append([
+          b,
+          c,
+          e
+        ]));
+      }, D = function () {
+        var b = a('<div>').addClass('timepicker-hours').append(a('<table>').addClass('table-condensed')), c = a('<div>').addClass('timepicker-minutes').append(a('<table>').addClass('table-condensed')), d = a('<div>').addClass('timepicker-seconds').append(a('<table>').addClass('table-condensed')), e = [C()];
+        return y('h') && e.push(b), y('m') && e.push(c), y('s') && e.push(d), e;
+      }, E = function () {
+        var b = [];
+        return d.showTodayButton && b.push(a('<td>').append(a('<a>').attr({
+          'data-action': 'today',
+          title: d.tooltips.today
+        }).append(a('<span>').addClass(d.icons.today)))), !d.sideBySide && A() && z() && b.push(a('<td>').append(a('<a>').attr({
+          'data-action': 'togglePicker',
+          title: d.tooltips.selectTime
+        }).append(a('<span>').addClass(d.icons.time)))), d.showClear && b.push(a('<td>').append(a('<a>').attr({
+          'data-action': 'clear',
+          title: d.tooltips.clear
+        }).append(a('<span>').addClass(d.icons.clear)))), d.showClose && b.push(a('<td>').append(a('<a>').attr({
+          'data-action': 'close',
+          title: d.tooltips.close
+        }).append(a('<span>').addClass(d.icons.close)))), a('<table>').addClass('table-condensed').append(a('<tbody>').append(a('<tr>').append(b)));
+      }, F = function () {
+        var b = a('<div>').addClass('bootstrap-datetimepicker-widget dropdown-menu'), c = a('<div>').addClass('datepicker').append(B()), e = a('<div>').addClass('timepicker').append(D()), f = a('<ul>').addClass('list-unstyled'), g = a('<li>').addClass('picker-switch' + (d.collapse ? ' accordion-toggle' : '')).append(E());
+        return d.inline && b.removeClass('dropdown-menu'), h && b.addClass('usetwentyfour'), y('s') && !h && b.addClass('wider'), d.sideBySide && A() && z() ? (b.addClass('timepicker-sbs'), 'top' === d.toolbarPlacement && b.append(g), b.append(a('<div>').addClass('row').append(c.addClass('col-md-6')).append(e.addClass('col-md-6'))), 'bottom' === d.toolbarPlacement && b.append(g), b) : ('top' === d.toolbarPlacement && f.append(g), A() && f.append(a('<li>').addClass(d.collapse && z() ? 'collapse in' : '').append(c)), 'default' === d.toolbarPlacement && f.append(g), z() && f.append(a('<li>').addClass(d.collapse && A() ? 'collapse' : '').append(e)), 'bottom' === d.toolbarPlacement && f.append(g), b.append(f));
+      }, G = function () {
+        var b, e = {};
+        return b = c.is('input') || d.inline ? c.data() : c.find('input').data(), b.dateOptions && b.dateOptions instanceof Object && (e = a.extend(!0, e, b.dateOptions)), a.each(d, function (a) {
+          var c = 'date' + a.charAt(0).toUpperCase() + a.slice(1);
+          void 0 !== b[c] && (e[a] = b[c]);
+        }), e;
+      }, H = function () {
+        var b, e = (n || c).position(), f = (n || c).offset(), g = d.widgetPositioning.vertical, h = d.widgetPositioning.horizontal;
+        if (d.widgetParent)
+          b = d.widgetParent.append(o);
+        else if (c.is('input'))
+          b = c.after(o).parent();
+        else {
+          if (d.inline)
+            return void (b = c.append(o));
+          b = c, c.children().first().after(o);
+        }
+        if ('auto' === g && (g = f.top + 1.5 * o.height() >= a(window).height() + a(window).scrollTop() && o.height() + c.outerHeight() < f.top ? 'top' : 'bottom'), 'auto' === h && (h = b.width() < f.left + o.outerWidth() / 2 && f.left + o.outerWidth() > a(window).width() ? 'right' : 'left'), 'top' === g ? o.addClass('top').removeClass('bottom') : o.addClass('bottom').removeClass('top'), 'right' === h ? o.addClass('pull-right') : o.removeClass('pull-right'), 'relative' !== b.css('position') && (b = b.parents().filter(function () {
+            return 'relative' === a(this).css('position');
+          }).first()), 0 === b.length)
+          throw new Error('datetimepicker component should be placed within a relative positioned container');
+        o.css({
+          top: 'top' === g ? 'auto' : e.top + c.outerHeight(),
+          bottom: 'top' === g ? e.top + c.outerHeight() : 'auto',
+          left: 'left' === h ? b === c ? 0 : e.left : 'auto',
+          right: 'left' === h ? 'auto' : b.outerWidth() - c.outerWidth() - (b === c ? 0 : e.left)
+        });
+      }, I = function (a) {
+        'dp.change' === a.type && (a.date && a.date.isSame(a.oldDate) || !a.date && !a.oldDate) || c.trigger(a);
+      }, J = function (a) {
+        'y' === a && (a = 'YYYY'), I({
+          type: 'dp.update',
+          change: a,
+          viewDate: f.clone()
+        });
+      }, K = function (a) {
+        o && (a && (k = Math.max(p, Math.min(3, k + a))), o.find('.datepicker > div').hide().filter('.datepicker-' + q[k].clsName).show());
+      }, L = function () {
+        var b = a('<tr>'), c = f.clone().startOf('w').startOf('d');
+        for (d.calendarWeeks === !0 && b.append(a('<th>').addClass('cw').text('#')); c.isBefore(f.clone().endOf('w'));)
+          b.append(a('<th>').addClass('dow').text(c.format('dd'))), c.add(1, 'd');
+        o.find('.datepicker-days thead').append(b);
+      }, M = function (a) {
+        return d.disabledDates[a.format('YYYY-MM-DD')] === !0;
+      }, N = function (a) {
+        return d.enabledDates[a.format('YYYY-MM-DD')] === !0;
+      }, O = function (a) {
+        return d.disabledHours[a.format('H')] === !0;
+      }, P = function (a) {
+        return d.enabledHours[a.format('H')] === !0;
+      }, Q = function (b, c) {
+        if (!b.isValid())
+          return !1;
+        if (d.disabledDates && 'd' === c && M(b))
+          return !1;
+        if (d.enabledDates && 'd' === c && !N(b))
+          return !1;
+        if (d.minDate && b.isBefore(d.minDate, c))
+          return !1;
+        if (d.maxDate && b.isAfter(d.maxDate, c))
+          return !1;
+        if (d.daysOfWeekDisabled && 'd' === c && -1 !== d.daysOfWeekDisabled.indexOf(b.day()))
+          return !1;
+        if (d.disabledHours && ('h' === c || 'm' === c || 's' === c) && O(b))
+          return !1;
+        if (d.enabledHours && ('h' === c || 'm' === c || 's' === c) && !P(b))
+          return !1;
+        if (d.disabledTimeIntervals && ('h' === c || 'm' === c || 's' === c)) {
+          var e = !1;
+          if (a.each(d.disabledTimeIntervals, function () {
+              return b.isBetween(this[0], this[1]) ? (e = !0, !1) : void 0;
+            }), e)
+            return !1;
+        }
+        return !0;
+      }, R = function () {
+        for (var b = [], c = f.clone().startOf('y').startOf('d'); c.isSame(f, 'y');)
+          b.push(a('<span>').attr('data-action', 'selectMonth').addClass('month').text(c.format('MMM'))), c.add(1, 'M');
+        o.find('.datepicker-months td').empty().append(b);
+      }, S = function () {
+        var b = o.find('.datepicker-months'), c = b.find('th'), g = b.find('tbody').find('span');
+        c.eq(0).find('span').attr('title', d.tooltips.prevYear), c.eq(1).attr('title', d.tooltips.selectYear), c.eq(2).find('span').attr('title', d.tooltips.nextYear), b.find('.disabled').removeClass('disabled'), Q(f.clone().subtract(1, 'y'), 'y') || c.eq(0).addClass('disabled'), c.eq(1).text(f.year()), Q(f.clone().add(1, 'y'), 'y') || c.eq(2).addClass('disabled'), g.removeClass('active'), e.isSame(f, 'y') && !m && g.eq(e.month()).addClass('active'), g.each(function (b) {
+          Q(f.clone().month(b), 'M') || a(this).addClass('disabled');
+        });
+      }, T = function () {
+        var a = o.find('.datepicker-years'), b = a.find('th'), c = f.clone().subtract(5, 'y'), g = f.clone().add(6, 'y'), h = '';
+        for (b.eq(0).find('span').attr('title', d.tooltips.prevDecade), b.eq(1).attr('title', d.tooltips.selectDecade), b.eq(2).find('span').attr('title', d.tooltips.nextDecade), a.find('.disabled').removeClass('disabled'), d.minDate && d.minDate.isAfter(c, 'y') && b.eq(0).addClass('disabled'), b.eq(1).text(c.year() + '-' + g.year()), d.maxDate && d.maxDate.isBefore(g, 'y') && b.eq(2).addClass('disabled'); !c.isAfter(g, 'y');)
+          h += '<span data-action="selectYear" class="year' + (c.isSame(e, 'y') && !m ? ' active' : '') + (Q(c, 'y') ? '' : ' disabled') + '">' + c.year() + '</span>', c.add(1, 'y');
+        a.find('td').html(h);
+      }, U = function () {
+        var a = o.find('.datepicker-decades'), c = a.find('th'), g = b({ y: f.year() - f.year() % 100 - 1 }), h = g.clone().add(100, 'y'), i = g.clone(), j = '';
+        for (c.eq(0).find('span').attr('title', d.tooltips.prevCentury), c.eq(2).find('span').attr('title', d.tooltips.nextCentury), a.find('.disabled').removeClass('disabled'), (g.isSame(b({ y: 1900 })) || d.minDate && d.minDate.isAfter(g, 'y')) && c.eq(0).addClass('disabled'), c.eq(1).text(g.year() + '-' + h.year()), (g.isSame(b({ y: 2000 })) || d.maxDate && d.maxDate.isBefore(h, 'y')) && c.eq(2).addClass('disabled'); !g.isAfter(h, 'y');)
+          j += '<span data-action="selectDecade" class="decade' + (g.isSame(e, 'y') ? ' active' : '') + (Q(g, 'y') ? '' : ' disabled') + '" data-selection="' + (g.year() + 6) + '">' + (g.year() + 1) + ' - ' + (g.year() + 12) + '</span>', g.add(12, 'y');
+        j += '<span></span><span></span><span></span>', a.find('td').html(j), c.eq(1).text(i.year() + 1 + '-' + g.year());
+      }, V = function () {
+        var b, c, g, h, i = o.find('.datepicker-days'), j = i.find('th'), k = [];
+        if (A()) {
+          for (j.eq(0).find('span').attr('title', d.tooltips.prevMonth), j.eq(1).attr('title', d.tooltips.selectMonth), j.eq(2).find('span').attr('title', d.tooltips.nextMonth), i.find('.disabled').removeClass('disabled'), j.eq(1).text(f.format(d.dayViewHeaderFormat)), Q(f.clone().subtract(1, 'M'), 'M') || j.eq(0).addClass('disabled'), Q(f.clone().add(1, 'M'), 'M') || j.eq(2).addClass('disabled'), b = f.clone().startOf('M').startOf('w').startOf('d'), h = 0; 42 > h; h++)
+            0 === b.weekday() && (c = a('<tr>'), d.calendarWeeks && c.append('<td class="cw">' + b.week() + '</td>'), k.push(c)), g = '', b.isBefore(f, 'M') && (g += ' old'), b.isAfter(f, 'M') && (g += ' new'), b.isSame(e, 'd') && !m && (g += ' active'), Q(b, 'd') || (g += ' disabled'), b.isSame(x(), 'd') && (g += ' today'), (0 === b.day() || 6 === b.day()) && (g += ' weekend'), c.append('<td data-action="selectDay" data-day="' + b.format('L') + '" class="day' + g + '">' + b.date() + '</td>'), b.add(1, 'd');
+          i.find('tbody').empty().append(k), S(), T(), U();
+        }
+      }, W = function () {
+        var b = o.find('.timepicker-hours table'), c = f.clone().startOf('d'), d = [], e = a('<tr>');
+        for (f.hour() > 11 && !h && c.hour(12); c.isSame(f, 'd') && (h || f.hour() < 12 && c.hour() < 12 || f.hour() > 11);)
+          c.hour() % 4 === 0 && (e = a('<tr>'), d.push(e)), e.append('<td data-action="selectHour" class="hour' + (Q(c, 'h') ? '' : ' disabled') + '">' + c.format(h ? 'HH' : 'hh') + '</td>'), c.add(1, 'h');
+        b.empty().append(d);
+      }, X = function () {
+        for (var b = o.find('.timepicker-minutes table'), c = f.clone().startOf('h'), e = [], g = a('<tr>'), h = 1 === d.stepping ? 5 : d.stepping; f.isSame(c, 'h');)
+          c.minute() % (4 * h) === 0 && (g = a('<tr>'), e.push(g)), g.append('<td data-action="selectMinute" class="minute' + (Q(c, 'm') ? '' : ' disabled') + '">' + c.format('mm') + '</td>'), c.add(h, 'm');
+        b.empty().append(e);
+      }, Y = function () {
+        for (var b = o.find('.timepicker-seconds table'), c = f.clone().startOf('m'), d = [], e = a('<tr>'); f.isSame(c, 'm');)
+          c.second() % 20 === 0 && (e = a('<tr>'), d.push(e)), e.append('<td data-action="selectSecond" class="second' + (Q(c, 's') ? '' : ' disabled') + '">' + c.format('ss') + '</td>'), c.add(5, 's');
+        b.empty().append(d);
+      }, Z = function () {
+        var a, b, c = o.find('.timepicker span[data-time-component]');
+        h || (a = o.find('.timepicker [data-action=togglePeriod]'), b = e.clone().add(e.hours() >= 12 ? -12 : 12, 'h'), a.text(e.format('A')), Q(b, 'h') ? a.removeClass('disabled') : a.addClass('disabled')), c.filter('[data-time-component=hours]').text(e.format(h ? 'HH' : 'hh')), c.filter('[data-time-component=minutes]').text(e.format('mm')), c.filter('[data-time-component=seconds]').text(e.format('ss')), W(), X(), Y();
+      }, $ = function () {
+        o && (V(), Z());
+      }, _ = function (a) {
+        var b = m ? null : e;
+        return a ? (a = a.clone().locale(d.locale), 1 !== d.stepping && a.minutes(Math.round(a.minutes() / d.stepping) * d.stepping % 60).seconds(0), void (Q(a) ? (e = a, f = e.clone(), g.val(e.format(i)), c.data('date', e.format(i)), m = !1, $(), I({
+          type: 'dp.change',
+          date: e.clone(),
+          oldDate: b
+        })) : (d.keepInvalid || g.val(m ? '' : e.format(i)), I({
+          type: 'dp.error',
+          date: a
+        })))) : (m = !0, g.val(''), c.data('date', ''), I({
+          type: 'dp.change',
+          date: !1,
+          oldDate: b
+        }), void $());
+      }, aa = function () {
+        var b = !1;
+        return o ? (o.find('.collapse').each(function () {
+          var c = a(this).data('collapse');
+          return c && c.transitioning ? (b = !0, !1) : !0;
+        }), b ? l : (n && n.hasClass('btn') && n.toggleClass('active'), o.hide(), a(window).off('resize', H), o.off('click', '[data-action]'), o.off('mousedown', !1), o.remove(), o = !1, I({
+          type: 'dp.hide',
+          date: e.clone()
+        }), g.blur(), l)) : l;
+      }, ba = function () {
+        _(null);
+      }, ca = {
+        next: function () {
+          var a = q[k].navFnc;
+          f.add(q[k].navStep, a), V(), J(a);
+        },
+        previous: function () {
+          var a = q[k].navFnc;
+          f.subtract(q[k].navStep, a), V(), J(a);
+        },
+        pickerSwitch: function () {
+          K(1);
+        },
+        selectMonth: function (b) {
+          var c = a(b.target).closest('tbody').find('span').index(a(b.target));
+          f.month(c), k === p ? (_(e.clone().year(f.year()).month(f.month())), d.inline || aa()) : (K(-1), V()), J('M');
+        },
+        selectYear: function (b) {
+          var c = parseInt(a(b.target).text(), 10) || 0;
+          f.year(c), k === p ? (_(e.clone().year(f.year())), d.inline || aa()) : (K(-1), V()), J('YYYY');
+        },
+        selectDecade: function (b) {
+          var c = parseInt(a(b.target).data('selection'), 10) || 0;
+          f.year(c), k === p ? (_(e.clone().year(f.year())), d.inline || aa()) : (K(-1), V()), J('YYYY');
+        },
+        selectDay: function (b) {
+          var c = f.clone();
+          a(b.target).is('.old') && c.subtract(1, 'M'), a(b.target).is('.new') && c.add(1, 'M'), _(c.date(parseInt(a(b.target).text(), 10))), z() || d.keepOpen || d.inline || aa();
+        },
+        incrementHours: function () {
+          var a = e.clone().add(1, 'h');
+          Q(a, 'h') && _(a);
+        },
+        incrementMinutes: function () {
+          var a = e.clone().add(d.stepping, 'm');
+          Q(a, 'm') && _(a);
+        },
+        incrementSeconds: function () {
+          var a = e.clone().add(1, 's');
+          Q(a, 's') && _(a);
+        },
+        decrementHours: function () {
+          var a = e.clone().subtract(1, 'h');
+          Q(a, 'h') && _(a);
+        },
+        decrementMinutes: function () {
+          var a = e.clone().subtract(d.stepping, 'm');
+          Q(a, 'm') && _(a);
+        },
+        decrementSeconds: function () {
+          var a = e.clone().subtract(1, 's');
+          Q(a, 's') && _(a);
+        },
+        togglePeriod: function () {
+          _(e.clone().add(e.hours() >= 12 ? -12 : 12, 'h'));
+        },
+        togglePicker: function (b) {
+          var c, e = a(b.target), f = e.closest('ul'), g = f.find('.in'), h = f.find('.collapse:not(.in)');
+          if (g && g.length) {
+            if (c = g.data('collapse'), c && c.transitioning)
+              return;
+            g.collapse ? (g.collapse('hide'), h.collapse('show')) : (g.removeClass('in'), h.addClass('in')), e.is('span') ? e.toggleClass(d.icons.time + ' ' + d.icons.date) : e.find('span').toggleClass(d.icons.time + ' ' + d.icons.date);
+          }
+        },
+        showPicker: function () {
+          o.find('.timepicker > div:not(.timepicker-picker)').hide(), o.find('.timepicker .timepicker-picker').show();
+        },
+        showHours: function () {
+          o.find('.timepicker .timepicker-picker').hide(), o.find('.timepicker .timepicker-hours').show();
+        },
+        showMinutes: function () {
+          o.find('.timepicker .timepicker-picker').hide(), o.find('.timepicker .timepicker-minutes').show();
+        },
+        showSeconds: function () {
+          o.find('.timepicker .timepicker-picker').hide(), o.find('.timepicker .timepicker-seconds').show();
+        },
+        selectHour: function (b) {
+          var c = parseInt(a(b.target).text(), 10);
+          h || (e.hours() >= 12 ? 12 !== c && (c += 12) : 12 === c && (c = 0)), _(e.clone().hours(c)), ca.showPicker.call(l);
+        },
+        selectMinute: function (b) {
+          _(e.clone().minutes(parseInt(a(b.target).text(), 10))), ca.showPicker.call(l);
+        },
+        selectSecond: function (b) {
+          _(e.clone().seconds(parseInt(a(b.target).text(), 10))), ca.showPicker.call(l);
+        },
+        clear: ba,
+        today: function () {
+          var a = x();
+          Q(a, 'd') && _(a);
+        },
+        close: aa
+      }, da = function (b) {
+        return a(b.currentTarget).is('.disabled') ? !1 : (ca[a(b.currentTarget).data('action')].apply(l, arguments), !1);
+      }, ea = function () {
+        var b, c = {
+            year: function (a) {
+              return a.month(0).date(1).hours(0).seconds(0).minutes(0);
+            },
+            month: function (a) {
+              return a.date(1).hours(0).seconds(0).minutes(0);
+            },
+            day: function (a) {
+              return a.hours(0).seconds(0).minutes(0);
+            },
+            hour: function (a) {
+              return a.seconds(0).minutes(0);
+            },
+            minute: function (a) {
+              return a.seconds(0);
+            }
+          };
+        return g.prop('disabled') || !d.ignoreReadonly && g.prop('readonly') || o ? l : (void 0 !== g.val() && 0 !== g.val().trim().length ? _(ga(g.val().trim())) : d.useCurrent && m && (g.is('input') && 0 === g.val().trim().length || d.inline) && (b = x(), 'string' == typeof d.useCurrent && (b = c[d.useCurrent](b)), _(b)), o = F(), L(), R(), o.find('.timepicker-hours').hide(), o.find('.timepicker-minutes').hide(), o.find('.timepicker-seconds').hide(), $(), K(), a(window).on('resize', H), o.on('click', '[data-action]', da), o.on('mousedown', !1), n && n.hasClass('btn') && n.toggleClass('active'), o.show(), H(), d.focusOnShow && !g.is(':focus') && g.focus(), I({ type: 'dp.show' }), l);
+      }, fa = function () {
+        return o ? aa() : ea();
+      }, ga = function (a) {
+        return a = void 0 === d.parseInputDate ? b.isMoment(a) || a instanceof Date ? b(a) : x(a) : d.parseInputDate(a), a.locale(d.locale), a;
+      }, ha = function (a) {
+        var b, c, e, f, g = null, h = [], i = {}, j = a.which, k = 'p';
+        w[j] = k;
+        for (b in w)
+          w.hasOwnProperty(b) && w[b] === k && (h.push(b), parseInt(b, 10) !== j && (i[b] = !0));
+        for (b in d.keyBinds)
+          if (d.keyBinds.hasOwnProperty(b) && 'function' == typeof d.keyBinds[b] && (e = b.split(' '), e.length === h.length && v[j] === e[e.length - 1])) {
+            for (f = !0, c = e.length - 2; c >= 0; c--)
+              if (!(v[e[c]] in i)) {
+                f = !1;
+                break;
+              }
+            if (f) {
+              g = d.keyBinds[b];
+              break;
+            }
+          }
+        g && (g.call(l, o), a.stopPropagation(), a.preventDefault());
+      }, ia = function (a) {
+        w[a.which] = 'r', a.stopPropagation(), a.preventDefault();
+      }, ja = function (b) {
+        var c = a(b.target).val().trim(), d = c ? ga(c) : null;
+        return _(d), b.stopImmediatePropagation(), !1;
+      }, ka = function () {
+        g.on({
+          change: ja,
+          blur: d.debug ? '' : aa,
+          keydown: ha,
+          keyup: ia,
+          focus: d.allowInputToggle ? ea : ''
+        }), c.is('input') ? g.on({ focus: ea }) : n && (n.on('click', fa), n.on('mousedown', !1));
+      }, la = function () {
+        g.off({
+          change: ja,
+          blur: blur,
+          keydown: ha,
+          keyup: ia,
+          focus: d.allowInputToggle ? aa : ''
+        }), c.is('input') ? g.off({ focus: ea }) : n && (n.off('click', fa), n.off('mousedown', !1));
+      }, ma = function (b) {
+        var c = {};
+        return a.each(b, function () {
+          var a = ga(this);
+          a.isValid() && (c[a.format('YYYY-MM-DD')] = !0);
+        }), Object.keys(c).length ? c : !1;
+      }, na = function (b) {
+        var c = {};
+        return a.each(b, function () {
+          c[this] = !0;
+        }), Object.keys(c).length ? c : !1;
+      }, oa = function () {
+        var a = d.format || 'L LT';
+        i = a.replace(/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (a) {
+          var b = e.localeData().longDateFormat(a) || a;
+          return b.replace(/(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g, function (a) {
+            return e.localeData().longDateFormat(a) || a;
+          });
+        }), j = d.extraFormats ? d.extraFormats.slice() : [], j.indexOf(a) < 0 && j.indexOf(i) < 0 && j.push(i), h = i.toLowerCase().indexOf('a') < 1 && i.replace(/\[.*?\]/g, '').indexOf('h') < 1, y('y') && (p = 2), y('M') && (p = 1), y('d') && (p = 0), k = Math.max(p, k), m || _(e);
+      };
+    if (l.destroy = function () {
+        aa(), la(), c.removeData('DateTimePicker'), c.removeData('date');
+      }, l.toggle = fa, l.show = ea, l.hide = aa, l.disable = function () {
+        return aa(), n && n.hasClass('btn') && n.addClass('disabled'), g.prop('disabled', !0), l;
+      }, l.enable = function () {
+        return n && n.hasClass('btn') && n.removeClass('disabled'), g.prop('disabled', !1), l;
+      }, l.ignoreReadonly = function (a) {
+        if (0 === arguments.length)
+          return d.ignoreReadonly;
+        if ('boolean' != typeof a)
+          throw new TypeError('ignoreReadonly () expects a boolean parameter');
+        return d.ignoreReadonly = a, l;
+      }, l.options = function (b) {
+        if (0 === arguments.length)
+          return a.extend(!0, {}, d);
+        if (!(b instanceof Object))
+          throw new TypeError('options() options parameter should be an object');
+        return a.extend(!0, d, b), a.each(d, function (a, b) {
+          if (void 0 === l[a])
+            throw new TypeError('option ' + a + ' is not recognized!');
+          l[a](b);
+        }), l;
+      }, l.date = function (a) {
+        if (0 === arguments.length)
+          return m ? null : e.clone();
+        if (!(null === a || 'string' == typeof a || b.isMoment(a) || a instanceof Date))
+          throw new TypeError('date() parameter must be one of [null, string, moment or Date]');
+        return _(null === a ? null : ga(a)), l;
+      }, l.format = function (a) {
+        if (0 === arguments.length)
+          return d.format;
+        if ('string' != typeof a && ('boolean' != typeof a || a !== !1))
+          throw new TypeError('format() expects a sting or boolean:false parameter ' + a);
+        return d.format = a, i && oa(), l;
+      }, l.timeZone = function (a) {
+        return 0 === arguments.length ? d.timeZone : (d.timeZone = a, l);
+      }, l.dayViewHeaderFormat = function (a) {
+        if (0 === arguments.length)
+          return d.dayViewHeaderFormat;
+        if ('string' != typeof a)
+          throw new TypeError('dayViewHeaderFormat() expects a string parameter');
+        return d.dayViewHeaderFormat = a, l;
+      }, l.extraFormats = function (a) {
+        if (0 === arguments.length)
+          return d.extraFormats;
+        if (a !== !1 && !(a instanceof Array))
+          throw new TypeError('extraFormats() expects an array or false parameter');
+        return d.extraFormats = a, j && oa(), l;
+      }, l.disabledDates = function (b) {
+        if (0 === arguments.length)
+          return d.disabledDates ? a.extend({}, d.disabledDates) : d.disabledDates;
+        if (!b)
+          return d.disabledDates = !1, $(), l;
+        if (!(b instanceof Array))
+          throw new TypeError('disabledDates() expects an array parameter');
+        return d.disabledDates = ma(b), d.enabledDates = !1, $(), l;
+      }, l.enabledDates = function (b) {
+        if (0 === arguments.length)
+          return d.enabledDates ? a.extend({}, d.enabledDates) : d.enabledDates;
+        if (!b)
+          return d.enabledDates = !1, $(), l;
+        if (!(b instanceof Array))
+          throw new TypeError('enabledDates() expects an array parameter');
+        return d.enabledDates = ma(b), d.disabledDates = !1, $(), l;
+      }, l.daysOfWeekDisabled = function (a) {
+        if (0 === arguments.length)
+          return d.daysOfWeekDisabled.splice(0);
+        if ('boolean' == typeof a && !a)
+          return d.daysOfWeekDisabled = !1, $(), l;
+        if (!(a instanceof Array))
+          throw new TypeError('daysOfWeekDisabled() expects an array parameter');
+        if (d.daysOfWeekDisabled = a.reduce(function (a, b) {
+            return b = parseInt(b, 10), b > 6 || 0 > b || isNaN(b) ? a : (-1 === a.indexOf(b) && a.push(b), a);
+          }, []).sort(), d.useCurrent && !d.keepInvalid) {
+          for (var b = 0; !Q(e, 'd');) {
+            if (e.add(1, 'd'), 7 === b)
+              throw 'Tried 7 times to find a valid date';
+            b++;
+          }
+          _(e);
+        }
+        return $(), l;
+      }, l.maxDate = function (a) {
+        if (0 === arguments.length)
+          return d.maxDate ? d.maxDate.clone() : d.maxDate;
+        if ('boolean' == typeof a && a === !1)
+          return d.maxDate = !1, $(), l;
+        'string' == typeof a && ('now' === a || 'moment' === a) && (a = x());
+        var b = ga(a);
+        if (!b.isValid())
+          throw new TypeError('maxDate() Could not parse date parameter: ' + a);
+        if (d.minDate && b.isBefore(d.minDate))
+          throw new TypeError('maxDate() date parameter is before options.minDate: ' + b.format(i));
+        return d.maxDate = b, d.useCurrent && !d.keepInvalid && e.isAfter(a) && _(d.maxDate), f.isAfter(b) && (f = b.clone().subtract(d.stepping, 'm')), $(), l;
+      }, l.minDate = function (a) {
+        if (0 === arguments.length)
+          return d.minDate ? d.minDate.clone() : d.minDate;
+        if ('boolean' == typeof a && a === !1)
+          return d.minDate = !1, $(), l;
+        'string' == typeof a && ('now' === a || 'moment' === a) && (a = x());
+        var b = ga(a);
+        if (!b.isValid())
+          throw new TypeError('minDate() Could not parse date parameter: ' + a);
+        if (d.maxDate && b.isAfter(d.maxDate))
+          throw new TypeError('minDate() date parameter is after options.maxDate: ' + b.format(i));
+        return d.minDate = b, d.useCurrent && !d.keepInvalid && e.isBefore(a) && _(d.minDate), f.isBefore(b) && (f = b.clone().add(d.stepping, 'm')), $(), l;
+      }, l.defaultDate = function (a) {
+        if (0 === arguments.length)
+          return d.defaultDate ? d.defaultDate.clone() : d.defaultDate;
+        if (!a)
+          return d.defaultDate = !1, l;
+        'string' == typeof a && ('now' === a || 'moment' === a) && (a = x());
+        var b = ga(a);
+        if (!b.isValid())
+          throw new TypeError('defaultDate() Could not parse date parameter: ' + a);
+        if (!Q(b))
+          throw new TypeError('defaultDate() date passed is invalid according to component setup validations');
+        return d.defaultDate = b, (d.defaultDate && d.inline || '' === g.val().trim()) && _(d.defaultDate), l;
+      }, l.locale = function (a) {
+        if (0 === arguments.length)
+          return d.locale;
+        if (!b.localeData(a))
+          throw new TypeError('locale() locale ' + a + ' is not loaded from moment locales!');
+        return d.locale = a, e.locale(d.locale), f.locale(d.locale), i && oa(), o && (aa(), ea()), l;
+      }, l.stepping = function (a) {
+        return 0 === arguments.length ? d.stepping : (a = parseInt(a, 10), (isNaN(a) || 1 > a) && (a = 1), d.stepping = a, l);
+      }, l.useCurrent = function (a) {
+        var b = [
+            'year',
+            'month',
+            'day',
+            'hour',
+            'minute'
+          ];
+        if (0 === arguments.length)
+          return d.useCurrent;
+        if ('boolean' != typeof a && 'string' != typeof a)
+          throw new TypeError('useCurrent() expects a boolean or string parameter');
+        if ('string' == typeof a && -1 === b.indexOf(a.toLowerCase()))
+          throw new TypeError('useCurrent() expects a string parameter of ' + b.join(', '));
+        return d.useCurrent = a, l;
+      }, l.collapse = function (a) {
+        if (0 === arguments.length)
+          return d.collapse;
+        if ('boolean' != typeof a)
+          throw new TypeError('collapse() expects a boolean parameter');
+        return d.collapse === a ? l : (d.collapse = a, o && (aa(), ea()), l);
+      }, l.icons = function (b) {
+        if (0 === arguments.length)
+          return a.extend({}, d.icons);
+        if (!(b instanceof Object))
+          throw new TypeError('icons() expects parameter to be an Object');
+        return a.extend(d.icons, b), o && (aa(), ea()), l;
+      }, l.tooltips = function (b) {
+        if (0 === arguments.length)
+          return a.extend({}, d.tooltips);
+        if (!(b instanceof Object))
+          throw new TypeError('tooltips() expects parameter to be an Object');
+        return a.extend(d.tooltips, b), o && (aa(), ea()), l;
+      }, l.useStrict = function (a) {
+        if (0 === arguments.length)
+          return d.useStrict;
+        if ('boolean' != typeof a)
+          throw new TypeError('useStrict() expects a boolean parameter');
+        return d.useStrict = a, l;
+      }, l.sideBySide = function (a) {
+        if (0 === arguments.length)
+          return d.sideBySide;
+        if ('boolean' != typeof a)
+          throw new TypeError('sideBySide() expects a boolean parameter');
+        return d.sideBySide = a, o && (aa(), ea()), l;
+      }, l.viewMode = function (a) {
+        if (0 === arguments.length)
+          return d.viewMode;
+        if ('string' != typeof a)
+          throw new TypeError('viewMode() expects a string parameter');
+        if (-1 === r.indexOf(a))
+          throw new TypeError('viewMode() parameter must be one of (' + r.join(', ') + ') value');
+        return d.viewMode = a, k = Math.max(r.indexOf(a), p), K(), l;
+      }, l.toolbarPlacement = function (a) {
+        if (0 === arguments.length)
+          return d.toolbarPlacement;
+        if ('string' != typeof a)
+          throw new TypeError('toolbarPlacement() expects a string parameter');
+        if (-1 === u.indexOf(a))
+          throw new TypeError('toolbarPlacement() parameter must be one of (' + u.join(', ') + ') value');
+        return d.toolbarPlacement = a, o && (aa(), ea()), l;
+      }, l.widgetPositioning = function (b) {
+        if (0 === arguments.length)
+          return a.extend({}, d.widgetPositioning);
+        if ('[object Object]' !== {}.toString.call(b))
+          throw new TypeError('widgetPositioning() expects an object variable');
+        if (b.horizontal) {
+          if ('string' != typeof b.horizontal)
+            throw new TypeError('widgetPositioning() horizontal variable must be a string');
+          if (b.horizontal = b.horizontal.toLowerCase(), -1 === t.indexOf(b.horizontal))
+            throw new TypeError('widgetPositioning() expects horizontal parameter to be one of (' + t.join(', ') + ')');
+          d.widgetPositioning.horizontal = b.horizontal;
+        }
+        if (b.vertical) {
+          if ('string' != typeof b.vertical)
+            throw new TypeError('widgetPositioning() vertical variable must be a string');
+          if (b.vertical = b.vertical.toLowerCase(), -1 === s.indexOf(b.vertical))
+            throw new TypeError('widgetPositioning() expects vertical parameter to be one of (' + s.join(', ') + ')');
+          d.widgetPositioning.vertical = b.vertical;
+        }
+        return $(), l;
+      }, l.calendarWeeks = function (a) {
+        if (0 === arguments.length)
+          return d.calendarWeeks;
+        if ('boolean' != typeof a)
+          throw new TypeError('calendarWeeks() expects parameter to be a boolean value');
+        return d.calendarWeeks = a, $(), l;
+      }, l.showTodayButton = function (a) {
+        if (0 === arguments.length)
+          return d.showTodayButton;
+        if ('boolean' != typeof a)
+          throw new TypeError('showTodayButton() expects a boolean parameter');
+        return d.showTodayButton = a, o && (aa(), ea()), l;
+      }, l.showClear = function (a) {
+        if (0 === arguments.length)
+          return d.showClear;
+        if ('boolean' != typeof a)
+          throw new TypeError('showClear() expects a boolean parameter');
+        return d.showClear = a, o && (aa(), ea()), l;
+      }, l.widgetParent = function (b) {
+        if (0 === arguments.length)
+          return d.widgetParent;
+        if ('string' == typeof b && (b = a(b)), null !== b && 'string' != typeof b && !(b instanceof a))
+          throw new TypeError('widgetParent() expects a string or a jQuery object parameter');
+        return d.widgetParent = b, o && (aa(), ea()), l;
+      }, l.keepOpen = function (a) {
+        if (0 === arguments.length)
+          return d.keepOpen;
+        if ('boolean' != typeof a)
+          throw new TypeError('keepOpen() expects a boolean parameter');
+        return d.keepOpen = a, l;
+      }, l.focusOnShow = function (a) {
+        if (0 === arguments.length)
+          return d.focusOnShow;
+        if ('boolean' != typeof a)
+          throw new TypeError('focusOnShow() expects a boolean parameter');
+        return d.focusOnShow = a, l;
+      }, l.inline = function (a) {
+        if (0 === arguments.length)
+          return d.inline;
+        if ('boolean' != typeof a)
+          throw new TypeError('inline() expects a boolean parameter');
+        return d.inline = a, l;
+      }, l.clear = function () {
+        return ba(), l;
+      }, l.keyBinds = function (a) {
+        return d.keyBinds = a, l;
+      }, l.getMoment = function (a) {
+        return x(a);
+      }, l.debug = function (a) {
+        if ('boolean' != typeof a)
+          throw new TypeError('debug() expects a boolean parameter');
+        return d.debug = a, l;
+      }, l.allowInputToggle = function (a) {
+        if (0 === arguments.length)
+          return d.allowInputToggle;
+        if ('boolean' != typeof a)
+          throw new TypeError('allowInputToggle() expects a boolean parameter');
+        return d.allowInputToggle = a, l;
+      }, l.showClose = function (a) {
+        if (0 === arguments.length)
+          return d.showClose;
+        if ('boolean' != typeof a)
+          throw new TypeError('showClose() expects a boolean parameter');
+        return d.showClose = a, l;
+      }, l.keepInvalid = function (a) {
+        if (0 === arguments.length)
+          return d.keepInvalid;
+        if ('boolean' != typeof a)
+          throw new TypeError('keepInvalid() expects a boolean parameter');
+        return d.keepInvalid = a, l;
+      }, l.datepickerInput = function (a) {
+        if (0 === arguments.length)
+          return d.datepickerInput;
+        if ('string' != typeof a)
+          throw new TypeError('datepickerInput() expects a string parameter');
+        return d.datepickerInput = a, l;
+      }, l.parseInputDate = function (a) {
+        if (0 === arguments.length)
+          return d.parseInputDate;
+        if ('function' != typeof a)
+          throw new TypeError('parseInputDate() sholud be as function');
+        return d.parseInputDate = a, l;
+      }, l.disabledTimeIntervals = function (b) {
+        if (0 === arguments.length)
+          return d.disabledTimeIntervals ? a.extend({}, d.disabledTimeIntervals) : d.disabledTimeIntervals;
+        if (!b)
+          return d.disabledTimeIntervals = !1, $(), l;
+        if (!(b instanceof Array))
+          throw new TypeError('disabledTimeIntervals() expects an array parameter');
+        return d.disabledTimeIntervals = b, $(), l;
+      }, l.disabledHours = function (b) {
+        if (0 === arguments.length)
+          return d.disabledHours ? a.extend({}, d.disabledHours) : d.disabledHours;
+        if (!b)
+          return d.disabledHours = !1, $(), l;
+        if (!(b instanceof Array))
+          throw new TypeError('disabledHours() expects an array parameter');
+        if (d.disabledHours = na(b), d.enabledHours = !1, d.useCurrent && !d.keepInvalid) {
+          for (var c = 0; !Q(e, 'h');) {
+            if (e.add(1, 'h'), 24 === c)
+              throw 'Tried 24 times to find a valid date';
+            c++;
+          }
+          _(e);
+        }
+        return $(), l;
+      }, l.enabledHours = function (b) {
+        if (0 === arguments.length)
+          return d.enabledHours ? a.extend({}, d.enabledHours) : d.enabledHours;
+        if (!b)
+          return d.enabledHours = !1, $(), l;
+        if (!(b instanceof Array))
+          throw new TypeError('enabledHours() expects an array parameter');
+        if (d.enabledHours = na(b), d.disabledHours = !1, d.useCurrent && !d.keepInvalid) {
+          for (var c = 0; !Q(e, 'h');) {
+            if (e.add(1, 'h'), 24 === c)
+              throw 'Tried 24 times to find a valid date';
+            c++;
+          }
+          _(e);
+        }
+        return $(), l;
+      }, l.viewDate = function (a) {
+        if (0 === arguments.length)
+          return f.clone();
+        if (!a)
+          return f = e.clone(), l;
+        if (!('string' == typeof a || b.isMoment(a) || a instanceof Date))
+          throw new TypeError('viewDate() parameter must be one of [string, moment or Date]');
+        return f = ga(a), J(), l;
+      }, c.is('input'))
+      g = c;
+    else if (g = c.find(d.datepickerInput), 0 === g.size())
+      g = c.find('input');
+    else if (!g.is('input'))
+      throw new Error('CSS class "' + d.datepickerInput + '" cannot be applied to non input element');
+    if (c.hasClass('input-group') && (n = 0 === c.find('.datepickerbutton').size() ? c.find('.input-group-addon') : c.find('.datepickerbutton')), !d.inline && !g.is('input'))
+      throw new Error('Could not initialize DateTimePicker without an input element');
+    return e = x(), f = e.clone(), a.extend(!0, d, G()), l.options(d), oa(), ka(), g.prop('disabled') && l.disable(), g.is('input') && 0 !== g.val().trim().length ? _(ga(g.val().trim())) : d.defaultDate && void 0 === g.attr('placeholder') && _(d.defaultDate), d.inline && ea(), l;
+  };
+  a.fn.datetimepicker = function (b) {
+    return this.each(function () {
+      var d = a(this);
+      d.data('DateTimePicker') || (b = a.extend(!0, {}, a.fn.datetimepicker.defaults, b), d.data('DateTimePicker', c(d, b)));
+    });
+  }, a.fn.datetimepicker.defaults = {
+    timeZone: 'Etc/UTC',
+    format: !1,
+    dayViewHeaderFormat: 'MMMM YYYY',
+    extraFormats: !1,
+    stepping: 1,
+    minDate: !1,
+    maxDate: !1,
+    useCurrent: !0,
+    collapse: !0,
+    locale: b.locale(),
+    defaultDate: !1,
+    disabledDates: !1,
+    enabledDates: !1,
+    icons: {
+      time: 'glyphicon glyphicon-time',
+      date: 'glyphicon glyphicon-calendar',
+      up: 'glyphicon glyphicon-chevron-up',
+      down: 'glyphicon glyphicon-chevron-down',
+      previous: 'glyphicon glyphicon-chevron-left',
+      next: 'glyphicon glyphicon-chevron-right',
+      today: 'glyphicon glyphicon-screenshot',
+      clear: 'glyphicon glyphicon-trash',
+      close: 'glyphicon glyphicon-remove'
+    },
+    tooltips: {
+      today: 'Go to today',
+      clear: 'Clear selection',
+      close: 'Close the picker',
+      selectMonth: 'Select Month',
+      prevMonth: 'Previous Month',
+      nextMonth: 'Next Month',
+      selectYear: 'Select Year',
+      prevYear: 'Previous Year',
+      nextYear: 'Next Year',
+      selectDecade: 'Select Decade',
+      prevDecade: 'Previous Decade',
+      nextDecade: 'Next Decade',
+      prevCentury: 'Previous Century',
+      nextCentury: 'Next Century',
+      pickHour: 'Pick Hour',
+      incrementHour: 'Increment Hour',
+      decrementHour: 'Decrement Hour',
+      pickMinute: 'Pick Minute',
+      incrementMinute: 'Increment Minute',
+      decrementMinute: 'Decrement Minute',
+      pickSecond: 'Pick Second',
+      incrementSecond: 'Increment Second',
+      decrementSecond: 'Decrement Second',
+      togglePeriod: 'Toggle Period',
+      selectTime: 'Select Time'
+    },
+    useStrict: !1,
+    sideBySide: !1,
+    daysOfWeekDisabled: !1,
+    calendarWeeks: !1,
+    viewMode: 'days',
+    toolbarPlacement: 'default',
+    showTodayButton: !1,
+    showClear: !1,
+    showClose: !1,
+    widgetPositioning: {
+      horizontal: 'auto',
+      vertical: 'auto'
+    },
+    widgetParent: null,
+    ignoreReadonly: !1,
+    keepOpen: !1,
+    focusOnShow: !0,
+    inline: !1,
+    keepInvalid: !1,
+    datepickerInput: '.datepickerinput',
+    keyBinds: {
+      up: function (a) {
+        if (a) {
+          var b = this.date() || this.getMoment();
+          a.find('.datepicker').is(':visible') ? this.date(b.clone().subtract(7, 'd')) : this.date(b.clone().add(this.stepping(), 'm'));
+        }
+      },
+      down: function (a) {
+        if (!a)
+          return void this.show();
+        var b = this.date() || this.getMoment();
+        a.find('.datepicker').is(':visible') ? this.date(b.clone().add(7, 'd')) : this.date(b.clone().subtract(this.stepping(), 'm'));
+      },
+      'control up': function (a) {
+        if (a) {
+          var b = this.date() || this.getMoment();
+          a.find('.datepicker').is(':visible') ? this.date(b.clone().subtract(1, 'y')) : this.date(b.clone().add(1, 'h'));
+        }
+      },
+      'control down': function (a) {
+        if (a) {
+          var b = this.date() || this.getMoment();
+          a.find('.datepicker').is(':visible') ? this.date(b.clone().add(1, 'y')) : this.date(b.clone().subtract(1, 'h'));
+        }
+      },
+      left: function (a) {
+        if (a) {
+          var b = this.date() || this.getMoment();
+          a.find('.datepicker').is(':visible') && this.date(b.clone().subtract(1, 'd'));
+        }
+      },
+      right: function (a) {
+        if (a) {
+          var b = this.date() || this.getMoment();
+          a.find('.datepicker').is(':visible') && this.date(b.clone().add(1, 'd'));
+        }
+      },
+      pageUp: function (a) {
+        if (a) {
+          var b = this.date() || this.getMoment();
+          a.find('.datepicker').is(':visible') && this.date(b.clone().subtract(1, 'M'));
+        }
+      },
+      pageDown: function (a) {
+        if (a) {
+          var b = this.date() || this.getMoment();
+          a.find('.datepicker').is(':visible') && this.date(b.clone().add(1, 'M'));
+        }
+      },
+      enter: function () {
+        this.hide();
+      },
+      escape: function () {
+        this.hide();
+      },
+      'control space': function (a) {
+        a.find('.timepicker').is(':visible') && a.find('.btn[data-action="togglePeriod"]').click();
+      },
+      t: function () {
+        this.date(this.getMoment());
+      },
+      'delete': function () {
+        this.clear();
+      }
+    },
+    debug: !1,
+    allowInputToggle: !1,
+    disabledTimeIntervals: !1,
+    disabledHours: !1,
+    enabledHours: !1,
+    viewDate: !1
+  };
+});
 /*!
 Waypoints - 4.0.0
 Copyright © 2011-2015 Caleb Troughton
@@ -57161,8 +59481,12 @@ angular.module('dellUiComponents').directive('toggle', function () {
           $(element).popover({ trigger: 'manual' });
           $(element).click(function (event) {
             event.preventDefault();
-            destroy();
-            $(this).popover('show');
+            if ($(this).attr('aria-describedby')) {
+              destroy();
+            } else {
+              destroy();
+              $(this).popover('show');
+            }
             $('[data-dismiss="popover"]').bind('click', function (event) {
               event.preventDefault();
               destroy();
@@ -57870,59 +60194,69 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       $scope.emptyName = $attributes.emptyName || '*State';
     }
   };
-}).directive('dateSelector', function () {
-  // Runs during compile
-  return {
-    restrict: 'C',
-    link: function ($scope, $element, $attrs) {
-      var inputField = $element.find('input'), calendarIcon = $element.find('.icon-small-calendar'), calendarWidget, inputFieldWidth = inputField.width(), inputFieldOffset = inputField.offset(), viewPortWidth = $(window).width(), viewPortHeight = $(window).height(), dateSelectorConfig = {
-          icons: {
-            time: 'icon-small-clock',
-            date: 'icon-small-calendar',
-            up: 'glyphicon glyphicon-chevron-up',
-            down: 'glyphicon glyphicon-chevron-down',
-            previous: 'glyphicon glyphicon-chevron-left',
-            next: 'glyphicon glyphicon-chevron-right',
-            today: 'icon-small-software',
-            clear: 'icon-small-trash',
-            close: 'icon-ui-close'
-          },
-          keepOpen: true,
-          widgetPositioning: {
-            horizontal: 'right',
-            vertical: typeof $attrs.position !== 'undefined' ? $attrs.position : 'bottom'
-          },
-          format: typeof $attrs.format !== 'undefined' ? $attrs.format : 'MM/DD/YYYY'
-        };
-      //TODO, check to see if the field is at the bottom of the viewport and position it on top
-      inputField.datetimepicker(dateSelectorConfig);
-      inputField.on('dp.show', function (e) {
-        calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
-        //have to repeat this because it is destroyed everytime focus is gone
-        //check to see if the right side is big enough for the widget
-        if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
-          calendarWidget.removeClass('pull-right');
-        } else {
-          calendarWidget.addClass('pull-right');
-        }
-        //check to see if the bottom side is big enough for the widget
-        if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
-          //dateSelectorConfig.widgetPositioning.vertical = "top";
-          calendarWidget.removeClass('bottom').addClass('top');
-        } else {
-          calendarWidget.removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
-        }
-      });
-      calendarIcon.on('click', function (e) {
-        inputField.focus();
-      });  /*            inputField.on("blur",function (e) {
+}).directive('dateSelector', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, $attrs) {
+        var inputField = $element.find('input'), calendarIcon = $element.find('.icon-small-calendar'), calendarWidget, inputFieldWidth = inputField.width(), inputFieldOffset = inputField.offset(), viewPortWidth = $(window).width(), viewPortHeight = $(window).height(), dateSelectorConfig = {
+            icons: {
+              time: 'icon-small-clock',
+              date: 'icon-small-calendar',
+              up: 'glyphicon glyphicon-chevron-up',
+              down: 'glyphicon glyphicon-chevron-down',
+              previous: 'glyphicon glyphicon-chevron-left',
+              next: 'glyphicon glyphicon-chevron-right',
+              today: 'icon-small-software',
+              clear: 'icon-small-trash',
+              close: 'icon-ui-close'
+            },
+            keepOpen: true,
+            widgetPositioning: {
+              horizontal: 'right',
+              vertical: typeof $attrs.position !== 'undefined' ? $attrs.position : 'bottom'
+            },
+            format: typeof $attrs.format !== 'undefined' ? $attrs.format : 'MM/DD/YYYY'
+          };
+        //TODO, check to see if the field is at the bottom of the viewport and position it on top
+        inputField.datetimepicker(dateSelectorConfig);
+        inputField.on('dp.show', function (e) {
+          calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
+          //have to repeat this because it is destroyed everytime focus is gone
+          //check to see if the right side is big enough for the widget
+          if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
+            calendarWidget.removeClass('pull-right');
+          } else {
+            calendarWidget.addClass('pull-right');
+          }
+          //check to see if the bottom side is big enough for the widget
+          if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
+            //dateSelectorConfig.widgetPositioning.vertical = "top";
+            calendarWidget.removeClass('bottom').addClass('top');
+          } else {
+            calendarWidget.removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
+          }
+          calendarWidget.find('.datepicker tr > td.day').on('click', function () {
+            $timeout(function () {
+              inputField.data('DateTimePicker').hide();
+            });
+          });
+        });
+        calendarIcon.on('click', function (e) {
+          inputField.focus();
+        });  /*
+            inputField.on("blur",function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 inputField.data("DateTimePicker").show();
-            });*/
-    }
-  };
-});
+            });
+*/
+      }
+    };
+  }
+]);
 angular.module('dellUiComponents').directive('alertCollapsible', function () {
   return {
     restrict: 'C',
@@ -58027,7 +60361,7 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
         var selector = $attrs.equalizeHeight;
         if (selector) {
           $timeout(function () {
-            $(selector).matchHeight();
+            $(selector).matchHeight({ property: 'min-height' });
           }, 500);
         } else {
           console.error('equalize-height usage error. Must include css selector to identify objects to equalize. Example: cequalize-height=".classname"');
@@ -59424,7 +61758,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/dropdown-buttons/demo-play-dropdown-buttons.html', '<section ng-controller=dropdownButtonsPLayDemoCtrl id=dropdown-buttons-play-demo><div class=container><h2>Dropdown-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/footer/demo-footer.html', '<section ng-controller=footerCtrl id=footer-html-example><div class=container><h2>Footer Demo</h2><h3>Simplified Footer</h3><div class=row><div class=col-md-9><div equalizer=group class="equalize well well-white text-gray-medium well-white-stroke"><div class="center-component component-code" id=navigation-footer-simplified-footer><footer class=navbar><div class=container><ul class="nav navbar-nav"><li><a href=javascript:;>&copy;2015 Dell</a></li><li><a href=javascript:;>Terms &amp; Conditions</a></li><li><a href=javascript:;>Privacy</a></li><li><a href=javascript:;>Ads &amp; Emails</a></li><li><a href=javascript:;>Contact</a></li><li><a href=javascript:;>Site Map</a></li><li><a href=javascript:;>Feedback</a></li></ul></div></footer></div><div class=row><div class=col-xs-12><hr class="rule-break hr-gray-light"><h5 class=fragment-title>Simplified Footer</h5><div class=description>Use for the minimum required footer functionality/content for dell.com pages.</div></div></div></div></div><div class=col-md-3><div class=well>sidebar</div></div></div></div></section>');
     $templateCache.put('components/footer/demo-play-footer.html', '<section ng-controller=footerPLayDemoCtrl id=footer-play-demo><div class=container><h2>Footer Builder</h2><div></div></div></section>');
-    $templateCache.put('components/forms/demo-forms.html', '<section ng-controller=formsCtrl id=forms-html-example><div class=container><h2>Forms Demo</h2><h3 class=top-offset-20>individual form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=text-label-input>Text input label</label><div class="col-xs-12 col-sm-5"><input type=text class=form-control id=text-label-input><p class=help-block>In addition to freeform text, any HTML5 text-based input appears like so.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=uneditable>Uneditable input</label><div class="col-xs-12 col-sm-5"><span id=uneditable class="uneditable-input form-control">Some value here</span></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=disabledInput>Disabled input</label><div class="col-xs-12 col-sm-5"><input class="disabled form-control" id=disabledInput type=text placeholder="Disabled input here\u2026" disabled></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=textarea>Textarea input</label><div class="col-xs-12 col-sm-5"><textarea id=textarea class=form-control rows=5></textarea></div></div></div></form></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Checkboxes</h4><div class=checkbox><label><input type=checkbox value="option 1"> Checkbox one</label></div><div class="checkbox disabled bottom-offset-20"><label><input type=checkbox value="value option 2" disabled> Checkbox two is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline checkboxes</h4><label class=checkbox-inline><input type=checkbox id=inlineCheckbox1 value=option1>1</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox2 value=option2>2</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox3 value=option3>3</label></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Radio Buttons</h4><div class=radio><label><input type=radio name=optionsRadios id=options-radio-1 value=option1 checked> Option one radio button</label></div><div class=radio><label><input type=radio name=optionsRadios id=options-radio-2 value=option2> Option two radio button</label></div><div class="radio disabled"><label><input type=radio name=optionsRadios id=options-radio-3 value=option3 disabled> Option three is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline Radio Buttons</h4><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio1 value=option1> 1</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio2 value=option2> 2</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio3 value=option3> 3</label></div></div><div class=row><div class="col-xs-12 col-sm-8 bottom-offset-40"><h4>Tree Checkboxes</h4><ul class=list-tree><li><label class=checkbox><input type=checkbox value=option1-parent1> Checkbox value (parent 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild1> Checkbox value (grand child 1)</label></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent1-child2> Checkbox value (child 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild3> Checkbox value (grand child 3)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild4> Checkbox value (grand child 4)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild5> Checkbox value (grand child 5)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild1> Checkbox value (great grand child 1)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild2> Checkbox value (great grand child 2)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild3> Checkbox value (great grand child 3)</label></li></ul></li></ul></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent2> Checkbox value (parent 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-grandchild1> Checkbox value (grand child 1)</label></li></ul></li></ul></li></ul></div></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=exampleInputFile>File upload label</label><div class="col-xs-6 col-sm-6"><input type=file id=exampleInputFile><p class=help-block>Example block-level help text here.</p></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Email: default error msg</label><div class="col-xs-6 col-sm-6"><input type=text class="email-check form-control"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Email: Custom msg/localized</label><div class="col-xs-6 col-sm-6"><input type=text class="email-check form-control" data-error-message="Hello!! Please input a valid email address!"></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="form-group show-password"><label for=passwordShowHide class="col-xs-12 col-sm-2 form-label">Password</label><div class="col-xs-6 col-sm-6"><input id=passwordShowHide type=password class=form-control ng-model=password></div><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"><label class="checkbox help-block"><input type=checkbox value=option1 ng-model=showPassword ng-click=togglePassword()> <span ng-if=!showPassword>Show password</span> <span ng-if=showPassword>Hide password</span></label></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-6 col-sm-8 col-md-8"><label class="col-xs-12 col-sm-3 form-label" for=phone>Phone number</label><div class="col-xs-12 col-sm-9"><input id=phone type=text class="form-control phone-number" placeholder="(555) 111-2222"></div></div></div><div class=row><div class="col-xs-12 col-sm-8 col-md-8"><div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phone-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phone-ext class="collapse col-xs-6 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label><div class=spinbox data-orient=vertical data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box horizontal</label><div class=spinbox data-orient=horizontal data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class="bottom-offset-40 top-offset-40"><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: current value</label><input class=bs-slider id=single-handle-ex1 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: tooltip constant</label><input class=bs-slider id=single-handle-ex2 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class="form-group single-handle-slider"><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Double handler Slider</label><input class=bs-slider id=double-handle-ex1 type="text"></div></div></div></form></div><h3 class=top-offset-40>select form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Select list</label><select class=form-control id=select01><option>something</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select-01 class=form-label>Tiered select list</label><select class=form-control id=select-01><option class=text-gray-dark value=all>All</option><optgroup class=text-gray-dark label="Original Release Date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup><optgroup class=text-gray-dark label="Last updated date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=multiSelect class=form-label>multi-select</label><select multiple id=multiSelect><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><div class=form-group><label for=ms class=form-label>Multi-select with checkboxes</label><select class=ms-checkbox id=ms multiple><option value=1>January</option><option value=2>February</option><option value=3>March</option><option value=4>April</option><option value=5>May</option><option value=6>June</option><option value=7>July</option><option value=8>August</option><option value=9>September</option><option value=10>October</option><option value=11>November</option><option value=12>December</option></select></div></div></div></div></form></div><h3 class=top-offset-40>Selects with pre-populated states (U.S. only)</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=default-select-state class=form-label>Standard Select U.S. States</label><select class="form-control select-state" id=default-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=short-select-state class=form-label>States with Abbreviations</label><select class="form-control select-state" data-format=short id=short-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=both-select-state class=form-label>States with Abbreviations and Name</label><select class="form-control select-state" data-format=both id=both-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=emptyname-select-state class=form-label>States with Custom Select Text</label><select class="form-control select-state" data-format="" data-empty-name="Please select a state" id=emptyname-select-state ng-model=stateDefault></select></div></div></div></form></div><h3 class=top-offset-40>Common Forms</h3><hr><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9"></h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First Name</label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name>First</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 col-md-3 hidden-sm form-label" for=last-name>Last Name</label><label class="col-xs-12 col-sm-2 col-md-3 visible-sm-block form-label" for=last-name>Last</label><div class="col-xs-12 col-sm-10 col-md-9"><input type=text class=form-control id=last-name placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone #</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 col-md-1 form-label" for=email-address>Email&nbsp;</label><div class="col-xs-12 col-sm-10 col-md-11"><input type=text class="form-control email-address" id=email-address placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 form-label" for=address-1>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-1 placeholder="*Street Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-2>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-2 placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state>&nbsp;</label><div><select class="form-control select-state" id=default-state ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip placeholder="*Zip Code"></div></div></div></form><hr class="top-offset-40"><h3>Ship to (group addressed form in Well)</h3><div class=bottom-offset-40><div class=row><div class=col-md-9><div class="well well-white text-gray-medium well-white-stroke"><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9">Ship to</h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name-1>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name-1 placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial-1>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial-1 placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 hidden-sm form-label" for=last-name>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-12 col-sm-2 visible-sm-block form-label" for=last-name-1>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=last-name-1 placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone<span class="hidden-xs hidden-sm hidden-md">#</span></label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number-1 placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=email-address-1>Email&nbsp;</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control email-address" id=email-address-1 placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext-2><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext-2 class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-A>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-A placeholder="*Street Address"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-B>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-B placeholder="*Additional Address"></div></div></div><div class=row><div class=col-xs-12><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address-1><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address-1 class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city-1>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city-1 placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state-1>&nbsp;</label><div><select class="form-control select-state" id=default-state-1 ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip-1>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip-1 placeholder="*Zip Code"></div></div></div></form></div></div></div></div><hr class="top-offset-40"><h3>Date Selector Demo</h3><form class=form-compressed role=form><div class=row><div class=form-group id=date-selector-example><label class="col-sm-2 form-label" for=date-selector-input>Date</label><div class=col-sm-2><div class=date-selector><input type=text class=form-control id=date-selector-input> <i class=icon-small-calendar></i><p class=help-block>mm/dd/yyyy</p></div></div></div></div></form><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p></div></div></section>');
+    $templateCache.put('components/forms/demo-forms.html', '<section ng-controller=formsCtrl id=forms-html-example><div class=container><h2>Forms Demo</h2><h3 class=top-offset-20>individual form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=text-label-input>Text input label</label><div class="col-xs-12 col-sm-5"><input type=text class=form-control id=text-label-input><p class=help-block>In addition to freeform text, any HTML5 text-based input appears like so.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=uneditable>Uneditable input</label><div class="col-xs-12 col-sm-5"><span id=uneditable class="uneditable-input form-control">Some value here</span></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=disabledInput>Disabled input</label><div class="col-xs-12 col-sm-5"><input class="disabled form-control" id=disabledInput type=text placeholder="Disabled input here\u2026" disabled></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=textarea>Textarea input</label><div class="col-xs-12 col-sm-5"><textarea id=textarea class=form-control rows=5></textarea></div></div></div></form></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Checkboxes</h4><div class=checkbox><label><input type=checkbox value="option 1"> Checkbox one</label></div><div class="checkbox disabled bottom-offset-20"><label><input type=checkbox value="value option 2" disabled> Checkbox two is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline checkboxes</h4><label class=checkbox-inline><input type=checkbox id=inlineCheckbox1 value=option1>1</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox2 value=option2>2</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox3 value=option3>3</label></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Radio Buttons</h4><div class=radio><label><input type=radio name=optionsRadios id=options-radio-1 value=option1 checked> Option one radio button</label></div><div class=radio><label><input type=radio name=optionsRadios id=options-radio-2 value=option2> Option two radio button</label></div><div class="radio disabled"><label><input type=radio name=optionsRadios id=options-radio-3 value=option3 disabled> Option three is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline Radio Buttons</h4><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio1 value=option1> 1</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio2 value=option2> 2</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio3 value=option3> 3</label></div></div><div class=row><div class="col-xs-12 col-sm-8 bottom-offset-40"><h4>Tree Checkboxes</h4><ul class=list-tree><li><label class=checkbox><input type=checkbox value=option1-parent1> Checkbox value (parent 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild1> Checkbox value (grand child 1)</label></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent1-child2> Checkbox value (child 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild3> Checkbox value (grand child 3)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild4> Checkbox value (grand child 4)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild5> Checkbox value (grand child 5)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild1> Checkbox value (great grand child 1)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild2> Checkbox value (great grand child 2)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild3> Checkbox value (great grand child 3)</label></li></ul></li></ul></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent2> Checkbox value (parent 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-grandchild1> Checkbox value (grand child 1)</label></li></ul></li></ul></li></ul></div></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=exampleInputFile>File upload label</label><div class="col-xs-6 col-sm-6"><input type=file id=exampleInputFile><p class=help-block>Example block-level help text here.</p></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Email: default error msg</label><div class="col-xs-6 col-sm-6"><input type=text class="email-check form-control"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Email: Custom msg/localized</label><div class="col-xs-6 col-sm-6"><input type=text class="email-check form-control" data-error-message="Hello!! Please input a valid email address!"></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="form-group show-password"><label for=passwordShowHide class="col-xs-12 col-sm-2 form-label">Password</label><div class="col-xs-6 col-sm-6"><input id=passwordShowHide type=password class=form-control ng-model=password></div><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"><label class="checkbox help-block"><input type=checkbox value=option1 ng-model=showPassword ng-click=togglePassword()> <span ng-if=!showPassword>Show password</span> <span ng-if=showPassword>Hide password</span></label></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-6 col-sm-8 col-md-8"><label class="col-xs-12 col-sm-3 form-label" for=phone>Phone number</label><div class="col-xs-12 col-sm-9"><input id=phone type=text class="form-control phone-number" placeholder="(555) 111-2222"></div></div></div><div class=row><div class="col-xs-12 col-sm-8 col-md-8"><div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phone-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phone-ext class="collapse col-xs-6 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label><div class=spinbox data-orient=vertical data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box horizontal</label><div class=spinbox data-orient=horizontal data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class="bottom-offset-40 top-offset-40"><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: current value</label><input class=bs-slider id=single-handle-ex1 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: tooltip constant</label><input class=bs-slider id=single-handle-ex2 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class="form-group single-handle-slider"><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Double handler Slider</label><input class=bs-slider id=double-handle-ex1 type="text"></div></div></div></form></div><h3 class=top-offset-40>select form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Select list</label><select class=form-control id=select01><option>something</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select-01 class=form-label>Tiered select list</label><select class=form-control id=select-01><option class=text-gray-dark value=all>All</option><optgroup class=text-gray-dark label="Original Release Date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup><optgroup class=text-gray-dark label="Last updated date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=multiSelect class=form-label>multi-select</label><select multiple id=multiSelect><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><div class=form-group><label for=ms class=form-label>Multi-select with checkboxes</label><select class=ms-checkbox id=ms multiple><option value=1>January</option><option value=2>February</option><option value=3>March</option><option value=4>April</option><option value=5>May</option><option value=6>June</option><option value=7>July</option><option value=8>August</option><option value=9>September</option><option value=10>October</option><option value=11>November</option><option value=12>December</option></select></div></div></div></div></form></div><h3 class=top-offset-40>Selects with pre-populated states (U.S. only)</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=default-select-state class=form-label>Standard Select U.S. States</label><select class="form-control select-state" id=default-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=short-select-state class=form-label>States with Abbreviations</label><select class="form-control select-state" data-format=short id=short-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=both-select-state class=form-label>States with Abbreviations and Name</label><select class="form-control select-state" data-format=both id=both-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=emptyname-select-state class=form-label>States with Custom Select Text</label><select class="form-control select-state" data-format="" data-empty-name="Please select a state" id=emptyname-select-state ng-model=stateDefault></select></div></div></div></form></div><h3 class=top-offset-40>Common Forms</h3><hr><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9"></h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First Name</label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name>First</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 col-md-3 hidden-sm form-label" for=last-name>Last Name</label><label class="col-xs-12 col-sm-2 col-md-3 visible-sm-block form-label" for=last-name>Last</label><div class="col-xs-12 col-sm-10 col-md-9"><input type=text class=form-control id=last-name placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone #</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 col-md-1 form-label" for=email-address>Email&nbsp;</label><div class="col-xs-12 col-sm-10 col-md-11"><input type=text class="form-control email-address" id=email-address placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 form-label" for=address-1>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-1 placeholder="*Street Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-2>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-2 placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state>&nbsp;</label><div><select class="form-control select-state" id=default-state ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip placeholder="*Zip Code"></div></div></div></form><hr class="top-offset-40"><h3>Ship to (group addressed form in Well)</h3><div class=bottom-offset-40><div class=row><div class=col-md-9><div class="well well-white text-gray-medium well-white-stroke"><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9">Ship to</h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name-1>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name-1 placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial-1>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial-1 placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 hidden-sm form-label" for=last-name>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-12 col-sm-2 visible-sm-block form-label" for=last-name-1>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=last-name-1 placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone<span class="hidden-xs hidden-sm hidden-md">#</span></label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number-1 placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=email-address-1>Email&nbsp;</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control email-address" id=email-address-1 placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext-2><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext-2 class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-A>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-A placeholder="*Street Address"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-B>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-B placeholder="*Additional Address"></div></div></div><div class=row><div class=col-xs-12><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address-1><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address-1 class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city-1>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city-1 placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state-1>&nbsp;</label><div><select class="form-control select-state" id=default-state-1 ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip-1>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip-1 placeholder="*Zip Code"></div></div></div></form></div></div></div></div><hr class="top-offset-40"><h3>Date Selector Demo</h3><div id=child-selects><div equalizer=group class="equalize well well-white text-gray-medium well-white-stroke"><div class="center-component component-code" id=forms-selects-date-selector><form class=bottom-offset-40 role=form><div class=row><div class=form-group id=date-selector-example role=form><div class="col-xs-12 col-sm-2"><label class=form-label for=date-selector-input>Date</label></div><div class="col-xs-6 col-sm-6"><div class=date-selector><input type=text class=form-control id=date-selector-input> <i class=icon-small-calendar></i><p class=help-block>mm/dd/yyyy</p></div></div></div></div></form></div><div class=row><div class=col-xs-12><hr class="rule-break hr-gray-light"><h5 class=fragment-title>Date selector</h5><div class=description>Allows a user to easily select a date from a calendar.</div></div></div></div></div><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p></div><div class="label label-green-marker">Recent purchase</div></div></section>');
     $templateCache.put('components/forms/demo-play-forms.html', '<section ng-controller=formsPLayDemoCtrl id=forms-play-demo><div class=container><h2>Forms Builder</h2><div></div></div></section>');
     $templateCache.put('components/grid/demo-grid.html', '<section><div class=container id=grid-html-example><h2>Grid sample</h2><h3 class=top-offset-20>Gutter explanation</h3><div class=grid-gutter-demo><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 outer-div-column-area"><span class="visible-xs-block text-center inner-div-live-area">Live Area<br>.col-xs-3</span> <span class="visible-sm-block text-center inner-div-live-area">Live Area<br>.col-sm-3</span> <span class="visible-md-block text-center inner-div-live-area">Live Area<br>.col-md-3</span> <span class="visible-lg-block text-center inner-div-live-area">Live Area<br>.col-lg-3</span></div><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 outer-div-column-area"><span class="visible-xs-block text-center inner-div-live-area">Live Area<br>.col-xs-3</span> <span class="visible-sm-block text-center inner-div-live-area">Live Area<br>.col-sm-3</span> <span class="visible-md-block text-center inner-div-live-area">Live Area<br>.col-md-3</span> <span class="visible-lg-block text-center inner-div-live-area">Live Area<br>.col-lg-3</span></div><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 outer-div-column-area"><span class="visible-xs-block text-center inner-div-live-area">Live Area<br>.col-xs-3</span> <span class="visible-sm-block text-center inner-div-live-area">Live Area<br>.col-sm-3</span> <span class="visible-md-block text-center inner-div-live-area">Live Area<br>.col-md-3</span> <span class="visible-lg-block text-center inner-div-live-area">Live Area<br>.col-lg-3</span></div><div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 outer-div-column-area"><span class="visible-xs-block text-center inner-div-live-area">Live Area<br>.col-xs-3</span> <span class="visible-sm-block text-center inner-div-live-area">Live Area<br>.col-sm-3</span> <span class="visible-md-block text-center inner-div-live-area">Live Area<br>.col-md-3</span> <span class="visible-lg-block text-center inner-div-live-area">Live Area<br>.col-lg-3</span></div></div><div class="row top-offset-20"><div class="well well-white"><div class=media><div class=media-left><div class=outer-div-column-area-square-div></div></div><div class=media-body><h4 class=media-heading>Columns<a class=anchorjs-link href=#media-heading><span class=anchorjs-icon></span></a></h4>Inside each column is 15px of padding placed on the left and right <i><strong>( See the light gray shaded area )</strong></i>. This padding pushes the live area in by a total of 30px per column. The "Gutter" is created by the sum of the padding between two adjacent columns.</div></div><div class=media><div class=media-left><div class=inner-div-live-area-square-div></div></div><div class=media-body><h4 class=media-heading>Inside Live Area for a Column<a class=anchorjs-link href=#media-heading><span class=anchorjs-icon></span></a></h4>The live content area for each column is indicated by the light yellow shaded area with red dotted lines.</div></div></div></div><hr></div></section>');
     $templateCache.put('components/icons/demo-icons.html', '<section ng-controller=iconsCtrl id=icons-html-example><div class=container><h2>Icons Demo</h2><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><p><strong>Dev guidance:</strong> The following icons are specific to Dell Brand Standards. Please use the following icon class names in place of native Bootstrap icon class names.</p><p><strong>Color guidance:</strong> All of the icons below can change to the following colors by adding these class modifiers <code>.text-blue</code>, <code>.text-dark-blue</code>, <code>.text-purple</code>, <code>.text-berry</code>, <code>.text-red</code>, <code>.text-red-dark</code>, <code>.text-gray-medium</code>, <code>.text-gray-dark</code>, <code>.text-orange</code>, <code>.text-green</code>, or <code>.text-white</code>. For example: <code>class="icon-ui-arrowleft text-blue"</code> change the modifier color after the <code>.text-*</code>.</p><h3 class=top-offset-20>UI icons</h3><ul class=icons-gallery-list><li><i class=icon-ui-arrowleft></i> <span class="icons-gallery-class ng-binding">icon-ui-arrowleft</span></li><li><i class=icon-ui-arrowright></i> <span class="icons-gallery-class ng-binding">icon-ui-arrowright</span></li><li></li><li><i class=icon-ui-close></i> <span class="icons-gallery-class ng-binding">icon-ui-close</span></li><li><i class=icon-ui-closecircle></i> <span class="icons-gallery-class ng-binding">icon-ui-closecircle</span></li><li><i class=icon-ui-collapse></i> <span class="icons-gallery-class ng-binding">icon-ui-collapse</span></li><li><i class=icon-ui-dell></i> <span class="icons-gallery-class ng-binding">icon-ui-dell</span></li><li><i class=icon-ui-expand></i> <span class="icons-gallery-class ng-binding">icon-ui-expand</span></li><li><i class=icon-ui-grid-view></i> <span class="icons-gallery-class ng-binding">icon-ui-grid-view</span></li><li><i class=icon-ui-list-view></i> <span class="icons-gallery-class ng-binding">icon-ui-list-view</span></li><li><i class=icon-ui-menucollapsed></i> <span class="icons-gallery-class ng-binding">icon-ui-menucollapsed</span></li><li><i class=icon-ui-minus></i> <span class="icons-gallery-class ng-binding">icon-ui-minus</span></li><li><i class=icon-ui-pause></i> <span class="icons-gallery-class ng-binding">icon-ui-pause</span></li><li><i class=icon-ui-play></i> <span class="icons-gallery-class ng-binding">icon-ui-play</span></li><li><i class=icon-ui-plus></i> <span class="icons-gallery-class ng-binding">icon-ui-plus</span></li><li><i class=icon-ui-triangledown></i> <span class="icons-gallery-class ng-binding">icon-ui-triangledown</span></li><li><i class=icon-ui-triangleleft></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleleft</span></li><li><i class=icon-ui-triangleright></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleright</span></li><li><i class=icon-ui-triangleup></i> <span class="icons-gallery-class ng-binding">icon-ui-triangleup</span></li><li><i class=icon-ui-loading></i> <span class="icons-gallery-class ng-binding">icon-ui-loading</span></li><li><i class=icon-ui-handle></i> <span class="icons-gallery-class ng-binding">icon-ui-handle</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Small icons</h3><p>The small icons have less detail and are intended to be used at the default font size of 16px. Please use the small icons for task based communications. For crisper small icons use the following sizes: 16px, 28px and 42px.</p><ul class=icons-gallery-list><li><i class="icon-small-360-hinge text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-360-hinge</span></li><li><i class="icon-small-add text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-add</span></li><li><i class="icon-small-alertcomplete text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertcomplete</span></li><li><i class="icon-small-alerterror text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alerterror</span></li><li><i class="icon-small-alertinfo text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertinfo</span></li><li><i class="icon-small-alertnotice text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-alertnotice</span></li><li><i class="icon-small-audiocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-audiocard</span></li><li><i class="icon-small-audiospeaker text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-audiospeaker</span></li><li><i class="icon-small-award text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-award</span></li><li><i class="icon-small-battery text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-battery</span></li><li><i class="icon-small-bell text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-bell</span></li><li><i class="icon-small-cables text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cables</span></li><li><i class="icon-small-calculator text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-calculator</span></li><li><i class="icon-small-calendar text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-calendar</span></li><li><i class="icon-small-carryingcase text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-carryingcase</span></li><li><i class="icon-small-cart text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cart</span></li><li><i class="icon-small-chat text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-chat</span></li><li><i class="icon-small-checkmark text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-checkmark</span></li><li><i class="icon-small-chipset text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-chipset</span></li><li><i class="icon-small-clock text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-clock</span></li><li><i class="icon-small-cloud text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-cloud</span></li><li><i class="icon-small-color text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-color</span></li><li><i class="icon-small-computergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-computergeneric</span></li><li><i class="icon-small-contact text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-contact</span></li><li><i class="icon-small-copy text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-copy</span></li><li><i class="icon-small-data text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-data</span></li><li><i class="icon-small-deals text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-deals</span></li><li><i class="icon-small-detachable text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-detachable</span></li><li><i class="icon-small-diagnostic text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-diagnostic</span></li><li><i class="icon-small-dimensionsweight text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-dimensionsweight</span></li><li><i class="icon-small-display text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-display</span></li><li><i class="icon-small-download text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-download</span></li><li><i class="icon-small-drivers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-drivers</span></li><li><i class="icon-small-edit text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-edit</span></li><li><i class="icon-small-employee text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-employee</span></li><li><i class="icon-small-energyefficient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-energyefficient</span></li><li><i class="icon-small-enterprise text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-enterprise</span></li><li><i class="icon-small-e-value text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-e-value</span></li><li><i class="icon-small-gift-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-gift-card</span></li><li><i class="icon-small-globe text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-globe</span></li><li><i class="icon-small-graphics-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-graphics-card</span></li><li><i class="icon-small-harddrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-harddrive</span></li><li><i class="icon-small-help text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-help</span></li><li><i class="icon-small-house text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-house</span></li><li><i class="icon-small-infrastructure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-infrastructure</span></li><li><i class="icon-small-inktoner text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-inktoner</span></li><li><i class="icon-small-keyboard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-keyboard</span></li><li><i class="icon-small-lightbulb text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-lightbulb</span></li><li><i class="icon-small-location text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-location</span></li><li><i class="icon-small-magnifying-glass text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-magnifying-glass</span></li><li><i class="icon-small-mail text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mail</span></li><li><i class="icon-small-memory text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-memory</span></li><li><i class="icon-small-memorycardreader text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-memorycardreader</span></li><li><i class="icon-small-missingimage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-missingimage</span></li><li><i class="icon-small-mobile text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mobile</span></li><li><i class="icon-small-mouse text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-mouse</span></li><li><i class="icon-small-music text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-music</span></li><li><i class="icon-small-network text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-network</span></li><li><i class="icon-small-notebook text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-notebook</span></li><li><i class="icon-small-operatingsystem text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-operatingsystem</span></li><li><i class="icon-small-opticaldrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-opticaldrive</span></li><li><i class="icon-small-package text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-package</span></li><li><i class="icon-small-partners text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-partners</span></li><li><i class="icon-small-performance text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-performance</span></li><li><i class="icon-small-phone text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-phone</span></li><li><i class="icon-small-photos text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-photos</span></li><li><i class="icon-small-ports text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-ports</span></li><li><i class="icon-small-powersupply text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-powersupply</span></li><li><i class="icon-small-printer text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-printer</span></li><li><i class="icon-small-processor text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-processor</span></li><li><i class="icon-small-projector text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-projector</span></li><li><i class="icon-small-protection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-protection</span></li><li><i class="icon-small-recycle text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-recycle</span></li><li><i class="icon-small-refresh text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-refresh</span></li><li><i class="icon-small-rss text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-rss</span></li><li><i class="icon-small-save text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-save</span></li><li><i class="icon-small-scale-out text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-scale-out</span></li><li><i class="icon-small-searchleft text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-searchleft</span></li><li><i class="icon-small-secure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-secure</span></li><li><i class="icon-small-securesoftware text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-securesoftware</span></li><li><i class="icon-small-server text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-server</span></li><li><i class="icon-small-serverrack text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-serverrack</span></li><li><i class="icon-small-share text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-share</span></li><li><i class="icon-small-shipping text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-shipping</span></li><li><i class="icon-small-socialnetworking text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-socialnetworking</span></li><li><i class="icon-small-software text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-software</span></li><li><i class="icon-small-solutions text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-solutions</span></li><li><i class="icon-small-speakers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-speakers</span></li><li><i class="icon-small-star text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-star</span></li><li><i class="icon-small-storage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-storage</span></li><li><i class="icon-small-support text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-support</span></li><li><i class="icon-small-surgeprotection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-surgeprotection</span></li><li><i class="icon-small-tablet text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-tablet</span></li><li><i class="icon-small-thinclient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-thinclient</span></li><li><i class="icon-small-touch text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-touch</span></li><li><i class="icon-small-touch-pad text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-touch-pad</span></li><li><i class="icon-small-towergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-towergeneric</span></li><li><i class="icon-small-trash text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-trash</span></li><li><i class="icon-small-tv text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-tv</span></li><li><i class="icon-small-useraccount text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-useraccount</span></li><li><i class="icon-small-video text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-video</span></li><li><i class="icon-small-videocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-videocard</span></li><li><i class="icon-small-virtualization text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-virtualization</span></li><li><i class="icon-small-warranty text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-warranty</span></li><li><i class="icon-small-webcam text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-webcam</span></li><li><i class="icon-small-whitepaper text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-whitepaper</span></li><li><i class="icon-small-wireless text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-wireless</span></li><li><i class="icon-small-zoomin text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-zoomin</span></li><li><i class="icon-small-zoomout text-blue"></i> <span class="icons-gallery-class ng-binding">icon-small-zoomout</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Large icons</h3><p>The large icons have more detail then the small icons. These should be used to support content only. For crisper large icons use the following sizes: 36px, 72px and 108px.</p><ul class="icons-gallery-list large"><li><i class="icon-large-360-hinge text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-360-hinge</span></li><li><i class="icon-large-add text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-add</span></li><li><i class="icon-large-alertcomplete text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertcomplete</span></li><li><i class="icon-large-alerterror text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alerterror</span></li><li><i class="icon-large-alertinfo text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertinfo</span></li><li><i class="icon-large-alertnotice text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-alertnotice</span></li><li><i class="icon-large-audicard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-audicard</span></li><li><i class="icon-large-audiospeaker text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-audiospeaker</span></li><li><i class="icon-large-award text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-award</span></li><li><i class="icon-large-battery text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-battery</span></li><li><i class="icon-large-bell text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-bell</span></li><li><i class="icon-large-cables text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cables</span></li><li><i class="icon-large-calculator text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-calculator</span></li><li><i class="icon-large-calendar text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-calendar</span></li><li><i class="icon-large-carryingcase text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-carryingcase</span></li><li><i class="icon-large-cart text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cart</span></li><li><i class="icon-large-chat text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-chat</span></li><li><i class="icon-large-checkmark text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-checkmark</span></li><li><i class="icon-large-chipset text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-chipset</span></li><li><i class="icon-large-clock text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-clock</span></li><li><i class="icon-large-cloud text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-cloud</span></li><li><i class="icon-large-color text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-color</span></li><li><i class="icon-large-computergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-computergeneric</span></li><li><i class="icon-large-contact text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-contact</span></li><li><i class="icon-large-copy text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-copy</span></li><li><i class="icon-large-data text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-data</span></li><li><i class="icon-large-deals text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-deals</span></li><li><i class="icon-large-detachable text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-detachable</span></li><li><i class="icon-large-diagnostic text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-diagnostic</span></li><li><i class="icon-large-dimensionsweight text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-dimensionsweight</span></li><li><i class="icon-large-display text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-display</span></li><li><i class="icon-large-download text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-download</span></li><li><i class="icon-large-drivers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-drivers</span></li><li><i class="icon-large-edit text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-edit</span></li><li><i class="icon-large-employee text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-employee</span></li><li><i class="icon-large-energyefficient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-energyefficient</span></li><li><i class="icon-large-enterprise text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-enterprise</span></li><li><i class="icon-large-e-value text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-e-value</span></li><li><i class="icon-large-giftcard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-giftcard</span></li><li><i class="icon-large-globe text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-globe</span></li><li><i class="icon-large-graphics-card text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-graphics-card</span></li><li><i class="icon-large-harddrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-harddrive</span></li><li><i class="icon-large-help text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-help</span></li><li><i class="icon-large-house text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-house</span></li><li><i class="icon-large-infrastructure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-infrastructure</span></li><li><i class="icon-large-inktoner text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-inktoner</span></li><li><i class="icon-large-keyboard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-keyboard</span></li><li><i class="icon-large-lightbulb text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-lightbulb</span></li><li><i class="icon-large-location text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-location</span></li><li><i class="icon-large-magnifying-glass text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-magnifying-glass</span></li><li><i class="icon-large-mail text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mail</span></li><li><i class="icon-large-memory text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-memory</span></li><li><i class="icon-large-memorycarreader text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-memorycarreader</span></li><li><i class="icon-large-missingimage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-missingimage</span></li><li><i class="icon-large-mobile text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mobile</span></li><li><i class="icon-large-mouse text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-mouse</span></li><li><i class="icon-large-music text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-music</span></li><li><i class="icon-large-network text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-network</span></li><li><i class="icon-large-notebook text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-notebook</span></li><li><i class="icon-large-operatingsystem text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-operatingsystem</span></li><li><i class="icon-large-opticaldrive text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-opticaldrive</span></li><li><i class="icon-large-package text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-package</span></li><li><i class="icon-large-partners text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-partners</span></li><li><i class="icon-large-performance text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-performance</span></li><li><i class="icon-large-phone text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-phone</span></li><li><i class="icon-large-photos text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-photos</span></li><li><i class="icon-large-ports text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-ports</span></li><li><i class="icon-large-powersupply text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-powersupply</span></li><li><i class="icon-large-printer text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-printer</span></li><li><i class="icon-large-processor text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-processor</span></li><li><i class="icon-large-projector text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-projector</span></li><li><i class="icon-large-protection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-protection</span></li><li><i class="icon-large-recycle text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-recycle</span></li><li><i class="icon-large-refresh text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-refresh</span></li><li><i class="icon-large-rss text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-rss</span></li><li><i class="icon-large-save text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-save</span></li><li><i class="icon-large-scale-out text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-scale-out</span></li><li><i class="icon-large-searchleft text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-searchleft</span></li><li><i class="icon-large-secure text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-secure</span></li><li><i class="icon-large-securesoftware text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-securesoftware</span></li><li><i class="icon-large-server text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-server</span></li><li><i class="icon-large-serverrack text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-serverrack</span></li><li><i class="icon-large-share text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-share</span></li><li><i class="icon-large-shipping text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-shipping</span></li><li><i class="icon-large-socialnetworking text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-socialnetworking</span></li><li><i class="icon-large-software text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-software</span></li><li><i class="icon-large-solutions text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-solutions</span></li><li><i class="icon-large-speakers text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-speakers</span></li><li><i class="icon-large-star text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-star</span></li><li><i class="icon-large-storage text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-storage</span></li><li><i class="icon-large-support text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-support</span></li><li><i class="icon-large-surgeprotection text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-surgeprotection</span></li><li><i class="icon-large-tablet text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-tablet</span></li><li><i class="icon-large-thinclient text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-thinclient</span></li><li><i class="icon-large-touch text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-touch</span></li><li><i class="icon-large-touchpad text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-touchpad</span></li><li><i class="icon-large-towergeneric text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-towergeneric</span></li><li><i class="icon-large-trash text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-trash</span></li><li><i class="icon-large-tv text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-tv</span></li><li><i class="icon-large-useraccount text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-useraccount</span></li><li><i class="icon-large-video text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-video</span></li><li><i class="icon-large-videocard text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-videocard</span></li><li><i class="icon-large-virtualization text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-virtualization</span></li><li><i class="icon-large-warranty text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-warranty</span></li><li><i class="icon-large-webcam text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-webcam</span></li><li><i class="icon-large-whitepaper text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-whitepaper</span></li><li><i class="icon-large-wireless text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-wireless</span></li><li><i class="icon-large-zoomin text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-zoomin</span></li><li><i class="icon-large-zoomout text-blue"></i> <span class="icons-gallery-class ng-binding">icon-large-zoomout</span></li></ul></div></div><hr><div class=row><div class="col-xs-12 bottom-offset-20 top-offset-20"><h3>Ratings icons</h3><p>The rating icons have been broken down to 10% increments. These small changes are demonstrated on the last star of the examples below</p><ul class=icons-gallery-list><li><i class=icon-small-favorite-100></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-100</span></li><li><i class=icon-small-favorite-90></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-90</span></li><li><i class=icon-small-favorite-80></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-80</span></li><li><i class=icon-small-favorite-70></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-70</span></li><li><i class=icon-small-favorite-60></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-60</span></li><li><i class=icon-small-favorite-50></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-50</span></li><li><i class=icon-small-favorite-40></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-40</span></li><li><i class=icon-small-favorite-30></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-30</span></li><li><i class=icon-small-favorite-20></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-20</span></li><li><i class=icon-small-favorite-10></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-10</span></li><li><i class=icon-small-favorite-0></i> <span class="icons-gallery-class ng-binding">icon-small-favorite-0</span></li></ul></div></div></div></section>');
@@ -59446,7 +61780,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/pagination/demo-pagination.html', '<section ng-controller=paginationCtrl id=pagination-html-example><div class=container><h2>Pagination Demo</h2><div><h3 class="top-offset-40 bottom-offset-20">Centered pagination</h3><div class="pagination center-block"><ul class=pager><li><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div><h3 class="top-offset-40 bottom-offset-20">Justified pagination</h3><div class=row><div class="pagination col-xs-12"><ul class="pager bottom-offset-20"><li class=previous><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li class=next><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div></div><h3 class="top-offset-40 bottom-offset-20">Centered pagination with filters</h3><div class=row><div class="pagination col-xs-12 col-md-8"><ul class="pager bottom-offset-10"><li class="previous pull-left"><a href=# data-action=previous><span aria-hidden=true class=icon-ui-arrowleft></span>&nbsp;Previous</a></li><li><span class="pager-span hidden-xs">page</span><input class=pagination-input type=text readonly data-max-page="40"><span class="pager-span hidden-xs">of 40</span></li><li class="next pull-right"><a href=# data-action=next>Next&nbsp;<span aria-hidden=true class=icon-ui-arrowright></span></a></li></ul></div><div class="col-xs-12 col-md-4 bottom-offset-10"><select class=form-control><option value="Items per page">Items per page</option><option value="20 per page">20 per page</option><option value="30 per page">30 per page</option><option value="40 per page">40 per page</option></select></div></div></div><div class="top-offset-40 bottom-offset-5"><h3 class=bottom-offset-40>Tap-to-Load</h3></div><div class=bottom-offset-60><div class=row><div class=col-xs-12><ul id=load-more-example class="list-unstyled load-more"><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>A</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>B</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>C</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>D</strong></p></li><li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>E</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>F</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>G</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>H</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>I</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>J</strong></p></li><li class="well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>K</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>L</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>M</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>N</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>O</strong></p></li><li class="well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>P</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>Q</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>R</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>S</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>T</strong></p></li><li class="well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>U</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>V</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>W</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>X</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>Y</strong></p></li><li class="well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>Z</strong></p></li></ul><div class=pager><button id=load-more-link type=button data-target=#load-more-example data-loading-text="" data-toggle=load-more class="btn btn-load-more">Load More Results</button></div></div></div></div></div></section>');
     $templateCache.put('components/pagination/demo-play-pagination.html', '<section ng-controller=paginationPLayDemoCtrl id=pagination-play-demo><div class=container><h2>Pagination Builder</h2><div></div></div></section>');
     $templateCache.put('components/popovers/demo-play-popovers.html', '<section ng-controller=popoversPLayDemoCtrl id=popovers-play-demo><div class=container><h2>Popovers Builder</h2><div></div></div></section>');
-    $templateCache.put('components/popovers/demo-popovers.html', '<section ng-controller=popoversCtrl id=popovers-html-example><div class=container><h2>Popovers Demo</h2><div><div class=bottom-offset-40><ul class="unstyled list-inline"><li class=top-offset-20 aria-describedby=popover-top><a tabindex=0 role=popover id=popover-top data-trigger=focus class="btn btn-default" data-html=true data-toggle=popover data-placement=top data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on top &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on top</a></li><li class=top-offset-20 aria-describedby=popover-right><a tabindex=0 role=popover id=popover-right data-trigger=focus class="btn btn-default" data-html=true data-toggle=popover data-placement=right data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on right</a></li><li class=top-offset-20 aria-describedby=popover-bottom><a tabindex=0 role=popover id=popover-bottom data-trigger=focus class="btn btn-default" data-html=true data-toggle=popover data-placement=bottom data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on bottom &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on bottom</a></li><li class=top-offset-20 aria-describedby=popover-left><a tabindex=0 role=popover id=popover-left data-trigger=focus class="btn btn-default" data-html=true data-toggle=popover data-placement=left data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on left</a></li></ul></div></div></div></section>');
+    $templateCache.put('components/popovers/demo-popovers.html', '<section ng-controller=popoversCtrl id=popovers-html-example><div class=container><h2>Popovers Demo</h2><div><div class=bottom-offset-40><ul class="unstyled list-inline"><li class=top-offset-20 aria-describedby=popover-top><a tabindex=0 role=popover id=popover-top data-trigger=show class="btn btn-default" data-html=true data-toggle=popover data-placement=top data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on top &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on top</a></li><li class=top-offset-20 aria-describedby=popover-right><a tabindex=0 role=popover id=popover-right data-trigger=focus class="btn btn-default" data-html=true data-toggle=popover data-placement=right data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on right</a></li><li class=top-offset-20 aria-describedby=popover-bottom><a tabindex=0 role=tooltip id=popover-bottom data-trigger=focus class="btn btn-default" data-html=true data-toggle=popover data-placement=bottom data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on bottom &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on bottom</a></li><li class=top-offset-20 aria-describedby=popover-left><a tabindex=0 role=popover id=popover-left data-trigger=focus class="btn btn-default" data-html=true data-toggle=popover data-placement=left data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left &lt;button type=\'button\' class=\'close pull-right visible-phone\' data-dismiss=\'popover\'&gt;\xd7&lt;/button&gt;">Popover on left</a></li></ul></div></div><div class="bs-example bs-example-popover" data-example-id=static-popovers><div class="popover top"><div class=arrow></div><h3 class=popover-title>Popover top</h3><div class=popover-content><p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p></div></div><div class="popover right"><div class=arrow></div><h3 class=popover-title>Popover right</h3><div class=popover-content><p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p></div></div><div class="popover bottom"><div class=arrow></div><h3 class=popover-title>Popover bottom</h3><div class=popover-content><p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p></div></div><div class="popover left"><div class=arrow></div><h3 class=popover-title>Popover left</h3><div class=popover-content><p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p></div></div><div class=clearfix></div></div></div></section>');
     $templateCache.put('components/progress-bars/demo-play-progress-bars.html', '<section ng-controller=progressBarsPLayDemoCtrl id=progress-bars-play-demo><div class=container><h2>Progress-Bars Builder</h2><div></div></div></section>');
     $templateCache.put('components/progress-bars/demo-progress-bars.html', '<section ng-controller=progressBarsCtrl id=progress-bars-html-example><div class=container><h2>Progress-Bars Demo</h2><div class=row><div class="col-md-6 bottom-offset-20"><h4>Default</h4><div class=progress><div class=bar style="width: 60%"></div></div><h4>Default with percentage</h4><div class=progress><div class=bar style="width: 60%">60%</div></div></div></div><div class=bottom-offset-60><h4>Default progress status</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></a><div class="bar bar-progress" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status: Disabled</h4><div class="progress progress-status"><div href=javascript:; class="bar bar-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Shipping</span></div><div class="bar bar-progress-disabled" style="width: 33.3%"><span class="hidden-xs hidden-sm">Payment</span></div><div class="bar bar-incomplete" style="width: 33.4%"><span class="hidden-xs hidden-sm">Verify &amp; Submit Order</span></div></div></div><div class=bottom-offset-60><h4>Progress Status 2-Step minimum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 50%"><span class="hidden-xs hidden-sm">Payment</span></a><div class="bar bar-incomplete" style="width: 50%"><span class="hidden-xs hidden-sm">Verify &amp; submit order</span></div></div></div><div class=bottom-offset-60><h4>Progress status 6-Step maximum</h4><div class="progress progress-status"><a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 1</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 2</span></a> <a href=javascript:; class="bar bar-complete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 3</span></a><div class="bar bar-progress" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 4</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 5</span></div><div class="bar bar-incomplete" style="width: 16.666%"><span class="hidden-xs hidden-sm">Step 6</span></div></div></div><div class=bottom-offset-60><h4>Animated Striped</h4><p>Add <code>.active</code> to <code>.progress-bar-striped</code> to animate the stripes right to left. Not available in IE9 and below.</p><div class=progress><div class="progress-bar progress-bar-striped active" role=progressbar aria-valuenow=45 aria-valuemin=0 aria-valuemax=100 style="width: 45%"><span class=sr-only>45% Complete</span></div></div></div><div class=bottom-offset-60><h4>Striped progress</h4><div ng-init=fakeAnimation() class=interactive-progress-bar><div class="pull-right progress-counter hidden-xs"><h4 class=pull-right>{{fakeAnimationValue}}%</h4></div><div class="progress bottom-offset-5"><div ng-class=stripeAnimate class="progress-bar progress-bar-striped" role=progressbar aria-valuenow={{fakeAnimationValue}} aria-valuemin=0 aria-valuemax=100 style="width: {{fakeAnimationValue}}%"></div></div><div><p class=pull-left>Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p><div class="btn-group pull-right fake-animation-controls"><button type=reset class="btn btn-default" ng-click=resetFakeAnimation() ng-if="fakeAnimationValue !== 100">Cancel</button> <button type=submit class="btn btn-primary" ng-click=pauseFakeAnimation() ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button> <button type=submit class="btn btn-primary" ng-click=fakeAnimation() ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button> <button type=submit class="btn btn-primary" ng-if="fakeAnimationValue === 100" ng-click=resetFakeAnimation()>Ok</button></div></div></div></div><div class=bottom-offset-60><h4>Striped progress</h4><div class=btn-toolbar><div class=btn-group id=button-default-dropdown><a class="btn btn-default dropdown-toggle btn-progress" data-toggle=dropdown href=javascript:; aria-expanded=false>Step 5 of 9: Lorem ispum</a><ul class=dropdown-menu><li class=completed><a href=javascript:;>Step 1 of 9: Lorem ispum</a></li><li class=completed><a href=javascript:;>Step 2 of 9: Lorem ispum</a></li><li class=completed><a href=javascript:;>Step 3 of 9: Lorem ispum</a></li><li class=completed><a href=javascript:;>Step 4 of 9: Lorem ispum</a></li><li class=active><a href=javascript:;>Step 5 of 9: Lorem ispum</a></li><li class=disabled><a href=javascript:;>Step 6 of 9: Lorem ispum</a></li><li class=disabled><a href=javascript:;>Step 7 of 9: Lorem ispum</a></li><li class=disabled><a href=javascript:;>Step 8 of 9: Lorem ispum</a></li><li class=disabled><a href=javascript:;>Step 9 of 9: Lorem ispum</a></li><li><a href=javascript:;>Summary</a></li></ul></div><div class=btn-group><a class="btn btn-primary" href=javascript:;>Next</a></div><div class=btn-group><a class="btn btn-link" href=javascript:;>Exit</a></div></div></div></div></section>');
     $templateCache.put('components/ratings-and-reviews/demo-play-ratings-and-reviews.html', '<section ng-controller=ratingsAndReviewsPLayDemoCtrl id=ratings-and-reviews-play-demo><div class=container><h2>Ratings-And-Reviews Builder</h2><div></div></div></section>');
@@ -59464,7 +61798,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/tabs/demo-play-tabs.html', '<section ng-controller=tabsPLayDemoCtrl id=tabs-play-demo><div class=container><h2>Tabs Builder</h2><div></div></div></section>');
     $templateCache.put('components/tabs/demo-tabs.html', '<section ng-controller=tabsCtrl id=tabs-html-example><div class=container><h2>Tabs Demo</h2><h3>Tabs <small>(default)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs"><li role=presentation class=active><a href=#home aria-controls=home role=tab data-toggle=tab>Home <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#profile aria-controls=profile role=tab data-toggle=tab>Profile <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#messages aria-controls=messages role=tab data-toggle=tab>Messages <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#settings aria-controls=settings role=tab data-toggle=tab>Settings <i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=home><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</p></div><div role=tabpanel class="tab-pane fade" id=profile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</p></div><div role=tabpanel class="tab-pane fade" id=messages><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</p></div><div role=tabpanel class="tab-pane fade" id=settings><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</p></div></div></div></div><hr><h3>Tabs <small>(overflow: more tabs than the container width can handle)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs" id=overflow-tabs-example><li role=presentation class=active><a href=#overflow-1 aria-controls=home role=tab data-toggle=tab>Home <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-2 aria-controls=profile role=tab data-toggle=tab>Profile <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-3 aria-controls=messages role=tab data-toggle=tab>Messages <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-4 aria-controls=settings role=tab data-toggle=tab>Settings <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-5 aria-controls=more-stuff role=tab data-toggle=tab>Sed at sapien turpis <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-6 aria-controls=even-more-stuff role=tab data-toggle=tab>Nulla iaculis rhoncus <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-7 aria-controls=too-much-stuff role=tab data-toggle=tab>Curabitur eleifend <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-8 aria-controls=way-too-much-stuff role=tab data-toggle=tab>Sociis natoque penatibus <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-9 aria-controls=absolutely-way-too-much-stuff role=tab data-toggle=tab>Morbi sed sagittis puru <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-10 aria-controls=this-needs-to-stop role=tab data-toggle=tab>Nam sed velit vel tortor suscipit egestas <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-11 aria-controls=seriously-stop role=tab data-toggle=tab>Etiam tincidunt ut<br>ante sed ultrices <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-12 aria-controls=ok-done role=tab data-toggle=tab>Sed condimentum interdum est nec imperdiet <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#overflow-13 aria-controls=ok-done role=tab data-toggle=tab>Sed quis egestas libero <i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=overflow-1><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-2><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-3><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-4><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-5><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Sed at sapien turpis. Ut at nulla eget ligula facilisis feugiat. Mauris egestas erat tortor, sit amet blandit enim sollicitudin eu. Curabitur malesuada metus est, vel bibendum tortor mollis id. Nunc efficitur non quam quis porttitor. Nam odio tellus, efficitur et suscipit a, rutrum quis magna. Fusce luctus leo ut justo fringilla, in pellentesque nisl fringilla. Aliquam ullamcorper ex et nunc egestas, eget venenatis magna varius. Morbi in tortor eu quam ullamcorper porta sed at nisi. Sed sed sapien eros. Praesent rutrum purus ut libero feugiat cursus. Fusce in justo lorem. Phasellus consequat felis sapien, sit amet tempor mi hendrerit sed. Nullam nulla eros, condimentum quis elit tristique, convallis blandit sem.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-6><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Nulla iaculis rhoncus lacus ac dictum. Aenean ut sem mi. Quisque nec sapien porta, iaculis justo eu, feugiat mi. Proin vel tellus in nulla pretium dignissim sit amet pulvinar justo. Donec ac tempus eros. Morbi pretium turpis diam, id imperdiet nibh tempor sed. In scelerisque eros quis ultricies hendrerit. Aenean aliquam ante sed metus rhoncus, eget ornare libero imperdiet. Nam erat nunc, vestibulum vel lacinia nec, ultrices nec justo. Curabitur interdum massa leo, vel tempor velit accumsan quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris felis augue, porttitor ut lacinia id, volutpat at lorem. Phasellus accumsan vestibulum odio, sit amet elementum ex rhoncus eu.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-7><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Curabitur eleifend, ligula sed commodo imperdiet, odio quam pellentesque nulla, ornare ullamcorper lorem augue vel sapien. Ut pretium, ligula eu elementum semper, ipsum dui auctor eros, eget tincidunt est arcu nec arcu. Sed sapien odio, mollis et elit in, dapibus viverra orci. Duis nec lacus ut libero molestie bibendum at at justo. Integer blandit massa nec elit aliquet, nec commodo metus semper. Donec lectus tortor, dapibus eu sodales at, dictum a nibh. Duis in justo et nibh placerat sodales in eget magna.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-8><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sit amet eros egestas, rhoncus enim suscipit, aliquam leo. Vestibulum non porta risus. Phasellus sit amet mattis purus. Aenean arcu mi, consequat vel faucibus et, tincidunt ut lectus. Curabitur eget tincidunt augue. Praesent id pellentesque elit. Ut ultricies, ligula quis faucibus finibus, dolor massa fringilla eros, ac porttitor odio nisl at enim. Nullam condimentum lobortis massa nec pellentesque. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-9><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Morbi sed sagittis purus. Pellentesque pretium tortor eget aliquam faucibus. Sed vestibulum scelerisque consequat. Maecenas commodo pellentesque auctor. Proin sed eros sit amet felis condimentum maximus. Quisque in nibh lacinia elit consectetur ultrices nec et dolor. Fusce tempus nisi vitae lectus accumsan sollicitudin. Donec non tempus erat. Aliquam semper eleifend ornare. Nulla elementum dignissim libero sit amet tincidunt. Ut mattis mi neque, vel fermentum enim elementum vel. Vivamus lobortis congue massa a hendrerit. Morbi sed aliquam mauris, non ultrices ipsum.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-10><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Nam sed velit vel tortor suscipit egestas. Vestibulum lobortis felis et elit facilisis lobortis. Quisque at nulla eleifend, rhoncus tortor id, convallis leo. Donec malesuada ex nibh, et auctor libero consequat porta. Donec a elementum metus. Morbi dolor elit, gravida id elementum nec, ullamcorper at lorem. In sodales turpis eu nisl aliquet, in mollis mi efficitur. Cras sagittis pharetra dapibus. Pellentesque lacinia a tortor sit amet mattis. Suspendisse potenti. Nullam id lacus diam. Mauris laoreet elit a orci tincidunt dignissim. Quisque tristique ex vitae libero commodo, a suscipit mi consequat. Donec sed rutrum augue. Nullam ornare condimentum tempus.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-11><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Etiam tincidunt ut ante sed ultrices. Proin vitae vulputate arcu. Nulla vehicula scelerisque tincidunt. Pellentesque a sollicitudin nulla, quis pellentesque libero. In pharetra, urna et lobortis scelerisque, ipsum mi commodo massa, vel cursus lectus dolor sit amet lectus. Curabitur eget lobortis nibh. Nulla rhoncus orci tincidunt, porta sapien ut, cursus tellus. Quisque pretium nisi sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam felis odio, fermentum ac laoreet sit amet, tempor eu nisl. Phasellus sed augue eu lectus dictum ornare in ut tortor.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-12><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Sed condimentum interdum est nec imperdiet. Proin eu purus blandit, finibus felis id, ultrices magna. Curabitur consectetur dolor sit amet tellus ultricies, in auctor turpis lacinia. Donec sagittis ligula commodo, vehicula sapien at, eleifend mauris. Vestibulum ac elit eget nibh vulputate efficitur sit amet at orci. Ut sit amet pulvinar nunc. Praesent condimentum eu felis non tincidunt. Duis malesuada turpis vel elit vulputate, a fermentum erat tincidunt.</p></div><div role=tabpanel class="tab-pane fade" id=overflow-13><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Sed quis egestas libero. Suspendisse lobortis viverra velit, vel lacinia justo consequat vel. Proin ipsum elit, ultricies non erat quis, auctor molestie lacus. Phasellus sodales commodo eros, id ullamcorper tellus posuere ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent quis suscipit urna. Sed porta odio ligula, a varius eros hendrerit nec. Cras et ante in sem tempor pretium sit amet vitae odio. Vivamus efficitur tortor id metus eleifend pellentesque. Cras semper mi enim, at dapibus turpis fermentum eu. Fusce porta scelerisque elit vitae tincidunt.</p></div></div></div></div><hr><h3>Tabs <small>(justified)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-justified" role=tablist><li role=presentation class=active><a href=#long-example aria-controls=long-example role=tab data-toggle=tab>Example to show the auto adjusted tab height. <i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#automobile aria-controls=Automobile role=tab data-toggle=tab>Automobile<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#boats aria-controls=Boats role=tab data-toggle=tab>Boats<i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#planes aria-controls=Planes role=tab data-toggle=tab>Planes<i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=long-example><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Long example ipsum dolor sit amet, consectetur adipiscing elit. Curabitur semper vulputate justo, nec fermentum ante pellentesque at. Aliquam erat volutpat. Mauris vehicula rhoncus velit vitae scelerisque.</p></div><div role=tabpanel class="tab-pane fade" id=automobile><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Automobile et metus at urna auctor varius. Cras mattis tincidunt eros facilisis efficitur. Nam ullamcorper faucibus neque nec eleifend.</p></div><div role=tabpanel class="tab-pane fade" id=boats><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Boats sapien quam, facilisis gravida magna sit amet, dignissim vehicula mauris. Proin tellus purus, condimentum in ex nec, varius malesuada neque.</p></div><div role=tabpanel class="tab-pane fade" id=planes><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Planes condimentum urna sit amet interdum mattis. Vivamus fermentum porttitor libero id faucibus. Duis nec suscipit nisi. Aenean in egestas metus.</p></div></div></div></div><hr><h3>Tabs <small>(centered)</small></h3><div class=bottom-offset-60><div class="row-offcanvas row-offcanvas-right"><ul class="nav nav-tabs nav-centered" role=tablist><li role=presentation class=active><a href=#inspiron role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Inspiron Laptops</h4><p class=text-gray-dark>For home and home office</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#latitude role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Latitude Laptops</h4><p class=text-gray-dark>For business-class security and reliability</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#vostro role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Vostro Laptops</h4><p class=text-gray-dark>For small business computing</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#XPS role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>XPS Laptops</h4><p class=text-gray-dark>For the ultimate experience</p><i class="icon-ui-arrowright visible-xs"></i></a></li><li role=presentation><a href=#precision role=tab data-toggle=tab><img class=tab-image alt=80x80 src=http://placehold.it/80x80><h4>Dell Precision Mobile Workstation\'s</h4><p class=text-gray-dark>For professional creators</p><i class="icon-ui-arrowright visible-xs"></i></a></li></ul><div class=tab-content><div role=tabpanel class="tab-pane fade active in" id=inspiron><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Inspiron condimentum urna sit amet interdum mattis. Vivamus fermentum porttitor libero id faucibus. Duis nec suscipit nisi. Aenean in egestas metus.</p></div><div role=tabpanel class="tab-pane fade" id=latitude><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Latitude as et metus at urna auctor varius. Cras mattis tincidunt eros facilisis efficitur. Nam ullamcorper faucibus neque nec eleifend.</p></div><div role=tabpanel class="tab-pane fade" id=vostro><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Vostro estibulum nec pharetra magna, vitae auctor erat. Suspendisse quam enim, bibendum quis ante quis, hendrerit condimentum len.</p></div><div role=tabpanel class="tab-pane fade" id=XPS><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>XPS sollicitudin, metus eget venenatis bibendum, ex neque posuere diam, sed pharetra urna tortor in justo. Maecenas faucibus quam sit amet fermentum sodales.</p></div><div role=tabpanel class="tab-pane fade" id=precision><button class="btn btn-default btn-block visible-xs" data-toggle=offcanvas><i class=icon-ui-arrowleft></i> Back</button><p>Precision vel nibh et risus fringilla molestie. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p></div></div></div></div></div></section>');
     $templateCache.put('components/tooltips/demo-play-tooltips.html', '<section ng-controller=tooltipsPLayDemoCtrl id=tooltips-play-demo><div class=container><h2>Tooltips Builder</h2><div></div></div></section>');
-    $templateCache.put('components/tooltips/demo-tooltips.html', '<section ng-controller=tooltipsCtrl id=tooltips-html-example><div class=container><h2 class=bottom-offset-20>Tooltips Demo</h2><h4 class=top-offset-20>Tooltip positioning</h4><ul class="unstyled list-inline"><li class=top-offset-10 aria-describedby=tooltip-top><span role=tooltip id=tooltip-top data-toggle=tooltip data-container=body data-placement=top data-original-title="Tooltip on top with simple filler copy">Tooltip on top</span></li><li class=top-offset-10 aria-describedby=tooltip-right><span role=tooltip id=tooltip-right data-toggle=tooltip data-container=body data-placement=right data-original-title="Tooltip on right with simple filler copy">Tooltip on right</span></li><li class=top-offset-10 aria-describedby=tooltip-bottom><span role=tooltip id=tooltip-bottom data-toggle=tooltip data-container=body data-placement=bottom data-original-title="Tooltip on bottom with simple filler copy">Tooltip on bottom</span></li><li class=top-offset-10 aria-describedby=tooltip-left><span role=tooltip id=tooltip-left data-toggle=tooltip data-container=body data-placement=left data-original-title="Tooltip on left with simple filler copy">Tooltip on left</span></li></ul><h4 class=top-offset-20 aria-describedby=tooltip-para>Inline tooltip to provide glossary term definition</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu nisl fringilla, dignissim <span role=tooltip id=tooltip-para data-toggle=tooltip data-container=body data-placement=top data-original-title="Inline tooltip used as a glossary term definition.">eliefend</span> at ligula auctor massa auctor lobortis hendrerit id lorem. Sed rutrum felis enim, vel cursus ligula pharetra id. Nullam vitae magna ac erat elementum tristique.</p><h4 class=top-offset-20 aria-describedby=tooltip-link>Inline tooltip to provide context to a link</h4><p>Lorem ipsum dolor sit amet, <a href="javascript:alert(\'hey you clicked on a link!\')" role=tooltip id=tooltip-link data-toggle=tooltip data-container=body data-placement=top data-original-title="Tooltip used on a link to provide context.">consectetur adipiscing elit</a>.</p><h4 class=top-offset-20 aria-describedby=tooltip-image>Tooltip on an image</h4><p><img src=https://placehold.it/250x100 role=tooltip id=tooltip-image data-toggle=tooltip data-container=body data-placement=right data-original-title="This is an awesome image!"></p></div></section>');
+    $templateCache.put('components/tooltips/demo-tooltips.html', '<section ng-controller=tooltipsCtrl id=tooltips-html-example><div class=container><h2 class=bottom-offset-20>Tooltips Demo</h2><ul class="unstyled list-inline top-offset-10"><li aria-describedby=tooltip-top><a id=tooltip-top href=javascript:; data-toggle=tooltip data-container=body data-placement=top title="Tooltip on bottom with simple filler copy">Tooltip on top</a></li><li aria-describedby=tooltip-right><a href=javascript:; data-toggle=tooltip data-container=body data-placement=right title="Tooltip on left with simple filler copy">Tooltip on right</a></li><li aria-describedby=tooltip-bottom><a href=javascript:; data-toggle=tooltip data-container=body data-placement=bottom title="Tooltip on bottom with simple filler copy">Tooltip on bottom</a></li><li><a href=javascript:; data-toggle=tooltip data-container=body data-placement=left title="Tooltip on left with simple filler copy">Tooltip on left</a></li></ul></div></section>');
     $templateCache.put('components/typography/demo-play-typography.html', '<section ng-controller=typographyPLayDemoCtrl id=typography-play-demo></section>');
     $templateCache.put('components/typography/demo-typography.html', '<section ng-controller=typographyCtrl id=typography-html-example><div class=container><h2>Typography Demo</h2><div class=well><table class="table bottom-offset-0"><tr><td><h1 class=visible-lg>H1 : 32px/40px</h1><h1 class=visible-md>H1 : 32px/40px</h1><h1 class=visible-sm>H1 : 30px/36px</h1><h1 class=visible-xs>H1 : 24px/28px</h1><p><small>Font-family: museo-sans-for-dell-300</small></p></td></tr><tr><td><h2 class=visible-lg>H2 : 28px/32px</h2><h2 class=visible-md>H2 : 28px/32px</h2><h2 class=visible-sm>H2 : 26px/30px</h2><h2 class=visible-xs>H2 : 20px/24px</h2><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><h3 class="visible-lg feature">H3 "feature" : 24px/28px</h3><h3 class="visible-md feature">H3 "feature" : 24px/28px</h3><h3 class="visible-sm feature">H3 "feature" : 22px/26px</h3><h3 class="visible-xs feature">H3 "feature" : 18px/22px</h3><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><h3 class=visible-lg>H3 : 20px/24px</h3><h3 class=visible-md>H3 : 20px/24px</h3><h3 class=visible-sm>H3 : 20px/24px</h3><h3 class=visible-xs>H3 : 17px/20px</h3><p><small>Font-family: Museo Sans for Dell 300</small></p></td></tr><tr><td><h4 class=visible-lg>H4 : 18px/22px</h4><h4 class=visible-md>H4 : 18px/22px</h4><h4 class=visible-sm>H4 : 18px/22px</h4><h4 class=visible-xs>H4 : 16px/20px</h4><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><h5 class=visible-lg>H5 : 16px/20px</h5><h5 class=visible-md>H5 : 16px/20px</h5><h5 class=visible-sm>H5 : 16px/20px</h5><h5 class=visible-xs>H5 : 14px/20px</h5><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><p class="bold-16 bottom-offset-0">bold-16</p><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><p class="bold-14 bottom-offset-0">bold-14</p><p><small>Font-family: Trebuchet MS</small></p></td></tr><tr><td><p class="bold-12 bottom-offset-0">bold-12</p><p><small>Font-family: Trebuchet MS</small></p></td></tr></table></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-20"><h3>Example body text <small>(default)</small></h3><div id=example-body-text><p>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p></div><p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p><div class="top-offset-30 bottom-offset-20"><h3>Example small text <small>(fine print)</small></h3><p id=example-small-body-text><small>This copy is meant to be treated as fine print. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</small></p><p><small>This copy is meant to be treated as fine print. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</small></p></div></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-20"><h3 class=text-rtl>Example body text <small>(default)</small></h3><p class=text-rtl>Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p><p class=text-rtl>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</p><div class="top-offset-30 bottom-offset-20"><h3 class=text-rtl>Example small text <small>(fine print)</small></h3><p class=text-rtl><small>This copy is meant to be treated as fine print. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula ut id elit.</small></p><p class=text-rtl><small>This copy is meant to be treated as fine print. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec sed odio dui.</small></p></div></div></div><div class=bottom-offset-40><h3>Example bold copy</h3><div class="well well-sm bottom-offset-40"><div id=strong-text><strong>Text rendered as bold text</strong></div></div><h3>Example italicized copy</h3><div class="well well-sm bottom-offset-40"><div id=italic-text><em>Text rendered as italicized text</em></div></div></div><h3>Example colored text</h3><div class="well well-sm" style="background: #ddd"><p class=text-gray-dark>This text is <strong>text-gray-dark</strong> <small>&nbsp;(default)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-blue>This text is <strong>text-blue</strong> <small>&nbsp;(Brand name: Dell Blue)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-dark-blue>This text is <strong>text-dark-blue</strong> <small>&nbsp;(Brand name: Dell Dark Blue)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-purple>This text is <strong>text-purple</strong> <small>&nbsp;(Brand name: Dell Purple)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-berry>This text is <strong>text-berry</strong> <small>&nbsp;(Brand name: Dell Berry)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-red>This text is <strong>text-red</strong> <small>&nbsp;(Brand name: Dell Red)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-red-dark>This text is <strong>text-red-dark</strong> <small>&nbsp;(Brand name: Dell Dark Red)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-white>This text is <strong>text-white</strong> <small>&nbsp;(Brand name: White)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-gray-medium>This text is <strong>text-gray-medium</strong> <small>&nbsp;(Brand name: 75% Dell Dark Gray)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-gray-dark>This text is <strong>text-gray-dark</strong> <small>&nbsp;(Brand name: Dell Dark Gray)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-orange>This text is <strong>text-orange</strong> <small>&nbsp;(Brand name: Dell Orange)</small> .</p></div><div class="well well-sm" style="background: #ddd"><p class=text-green>This text is <strong>text-orange</strong> <small>&nbsp;(Brand name: Dell Green)</small> .</p></div><h3>Example text alignment</h3><div class="well well-sm"><div id=left-aligned-text><p class=text-left>Left aligned text.</p></div><hr><div id=center-aligned-text><p class=text-center>Center aligned text.</p></div><hr><div id=right-aligned-text><p class=text-right>Right aligned text.</p></div></div><h3>Example strikethrough</h3><div class="well well-sm bottom-offset-40"><div id=strikethrough-text><p class=strike-through>This is an example of strikethrough text.</p></div></div></div></section>');
     $templateCache.put('demo-assets/partials/all-components/all-components.html', '<div ng-controller=AllComponentsCtrl><h2>All components</h2><ul><li ng-repeat="item in components"><a href=#/demo/{{item.id}}>{{item.label}} demo</a> | <a href=#/play/{{item.id}}>play</a></li></ul></div>');
