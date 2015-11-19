@@ -1,12 +1,12 @@
 {
   "name": "dell-ui-bootstrap",
   "homepage": "https://github.com/DellGDC/dell-ui-bootstrap",
-  "version": "1.2.2",
-  "_release": "1.2.2",
+  "version": "1.2.4",
+  "_release": "1.2.4",
   "_resolution": {
     "type": "version",
-    "tag": "1.2.2",
-    "commit": "58d78bc999b84edcff1d6e743d1fd5e1b85c625a"
+    "tag": "1.2.4",
+    "commit": "80fa26df4fac64b17bc5f1e864c29a044453a84c"
   },
   "_source": "git://github.com/DellGDC/dell-ui-bootstrap.git",
   "_target": "~1",

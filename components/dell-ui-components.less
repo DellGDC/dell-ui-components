@@ -62,42 +62,13 @@
 // Close icons
 // --------------------------------------------------
 
-// Opacity
-// TODO this is duplicate in the Bootstrap UI, but needed to make opacity work
+// Opacity mixin
+// this is duplicate in the Bootstrap UI, but needed to make opacity work
 .opacity(@opacity) {
     opacity: @opacity;
     // IE8 filter
     @opacity-ie: (@opacity * 100);
     filter: ~"alpha(opacity=@{opacity-ie})";
-}
-
-//TODO to be updated in DEll-Bootstrap-UI theme ////////////////////////////////////////////////////////////////////////
-
-
-.tooltip {
-    background:@white;
-}
-
-//TODO the below changes for the ".close" will eventually need to be updated in DEll-Bootstrap-UI theme, and removed here
-.close {
-    float: right;
-    font-size: (@font-size-base * 1.5);
-    font-weight: @close-font-weight;
-    line-height: 1;
-    color: @close-color;
-    text-shadow: @close-text-shadow;
-    // the only change is to the .opacity
-    .opacity(.55);
-
-    &:hover,
-    &:focus {
-        color: @close-color;
-        text-decoration: none;
-        cursor: pointer;
-        // the only change is to the .opacity
-        .opacity(.8);
-    }
-
 }
 
 @ease-in-out-expo: cubic-bezier(1.000, 0.000, 0.000, 1.000);
