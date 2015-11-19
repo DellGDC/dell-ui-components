@@ -1,4 +1,3 @@
-@import "../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css";
 /*!
  * Dell-UI-Components v1.0.12 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
@@ -251,10 +250,6 @@ blockquote .blockquote-links li + li::before {
  * Standard-Buttons component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.btn-link:focus,
-.btn-link:hover {
-  text-decoration: underline;
-}
 .tap-to-load {
   height: 34px;
   color: #00618f;
@@ -818,19 +813,6 @@ fieldset[disabled] a.btn.btn-primary {
  * Containers component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.well-lg {
-  padding: 24px;
-}
-.well-sm {
-  padding: 9px;
-}
-@media (max-width: 767px) {
-  .well-lg,
-  .well-sm {
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-}
 @media (min-width: 480px) {
   .well-caption {
     background: rgba(255, 255, 255, 0.9);
@@ -1164,7 +1146,7 @@ footer.navbar ul.navbar-nav li a {
 footer.navbar ul.navbar-nav li a:hover {
   text-decoration: underline;
   background: #007db8;
-  color: #cce5f1;
+  color: #ffffff;
 }
 footer.navbar ul.navbar-nav li:last-child {
   border-bottom: none;
@@ -1870,6 +1852,379 @@ footer.navbar ul.navbar-nav li:last-child {
   opacity: 1;
 }
 /* date-selector */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+/*!
+ * Datetimepicker for Bootstrap 3
+ * version : 4.17.37
+ * https://github.com/Eonasdan/bootstrap-datetimepicker/
+ */
+.bootstrap-datetimepicker-widget {
+  list-style: none;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  margin: 2px 0;
+  padding: 4px;
+  width: 19em;
+}
+@media (min-width: 768px) {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
+  }
+}
+@media (min-width: 992px) {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
+  }
+}
+@media (min-width: 1200px) {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+    width: 38em;
+  }
+}
+.bootstrap-datetimepicker-widget.dropdown-menu:before,
+.bootstrap-datetimepicker-widget.dropdown-menu:after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #cccccc;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  top: -7px;
+  left: 7px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  top: -6px;
+  left: 8px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.top:before {
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #cccccc;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  bottom: -7px;
+  left: 6px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.top:after {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #ffffff;
+  bottom: -6px;
+  left: 7px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
+  left: auto;
+  right: 6px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {
+  left: auto;
+  right: 7px;
+}
+.bootstrap-datetimepicker-widget .list-unstyled {
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget a[data-action] {
+  padding: 6px 0;
+}
+.bootstrap-datetimepicker-widget a[data-action]:active {
+  box-shadow: none;
+}
+.bootstrap-datetimepicker-widget .timepicker-hour,
+.bootstrap-datetimepicker-widget .timepicker-minute,
+.bootstrap-datetimepicker-widget .timepicker-second {
+  width: 54px;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget button[data-action] {
+  padding: 6px;
+}
+.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Increment Hours";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Increment Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Decrement Hours";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Decrement Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Show Hours";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Show Minutes";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Toggle AM/PM";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="clear"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Clear the picker";
+}
+.bootstrap-datetimepicker-widget .btn[data-action="today"]::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Set the date to today";
+}
+.bootstrap-datetimepicker-widget .picker-switch {
+  text-align: center;
+}
+.bootstrap-datetimepicker-widget .picker-switch::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Toggle Date and Time Screens";
+}
+.bootstrap-datetimepicker-widget .picker-switch td {
+  padding: 0;
+  margin: 0;
+  height: auto;
+  width: auto;
+  line-height: inherit;
+}
+.bootstrap-datetimepicker-widget .picker-switch td span {
+  line-height: 2.5;
+  height: 2.5em;
+  width: 100%;
+}
+.bootstrap-datetimepicker-widget table {
+  width: 100%;
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget table td,
+.bootstrap-datetimepicker-widget table th {
+  text-align: center;
+  border-radius: 1px;
+}
+.bootstrap-datetimepicker-widget table th {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+}
+.bootstrap-datetimepicker-widget table th.picker-switch {
+  width: 145px;
+}
+.bootstrap-datetimepicker-widget table th.disabled,
+.bootstrap-datetimepicker-widget table th.disabled:hover {
+  background: none;
+  color: #eeeeee;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget table th.prev::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Previous Month";
+}
+.bootstrap-datetimepicker-widget table th.next::after {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  content: "Next Month";
+}
+.bootstrap-datetimepicker-widget table thead tr:first-child th {
+  cursor: pointer;
+}
+.bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+  background: #f9f9f9;
+}
+.bootstrap-datetimepicker-widget table td {
+  height: 54px;
+  line-height: 54px;
+  width: 54px;
+}
+.bootstrap-datetimepicker-widget table td.cw {
+  font-size: .8em;
+  height: 20px;
+  line-height: 20px;
+  color: #eeeeee;
+}
+.bootstrap-datetimepicker-widget table td.day {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+}
+.bootstrap-datetimepicker-widget table td.day:hover,
+.bootstrap-datetimepicker-widget table td.hour:hover,
+.bootstrap-datetimepicker-widget table td.minute:hover,
+.bootstrap-datetimepicker-widget table td.second:hover {
+  background: #f9f9f9;
+  cursor: pointer;
+}
+.bootstrap-datetimepicker-widget table td.old,
+.bootstrap-datetimepicker-widget table td.new {
+  color: #eeeeee;
+}
+.bootstrap-datetimepicker-widget table td.today {
+  position: relative;
+}
+.bootstrap-datetimepicker-widget table td.today:before {
+  content: '';
+  display: inline-block;
+  border: solid transparent;
+  border-width: 0 0 7px 7px;
+  border-bottom-color: #007db8;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: #007db8;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.bootstrap-datetimepicker-widget table td.active.today:before {
+  border-bottom-color: #fff;
+}
+.bootstrap-datetimepicker-widget table td.disabled,
+.bootstrap-datetimepicker-widget table td.disabled:hover {
+  background: none;
+  color: #eeeeee;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget table td span {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  line-height: 54px;
+  margin: 2px 1.5px;
+  cursor: pointer;
+  border-radius: 1px;
+}
+.bootstrap-datetimepicker-widget table td span:hover {
+  background: #f9f9f9;
+}
+.bootstrap-datetimepicker-widget table td span.active {
+  background-color: #007db8;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.bootstrap-datetimepicker-widget table td span.old {
+  color: #eeeeee;
+}
+.bootstrap-datetimepicker-widget table td span.disabled,
+.bootstrap-datetimepicker-widget table td span.disabled:hover {
+  background: none;
+  color: #eeeeee;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget.usetwentyfour td.hour {
+  height: 27px;
+  line-height: 27px;
+}
+.bootstrap-datetimepicker-widget.wider {
+  width: 21em;
+}
+.bootstrap-datetimepicker-widget .datepicker-decades .decade {
+  line-height: 1.8em !important;
+}
+.input-group.date .input-group-addon {
+  cursor: pointer;
+}
 .date-selector {
   position: relative;
 }
@@ -2127,9 +2482,6 @@ footer.navbar ul.navbar-nav li:last-child {
 .icon-social-youtube {
   background-position: 0 -374px;
 }
-[class*=icon-small-favorite] {
-  margin: 0;
-}
 /*
  * Lists component theme overrides
  *------------------------------------------------------------------------------------------
@@ -2201,20 +2553,6 @@ input:focus + [role="modal"] {
  * Pagers component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.pager .icon-ui-arrowright,
-.pager .icon-ui-arrowleft {
-  text-align: center;
-  vertical-align: middle;
-}
-.pager .icon-ui-arrowright:before,
-.pager .icon-ui-arrowleft:before {
-  position: relative;
-  top: -1px !important;
-}
-.pager input[type=text] {
-  margin-left: 5px;
-  margin-right: 5px;
-}
 .pager .pager-span {
   padding-left: 5px;
   padding-right: 5px;
@@ -2283,6 +2621,11 @@ input:focus + [role="modal"] {
  * Popovers component theme overrides
  *------------------------------------------------------------------------------------------
  */
+[data-toggle="popover"] .icon-small-alertinfo,
+[data-toggle="popover"] .icon-large-alertinfo {
+  color: #007db8;
+  cursor: help;
+}
 /*
  * Responsive-Utilities component theme overrides
  *------------------------------------------------------------------------------------------
@@ -3211,24 +3554,6 @@ td.dt-body-center input[type="checkbox"] {
 ul.ColVis_collection li:first-of-type {
   display: none;
 }
-.nav-tabs > li.active > a,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li.active > a:hover {
-  width: 102%;
-  margin-left: -1%;
-}
-.nav-tabs.pull-right {
-  position: relative;
-  z-index: 1;
-}
-.nav-tabs.pull-right + .tab-content {
-  position: relative;
-  top: -11px;
-  padding-top: 10px;
-  z-index: 0;
-  clear: both;
-  border-top: 1px solid #cccccc;
-}
 .nav-tabs-overflow-container {
   overflow-x: hidden;
 }
@@ -3263,9 +3588,7 @@ ul.ColVis_collection li:first-of-type {
   .nav-tabs-overflow-container > div.prev a:hover,
   .nav-tabs-overflow-container > div.next a:hover,
   .nav-tabs-overflow-container > div.prev a:active,
-  .nav-tabs-overflow-container > div.next a:active,
-  .nav-tabs-overflow-container > div.prev a:focus,
-  .nav-tabs-overflow-container > div.next a:focus {
+  .nav-tabs-overflow-container > div.next a:active {
     background: #cce5f1;
   }
   .nav-tabs-overflow-container > div.prev.disabled a,
@@ -3370,17 +3693,17 @@ ul.ColVis_collection li:first-of-type {
   .nav-tabs.nav-justified > li a {
     border: none;
     width: 100%;
-    margin-left: -1px;
+    margin-left: 0px;
   }
   .nav-tabs.nav-justified > li a,
   .nav-tabs.nav-justified > li a:hover {
     margin-bottom: -1px;
     border-top: none !important;
-    margin-left: -1px;
+    margin-left: 0px;
   }
   .nav-tabs.nav-justified > li.active > a {
     border: none;
-    margin-left: -1px;
+    margin-left: 0px;
     padding: 10px 15px;
     width: 100%;
   }
@@ -3388,15 +3711,15 @@ ul.ColVis_collection li:first-of-type {
   .nav-tabs.nav-justified > li.active > a:focus {
     border: none;
     width: 100%;
-    margin-left: -1px;
+    margin-left: 0px;
     padding: 10px 15px;
   }
   .nav-tabs.nav-justified > li:first-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-top: 1px solid #cccccc;
   }
   .nav-tabs.nav-justified > li:last-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-bottom: 1px solid #cccccc;
   }
   .nav-tabs.nav-centered {
@@ -3413,20 +3736,20 @@ ul.ColVis_collection li:first-of-type {
   .nav-tabs.nav-centered > li a:hover {
     margin-bottom: -1px;
     border-top: none !important;
-    margin-left: -1px;
+    margin-left: 0px;
   }
   .nav-tabs.nav-centered > li.active > a {
     border: none;
-    margin-left: -1px;
+    margin-left: 0px;
     padding: 20px 15px 10px 15px !important;
     width: 100%;
   }
   .nav-tabs.nav-centered > li:first-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-top: 1px solid #cccccc;
   }
   .nav-tabs.nav-centered > li:last-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-bottom: 1px solid #cccccc;
   }
 }
@@ -3442,16 +3765,16 @@ ul.ColVis_collection li:first-of-type {
     width: 105%;
     border: 1px solid #cccccc;
     margin-bottom: -1px;
-    margin-left: -1px;
+    margin-left: 0px;
     height: auto;
     padding-right: 9%;
   }
   .nav-tabs > li:first-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-top: 1px solid #cccccc;
   }
   .nav-tabs > li:last-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-bottom: 1px solid #cccccc;
   }
   .nav-tabs > li:hover {
@@ -3468,7 +3791,7 @@ ul.ColVis_collection li:first-of-type {
   .nav-tabs > li.active > a:focus {
     border-color: transparent;
     width: 100%;
-    margin-left: -1px;
+    margin-left: 0px;
     margin-bottom: -1px !important;
     border-top: none;
     padding: 10px 15px;
@@ -3478,7 +3801,7 @@ ul.ColVis_collection li:first-of-type {
     background: #cce5f1;
   }
   .nav-tabs > li.active:last-child {
-    margin-left: -1px;
+    margin-left: 0px;
     margin-bottom: 0;
   }
   .nav-tabs > li > a {
@@ -3509,7 +3832,7 @@ ul.ColVis_collection li:first-of-type {
   .nav-tabs.nav-justified > li a:hover {
     margin-bottom: -1px;
     border-top: none !important;
-    margin-left: -1px;
+    margin-left: 0px;
   }
   .nav-tabs.nav-justified > li.active > a {
     border: none;
@@ -3521,15 +3844,15 @@ ul.ColVis_collection li:first-of-type {
   .nav-tabs.nav-justified > li.active > a:focus {
     border: none;
     width: 100%;
-    margin-left: -1px;
+    margin-left: 0px;
     padding: 10px 15px;
   }
   .nav-tabs.nav-justified > li:first-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-top: 1px solid #cccccc;
   }
   .nav-tabs.nav-justified > li:last-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-bottom: 1px solid #cccccc;
   }
   .nav-tabs.nav-centered {
@@ -3540,26 +3863,26 @@ ul.ColVis_collection li:first-of-type {
   .nav-tabs.nav-centered > li a {
     border: none;
     width: 100%;
-    margin-left: -1px;
+    margin-left: 0px;
   }
   .nav-tabs.nav-centered > li a,
   .nav-tabs.nav-centered > li a:hover {
     margin-bottom: -1px;
     border-top: none !important;
-    margin-left: -1px;
+    margin-left: 0px;
   }
   .nav-tabs.nav-centered > li.active > a {
     border: none;
-    margin-left: -1px;
+    margin-left: 0px;
     padding: 20px 15px 10px 15px;
     width: 100%;
   }
   .nav-tabs.nav-centered > li:first-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-top: 1px solid #cccccc;
   }
   .nav-tabs.nav-centered > li:last-child {
-    margin-left: -1px;
+    margin-left: 0px;
     border-bottom: 1px solid #cccccc;
   }
 }
@@ -3904,21 +4227,11 @@ ul.ColVis_collection li:first-of-type {
  * Tooltips component theme overrides
  *------------------------------------------------------------------------------------------
  */
-a[data-toggle="tooltip"] {
-  padding-top: 0;
-  padding-bottom: 0;
+.tooltip {
+  background: #ffffff;
 }
-button[data-toggle="tooltip"] {
-  border: inherit;
-}
-.tooltip.top {
-  margin-top: -5px;
-}
-.tooltip.left {
-  margin-left: -10px;
-}
-/* ----------| Tooltip Change to Modal based on the sm and xs media query |---------- */
-@media (max-width: 991px) {
+/* ----------| Tooltip Change to Modal based on the xs media query |---------- */
+@media (max-width: 767px) {
   .tooltip.in {
     bottom: 0;
     left: 0;
@@ -3980,10 +4293,6 @@ button[data-toggle="tooltip"] {
  * Typography component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.text-rtl {
-  direction: rtl;
-  unicode-bidi: bidi-override;
-}
 /*
  * Ratings-And-Reviews component theme overrides - OLD
  *------------------------------------------------------------------------------------------
@@ -4010,6 +4319,9 @@ ul.ratings:after {
   content: " ";
   clear: both;
   display: block;
+}
+ul.ratings li a.btn-link {
+  margin-right: 10px;
 }
 .ratings-histogram .progress {
   margin-bottom: 10px;
@@ -4043,6 +4355,13 @@ blockquote.blockquote-unstyled {
 .hide-expanded:focus,
 .collapsed .show-collapsed:focus {
   outline: none;
+}
+span.collapsed .show-collapsed {
+  display: inline-block;
+  padding: 0;
+}
+span.collapsed .show-collapsed a {
+  padding: 0;
 }
 .collapsed .hide-expanded,
 .show-collapsed {
@@ -4489,7 +4808,7 @@ blockquote.blockquote-unstyled {
   }
   .jumbotron h3.feature,
   .jumbotron .h3.feature {
-    font-family: 'museo-sans-for-dell-300', 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 24px;
     line-height: 28px;
   }
@@ -4537,7 +4856,7 @@ blockquote.blockquote-unstyled {
   }
   .jumbotron h3.feature,
   .jumbotron .h3.feature {
-    font-family: 'museo-sans-for-dell-300', 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 22px;
     line-height: 26px;
   }
@@ -4585,7 +4904,7 @@ blockquote.blockquote-unstyled {
   }
   .jumbotron h3.feature,
   .jumbotron .h3.feature {
-    font-family: 'museo-sans-for-dell-300', 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 18px;
     line-height: 22px;
   }
@@ -4626,6 +4945,10 @@ blockquote.blockquote-unstyled {
 .jumbotron p small {
   font-size: 85%;
   line-height: 15px;
+}
+.container .jumbotron,
+.container-fluid .jumbotron {
+  border-radius: 0;
 }
 .jumbotron {
   margin: 0;
@@ -4774,7 +5097,7 @@ blockquote.blockquote-unstyled {
   padding: 5px 10px;
   font-size: 18px;
   line-height: 22px;
-  font-family: 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
 }
 .contact-drawer .contact-drawer-panel {
   border: 1px solid #f9f9f9;
@@ -4934,24 +5257,3 @@ masthead .masthead-shadow {
   z-index: 500;
 }
 /* Add Component LESS Above */
-.tooltip {
-  background: #ffffff;
-}
-.close {
-  float: right;
-  font-size: 21px;
-  font-weight: bold;
-  line-height: 1;
-  color: #444444;
-  text-shadow: 0 1px 0 #ffffff;
-  opacity: 0.55;
-  filter: alpha(opacity=55.00000000000001);
-}
-.close:hover,
-.close:focus {
-  color: #444444;
-  text-decoration: none;
-  cursor: pointer;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-}
