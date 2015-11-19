@@ -147,6 +147,15 @@
                 </div>
             </div>
 
+                    <!-- <p>
+                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-example-area-5">
+                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i></span>
+                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i></span>
+                        </a>
+                    </p>
+                    <p id="collapsible-example-area-5" class="collapse">
+                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.
+                    </p> -->
 
             <div class="row">
                 <div class="col-xs-12 col-sm-8 bottom-offset-40">
@@ -154,59 +163,110 @@
                     <!-- tree checkboxes -->
                     <ul class="list-tree">
                         <li>
-                            <label class="checkbox">
-                                <input type="checkbox" value="option1-parent1"> Checkbox value (parent 1)
-                            </label>
-                            <ul>
-                                <li>
+                            <a class="collapsed" data-target="#collapsible-example-parent-1" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+                                <span class="show-collapsed">
+                                    <i class="icon-ui-triangleright pull-left" aria-hidden="true"></i>
                                     <label class="checkbox">
-                                        <input type="checkbox" value="option1-parent1-child1"> Checkbox value (child 1)
+                                        <input type="checkbox" id="treelist-parent1" value="option1-parent1"> Checkbox value (parent 1)
                                     </label>
-                                    <ul>
-                                        <li>
+                                    
+                                </span>
+                                <span class="hide-expanded">
+                                    <i class="icon-ui-triangledown pull-left" aria-hidden="true"></i>
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="treelist-parent1" value="option1-parent1"> Checkbox value (parent 1)
+                                    </label>        
+                                </span>
+                            </a>                 
+                            <ul id="collapsible-example-parent-1" class="collapse">
+<!-- | Child 1 | -->                        
+                                <li>
+                                    <a class="collapsed" data-target="#collapsible-example-child-1" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+                                        <span class="show-collapsed">
+                                            <i class="icon-ui-triangleright pull-left" aria-hidden="true"></i>
                                             <label class="checkbox">
-                                                <input type="checkbox" value="option1-parent1-grandchild1"> Checkbox value (grand child 1)</label>
+                                                <input type="checkbox" id="treelist-parent1-child1" value="option1-parent1-child1"> Checkbox value (child 1)
+                                            </label>
+                                        </span>
+                                        <span class="hide-expanded">
+                                            <i class="icon-ui-triangledown pull-left" aria-hidden="true"></i>
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="treelist-parent1-child1" value="option1-parent1-child1"> Checkbox value (child 1)
+                                            </label>
+                                        </span>
+                                    </a>
+                                        
+                                    <ul id="collapsible-example-child-1" class="collapse">
+                                        <li>
+<!-- | Grandchild 1 | -->                                
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="treelist-parent1-grandchild1" value="option1-parent1-grandchild1"> Checkbox value (grand child 1)
+                                            </label>
                                         </li>
                                     </ul>
                                 </li>
+<!-- | Child 2 | -->                        
                                 <li>
-                                    <label class="checkbox">
-                                        <input type="checkbox" value="option1-parent1-child2"> Checkbox value (child 2)
-                                    </label>
-                                    <ul>
-                                        <li>
+                                    <a class="collapsed" data-target="#collapsible-example-child-2" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+                                        <span class="show-collapsed">
+                                            <i class="icon-ui-triangleright pull-left" aria-hidden="true"></i>
                                             <label class="checkbox">
-                                                <input type="checkbox" value="option1-parent1-grandchild3"> Checkbox value (grand child 3)
+                                                <input type="checkbox" id="treelist-parent1-child2" value="option1-parent1-child2"> Checkbox value (child 2)
                                             </label>
-                                        </li>
-                                        <li>
+                                        </span>
+                                        <span class="hide-expanded">
+                                            <i class="icon-ui-triangledown pull-left" aria-hidden="true"></i>
                                             <label class="checkbox">
-                                                <input type="checkbox" value="option1-parent1-grandchild4"> Checkbox value (grand child 4)
+                                                <input type="checkbox" id="treelist-parent1-child2" value="option1-parent1-child2"> Checkbox value (child 2)
                                             </label>
-                                        </li>
-                                        <li>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="option1-parent1-grandchild5"> Checkbox value (grand child 5)
-                                            </label>
-                                            <ul>
+                                        </span>
+                                            <ul id="collapsible-example-child-2" class="collapse">
                                                 <li>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="option1-parent1-greatgrandchild1"> Checkbox value (great grand child 1)
+<!-- | Grandchild 3 | -->                           <label class="checkbox">
+                                                        <input type="checkbox" value="option1-parent1-grandchild3"> Checkbox value (grand child 3)
                                                     </label>
                                                 </li>
                                                 <li>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="option1-parent1-greatgrandchild2"> Checkbox value (great grand child 2)
+<!-- | Grandchild 4 | -->                           <label class="checkbox">
+                                                        <input type="checkbox" value="option1-parent1-grandchild4"> Checkbox value (grand child 4)
                                                     </label>
                                                 </li>
                                                 <li>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="option1-parent1-greatgrandchild3"> Checkbox value (great grand child 3)
-                                                    </label>
+<!-- | Grandchild 5 | -->                                                
+                                                    <a class="collapsed grandchild5" data-target="#collapsible-example-grandchild-5" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+                                                        <span class="show-collapsed">
+                                                            <i class="icon-ui-triangleright pull-left" aria-hidden="true"></i>
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" id="treelist-parent1-grandchild5" value="option1-parent1-grandchild5"> Checkbox value (grand child 5)
+                                                            </label>
+                                                        </span>
+                                                        <span class="hide-expanded">
+                                                            <i class="icon-ui-triangledown pull-left" aria-hidden="true"></i>
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" id="treelist-parent1-grandchild5" value="option1-parent1-grandchild5"> Checkbox value (grand child 5)
+                                                            </label>
+                                                        </span>
+                                                        <ul id="collapsible-example-grandchild-5" class="collapse greatgrandchild">
+                                                            <li>
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" value="option1-parent1-greatgrandchild1"> Checkbox value (great grand child 1)
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" value="option1-parent1-greatgrandchild2"> Checkbox value (great grand child 2)
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" value="option1-parent1-greatgrandchild3"> Checkbox value (great grand child 3)
+                                                                </label>
+                                                            </li>
+                                                        </ul>
+                                                    </a>    
                                                 </li>
                                             </ul>
-                                        </li>
-                                    </ul>
+                                    </a>
                                 </li>
                             </ul>
                         <li>

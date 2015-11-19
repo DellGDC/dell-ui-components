@@ -27,6 +27,17 @@ angular.module('dellUiComponents')
                     $(this).parent().removeClass('open');
                 }
             });
+
+    // -----| Added for DUC-198 |----- // 
+
+            // $element.find('parent.option1-parent1-grandchild1').on('open', function(){
+            //     if($(this).is(':checked')) |  {
+            //         $(this).parent().addClass('checked-kids')
+            //     }
+            // });
+
+    // ---------------| |--------------- //        
+        
         }
     };
 })
