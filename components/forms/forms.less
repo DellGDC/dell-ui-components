@@ -31,12 +31,15 @@
         a {
             color: #444444;
             line-height: 0 /* 1.42857 */;
+            /*>.collapsed {
+                float: left;
+            }*/
         }
     }
     
     [data-toggle="collapse"] .icon-ui-triangledown, [data-toggle="collapse"] .icon-ui-triangleright, [data-toggle="collapse"] .icon-ui-triangleup {
-        top: 11px;
-        width: 20px;
+        top: 4px;
+        padding-right: 10px;
     }
     .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
         margin-left: -5px;
@@ -45,7 +48,7 @@
     .checkbox {
         display: inline-block;
     }
-    
+
     .hide-expanded, .show-collapsed, .collapsed .show-collapsed {
         padding: 0;
     }
@@ -55,7 +58,10 @@
     }
     .grandchild5 {
         position: relative;
-        left: -23px;
+        left: -27px;
+    }
+    .some-kids-chekced {
+        background: @dell-blue;
     }
 }
 
@@ -972,8 +978,19 @@
     }
 }
 
+/* ----------| Jquery checktree plugin  |---------- */
 
+.checktree li .arrow {
+    margin: 4px 8px 0;
+    position: inherit;
+    box-shadow: none;
+    transform: none;
+    background: url("checktree_icon.png") no-repeat scroll 0 -22px transparent;
 
+    &:after {
+        content: none !important;
+    }
+}
 
 
 
