@@ -21824,6 +21824,7 @@ angular.module('dellUiComponents').directive('toggle', [
         case 'tooltip':
           $element.tooltip();
           $element.on('click', function () {
+            console.log("hello",$rootScope.bp);
             if ($rootScope.bp.isXS) {
               $element.tooltip('show');
             }
