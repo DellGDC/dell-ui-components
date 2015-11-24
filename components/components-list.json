@@ -26,6 +26,7 @@
      "offsets",
      "pagers",
      "pagination",
+     "product-stack",
      "popovers",
      "responsive-utilities",
      "progress-bars",
@@ -35,6 +36,6 @@
      "tooltips",
      "typography",
      "ratings-and-reviews",
-     "search-and-navigation",
-     "product-stack"
+     "search-and-navigation"
+
 ]
