@@ -40,4 +40,28 @@
         display: block;
     }
 
+    .tech-spec {
+        .list-inline {
+            padding-left: 0;
+            list-style: none;
+            margin-left: 0;
+            line-height: 3px;
+        }
+        p {
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+        .spec-bar {
+            height: 3px;
+            max-width: 18.5%;
+            min-width: 18.1%;
+            &.default {
+                background:@dell-gray-light
+            }
+            &.active {
+                background: @dell-blue;
+            }
+        }
+    }
+
 }
