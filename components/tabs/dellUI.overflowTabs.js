@@ -172,7 +172,9 @@
                                 leftPosition = tabInContext.tabContainerWidth - tabInContext.rightMostPoint -60 ;
                             }
                         }
-                        element.css('left',leftPosition + "px");
+                        if(!breakpoint().isXS && !element.parent().hasClass('row-offcanvas')) {
+                            element.css('left',leftPosition + "px");
+                        }
                     } else {
                         isHome = true;
                     }
@@ -213,12 +215,14 @@
                     changeHeight(maxTabHeight);
                 } else {
                     changeHeight();
+                    element.removeAttr("style");
                 }
 
                 //set up a window change watch here
                 $(window).resize(function() {
                     if(breakpoint().isXS) {
                         changeHeight(); //if it is mobile (xs) clear all height values
+                        element.removeAttr("style");
                     } else {
                         changeHeight(maxTabHeight);
                     }
