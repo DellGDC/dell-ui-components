@@ -33,6 +33,15 @@
             float: left !important;
         }
     }
+    .product-title-stack {
+        h5 {
+            margin-bottom: 5px;
+        }
+        .optional-price {
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+    }
 
     .img-responsive {
         width: 170px;
@@ -67,19 +76,66 @@
     .feature-spec {
         border-top: 1px solid @dell-gray;
         border-bottom: 1px solid @dell-gray;
-        margin: 20px 0;
+        margin: 20px 0 10px 0;
         padding: 5px 0;
         .wrapper {
             display: table-row;
         }
         [class^=icon-] {
             color: @dell-blue;
-            margin: 5px 0;
-
+            top: 1px;
+            position: relative;
         }
         p {
             display: table-cell;
             vertical-align: middle;
+        }
+    }
+
+    .special-offers {
+        border-top: 1px solid @dell-berry;
+        border-bottom: 1px solid @dell-berry;
+        margin-bottom: 10px;
+        ol, ul {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        li {
+            color: @dell-blue;
+            margin-bottom: 5px;
+        }
+    }
+    .price-stack {
+        border-bottom: 1px solid @dell-gray;
+        .h4, .h5, .h6, h4, h5, h6 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+    }
+
+    .finance-stack {
+        border-bottom: 1px solid @dell-gray;
+        .h4, .h5, .h6, h4, h5, h6 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            &:first-of-type {
+                margin-top: 10px;
+            }
+        }
+        ol, ul {
+            margin-top: -3px;
+            margin-bottom: 10px;
+        }
+        .list-inline > li {
+            display: inline-block;
+            padding-left: 5px;
+            margin-bottom: 5px;
+            &.pipe {
+                padding-left: 0;
+                padding-right: 0;
+                color: @dell-blue;
+            }
         }
     }
 
