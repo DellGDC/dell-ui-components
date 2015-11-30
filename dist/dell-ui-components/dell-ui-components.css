@@ -3621,7 +3621,7 @@ ul.ColVis_collection li:first-of-type {
 @media (min-width: 520px) and (max-width: 767px) {
   .nav-tabs {
     display: block;
-    width: 107%;
+    width: 107% !important;
     margin-left: -15px;
     margin-right: -15px;
   }
@@ -3756,7 +3756,7 @@ ul.ColVis_collection li:first-of-type {
 @media (min-width: 100px) and (max-width: 520px) {
   .nav-tabs {
     display: block;
-    width: 112%;
+    width: 112% !important;
     margin-left: -15px;
     margin-right: -15px;
   }
@@ -3965,6 +3965,14 @@ ul.ColVis_collection li:first-of-type {
   .row-offcanvas.row-offcanvas-right .tab-content .tab-pane {
     min-height: 3000px;
     background: #ffffff;
+  }
+  .row-offcanvas.row-offcanvas-right .tab-content .tab-pane.active {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .row-offcanvas.row-offcanvas-right .tab-content .tab-pane.active button[data-toggle="offcanvas"] {
+    margin-left: -10px;
+    width: 110%;
   }
   .row-offcanvas.row-offcanvas-left {
     position: relative;

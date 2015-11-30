@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Bootstrap v1.2.4 (bower dell-ui-bootstrap)
+ * Dell-UI-Bootstrap v1.2.5 (bower dell-ui-bootstrap)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -7152,9 +7152,10 @@ fieldset[disabled] .btn-default.active {
   background-color: #00618f;
 }
 .btn-default:hover,
-.btn-default:focus .btn-default:active,
+.btn-default:focus,
+.btn-default:active,
 .btn-default.active {
-  background: #dadada;
+  background: #dadada !important;
 }
 .btn-primary {
   color: #ffffff;
@@ -7223,9 +7224,10 @@ fieldset[disabled] .btn-primary.active {
   background-color: #ffffff;
 }
 .btn-primary:hover,
-.btn-primary:focus .btn-primary:active,
+.btn-primary:focus,
+.btn-primary:active,
 .btn-primary.active {
-  background: #00447c;
+  background: #00447c !important;
 }
 .btn-success {
   color: #ffffff;
@@ -7294,9 +7296,10 @@ fieldset[disabled] .btn-success.active {
   background-color: #ffffff;
 }
 .btn-success:hover,
-.btn-success:focus .btn-success:active,
+.btn-success:focus,
+.btn-success:active,
 .btn-success.active {
-  background: #285709;
+  background: #285709 !important;
 }
 .btn-info {
   color: #ffffff;
@@ -7515,10 +7518,20 @@ fieldset[disabled] .btn-danger.active {
 .btn-group-xs > .btn {
   padding: 1px 5px;
 }
+.btn-link:focus,
+.btn-link:active,
+.btn-link:hover {
+  text-decoration: underline;
+}
 .btn-link.dropdown-toggle:focus,
 .btn-link.dropdown-toggle:active,
 .btn-link.dropdown-toggle:hover {
   text-decoration: none;
+}
+.btn-link.dropdown-toggle:focus span,
+.btn-link.dropdown-toggle:active span,
+.btn-link.dropdown-toggle:hover span {
+  text-decoration: underline;
 }
 .btn[data-loading-text][disabled] {
   color: #00618f;
