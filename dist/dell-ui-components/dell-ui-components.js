@@ -21695,7 +21695,9 @@ angular.module('dellUiComponents').config(function () {
                 leftPosition = tabInContext.tabContainerWidth - tabInContext.rightMostPoint - 60;
               }
             }
-            element.css('left', leftPosition + 'px');
+            if (!breakpoint().isXS) {
+              element.css('left', leftPosition + 'px');
+            }
           } else {
             isHome = true;
           }
