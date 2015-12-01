@@ -9,7 +9,7 @@
             "Last_edited": "2011/07/22",
             "List_price": "$3,998",
             "Customer_number": "0U812A353",
-            "Reference_number": "NTBYB90",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "8422-AWS2"
         },{
             "Company_name": "Microsoft",
@@ -19,7 +19,7 @@
             "Last_edited": "2015/02/05",
             "List_price": "$2,345",
             "Customer_number": "556187830",
-            "Reference_number": "RTB879",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "3234f55-AWS2"
         },{
             "Company_name": "Ford Auto",
@@ -29,7 +29,7 @@
             "Last_edited": "2011/07/25",
             "List_price": "$3,234",
             "Customer_number": "683995770",
-            "Reference_number": "SOME783",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "323325-424e"
         },{
            "Company_name": "Time Warner",
@@ -39,7 +39,7 @@
             "Last_edited": "2011/05/19",
             "List_price": "$3,998",
             "Customer_number": "233564564g",
-            "Reference_number": "NTBYB90",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "3432-AWS2"
         },{
             "Company_name": "Chrysler",
@@ -49,7 +49,7 @@
             "Last_edited": "2015/03/05",
             "List_price": "$2,345",
             "Customer_number": "r326187830",
-            "Reference_number": "RTB879",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "113-4534"
         },{
             "Company_name": "Hyundai",
@@ -59,7 +59,7 @@
             "Last_edited": "2011/07/25",
             "List_price": "$3,234",
             "Customer_number": "683995770",
-            "Reference_number": "HYIDEP78364",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "8978990r-wer3"
         },{
             "Company_name": "AT&T",
@@ -69,7 +69,7 @@
             "Last_edited": "2014/09/25",
             "List_price": "$5,234",
             "Customer_number": "683995770",
-            "Reference_number": "TEse53420",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "werwer-cji5"
         },{
             "Company_name": "PBS",
@@ -79,7 +79,7 @@
             "Last_edited": "2015/04/15",
             "List_price": "$2,345",
             "Customer_number": "324923424",
-            "Reference_number": "RTB879",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "c443fw5-55342"
         },{
             "Company_name": "Comcast",
@@ -89,7 +89,7 @@
             "Last_edited": "2011/07/25",
             "List_price": "$3,234",
             "Customer_number": "683995770",
-            "Reference_number": "SOMwfE783",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "1123-werwf35g"
         },{
             "Company_name": "Ricola",
@@ -99,7 +99,7 @@
             "Last_edited": "2014/09/25",
             "List_price": "$5,234",
             "Customer_number": "683995770",
-            "Reference_number": "Gruto7910",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "1123-333d"
         },{
             "Company_name": "NorthStar",
@@ -109,7 +109,7 @@
             "Last_edited": "2012/11/21",
             "List_price": "$2,635",
             "Customer_number": "324923424",
-            "Reference_number": "RTB879",
+            "Status": "default",
             "Quote_number": "c44243fw5-55342"
         },{
             "Company_name": "Jones Cable",
@@ -119,7 +119,7 @@
             "Last_edited": "2011/07/25",
             "List_price": "$3,234",
             "Customer_number": "683995770",
-            "Reference_number": "SSSjlk980",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active<\/a>",
             "Quote_number": "1123-asdq3x"
         },{
             "Company_name": "Proctor & Gamble",
@@ -129,7 +129,7 @@
             "Last_edited": "2014/09/25",
             "List_price": "$5,234",
             "Customer_number": "683995770",
-            "Reference_number": "NAME87690-2",
+            "Status": "default",
             "Quote_number": "1123-4t3d2"
         },{
             "Company_name": "Boeing Aerospace",
@@ -139,7 +139,7 @@
             "Last_edited": "2011/07/22",
             "List_price": "$3,998",
             "Customer_number": "0U812A353",
-            "Reference_number": "NTBYB90",
+            "Status": "default",
             "Quote_number": "8422-AWS2"
         },{
             "Company_name": "Microsoft",
@@ -149,7 +149,7 @@
             "Last_edited": "2015/02/05",
             "List_price": "$2,345",
             "Customer_number": "556187830",
-            "Reference_number": "RTB879",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active<\/a>",
             "Quote_number": "994GR02-34345"
         },{
             "Company_name": "Sony",
@@ -159,7 +159,7 @@
             "Last_edited": "2011/04/06",
             "List_price": "$4,234",
             "Customer_number": "683995770",
-            "Reference_number": "VET424ll",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "1123-SSDS"
         },{
             "Company_name": "Time Warner",
@@ -169,7 +169,7 @@
             "Last_edited": "2011/05/19",
             "List_price": "$3,998",
             "Customer_number": "233564564g",
-            "Reference_number": "NTBYB90",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "3432-AWS2"
         },{
             "Company_name": "Federal Credit Union",
@@ -179,7 +179,7 @@
             "Last_edited": "2015/03/05",
             "List_price": "$2,345",
             "Customer_number": "r326187830",
-            "Reference_number": "RTB879",
+            "Status": "default",
             "Quote_number": "992402-4555g"
         },{
             "Company_name": "Hyundai",
@@ -189,7 +189,7 @@
             "Last_edited": "2011/07/25",
             "List_price": "$3,234",
             "Customer_number": "683995770",
-            "Reference_number": "DECt7669",
+            "Status": "default",
             "Quote_number": "77yi8766"
         }
         ,{
@@ -200,7 +200,7 @@
             "Last_edited": "2012/03/27",
             "List_price": "$2,234",
             "Customer_number": "d432dd",
-            "Reference_number": "HGGY6689",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "34234-wf433f"
         },{
             "Company_name": "Recon",
@@ -210,7 +210,7 @@
             "Last_edited": "2011/05/21",
             "List_price": "$2,345",
             "Customer_number": "324923424",
-            "Reference_number": "RTdf44B879",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "c44243fw5-55342"
         },{
             "Company_name": "ServerPro",
@@ -220,7 +220,7 @@
             "Last_edited": "2011/027/11",
             "List_price": "4,234",
             "Customer_number": "683dsf995770",
-            "Reference_number": "SwMsdfwfE783",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "1123-werwf35g"
         }
         ,{
@@ -231,7 +231,7 @@
             "Last_edited": "2014/11/01",
             "List_price": "$3,234",
             "Customer_number": "683995770",
-            "Reference_number": "HIGFH122",
+            "Status": "default",
             "Quote_number": "1123-333d"
         },{
             "Company_name": "NPR",
@@ -241,7 +241,7 @@
             "Last_edited": "2013/11/15",
             "List_price": "$1,345",
             "Customer_number": "324943523424",
-            "Reference_number": "RTB879",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "c44243fw5-55342"
         },{
             "Company_name": "Kool-Aid",
@@ -251,7 +251,7 @@
             "Last_edited": "2011/07/25",
             "List_price": "$3,234",
             "Customer_number": "3234254",
-            "Reference_number": "3fcct43",
+            "Status": "default",
             "Quote_number": "1123-asd332q3x"
         },{
             "Company_name": "CMT",
@@ -261,7 +261,7 @@
             "Last_edited": "2013/04/22",
             "List_price": "$3,234",
             "Customer_number": "683995770",
-            "Reference_number": "SOME783",
+            "Status": "<a href=\"javascript:;\" class=\"btn btn-default  btn-xs\">active</a>",
             "Quote_number": "1123-4t3d2"
         }
 

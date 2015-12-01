@@ -1,5 +1,6 @@
+@import "../bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css";
 /*!
- * Dell-UI-Components v1.0.11 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.12 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -1868,51 +1869,6 @@ footer.navbar ul.navbar-nav li:last-child {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff89cdef', endColorstr='#ff81bfde', GradientType=0);
   opacity: 1;
 }
-.ui-tooltip,
-.arrow:after {
-  background: black;
-  border: 2px solid white;
-}
-.ui-tooltip {
-  padding: 10px 20px;
-  color: white;
-  border-radius: 20px;
-  font: bold 14px "Helvetica Neue", Sans-Serif;
-  text-transform: uppercase;
-  box-shadow: 0 0 7px black;
-}
-.arrow {
-  width: 70px;
-  height: 16px;
-  overflow: hidden;
-  position: absolute;
-  left: 50%;
-  margin-left: -35px;
-  bottom: -16px;
-}
-.arrow.top {
-  top: -16px;
-  bottom: auto;
-}
-.arrow.left {
-  left: 20%;
-}
-.arrow:after {
-  content: "";
-  position: absolute;
-  left: 20px;
-  top: -20px;
-  width: 25px;
-  height: 25px;
-  box-shadow: 6px 5px 9px -9px #000000;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.arrow.top:after {
-  bottom: -20px;
-  top: auto;
-}
 /* date-selector */
 .date-selector {
   position: relative;
@@ -1950,9 +1906,8 @@ footer.navbar ul.navbar-nav li:last-child {
   font-size: 14px;
 }
 .date-selector .bootstrap-datetimepicker-widget.pull-right {
-  top: -36px !important;
-  left: 220px !important;
-  position: relative;
+  top: -2px !important;
+  right: -220px !important;
 }
 .date-selector .bootstrap-datetimepicker-widget.top {
   top: -264px !important;
@@ -1965,8 +1920,7 @@ footer.navbar ul.navbar-nav li:last-child {
   }
 }
 .date-selector .bootstrap-datetimepicker-widget.top.pull-right {
-  position: relative;
-  top: -254px !important;
+  top: -220px !important;
 }
 .date-selector .bootstrap-datetimepicker-widget:before,
 .date-selector .bootstrap-datetimepicker-widget:after {
@@ -2329,22 +2283,6 @@ input:focus + [role="modal"] {
  * Popovers component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.popover .close {
-  font-size: 16px;
-  line-height: 1;
-  padding-left: 5px;
-}
-.popover.right > .arrow {
-  left: 24px !important;
-}
-.popover.left > .arrow {
-  left: 113% !important;
-}
-input:focus + [role="popover"] {
-  display: block;
-  position: absolute;
-  top: 100%;
-}
 /*
  * Responsive-Utilities component theme overrides
  *------------------------------------------------------------------------------------------
@@ -3966,151 +3904,77 @@ ul.ColVis_collection li:first-of-type {
  * Tooltips component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.tooltip {
-  position: absolute;
-  z-index: 1030;
-  display: block;
-  visibility: visible;
-  font-family: 'Trebuchet MS', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', Gulim, Tahoma, 'Arial Unicode', sans-serif;
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 1.4;
-  border: 1px solid #999999;
-  background: #ffffff !important;
+a[data-toggle="tooltip"] {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+button[data-toggle="tooltip"] {
+  border: inherit;
 }
 .tooltip.top {
-  margin-top: -10px;
-  margin-left: -1px;
-  padding: 4px 3px;
-}
-.tooltip.right {
-  margin-left: 11px;
-  padding: 4px 0;
-}
-.tooltip.bottom {
-  margin-top: 12px;
-  padding: 4px 3px;
+  margin-top: -5px;
 }
 .tooltip.left {
-  margin-left: -12px;
-  padding: 4px 0;
+  margin-left: -10px;
 }
-.tooltip-inner {
-  max-width: 125px;
-  padding: 4px 0px;
-  margin: -2px 6px;
-  color: #444444;
-  text-align: center;
-  text-decoration: none;
-  background-color: #ffffff;
-  border-radius: 1px;
-}
-.tooltip.right .tooltip-inner {
-  margin: -2px 2px;
-}
-.tooltip.left .tooltip-inner {
-  margin: -2px 2px;
-}
-.tooltip-arrow {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-}
-.tooltip.top .tooltip-arrow {
-  bottom: -8px;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 7px 7px 0;
-  border-top-color: #666;
-}
-.tooltip.top-left .tooltip-arrow {
-  bottom: 0;
-  right: 7px;
-  margin-bottom: -7px;
-  border-width: 7px 7px 0;
-  border-top-color: #cccccc;
-}
-.tooltip.top-right .tooltip-arrow {
-  bottom: 0;
-  left: -7px;
-  margin-bottom: -7px;
-  border-width: 7px 7px 0;
-  border-top-color: #cccccc;
-}
-.tooltip.right .tooltip-arrow {
-  top: 50%;
-  left: -7px;
-  margin-top: -7px;
-  border-width: 7px 7px 7px 0;
-  border-right-color: #666666;
-}
-.tooltip.left .tooltip-arrow {
-  top: 50%;
-  right: -7px;
-  margin-top: -7px;
-  border-width: 7px 0 7px 7px;
-  border-left-color: #666666;
-}
-.tooltip.bottom .tooltip-arrow {
-  top: -8px;
-  left: 50%;
-  margin-left: -7px;
-  border-width: 0 7px 7px;
-  border-bottom-color: #666666;
-}
-.tooltip.bottom-left .tooltip-arrow {
-  top: 0;
-  right: 7px;
-  margin-top: -7px;
-  border-width: 0 7px 7px;
-  border-bottom-color: #cccccc;
-}
-.tooltip.bottom-right .tooltip-arrow {
-  top: 0;
-  left: 7px;
-  margin-top: -7px;
-  border-width: 0 7px 7px;
-  border-bottom-color: #cccccc;
-}
-.tooltip.right .tooltip-arrow:after {
-  left: 1px;
-}
-.tooltip.bottom .tooltip-arrow:after {
-  top: 1px;
-}
-.tooltip.left .tooltip-arrow:after {
-  right: 1px;
-}
-[class^=icon][data-toggle="tooltip"] {
-  border: none;
-}
-a[data-toggle="tooltip"] {
-  padding-bottom: 0;
-}
-img[data-toggle="tooltip"] {
-  border: none;
-}
-.contextual-help .form-label {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  padding-left: 5px;
-  padding-top: 8px;
-  text-align: right;
-  top: 0;
-}
-.contextual-help [class^=icon][data-toggle="tooltip"] {
-  border: none;
-}
-.contextual-help [data-toggle="tooltip"] {
-  border-bottom: none !important;
-  color: #007db8;
-}
-input:focus + [role="tooltip"] {
-  display: block;
-  position: absolute;
-  top: 100%;
+/* ----------| Tooltip Change to Modal based on the sm and xs media query |---------- */
+@media (max-width: 991px) {
+  .tooltip.in {
+    bottom: 0;
+    left: 0;
+    outline: 0 none;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1050;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    padding: 0;
+  }
+  .tooltip.in.top,
+  .tooltip.in.right,
+  .tooltip.in.left,
+  .tooltip.in.bottom {
+    /*bottom: 0 !important;*/
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 auto;
+  }
+  .tooltip.in .tooltip-inner {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+    background-clip: padding-box !important;
+    background-color: #fff !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    border-radius: 5px !important;
+    outline: 0 none !important;
+    position: relative !important;
+    width: 50% !important;
+    margin: 10% auto 0 auto;
+    padding: 10px 15px;
+  }
+  .tooltip.in .tooltip-inner:before {
+    content: "\e602";
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-family: 'icon-ui';
+    font-size: 10px;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .tooltip.in .tooltip-arrow {
+    display: none !important;
+  }
 }
 /*
  * Typography component theme overrides
@@ -4762,6 +4626,10 @@ blockquote.blockquote-unstyled {
 .jumbotron p small {
   font-size: 85%;
   line-height: 15px;
+}
+.container .jumbotron,
+.container-fluid .jumbotron {
+  border-radius: 0;
 }
 .jumbotron {
   margin: 0;

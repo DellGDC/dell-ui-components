@@ -911,30 +911,50 @@
         <hr class="top-offset-40"/>
 
         <h3>Date Selector Demo</h3>
-        <form class="form-compressed" role="form">
-            <div class="row">
-                <!-- Date selector -->
-                <div class="form-group" id="date-selector-example">
-                    <label class="col-xs-12 col-sm-2 form-label" for="date-selector-input">Date</label>
-                    <div class="col-xs-6 col-sm-6">
-                        <div class="date-selector">
-                            <input type="text" class="form-control" id="date-selector-input">
-                            <i class="icon-small-calendar"></i>
-                            <p class="help-block">
-                                mm/dd/yyyy
-                            </p>
+
+        <div id="child-selects">
+            <div equalizer="group" class="equalize well well-white text-gray-medium well-white-stroke">
+                <div class="center-component component-code" id="forms-selects-date-selector">
+                    <form class="bottom-offset-40" role="form">
+                      <div class="row">
+                        <!-- Date selector -->
+                        <div class="form-group" id="date-selector-example" role="form">
+                            <div class="col-xs-12 col-sm-2">
+                                <label class="form-label" for="date-selector-input">Date</label>
+                            </div>
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="date-selector">
+                                    <input type="text" class="form-control" id="date-selector-input">
+                                    <i class="icon-small-calendar"></i>
+                                    <p class="help-block">
+                                        mm/dd/yyyy
+                                    </p>
+                                </div>
+                            </div>
                         </div>
+                        <!-- // Date selector -->
+                      </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <hr class="rule-break hr-gray-light">
+                        <h5 class="fragment-title">Date selector</h5>
+                        <div class="description">Allows a user to easily select a date from a calendar.</div>
                     </div>
                 </div>
-                <!-- // Date selector -->
+                
             </div>
-        </form>
+        </div>
+
         <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
         <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
         <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
         <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
         <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
     </div>
+
+    <div class="label label-green-marker"> Recent purchase</div>
 
 
 </section>
