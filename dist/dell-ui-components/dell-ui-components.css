@@ -2706,7 +2706,6 @@ input:focus + [role="modal"] {
 .btn-progress:hover,
 .btn-progress .open > .dropdown-toggle.btn-progress {
   background: white none repeat scroll 0 0;
-  margin-right: 10px;
 }
 .btn-progress + .dropdown-menu li {
   position: relative;
