@@ -7,11 +7,28 @@
 
 
 
-.show-password .checkbox,
-.show-password .radio {
-    margin-bottom: 5px;
-    margin-top: -5px;
-    margin-left: 20px;
+.show-hide-password {
+    .checkbox,
+    .radio {
+        margin-bottom: 5px;
+        margin-top: -5px;
+        margin-left: 20px;
+    }
+
+    input[type=checkbox] {
+        ~ .hide-password {
+            display:none;
+        }
+        &:checked {
+            ~.hide-password {
+                display:inline-block;
+            }
+            +.show-password {
+                display:none;
+            }
+        }
+    }
+
 }
 
 // tree view

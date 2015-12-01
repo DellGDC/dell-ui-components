@@ -318,16 +318,16 @@
             <!--password-->
             <form class="form-compressed" role="form">
                 <div class="row">
-                    <div class="form-group show-password">
+                    <div class="form-group show-hide-password">
                         <label for="passwordShowHide" class="col-xs-12 col-sm-2 form-label">Password</label>
                         <div class="col-xs-6 col-sm-6">
-                            <input id="passwordShowHide" type="password" class="form-control" ng-model="password">
+                            <input id="password-show-hide-example" type="password" class="form-control">
                         </div>
                         <div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2">
                             <label class="checkbox help-block">
-                                <input type="checkbox"  value="option1" ng-model="showPassword" ng-click="togglePassword()">
-                                <span ng-if="!showPassword">Show password</span>
-                                <span ng-if="showPassword">Hide password</span>
+                                <input type="checkbox">
+                                <span class="show-password">Show password</span>
+                                <span class="hide-password">Hide password</span>
                             </label>
                         </div>
                     </div>

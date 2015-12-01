@@ -98,19 +98,19 @@ angular.module('dellUiComponents')
 
 
 
-.directive('showPassword', function() {
+.directive('showHidePassword', function() {
 return {
     restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
 
         link: function($scope, $element, $attrs, controller) {
-            $scope.togglePassword = function() {
-                $scope.showPassword = !$scope.showPassword;
-                if ($scope.showPassword) {
+
+            $element.find('.checkbox input[type=checkbox]').on('click',function(){
+                if($element.find('.checkbox input[type=checkbox]').is(":checked")){
                     $($element).find('input[type=password]').attr('type', 'text');
                 } else {
                     $($element).find('input[type=text]').attr('type', 'password');
                 }
-            };
+            })
         }
     };
 })
