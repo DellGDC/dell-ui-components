@@ -177,6 +177,9 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 
 **1.0.14** - November 30, 2015:
   - Fixed conflict with overflow tabs and offcanvas
+  - Fixed issue with dropdown progress status hover
+  - Updated to dell-ui-bootstrap 1.2.5
+  - Fixed conflict between overflow tabs and off-canvas
 
 
 ### Older versions:
