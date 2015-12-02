@@ -110,7 +110,7 @@ return {
                 } else {
                     $($element).find('input[type=text]').attr('type', 'password');
                 }
-            })
+            });
         }
     };
 })
@@ -531,7 +531,7 @@ return {
         restrict: 'AC', // E = Element, A = Attribute, C = Class, M = Comment
         template: template,
         link: function($scope, $element, $attributes, controller) {
-            $scope.emptyName = $attributes.emptyName || '*State';
+            $scope.emptyName = $attributes.emptyName || 'State';
         }
     };
 })
