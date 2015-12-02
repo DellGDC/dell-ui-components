@@ -111,6 +111,9 @@
             margin-top: 5px;
             margin-bottom: 5px;
         }
+        .dell-price {
+            margin-top: -3px;
+        }
 
     }
 
@@ -125,7 +128,9 @@
         }
         ol, ul {
             margin-top: -3px;
-            margin-bottom: 10px;
+            &.list-inline{
+                margin-bottom: 5px;
+            }
         }
         .list-inline > li {
             display: inline-block;
@@ -135,7 +140,20 @@
                 padding-left: 0;
                 padding-right: 0;
                 color: @dell-blue;
+                margin-left: -5px;
+                margin-right: -3px;
             }
+        }
+    }
+    .rewards-stack {
+        border-bottom: 1px solid @dell-gray;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        [class^=icon-] {
+            margin-top: 3px;
+        }
+        p {
+            margin: 0 0 5px;
         }
     }
 
