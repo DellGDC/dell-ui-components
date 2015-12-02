@@ -43,7 +43,7 @@
         }
     }
 
-    .img-responsive {
+    .product-img {
         width: 170px;
         height: auto;
         display: block;
@@ -99,6 +99,7 @@
         ol, ul {
             margin-top: 10px;
             margin-bottom: 10px;
+            padding-left: 15px;
         }
         li {
             color: @dell-blue;
@@ -129,7 +130,7 @@
         ol, ul {
             margin-top: -3px;
             &.list-inline{
-                margin-bottom: 5px;
+                margin-bottom: 0;
             }
         }
         .list-inline > li {
@@ -154,6 +155,26 @@
         }
         p {
             margin: 0 0 5px;
+        }
+    }
+    .shipping-stack {
+        border-bottom: 1px solid @dell-gray;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        [class^=icon-] {
+            margin-top: 3px;
+        }
+        img {
+
+        }
+
+        .tooltip-inner {
+            max-width: auto;
+            padding: 3px 8px;
+            color: #444;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 1px;
         }
     }
 
