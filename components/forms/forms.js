@@ -587,6 +587,7 @@ return {
                 }
 
                 //check to see if the bottom side is big enough for the widget
+                console.log(inputFieldOffset.top - window.pageYOffset + 255,viewPortHeight);
                 if(inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
                     //dateSelectorConfig.widgetPositioning.vertical = "top";
                     calendarWidget.removeClass('bottom').addClass('top');
