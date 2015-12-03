@@ -2237,11 +2237,6 @@ footer.navbar ul.navbar-nav li:last-child {
   cursor: pointer;
   float: right;
 }
-@media (max-width: 767px) {
-  .date-selector .icon-small-calendar {
-    top: 40px;
-  }
-}
 .date-selector .icon-small-calendar:hover {
   background: #cce5f1;
   -webkit-border-radius: 1px;
@@ -2625,6 +2620,56 @@ input:focus + [role="modal"] {
 [data-toggle="popover"] .icon-large-alertinfo {
   color: #007db8;
   cursor: help;
+}
+@media (max-width: 767px) {
+  .popover.in {
+    display: block;
+    bottom: 0;
+    left: 0;
+    outline: 0 none;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1050;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    padding: 0;
+    width: 100%;
+  }
+  .popover.in.top,
+  .popover.in.right,
+  .popover.in.left,
+  .popover.in.bottom {
+    /*bottom: 0 !important;*/
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 auto;
+  }
+  .popover.in .popover-content {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+    background-clip: padding-box !important;
+    background-color: #fff !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    border-radius: 5px !important;
+    outline: 0 none !important;
+    position: relative !important;
+    width: 50% !important;
+    margin: -8% auto 0 auto;
+    padding: 60px 15px 10px 15px;
+    z-index: 1;
+  }
+  .popover.in .popover-title {
+    width: 45% !important;
+    background: transparent;
+    margin: 40% auto 0 auto;
+    z-index: 2;
+    position: relative;
+    padding: 15px 0;
+    height: 50px;
+  }
 }
 /*
  * Responsive-Utilities component theme overrides
@@ -4236,65 +4281,6 @@ ul.ColVis_collection li:first-of-type {
  */
 .tooltip {
   background: #ffffff;
-}
-/* ----------| Tooltip Change to Modal based on the xs media query |---------- */
-@media (max-width: 767px) {
-  .tooltip.in {
-    bottom: 0;
-    left: 0;
-    outline: 0 none;
-    overflow: hidden;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 1050;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: rgba(0, 0, 0, 0.5) !important;
-    padding: 0;
-  }
-  .tooltip.in.top,
-  .tooltip.in.right,
-  .tooltip.in.left,
-  .tooltip.in.bottom {
-    /*bottom: 0 !important;*/
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin: 0 auto;
-  }
-  .tooltip.in .tooltip-inner {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
-    background-clip: padding-box !important;
-    background-color: #fff !important;
-    border: 1px solid rgba(0, 0, 0, 0.2) !important;
-    border-radius: 5px !important;
-    outline: 0 none !important;
-    position: relative !important;
-    width: 50% !important;
-    margin: 10% auto 0 auto;
-    padding: 10px 15px;
-  }
-  .tooltip.in .tooltip-inner:before {
-    content: "\e602";
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    font-family: 'icon-ui';
-    font-size: 10px;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  .tooltip.in .tooltip-arrow {
-    display: none !important;
-  }
 }
 /*
  * Typography component theme overrides
