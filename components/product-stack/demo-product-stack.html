@@ -116,23 +116,68 @@
 
                         <!-- special-offers -->
                         <div class="special-offers">
-                            <ul>
-                                <li>
-                                    <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                </li>
-                            </ul>
+                            <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#special-offers">
+                                <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show stuff</span>
+                                <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide stuff</span>
+                            </a>
+                                <div id="special-offers" class="collapse">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+
                         </div>
                         <!-- /special-offers -->
 
                         <!-- price-stack -->
                         <div class="price-stack">
-                            <h6>Market Value<span class="pull-right">$00.00</span></h6>
-                            <a href="javascript:;" class="btn-link"><h6 class="">Total Savings<span class="pull-right">$00.00</span></h6></a>
-                            <h5 class="dell-price">Dell Price<span class="pull-right">$0,000.00</span></h5>
+                            <div class="well well-transparent-stroke">
+                                <!--<h6>Market Value<span class="pull-right">$00.00</span></h6>-->
+                                <!--<a href="javascript:;" class="btn-link"><h6 class="">Total Savings<span class="pull-right">$00.00</span></h6></a>-->
+                                <h4 class="dell-price"><small>Dell Price</small><span class="pull-right"><strong>$0,000,000.00</strong></span></h4>
+
+                                <h6 aria-describedby="popover-top">
+                                    <a tabindex="0"
+                                       role="popover"
+                                       id="popover-top"
+                                       data-trigger="show"
+                                       class="popover-link"
+                                       data-html="true"
+                                       data-toggle="popover"
+                                       data-placement="top"
+                                       data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
+                                                     &lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;
+                                                     &lt;hr class='dotted-hr'/&gt;
+                                                     &lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
+                                       >$20 Discount included</a>
+                                </h6>
+
+                            </div>
+
+
+
+                            <!--&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;-->
+                            <!--&lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;-->
+                            <!--&lt;hr class='dotted-hr'/&gt;-->
+                            <!--&lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;-->
+
+                            <!--<h6>Market Value<sup>1</sup><span class="pull-right">$000.00</span></h6>-->
+                            <!--<h6 class="text-berry">Instant discount<span class="pull-right">-$00.00</span></h6>-->
+                            <!--<hr class="dotted-hr"/>-->
+                            <!--<h6><strong>Dell Price<span class="pull-right">$000.00</span></strong></h6>-->
+
                         </div>
+
+                        <!--<a href="javascript:;" data-toggle="tooltip" data-container="body" data-placement="top" title="Tooltip on bottom with simple filler copy"><small>Tooltip on top</small></a>-->
+
+
                         <!-- /price-stack -->
                         <!-- finance-stack -->
                         <div class="finance-stack">
@@ -154,14 +199,25 @@
                         <!-- rewards-stack -->
                         <!-- rewards-stack -->
                         <div class="shipping-stack">
-                            <img src="components/product-stack/product-img/Smart_Selection_Green_64px.png" class="img-responsive pull-left" alt="Responsive image">
+                            <div class="ship-date">
+                                <img src="components/product-stack/product-img/Smart_Selection_Green_64px.png" class="img-responsive pull-left" alt="Responsive image">
+                                <p class=pull-left">
+                                    <small><a href="javascript:;" data-toggle="tooltip" data-placement="top" title=""
+                                              data-original-title="Dell Smart Selection systems are our best value, ready-to-ship systems prebuilt based on customer insights. With Smart Selection, you get a simplified ordering process and fast shipping. Our experts will also recommend preselected software and accessories so that you get everything you need in one purchase. And you can add our custom-selected support services to keep your computer up and running.
+                                 Limited system quantities available. Smart Selection system orders typically ship out from Dell facilities the next business day after payment processing. 3-5 day shipping method is standard. Not available for APO/FPO orders. Electronics and accessories may ship separately.">Smart Selection</a></small>
+                                </p>
+                                <p><small><strong>Ship date: </strong></small><small><strong>/12/15</strong></small></p>
+                            </div>
+                            <div class="same-day-ship">
+                                <p><small><strong class="text-orange"><a href="javascript:;" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Same day shipment subject to order size limitations and payment confirmation. Not available for APO/FPO orders or AK or HI addresses. Electronics and accessories may ship separately.">Ships same day</a></strong> if ordered by 2pm CST Monday - Thursday</small></p>
+                            </div>
 
-                            <p>
-                                <small><a href="javascript:;" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dell Smart Selection systems are our best value, ready-to-ship systems prebuilt based on customer insights. With Smart Selection, you get a simplified ordering process and fast shipping. Our experts will also recommend preselected software and accessories so that you get everything you need in one purchase. And you can add our custom-selected support services to keep your computer up and running.
-        Limited system quantities available. Smart Selection system orders typically ship out from Dell facilities the next business day after payment processing. 3-5 day shipping method is standard. Not available for APO/FPO orders. Electronics and accessories may ship separately.">Smart Selection</a></small>
-                            </p>
+
                         </div>
                         <!-- rewards-stack -->
+
+
+
 
 
                     </div>

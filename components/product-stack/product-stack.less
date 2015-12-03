@@ -96,8 +96,10 @@
         border-top: 1px solid @dell-berry;
         border-bottom: 1px solid @dell-berry;
         margin-bottom: 10px;
+        z-index: 1;
+        position: relative;
         ol, ul {
-            margin-top: 10px;
+            margin-top: -1px;
             margin-bottom: 10px;
             padding-left: 15px;
         }
@@ -107,13 +109,29 @@
         }
     }
     .price-stack {
+        border-top: 1px solid @dell-gray;
         border-bottom: 1px solid @dell-gray;
+        margin-top: -11px;
         .h4, .h5, .h6, h4, h5, h6 {
             margin-top: 5px;
             margin-bottom: 5px;
         }
         .dell-price {
             margin-top: -3px;
+        }
+        .well {
+            min-height: 20px;
+            padding: 10px 10px;
+            margin-bottom: 0;
+            background-color: @dell-gray-light;
+            border: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+        .dotted-hr {
+            border-top: 1px dotted @dell-gray;
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
     }
@@ -165,17 +183,56 @@
             margin-top: 3px;
         }
         img {
-
+            margin-right: 5px;
         }
 
         .tooltip-inner {
-            max-width: auto;
+            max-width: 275px !important;
             padding: 3px 8px;
             color: #444;
-            text-align: center;
+            text-align: left;
             background-color: #fff;
             border-radius: 1px;
         }
+        .ship-date {
+           p {
+               margin-bottom: 0;
+               margin-top: 0;
+               line-height: 14px;
+            }
+        }
     }
+
+    .popover {
+        padding: 20px;
+        box-shadow: 0 2px 3px rgba(0,0,0,.1);
+        border: 1px solid #999;
+        max-width: 300px;
+        min-width: 190px;
+        .popover-title {
+             margin: 0;
+             padding: 0 0 10px;
+             font-size: 16px;
+             //font-family: museo-sans-for-dell-300,'Trebuchet MS',Roboto,'Segoe UI','Helvetica Neue','Meiryo UI Reg','メイリオ Reg','MS UI Gothic Reg','Hiragino Kaku Gothic Reg','ヒラギノ角ゴ Pro W3 Reg','Microsoft YaHei','微软雅黑','Hiragino Sans GB','Microsoft JhengHei','微軟正黑體','Malgun Gothic',Gulim,Tahoma,'Arial Unicode',sans-serif;
+             //font-weight: 700;
+             line-height: 18px;
+             border-bottom: 1px solid @dell-gray;
+         }
+        .popover-content {
+            padding: 0;
+        }
+
+    }
+
+    .popover-link {
+        border-bottom: 1px dashed @dell-gray;
+        padding-top: 0;
+        padding-bottom: 0;
+        &:hover{
+
+        }
+    }
+
+
 
 }
