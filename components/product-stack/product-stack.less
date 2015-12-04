@@ -133,7 +133,6 @@
             margin-top: 0;
             margin-bottom: 0;
         }
-
     }
 
     .finance-stack {
@@ -169,10 +168,26 @@
         margin-top: 5px;
         margin-bottom: 5px;
         [class^=icon-] {
-            margin-top: 3px;
+            margin-top: 1px;
         }
         p {
             margin: 0 0 5px;
+        }
+        .popover {
+            max-width: 300px;
+            min-width: 350px;
+        }
+        .list-inline > li {
+            display: inline-block;
+            padding-left: 5px;
+            margin-bottom: 5px;
+            &.pipe {
+                padding-left: 0;
+                padding-right: 0;
+                color: @dell-blue;
+                margin-left: -5px;
+                margin-right: -3px;
+            }
         }
     }
     .shipping-stack {
@@ -211,6 +226,7 @@
         min-width: 190px;
         .popover-title {
              margin: 0;
+             margin-bottom: 10px;
              padding: 0 0 10px;
              font-size: 16px;
              //font-family: museo-sans-for-dell-300,'Trebuchet MS',Roboto,'Segoe UI','Helvetica Neue','Meiryo UI Reg','メイリオ Reg','MS UI Gothic Reg','Hiragino Kaku Gothic Reg','ヒラギノ角ゴ Pro W3 Reg','Microsoft YaHei','微软雅黑','Hiragino Sans GB','Microsoft JhengHei','微軟正黑體','Malgun Gothic',Gulim,Tahoma,'Arial Unicode',sans-serif;
