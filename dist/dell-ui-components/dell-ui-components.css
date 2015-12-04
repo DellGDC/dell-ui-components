@@ -2806,6 +2806,11 @@ div.dataTables_length label {
   white-space: nowrap;
   float: left;
 }
+@media (max-width: 470px) {
+  div.dataTables_length label {
+    clear: both;
+  }
+}
 div.dataTables_length select {
   width: 75px;
   display: inline-block;
@@ -2818,6 +2823,8 @@ div.dataTables_filter label {
   white-space: nowrap;
   text-align: left;
   padding: 10px 0 10px 0;
+  float: right;
+  margin-right: -10px;
 }
 div.dataTables_filter input {
   margin-left: 0.5em;
@@ -2837,6 +2844,7 @@ div.dataTables_paginate ul.pagination {
   margin: 2px 0;
   white-space: nowrap;
   padding-right: 0;
+  float: right;
 }
 table.dataTable input {
   vertical-align: top;
@@ -2864,21 +2872,6 @@ table.dataTable {
   margin-top: 6px !important;
   margin-bottom: 6px !important;
   max-width: none !important;
-}
-table.dataTable thead .sorting:after {
-  content: "\f0dc";
-  color: #5AABD1;
-}
-table.dataTable thead .sorting_asc:after {
-  content: "\f0de";
-  color: #007db8;
-}
-table.dataTable thead .sorting_desc:after {
-  content: "\f0dd";
-  color: #007db8;
-}
-table.dataTable thead > tr > th {
-  padding-right: 15px;
 }
 table.dataTable th:active {
   outline: none;
@@ -3162,11 +3155,14 @@ table.dataTable thead .sorting_asc_disabled {
 table.dataTable thead .sorting_desc_disabled {
   background-image: none;
 }
+table.dataTable tbody tr.selected {
+  background: #EDF9FF;
+}
 .table-striped tbody > tr:nth-child(odd).selected > td,
 .table-striped tbody > tr:nth-child(odd).selected > th,
 .table-striped tbody > tr:nth-child(even).selected > td,
 .table-striped tbody > tr:nth-child(even).selected > th {
-  background-color: #CCE5F1;
+  background: #EDF9FF;
   border-top: 0;
 }
 table.dataTable.hover tbody tr:hover.selected,
@@ -3242,20 +3238,17 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-  top: 0px;
-  left: 2px;
-  height: 16px;
-  width: 16px;
-  display: block;
-  position: relative;
-  font-family: 'FontAwesome';
-  content: '\f0de';
+  content: "\e610";
   color: #007db8;
-  text-align: center;
-  line-height: 14px;
-  box-sizing: content-box;
-  padding-left: 2px;
-  padding-bottom: 15px;
+  padding: 0 3px 0 0;
+  position: relative;
+  top: 0;
+  right: 0;
+  display: block;
+  font-family: icon-ui;
+  opacity: 0.8;
+  background: none !important;
+  float: left;
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child.dataTables_empty:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_empty:before {
@@ -3263,7 +3256,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_em
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
-  content: "\f0dd";
+  content: "\e60e";
   color: #007db8;
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr.child td:before {
@@ -3319,7 +3312,7 @@ table.dataTable > tbody > tr.child:hover {
   background: transparent !important;
 }
 table.dataTable > tbody > tr.child ul {
-  display: inline-block;
+  display: block;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -3336,8 +3329,8 @@ table.dataTable > tbody > tr.child ul li:last-child {
 }
 table.dataTable > tbody > tr.child span.dtr-title {
   display: inline-block;
-  min-width: 75px;
-  font-weight: bold;
+  color: #737373!important;
+  font-size: 85%;
 }
 table.table-responsive td:before {
   display: none;
@@ -3412,9 +3405,13 @@ td.details-control {
   opacity: 0.8;
   background: none !important;
 }
-td.details-control:after {
+td.details-control:before {
   content: "\e610";
   color: #007db8;
+  padding: 0 5px 0 0;
+}
+th.details-control input[type="checkbox"] {
+  margin-left: 24px;
 }
 tr.shown td.details-control {
   position: relative;
@@ -3425,7 +3422,7 @@ tr.shown td.details-control {
   opacity: 0.8;
   background: none !important;
 }
-tr.shown td.details-control:after {
+tr.shown td.details-control:before {
   content: "\e60e";
   color: #007db8;
 }
@@ -3457,20 +3454,15 @@ div.ColVis {
 button.ColVis_Button,
 ul.ColVis_collection li {
   position: relative;
-  float: left;
-  padding: 5px 8px;
-  border: 1px solid #999;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
   cursor: pointer;
   *cursor: hand;
-  font-size: 0.88em;
-  color: black !important;
+  color: #00618f !important;
   white-space: nowrap;
   background: #eeeeee;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
+  border-radius: none;
   -webkit-box-shadow: 1px 1px 3px #ccc;
   -moz-box-shadow: 1px 1px 3px #ccc;
   -ms-box-shadow: 1px 1px 3px #ccc;
@@ -3512,6 +3504,7 @@ div.ColVis_collectionBackground {
   height: 100%;
   width: 100%;
   background-color: black;
+  opacity: 0.5 !important;
   z-index: 1100;
 }
 ul.ColVis_collection {
@@ -3588,15 +3581,165 @@ table .table-responsive-columns table th[class*=col-] {
   position: static;
   float: none;
   display: table-cell;
-  background: green !important;
 }
-td.dt-body-center input[type="checkbox"] {
+.table-expandable-row p {
+  margin-bottom: 5px;
+  line-height: 15px;
+}
+.table-expandable-row p + p {
+  margin-bottom: 10px;
+}
+.table-expandable-row td.details-control {
+  text-align: left;
+}
+.table-expandable-row td.details-control:after {
+  padding-left: 5px;
+}
+.table-expandable-row th {
+  line-height: 15px !important;
+}
+.table-expandable-row th:first-child.details-control.sorting span:before,
+.table-expandable-row th:first-child.details-control.sorting_asc span:before,
+.table-expandable-row th:first-child.details-control.sorting_desc span:before {
+  display: none;
+}
+div.dataTables_wrapper > div.row > div,
+div.dataTables_length,
+div.dataTables_filter,
+div.dataTables_info,
+div.dataTables_paginate {
+  text-align: left;
+}
+.dt-form-inline .form-control {
+  display: inline-block;
+  width: 135px !important;
+  vertical-align: top;
+  margin-right: 10px;
+  height: 30px;
+  line-height: 30px;
+  padding: 3px 5px;
+}
+.dt-form-inline .form-group {
+  float: left;
+  margin-top: 5px;
+}
+.dt-form-inline .control-label {
+  margin-bottom: 0;
+  vertical-align: middle;
+  text-align: left;
+  float: left;
+  width: auto;
+  padding: 9px 5px 9px 0;
+}
+div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
+  right: 24px;
+  top: 8px;
+  position: relative;
+  z-index: 20;
+}
+@media (max-width: 767px) {
+  div.dataTables_filter label {
+    font-weight: normal;
+    white-space: nowrap;
+    text-align: left;
+    padding: 10px 0 10px 0;
+    float: left;
+    width: 100%;
+    margin-top: -20px;
+  }
+  div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
+    float: right;
+    right: 15px;
+    top: 25px;
+    position: relative;
+    z-index: 20;
+  }
+  .form-inline .form-control {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+    margin-left: 0;
+    margin-right: 0;
+    height: 31px !important;
+  }
+  select.form-control {
+    width: 50px !important;
+  }
+  div.dataTables_paginate ul.pagination {
+    margin: 2px 0;
+    white-space: nowrap;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-align: center !important;
+    float: none;
+  }
+  div.dataTables_wrapper > div.row > div,
+  div.dataTables_length,
+  div.dataTables_filter,
+  div.dataTables_info,
+  div.dataTables_paginate {
+    text-align: center !important;
+    padding-bottom: 10px;
+  }
+}
+input.form-control.input-sm.col-xs-12.col-sm-4 {
+  height: 31px !important;
+}
+.ColVis_Button i.glyphicon.glyphicon-option-horizontal.text-blue {
+  padding-top: 3px;
+}
+table.dataTable thead th {
+  background: transparent !important;
+  white-space: nowrap;
+}
+table.dataTable thead span.sort-icon {
+  display: inline-block;
+  margin-left: 10px;
+  font-family: 'FontAwesome';
+}
+table.dataTable thead .sorting span:before {
+  content: "\f0dc";
+  color: #5AABD1;
+}
+table.dataTable thead .sorting_asc span:before {
+  content: "\f0de";
+  color: #007db8;
+}
+table.dataTable thead .sorting_desc span:before {
+  content: "\f0dd";
+  color: #007db8;
+}
+table.dataTable thead .sorting_asc_disabled span:before {
+  content: "\f0de";
+  color: #eeeeee;
+}
+table.dataTable thead .sorting_desc_disabled span:before {
+  content: "\f0dd";
+  color: #eeeeee;
+}
+th.dt-body-center input[type="checkbox"] {
+  margin-left: 5px;
+}
+.collapsed th.dt-body-center input[type="checkbox"] {
+  margin-left: 24px;
+}
+.collapsed td.dt-body-center input[type="checkbox"] {
   display: inline-block;
   margin-bottom: 0;
   vertical-align: top;
+  margin-left: 5px;
 }
 ul.ColVis_collection li:first-of-type {
   display: none;
+}
+table.DTCR_clonedTable {
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 202;
+}
+div.DTCR_pointer {
+  width: 1px;
+  background-color: #0259C4;
+  z-index: 201;
 }
 .nav-tabs-overflow-container {
   overflow-x: hidden;
@@ -4314,7 +4457,7 @@ ul.ratings:after {
   display: block;
 }
 ul.ratings li a.btn-link {
-  margin-right: 10px;
+  margin-left: 10px;
 }
 .ratings-histogram .progress {
   margin-bottom: 10px;
@@ -5249,4 +5392,8 @@ masthead .masthead-shadow {
   margin: -26px auto 0;
   z-index: 500;
 }
+/*
+ * Product-Stack component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
 /* Add Component LESS Above */
