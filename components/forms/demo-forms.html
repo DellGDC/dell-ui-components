@@ -484,7 +484,7 @@
 
 
 
-        <h3 class="top-offset-40">select form controls</h3>
+       <h3 class="top-offset-40">select form controls</h3>
 
         <hr/>
 
@@ -496,7 +496,7 @@
                         <div class="col-xs-12 col-sm-6">
                             <label for="select01" class="form-label">Select list</label>
                             <select class="form-control" id="select01">
-                                <option>  </option>
+                                <option> Please choose </option>
                                 <option> 2 </option>
                                 <option> 3 </option>
                                 <option> 4 </option>
@@ -580,6 +580,7 @@
                                     <option value="11">November</option>
                                     <option value="12">December</option>
                                 </select>
+                                <p class="help-block">i.e. "Months"</p>
                             </div>
                         </div>
                     </div>
@@ -602,7 +603,7 @@
                             <label for="default-select-state" class="form-label">Standard Select U.S. States</label>
                             <select class="form-control select-state" id="default-select-state" ng-model="stateDefault"></select>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </form>
             <!-- /Standard Select U.S. States -->
@@ -672,14 +673,14 @@
                         <label class="col-xs-8 col-sm-2 hidden-sm form-label" for="first-name">First Name</label>
                         <label class="col-xs-8 col-sm-2 visible-sm-block form-label" for="first-name">First</label>
                         <div class="col-xs-12 col-sm-10">
-                            <input type="text" class="form-control" id="first-name" placeholder="*First Name">
+                            <input type="text" class="form-control" id="first-name" placeholder="">
                         </div>
                     </div>
 
                     <div class="col-xs-1">
                         <label class="col-xs-12 col-sm-4 form-label" for="middle-initial">MI</label>
                         <div class="col-xs-12 col-sm-8">
-                            <input type="text" class="form-control" id="middle-initial" placeholder="MI">
+                            <input type="text" class="form-control" id="middle-initial" placeholder="">
                         </div>
                     </div>
 
@@ -687,7 +688,7 @@
                         <label class="col-xs-12 col-sm-2 col-md-3 hidden-sm form-label"for="last-name">Last Name</label>
                         <label class="col-xs-12 col-sm-2 col-md-3 visible-sm-block form-label"for="last-name">Last</label>
                         <div class="col-xs-12 col-sm-10 col-md-9">
-                            <input type="text" class="form-control" id="last-name" placeholder="*Last Name">
+                            <input type="text" class="form-control" id="last-name" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -703,7 +704,7 @@
                     <div class="col-xs-6 col-sm-6">
                         <label class="col-xs-8 col-sm-2 col-md-1 form-label" for="email-address">Email&nbsp;</label>
                         <div class="col-xs-12 col-sm-10 col-md-11">
-                            <input type="text" class="form-control email-address" id="email-address" placeholder="*Email Address">
+                            <input type="text" class="form-control email-address" id="email-address" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -726,7 +727,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <label class="col-xs-8 col-sm-1 form-label" for="address-1">Address</label>
                         <div class="col-xs-12 col-sm-11">
-                            <input type="text" class="form-control" id="address-1" placeholder="*Street Address">
+                            <input type="text" class="form-control" id="address-1" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -735,7 +736,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <label class="col-xs-8 col-sm-1 col-md-1 form-label" for="address-2">Address</label>
                         <div class="col-xs-12 col-sm-11">
-                            <input type="text" class="form-control" id="address-2" placeholder="*Additional Address">
+                            <input type="text" class="form-control" id="address-2" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -748,7 +749,7 @@
                             </a>
                         </div>
                         <div id="additional-address" class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1">
-                            <input type="text" class="form-control" placeholder="*Additional Address">
+                            <input type="text" class="form-control" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -756,7 +757,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <label class="col-xs-8 col-sm-2 form-label" for="city">City</label>
                         <div class="col-xs-12 col-sm-10">
-                            <input type="text" class="form-control" id="city" placeholder="*City">
+                            <input type="text" class="form-control" id="city" placeholder="">
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-3">
@@ -769,7 +770,7 @@
                     <div class="col-xs-6 col-sm-3 col-md-3">
                         <label class="col-xs-8 col-sm-2 form-label" for="zip">Zip</label>
                         <div class="col-xs-12 col-sm-10">
-                            <input type="text" class="form-control" id="zip" placeholder="*Zip Code">
+                            <input type="text" class="form-control" id="zip" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -795,14 +796,14 @@
                                     <label class="col-xs-8 col-sm-2 hidden-sm form-label" for="first-name">First<span class="hidden-xs hidden-sm hidden-md"> Name</span></label>
                                     <label class="col-xs-8 col-sm-2 visible-sm-block form-label" for="first-name-1">First<span class="hidden-xs hidden-sm hidden-md"> Name</span></label>
                                     <div class="col-xs-12 col-sm-10">
-                                        <input type="text" class="form-control" id="first-name-1" placeholder="*First Name">
+                                        <input type="text" class="form-control" id="first-name-1" placeholder="">
                                     </div>
                                 </div>
 
                                 <div class="col-xs-1">
                                     <label class="col-xs-12 col-sm-4 form-label" for="middle-initial-1">MI</label>
                                     <div class="col-xs-12 col-sm-8">
-                                        <input type="text" class="form-control" id="middle-initial-1" placeholder="MI">
+                                        <input type="text" class="form-control" id="middle-initial-1" placeholder="">
                                     </div>
                                 </div>
 
@@ -810,7 +811,7 @@
                                     <label class="col-xs-12 col-sm-2 hidden-sm form-label"for="last-name">Last<span class="hidden-xs hidden-sm hidden-md"> Name</span></label>
                                     <label class="col-xs-12 col-sm-2 visible-sm-block form-label"for="last-name-1">Last<span class="hidden-xs hidden-sm hidden-md"> Name</span></label>
                                     <div class="col-xs-12 col-sm-10">
-                                        <input type="text" class="form-control" id="last-name-1" placeholder="*Last Name">
+                                        <input type="text" class="form-control" id="last-name-1" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -826,7 +827,7 @@
                                 <div class="col-xs-6 col-sm-6">
                                     <label class="col-xs-8 col-sm-2 form-label" for="email-address-1">Email&nbsp;</label>
                                     <div class="col-xs-12 col-sm-10">
-                                        <input type="text" class="form-control email-address" id="email-address-1" placeholder="*Email Address">
+                                        <input type="text" class="form-control email-address" id="email-address-1" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -839,17 +840,17 @@
                                             <span><label class="hide-expanded"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove extension</label></span>
                                         </a>
                                     </div>
-                                    <div id="phonegroup-ext-2" class="collapse col-xs-12 col-sm-10 col-sm-offset-2">
+                                    <div id="phonegroup-ext-2" class="collapse col-xs-12 col-sm-9 col-sm-offset-3">
                                         <input type="text" class="form-control phone-extension" placeholder="ext: (2222)">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-xs-12">
-                                    <label class="col-xs-8 col-sm-1 form-label" for="address-A">Address</label>
+                                    <div class="col-xs-12">
+                                        <label class="col-xs-8 col-sm-1 form-label" for="address-A">Address</label>
                                     <div class="col-xs-12 col-sm-11">
-                                        <input type="text" class="form-control" id="address-A" placeholder="*Street Address">
+                                        <input type="text" class="form-control" id="address-A" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -858,7 +859,7 @@
                                 <div class="col-xs-12">
                                     <label class="col-xs-8 col-sm-1 form-label" for="address-B">Address</label>
                                     <div class="col-xs-12 col-sm-11">
-                                        <input type="text" class="form-control" id="address-B" placeholder="*Additional Address">
+                                        <input type="text" class="form-control" id="address-B" placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -879,7 +880,7 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6">
                                     <label class="col-xs-8 col-sm-2 form-label" for="city-1">City</label>
                                     <div class="col-xs-12 col-sm-10">
-                                        <input type="text" class="form-control" id="city-1" placeholder="*City">
+                                        <input type="text" class="form-control" id="city-1" placeholder="">
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-sm-3">
@@ -892,7 +893,7 @@
                                 <div class="col-xs-6 col-sm-3 col-md-3">
                                     <label class="col-xs-8 col-sm-2 form-label" for="zip-1">Zip</label>
                                     <div class="col-xs-12 col-sm-10">
-                                        <input type="text" class="form-control" id="zip-1" placeholder="*Zip Code">
+                                        <input type="text" class="form-control" id="zip-1" placeholder="">
                                     </div>
                                 </div>
                             </div>
