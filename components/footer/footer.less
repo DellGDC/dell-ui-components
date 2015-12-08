@@ -59,48 +59,7 @@ footer.navbar.universal-footer {
         background:@dell-gray-light;
         min-height:0;
         z-index:100;
-        .footer-gallery {
-            position:relative;
-            border-bottom:1px solid darken(@dell-gray-light, 7%);
-            background-color:@dell-gray-light;
-            z-index:120;
-            .gallery-item {
-                padding:20px 15px 10px 15px;
-                border-right:1px solid darken(@dell-gray-light, 7%);
-                border-bottom:none;
-                border-radius:0;
-                text-align:center;
-                cursor:pointer;
-                &:hover {
-                    background-color:@white;
-                }
-            }
-            .gallery-item:first-child {
-                padding-left:30px;
-            }
-            .gallery-item:last-child {
-                padding-right:30px;
-                border:none;
-            }
-            h5 {
-                color:@dell-gray-dark;
-                margin-top:10px;
-                margin-bottom:5px;
-            }
-            p {
-                font-size:12px;
-            }
-            i {
-                padding:0;
-                margin:0;
-            }
-            .icon-large-shipping, .icon-large-calculator, .icon-large-giftcard {
-                font-size:36px;
-                padding:0;
-                margin:0;
-                color:@dell-blue;
-            }
-        }
+
         ul.navbar-nav.about-links  {
             position:relative;
             background-color:transparent;
@@ -242,7 +201,7 @@ footer.navbar.universal-footer {
                         list-style:none;
                         border:none;
                     }
-                    ul li:first-child a {
+                  /*  ul li:first-child a {
                         padding-right:5px;
                     }
                     ul li:first-child a:after {
@@ -251,7 +210,7 @@ footer.navbar.universal-footer {
                     }
                     ul li:last-child:before {
                         padding-left:0;
-                    }
+                    }*/
                 }
             }
             @media (min-width:@screen-sm-min) {
@@ -291,10 +250,10 @@ footer.navbar.universal-footer {
                                 padding-right:0;
                             }
                         }
-                        ul li:first-child a:after {
+                      /*  ul li:first-child a:after {
                             content:"|";
                             padding-left:10px;
-                        }
+                        }*/
                         ul li:last-child {
                             a {
                                 padding-right:0;
