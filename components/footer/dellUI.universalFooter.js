@@ -78,6 +78,7 @@
             importJson = function() {
                 $.getJSON( "components/footer/footerData.json", function( data ) {
                     var items = [];
+                    console.log("data", data);
                     $.each( data, function() {
                         var countryData = data;
                         $.each( countryData.countries, function(key, value) {

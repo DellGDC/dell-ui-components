@@ -1,5 +1,5 @@
 angular.module('dellUiComponents')
-    .directive('universalFooter', function(){
+    .directive('defaultFooter', function(){
         return {
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller) {

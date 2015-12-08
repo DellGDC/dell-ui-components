@@ -1,5 +1,8 @@
 //This LESS should ONLY be for DEMO purposes. It will not be included in the dell-ui-components css, only in the demo application
+.footer-overflow {
+    overflow: visible;
 
+}
 #navigation-footer-simplified-footer {
 	margin-left: -30px;
 	margin-right: -30px;
@@ -9,15 +12,28 @@
 		padding-right: 30px;
 	}
 }
-#navigation-footer-universal-footer {
-    margin-left: -30px;
-    margin-right: -30px;
+#navigation-footer-default-footer {
+    margin-left: -19px;
+    margin-right: -19px;
     .container {
         width:100%;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 19px;
+        padding-right: 19px;
     }
 }
+
+@media (min-width: @screen-sm-min) {
+    #navigation-footer-default-footer {
+        margin-left: -19px;
+        margin-right: -19px;
+        .container {
+            width:100%;
+            padding-left: 19px;
+            padding-right: 19px;
+        }
+    }
+}
+
 //for play demo
 #footer-play-demo {
 }
