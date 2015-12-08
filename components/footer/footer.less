@@ -13,6 +13,7 @@ footer.navbar {
     min-height: 0;
     z-index:0;
     ul.navbar-nav {
+        min-height:44px;
         margin:0 auto 0 auto;
         li {
             border-bottom:1px solid darken(@dell-highlight-blue, 28%);
@@ -25,7 +26,7 @@ footer.navbar {
                 &:hover {
                     text-decoration:underline;
                     background: transparent;
-                    color: @dell-highlight-blue;
+                    color: @white;
                 }
             }
             &:last-child {
@@ -50,7 +51,7 @@ footer.navbar {
         }
     }
 }
-footer.navbar.universal-footer {
+footer.navbar.default-footer {
     border-top:1px solid darken(@dell-gray-light, 7%);
     .footer-about {
         position:relative;
@@ -201,16 +202,14 @@ footer.navbar.universal-footer {
                         list-style:none;
                         border:none;
                     }
-                  /*  ul li:first-child a {
-                        padding-right:5px;
+                    .language-divider {
+                        padding:0;
+                        margin:0;
                     }
-                    ul li:first-child a:after {
-                        content:"|";
-                        padding-left:10px;
+                    ul li:first-child a {
+                        padding-right:0;
                     }
-                    ul li:last-child:before {
-                        padding-left:0;
-                    }*/
+
                 }
             }
             @media (min-width:@screen-sm-min) {
@@ -218,9 +217,10 @@ footer.navbar.universal-footer {
                     margin: 0;
                     padding: 6px 0 6px 0;
                     width: 100%;
-                    height: 44px;
+                    min-height:44px;
                     width:100%;
                     li {
+
                         display:inline-block;
                         border-bottom:none;
                         padding:4px 0 0 0;
@@ -244,16 +244,16 @@ footer.navbar.universal-footer {
                         border-bottom:none;
                         float:right;
                         text-align:right;
+                        ul {
+                            margin-left:0;
+                            padding-left:20px;
+                        }
                         ul li {
                             border:none;
                             &:first-child a, :last-child a {
                                 padding-right:0;
                             }
                         }
-                      /*  ul li:first-child a:after {
-                            content:"|";
-                            padding-left:10px;
-                        }*/
                         ul li:last-child {
                             a {
                                 padding-right:0;
