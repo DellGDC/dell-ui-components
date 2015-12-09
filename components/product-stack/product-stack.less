@@ -5,7 +5,7 @@
 
 .product-stack {
     &.wrapper {
-
+        //The "wrapper" class is required for all the following classes
     }
     .well {
         min-height: 20px;
@@ -16,13 +16,25 @@
         border-radius: 0;
         box-shadow: none;
     }
+    .compare-stack {
+        margin-bottom: 20px;
+        .compare-active {
+            position: relative;
+            top: 2px;
+        }
+        .show {
+            display: inline-block!important;
+        }
+    }
+
 
     .product-bug {
         text-align: center;
         padding-right: 12px;
         p {
             padding:    2px 5px 2px 0;
-
+            line-height: 16px;
+            margin: 5px 0;
         }
         .triangle{
             border-color: @dell-red transparent transparent @dell-red;
