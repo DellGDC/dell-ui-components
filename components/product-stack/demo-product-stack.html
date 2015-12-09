@@ -168,23 +168,30 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="well well-transparent-stroke">
-                                        <h4 class="dell-price"><small>Dell Price</small><span class="pull-right"><strong>$0,000,000.00</strong></span></h4>
+                                        <h4 class="dell-price pull-left"><small>Dell Price</small></h4>
+                                        <h4 class="price"><strong>$0,000,000.00</strong></h4>
                                         <!-- custom popover -->
-                                        <h6 aria-describedby="popover-discount">
-                                            <a tabindex="0"
-                                               role="popover"
-                                               id="popover-discount"
-                                               data-trigger="show"
-                                               class="popover-link"
-                                               data-html="true"
-                                               data-toggle="popover"
-                                               data-placement="top"
-                                               data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h6 aria-describedby="popover-discount">
+                                                    <a tabindex="0"
+                                                       role="popover"
+                                                       id="popover-discount"
+                                                       data-trigger="show"
+                                                       class="popover-link"
+                                                       data-html="true"
+                                                       data-toggle="popover"
+                                                       data-placement="top"
+                                                       data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
                                                                  &lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;
                                                                  &lt;hr class='dotted-hr'/&gt;
                                                                  &lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
-                                            >$20 Discount included</a>
-                                        </h6>
+                                                    >$20 Discount included</a>
+                                                </h6>
+                                            </div>
+
+                                        </div>
+
                                         <!-- /custom popover -->
                                     </div>
                                 </div>
@@ -196,8 +203,13 @@
                         <div class="finance-stack">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <h5>Financing<sup>^</sup><span><small><a href="javascript:;" class="btn-link pull-right">As low as <sup>$</sup>20/mo<sup>1</sup></a></small></span></h5>
-                                    <h5><small><a href="javascript:;" class="btn-link pull-left bottom-offset-5">6-month special financing</a></small></h5>
+                                    <h5 class="finance">Financing<sup>^</sup></h5>
+                                    <h5><small><a href="javascript:;" class="btn-link finance-discount">As low as <sup>$</sup>20/mo<sup>1</sup></a></small></h5>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <h5><small><a href="javascript:;" class="btn-link finance-special-discount">6-month special financing</a></small></h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -207,9 +219,9 @@
                         <div class="rewards-stack">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <h5 class="text-blue"><i aria-hidden="true" class="icon-small-star text-blue pull-left"></i>&nbsp;Rewards
+                                    <h5 class="text-blue rewards"><i aria-hidden="true" class="icon-small-star text-blue pull-left"></i>&nbsp;Rewards</h5>
                                     <!-- custom popover -->
-                                    <span class="pull-right" aria-describedby="popover-top"><small>
+                                    <h6 class="rewards-discount" aria-describedby="popover-top">
                                             <a tabindex="0"
                                                role="popover-rewads"
                                                id="popover-top"
@@ -227,7 +239,7 @@
                                                                 &lt;li&gt;&lt;a href='javascript:;' class='btn-link'>No financing required&lt;/a&gt;&lt;/li&gt;
                                                              &lt;/ul&gt;"
                                             >Up to $80 back</a>
-                                    </small></span></h5>
+                                    </h6>
                                     <!-- /custom popover -->
                                 </div>
                             </div>
@@ -269,13 +281,8 @@
                             <div class="col-xs-12 bottom-offset-10">
                                 <button class="btn btn-primary btn-xs btn-block" type="button">View Details</button>
                             </div>
-
                         </div>
                         <!-- /cta-substack-->
-
-
-
-
                     </div>
                 </div>
             </div>
