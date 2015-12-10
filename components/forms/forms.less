@@ -818,10 +818,18 @@
             top:-2px !important;
             right:-220px !important;
         }
+        @media (max-width: @screen-xs-max) {
+            &.pull-left {
+                left:0 !important;
+            }
+        }
         &.top {
             top: -264px !important;
             @media (max-width: @screen-xs-max) {
                 top: -225px !important; //TODO this assumes that the label for date is full width
+                &.pull-left {
+                    top: -260px !important;
+                }
             }
             bottom: auto !important;
             position:absolute;
@@ -829,6 +837,8 @@
                 //position:relative;
                 top: -220px !important;
             }
+
+
         }
         &:before,&:after {
             //the caret
