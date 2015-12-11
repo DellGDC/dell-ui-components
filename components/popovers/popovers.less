@@ -3,3 +3,61 @@
  *------------------------------------------------------------------------------------------
  */
 
+[data-toggle="popover"] .icon-small-alertinfo,
+[data-toggle="popover"] .icon-large-alertinfo {
+	color:@dell-blue;
+	cursor: help;
+}
+
+
+@media (max-width: @screen-xs-max) {
+    .popover.in {
+    	display:block;
+        bottom: 0;
+        left: 0;
+        outline: 0 none;
+        overflow: hidden;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1050;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: rgba(0, 0, 0, .5) !important;
+        padding:0;
+        width:100%;
+
+        &.top, &.right, &.left, &.bottom    { 
+            /*bottom: 0 !important;*/
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important; 
+            margin: 0 auto; 
+        }
+
+        .popover-content {
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+            background-clip: padding-box !important;
+            background-color: #fff !important;
+            border: 1px solid rgba(0, 0, 0, 0.2) !important;
+            border-radius: 5px !important;
+            outline: 0 none !important;
+            position: relative !important;
+            width: 50% !important;
+            margin:-8% auto 0 auto;
+            padding:60px 15px 10px 15px;
+            z-index:1;
+
+        }
+        .popover-title {
+        	width: 45% !important;
+        	background: transparent;
+        	margin:40% auto 0 auto;
+        	z-index:2;
+        	position:relative;
+        	padding:15px 0;
+        	height:50px;
+        }
+
+    }
+}
