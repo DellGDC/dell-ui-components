@@ -3,3 +3,24 @@
  *------------------------------------------------------------------------------------------
  */
 
+
+@media (max-width: @screen-xs-max) {
+
+    .popover.in{
+        z-index:1050;
+        position: absolute;
+        &:after {
+            content:" ";
+            display:block;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1049;
+            background-color: #000000;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+    }
+}
