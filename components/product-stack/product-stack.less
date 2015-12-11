@@ -67,6 +67,8 @@
         width: 170px;
         height: auto;
         display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .tech-spec {
@@ -373,16 +375,18 @@
                 margin-right: 10px;
             }
             ul.ratings li a.btn-link {
-                margin-left: 0;
+                margin-left: 0 !important;
             }
             border-bottom: 1px solid @dell-gray;
             margin-bottom: 10px;
         }
 
         .product-img {
-            width: 170px;
+            width: 130px;
             height: auto;
             display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .tech-spec {
@@ -547,6 +551,320 @@
             .popover {
                 max-width: 300px;
                 min-width: 350px;
+            }
+            .list-inline > li {
+                display: inline-block;
+                padding-left: 5px;
+                margin-bottom: 5px;
+                &.pipe {
+                    padding-left: 0;
+                    padding-right: 0;
+                    color: @dell-blue;
+                    margin-left: -5px;
+                    margin-right: -3px;
+                }
+            }
+        }
+
+        .shipping-stack {
+            border-bottom: 1px solid @dell-gray;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding: 6px 0 20px 0;
+            [class^=icon-] {
+                margin-top: 3px;
+            }
+            img {
+                margin-right: 5px;
+                margin-top: 2px;
+                width: 30px;
+                height: auto;
+            }
+
+            .tooltip-inner {
+                max-width: 275px !important;
+                padding: 3px 8px;
+                color: #444;
+                text-align: left;
+                background-color: #fff;
+                border-radius: 1px;
+            }
+            .same-day-ship {
+                h6 {
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    line-height: 14px;
+                }
+            }
+        }
+
+        .popover {
+            padding: 20px;
+            box-shadow: 0 2px 3px rgba(0,0,0,.1);
+            border: 1px solid #999;
+            max-width: 300px;
+            min-width: 190px;
+            .popover-title {
+                margin: 0;
+                margin-bottom: 10px;
+                padding: 0 0 10px;
+                font-size: 16px;
+                line-height: 18px;
+                border-bottom: 1px solid @dell-gray;
+            }
+            .popover-content {
+                padding: 0;
+            }
+        }
+
+        .popover-link {
+            border-bottom: 1px dashed @dell-gray;
+            padding-top: 0;
+            padding-bottom: 0;
+            &:hover{
+
+            }
+        }
+    }
+}
+
+
+/* Extra small devices (phones, less than 768px) */
+@media (max-width: @screen-xs-max) {
+    .product-stack {
+        &.wrapper {
+            //The "wrapper" class is required for all the following classes
+        }
+        .well {
+            min-height: 20px;
+            padding: 0;
+            margin-bottom: 20px;
+            background-color: @dell-gray-light;
+            border: transparent;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .compare-stack {
+            margin-bottom: 10px;
+            .compare-active {
+                position: relative;
+                top: 2px;
+            }
+            .show {
+                display: inline-block!important;
+            }
+        }
+
+        .product-bug {
+            text-align: center;
+            padding-right: 12px;
+            p {
+                padding:    2px 5px 2px 0;
+                line-height: 16px;
+                margin: 5px 0;
+            }
+            .triangle{
+                border-color: @dell-red transparent transparent @dell-red;
+                border-style: solid;
+                border-width: 12px;
+                width: 0;
+                height: 0;
+                float: left !important;
+            }
+        }
+
+        .product-title-stack {
+            h5 {
+                margin-bottom: 5px;
+            }
+            .optional-price {
+                margin-bottom: 10px;
+            }
+            .optional-price-strike {
+                text-decoration: line-through;
+                font-size: 85%;
+                margin-top: 0;
+                margin-right: 10px;
+            }
+            ul.ratings li a.btn-link {
+                margin-left: 0 !important;
+            }
+            border-bottom: 1px solid @dell-gray;
+            margin-bottom: 10px;
+        }
+
+        .product-img {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding-right: 15px;
+        }
+
+        .tech-spec {
+            .list-inline {
+                padding-left: 0;
+                list-style: none;
+                margin-left: 0;
+                line-height: 3px;
+            }
+            p {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+            .spec-bar {
+                height: 3px;
+                max-width: 18.5%;
+                min-width: 17.9%;
+                &.default {
+                    background:@dell-gray-stroke;
+                }
+                &.active {
+                    background: @dell-blue;
+                }
+            }
+        }
+
+        .feature-spec {
+            border-top: 1px solid @dell-gray;
+            border-bottom: 1px solid @dell-gray;
+            margin: 20px 0 10px 0;
+            padding: 5px 0;
+            .wrapper {
+                display: table-row;
+            }
+            [class^=icon-] {
+                color: @dell-blue;
+                top: 1px;
+                position: relative;
+            }
+            p {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+
+        .special-offers {
+            border-top: 1px solid @dell-berry;
+            border-bottom: 1px solid @dell-berry;
+            margin-bottom: 10px;
+            z-index: 1;
+            position: relative;
+            ol, ul {
+                margin-top: -1px;
+                margin-bottom: 10px;
+                padding-left: 15px;
+            }
+            li {
+                color: @dell-blue;
+                margin-bottom: 5px;
+            }
+            .hide-expanded,
+            .show-collapsed,
+            .collapsed .show-collapsed {
+                padding: 9px 10px 9px 0;
+            }
+        }
+
+        .price-stack {
+            border-top: 1px solid @dell-gray;
+            border-bottom: 1px solid @dell-gray;
+            margin-top: -11px;
+            .h4, .h5, .h6, h4, h5, h6 {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            .dell-price {
+                margin-top: 0;
+                margin-bottom: -5px;
+            }
+            .price {
+                float: right!important;
+            }
+            .well {
+                min-height: 20px;
+                padding: 10px 10px;
+                margin-bottom: 0;
+                background-color: @dell-gray-light;
+                border: transparent;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .dotted-hr {
+                border-top: 1px dotted @dell-gray;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        .finance-stack {
+            border-bottom: 1px solid @dell-gray;
+            .h4, .h5, .h6, h4, h5, h6 {
+                margin-top: 0;
+                margin-bottom: 5px;
+            }
+            ol, ul {
+                margin-top: -3px;
+                &.list-inline{
+                    margin-bottom: 0;
+                }
+            }
+            .list-inline > li {
+                display: inline-block;
+                padding-left: 5px;
+                margin-bottom: 5px;
+                &.pipe {
+                    padding-left: 0;
+                    padding-right: 0;
+                    color: @dell-blue;
+                    margin-left: -5px;
+                    margin-right: -3px;
+                }
+            }
+            a.btn-link {
+                padding-top: 0;
+                &.pull-right {
+                    margin-top: 6px;
+                }
+            }
+            .finance {
+                margin-top: 10px;
+                float: left!important;
+            }
+            .finance-discount {
+                float: right!important;
+                margin-top: 15px;
+            }
+            .finance-special-discount {
+                float: left!important;
+                margin-top: 0;
+                margin-bottom: 5px;
+            }
+        }
+
+        .rewards-stack {
+            border-bottom: 1px solid @dell-gray;
+            margin-top: 0;
+            margin-bottom: 5px;
+            padding-bottom: 0;
+            [class^=icon-] {
+                margin-top: 1px;
+            }
+            .rewards {
+                float: left!important;
+            }
+            .rewards-discount {
+                float: right!important;
+                margin-top: 15px;
+            }
+            p {
+                margin: 0 0 5px;
+            }
+            .popover {
+                max-width: 300px;
+                min-width: 255px;
             }
             .list-inline > li {
                 display: inline-block;
