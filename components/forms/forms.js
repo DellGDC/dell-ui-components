@@ -568,25 +568,31 @@ return {
                 };
 
 
-
-
-
-
             //TODO, check to see if the field is at the bottom of the viewport and position it on top
             inputField.datetimepicker(dateSelectorConfig);
 
             inputField.on("dp.show",function (e) {
 
+                viewPortWidth = $(window).width();
+                viewPortHeight = $(window).height();
+                inputFieldWidth = inputField.width();
+                inputFieldOffset = inputField.offset();
+
+
                 calendarWidget = $element.find('.bootstrap-datetimepicker-widget'); //have to repeat this because it is destroyed everytime focus is gone
 
                 //check to see if the right side is big enough for the widget
+                console.log(inputFieldOffset.left,inputFieldWidth,215,viewPortWidth);
                 if(inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
                     calendarWidget.removeClass('pull-right');
+                    calendarWidget.addClass('pull-left');
                 } else {
+                    calendarWidget.removeClass('pull-left');
                     calendarWidget.addClass('pull-right');
                 }
 
                 //check to see if the bottom side is big enough for the widget
+                console.log("Needs to go on top?", inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight);
                 if(inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
                     //dateSelectorConfig.widgetPositioning.vertical = "top";
                     calendarWidget.removeClass('bottom').addClass('top');
@@ -605,8 +611,8 @@ return {
             calendarIcon.on("click",function (e) {
                 inputField.focus();                
             });
-/*
-            inputField.on("blur",function (e) {
+
+/*            inputField.on("blur",function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 inputField.data("DateTimePicker").show();
