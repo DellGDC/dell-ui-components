@@ -1,4 +1,4 @@
-angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
+angular.module('dellUiComponents').directive('toggle', function ($rootScope,$timeout) {
     return {
         restrict: 'A',
         link: function ($scope, $element, $attrs, controller) {
@@ -16,6 +16,11 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                             event.preventDefault();
                             destroy();
                             $(this).popover('show');
+                            if($rootScope.bp.isXS){
+                                $timeout(function(){
+                                    $('body').append('<div class="modal-backdrop in"></div>');
+                                },200);
+                            }
                         });
                     } else {
                         $element.popover({
@@ -29,8 +34,10 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                                 destroy();
                                 $(this).popover('show');
                                 if($rootScope.bp.isXS){
-                                    $('body').append('<div class="modal-backdrop in"></div>');
-                                }                                
+                                    $timeout(function(){
+                                        $('body').append('<div class="modal-backdrop in"></div>');
+                                    },100);
+                                }
                             }
                             
                             $('[data-dismiss="popover"]').bind('click', function (event) {
