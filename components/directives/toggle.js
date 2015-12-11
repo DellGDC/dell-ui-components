@@ -6,6 +6,10 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                 case "popover":
                     var destroy = function () {
                         $('[data-toggle="popover"]').popover('destroy');
+                        
+                        $element.on('hidden.bs.popover', function () {
+                          $('.modal-backdrop.in').remove();
+                        });
                     };
                     if ($attrs.trigger === "hover") {
                         $element.mouseover(function (event) {
@@ -24,6 +28,9 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                             } else {
                                 destroy();
                                 $(this).popover('show');
+                                if($rootScope.bp.isXS){
+                                    $('body').append('<div class="modal-backdrop in"></div>');
+                                }                                
                             }
                             
                             $('[data-dismiss="popover"]').bind('click', function (event) {
@@ -32,6 +39,10 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                             });
                         });
                     }
+
+
+
+
                     break;
                 case "tooltip":
                     $element.tooltip();
