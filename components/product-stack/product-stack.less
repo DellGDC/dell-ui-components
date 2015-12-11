@@ -862,10 +862,10 @@
             p {
                 margin: 0 0 5px;
             }
-            .popover {
-                max-width: 300px;
-                min-width: 255px;
-            }
+            //.popover {
+            //    max-width: 300px !important;
+            //    min-width: 255px !important;
+            //}
             .list-inline > li {
                 display: inline-block;
                 padding-left: 5px;
@@ -938,6 +938,15 @@
             &:hover{
 
             }
+        }
+
+        .popover.in.top, .popover.in.right, .popover.in.left, .popover.in.bottom {
+            bottom: 0 !important;
+            top: 0 !important;
+            left: -75px !important;
+            right: 0 !important;
+            margin: 0 auto;
+            min-width: 150%;
         }
     }
 }
