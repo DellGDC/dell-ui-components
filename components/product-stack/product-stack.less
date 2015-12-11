@@ -237,9 +237,12 @@
         p {
             margin: 0 0 5px;
         }
-        .popover {
-            max-width: 300px;
-            min-width: 350px;
+        @media (min-width: @screen-sm-min) {
+
+            .popover {
+                max-width: 300px;
+                min-width: 350px;
+            }
         }
         .list-inline > li {
             display: inline-block;
@@ -286,32 +289,34 @@
             }
         }
     }
+    @media (min-width: @screen-sm-min) {
 
-    .popover {
-        padding: 20px;
-        box-shadow: 0 2px 3px rgba(0,0,0,.1);
-        border: 1px solid #999;
-        max-width: 300px;
-        min-width: 190px;
-        .popover-title {
-             margin: 0;
-             margin-bottom: 10px;
-             padding: 0 0 10px;
-             font-size: 16px;
-             line-height: 18px;
-             border-bottom: 1px solid @dell-gray;
-         }
-        .popover-content {
-            padding: 0;
+        .popover {
+            padding: 20px;
+            box-shadow: 0 2px 3px rgba(0,0,0,.1);
+            border: 1px solid #999;
+            max-width: 300px;
+            min-width: 190px;
+            .popover-title {
+                 margin: 0;
+                 margin-bottom: 10px;
+                 padding: 0 0 10px;
+                 font-size: 16px;
+                 line-height: 18px;
+                 border-bottom: 1px solid @dell-gray;
+             }
+            .popover-content {
+                padding: 0;
+            }
         }
-    }
 
-    .popover-link {
-        border-bottom: 1px dashed @dell-gray;
-        padding-top: 0;
-        padding-bottom: 0;
-        &:hover{
+        [data-toggle="popover"] {
+            border-bottom: 1px dashed @dell-gray;
+            padding-top: 0;
+            padding-bottom: 0;
+            &:hover{
 
+            }
         }
     }
 }
@@ -548,9 +553,12 @@
             p {
                 margin: 0 0 5px;
             }
-            .popover {
-                max-width: 300px;
-                min-width: 350px;
+            @media (min-width: @screen-sm-min) {
+
+                .popover {
+                    max-width: 300px;
+                    min-width: 350px;
+                }
             }
             .list-inline > li {
                 display: inline-block;
@@ -597,32 +605,34 @@
                 }
             }
         }
+        @media (min-width: @screen-sm-min) {
 
-        .popover {
-            padding: 20px;
-            box-shadow: 0 2px 3px rgba(0,0,0,.1);
-            border: 1px solid #999;
-            max-width: 300px;
-            min-width: 190px;
-            .popover-title {
-                margin: 0;
-                margin-bottom: 10px;
-                padding: 0 0 10px;
-                font-size: 16px;
-                line-height: 18px;
-                border-bottom: 1px solid @dell-gray;
+            .popover {
+                padding: 20px;
+                box-shadow: 0 2px 3px rgba(0,0,0,.1);
+                border: 1px solid #999;
+                max-width: 300px;
+                min-width: 190px;
+                .popover-title {
+                    margin: 0;
+                    margin-bottom: 10px;
+                    padding: 0 0 10px;
+                    font-size: 16px;
+                    line-height: 18px;
+                    border-bottom: 1px solid @dell-gray;
+                }
+                .popover-content {
+                    padding: 0;
+                }
             }
-            .popover-content {
-                padding: 0;
-            }
-        }
 
-        .popover-link {
-            border-bottom: 1px dashed @dell-gray;
-            padding-top: 0;
-            padding-bottom: 0;
-            &:hover{
+            [data-toggle="popover"] {
+                border-bottom: 1px dashed @dell-gray;
+                padding-top: 0;
+                padding-bottom: 0;
+                &:hover{
 
+                }
             }
         }
     }
@@ -912,6 +922,16 @@
             }
         }
 
+        [data-toggle="popover"] {
+            border-bottom: 1px dashed @dell-gray;
+            padding-top: 0;
+            padding-bottom: 0;
+            &:hover{
+
+            }
+        }
+
+/*
         .popover {
             padding: 20px;
             box-shadow: 0 2px 3px rgba(0,0,0,.1);
@@ -931,7 +951,7 @@
             }
         }
 
-        .popover-link {
+        [data-toggle="popover"] {
             border-bottom: 1px dashed @dell-gray;
             padding-top: 0;
             padding-bottom: 0;
@@ -947,6 +967,6 @@
             right: 0 !important;
             margin: 0 auto;
             min-width: 150%;
-        }
+        }*/
     }
 }
