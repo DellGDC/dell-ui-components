@@ -1,0 +1,97 @@
+<div ng-controller="GuideCtrl">
+	<nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header col-sm-9">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <i class="icon-ui-dell" style="
+                          font-size: 42px;
+                          position: relative;
+                          top: -12px;
+                          ">
+                        </i>
+                      <span style="
+                            position: relative;
+                            top: -24px;
+                            left: 0px;
+                            font-size: 20px;
+                        ">
+                        Dell UI Components Development Guide
+                      </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation" ng-class="{active:!section}">
+						<a href="#guide/">Dell UI Components</a>
+					</li>
+					<li role="presentation" ng-class="{active:section==='getting-started'}">
+						<a href="#guide/getting-started">Getting started</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='code-guidelines'}">
+						<a href="#guide/code-guidelines">Code Guidelines</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='setting-up-environment'}">
+						<a href="#guide/setting-up-environment">Setting up environment</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='git-workflow'}">
+						<a href="#guide/git-workflow">Git workflow </a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='creating-new-components'}">
+						<a href="#guide/creating-new-components">Creating new components</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='editing-components'}">
+						<a href="#guide/editing-components">Editing components</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='updating-bower-package'}">
+						<a href="#guide/updating-bower-package">Updating Bower package</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='updating-sherpa-manager-with-new-package'}">
+						<a href="#guide/updating-sherpa-manager-with-new-package">Updating Sherpa Manager with new package</a>
+					</li>
+
+					<li role="presentation">
+						<a href="#demo">Development demo</a>
+					</li>					
+				</ul>
+			</div>
+			<div class="col-sm-9">
+				<div ng-if="!section">
+					<h2>Dell-UI-Components Development Environment</h2>
+					<p>
+						The purpose of this guide is to provide guidance on working on the Dell-UI-Components package. If you have any suggestion for things that should be clarified or improved place contact <a mailto="bo_lora@dell.com">Bo Lora</a>.
+					</p>
+					<p class="alert alert-info">
+						The information in this guide is extremely important. If you will be contributing code or patches to dell-ui-components, you will need to strictly follow these development guidelines. Code which doesn't follow the guidelines will degrade the dell-ui-components package and make it harder for maintenance in the future.
+					</p>
+					<p>
+					Some code already in place may not match these guidelines, this is mostly due to it being written before the guidelines were defined. Assistance with cleaning up any incorrect code is very inportant to the future of the package but it should be properly coordinated through our process. If you see anything that needs to be fixed, please contact <a mailto="sunny_boukadakis@dell.com">Sunny Boukadakis</a>.
+					</p>
+				</div>
+				<div ng-if="section">
+					<h2>{{section | _.str:'humanize,titleize'}}</h2>
+					<div ng-include="'guide/'+section+'.html'"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

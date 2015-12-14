@@ -922,7 +922,12 @@
 }
 
 
-
+.form-control[readonly]{
+  background: none;
+  -webkit-box-shadow: none; // iOS <4.3 & Android <4.1
+  box-shadow: none;
+  border: none;
+}
 
 
 
