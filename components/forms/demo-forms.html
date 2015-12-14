@@ -313,15 +313,14 @@
         <hr/>
 
 
-
+<!--password-->
         <div class="bottom-offset-20">
-            <!--password-->
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group show-hide-password">
                         <label for="passwordShowHide" class="col-xs-12 col-sm-2 form-label">Password</label>
                         <div class="col-xs-6 col-sm-6">
-                            <input id="password-show-hide-example" type="password" class="form-control">
+                            <input id="password-show-hide-example" type="text" class="form-control delay-hide" onkeypress="return showHidePassword()">
                         </div>
                         <div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2">
                             <label class="checkbox help-block">
@@ -333,8 +332,10 @@
                     </div>
                 </div>
             </form>
-            <!--/password-->
         </div>
+<!--/password-->
+
+
 
         <div class="bottom-offset-20">
         <!-- phone number -->
