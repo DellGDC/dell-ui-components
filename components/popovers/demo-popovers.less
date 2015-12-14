@@ -7,6 +7,9 @@
         margin: 0 -20px;
         clear:both;
         display:block;
+        position:relative;
+        z-index:1;
+
         .popover {
             position: relative;
             display: block;
@@ -15,10 +18,7 @@
             margin: 20px;
         }
     }
-    .example-help-popover {
-        position:relative;
-        z-index:1;
-    }
+
     @media (max-width: @screen-xs-max) {
         .example-popover {
             display:none;
