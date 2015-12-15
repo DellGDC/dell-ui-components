@@ -15,31 +15,33 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                         $element.mouseover(function (event) {
                             event.preventDefault();
                             destroy();
-                            $(this).popover('show');
                             if($rootScope.bp.isXS){
                                 $timeout(function(){
+                                    $element.popover('show');
                                     $('body').append('<div class="modal-backdrop in"></div>');
+                                    
                                 },200);
+                            } else {
+                                $element.popover('show');
                             }
                         });
                     } else {
+                        console.log("hello popover manual");
                         $element.popover({
                             trigger: 'manual'
                         });
                         $element.click(function (event) {
                             event.preventDefault();
-                            if($(this).attr('aria-describedby')) {
-                                destroy();
+                            destroy();
+                            if($rootScope.bp.isXS){
+                                $timeout(function(){
+                                    $element.popover('show');
+                                    $('body').append('<div class="modal-backdrop in"></div>');
+                                },200);
                             } else {
-                                destroy();
-                                $(this).popover('show');
-                                if($rootScope.bp.isXS){
-                                    $timeout(function(){
-                                        $('body').append('<div class="modal-backdrop in"></div>');
-                                    },100);
-                                }
+                                $element.popover('show');
                             }
-                            
+                        
                             $('[data-dismiss="popover"]').bind('click', function (event) {
                                 event.preventDefault();
                                 destroy();
