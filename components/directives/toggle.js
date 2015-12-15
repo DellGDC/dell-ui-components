@@ -10,6 +10,9 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                         $element.on('hidden.bs.popover', function () {
                           $('.modal-backdrop.in').remove();
                         });
+                        $element.on('show.bs.popover', function () {
+                            $('body').append('<div class="modal-backdrop in"></div>');
+                        });
                     };
                     if ($attrs.trigger === "hover") {
                         $element.mouseover(function (event) {
@@ -17,27 +20,25 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                             destroy();
                             if($rootScope.bp.isXS){
                                 $timeout(function(){
-                                    $element.popover('show');
-                                    $('body').append('<div class="modal-backdrop in"></div>');
-                                    
-                                },200);
+                                    $element.popover('show');                                   
+                                },300);
                             } else {
                                 $element.popover('show');
                             }
                         });
                     } else {
-                        console.log("hello popover manual");
                         $element.popover({
                             trigger: 'manual'
                         });
+
                         $element.click(function (event) {
+                            
                             event.preventDefault();
                             destroy();
                             if($rootScope.bp.isXS){
                                 $timeout(function(){
                                     $element.popover('show');
-                                    $('body').append('<div class="modal-backdrop in"></div>');
-                                },200);
+                                },300);
                             } else {
                                 $element.popover('show');
                             }
