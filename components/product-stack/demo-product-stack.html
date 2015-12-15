@@ -6,30 +6,20 @@
             <!-- example html for Product-Stack component -->
             <div class="product-stack wrapper">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-3">
+                    <div class="col-sm-3">
 
                         <!-- add to compare -->
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="compare-stack compare">
-                                    <input type="checkbox" value="option 1" class="pull-left">
-                                    <span class="compare-default">Add to Compare</span>
-                                    <span class="compare-active hide"><a class="btn btn-primary" href="javascript:;">Compare (1/3)</a></span>
-                                </div>
-                            </div>
+                        <div class="compare-stack compare">
+                            <input type="checkbox" value="option 1" class="pull-left">
+                            <span class="compare-default">Add to Compare</span>
+                            <span class="compare-active hide"><a class="btn btn-primary" href="javascript:;">Compare (1/3)</a></span>
                         </div>
                         <!-- /add to compare -->
 
-
                         <!-- product-bug-->
                         <div class="well product-bug">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="triangle"></div>
-                                    <p>3 Year Accidental Damage Service Included</p>
-                                </div>
-                            </div>
-
+                            <div class="triangle"></div>
+                            <p>3 Year Accidental Damage Service Included</p>
                         </div>
                         <!-- /product-bug-->
 
@@ -64,8 +54,6 @@
 
                                     <!-- optional pricing overview -->
                                     <h5 class="optional-price-strike text-gray-medium pull-left"><strong>$00.00</strong></h5><div><h5 class="optional-price"><strong>$000.00</strong></h5></div>
-
-                                    <!--<h5 class="optional-price pull-right"><strong>$000.00</strong></h5>-->
                                     <!-- /optional pricing overview -->
                                 </div>
                             </div>
@@ -143,22 +131,20 @@
 
                         <!-- special-offers -->
                         <div class="special-offers">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#special-offers">
-                                    <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show stuff</span>
-                                    <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide stuff</span>
-                                </a>
-                                    <div id="special-offers" class="collapse">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div>
+                            <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#special-offers">
+                                <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show stuff</span>
+                                <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide stuff</span>
+                            </a>
+                                <div id="special-offers" class="collapse">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -166,40 +152,35 @@
 
                         <!-- price-stack -->
                         <div class="price-stack">
-                            <!--<div class="row">-->
-                                <!--<div class="col-xs-12">-->
-                                    <div class="well well-transparent-stroke">
-                                        <h4 class="dell-price pull-left"><small>Dell Price</small></h4>
-                                        <h4 class="price "><strong>$0,000,000.00</strong></h4>
-                                        <!-- custom popover -->
-                                        <div class="price-discount-popup">
-                                            <h6 aria-describedby="popover-discount">
-                                                <a tabindex="0"
-                                                   role="popover"
-                                                   id="popover-discount"
-                                                   data-trigger="show"
-                                                   class="popover-link"
-                                                   data-html="true"
-                                                   data-toggle="popover"
-                                                   data-placement="top"
-                                                   data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
-                                                                 &lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;
-                                                                 &lt;hr class='dotted-hr'/&gt;
-                                                                 &lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
-                                                >$20 Discount included</a>
-                                            </h6>
-                                        </div>
-                                        <!-- /custom popover -->
-                                    </div>
-                                <!--</div>-->
-                            <!--</div>-->
+                            <div class="well well-transparent-stroke">
+                                <h4 class="dell-price pull-left"><small>Dell Price</small></h4>
+                                <h4 class="price "><strong>$0,000,000.00</strong></h4>
+                                <!-- custom popover -->
+                                <div class="price-discount-popup">
+                                    <h6 aria-describedby="popover-discount">
+                                        <a tabindex="0"
+                                           role="popover"
+                                           id="popover-discount"
+                                           data-trigger="show"
+                                           class="popover-link"
+                                           data-html="true"
+                                           data-toggle="popover"
+                                           data-placement="top"
+                                           data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
+                                                         &lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;
+                                                         &lt;hr class='dotted-hr'/&gt;
+                                                         &lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
+                                        >$20 Discount included</a>
+                                    </h6>
+                                </div>
+                                <!-- /custom popover -->
+                            </div>
                         </div>
 
                         <!-- /price-stack -->
                         <!-- finance-stack -->
                         <div class="finance-stack">
-                            <div class="row">
-                                <div class="col-xs-12">
+
                                     <h5 class="finance">Financing<sup>^</sup></h5>
                                     <h5><small><a href="javascript:;" class="btn-link finance-discount">As low as <sup>$</sup>20/mo<sup>1</sup></a></small></h5>
                                     <div class="row">
@@ -208,8 +189,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+
                         <!-- finance-stack -->
 
                         <!-- rewards-stack -->
