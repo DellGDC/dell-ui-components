@@ -11,7 +11,9 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                           $('.modal-backdrop.in').remove();
                         });
                         $element.on('show.bs.popover', function () {
-                            $('body').append('<div class="modal-backdrop in"></div>');
+                            if($rootScope.bp.isXS){
+                                $('body').append('<div class="modal-backdrop in"></div>');
+                            }
                         });
                     };
                     if ($attrs.trigger === "hover") {
