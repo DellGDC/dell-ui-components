@@ -1,0 +1,108 @@
+<div>
+	<h4>General</h4>
+	<p>
+		Your code should not stick out — A consequent use of style, makes it easier for others to understand and use your HTML.
+	</p>
+
+	<h4>Indenting and white space</h4>
+	<ul>
+		<li>Set your editor to 4 spaces per tab.</li>
+		<li>Use tabs to indent blocks.</li>
+		<li>In general, you use one tab per tag level.</li>
+		<li>Avoid code lines longer than 80 characters.</li>
+		<li>Do not add blank lines without a reason.</li>
+		<li>For readability, add blank lines to separate large or logical code blocks.</li>
+		<li>Do not use unnecessary blank lines and indentation. It is not necessary to use blank lines between short and related items. It is not necessary to indent every element.</li>
+	</ul>
+
+	<h4>Use of Comments</h4>
+	<ul>
+		<li>Be generous with comments.</li>
+		<li>It is useful to leave information that will be read at a later time by people (possibly yourself) who will need to understand what you have done.</li>
+		<li>The comments should be well-written and clear, just like the code they are annotating.</li>
+		<li>It is important that comments be kept up-to-date.</li>
+		<li>Erroneous comments can make HTML code even harder to read and understand.</li>
+		<li>Make comments meaningful.</li>
+		<li>Short comments should be written on one line, with a space after <code>&lt;!-- and a space before --></code></li>
+		<li>Long comments, spanning many lines, should be written with <code>&lt;!-- and --> on separate lines:</code></li>
+		<li>Long comments are easier to observe, if they are indented with a tab.</li>
+	</ul>
+
+	<h4>Use Lower Case Element Names</h4>
+	<p>Although HTML5 allows mixing uppercase and lowercase letters in element names, All HTML elements should be written in lowercase for the following reasons:</p>
+	<ul>
+		<li>Mixing uppercase and lowercase names is inconsistent and a bad practice.</li>
+		<li>Developers are used to using lowercase names (as in XHTML)</li>
+		<li>Lowercase looks cleaner and is easier to read.</li>
+		<li>Lowercase is easier to write</li>
+	</ul>
+
+	<h4>Closing all HTML elements</h4>
+	<ul>
+		<li>Although HTML5 does not require closing some elements (such as the p tag) and some browsers are forgiving on other elements as well, ALL elements should be closed.</li>
+		<li>All empty HTML elements should be closed:
+			<ul>
+				<li><code>&lt;input ... /&gt;</code></li>
+				<li><code>&lt;hr/&gt;</code></li>
+				<li><code>&lt;br/&gt;</code></li>
+				<li><code>&lt;meta .../&gt;</code></li>
+			</ul>
+		</li>
+	</ul>
+
+	<h4>Use Lower Case Attribute Names</h4>
+	<p>Although HTML5 allows mixing uppercase and lowercase letters in attribute names, All HTML attributes should be written in lowercase for the following reasons:</p>
+	<ul>
+		<li>Mixing uppercase and lowercase names is inconsistent and a bad practice.</li>
+		<li>Developers are used to using lowercase names (as in XHTML)</li>
+		<li>Lowercase looks cleaner and is easier to read.</li>
+		<li>Lowercase is easier to write</li>
+	</ul>
+
+	<p>Custom Attribute Names should also be lower case and dasherized when incorporating multiple words.</p>
+
+	<h4>Double Quote Attribute Names</h4>
+	<p>Although HTML5 allows attribute values without quotes and with single or double quotes, you should double quote for the following reasons:</p>
+	<ul>
+		<li>You have to use quotes if the value contains spaces</li>
+		<li>Mixing styles is never good</li>
+		<li>Quoted values are easier to read</li>
+		<li>
+			<p>
+				Exeption to this rule:<br/>
+				In cases where the attribute has HTML code content with double quotes, single quotes can be used to minimize having to escape double quotes inside the attribute value. Example:
+			</p>
+			<p><pre><code>
+&lt;a tabindex="1" role="popover" id="popover-right" data-trigger="focus" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"&gt;Popover on right&lt;/a&gt;
+	</code></pre></p>
+		</li>
+	</ul>
+
+	<h4>Order of Attributes</h4>
+	<p>HTML attributes should come in this particular order for easier reading of code.</p>
+	<ul>
+      <li><code>class</code></li>
+      <li><code>id</code>*, <code>name</code></li>
+      <li><code>data-*</code></li>
+      <li><code>src</code>, <code>for</code>, <code>type</code>, <code>href</code>, <code>value</code></li>
+      <li><code>title</code>, <code>alt</code></li>
+      <li><code>role</code>, <code>aria-*</code></li>
+    </ul>
+    <p>* IDs are very specific and should be used sparingly. In the demo code, IDs are used for identifying specific examples of code.</p>
+
+    <h4>Image Attributes</h4>
+    <ul>
+    	<li>Always use the <strong>alt</strong> attribute with images. It is important when the image cannot be viewed.</li>
+    	<li>To make an image as wide as its container, use the <code>image-responsive</code> class available from dell-ui-bootstrap</li>
+    </ul>
+
+    <h4>Spaces and Equal Signs with Attributes</h4>
+    <p>Although <code>&lt;span class = "foobar">&lt;/span></code> is perfectly legal a spaceless example <code>&lt;span class="foobar">&lt;/span></code> is much easier to read and groups attributes better together.</p>
+
+    <h4>Filename Convention</h4>
+    <ul>
+    	<li>All filenames should be lowercase (some systems like Unix are case sensitive)</li>
+    	<li>All filenames should be dasherized (easier to read)</li>
+    	<li>All filenames should have a <strong>.html</strong> extension (not .htm)</li>
+    </ul>
+</div>
