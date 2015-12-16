@@ -35,8 +35,7 @@
 
         //get children html tag string
         function getChildrenHtml(treesdata){
-            var result = '', len = treesdata.length, node, clen, arrowClass, checkedClass = ''
-                        checkedChildren;
+            var result = '', len = treesdata.length, node, clen, arrowClass, checkedClass = '';
             for(i = 0; i < len; i++){
                 node = treesdata[i];
                 $.data($tree, node.item.id, node); //attach node data to node id
