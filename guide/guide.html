@@ -1,4 +1,4 @@
-<div ng-controller="GuideCtrl">
+<div ng-controller="GuideCtrl" id="development-guide">
 	<nav class="navbar navbar-inverse">
         <div class="container">
             <div class="row">
@@ -32,7 +32,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3">
-				<ul class="nav nav-pills nav-stacked">
+				<ul class="nav nav-pills nav-stacked side-bar">
 					<li role="presentation" ng-class="{active:!section}">
 						<a href="#guide/">Dell UI Components</a>
 					</li>
@@ -40,8 +40,8 @@
 						<a href="#guide/getting-started">Getting started</a>
 					</li>
 
-					<li role="presentation" ng-class="{active:section==='setting-up-environment'}">
-						<a href="#guide/setting-up-environment">Setting up environment</a>
+					<li role="presentation" ng-class="{active:section==='what-you-should-know-or-learn'}">
+						<a href="#guide/what-you-should-know-or-learn">What you should know or learn</a>
 					</li>
 
 					<li role="presentation" ng-class="{active:section==='git-workflow'}">
@@ -106,4 +106,7 @@
 
 		</div>
 	</div>
+	<a class="scroll scroll-to-top" href="#development-guide">
+		<i class="glyphicon glyphicon-chevron-up" aria-hidden="true"></i>
+	</a>
 </div>

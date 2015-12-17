@@ -1,59 +1,91 @@
 <div>
-	<h4>What you should already know or need to learn.</h4>
-	<p>The development environment for dell-ui-components uses JavaScript, HTML5 and CSS3 technologies. To ramp up and be productive in this environment you should have a solid understanding of the following:</p>
-	<uL>
-		<li>JavaScript</li>
-		<li>jQuery</li>
-		<li>Twitter Bootstrap</li>
-		<li>Angular JS</li>
-		<li>LESS</li>
-		<li>Node.js and the Node Package Management system (npm)</li>
-		<li>Grunt</li>
-		<li>Yeoman</li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-	</uL>
+	<h4>Requirements</h4>
+	<p>The development environment for dell-ui-components requires certain software to be installed in your computer. Some of these software packages require your computer to be outside of the corporate firewall to install.</p>
+	<p>Below are <strong>step by step instructions</strong> on how to set up the dell-ui-components development environment and all the software you require to get started.</p>
 
-	<h4>Understanding JavaScript</h4>
-	<p>JavaScript is at the core of all web applications. Understanding JavaScript and good coding practices is critical to the quality of our work.</p>
-	<p>Here are some resources:</p>
+	<h4>Step 1: Get an editor</h4>
+	<p>Sublime Text is a free powerful text editor for the purpose of working with this development environment. Sublime Text also has the ability to be extended through a great number of plugins. If you already have Sublime Text you can skip to the next step.</p>
 	<ul>
-		<li>
-			<a href="http://jsforcats.com/" target="_new">JavaScript for cats - Intro to beginners</a>
-		</li>
-		<li>
-			<a href="http://www.w3schools.com/js/" target="_new">W3schools JS Tutorial</a>
-		</li>
-		<li>
-			<a href="https://www.youtube.com/watch?v=fju9ii8YsGs" target="_new">Code Academy JS tutorial</a>
-		</li>
-		<li>
-			<a href="https://www.youtube.com/watch?v=fju9ii8YsGs" target="_new">JS tutorial video</a>
-		</li>
-	</ul>
+		<li><a href="http://www.sublimetext.com/2" target="_new">Download</a></li>
+		<li><a href="http://www.sublimetext.com/docs/2/" target="_new">View documentation</a></li>
+		<li><a href="https://packagecontrol.io/installation" target="_new">Install Package Control</a></li>
 
-	<h4>Understanding Twitter Bootstrap</h4>
-	<p>Twitter Bootstrap is a free and open-source collection of tools for creating websites and web applications. It contains HTML- and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions.</p>
-	<p>To understand dell-ui-components it is critical to have a strong knowledge of Twitter Bootstrap. Here are some resources:</p>
-	<ul>
-		<li>
-			<a href="http://www.w3schools.com/bootstrap/" target="_new">W3schools Bootstrap 3 Tutorial</a>
-		</li>
-		<li>
-			<a href="https://www.youtube.com/watch?v=gqOEoUR5RHg" target="_new">Bootstrap tutorial video</a>
+		<li>Install the following Sublime Text plugins:
+			<ul>
+				<li><a href="https://packagecontrol.io/packages/Bootstrap%203%20Snippets" target="_new">Bootstrap Snippets</a></li>
+				<li><a href="https://packagecontrol.io/packages/LESS" target="_new">LESS</a></li>
+				<li><a href="https://packagecontrol.io/packages/AngularJS" target="_new">Angular JS</a></li>
+				<li><a href="https://packagecontrol.io/packages/AngularJS%20Snippets" target="_new">Angular JS Snippets</a></li>
+				<li><a href="https://packagecontrol.io/packages/jQuery" target="_new">jQuery</a></li>
+				<li><a href="https://packagecontrol.io/packages/JavaScript%20%26%20NodeJS%20Snippets" target="_new">Java​Script & Node​JS Snippets</a></li>
+				<li><a href="https://packagecontrol.io/packages/Grunt%20Snippets" target="_new">Grunt Snippets</a></li>
+			</ul>
 		</li>
 	</ul>
 
 
-	<h4>Understanding npm</h4>
-	<p>npm is the default package manager for Node.js. It was initially created to help developers manage dependencies for their JavaScript applications. Born as an open source project in 2009, npm features a package registry and client that enables developers to consume and distribute open source code.</p>
+	<h4>Step 2: Install Git</h4>
+	<p>Sublime Text is a free powerful text editor for the purpose of working with this development environment. Sublime Text also has the ability to be extended through a great number of plugins. If you already hav Sublime Text you can skip to the next step.</p>
+	<ul>
+		<li><a href="https://git-scm.com/downloads" target="_new">Download</a></li>
+		<li><a href="https://git-scm.com/doc" target="_new">Documentation</a></li>
+	</ul>
 
-	<p>Since its creation, the role of npm has expanded to fulfill the broader needs of the JavaScript and Node.js developer community to include management of front-end web applications, mobile applications and other JavaScript development tools and frameworks. Today, the npm project and registry is hosted and managed as a free service by npm, Inc, supporting more than a billion downloads a month.</p>
 
-	<a href="https://docs.npmjs.com/cli/npm" target="_new">more info...</a>
+	<h4>Step 3: Install a Git GUI</h4>
+	<p>While it is really beneficial to learn Git from the command line (git bash) some people just feel better with a GUI application that helps with git commands. There are two good options and you can install both if you want but at least one of these is a MUST:</p>
+
+	<p><strong>Tortoise Git</strong></p>
+	<p>Within Tortoise Git you can do pretty much anything that you do in the command line and more. Tortoise Git has a great diff (difference) editor that allows you to look and resolve merge conflicts.</p>
+	<ul>
+		<li><a href="https://tortoisegit.org/download/" target="_new">Download</a></li>
+		<li><a href="https://tortoisegit.org/about/" target="_new">More info...</a></li>
+	</ul>
+
+	<p><strong>Source Tree</strong></p>
+	<p>Source Tree also allows you to do everything you can do in the command line and more but it has a better (more modern and visual) user interface than Tortoise Git.</p>
+	<ul>
+		<li><a href="https://www.sourcetreeapp.com/download/" target="_new">Download</a></li>
+		<li><a href="https://www.sourcetreeapp.com/" target="_new">More info...</a></li>
+	</ul>
+
+
+	<h4>Step 4: Install NodeJS</h4>
+	<p>NodeJS is integral to our development environment and provides a lot of functionality such as serving your files in web server, watching your files for changes and a build process.</p>
+	<ul>
+		<li><a href="https://nodejs.org/en/download/" target="_new">Download</a></li>
+		<li><a href="https://nodejs.org/en/about/" target="_new">About NodeJS</a></li>
+		<li><a href="https://nodejs.org/api/" target="_new">Documentation</a></li>
+	</ul>
+
+	<h4>Step 5: Check your environment path and access to node</h4>
+	<p>At this point sometimes the path for node may not be properly configured. For this reason it is wise at this point to check from the command line first:</p>
+
+	<ol>
+		<li>Right click your desktop and you should see "Git Bash". If not, go back to step 2</li>
+		<li>Once you see the command line, type npm and hit return.</li>
+		<li>You should see a response from the Node Package Manager.</li>
+		<li>If you see "command not found", your path variable may not be properly configured or you may not have NodeJS installed.</li>
+		<li>If you know you have alrady installed NodeJS then <a href="javascript:;" ng-click="checkYourPath = !checkYourPath">check your path variables</a></li>
+	</ol>
+	<div ng-show="checkYourPath">
+		<p>Windows 7:</p>
+		<ol>
+			<li>
+				<p>Go to Start button and right click device.</p>
+				<p><img class="img-responsive" ng-src="guide/start-button.png"/></p>
+			</li>
+			<li>
+				<p>Click on advance settings</p>
+				<p><img class="img-responsive" ng-src="guide/system-properties.png"/></p>
+			</li>
+			<li>
+				<p>Double click on PATH and confirm npm is in the path. If not, create the PATH variable as below.</p>
+				<p><img class="img-responsive" ng-src="guide/advanced-properties.png"/></p>
+			</li>
+			<li>Repeat this step and if it fails, contact someone on the <a href="mailto:sherpa@dell.com">Sherpa team</a>.</li>
+		</ol>
+	</div>
 
 
 
