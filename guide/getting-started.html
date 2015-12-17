@@ -87,6 +87,65 @@
 		</ol>
 	</div>
 
+	<h4>Step 6: Get outside of the corporate firewall.</h4>
+	<p>Node Package Manager uses a particular transfer protocol and port to download files that is typically blocked by corporate firewall. The next few steps require NPM so you must have access outside of the corporate firewall.</p>
+	<p>NOTE: If you are logged in through VPN you can skip this.</p>
+
+	<h4>Step 7: Install Grunt, Yeoman and Bower</h4>
+	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
+
+	<div class="well well-black">
+		<p>$ npm install -g grunt-cli yo bower</p>
+	</div>
+
+	<h4>Step 10: Install CG-Angular Yeoman generator</h4>
+	<p>Enter the following:</p>
+
+	<div class="well well-black">
+		<p>$ npm install -g generator-cg-angular</p>
+	</div>
+
+
+	<h4>Step 11: Go back inside the corporate firewall</h4>
+	<p>The next steps require access to internal servers. </p>
+	<p>NOTE: If you are logged in through VPN you can skip this.</p>
+
+	<h4>Step 12: Clone the Dell-UI-Components git repository</h4>
+	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
+
+	<div class="well well-black">
+		<p>$ cd c:</p>
+		<p>$ git clone http://dmvmsherpa.oldev.preol.dell.com:7990/scm/duc/dell-ui-components.git _duc</p>
+		<p>$ git checkout development</p>
+	</div>
+
+	<p>NOTE: This will create a directory called _duc directly in your c drive. It is important to do this because windows has a limitation for the number of letters in a file's path so the shorter the directory path is the better.</p>
+
+	<h4>Step 13: Get outside of the corporate firewall (again).</h4>
+	<p>NOTE: If you are logged in through VPN you can skip this.</p>
+
+	<h4>Step 14: Clone the Dell-UI-Components git repository</h4>
+	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
+
+	<div class="well well-black">
+		<p>$ cd c:_duc</p>
+		<p>$ npm install</p>
+		<p>$ bower install</p>
+	</div>
+
+	<h4>Step 15: Go back inside the corporate firewall</h4>
+	<p>NOTE: If you are logged in through VPN you can skip this.</p>
+
+	<div class="well well-black">
+		<p>$ grunt serve</p>
+	</div>
+
+	<h4>Step 16: View development demo</h4>
+	<p>Open your Chrome browser and go to <a href="http://localhost:9002/">http://localhost:9002/</a></p>
+
+
+
+</p>
 
 
 </div>
