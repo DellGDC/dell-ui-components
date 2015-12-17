@@ -1,3 +1,159 @@
 <div>
-	git workflow
+    <!-- for DUC -->
+	<h4>Git Workflow for Dell UI Components</h4>
+    <p>We use a Feature Branch Workflow model. This model subscribes to the notion that all new features, bugfixes, or
+        otherwise improvements get their own isolated branch. Once the work is fully developed, tested, and approved,
+        then and only then does the branch get merged back. All new branches must start from the latest built and tested
+        branch with the exception if the new feature is an extension of one already built and it would save time by continuing
+        down a similar path.</p>
+    <p>
+        While there are a number of GUI tools to assist with this process, we are currently using SourceTree to manage
+        all the various branches.
+    </p>
+    <h5>Here's how it works</h5>
+    <p>The Feature Branch Workflow still uses a central repository, and master still represents the official project history.
+        But, instead of committing directly on their local master branch, developers create a new branch every time they
+        start work on a new feature. Feature branches should have descriptive names, like animated-menu-items or issue-#1061.
+        The idea is to give a clear, highly-focused purpose to each branch.</p>
+    <p>Git makes no technical distinction between the master branch and feature branches, so developers can edit, stage,
+        and commit changes to a feature branch just as they did in the Centralized Workflow.</p>
+
+    <p>In addition, feature branches can (and should) be pushed to the central repository. This makes it possible to
+        share a feature with other developers without touching any official code. Since master is the only “special”
+        branch, storing several feature branches on the central repository doesn’t pose any problems. Of course, this is
+        also a convenient way to back up everybody’s local commits.</p>
+
+    <h5>Pull Requests</h5>
+    <p>Aside from isolating feature development, branches make it possible to discuss changes via pull requests.
+        Once someone completes a feature, they don’t immediately merge it into master. Instead, they push the feature
+        branch to the central server and file a pull request asking to merge their additions into master. This gives
+        other developers an opportunity to review the changes before they become a part of the main codebase.</p>
+
+    <p>Code review is a major benefit of pull requests, but they’re actually designed to be a generic way to talk
+        about code. You can think of pull requests as a discussion dedicated to a particular branch. This means that
+        they can also be used much earlier in the development process. For example, if a developer needs help with a
+        particular feature, all they have to do is file a pull request. Interested parties will be notified automatically,
+        and they’ll be able to see the question right next to the relevant commits.</p>
+
+    <p>Once a pull request is accepted, the actual act of publishing a feature is much the same as in the Centralized
+        Workflow. First, you need to make sure your local master is synchronized with the upstream master. Then, you
+        merge the feature branch into master and push the updated master back to the central repository.</p>
+
+    <p>Pull requests can be facilitated by product repository management solutions like Bitbucket Cloud or Bitbucket Server.
+        View the Bitbucket Server pull requests documentation for an example.</p>
+
+    <h4>Example</h4>
+    <p>The example included below demonstrates a pull request as a form of code review, but remember that they can serve
+        many other purposes.</p>
+
+    <h5>Mary begins a new feature</h5>
+
+    {{New Feature Branch Image}}
+
+    <p>Before she starts developing a feature, Mary needs an isolated branch to work on. She can request a new branch
+        with the following command:</p>
+
+    <code>git checkout -b marys-feature master</code>
+
+    <p>This checks out a branch called marys-feature based on master, and the -b flag tells Git to create the branch
+        if it doesn’t already exist. On this branch, Mary edits, stages, and commits changes in the usual fashion,
+        building up her feature with as many commits as necessary:</p>
+    <code>
+    git status
+    git add <some-file>
+    git commit
+    </code>
+    <h5>Mary goes to lunch</h5>
+    {{Git Workflows: Feature Commits}}
+
+    <p>Mary adds a few commits to her feature over the course of the morning. Before she leaves for lunch, it’s a good
+        idea to push her feature branch up to the central repository. This serves as a convenient backup, but if Mary
+        was collaborating with other developers, this would also give them access to her initial commits.</p>
+
+    <code>
+    git push -u origin marys-feature
+    </code>
+
+    <p>This command pushes marys-feature to the central repository (origin), and the -u flag adds it as a remote
+        tracking branch. After setting up the tracking branch, Mary can call git push without any parameters to push her
+        feature.</p>
+
+    <h5>Mary finishes her feature</h5>
+
+    {{Git Workflows: Pull Request}}
+
+    <p>When Mary gets back from lunch, she completes her feature. Before merging it into master, she needs to file a
+        pull request letting the rest of the team know she's done. But first, she should make sure the central
+        repository has her most recent commits:</p>
+
+    <code>git push</code>
+
+    <p>Then, she files the pull request in her Git GUI asking to merge marys-feature into master, and team members will
+        be notified automatically. The great thing about pull requests is that they show comments right next to their
+        related commits, so it's easy to ask questions about specific changesets.</p>
+
+    <h5>Bill receives the pull request</h5>
+
+    {{Git Workflows: Feature Pull Requests}}
+
+    <p>Bill gets the pull request and takes a look at marys-feature. He decides he wants to make a few changes before
+        integrating it into the official project, and he and Mary have some back-and-forth via the pull request.</p>
+
+    <h5>Mary makes the changes</h5>
+
+    {{Git Workflows: Central Repository Push}}
+
+    <p>To make the changes, Mary uses the exact same process as she did to create the first iteration of her feature.
+        She edits, stages, commits, and pushes updates to the central repository. All her activity shows up in the pull
+        request, and Bill can still make comments along the way.</p>
+
+    <p>If he wanted, Bill could pull marys-feature into his local repository and work on it on his own. Any commits he
+        added would also show up in the pull request.</p>
+
+    <h5>Mary publishes her feature</h5>
+
+    {{Merging a Feature Branch}}
+
+    <p>Once Bill is ready to accept the pull request, someone needs to merge the feature into the stable project
+        (this can be done by either Bill or Mary):</p>
+
+    <code>
+    git checkout master
+    git pull
+    git pull origin marys-feature
+    git push
+    </code>
+
+    <p>First, whoever’s performing the merge needs to check out their master branch and make sure it’s up to date.
+        Then, git pull origin marys-feature merges the central repository’s copy of marys-feature. You could also use a
+        simple git merge marys-feature, but the command shown above makes sure you’re always pulling the most up-to-date
+        version of the feature branch. Finally, the updated master needs to get pushed back to origin.</p>
+
+    <p>This process often results in a merge commit. Some developers like this because it’s like a symbolic joining of
+        the feature with the rest of the code base. But, if you’re partial to a linear history, it’s possible to rebase
+        the feature onto the tip of master before executing the merge, resulting in a fast-forward merge.</p>
+
+    <p>Some GUI’s will automate the pull request acceptance process by running all of these commands just by clicking
+        an “Accept” button. If yours doesn’t, it should at least be able to automatically close the pull request when the
+        feature branch gets merged into master</p>
+
+    <h5>Meanwhile, John is doing the exact same thing</h5>
+    <p>While Mary and Bill are working on marys-feature and discussing it in her pull request, John is doing the exact
+        same thing with his own feature branch. By isolating features into separate branches, everybody can work
+        independently, yet it’s still trivial to share changes with other developers when necessary.</p>
+
+    <h4>Where To Go From Here</h4>
+
+    <p>For a walkthrough of feature branching on Bitbucket, check out the Using Git Branches documentation. By now, you
+        can hopefully see how feature branches are a way to quite literally multiply the functionality of the single
+        master branch used in the Centralized Workflow. In addition, feature branches also facilitate pull requests,
+        which makes it possible to discuss specific commits right inside of your version control GUI.</p>
+
+    <p>The Feature Branch Workflow is an incredibly flexible way to develop a project. The problem is, sometimes it’s
+        too flexible. For larger teams, it’s often beneficial to assign more specific roles to different branches.
+        The Gitflow Workflow is a common pattern for managing feature development, release preparation, and maintenance.</p>
+
+    <!-- for Prototypes -->
+    <h4>Git Workflow for Prototypes</h4>
+    <p>We start all prototypes as a Centralized Workflow model. </p>
 </div>
