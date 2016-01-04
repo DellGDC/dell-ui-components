@@ -97,13 +97,35 @@ angular.module('dellUiComponents')
                         displayLength: 5,
                         paging: false,
                         scrollY:"300px",
-                        scrollX: true
+                        scrollX: true,
+                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
                     });
 
                     //change the position of the sorting toggle arrows
                     table.columns().iterator( 'column', function (ctx, idx) {
                         $( table.column(idx).header() ).append('<span class="sort-icon"/>');
                     });
+
+                // change positioning of search bar
+                $element.each(function(){
+                    var datatable = $(this);
+                    // find the search label
+                    var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+                    search_label.addClass('hide-text');
+
+
+                    // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+                    var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+                    search_input.attr('placeholder', 'Search');
+                    search_input.addClass('form-control col-xs-12 col-sm-4');
+
+
+                    // LENGTH - Inline-Form control
+                    // code below for select
+                    var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+                    length_sel.addClass('form-control');
+
+                });
             }
         };
     })
@@ -153,7 +175,9 @@ angular.module('dellUiComponents')
                         displayLength: 5,
                         paging: false,
                         scrollY:"300px",
-                        scrollX: true
+                        scrollX: true,
+                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+
                     });
 
                     //change the position of the sorting toggle arrows
@@ -177,6 +201,27 @@ angular.module('dellUiComponents')
                             tr.addClass('shown');
                         }
                     });
+
+                // change positioning of search bar
+                $element.each(function(){
+                    var datatable = $(this);
+                    // find the search label
+                    var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+                    search_label.addClass('hide-text');
+
+
+                    // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+                    var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+                    search_input.attr('placeholder', 'Search');
+                    search_input.addClass('form-control col-xs-12 col-sm-4');
+
+
+                    // LENGTH - Inline-Form control
+                    // code below for select
+                    var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+                    length_sel.addClass('form-control');
+
+                });
             }
         };
     })
