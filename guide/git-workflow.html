@@ -1,7 +1,7 @@
 <div>
     <!-- for DUC -->
 	<h4>Git Workflow for Dell UI Components</h4>
-    <p>We use a Feature Branch Workflow model. This model subscribes to the notion that all new features, bugfixes, or
+    <p>We use a <em>Feature Branch Workflow</em> model in matters of the Dell UI Components. This model subscribes to the notion that all new features, bug fixes, or
         otherwise improvements get their own isolated branch. Once the work is fully developed, tested, and approved,
         then and only then does the branch get merged back. All new branches must start from the latest built and tested
         branch with the exception if the new feature is an extension of one already built and it would save time by continuing
@@ -10,11 +10,22 @@
         While there are a number of GUI tools to assist with this process, we are currently using SourceTree to manage
         all the various branches.
     </p>
-    <h5>Here's how it works</h5>
-    <p>The Feature Branch Workflow still uses a central repository, and master still represents the official project history.
-        But, instead of committing directly on their local master branch, developers create a new branch every time they
-        start work on a new feature. Feature branches should have descriptive names, like animated-menu-items or issue-#1061.
-        The idea is to give a clear, highly-focused purpose to each branch.</p>
+    <h4>Here's how (G)it works</h4>
+    <div class="text-center">
+        <img src="guide/images/01.svg" class="img-responsive">
+    </div>
+    <p>The <em>Feature Branch Workflow</em> still uses a central repository, and <strong>master</strong> still represents the
+        official project history. But, instead of committing directly on your local <strong>master</strong> branch,
+        developers create a <strong>new branch every time they
+        start work on a <u>new</u> feature</strong>. Feature branches should have descriptive names,
+        such as "DUC-451-books-on-fire".  The idea is to give a clear, highly-focused purpose to each branch.</p>
+
+    <p>We highly
+        suggest a ticket naming convention that's also intuitive. In the example, "DUC-451-books-on-fire", we give the
+        branch name three identifying elements: <strong>DUC</strong> is for Dell UI Components, <strong>451</strong> is
+        the actual ticket number, and <strong>books on fire</strong> is the ticket name in full or shortened name.
+        It just helps!</p>
+
     <p>Git makes no technical distinction between the master branch and feature branches, so developers can edit, stage,
         and commit changes to a feature branch just as they did in the Centralized Workflow.</p>
 
@@ -23,7 +34,7 @@
         branch, storing several feature branches on the central repository doesn’t pose any problems. Of course, this is
         also a convenient way to back up everybody’s local commits.</p>
 
-    <h5>Pull Requests</h5>
+    <h4>Pull Requests</h4>
     <p>Aside from isolating feature development, branches make it possible to discuss changes via pull requests.
         Once someone completes a feature, they don’t immediately merge it into master. Instead, they push the feature
         branch to the central server and file a pull request asking to merge their additions into master. This gives
@@ -39,8 +50,6 @@
         Workflow. First, you need to make sure your local master is synchronized with the upstream master. Then, you
         merge the feature branch into master and push the updated master back to the central repository.</p>
 
-    <p>Pull requests can be facilitated by product repository management solutions like Bitbucket Cloud or Bitbucket Server.
-        View the Bitbucket Server pull requests documentation for an example.</p>
 
     <h4>Example</h4>
     <p>The example included below demonstrates a pull request as a form of code review, but remember that they can serve
@@ -48,31 +57,34 @@
 
     <h5>Mary begins a new feature</h5>
 
-    {{New Feature Branch Image}}
+    <div class="text-center">
+        <img src="guide/images/02.svg" class="img-responsive">
+    </div>
 
     <p>Before she starts developing a feature, Mary needs an isolated branch to work on. She can request a new branch
         with the following command:</p>
 
-    <code>git checkout -b marys-feature master</code>
+    <pre>
+        $ git checkout -b marys-feature master</pre>
 
     <p>This checks out a branch called marys-feature based on master, and the -b flag tells Git to create the branch
         if it doesn’t already exist. On this branch, Mary edits, stages, and commits changes in the usual fashion,
         building up her feature with as many commits as necessary:</p>
-    <code>
-    git status
-    git add <some-file>
-    git commit
-    </code>
-    <h5>Mary goes to lunch</h5>
-    {{Git Workflows: Feature Commits}}
 
+    <pre>
+        $ git status
+        $ git add <some-file>
+        $ git commit</pre>
+    <h5>Mary goes to lunch</h5>
+    <div class="text-center">
+        <img src="guide/images/03.svg" class="img-responsive">
+    </div>
     <p>Mary adds a few commits to her feature over the course of the morning. Before she leaves for lunch, it’s a good
         idea to push her feature branch up to the central repository. This serves as a convenient backup, but if Mary
         was collaborating with other developers, this would also give them access to her initial commits.</p>
 
-    <code>
-    git push -u origin marys-feature
-    </code>
+    <pre>
+        $ git push -u origin marys-feature</pre>
 
     <p>This command pushes marys-feature to the central repository (origin), and the -u flag adds it as a remote
         tracking branch. After setting up the tracking branch, Mary can call git push without any parameters to push her
@@ -80,13 +92,16 @@
 
     <h5>Mary finishes her feature</h5>
 
-    {{Git Workflows: Pull Request}}
+    <div class="text-center">
+        <img src="guide/images/04.svg" class="img-responsive">
+    </div>
 
     <p>When Mary gets back from lunch, she completes her feature. Before merging it into master, she needs to file a
         pull request letting the rest of the team know she's done. But first, she should make sure the central
         repository has her most recent commits:</p>
 
-    <code>git push</code>
+    <pre>
+        $ git push</pre>
 
     <p>Then, she files the pull request in her Git GUI asking to merge marys-feature into master, and team members will
         be notified automatically. The great thing about pull requests is that they show comments right next to their
@@ -94,15 +109,18 @@
 
     <h5>Bill receives the pull request</h5>
 
-    {{Git Workflows: Feature Pull Requests}}
+    <div class="text-center">
+        <img src="guide/images/05.svg" class="img-responsive">
+    </div>
 
     <p>Bill gets the pull request and takes a look at marys-feature. He decides he wants to make a few changes before
         integrating it into the official project, and he and Mary have some back-and-forth via the pull request.</p>
 
     <h5>Mary makes the changes</h5>
 
-    {{Git Workflows: Central Repository Push}}
-
+    <div class="text-center">
+        <img src="guide/images/06.svg" class="img-responsive">
+    </div>
     <p>To make the changes, Mary uses the exact same process as she did to create the first iteration of her feature.
         She edits, stages, commits, and pushes updates to the central repository. All her activity shows up in the pull
         request, and Bill can still make comments along the way.</p>
@@ -112,17 +130,18 @@
 
     <h5>Mary publishes her feature</h5>
 
-    {{Merging a Feature Branch}}
+    <div class="text-center">
+        <img src="guide/images/07.svg" class="img-responsive">
+    </div>
 
     <p>Once Bill is ready to accept the pull request, someone needs to merge the feature into the stable project
         (this can be done by either Bill or Mary):</p>
 
-    <code>
-    git checkout master
-    git pull
-    git pull origin marys-feature
-    git push
-    </code>
+    <pre>
+        $ git checkout master
+        $ git pull
+        $ git pull origin marys-feature
+        $ git push</pre>
 
     <p>First, whoever’s performing the merge needs to check out their master branch and make sure it’s up to date.
         Then, git pull origin marys-feature merges the central repository’s copy of marys-feature. You could also use a
@@ -142,18 +161,64 @@
         same thing with his own feature branch. By isolating features into separate branches, everybody can work
         independently, yet it’s still trivial to share changes with other developers when necessary.</p>
 
-    <h4>Where To Go From Here</h4>
+    <h4>Quick Commands in the Git Bash Window</h4>
 
-    <p>For a walkthrough of feature branching on Bitbucket, check out the Using Git Branches documentation. By now, you
-        can hopefully see how feature branches are a way to quite literally multiply the functionality of the single
-        master branch used in the Centralized Workflow. In addition, feature branches also facilitate pull requests,
-        which makes it possible to discuss specific commits right inside of your version control GUI.</p>
+    <p><strong>Verify Username and Password</strong>
+        <pre>
+        $ cat .git/config</pre>
+        <strong>View remote branches</strong>
+        <pre>
+        $ git branch -r</pre>
+        <strong>Check out and create local branch</strong>
+        <pre>
+        $ git checkout -t (insert path from above branch listings) -b (local branch name goes here)</pre>
+        <strong>Check in work</strong>
+        <pre>
+        $ git commit -a -m "Comment goes here"
+        $ git push</pre>
+        NOTE:  if force is needed
+        <pre>
+        $ git push -u origin (branch name goes here)</pre>
+        <strong>Clear Node Module Cache in case of issues</strong>
+        <ol>
+            <li>delete the node module folder in root directory</li>
+            <li>npm cache clean</li>
+            <li>Then do an npm install to get fresh node modals folder</li>
+        </ol>
 
-    <p>The Feature Branch Workflow is an incredibly flexible way to develop a project. The problem is, sometimes it’s
-        too flexible. For larger teams, it’s often beneficial to assign more specific roles to different branches.
-        The Gitflow Workflow is a common pattern for managing feature development, release preparation, and maintenance.</p>
+    </p>
 
-    <!-- for Prototypes -->
+    <h4>Frequently Asked Questions</h4>
+    <dl>
+        <dt>Q: How do I see other branches so that I can check them out?</dt>
+        <dd>If you haven't seen the new branch yet, you can refresh the list of available branches by the following command.
+            Then you can checkout what you need:</dd>
+        <dd>
+        <dd>&nbsp;</dd>
+        <pre>
+        $ git fetch</pre>
+        </dd>
+        <dt>Q: Ugh! I keep having to enter my username and password every single time! Is there a way to skip that?</dt>
+        <dd>Why yes there is. In your project folder open a hidden file located in your .git folder (hidden files and folders
+        may be on by default). Inside your .git folder there's a file called config. Open this in WordPad or Sublime, not Notepad.
+        </dd>
+        <dd>&nbsp;</dd>
+        <dd>
+            Find the line that starts with
+            <code>url = http://web-url-path-to-my-remote-git-repository.git</code>
+            and add your username:password@ after the two forward slashes//
+            <code>url = http://username:password@web-url-path-to-my-remote-git-repository.git</code>
+            Save then close the file.
+        </dd>
+
+        <dd>&nbsp;</dd>
+        <dt>Q: How can I submit additional questions to this list?</dt>
+        <dd>A: Email inquiries to <a href="mailto:sherpa@dell.com">sherpa@dell.com</a> and reference this document.</dd>
+
+        <dd>&nbsp;</dd>
+    </dl>
+
+    <!-- for Prototypes
     <h4>Git Workflow for Prototypes</h4>
-    <p>We start all prototypes as a Centralized Workflow model. </p>
+    <p>We start all prototypes as a Centralized Workflow model. </p>-->
 </div>
