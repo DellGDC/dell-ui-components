@@ -1,12 +1,12 @@
 <div>
 	<h4>Requirements</h4>
-	<p>The development environment for dell-ui-components requires certain software to be installed in your computer. Some of these software packages require your computer to be outside of the corporate firewall to install.</p>
-	<p>Below are <strong>step by step instructions</strong> on how to set up the dell-ui-components development environment and all the software you require to get started.</p>
+	<p>The development environment for <em>dell-ui-components</em> requires certain software to be installed in your computer. Some of these software packages require your computer to be outside of the corporate firewall to install.</p>
+	<p>Below are <strong>step by step instructions</strong> on how to set up the <em>dell-ui-components</em> development environment and all the software you require to get started.</p>
 
-	<h4>Step 1: Get an editor</h4>
-	<p>Sublime Text is a free powerful text editor for the purpose of working with this development environment. Sublime Text also has the ability to be extended through a great number of plugins. If you already have Sublime Text you can skip to the next step.</p>
+	<h4><span class="label label-default">Step 1</span> Get an editor</h4>
+	<p>Sublime Text is a free powerful text editor for the purpose of working with this development environment. Sublime Text also has the ability to be extended through a great number of plugins. If you already have Sublime Text you can skip to the <a href="#install-sublime-text" class="scroll">next step</a>.</p>
 	<ul>
-		<li><a href="http://www.sublimetext.com/2" target="_new">Download</a></li>
+		<li><a href="http://www.sublimetext.com/2" target="_new">Download</a><sup>*</sup></li>
 		<li><a href="http://www.sublimetext.com/docs/2/" target="_new">View documentation</a></li>
 		<li><a href="https://packagecontrol.io/installation" target="_new">Install Package Control</a></li>
 
@@ -22,18 +22,19 @@
 			</ul>
 		</li>
 	</ul>
+	<p><span class="label label-default"><sup>*</sup> Note</span> The instructions and links above are for the current version of Sublime Text which is 2. There is a <a href="http://www.sublimetext.com/2" target="_new">beta version 3</a> available if you want to download instead.</p>
 
-
-	<h4>Step 2: Install Git</h4>
-	<p>Sublime Text is a free powerful text editor for the purpose of working with this development environment. Sublime Text also has the ability to be extended through a great number of plugins. If you already hav Sublime Text you can skip to the next step.</p>
+	<h4 id="install-sublime-text"><span class="label label-default">Step 2</span> Install Git</h4>
+	<p>Sublime Text is a free powerful text editor for the purpose of working with this development environment. Sublime Text also has the ability to be extended through a great number of plugins. If you already hav Sublime Text you can skip to the <a href="#install-git-gui" class="scroll">next step</a>.</p>
 	<ul>
 		<li><a href="https://git-scm.com/downloads" target="_new">Download</a></li>
 		<li><a href="https://git-scm.com/doc" target="_new">Documentation</a></li>
+		<li><a ui-sref="guide({section:'git-workflow'})">Learn about our Git workflow</a></li>
 	</ul>
 
 
-	<h4>Step 3: Install a Git GUI</h4>
-	<p>While it is really beneficial to learn Git from the command line (git bash) some people just feel better with a GUI application that helps with git commands. There are two good options and you can install both if you want but at least one of these is a MUST:</p>
+	<h4 id="install-git-gui"><span class="label label-default">Step 3</span> Install a Git GUI</h4>
+	<p>While it is really beneficial to learn Git from the command line (git bash) some people just feel better with a GUI application that helps with git commands. There are two good options and you can install both if you want but at least one of these is a MUST.  If you already have a Git gui installed  you can skip to the <a href="#install-node-js" class="scroll">next step</a>.</p>
 
 	<p><strong>Tortoise Git</strong></p>
 	<p>Within Tortoise Git you can do pretty much anything that you do in the command line and more. Tortoise Git has a great diff (difference) editor that allows you to look and resolve merge conflicts.</p>
@@ -50,7 +51,7 @@
 	</ul>
 
 
-	<h4>Step 4: Install NodeJS</h4>
+	<h4 id="install-node-js"><span class="label label-default">Step 4</span> Install NodeJS</h4>
 	<p>NodeJS is integral to our development environment and provides a lot of functionality such as serving your files in web server, watching your files for changes and a build process.</p>
 	<ul>
 		<li><a href="https://nodejs.org/en/download/" target="_new">Download</a></li>
@@ -58,7 +59,7 @@
 		<li><a href="https://nodejs.org/api/" target="_new">Documentation</a></li>
 	</ul>
 
-	<h4>Step 5: Check your environment path and access to node</h4>
+	<h4><span class="label label-default">Step 5</span> Check your environment path and access to node</h4>
 	<p>At this point sometimes the path for node may not be properly configured. For this reason it is wise at this point to check from the command line first:</p>
 
 	<ol>
@@ -66,7 +67,7 @@
 		<li>Once you see the command line, type npm and hit return.</li>
 		<li>You should see a response from the Node Package Manager.</li>
 		<li>If you see "command not found", your path variable may not be properly configured or you may not have NodeJS installed.</li>
-		<li>If you know you have alrady installed NodeJS then <a href="javascript:;" ng-click="checkYourPath = !checkYourPath">check your path variables</a></li>
+		<li>If you know you have already installed NodeJS then check your path variables (<a href="javascript:;" ng-click="checkYourPath = !checkYourPath">need help?</a>)</li>
 	</ol>
 	<div ng-show="checkYourPath">
 		<p>Windows 7:</p>
@@ -87,18 +88,18 @@
 		</ol>
 	</div>
 
-	<h4>Step 6: Get outside of the corporate firewall.</h4>
+	<h4><span class="label label-default">Step 6</span> Get outside of the corporate firewall.</h4>
 	<p>Node Package Manager uses a particular transfer protocol and port to download files that is typically blocked by corporate firewall. The next few steps require NPM so you must have access outside of the corporate firewall.</p>
 	<p>NOTE: If you are logged in through VPN you can skip this.</p>
 
-	<h4>Step 7: Install Grunt, Yeoman and Bower</h4>
+	<h4><span class="label label-default">Step 7</span> Install Grunt, Yeoman and Bower</h4>
 	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
 
 	<div class="well well-black">
 		<p>$ npm install -g grunt-cli yo bower</p>
 	</div>
 
-	<h4>Step 10: Install CG-Angular Yeoman generator</h4>
+	<h4><span class="label label-default">Step 8</span> Install CG-Angular Yeoman generator</h4>
 	<p>Enter the following:</p>
 
 	<div class="well well-black">
@@ -106,11 +107,11 @@
 	</div>
 
 
-	<h4>Step 11: Go back inside the corporate firewall</h4>
+	<h4><span class="label label-default">Step 9</span> Go back inside the corporate firewall</h4>
 	<p>The next steps require access to internal servers. </p>
 	<p>NOTE: If you are logged in through VPN you can skip this.</p>
 
-	<h4>Step 12: Clone the Dell-UI-Components git repository</h4>
+	<h4><span class="label label-default">Step 10</span> Clone the Dell-UI-Components git repository</h4>
 	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
 
 	<div class="well well-black">
@@ -121,10 +122,10 @@
 
 	<p>NOTE: This will create a directory called _duc directly in your c drive. It is important to do this because windows has a limitation for the number of letters in a file's path so the shorter the directory path is the better.</p>
 
-	<h4>Step 13: Get outside of the corporate firewall (again).</h4>
+	<h4><span class="label label-default">Step 11</span> Get outside of the corporate firewall (again).</h4>
 	<p>NOTE: If you are logged in through VPN you can skip this.</p>
 
-	<h4>Step 14: Clone the Dell-UI-Components git repository</h4>
+	<h4><span class="label label-default">Step 12</span> Clone the Dell-UI-Components git repository</h4>
 	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
 
 	<div class="well well-black">
@@ -133,14 +134,14 @@
 		<p>$ bower install</p>
 	</div>
 
-	<h4>Step 15: Go back inside the corporate firewall</h4>
+	<h4><span class="label label-default">Step 13</span> Go back inside the corporate firewall</h4>
 	<p>NOTE: If you are logged in through VPN you can skip this.</p>
 
 	<div class="well well-black">
 		<p>$ grunt serve</p>
 	</div>
 
-	<h4>Step 16: View development demo</h4>
+	<h4><span class="label label-default">Step 14</span> View development demo</h4>
 	<p>Open your Chrome browser and go to <a href="http://localhost:9002/">http://localhost:9002/</a></p>
 
 
