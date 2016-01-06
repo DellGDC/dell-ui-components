@@ -3,14 +3,28 @@
 #popovers-html-example {
 
 
-}
+    .example-popover {
+        margin: 0 -20px;
+        clear:both;
+        display:block;
+        .popover {
+            position: relative;
+            display: block;
+            float: left;
+            width: 260px;
+            margin: 20px;
+        }
+    }
+    .example-help-popover {
+        position:relative;
+        z-index:1;
+    }
+    @media (max-width: @screen-xs-max) {
+        .example-popover {
+            display:none;
+        }
+    }
 
-.bs-example-popover .popover {
-    position: relative;
-    display: block;
-    float: left;
-    width: 260px;
-    margin: 20px;
 }
 
 //for play demo

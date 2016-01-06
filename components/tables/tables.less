@@ -6,6 +6,11 @@ div.dataTables_length {
         white-space: nowrap;
         float: left;
     }
+    @media (max-width: 470px) {
+        label {
+            clear: both;
+        }
+    }
     select {
         width: 75px;
         display: inline-block;
@@ -18,6 +23,8 @@ div.dataTables_filter {
         white-space: nowrap;
         text-align: left;
         padding: 10px 0 10px 0;
+        float: right;
+        margin-right: -10px;
     }
     input {
         margin-left: 0.5em;
@@ -37,10 +44,13 @@ div.dataTables_paginate {
         margin: 2px 0;
         white-space: nowrap;
         padding-right: 0;
+        float: right;
     }
 }
 table.dataTable input{
     vertical-align: top;
+    //float: right;
+    //margin-right: 30px;
 }
 
 // ========== modified ============
@@ -140,26 +150,26 @@ table.dataTable {
     margin-top: 6px !important;
     margin-bottom: 6px !important;
     max-width: none !important;
-    thead {
-        .sorting:after {
-            //opacity: 0.2;
-            content: "\f0dc";
-            color: #5AABD1;
-        }
-        .sorting_asc:after {
-            content: "\f0de";
-            color: @dell-blue;
-        }
-        .sorting_desc:after {
-            content: "\f0dd";
-            color: @dell-blue;
-        }
-        & > tr {
-            & > th {
-                padding-right: 15px;
-            }
-        }
-    }
+    //thead {
+    //    .sorting:after {
+    //        //opacity: 0.2;
+    //        content: "\f0dc";
+    //        color: #5AABD1;
+    //    }
+    //    .sorting_asc:after {
+    //        content: "\f0de";
+    //        color: @dell-blue;
+    //    }
+    //    .sorting_desc:after {
+    //        content: "\f0dd";
+    //        color: @dell-blue;
+    //    }
+    //    & > tr {
+    //        & > th {
+    //            padding-right: 15px;
+    //        }
+    //    }
+    //}
     th:active {
         outline: none;
     }
@@ -462,7 +472,7 @@ table.dataTable thead .sorting_desc_disabled {
 //================= /disable sort.png =====================
 
 table.dataTable tbody tr.selected {
-    //background-color: #B0BED9;
+    background: #EDF9FF;
 }
 
 table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected {
@@ -474,18 +484,12 @@ table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.o
 .table-striped tbody>tr:nth-child(odd).selected>th,
 .table-striped tbody>tr:nth-child(even).selected>td,
 .table-striped tbody>tr:nth-child(even).selected>th{
-    background-color: #CCE5F1;
+    background: #EDF9FF;
     border-top: 0;
 }
 
-//table.dataTable.stripe tbody tr.odd.selected,
-//table.dataTable.display tbody tr.odd.selected {
-//    background: #CCE5F1;
-//}
-
-
-
-table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
+table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected
+ {
     //background-color: #a9b7d1;
     background: #EDF9FF;
 }
@@ -652,34 +656,30 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
     padding-left: 10px;
     cursor: pointer;
 }
+
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-    top: 0px;
-    left: 2px;
-    height: 16px;
-    width: 16px;
-    display: block;
-    position: relative;
-    font-family: 'FontAwesome';
-    content: '\f0de';
+    content: "\e610";
     color: #007db8;
-    //border: 2px solid white;
-    //border-radius: 16px;
-    text-align: center;
-    line-height: 14px;
-    //box-shadow: 0 0 3px #444;
-    box-sizing: content-box;
-    padding-left: 2px;
-    padding-bottom: 15px;
-    //background-color: #31b131;
+    padding: 0 3px 0 0;
+    position: relative;
+    top: 0;
+    right: 0;
+    display: block;
+    font-family: icon-ui;
+    opacity: 0.8;
+    background: none !important;
+    float: left;
 }
+
+
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child.dataTables_empty:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_empty:before {
     display: none;
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
-    content: "\f0dd";;
+    content: "\e60e";
     color: #007db8;
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr.child td:before {
@@ -735,7 +735,7 @@ table.dataTable > tbody > tr.child:hover {
     background: transparent !important;
 }
 table.dataTable > tbody > tr.child ul {
-    display: inline-block;
+    display: block;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -752,8 +752,10 @@ table.dataTable > tbody > tr.child ul li:last-child {
 }
 table.dataTable > tbody > tr.child span.dtr-title {
     display: inline-block;
-    min-width: 75px;
-    font-weight: bold;
+    color: #737373!important;
+    font-size: 85%
+    //min-width: 75px;
+    //font-weight: bold;
 }
 
 // ================= Code for the Responsive Simple Table =====================
@@ -843,11 +845,19 @@ td.details-control {
     font-family: icon-ui;
     opacity: 0.8;
     background: none !important;
-    &:after {
+    &:before {
         content: "\e610";
         color: @dell-blue;
+        padding: 0 5px 0 0;
     }
 }
+
+th.details-control {
+    input[type="checkbox"] {
+        margin-left: 24px;
+    }
+}
+
 tr.shown td.details-control {
     position: relative;
     top: 0;
@@ -856,7 +866,7 @@ tr.shown td.details-control {
     font-family: icon-ui;
     opacity: 0.8;
     background: none !important;
-    &:after {
+    &:before {
         content: "\e60e";
         color: @dell-blue;
     }
@@ -903,20 +913,16 @@ div.ColVis {
 button.ColVis_Button,
 ul.ColVis_collection li {
     position: relative;
-    float: left;
-    padding: 5px 8px;
-    border: 1px solid #999;
+    //float: left;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
     cursor: pointer;
     *cursor: hand;
-    font-size: 0.88em;
-    color: black !important;
+    color: @btn-default-color !important;
     white-space: nowrap;
     background: @dell-gray-light;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
-    border-radius: 2px;
+    border-radius: none;
     -webkit-box-shadow: 1px 1px 3px #ccc;
     -moz-box-shadow: 1px 1px 3px #ccc;
     -ms-box-shadow: 1px 1px 3px #ccc;
@@ -966,6 +972,7 @@ div.ColVis_collectionBackground {
     height: 100%;
     width: 100%;
     background-color: black;
+    opacity: 0.5 !important;
     z-index: 1100;
 }
 

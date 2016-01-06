@@ -175,7 +175,30 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.11** - November 3, 2015:
+**1.0.15** - December 03, 2015:
+  - Removed XS tootip treament
+
+
+### Older versions:
+
+```
+-1.0.14 - November 30, 2015:
+  - Fixed conflict with overflow tabs and offcanvas
+  - Fixed issue with dropdown progress status hover
+  - Updated to dell-ui-bootstrap 1.2.5
+  - Fixed conflict between overflow tabs and off-canvas
+- 1.0.13 - November 19, 2015:
+  - Fixed bug in Tooltips (css)
+  - Fixed css bug in date selector
+  - Fixed hover highlight bug in with overflow tabs
+  - Fixed bug in equalize height function
+  - Fixed padding issue in ratings
+  - Fixed footer link highlight color bug
+  - Added styling for popover trigger with help icon
+- 1.0.12 - November 13, 2015:
+  - Fixed bug in Tooltips (js & css)
+  - Fixed bug Popovers
+- 1.0.11 - November 3, 2015:
   - Updated Ratings and Reviews
   - Added Date Selector
   - Added Overflow tabs
@@ -183,11 +206,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   - Added Simplified Footer
   - Added Simplifiead Masthead
   - Fixed bug in Tooltips
-
-
-### Older versions:
-
-```
 - 1.0.10 Updated to dell-ui-bootstrap 1.2.2 which includes updates to icon font files and added icon-ui-handle
 - 1.0.9 Changes to carousel (dots and css), collapsible items (added content gallery), social media icons, edits to blockquote icon positioning, added contextual help component
 - 1.0.8 Changes to tables, breadcrumbs, show/hide, addition of contact drawer
