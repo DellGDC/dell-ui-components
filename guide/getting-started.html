@@ -22,7 +22,7 @@
 			</ul>
 		</li>
 	</ul>
-	<p><span class="label label-default"><sup>*</sup> Note</span> The instructions and links above are for the current version of Sublime Text which is 2. There is a <a href="http://www.sublimetext.com/2" target="_new">beta version 3</a> available if you want to download instead.</p>
+	<p><span class="label label-info"><sup>*</sup> Note</span> The instructions and links above are for the current version of Sublime Text which is 2. There is a <a href="http://www.sublimetext.com/2" target="_new">beta version 3</a> available if you want to download instead.</p>
 
 	<h4 id="install-sublime-text"><span class="label label-default">Step 2</span> Install Git</h4>
 	<p>Sublime Text is a free powerful text editor for the purpose of working with this development environment. Sublime Text also has the ability to be extended through a great number of plugins. If you already hav Sublime Text you can skip to the <a href="#install-git-gui" class="scroll">next step</a>.</p>
@@ -90,7 +90,7 @@
 
 	<h4><span class="label label-default">Step 6</span> Get outside of the corporate firewall.</h4>
 	<p>Node Package Manager uses a particular transfer protocol and port to download files that is typically blocked by corporate firewall. The next few steps require NPM so you must have access outside of the corporate firewall.</p>
-	<p>NOTE: If you are logged in through VPN you can skip this.</p>
+	<p><span class="label label-info">NOTE</span> If you are logged in through VPN you can skip this.</p>
 
 	<h4><span class="label label-default">Step 7</span> Install Grunt, Yeoman and Bower</h4>
 	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
@@ -109,7 +109,7 @@
 
 	<h4><span class="label label-default">Step 9</span> Go back inside the corporate firewall</h4>
 	<p>The next steps require access to internal servers. </p>
-	<p>NOTE: If you are logged in through VPN you can skip this.</p>
+	<p><span class="label label-info">NOTE</span> If you are logged in through VPN you can skip this.</p>
 
 	<h4><span class="label label-default">Step 10</span> Clone the Dell-UI-Components git repository</h4>
 	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
@@ -120,13 +120,13 @@
 		<p>$ git checkout development</p>
 	</div>
 
-	<p>NOTE: This will create a directory called _duc directly in your c drive. It is important to do this because windows has a limitation for the number of letters in a file's path so the shorter the directory path is the better.</p>
+	<p><span class="label label-info">NOTE</span>  This will create a directory called _duc directly in your c drive. It is important to do this because windows has a limitation for the number of letters in a file's path so the shorter the directory path is the better.</p>
 
 	<h4><span class="label label-default">Step 11</span> Get outside of the corporate firewall (again).</h4>
-	<p>NOTE: If you are logged in through VPN you can skip this.</p>
+	<p><span class="label label-info">NOTE</span>  If you are logged in through VPN you can skip this.</p>
 
-	<h4><span class="label label-default">Step 12</span> Clone the Dell-UI-Components git repository</h4>
-	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following:</p>
+	<h4><span class="label label-default">Step 12</span> Install all NPM and Bower packages</h4>
+	<p>Open a GitBash (right click on desktop and click Git Bash) and enter the following commands. You will see a lot happening after each install command. You may see some errors but for the most part these ca be ignored.</p>
 
 	<div class="well well-black">
 		<p>$ cd c:_duc</p>
@@ -135,7 +135,7 @@
 	</div>
 
 	<h4><span class="label label-default">Step 13</span> Go back inside the corporate firewall</h4>
-	<p>NOTE: If you are logged in through VPN you can skip this.</p>
+	<p><span class="label label-info">NOTE</span>  If you are logged in through VPN you can skip this.</p>
 
 	<div class="well well-black">
 		<p>$ grunt serve</p>
