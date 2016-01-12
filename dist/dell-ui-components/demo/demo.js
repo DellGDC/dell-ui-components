@@ -28056,7 +28056,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           is: function (val) {
             return typeof val === 'string';
           },
-          pattern: /[^/]*/
+          pattern: /[^\/]*/
         },
         int: {
           encode: valToString,
@@ -28110,7 +28110,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           decode: angular.fromJson,
           is: angular.isObject,
           equals: angular.equals,
-          pattern: /[^/]*/
+          pattern: /[^\/]*/
         },
         any: {
           encode: angular.identity,
@@ -59401,7 +59401,7 @@ angular.module('dellUiComponents').config(function () {
             //2 pixels account for top and bottom border
             element.find('> li').find('a').css('height', h + 'px');
             element.parent().find('.prev,.next').find('a').css('height', h + 'px');
-            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)                            
+            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)
           } else {
             //if no height is provided everything is reset.
             element.removeAttr('style').width(totalWidth + 200);
@@ -59461,6 +59461,100 @@ angular.module('dellUiComponents').config(function () {
           }
         });
       }
+    });
+  };
+}(jQuery));
+(function ($) {
+  $.dellUIuniversalFooter = function (el, options) {
+    // To avoid scope issues, use 'base' instead of 'this'
+    // to reference this class from internal events and functions.
+    var base = this;
+    // Access to jQuery and DOM versions of element
+    base.$el = $(el);
+    base.el = el;
+    // Add a reverse reference to the DOM object
+    base.$el.data('dellUIuniversalFooter', base);
+  };
+  $.dellUIuniversalFooter.defaultOptions = {
+    xsMax: 750,
+    smMin: 751,
+    smMax: 975,
+    mdMin: 974,
+    mdMax: 1141,
+    dosomething: ''
+  };
+  $.fn.dellUIuniversalFooter = function (options) {
+    if (options) {
+      $.dellUIuniversalFooter.defaultOptions = $.extend($.dellUIuniversalFooter.defaultOptions, options);
+    }
+    return this.each(function () {
+      new $.dellUIuniversalFooter(this);
+      var options = $.dellUIuniversalFooter.defaultOptions, breakpoint = function () {
+          var window_size = $(window).width(), breakpoint = {
+              isXS: false,
+              isSM: false,
+              isMD: false,
+              isLG: false
+            };
+          switch (true) {
+          case window_size < options.xsMax:
+            breakpoint.isXS = true;
+            break;
+          case window_size > options.smMin && window_size < options.smMax:
+            breakpoint.isSM = true;
+            break;
+          case window_size > options.mdMin && window_size < options.mdMax:
+            breakpoint.isMD = true;
+            break;
+          default:
+            breakpoint.isLG = true;
+            break;
+          }
+          return breakpoint;
+        }, responsiveElements = function () {
+          if (breakpoint().isXS) {
+            $('.footer-gallery').css('display', 'none');
+            $('.gallery-shadow-section').css('display', 'none');
+          } else {
+            $('.footer-gallery').css('display', 'block');
+            $('.gallery-shadow-section').css('display', 'block');
+          }
+        }, equalizeRows = function () {
+          setTimeout(function () {
+            $('.gallery-item').removeAttr('style');
+            var eObj = {
+                highest: 0,
+                columns: $('.gallery-item')
+              };
+            eObj.columns.each(function () {
+              var currColumnHeight = $(this).outerHeight();
+              if (currColumnHeight > eObj.highest) {
+                eObj.highest = currColumnHeight;
+              }
+            });
+            eObj.columns.height(eObj.highest);
+          }, 800);
+        }, importJson = function () {
+          $.getJSON('components/footer/footerData.json', function (data) {
+            var items = [];
+            console.log('data', data);
+            $.each(data, function () {
+              var countryData = data;
+              $.each(countryData.countries, function (key, value) {
+                var countryInfo = value;
+                items.push('<li><a href=\'javascript;\'>' + countryInfo.label + '</a></li>');
+              });
+            });
+            $('.country-names').append(items);
+          });
+        };
+      importJson();
+      equalizeRows();
+      responsiveElements();
+      $(window).resize(function () {
+        equalizeRows();
+        responsiveElements();
+      });
     });
   };
 }(jQuery));
@@ -59599,6 +59693,16 @@ angular.module('dellUiComponents').directive('navTabs', function () {
             right: 'icon-ui-arrowright'
           }
         });
+      }
+    }
+  };
+});
+angular.module('dellUiComponents').directive('defaultFooter', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, iAttrs, controller) {
+      if ($(window).resize) {
+        $element.dellUIuniversalFooter({});
       }
     }
   };
@@ -59805,14 +59909,13 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   return {
     restrict: 'C',
     link: function ($scope, $element, $attrs, controller) {
-      $scope.togglePassword = function () {
-        $scope.showPassword = !$scope.showPassword;
-        if ($scope.showPassword) {
+      $element.find('.checkbox input[type=checkbox]').on('click', function () {
+        if ($element.find('.checkbox input[type=checkbox]').is(':checked')) {
           $($element).find('input[type=password]').attr('type', 'text');
         } else {
           $($element).find('input[type=text]').attr('type', 'password');
         }
-      };
+      });
     }
   };
 }).directive('phoneNumber', function () {
@@ -60238,16 +60341,23 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         //TODO, check to see if the field is at the bottom of the viewport and position it on top
         inputField.datetimepicker(dateSelectorConfig);
         inputField.on('dp.show', function (e) {
+          viewPortWidth = $(window).width();
+          viewPortHeight = $(window).height();
+          inputFieldWidth = inputField.width();
+          inputFieldOffset = inputField.offset();
           calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
           //have to repeat this because it is destroyed everytime focus is gone
           //check to see if the right side is big enough for the widget
+          console.log(inputFieldOffset.left, inputFieldWidth, 215, viewPortWidth);
           if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
             calendarWidget.removeClass('pull-right');
+            calendarWidget.addClass('pull-left');
           } else {
+            calendarWidget.removeClass('pull-left');
             calendarWidget.addClass('pull-right');
           }
           //check to see if the bottom side is big enough for the widget
-          console.log(inputFieldOffset.top - window.pageYOffset + 255, viewPortHeight);
+          console.log('Needs to go on top?', inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight);
           if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
             //dateSelectorConfig.widgetPositioning.vertical = "top";
             calendarWidget.removeClass('bottom').addClass('top');
@@ -60262,8 +60372,7 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         });
         calendarIcon.on('click', function (e) {
           inputField.focus();
-        });  /*
-            inputField.on("blur",function (e) {
+        });  /*            inputField.on("blur",function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 inputField.data("DateTimePicker").show();
@@ -60487,7 +60596,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             element: $element,
             stuckClass: 'affix',
             wrapper: 'nav-tabs-affix'
-          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false;
+          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false, offsetHeight = $element.height() + 5;
         //console.log(waypointObjs);
         function clearActiveTab() {
           $element.find('> li').removeClass('active');
@@ -60497,7 +60606,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             //Setting up a click listener on each tab
             e.preventDefault();
             var target = $($(e.currentTarget).attr('href'));
-            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 60 }, 900, 'swing');
+            $('html, body').stop().animate({ 'scrollTop': target.offset().top - offsetHeight }, 900, 'swing');
             if ($element.find('> li').hasClass('active')) {
               clearActiveTab();
               $(e.currentTarget).parent().addClass('active');
@@ -60616,11 +60725,27 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
           $(table.column(idx).header()).append('<span class="sort-icon"/>');
+        });
+        // change positioning of search bar
+        $element.each(function () {
+          var datatable = $(this);
+          // find the search label
+          var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+          search_label.addClass('hide-text');
+          // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+          var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+          search_input.attr('placeholder', 'Search');
+          search_input.addClass('form-control col-xs-12 col-sm-4');
+          // LENGTH - Inline-Form control
+          // code below for select
+          var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+          length_sel.addClass('form-control');
         });
       }
     };
@@ -60659,7 +60784,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -60678,6 +60804,21 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             row.child(format(row.data())).show();
             tr.addClass('shown');
           }
+        });
+        // change positioning of search bar
+        $element.each(function () {
+          var datatable = $(this);
+          // find the search label
+          var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+          search_label.addClass('hide-text');
+          // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+          var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+          search_input.attr('placeholder', 'Search');
+          search_input.addClass('form-control col-xs-12 col-sm-4');
+          // LENGTH - Inline-Form control
+          // code below for select
+          var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+          length_sel.addClass('form-control');
         });
       }
     };
@@ -62044,7 +62185,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/dividers/demo-play-dividers.html', '<section ng-controller=dividersPLayDemoCtrl id=dividers-play-demo><div class=container><h2>Dividers Builder</h2><div></div></div></section>');
     $templateCache.put('components/dropdown-buttons/demo-dropdown-buttons.html', '<section ng-controller=dropdownButtonsCtrl id=dropdown-buttons-html-example><div class=container><h2 class=bottom-offset-20>Dropdown-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase Dropdown</h4><div class=btn-group id=button-primary-dropdown><button type=button class="btn btn-primary dropdown-toggle" data-toggle=dropdown aria-expanded=false>Primary <span class=caret></span></button><ul class=dropdown-menu role=menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><div class=bottom-offset-30><h4>Primary Purchase Dropdown</h4><div class=btn-group id=button-success-dropdown><a class="btn btn-success dropdown-toggle" data-toggle=dropdown href=javascript:;>Purchase <i class=caret></i></a><ul class=dropdown-menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><div class=bottom-offset-30><h4>Secondary or General Use Dropdown</h4><div class=btn-group id=button-default-dropdown><a class="btn btn-default dropdown-toggle" data-toggle=dropdown href=javascript:;>General Use <i class=caret></i></a><ul class=dropdown-menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><hr><div class=bottom-offset-30><h4>Primary Split Non-Purchase Dropdown</h4><div class=btn-group id=button-primary-split><button type=button class="btn btn-primary">Primary split</button> <button type=button class="btn btn-primary dropdown-toggle" data-toggle=dropdown aria-expanded=false><span class=caret></span> <span class=sr-only>Toggle Dropdown</span></button><ul class=dropdown-menu role=menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><div class=bottom-offset-30><h4>Primary Split Purchase Dropdown</h4><div class=btn-group id=button-success-split><button type=button class="btn btn-success">Purchase split</button> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-expanded=false><span class=caret></span> <span class=sr-only>Toggle Dropdown</span></button><ul class=dropdown-menu role=menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div><div class=bottom-offset-30><h4>Secondary Split or General Use Dropdown</h4><div class=btn-group id=button-default-split><button type=button class="btn btn-default">General Use split</button> <button type=button class="btn btn-default dropdown-toggle" data-toggle=dropdown aria-expanded=false><span class=caret></span> <span class=sr-only>Toggle Dropdown</span></button><ul class=dropdown-menu role=menu><li><a href=javascript:;>Action</a></li><li><a href=javascript:;>Another action</a></li><li><a href=javascript:;>Something else here</a></li><li class=divider></li><li><a href=javascript:;>Separated link</a></li></ul></div></div></div></section>');
     $templateCache.put('components/dropdown-buttons/demo-play-dropdown-buttons.html', '<section ng-controller=dropdownButtonsPLayDemoCtrl id=dropdown-buttons-play-demo><div class=container><h2>Dropdown-Buttons Builder</h2><div></div></div></section>');
-    $templateCache.put('components/footer/demo-footer.html', '<section ng-controller=footerCtrl id=footer-html-example><div class=container><h2>Footer Demo</h2><h3>Simplified Footer</h3><div class=row><div class=col-md-9><div equalizer=group class="equalize well well-white text-gray-medium well-white-stroke"><div class="center-component component-code" id=navigation-footer-simplified-footer><footer class=navbar><div class=container><ul class="nav navbar-nav"><li><a href=javascript:;>&copy;2015 Dell</a></li><li><a href=javascript:;>Terms &amp; Conditions</a></li><li><a href=javascript:;>Privacy</a></li><li><a href=javascript:;>Ads &amp; Emails</a></li><li><a href=javascript:;>Contact</a></li><li><a href=javascript:;>Site Map</a></li><li><a href=javascript:;>Feedback</a></li></ul></div></footer></div><div class=row><div class=col-xs-12><hr class="rule-break hr-gray-light"><h5 class=fragment-title>Simplified Footer</h5><div class=description>Use for the minimum required footer functionality/content for dell.com pages.</div></div></div></div></div><div class=col-md-3><div class=well>sidebar</div></div></div></div></section>');
+    $templateCache.put('components/footer/demo-footer.html', '<section ng-controller=footerCtrl id=footer-html-example><div class=container><h2>Footer Demo</h2><h3>Simplified Footer</h3><div class=row><div class=col-md-9><div equalizer=group class="equalize well well-white text-gray-medium well-white-stroke"><div class="center-component component-code" id=navigation-footer-simplified-footer><footer class=navbar><div class=container><ul class="nav navbar-nav"><li><a href=javascript:;>&copy;2015 Dell</a></li><li><a href=javascript:;>Terms of Sale</a></li><li><a href=javascript:;>Privacy Statement</a></li><li><a href=javascript:;>Ads &amp; Emails</a></li><li><a href=javascript:;>Legal &amp; Regulatory</a></li><li><a href=javascript:;>Corporate Social Responsibility</a></li><li><a href=javascript:;>Contact</a></li></ul></div></footer></div><div class=row><div class=col-xs-12><hr class="rule-break hr-gray-light"><h5 class=fragment-title>Simplified Footer</h5><div class=description>Use for the minimum required footer functionality/content for dell.com pages.</div></div></div></div></div><div class=col-md-3><div class=well>sidebar</div></div></div><h3>Default Footer</h3><div class=row><div class=col-md-9><div equalizer=group class="footer-overflow equalize well well-white text-gray-medium well-white-stroke"><div class="center-component component-code" id=navigation-footer-default-footer><footer class="navbar default-footer"><div class="footer-about gray-light"><div class=container><ul class="nav navbar-nav about-links"><li><a href=javascript:;>About Dell</a></li><li><a href=javascript:;>Careers</a></li><li><a href=javascript:;>Community</a></li><li><a href=javascript:;>Events</a></li><li><a href=javascript:;>PartnerDirect</a></li><li><a href=javascript:;>Premier</a></li><li class="country-selector btn-group dropup"><a href=javascript:; class=dropdown-toggle data-toggle=dropdown tabindex=16><img src=components/footer/us.gif class="flag"> United States&nbsp;</a><ul class="dropdown-menu country-names"></ul></li></ul></div></div><div class="navbar footer-menu"><div class=footer-top-section><div class=footer-shadow-section></div><div class=container><ul class="nav navbar-nav"><li class="language no-brasil"><ul><li><a href=javascript:; tabindex=15>English</a></li><li class="language-divider text-white">&nbsp;|&nbsp;</li><li><a href=javascript:; tabindex=16>Spanish</a></li></ul></li><li><a href=javascript:;>&copy;2015 Dell</a></li><li><a href=javascript:;>Terms of Sale</a></li><li><a href=javascript:;>Privacy Statement</a></li><li><a href=javascript:;>Ads &amp; Emails</a></li><li><a href=javascript:;>Legal &amp; Regulatory</a></li><li><a href=javascript:;>Corporate Social Responsibility</a></li><li><a href=javascript:;>Contact</a></li></ul></div></div><div class=footer-shadow-section></div><div class=footer-bottom-section><div class="disclaimer container"><p>*DELL PREFERRED ACCOUNT (DPA): Offered to U.S. residents by WebBank, who determines qualifications for and terms of credit. Promotion eligibility varies and is determined by WebBank. Taxes, shipping, and other charges are extra and vary.</p><p>Offers subject to change, not combinable with all other offers. Taxes, shipping, handling and other fees apply. U.S. Dell Home new purchases only. Free shipping and handling offer available in Continental (except Alaska) U.S. only. Availability of electronics and accessories varies and quantities may be limited. Dell reserves the right to cancel orders arising from pricing or other errors.</p></div></div></div></footer></div><div class=row><div class=col-xs-12><hr class="rule-break hr-gray-light"><h5 class=fragment-title>Default Footer</h5><div class=description>Use for the maximum required footer functionality/content for dell.com pages.</div></div></div></div></div><div class=col-md-3><div class=well>sidebar</div></div></div></div></section>');
     $templateCache.put('components/footer/demo-play-footer.html', '<section ng-controller=footerPLayDemoCtrl id=footer-play-demo><div class=container><h2>Footer Builder</h2><div></div></div></section>');
     $templateCache.put('components/forms/demo-forms.html', '<section ng-controller=formsCtrl id=forms-html-example><div class=container><h2>Forms Demo</h2><h3 class=top-offset-20>individual form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=text-label-input>Text input label</label><div class="col-xs-12 col-sm-5"><input type=text class=form-control id=text-label-input><p class=help-block>In addition to freeform text, any HTML5 text-based input appears like so.</p></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=uneditable>Uneditable input</label><div class="col-xs-12 col-sm-5"><span id=uneditable class="uneditable-input form-control">Some value here</span></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=disabledInput>Disabled input</label><div class="col-xs-12 col-sm-5"><input class="disabled form-control" id=disabledInput type=text placeholder="Disabled input here\u2026" disabled></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=textarea>Textarea input</label><div class="col-xs-12 col-sm-5"><textarea id=textarea class=form-control rows=5></textarea></div></div></div></form></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Checkboxes</h4><div class=checkbox><label><input type=checkbox value="option 1"> Checkbox one</label></div><div class="checkbox disabled bottom-offset-20"><label><input type=checkbox value="value option 2" disabled> Checkbox two is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline checkboxes</h4><label class=checkbox-inline><input type=checkbox id=inlineCheckbox1 value=option1>1</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox2 value=option2>2</label><label class=checkbox-inline><input type=checkbox id=inlineCheckbox3 value=option3>3</label></div></div><div class=row><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Radio Buttons</h4><div class=radio><label><input type=radio name=optionsRadios id=options-radio-1 value=option1 checked> Option one radio button</label></div><div class=radio><label><input type=radio name=optionsRadios id=options-radio-2 value=option2> Option two radio button</label></div><div class="radio disabled"><label><input type=radio name=optionsRadios id=options-radio-3 value=option3 disabled> Option three is disabled</label></div></div><div class="col-xs-12 col-sm-6 bottom-offset-40"><h4>Inline Radio Buttons</h4><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio1 value=option1> 1</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio2 value=option2> 2</label><label class=radio-inline><input type=radio name=inlineRadioOptions id=inlineRadio3 value=option3> 3</label></div></div><div class=row><div class="col-xs-12 col-sm-8 bottom-offset-40"><h4>Tree Checkboxes</h4><ul class=list-tree><li><label class=checkbox><input type=checkbox value=option1-parent1> Checkbox value (parent 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild1> Checkbox value (grand child 1)</label></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent1-child2> Checkbox value (child 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild3> Checkbox value (grand child 3)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild4> Checkbox value (grand child 4)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-grandchild5> Checkbox value (grand child 5)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild1> Checkbox value (great grand child 1)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild2> Checkbox value (great grand child 2)</label></li><li><label class=checkbox><input type=checkbox value=option1-parent1-greatgrandchild3> Checkbox value (great grand child 3)</label></li></ul></li></ul></li></ul></li><li><label class=checkbox><input type=checkbox value=option1-parent2> Checkbox value (parent 2)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-child1> Checkbox value (child 1)</label><ul><li><label class=checkbox><input type=checkbox value=option1-parent2-grandchild1> Checkbox value (grand child 1)</label></li></ul></li></ul></li></ul></div></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=exampleInputFile>File upload label</label><div class="col-xs-6 col-sm-6"><input type=file id=exampleInputFile><p class=help-block>Example block-level help text here.</p></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Email: default error msg</label><div class="col-xs-6 col-sm-6"><input type=text class="email-check form-control"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label" for=inputError>Email: Custom msg/localized</label><div class="col-xs-6 col-sm-6"><input type=text class="email-check form-control" data-error-message="Hello!! Please input a valid email address!"></div></div></div></form></div><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="form-group show-password"><label for=passwordShowHide class="col-xs-12 col-sm-2 form-label">Password</label><div class="col-xs-6 col-sm-6"><input id=passwordShowHide type=password class=form-control ng-model=password></div><div class="col-xs-12 col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2"><label class="checkbox help-block"><input type=checkbox value=option1 ng-model=showPassword ng-click=togglePassword()> <span ng-if=!showPassword>Show password</span> <span ng-if=showPassword>Hide password</span></label></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-6 col-sm-8 col-md-8"><label class="col-xs-12 col-sm-3 form-label" for=phone>Phone number</label><div class="col-xs-12 col-sm-9"><input id=phone type=text class="form-control phone-number" placeholder="(555) 111-2222"></div></div></div><div class=row><div class="col-xs-12 col-sm-8 col-md-8"><div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phone-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phone-ext class="collapse col-xs-6 col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label><div class=spinbox data-orient=vertical data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><label class="col-xs-12 col-sm-2 form-label">Spin box horizontal</label><div class=spinbox data-orient=horizontal data-spinmin=0 data-spindefault=0 data-spinmax=30 data-spinstep=1 data-spinincrease="&lt;i class=\'icon-ui-plus\'&gt;&lt;/i&gt;" data-spindecrease="&lt;i class=\'icon-ui-minus\'&gt;&lt;/i&gt;" data-spinname=""></div></div></div></form></div><div class="bottom-offset-40 top-offset-40"><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: current value</label><input class=bs-slider id=single-handle-ex1 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Single handle Slider: tooltip constant</label><input class=bs-slider id=single-handle-ex2 data-slider-id=ex1Slider type=text data-slider-min=0 data-slider-max=20 data-slider-step=1 data-slider-value="14"></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class="form-group single-handle-slider"><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Double handler Slider</label><input class=bs-slider id=double-handle-ex1 type="text"></div></div></div></form></div><h3 class=top-offset-40>select form controls</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select01 class=form-label>Select list</label><select class=form-control id=select01><option>something</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=select-01 class=form-label>Tiered select list</label><select class=form-control id=select-01><option class=text-gray-dark value=all>All</option><optgroup class=text-gray-dark label="Original Release Date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup><optgroup class=text-gray-dark label="Last updated date"><option class=text-gray-dark value="0-30 days">0-30 days</option><option class=text-gray-dark value="0-90 days">0-90 days</option><option class=text-gray-dark value=older>older</option></optgroup></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><label for=multiSelect class=form-label>multi-select</label><select multiple id=multiSelect><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div></div></div></form></div><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><div class=form-group><div class="col-xs-12 col-sm-6"><div class=form-group><label for=ms class=form-label>Multi-select with checkboxes</label><select class=ms-checkbox id=ms multiple><option value=1>January</option><option value=2>February</option><option value=3>March</option><option value=4>April</option><option value=5>May</option><option value=6>June</option><option value=7>July</option><option value=8>August</option><option value=9>September</option><option value=10>October</option><option value=11>November</option><option value=12>December</option></select></div></div></div></div></form></div><h3 class=top-offset-40>Selects with pre-populated states (U.S. only)</h3><hr><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=default-select-state class=form-label>Standard Select U.S. States</label><select class="form-control select-state" id=default-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=short-select-state class=form-label>States with Abbreviations</label><select class="form-control select-state" data-format=short id=short-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=both-select-state class=form-label>States with Abbreviations and Name</label><select class="form-control select-state" data-format=both id=both-select-state ng-model=stateDefault></select></div></div></div></form></div><div class=bottom-offset-20><form class=form-compressed role=form><div class=row><div class="col-xs-12 col-sm-6"><div class=form-group><label for=emptyname-select-state class=form-label>States with Custom Select Text</label><select class="form-control select-state" data-format="" data-empty-name="Please select a state" id=emptyname-select-state ng-model=stateDefault></select></div></div></div></form></div><h3 class=top-offset-40>Common Forms</h3><hr><div class=bottom-offset-40><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9"></h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First Name</label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name>First</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 col-md-3 hidden-sm form-label" for=last-name>Last Name</label><label class="col-xs-12 col-sm-2 col-md-3 visible-sm-block form-label" for=last-name>Last</label><div class="col-xs-12 col-sm-10 col-md-9"><input type=text class=form-control id=last-name placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone #</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 col-md-1 form-label" for=email-address>Email&nbsp;</label><div class="col-xs-12 col-sm-10 col-md-11"><input type=text class="form-control email-address" id=email-address placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 form-label" for=address-1>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-1 placeholder="*Street Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><label class="col-xs-8 col-sm-1 col-md-1 form-label" for=address-2>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-2 placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-12 col-md-12"><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state>&nbsp;</label><div><select class="form-control select-state" id=default-state ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip placeholder="*Zip Code"></div></div></div></form><hr class="top-offset-40"><h3>Ship to (group addressed form in Well)</h3><div class=bottom-offset-40><div class=row><div class=col-md-9><div class="well well-white text-gray-medium well-white-stroke"><form class=form-compressed role=form><div class=row><h4 class="col-xs-12 col-sm-9">Ship to</h4></div><div class=row><div class="col-xs-11 col-sm-6"><label class="col-xs-8 col-sm-2 hidden-sm form-label" for=first-name>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-8 col-sm-2 visible-sm-block form-label" for=first-name-1>First<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=first-name-1 placeholder="*First Name"></div></div><div class=col-xs-1><label class="col-xs-12 col-sm-4 form-label" for=middle-initial-1>MI</label><div class="col-xs-12 col-sm-8"><input type=text class=form-control id=middle-initial-1 placeholder=MI></div></div><div class="col-xs-12 col-sm-5"><label class="col-xs-12 col-sm-2 hidden-sm form-label" for=last-name>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><label class="col-xs-12 col-sm-2 visible-sm-block form-label" for=last-name-1>Last<span class="hidden-xs hidden-sm hidden-md">Name</span></label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=last-name-1 placeholder="*Last Name"></div></div></div><div class=row><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=phone-number>Phone<span class="hidden-xs hidden-sm hidden-md">#</span></label><div class="col-xs-12 col-sm-10"><input type=text class="form-control phone-number" id=phone-number-1 placeholder="(555) 111-2222"></div></div><div class="col-xs-6 col-sm-6"><label class="col-xs-8 col-sm-2 form-label" for=email-address-1>Email&nbsp;</label><div class="col-xs-12 col-sm-10"><input type=text class="form-control email-address" id=email-address-1 placeholder="*Email Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6"><div class="col-xs-12 col-sm-6 col-sm-offset-2 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#phonegroup-ext-2><span><label class=show-collapsed><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Add extension</label></span> <span><label class=hide-expanded><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove extension</label></span></a></div><div id=phonegroup-ext-2 class="collapse col-xs-12 col-sm-10 col-sm-offset-2"><input type=text class="form-control phone-extension" placeholder="ext: (2222)"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-A>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-A placeholder="*Street Address"></div></div></div><div class=row><div class=col-xs-12><label class="col-xs-8 col-sm-1 form-label" for=address-B>Address</label><div class="col-xs-12 col-sm-11"><input type=text class=form-control id=address-B placeholder="*Additional Address"></div></div></div><div class=row><div class=col-xs-12><div class="col-xs-12 col-sm-6 col-sm-offset-1 col-md-11 col-md-offset-1 help-ext"><a href=javascript:; class=collapsed data-toggle=collapse data-target=#additional-address-1><span><label class=show-collapsed for=ph-ext><i aria-hidden=true class=icon-ui-plus></i>&nbsp;Additional address</label></span> <span><label class=hide-expanded for=ph-ext><i aria-hidden=true class=icon-ui-minus></i>&nbsp;Remove address</label></span></a></div><div id=additional-address-1 class="collapse col-xs-12 col-sm-11 col-sm-offset-1 col-md-11 col-md-offset-1"><input type=text class=form-control placeholder="*Additional Address"></div></div></div><div class=row><div class="col-xs-12 col-sm-6 col-md-6"><label class="col-xs-8 col-sm-2 form-label" for=city-1>City</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=city-1 placeholder=*City></div></div><div class="col-xs-6 col-sm-3"><label class="col-xs-8 col-sm-2 form-label visible-xs-block" for=default-state-1>&nbsp;</label><div><select class="form-control select-state" id=default-state-1 ng-model=stateDefault></select></div></div><div class="col-xs-6 col-sm-3 col-md-3"><label class="col-xs-8 col-sm-2 form-label" for=zip-1>Zip</label><div class="col-xs-12 col-sm-10"><input type=text class=form-control id=zip-1 placeholder="*Zip Code"></div></div></div></form></div></div></div></div><hr class="top-offset-40"><h3>Date Selector Demo</h3><div id=child-selects><div equalizer=group class="equalize well well-white text-gray-medium well-white-stroke"><div class="center-component component-code" id=forms-selects-date-selector><form class=bottom-offset-40 role=form><div class=row><div class=form-group id=date-selector-example role=form><div class="col-xs-12 col-sm-2"><label class=form-label for=date-selector-input>Date</label></div><div class="col-xs-6 col-sm-6"><div class=date-selector><input type=text class=form-control id=date-selector-input> <i class=icon-small-calendar></i><p class=help-block>mm/dd/yyyy</p></div></div></div></div></form></div><div class=row><div class=col-xs-12><hr class="rule-break hr-gray-light"><h5 class=fragment-title>Date selector</h5><div class=description>Allows a user to easily select a date from a calendar.</div></div></div></div></div><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p><p class="top-offset-60 bottom-offset-60">&nbsp;</p></div><div class="label label-green-marker">Recent purchase</div></div></section>');
     $templateCache.put('components/forms/demo-play-forms.html', '<section ng-controller=formsPLayDemoCtrl id=forms-play-demo><div class=container><h2>Forms Builder</h2><div></div></div></section>');
