@@ -32,9 +32,17 @@
 		<li>It is preferred that each variable be given its own line and comment.</li>
 		<li>They should be listed in alphabetical order if possible.</li>
 		<li>Functions should have a single var statement with declared variables separated by commas. Example:<br/><br/>
-<pre><code>var currentEntry, // currently selected table entry
+
+	<h5>Good <i class="icon-small-checkmark text-green" aria-hidden="true"></i></h5>
+	<p><pre><code>var currentEntry, // currently selected table entry
     level = 0,    // indentation level
-    size =10;     // size of table</code></pre>
+    size =10;     // size of table</code></pre></p>
+
+	<h5>Bad <i class="icon-ui-closecircle text-red-dark" aria-hidden="true"></i></h5>
+	<p><pre><code>var currentEntry; // currently selected table entry
+var level = 0;    // indentation level
+var size =10;     // size of table</code></pre></p>
+
 		</li>
 		<li>When declaring an object variable use {} instead of new Object()</li>
 		<li>Use [] instead of new Array().</li>
@@ -49,14 +57,14 @@
 		<li>The } (right curly brace) is aligned with the line containing the beginning of the declaration of the function.</li>
 		<li>Example:<br/>
 <pre><code>function outer(c, d) {
-        var e = c * d;
+    var e = c * d;
 
-        function inner(a, b) {
-            return (e * a) + b;
-        }
+    function inner(a, b) {
+        return (e * a) + b;
+    }
 
-        return inner(0, 1);
-    }</code></pre>
+    return inner(0, 1);
+}</code></pre>
 
 		</li>
 	</ul>
@@ -78,16 +86,15 @@
 	foo:true,
 	bar:false
 };</code></pre></li>
-		<li></li>
-		<li></li>
+
 	</ul>
 
-	<h5>return Statements</h5>
+	<h5><em>return</em> Statements</h5>
 	<ul>
 		<li>A return statement with a value should not use ( ) (parentheses) around the value. </li>
 		<li>The return value expression must start on the same line as the return keyword in order to avoid semicolon insertion. (in other words, if the expresion return is in another line the return value will be undefined)</li>
 	</ul>
-	<h5>if Statements</h5>
+	<h5><em>if</em> Statements</h5>
 	<ul>
 		<li>The if class of statements should have the following form:<br/>
 <pre><code>if (condition) {
@@ -119,10 +126,10 @@ if (condition) {
 	</li>
 		</ul>
 
-	<h5>for Statement, while Statement, do Statement</h5>
+	<h5><em>for</em> Statement, <em>while</em> Statement, <em>do</em> Statement</h5>
 	<p>Avoid use of native JS looping statements. The package includes <a href="http://underscorejs.org/" target="_new">underscore.js</a> which provides many functions useful for looping, searching, filtering etc.</p>
 
-	<h5>switch Statement</h5>
+	<h5><em>switch</em> Statement</h5>
 	<ul>
 		<li>A switch statement should have the following form:<br/>
 
@@ -139,7 +146,7 @@ if (condition) {
 	</ul>
 
 
-	<h5>try Statement</h5>
+	<h5><em>try</em> Statement</h5>
 	<ul>
 		<li>The try class of statements should have the following form:<br/>
 <pre><code>try {
@@ -158,11 +165,11 @@ try {
 		</li>
 	</ul>
 
-	<h5>with Statement</h5>
+	<h5><em>with</em> Statement</h5>
 
 	<p>The with statement <a href="http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/" target="_new">should not be used</a>.</p>
 
-	<h5>continue Statement</h5>
+	<h5><em>continue</em> Statement</h5>
 
 	<p>Avoid use of the continue statement. It tends to obscure the control flow of the function.</p>
 
@@ -176,7 +183,7 @@ try {
 		<li>Whitespace should follow every , (comma).</li>
 	</ul>
 
-	<h4>eval is Evil</h4>
+	<h4><em>eval</em> is Evil</h4>
 	<ul>
 		<li>The eval function is the most misused feature of JavaScript. Avoid it.</li>
 		<li>eval has aliases you may not be aware of:
