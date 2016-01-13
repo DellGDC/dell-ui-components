@@ -103,27 +103,9 @@ return {
     restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
 
         link: function($scope, $element, $attrs, controller) {
-
-    // -----| Delay script |----- //
-
-            $('.delay-hide').focus(function () {
-                currentFocus = $(this);
-            });
-            $('.delay-hide').keypress(function () {
-                $(this).find('input[type=password]').attr('type', 'text');
-                setTimeout(function () {
-                    currentFocus.val(currentFocus.val().replace(/[^\*]/, '*'));
-                }, 1000);
-            });
-            // if $($attr).is('type', 'text')) {
-            //         ('input[type=text]').attr('type', 'password');
-            //     };
-
-    // -----| END of delay script |----- //
-
             $element.find('.checkbox input[type=checkbox]').on('click',function(){
                 if($element.find('.checkbox input[type=checkbox]').is(":checked")){
-                    $($element).find('input[type=password]').attr('type', 'text') && ('input[type=password]').replace('type', 'text');
+                    $($element).find('input[type=password]').attr('type', 'text');
                 } else {
                     $($element).find('input[type=text]').attr('type', 'password');
                 }
