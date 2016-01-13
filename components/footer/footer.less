@@ -117,10 +117,18 @@ footer.navbar.default-footer {
                     font-size:12px;
                     padding: 5px 10px 5px 10px;
                 }
-                a:focus {
-                    //outline:@dell-blue solid thin;
-                    background-color:transparent;
+                //a:focus {
+                //    //outline:@dell-blue solid thin;
+                //    background-color:transparent;
+                //}
+                :focus {
+                    //border-color: #007db8;
+                    //outline: 0;
+                    outline:@dell-blue solid 1px;
+                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,125,184,.6);
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,125,184,.6);
                 }
+
                 .flag {
                     width:24px;
                     margin:0 3px 3px 0;
@@ -141,7 +149,11 @@ footer.navbar.default-footer {
                     left:0;
                     background:@white;
                     li {
-                        padding:0 0 0 10px;
+                        //padding:0 0 0 10px;
+                        a:hover {
+                            background: @dell-blue;
+                            color: @white;
+                        }
                     }
                 }
                 @media (max-width:@screen-xs-max) {
@@ -187,9 +199,9 @@ footer.navbar.default-footer {
                     text-align:right;
                     .dropdown-menu {
                         left:-75px;
-                        li {
-                            padding:0 0 0 10px;
-                        }
+                        //li {
+                        //    padding:0 0 0 10px;
+                        //}
                     }
                 }
             }
@@ -226,9 +238,9 @@ footer.navbar.default-footer {
                         padding:0;
                         margin:0;
                     }
-                    ul li:first-child a {
-                        padding-right:0;
-                    }
+                    //ul li:first-child a {
+                    //    padding-right:0;
+                    //}
 
                 }
             }
@@ -269,17 +281,17 @@ footer.navbar.default-footer {
                             margin-left:0;
                             padding-left:20px;
                         }
-                        ul li {
-                            border:none;
-                            &:first-child a, :last-child a {
-                                padding-right:0;
-                            }
-                        }
-                        ul li:last-child {
-                            a {
-                                padding-right:0;
-                            }
-                        }
+                        //ul li {
+                        //    border:none;
+                        //    &:first-child a, :last-child a {
+                        //        padding-right:0;
+                        //    }
+                        //}
+                        //ul li:last-child {
+                        //    a {
+                        //        padding-right:0;
+                        //    }
+                        //}
                     }
                 }
             }
@@ -329,3 +341,4 @@ footer.navbar.default-footer {
         }
     }
 }
+
