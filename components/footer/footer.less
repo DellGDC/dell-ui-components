@@ -24,13 +24,12 @@ footer.navbar {
             a {
                 display:block;
                 color: @white;
-                padding: 12px 13px 10px 0;
+                padding: 10px;
                 font-size: @font-size-small;
                 line-height: 15px; //same as p small
                 &:hover {
                     text-decoration:underline;
                     background: transparent;
-                    //background: @dell-blue;
                     color: @white;
                 }
             }
@@ -48,11 +47,7 @@ footer.navbar {
                         text-decoration: none;
                     }
                 }
-                &:first-child {
-                    a {
-                        padding-left: 10px;
-                    }
-                }
+
             }
         }
     }
@@ -82,7 +77,6 @@ footer.navbar.default-footer {
                 a {
                     padding-right: 10px;
                     padding-left: 10px;
-
                     font-size:@font-size-base;
                     color:@dell-gray-dark;
                     &:hover {
@@ -102,6 +96,7 @@ footer.navbar.default-footer {
                 float:right;
                 top:2px;
                 text-align:right;
+                right: -20px;
                 ul {
                     padding:0;
                     margin:0;
@@ -115,15 +110,9 @@ footer.navbar.default-footer {
                     color:@dell-gray-dark;
                     text-decoration:none;
                     font-size:12px;
-                    padding: 5px 10px 5px 10px;
+                    padding: 5px 5px 5px 5px;
                 }
-                //a:focus {
-                //    //outline:@dell-blue solid thin;
-                //    background-color:transparent;
-                //}
                 :focus {
-                    //border-color: #007db8;
-                    //outline: 0;
                     outline:@dell-blue solid 1px;
                     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,125,184,.6);
                     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,125,184,.6);
@@ -148,8 +137,10 @@ footer.navbar.default-footer {
                     position:absolute;
                     left:0;
                     background:@white;
+                    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+                    box-shadow: 0 6px 12px rgba(0,0,0,.175);
                     li {
-                        //padding:0 0 0 10px;
+                        padding:0;
                         a:hover {
                             background: @dell-blue;
                             color: @white;
@@ -175,7 +166,7 @@ footer.navbar.default-footer {
         @media (min-width:@screen-sm-min) {
             ul.navbar-nav.about-links   {
                 margin:0;
-                padding:6px 20px 6px 20px;
+                padding:6px 20px 6px 0;
                 width:100%;
                 height:44px;
                 z-index:140;
@@ -185,7 +176,7 @@ footer.navbar.default-footer {
                     padding:4px 0 0 0;
                     border-bottom:none;
                     a {
-                        padding:6px 20px 6px 20px;
+                        padding:6px 10px 6px 10px;
                         &:hover,
                         &:focus {
                             color:@dell-dark-blue;
@@ -198,17 +189,14 @@ footer.navbar.default-footer {
                     top:2px;
                     text-align:right;
                     .dropdown-menu {
-                        left:-75px;
-                        //li {
-                        //    padding:0 0 0 10px;
-                        //}
+                        left:-85px;
                     }
                 }
             }
         }
     }
     .navbar.footer-menu {
-        margin:0;
+        margin:0 -30px;
         padding:0;
         position:relative;
         z-index:0;
@@ -238,11 +226,16 @@ footer.navbar.default-footer {
                         padding:0;
                         margin:0;
                     }
-                    //ul li:first-child a {
-                    //    padding-right:0;
-                    //}
-
                 }
+            }
+            .shadow-box {
+                width: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+                margin-right: auto;
+                margin-left: auto;
+                display: block;
+                min-height: 100px;
             }
             @media (min-width:@screen-sm-min) {
                 ul.navbar-nav {
@@ -256,10 +249,8 @@ footer.navbar.default-footer {
                         border-bottom:none;
                         padding:4px 0 0 0;
                         a {
-                            //padding:6px 20px 6px 0;
                             &:focus,
                             &:hover {
-                                //outline:@white solid thin;
                                 background-color: transparent;
                             }
                         }
@@ -281,17 +272,6 @@ footer.navbar.default-footer {
                             margin-left:0;
                             padding-left:20px;
                         }
-                        //ul li {
-                        //    border:none;
-                        //    &:first-child a, :last-child a {
-                        //        padding-right:0;
-                        //    }
-                        //}
-                        //ul li:last-child {
-                        //    a {
-                        //        padding-right:0;
-                        //    }
-                        //}
                     }
                 }
             }
@@ -301,12 +281,11 @@ footer.navbar.default-footer {
             position:relative;
             z-index:0;
             .disclaimer {
-                padding-top:25px;
-                padding-bottom:20px;
+                padding:30px;
                 font-size:11px;
                 line-height:1.6em;
                 letter-spacing:.04em;
-                font-weight:200;
+                //font-weight:200;
                 color:@dell-highlight-blue;
                 opacity:.6;
             }
