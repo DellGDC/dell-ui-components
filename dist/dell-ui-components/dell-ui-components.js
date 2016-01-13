@@ -21726,7 +21726,7 @@ angular.module('dellUiComponents').config(function () {
             //2 pixels account for top and bottom border
             element.find('> li').find('a').css('height', h + 'px');
             element.parent().find('.prev,.next').find('a').css('height', h + 'px');
-            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)                            
+            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)
           } else {
             //if no height is provided everything is reset.
             element.removeAttr('style').width(totalWidth + 200);
@@ -21786,6 +21786,100 @@ angular.module('dellUiComponents').config(function () {
           }
         });
       }
+    });
+  };
+}(jQuery));
+(function ($) {
+  $.dellUIuniversalFooter = function (el, options) {
+    // To avoid scope issues, use 'base' instead of 'this'
+    // to reference this class from internal events and functions.
+    var base = this;
+    // Access to jQuery and DOM versions of element
+    base.$el = $(el);
+    base.el = el;
+    // Add a reverse reference to the DOM object
+    base.$el.data('dellUIuniversalFooter', base);
+  };
+  $.dellUIuniversalFooter.defaultOptions = {
+    xsMax: 750,
+    smMin: 751,
+    smMax: 975,
+    mdMin: 974,
+    mdMax: 1141,
+    dosomething: ''
+  };
+  $.fn.dellUIuniversalFooter = function (options) {
+    if (options) {
+      $.dellUIuniversalFooter.defaultOptions = $.extend($.dellUIuniversalFooter.defaultOptions, options);
+    }
+    return this.each(function () {
+      new $.dellUIuniversalFooter(this);
+      var options = $.dellUIuniversalFooter.defaultOptions, breakpoint = function () {
+          var window_size = $(window).width(), breakpoint = {
+              isXS: false,
+              isSM: false,
+              isMD: false,
+              isLG: false
+            };
+          switch (true) {
+          case window_size < options.xsMax:
+            breakpoint.isXS = true;
+            break;
+          case window_size > options.smMin && window_size < options.smMax:
+            breakpoint.isSM = true;
+            break;
+          case window_size > options.mdMin && window_size < options.mdMax:
+            breakpoint.isMD = true;
+            break;
+          default:
+            breakpoint.isLG = true;
+            break;
+          }
+          return breakpoint;
+        }, responsiveElements = function () {
+          if (breakpoint().isXS) {
+            $('.footer-gallery').css('display', 'none');
+            $('.gallery-shadow-section').css('display', 'none');
+          } else {
+            $('.footer-gallery').css('display', 'block');
+            $('.gallery-shadow-section').css('display', 'block');
+          }
+        }, equalizeRows = function () {
+          setTimeout(function () {
+            $('.gallery-item').removeAttr('style');
+            var eObj = {
+                highest: 0,
+                columns: $('.gallery-item')
+              };
+            eObj.columns.each(function () {
+              var currColumnHeight = $(this).outerHeight();
+              if (currColumnHeight > eObj.highest) {
+                eObj.highest = currColumnHeight;
+              }
+            });
+            eObj.columns.height(eObj.highest);
+          }, 800);
+        }, importJson = function () {
+          $.getJSON('components/footer/footerData.json', function (data) {
+            var items = [];
+            console.log('data', data);
+            $.each(data, function () {
+              var countryData = data;
+              $.each(countryData.countries, function (key, value) {
+                var countryInfo = value;
+                items.push('<li><a href=\'javascript;\'>' + countryInfo.label + '</a></li>');
+              });
+            });
+            $('.country-names').append(items);
+          });
+        };
+      importJson();
+      equalizeRows();
+      responsiveElements();
+      $(window).resize(function () {
+        equalizeRows();
+        responsiveElements();
+      });
     });
   };
 }(jQuery));
@@ -21924,6 +22018,16 @@ angular.module('dellUiComponents').directive('navTabs', function () {
             right: 'icon-ui-arrowright'
           }
         });
+      }
+    }
+  };
+});
+angular.module('dellUiComponents').directive('defaultFooter', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, iAttrs, controller) {
+      if ($(window).resize) {
+        $element.dellUIuniversalFooter({});
       }
     }
   };
@@ -22130,14 +22234,13 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   return {
     restrict: 'C',
     link: function ($scope, $element, $attrs, controller) {
-      $scope.togglePassword = function () {
-        $scope.showPassword = !$scope.showPassword;
-        if ($scope.showPassword) {
+      $element.find('.checkbox input[type=checkbox]').on('click', function () {
+        if ($element.find('.checkbox input[type=checkbox]').is(':checked')) {
           $($element).find('input[type=password]').attr('type', 'text');
         } else {
           $($element).find('input[type=text]').attr('type', 'password');
         }
-      };
+      });
     }
   };
 }).directive('phoneNumber', function () {
@@ -22563,16 +22666,23 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         //TODO, check to see if the field is at the bottom of the viewport and position it on top
         inputField.datetimepicker(dateSelectorConfig);
         inputField.on('dp.show', function (e) {
+          viewPortWidth = $(window).width();
+          viewPortHeight = $(window).height();
+          inputFieldWidth = inputField.width();
+          inputFieldOffset = inputField.offset();
           calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
           //have to repeat this because it is destroyed everytime focus is gone
           //check to see if the right side is big enough for the widget
+          console.log(inputFieldOffset.left, inputFieldWidth, 215, viewPortWidth);
           if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
             calendarWidget.removeClass('pull-right');
+            calendarWidget.addClass('pull-left');
           } else {
+            calendarWidget.removeClass('pull-left');
             calendarWidget.addClass('pull-right');
           }
           //check to see if the bottom side is big enough for the widget
-          console.log(inputFieldOffset.top - window.pageYOffset + 255, viewPortHeight);
+          console.log('Needs to go on top?', inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight);
           if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
             //dateSelectorConfig.widgetPositioning.vertical = "top";
             calendarWidget.removeClass('bottom').addClass('top');
@@ -22587,8 +22697,7 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         });
         calendarIcon.on('click', function (e) {
           inputField.focus();
-        });  /*
-            inputField.on("blur",function (e) {
+        });  /*            inputField.on("blur",function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 inputField.data("DateTimePicker").show();
@@ -22812,7 +22921,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             element: $element,
             stuckClass: 'affix',
             wrapper: 'nav-tabs-affix'
-          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false;
+          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false, offsetHeight = $element.height() + 5;
         //console.log(waypointObjs);
         function clearActiveTab() {
           $element.find('> li').removeClass('active');
@@ -22822,7 +22931,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             //Setting up a click listener on each tab
             e.preventDefault();
             var target = $($(e.currentTarget).attr('href'));
-            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 60 }, 900, 'swing');
+            $('html, body').stop().animate({ 'scrollTop': target.offset().top - offsetHeight }, 900, 'swing');
             if ($element.find('> li').hasClass('active')) {
               clearActiveTab();
               $(e.currentTarget).parent().addClass('active');
@@ -22941,11 +23050,27 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
           $(table.column(idx).header()).append('<span class="sort-icon"/>');
+        });
+        // change positioning of search bar
+        $element.each(function () {
+          var datatable = $(this);
+          // find the search label
+          var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+          search_label.addClass('hide-text');
+          // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+          var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+          search_input.attr('placeholder', 'Search');
+          search_input.addClass('form-control col-xs-12 col-sm-4');
+          // LENGTH - Inline-Form control
+          // code below for select
+          var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+          length_sel.addClass('form-control');
         });
       }
     };
@@ -22984,7 +23109,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -23003,6 +23129,21 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             row.child(format(row.data())).show();
             tr.addClass('shown');
           }
+        });
+        // change positioning of search bar
+        $element.each(function () {
+          var datatable = $(this);
+          // find the search label
+          var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+          search_label.addClass('hide-text');
+          // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+          var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+          search_input.attr('placeholder', 'Search');
+          search_input.addClass('form-control col-xs-12 col-sm-4');
+          // LENGTH - Inline-Form control
+          // code below for select
+          var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+          length_sel.addClass('form-control');
         });
       }
     };
