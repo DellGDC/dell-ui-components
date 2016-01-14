@@ -59805,14 +59805,13 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   return {
     restrict: 'C',
     link: function ($scope, $element, $attrs, controller) {
-      $scope.togglePassword = function () {
-        $scope.showPassword = !$scope.showPassword;
-        if ($scope.showPassword) {
+      $element.find('.checkbox input[type=checkbox]').on('click', function () {
+        if ($element.find('.checkbox input[type=checkbox]').is(':checked')) {
           $($element).find('input[type=password]').attr('type', 'text');
         } else {
           $($element).find('input[type=text]').attr('type', 'password');
         }
-      };
+      });
     }
   };
 }).directive('phoneNumber', function () {
@@ -60238,16 +60237,23 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         //TODO, check to see if the field is at the bottom of the viewport and position it on top
         inputField.datetimepicker(dateSelectorConfig);
         inputField.on('dp.show', function (e) {
+          viewPortWidth = $(window).width();
+          viewPortHeight = $(window).height();
+          inputFieldWidth = inputField.width();
+          inputFieldOffset = inputField.offset();
           calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
           //have to repeat this because it is destroyed everytime focus is gone
           //check to see if the right side is big enough for the widget
+          console.log(inputFieldOffset.left, inputFieldWidth, 215, viewPortWidth);
           if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
             calendarWidget.removeClass('pull-right');
+            calendarWidget.addClass('pull-left');
           } else {
+            calendarWidget.removeClass('pull-left');
             calendarWidget.addClass('pull-right');
           }
           //check to see if the bottom side is big enough for the widget
-          console.log(inputFieldOffset.top - window.pageYOffset + 255, viewPortHeight);
+          console.log('Needs to go on top?', inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight);
           if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
             //dateSelectorConfig.widgetPositioning.vertical = "top";
             calendarWidget.removeClass('bottom').addClass('top');
@@ -60262,8 +60268,7 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         });
         calendarIcon.on('click', function (e) {
           inputField.focus();
-        });  /*
-            inputField.on("blur",function (e) {
+        });  /*            inputField.on("blur",function (e) {
                 e.preventDefault();
                 e.stopPropagation();
                 inputField.data("DateTimePicker").show();
@@ -60487,7 +60492,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             element: $element,
             stuckClass: 'affix',
             wrapper: 'nav-tabs-affix'
-          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false;
+          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false, offsetHeight = $element.height() + 5;
         //console.log(waypointObjs);
         function clearActiveTab() {
           $element.find('> li').removeClass('active');
@@ -60497,7 +60502,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             //Setting up a click listener on each tab
             e.preventDefault();
             var target = $($(e.currentTarget).attr('href'));
-            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 60 }, 900, 'swing');
+            $('html, body').stop().animate({ 'scrollTop': target.offset().top - offsetHeight }, 900, 'swing');
             if ($element.find('> li').hasClass('active')) {
               clearActiveTab();
               $(e.currentTarget).parent().addClass('active');
@@ -60616,11 +60621,27 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
           $(table.column(idx).header()).append('<span class="sort-icon"/>');
+        });
+        // change positioning of search bar
+        $element.each(function () {
+          var datatable = $(this);
+          // find the search label
+          var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+          search_label.addClass('hide-text');
+          // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+          var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+          search_input.attr('placeholder', 'Search');
+          search_input.addClass('form-control col-xs-12 col-sm-4');
+          // LENGTH - Inline-Form control
+          // code below for select
+          var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+          length_sel.addClass('form-control');
         });
       }
     };
@@ -60659,7 +60680,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -60678,6 +60700,21 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             row.child(format(row.data())).show();
             tr.addClass('shown');
           }
+        });
+        // change positioning of search bar
+        $element.each(function () {
+          var datatable = $(this);
+          // find the search label
+          var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+          search_label.addClass('hide-text');
+          // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+          var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+          search_input.attr('placeholder', 'Search');
+          search_input.addClass('form-control col-xs-12 col-sm-4');
+          // LENGTH - Inline-Form control
+          // code below for select
+          var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+          length_sel.addClass('form-control');
         });
       }
     };
