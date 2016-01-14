@@ -98,7 +98,7 @@ angular.module('dellUiComponents')
 
 
 
-.directive('showPassword', function() {
+.directive('showHidePassword', function() {
 return {
     restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
 
@@ -528,7 +528,7 @@ return {
         restrict: 'AC', // E = Element, A = Attribute, C = Class, M = Comment
         template: template,
         link: function($scope, $element, $attributes, controller) {
-            $scope.emptyName = $attributes.emptyName || '*State';
+            $scope.emptyName = $attributes.emptyName || 'State';
         }
     };
 })
