@@ -144,21 +144,19 @@ return {
 
 .directive('bsSlider', function() {
     return {
-        restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
-        link: function($scope, element, attributes, controller) {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, $element, $attrs, controller) {
 
-            // With JQuery
-            $('#single-handle-ex1').slider({
-                formatter: function(value) {
-                    return 'Current value: ' + value;
-                }
-            });
+            // Angular implementation for Boostrap Slider: http://seiyria.com/bootstrap-slider/
+            var options = {};
 
-            $("#single-handle-ex2").slider({
-                tooltip: 'always'
-            });
+            if($attrs.sliderLabel) {
+                options.formatter = function(value) {
+                    return $attrs.sliderLabel + value;
+                };
+            }
 
-            $("#double-handle-ex1").slider({ id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
+            $element.slider(options);
 
         }
     };
@@ -576,12 +574,9 @@ return {
                 viewPortHeight = $(window).height();
                 inputFieldWidth = inputField.width();
                 inputFieldOffset = inputField.offset();
-
-
                 calendarWidget = $element.find('.bootstrap-datetimepicker-widget'); //have to repeat this because it is destroyed everytime focus is gone
 
                 //check to see if the right side is big enough for the widget
-                console.log(inputFieldOffset.left,inputFieldWidth,215,viewPortWidth);
                 if(inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
                     calendarWidget.removeClass('pull-right');
                     calendarWidget.addClass('pull-left');
@@ -591,7 +586,6 @@ return {
                 }
 
                 //check to see if the bottom side is big enough for the widget
-                console.log("Needs to go on top?", inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight);
                 if(inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
                     //dateSelectorConfig.widgetPositioning.vertical = "top";
                     calendarWidget.removeClass('bottom').addClass('top');
@@ -610,17 +604,6 @@ return {
             calendarIcon.on("click",function (e) {
                 inputField.focus();                
             });
-
-/*            inputField.on("blur",function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                inputField.data("DateTimePicker").show();
-            });
-*/
-
-            
-
-
         }
     };
 });
