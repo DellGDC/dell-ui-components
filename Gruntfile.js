@@ -128,6 +128,7 @@ module.exports = function (grunt) {
                     {src: ['components/**/*.json'], dest: 'dist/dell-ui-components/demo/'},
                     {src: ['README.md'], dest: 'dist/README.md'},
                     {src: ['LICENSE'], dest: 'dist/LICENSE'},
+                    {src: ['bower_components/font-awesome/fonts/*.*'], dest:'dist/dell-ui-components/fonts/',flatten:true,expand:true},
                     {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components/dell-ui-components.css'},
                     {cwd: 'bower_components/dell-ui-bootstrap/', src: ['**'], dest: 'dist/dell-ui-bootstrap/', expand:true}
                 ]
@@ -299,6 +300,10 @@ module.exports = function (grunt) {
                         {
                             pattern: /url\(\'standard-buttons/g,
                             replacement: "url('img/components/standard-buttons"
+                        },
+                        {
+                            pattern: /..\/fonts\//ig,
+                            replacement: 'fonts\/'
                         }
 
 
