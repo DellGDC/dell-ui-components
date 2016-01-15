@@ -22230,7 +22230,7 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       });
     }
   };
-}).directive('showPassword', function () {
+}).directive('showHidePassword', function () {
   return {
     restrict: 'C',
     link: function ($scope, $element, $attrs, controller) {
@@ -22268,25 +22268,16 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   };
 }).directive('bsSlider', function () {
   return {
-    restrict: 'AEC',
-    link: function ($scope, element, attributes, controller) {
-      // With JQuery
-      $('#single-handle-ex1').slider({
-        formatter: function (value) {
-          return 'Current value: ' + value;
-        }
-      });
-      $('#single-handle-ex2').slider({ tooltip: 'always' });
-      $('#double-handle-ex1').slider({
-        id: 'slider12c',
-        min: 0,
-        max: 10,
-        range: true,
-        value: [
-          3,
-          7
-        ]
-      });
+    restrict: 'C',
+    link: function ($scope, $element, $attrs, controller) {
+      // Angular implementation for Boostrap Slider: http://seiyria.com/bootstrap-slider/
+      var options = {};
+      if ($attrs.sliderLabel) {
+        options.formatter = function (value) {
+          return $attrs.sliderLabel + value;
+        };
+      }
+      $element.slider(options);
     }
   };
 }).directive('spinbox', function () {
@@ -22634,7 +22625,7 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
     restrict: 'AC',
     template: template,
     link: function ($scope, $element, $attributes, controller) {
-      $scope.emptyName = $attributes.emptyName || '*State';
+      $scope.emptyName = $attributes.emptyName || 'State';
     }
   };
 }).directive('dateSelector', [
@@ -22673,7 +22664,6 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
           calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
           //have to repeat this because it is destroyed everytime focus is gone
           //check to see if the right side is big enough for the widget
-          console.log(inputFieldOffset.left, inputFieldWidth, 215, viewPortWidth);
           if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
             calendarWidget.removeClass('pull-right');
             calendarWidget.addClass('pull-left');
@@ -22682,7 +22672,6 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
             calendarWidget.addClass('pull-right');
           }
           //check to see if the bottom side is big enough for the widget
-          console.log('Needs to go on top?', inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight);
           if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
             //dateSelectorConfig.widgetPositioning.vertical = "top";
             calendarWidget.removeClass('bottom').addClass('top');
@@ -22697,12 +22686,7 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         });
         calendarIcon.on('click', function (e) {
           inputField.focus();
-        });  /*            inputField.on("blur",function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                inputField.data("DateTimePicker").show();
-            });
-*/
+        });
       }
     };
   }
