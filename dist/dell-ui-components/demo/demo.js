@@ -28056,7 +28056,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           is: function (val) {
             return typeof val === 'string';
           },
-          pattern: /[^\/]*/
+          pattern: /[^/]*/
         },
         int: {
           encode: valToString,
@@ -28110,7 +28110,7 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.ex
           decode: angular.fromJson,
           is: angular.isObject,
           equals: angular.equals,
-          pattern: /[^\/]*/
+          pattern: /[^/]*/
         },
         any: {
           encode: angular.identity,
