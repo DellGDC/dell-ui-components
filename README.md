@@ -175,13 +175,22 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.15** - December 03, 2015:
-  - Removed XS tootip treament
+**1.0.16** - January 15, 2016:
+  - Fixed issue with erroneous masthead element - now header.masthead
+  - Added Uber Tables
+  - Added universal footer
+  - Added accesability tags to icon demo
+  - Changed demo content for states dropdowns
+  - Minor adjustments to unordered lists
+  - Changed demo content for tabs
+  - Changed demo code for date selector and fixed minor issues
 
 
 ### Older versions:
 
 ```
+-1.0.15 - December 03, 2015:
+  - Removed XS tootip treament
 -1.0.14 - November 30, 2015:
   - Fixed conflict with overflow tabs and offcanvas
   - Fixed issue with dropdown progress status hover
