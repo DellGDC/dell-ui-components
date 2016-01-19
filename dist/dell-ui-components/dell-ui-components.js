@@ -21860,9 +21860,12 @@ angular.module('dellUiComponents').config(function () {
             eObj.columns.height(eObj.highest);
           }, 800);
         }, importJson = function () {
-          $.getJSON('components/footer/footerData.json', function (data) {
+          if (!options.datafile) {
+            options.datafile = 'components/footer/footerData.json';
+          }
+          $.getJSON(options.datafile, function (data) {
             var items = [];
-            console.log('data', data);
+            //console.log("data", data);
             $.each(data, function () {
               var countryData = data;
               $.each(countryData.countries, function (key, value) {
@@ -22025,9 +22028,13 @@ angular.module('dellUiComponents').directive('navTabs', function () {
 angular.module('dellUiComponents').directive('defaultFooter', function () {
   return {
     restrict: 'C',
-    link: function ($scope, $element, iAttrs, controller) {
+    link: function ($scope, $element, $attributes, controller) {
+      var options = {};
+      if ($attributes.datafile) {
+        options.datafile = $attributes.datafile;
+      }
       if ($(window).resize) {
-        $element.dellUIuniversalFooter({});
+        $element.dellUIuniversalFooter(options);
       }
     }
   };
