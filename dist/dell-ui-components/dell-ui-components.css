@@ -1295,6 +1295,9 @@ footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-
   footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li a {
     padding: 10px 0;
   }
+  footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li a:focus {
+    outline: none;
+  }
 }
 @media (min-width: 768px) {
   footer.navbar.default-footer .footer-about ul.navbar-nav.about-links {
