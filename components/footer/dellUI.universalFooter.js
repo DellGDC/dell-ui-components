@@ -76,9 +76,12 @@
                 }, 800);
             },
             importJson = function() {
-                $.getJSON( "components/footer/footerData.json", function( data ) {
+                if(!options.datafile) {
+                    options.datafile = "components/footer/footerData.json";
+                }
+                $.getJSON(options.datafile, function( data ) {
                     var items = [];
-                    console.log("data", data);
+                    //console.log("data", data);
                     $.each( data, function() {
                         var countryData = data;
                         $.each( countryData.countries, function(key, value) {
