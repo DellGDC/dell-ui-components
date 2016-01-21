@@ -23176,7 +23176,12 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
     // Runs during compile
     return {
       restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
+      link: function ($scope, $element, $attributes, controller) {
+        var datafile = 'components/tables-uber/data-responsive.json';
+        //TODO need to redo sample json file so that includes configuration for columns
+        if ($attributes.datafile) {
+          datafile = $attributes.datafile;
+        }
         function updateDataTableSelectAllCtrl(table) {
           var $table = table.table().node();
           var $chkbox_all = $('tbody input[type="checkbox"]', $table);
@@ -23203,13 +23208,14 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
         /* Formatting function for row details - modify as you need */
         function format(d) {
           // `d` is the original data object for the row
+          //TODO we can't really do this. We can't hard code labels like "Company Name". The column names need to come from a configuration file. The HTML also needs to come from a template file.
           return '<row>' + '<div class="row">' + '<div class="col-xs-12">' + '<div class="col-xs-6 col-sm-3 visible-xs-block">' + '<p class="text-gray-medium small">Company Name</p>' + '<p>' + d.Company_name + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3 visible-xs-block">' + '<p class="text-gray-medium small">Solution ID</p>' + '<p><a href="javascript:;" class="btn-link">' + d.Solution_ID + '</a></p>' + '</div>' + '<div class="col-xs-6 col-sm-3 visible-xs-block">' + '<p class="text-gray-medium small">List Price</p>' + '<p>' + d.List_price + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3 visible-xs-block">' + '<p class="text-gray-medium small">Quote Number</p>' + '<p><a href="javascript:;" class="btn-link">' + d.Quote_number + '</a></p>' + '</div>' + '<div class="row">' + '<div class="col-xs-12 visible-xs-block">' + '<hr class="hr-gray top-offset-10">' + '</div>' + '</div>' + '<div class="col-xs-12">' + '<h3 class="text-blue">Account Details</h3>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Contact Number</p>' + '<p>' + d.Contact_number + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Extension</p>' + '<p>' + d.Extension + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Customer Since</p>' + '<p>' + d.Customer_since + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Location</p>' + '<p>' + d.Location + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Owner</p>' + '<p><a href="javascript:;" class="btn-link">' + d.Owner + '</a></p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Last Edited</p>' + '<p>' + d.Last_edited + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Customer Number</p>' + '<p><a href="javascript:;" class="btn-link">' + d.Customer_number + '</a></p>' + '</div>' + '</div>' + '</div>' + '<div class="row">' + '<div class="col-xs-12">' + '<hr class="hr-gray top-offset-10">' + '</div>' + '</div>' + '<div class="row">' + '<div class="col-xs-12">' + '<h3 class="text-blue col-xs-12">Additional Notes</h3>' + '</div>' + '<div class="col-xs-12">' + '<div class="col-xs-6">' + '<p class="text-gray-medium small">Purchase Details</p>' + '<p>' + d.Purchase_details + '</p>' + '</div>' + '<div class="col-xs-6">' + '<p class=" text-gray-medium small">Sales Notes</p>' + '<p>' + d.Sales_notes + '</p>' + '</div>' + '</div>' + '</div>' + '</row>';
         }
         // Array holding selected row IDs
         var rows_selected = [];
         var tableData;
         var table = $element.DataTable({
-            'ajax': 'components/tables-uber/data-responsive.json',
+            'ajax': datafile,
             'columnDefs': [{
                 'targets': 0,
                 'searchable': true,
@@ -23377,7 +23383,12 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
     // Runs during compile
     return {
       restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
+      link: function ($scope, $element, $attributes, controller) {
+        var datafile = 'components/tables-uber/dataColumn.json';
+        //TODO need to redo sample json file so that includes configuration for columns
+        if ($attributes.datafile) {
+          datafile = $attributes.datafile;
+        }
         function updateDataTableSelectAllCtrl(table) {
           var $table = table.table().node();
           var $chkbox_all = $('tbody input[type="checkbox"]', $table);
@@ -23405,7 +23416,7 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
         var rows_selected = [];
         var tableData;
         var table = $('#table-uber').DataTable({
-            'ajax': 'components/tables-uber/dataColumn.json',
+            'ajax': datafile,
             'columnDefs': [{
                 'targets': 0,
                 'searchable': true,

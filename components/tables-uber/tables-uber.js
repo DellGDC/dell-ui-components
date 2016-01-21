@@ -17,9 +17,13 @@ angular.module('dellUiComponents')
         // Runs during compile
         return {
             restrict: 'C',
-            link: function($scope, $element, iAttrs, controller ) {
+            link: function($scope, $element, $attributes, controller ) {
 
-
+                var datafile = "components/tables-uber/data-responsive.json";
+                //TODO need to redo sample json file so that includes configuration for columns
+                if($attributes.datafile) {
+                    datafile = $attributes.datafile;
+                }
                 function updateDataTableSelectAllCtrl(table){
                     var $table             = table.table().node();
                     var $chkbox_all        = $('tbody input[type="checkbox"]', $table);
@@ -53,10 +57,11 @@ angular.module('dellUiComponents')
                 /* Formatting function for row details - modify as you need */
                 function format ( d ) {
                     // `d` is the original data object for the row
+                    //TODO we can't really do this. We can't hard code labels like "Company Name". The column names need to come from a configuration file. The HTML also needs to come from a template file.
                     return  '<row>'+
                                 '<div class="row">'+
                                     '<div class="col-xs-12">'+
-                            //repeated herders visible in XS only
+                                        //repeated herders visible in XS only
                                         '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
                                             '<p class="text-gray-medium small">Company Name</p>'+
                                             '<p>'+d.Company_name+'</p>' +
@@ -148,7 +153,7 @@ angular.module('dellUiComponents')
                 var rows_selected = [];
                 var tableData;
                 var table = $element.DataTable({
-                    "ajax": "components/tables-uber/data-responsive.json",
+                    "ajax": datafile,
                     'columnDefs': [{
                         'targets': 0,
                         'searchable':true,
@@ -163,7 +168,6 @@ angular.module('dellUiComponents')
                         details: false
                     },
                     "columns": [
-
                         {
                             "data":''
                         },
@@ -364,8 +368,13 @@ angular.module('dellUiComponents')
         // Runs during compile
         return {
             restrict: 'C',
-            link: function($scope, $element, iAttrs, controller ) {
+            link: function($scope, $element, $attributes, controller ) {
 
+                var datafile = "components/tables-uber/dataColumn.json";
+                //TODO need to redo sample json file so that includes configuration for columns
+                if($attributes.datafile) {
+                    datafile = $attributes.datafile;
+                }
 
                 function updateDataTableSelectAllCtrl(table){
                     var $table             = table.table().node();
@@ -401,7 +410,7 @@ angular.module('dellUiComponents')
                 var rows_selected = [];
                 var tableData;
                 var table = $('#table-uber').DataTable({
-                    "ajax": "components/tables-uber/dataColumn.json",
+                    "ajax": datafile,
                     'columnDefs': [{
                         'targets': 0,
                         'searchable':true,
