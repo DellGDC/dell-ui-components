@@ -21726,7 +21726,7 @@ angular.module('dellUiComponents').config(function () {
             //2 pixels account for top and bottom border
             element.find('> li').find('a').css('height', h + 'px');
             element.parent().find('.prev,.next').find('a').css('height', h + 'px');
-            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)                            
+            element.parent().find('.prev,.next').find('a').css('padding-top', h / 2 - 8 + 'px');  //moves the arrow to center when the content pushes the height beyond default (42px)
           } else {
             //if no height is provided everything is reset.
             element.removeAttr('style').width(totalWidth + 200);
@@ -21786,6 +21786,103 @@ angular.module('dellUiComponents').config(function () {
           }
         });
       }
+    });
+  };
+}(jQuery));
+(function ($) {
+  $.dellUIuniversalFooter = function (el, options) {
+    // To avoid scope issues, use 'base' instead of 'this'
+    // to reference this class from internal events and functions.
+    var base = this;
+    // Access to jQuery and DOM versions of element
+    base.$el = $(el);
+    base.el = el;
+    // Add a reverse reference to the DOM object
+    base.$el.data('dellUIuniversalFooter', base);
+  };
+  $.dellUIuniversalFooter.defaultOptions = {
+    xsMax: 750,
+    smMin: 751,
+    smMax: 975,
+    mdMin: 974,
+    mdMax: 1141,
+    dosomething: ''
+  };
+  $.fn.dellUIuniversalFooter = function (options) {
+    if (options) {
+      $.dellUIuniversalFooter.defaultOptions = $.extend($.dellUIuniversalFooter.defaultOptions, options);
+    }
+    return this.each(function () {
+      new $.dellUIuniversalFooter(this);
+      var options = $.dellUIuniversalFooter.defaultOptions, breakpoint = function () {
+          var window_size = $(window).width(), breakpoint = {
+              isXS: false,
+              isSM: false,
+              isMD: false,
+              isLG: false
+            };
+          switch (true) {
+          case window_size < options.xsMax:
+            breakpoint.isXS = true;
+            break;
+          case window_size > options.smMin && window_size < options.smMax:
+            breakpoint.isSM = true;
+            break;
+          case window_size > options.mdMin && window_size < options.mdMax:
+            breakpoint.isMD = true;
+            break;
+          default:
+            breakpoint.isLG = true;
+            break;
+          }
+          return breakpoint;
+        }, responsiveElements = function () {
+          if (breakpoint().isXS) {
+            $('.footer-gallery').css('display', 'none');
+            $('.gallery-shadow-section').css('display', 'none');
+          } else {
+            $('.footer-gallery').css('display', 'block');
+            $('.gallery-shadow-section').css('display', 'block');
+          }
+        }, equalizeRows = function () {
+          setTimeout(function () {
+            $('.gallery-item').removeAttr('style');
+            var eObj = {
+                highest: 0,
+                columns: $('.gallery-item')
+              };
+            eObj.columns.each(function () {
+              var currColumnHeight = $(this).outerHeight();
+              if (currColumnHeight > eObj.highest) {
+                eObj.highest = currColumnHeight;
+              }
+            });
+            eObj.columns.height(eObj.highest);
+          }, 800);
+        }, importJson = function () {
+          if (!options.datafile) {
+            options.datafile = 'components/footer/footerData.json';
+          }
+          $.getJSON(options.datafile, function (data) {
+            var items = [];
+            //console.log("data", data);
+            $.each(data, function () {
+              var countryData = data;
+              $.each(countryData.countries, function (key, value) {
+                var countryInfo = value;
+                items.push('<li><a href=\'javascript;\'>' + countryInfo.label + '</a></li>');
+              });
+            });
+            $('.country-names').append(items);
+          });
+        };
+      importJson();
+      equalizeRows();
+      responsiveElements();
+      $(window).resize(function () {
+        equalizeRows();
+        responsiveElements();
+      });
     });
   };
 }(jQuery));
@@ -21924,6 +22021,20 @@ angular.module('dellUiComponents').directive('navTabs', function () {
             right: 'icon-ui-arrowright'
           }
         });
+      }
+    }
+  };
+});
+angular.module('dellUiComponents').directive('defaultFooter', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, $attributes, controller) {
+      var options = {};
+      if ($attributes.datafile) {
+        options.datafile = $attributes.datafile;
+      }
+      if ($(window).resize) {
+        $element.dellUIuniversalFooter(options);
       }
     }
   };
@@ -22126,18 +22237,17 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       });
     }
   };
-}).directive('showPassword', function () {
+}).directive('showHidePassword', function () {
   return {
     restrict: 'C',
     link: function ($scope, $element, $attrs, controller) {
-      $scope.togglePassword = function () {
-        $scope.showPassword = !$scope.showPassword;
-        if ($scope.showPassword) {
+      $element.find('.checkbox input[type=checkbox]').on('click', function () {
+        if ($element.find('.checkbox input[type=checkbox]').is(':checked')) {
           $($element).find('input[type=password]').attr('type', 'text');
         } else {
           $($element).find('input[type=text]').attr('type', 'password');
         }
-      };
+      });
     }
   };
 }).directive('phoneNumber', function () {
@@ -22165,25 +22275,16 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   };
 }).directive('bsSlider', function () {
   return {
-    restrict: 'AEC',
-    link: function ($scope, element, attributes, controller) {
-      // With JQuery
-      $('#single-handle-ex1').slider({
-        formatter: function (value) {
-          return 'Current value: ' + value;
-        }
-      });
-      $('#single-handle-ex2').slider({ tooltip: 'always' });
-      $('#double-handle-ex1').slider({
-        id: 'slider12c',
-        min: 0,
-        max: 10,
-        range: true,
-        value: [
-          3,
-          7
-        ]
-      });
+    restrict: 'C',
+    link: function ($scope, $element, $attrs, controller) {
+      // Angular implementation for Boostrap Slider: http://seiyria.com/bootstrap-slider/
+      var options = {};
+      if ($attrs.sliderLabel) {
+        options.formatter = function (value) {
+          return $attrs.sliderLabel + value;
+        };
+      }
+      $element.slider(options);
     }
   };
 }).directive('spinbox', function () {
@@ -22531,7 +22632,7 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
     restrict: 'AC',
     template: template,
     link: function ($scope, $element, $attributes, controller) {
-      $scope.emptyName = $attributes.emptyName || '*State';
+      $scope.emptyName = $attributes.emptyName || 'State';
     }
   };
 }).directive('dateSelector', [
@@ -22563,16 +22664,21 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         //TODO, check to see if the field is at the bottom of the viewport and position it on top
         inputField.datetimepicker(dateSelectorConfig);
         inputField.on('dp.show', function (e) {
+          viewPortWidth = $(window).width();
+          viewPortHeight = $(window).height();
+          inputFieldWidth = inputField.width();
+          inputFieldOffset = inputField.offset();
           calendarWidget = $element.find('.bootstrap-datetimepicker-widget');
           //have to repeat this because it is destroyed everytime focus is gone
           //check to see if the right side is big enough for the widget
           if (inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
             calendarWidget.removeClass('pull-right');
+            calendarWidget.addClass('pull-left');
           } else {
+            calendarWidget.removeClass('pull-left');
             calendarWidget.addClass('pull-right');
           }
           //check to see if the bottom side is big enough for the widget
-          console.log(inputFieldOffset.top - window.pageYOffset + 255, viewPortHeight);
           if (inputFieldOffset.top - window.pageYOffset + 255 > viewPortHeight) {
             //dateSelectorConfig.widgetPositioning.vertical = "top";
             calendarWidget.removeClass('bottom').addClass('top');
@@ -22587,13 +22693,7 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
         });
         calendarIcon.on('click', function (e) {
           inputField.focus();
-        });  /*
-            inputField.on("blur",function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                inputField.data("DateTimePicker").show();
-            });
-*/
+        });
       }
     };
   }
@@ -22812,7 +22912,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             element: $element,
             stuckClass: 'affix',
             wrapper: 'nav-tabs-affix'
-          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false;
+          }), waypointObjs = $element.find('> li > a[href^=#]'), waypoints = [], triggerClicked = false, offsetHeight = $element.height() + 5;
         //console.log(waypointObjs);
         function clearActiveTab() {
           $element.find('> li').removeClass('active');
@@ -22822,7 +22922,7 @@ angular.module('dellUiComponents').directive('navAnchored', [
             //Setting up a click listener on each tab
             e.preventDefault();
             var target = $($(e.currentTarget).attr('href'));
-            $('html, body').stop().animate({ 'scrollTop': target.offset().top - 60 }, 900, 'swing');
+            $('html, body').stop().animate({ 'scrollTop': target.offset().top - offsetHeight }, 900, 'swing');
             if ($element.find('> li').hasClass('active')) {
               clearActiveTab();
               $(e.currentTarget).parent().addClass('active');
@@ -22941,11 +23041,27 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
           $(table.column(idx).header()).append('<span class="sort-icon"/>');
+        });
+        // change positioning of search bar
+        $element.each(function () {
+          var datatable = $(this);
+          // find the search label
+          var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+          search_label.addClass('hide-text');
+          // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+          var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+          search_input.attr('placeholder', 'Search');
+          search_input.addClass('form-control col-xs-12 col-sm-4');
+          // LENGTH - Inline-Form control
+          // code below for select
+          var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+          length_sel.addClass('form-control');
         });
       }
     };
@@ -22984,7 +23100,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -23003,6 +23120,21 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             row.child(format(row.data())).show();
             tr.addClass('shown');
           }
+        });
+        // change positioning of search bar
+        $element.each(function () {
+          var datatable = $(this);
+          // find the search label
+          var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
+          search_label.addClass('hide-text');
+          // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+          var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+          search_input.attr('placeholder', 'Search');
+          search_input.addClass('form-control col-xs-12 col-sm-4');
+          // LENGTH - Inline-Form control
+          // code below for select
+          var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+          length_sel.addClass('form-control');
         });
       }
     };
@@ -23044,7 +23176,12 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
     // Runs during compile
     return {
       restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
+      link: function ($scope, $element, $attributes, controller) {
+        var datafile = 'components/tables-uber/data-responsive.json';
+        //TODO need to redo sample json file so that includes configuration for columns
+        if ($attributes.datafile) {
+          datafile = $attributes.datafile;
+        }
         function updateDataTableSelectAllCtrl(table) {
           var $table = table.table().node();
           var $chkbox_all = $('tbody input[type="checkbox"]', $table);
@@ -23071,13 +23208,14 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
         /* Formatting function for row details - modify as you need */
         function format(d) {
           // `d` is the original data object for the row
+          //TODO we can't really do this. We can't hard code labels like "Company Name". The column names need to come from a configuration file. The HTML also needs to come from a template file.
           return '<row>' + '<div class="row">' + '<div class="col-xs-12">' + '<div class="col-xs-6 col-sm-3 visible-xs-block">' + '<p class="text-gray-medium small">Company Name</p>' + '<p>' + d.Company_name + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3 visible-xs-block">' + '<p class="text-gray-medium small">Solution ID</p>' + '<p><a href="javascript:;" class="btn-link">' + d.Solution_ID + '</a></p>' + '</div>' + '<div class="col-xs-6 col-sm-3 visible-xs-block">' + '<p class="text-gray-medium small">List Price</p>' + '<p>' + d.List_price + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3 visible-xs-block">' + '<p class="text-gray-medium small">Quote Number</p>' + '<p><a href="javascript:;" class="btn-link">' + d.Quote_number + '</a></p>' + '</div>' + '<div class="row">' + '<div class="col-xs-12 visible-xs-block">' + '<hr class="hr-gray top-offset-10">' + '</div>' + '</div>' + '<div class="col-xs-12">' + '<h3 class="text-blue">Account Details</h3>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Contact Number</p>' + '<p>' + d.Contact_number + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Extension</p>' + '<p>' + d.Extension + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Customer Since</p>' + '<p>' + d.Customer_since + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Location</p>' + '<p>' + d.Location + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Owner</p>' + '<p><a href="javascript:;" class="btn-link">' + d.Owner + '</a></p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Last Edited</p>' + '<p>' + d.Last_edited + '</p>' + '</div>' + '<div class="col-xs-6 col-sm-3">' + '<p class="text-gray-medium small">Customer Number</p>' + '<p><a href="javascript:;" class="btn-link">' + d.Customer_number + '</a></p>' + '</div>' + '</div>' + '</div>' + '<div class="row">' + '<div class="col-xs-12">' + '<hr class="hr-gray top-offset-10">' + '</div>' + '</div>' + '<div class="row">' + '<div class="col-xs-12">' + '<h3 class="text-blue col-xs-12">Additional Notes</h3>' + '</div>' + '<div class="col-xs-12">' + '<div class="col-xs-6">' + '<p class="text-gray-medium small">Purchase Details</p>' + '<p>' + d.Purchase_details + '</p>' + '</div>' + '<div class="col-xs-6">' + '<p class=" text-gray-medium small">Sales Notes</p>' + '<p>' + d.Sales_notes + '</p>' + '</div>' + '</div>' + '</div>' + '</row>';
         }
         // Array holding selected row IDs
         var rows_selected = [];
         var tableData;
         var table = $element.DataTable({
-            'ajax': 'components/tables-uber/data-responsive.json',
+            'ajax': datafile,
             'columnDefs': [{
                 'targets': 0,
                 'searchable': true,
@@ -23245,7 +23383,12 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
     // Runs during compile
     return {
       restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
+      link: function ($scope, $element, $attributes, controller) {
+        var datafile = 'components/tables-uber/dataColumn.json';
+        //TODO need to redo sample json file so that includes configuration for columns
+        if ($attributes.datafile) {
+          datafile = $attributes.datafile;
+        }
         function updateDataTableSelectAllCtrl(table) {
           var $table = table.table().node();
           var $chkbox_all = $('tbody input[type="checkbox"]', $table);
@@ -23273,7 +23416,7 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
         var rows_selected = [];
         var tableData;
         var table = $('#table-uber').DataTable({
-            'ajax': 'components/tables-uber/dataColumn.json',
+            'ajax': datafile,
             'columnDefs': [{
                 'targets': 0,
                 'searchable': true,

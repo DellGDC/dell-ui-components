@@ -1,4 +1,4 @@
-angular.module('dellUiComponents').directive('equalizeHeight', [
+/*angular.module('dellUiComponents').directive('equalizeHeight', [
   '$timeout',
   '$rootScope',
   function ($timeout, $rootScope) {
@@ -17,4 +17,15 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
       }
     };
   }
-]);
+]);*/
+
+/******************************************
+ Needed for demo, do not delete!
+*******************************************/
+(function($){
+
+  $('[data-target="#truncated-list-sample"] .show-collapsed, [data-target="#truncated-list-sample-expand"] .show-collapsed').click(function(e){
+    $(e.currentTarget).parents('.equalize').height('auto');
+  });
+  
+})(jQuery);
