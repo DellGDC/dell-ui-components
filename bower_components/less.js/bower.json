@@ -20,16 +20,5 @@
     ".gitattributes",
     ".jshintrc",
     ".npmignore"
-  ],
-  "homepage": "https://github.com/less/less.js",
-  "version": "2.6.0",
-  "_release": "2.6.0",
-  "_resolution": {
-    "type": "version",
-    "tag": "v2.6.0",
-    "commit": "82053edfad8ddcb0ca55de7abf78cafd69434c6b"
-  },
-  "_source": "git://github.com/less/less.js.git",
-  "_target": "~2",
-  "_originalSource": "less.js"
+  ]
 }
