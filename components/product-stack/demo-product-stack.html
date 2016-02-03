@@ -4,7 +4,7 @@
         <h2>Product-Stack Demo</h2>
         <div>
             <!-- example html for Product-Stack component -->
-            <div class="product-stack wrapper">
+            <div class="product-stack-wrapper">
                 <div class="row">
                     <div class="col-sm-3">
 
@@ -295,59 +295,185 @@
                             <!-- /product blurb -->
 
                             <!-- special-offers -->
-                            <div class="special-offers">
-                                <div>
-                                <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#special-offers">
-                                    <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Special offer</span>
-                                    <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide special offer</span>
-                                </a>
-                                    <div id="special-offers" class="collapse">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                            </li>
-                                        </ul>
+
+                                <!-- ============ special offers for for ONE offer: Launches Modal ================ -->
+                                <div class="special-offers hidden">
+                                    <button class="btn btn-link" data-toggle="modal" data-target="#special-single-offer-modal" data-backdrop="static" data-keyboard="false">
+                                        Special offer
+                                    </button>
+                                </div>
+
+                                <div aria-labelledby="special-single-offer-modal" >
+                                    <div class="modal fade" role="modal" id="special-single-offer-modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h3 class="modal-title">Free Shipping & Easy Returns!</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>
+                                                        Free 3-5 business day ground shipping on all orders placed on Dell.com. No minimum purchase required.
+                                                    <p>
+                                                        <strong>Easy Returns:</strong> Send the product back to Dell within 30-days of the invoice date for a full refund. Includes free return shipping and no restocking fee. Excludes software if opened or downloaded.
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button class="btn btn-success" type="button">Add to Cart</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /special-offers -->
+                                <!-- ============ special offers for for ONE offer: Launches Modal ================ -->
+
+
+                                <!-- ============ special offers for for TWO offers: Launches Modal ================ -->
+                                <div class="special-offers">
+                                    <button class="btn btn-link" data-toggle="modal" data-target="#2-special-offer-modal" data-backdrop="static" data-keyboard="false">
+                                        Special offer
+                                    </button>
+                                </div>
+
+
+                                <div aria-labelledby="2-special-offer-modal">
+                                    <div class="modal fade" role="modal" id="2-special-offer-modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h3 class="modal-title">Save $50 off of PCs $699 plus with coupon code <strong>50OFF699</strong> for a limited time. Coupon applies in cart.</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4>
+                                                        Limited Time Offer!
+                                                    </h4>
+                                                    <p>
+                                                        <strong>Dell Coupon Offer:</strong> Offer valid 4/30/2015 7:00am - 4/29/2016 6:00am CST or 40,000 redemptions, whichever comes first. Coupon is good with select other offers, but not with other coupons. Coupon is valid on select order codes. Offer does not apply to, and is not available with, systems or items purchased through refurbished items or spare parts. Purchase limit of 3 items per order. Not valid for resellers and/or online auctions. Dell reserves the right to cancel orders arising from pricing or other errors. Only valid on select order codes.
+                                                    </p>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <button class="btn btn-primary pull-right" type="button">Copy Coupon Code</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="modal-header">
+                                                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                                                    <h3 class="modal-title">Free Shipping & Easy Returns!</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4>
+                                                        Limited Time Offer!
+                                                    </h4>
+                                                    <p>
+                                                        Free 3-5 business day ground shipping on all orders placed on Dell.com. No minimum purchase required.
+                                                    <p>
+                                                        <strong>Easy Returns:</strong> Send the product back to Dell within 30-days of the invoice date for a full refund. Includes free return shipping and no restocking fee. Excludes software if opened or downloaded.
+                                                    </p>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <button class="btn btn-success pull-right" type="button">Add to Cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ============ /special offers for for TWO offers: Launches Modal ================ -->
+
+                                <!-- ============ special offers for Deals page: offers exposed ================ -->
+                                <div class="special-offers hidden">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- ================== special offers for Deals page: offers =============-->
+
+                            <!--/special-offers-->
 
                             <!-- price-stack -->
                             <div class="price-stack">
                                 <div class="well well-transparent-stroke">
                                     <h4 class="dell-price pull-left"><small>Dell Price</small></h4>
                                     <h4 class="price "><strong>$0,000,000.00</strong></h4>
-                                    <!-- custom popover -->
                                     <div class="price-discount-popup">
-                                        <h6 aria-describedby="popover-discount">
-                                            <a tabindex="0"
-                                               role="popover"
-                                               id="popover-discount"
-                                               data-trigger="show"
-                                               class="popover-link"
-                                               data-html="true"
-                                               data-toggle="popover"
-                                               data-placement="top"
-                                               data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
-                                                             &lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;
-                                                             &lt;hr class='dotted-hr'/&gt;
-                                                             &lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
-                                            >$20 Discount included</a>
-                                        </h6>
+                                        <button class="btn btn-link" data-toggle="modal" data-target="#market-value-modal" data-backdrop="static" data-keyboard="false">
+                                            $20 Discount included
+                                        </button>
                                     </div>
+
+                                    <!-- custom popover -->
+                                    <!--<div class="price-discount-popup">-->
+                                        <!--<h6 aria-describedby="popover-discount">-->
+                                            <!--<a tabindex="0"-->
+                                               <!--role="popover"-->
+                                               <!--id="popover-discount"-->
+                                               <!--data-trigger="show"-->
+                                               <!--class="popover-link"-->
+                                               <!--data-html="true"-->
+                                               <!--data-toggle="popover"-->
+                                               <!--data-placement="top"-->
+                                               <!--data-content="&lt;h6&gt;Market Value &lt;button class='btn-link' data-toggle='modal' data-target='#market-value-modal' data-backdrop='static' data-keyboard='false'&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/button&gt; &lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;-->
+                                                             <!--&lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;-->
+                                                             <!--&lt;hr class='dotted-hr'/&gt;-->
+                                                             <!--&lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"-->
+                                            <!--&gt;$20 Discount included</a>-->
+                                        <!--</h6>-->
+                                    <!--</div>-->
                                     <!-- /custom popover -->
                                 </div>
+
+                                <!--<h6>Market Value <button class='btn-link' data-toggle='modal' data-target='#market-value-modal' data-backdrop='static' data-keyboard='false'><sup>1</sup></button> <span class='pull-right'>$000.00</span></h6>-->
+                                <!--<h6 class="text-berry">Instant discount<span class="pull-right">-$00.00</span></h6>-->
+                                <!--<hr class="dotted-hr"/>-->
+                                <!--<h6><strong>Dell Price<span class="pull-right">$000.00</span></strong></h6>-->
+
+
+                                <div aria-labelledby="market-value-modal">
+                                    <div class="modal fade" role="modal" id="market-value-modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h3 class="modal-title">Discounts Included</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h6>Market Value <button class="btn-link"><sup>1</sup></button><span class='pull-right'>$000.00</span></h6>
+                                                    <h6 class="text-berry">Instant discount<span class="pull-right">-$00.00</span></h6>
+                                                    <hr class="dotted-hr"/>
+                                                    <h6><strong>Dell Price<span class="pull-right">$000.00</span></strong></h6>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
                             </div>
 
                             <!-- /price-stack -->
                             <!-- finance-stack -->
                             <div class="finance-stack">
 
-                                        <h5 class="finance">Financing<sup>^</sup></h5>
-                                        <h5><small><a href="javascript:;" class="btn-link finance-discount">As low as <sup>$</sup>20/mo<sup>1</sup></a></small></h5>
+                                        <h5 class="finance">Financing</h5>
+                                        <h5><small><a href="javascript:;" class="btn-link finance-discount">As low as <sup>$</sup>20/mo<sup>^</sup></a></small></h5>
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <h5><small><a href="javascript:;" class="btn-link finance-special-discount">6-month special financing</a></small></h5>
@@ -887,11 +1013,33 @@
 
 
 
+<div>
+    Special offers Details
+    Save 10% off select XPS Desktops and Laptops with coupon code 10%OFFXPS. Coupon applies in cart. Limited time offer.
+
+    Limited Time Offer
+
+    Dell Coupon Offer: One coupon code may be applied per cart at checkout. Coupon code valid 1/28/2016 and expires 2/5/2016 6am CST or after 4000 redemptions or earlier if offer is terminated earlier. Available on Dell.com/MPP site and offers contained herein valid only for end users and not for resellers and/or online auctions. Offers subject to change. Taxes, shipping, handling and other fees apply. U.S. Dell For Home new purchases only. Purchase limit of 1 systems per order, but coupon discount applies to only 1 system per cart. Dell reserves the right to cancel orders arising from pricing or other errors.
+    Free Shipping & Easy Returns!
+
+    Limited Time Offer!
+
+    Free 3-5 business day ground shipping on all orders placed on Dell.com. No minimum purchase required. Easy Returns: Send the product back to Dell within 30-days of the invoice date for a full refund. Includes free return shipping and no restocking fee. Excludes software if opened or downloaded.
+    Close
+
+</div>
+
+<div>
+    Market Value is estimated based on industry data including published and as-sold prices for same or comparable products in most recent survey of major online and/or offline retailers.
+</div>
 
 
 
-
-
+    <div>
+        Special Offer!
+        Free 3-5 business day ground shipping on all orders placed on Dell.com. No minimum purchase required. Easy Returns: Send the product back to Dell within 30-days of the invoice date for a full refund. Includes free return shipping and no restocking fee. Excludes software if opened or downloaded.
+        Add to Cart
+    </div>
 
 
     <div class="bottom-offset-60">

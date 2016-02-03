@@ -3,10 +3,15 @@
  *------------------------------------------------------------------------------------------
  */
 // default desktop
-.product-stack {
-    &.wrapper {
-        //The "wrapper" class is required for all the following classes
+.product-stack-wrapper {
+    //The "wrapper" class is required for all the following classes
+
+    .modal-title {
+        strong {
+            font-weight: bold;
+        }
     }
+
     .well {
         min-height: 20px;
         padding: 0;
@@ -121,13 +126,20 @@
         z-index: 1;
         position: relative;
         ol, ul {
-            margin-top: -1px;
+            margin-top: 10px;
             margin-bottom: 10px;
             padding-left: 15px;
         }
         li {
             color: @dell-blue;
             margin-bottom: 5px;
+        }
+        .btn-link {
+            padding: 6px 10px;
+        }
+
+        ul .btn-link {
+            padding: 6px 0px;
         }
         .hide-expanded,
         .show-collapsed,
@@ -153,10 +165,13 @@
             //clear-after: both;
         }
         .price-discount-popup {
-            content: ".";
+            content: "";
             display: block;
             height: 20px;
             clear: both;
+            .btn-link {
+                padding: 0;
+            }
         }
         .well {
             min-height: 20px;
@@ -323,10 +338,9 @@
 
 /* Medium devices (desktops, 992px and up to 1200) */
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-    .product-stack {
-        &.wrapper {
-            //The "wrapper" class is required for all the following classes
-        }
+    .product-stack-wrapper {
+     //The "wrapper" class is required for all the following classes
+
         .well {
             min-height: 20px;
             padding: 0;
@@ -641,10 +655,8 @@
 
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: @screen-xs-max) {
-    .product-stack {
-        &.wrapper {
-            //The "wrapper" class is required for all the following classes
-        }
+    .product-stack-wrapper {
+        //The "wrapper" class is required for all the following classes
         .well {
             min-height: 20px;
             padding: 0;
