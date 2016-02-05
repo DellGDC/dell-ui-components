@@ -25,7 +25,7 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                                 destroy();
                                 $(this).popover('show');
                             }
-                            
+
                             $('[data-dismiss="popover"]').bind('click', function (event) {
                                 event.preventDefault();
                                 destroy();
