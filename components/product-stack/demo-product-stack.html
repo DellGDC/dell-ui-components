@@ -408,65 +408,43 @@
                                 <div class="well well-transparent-stroke">
                                     <h4 class="dell-price pull-left"><small>Dell Price</small></h4>
                                     <h4 class="price "><strong>$0,000,000.00</strong></h4>
-                                    <div class="price-discount-popup">
-                                        <button class="btn btn-link" data-toggle="modal" data-target="#market-value-modal" data-backdrop="static" data-keyboard="false">
-                                            $20 Discount included
-                                        </button>
-                                    </div>
 
                                     <!-- custom popover -->
-                                    <!--<div class="price-discount-popup">-->
-                                        <!--<h6 aria-describedby="popover-discount">-->
-                                            <!--<a tabindex="0"-->
-                                               <!--role="popover"-->
-                                               <!--id="popover-discount"-->
-                                               <!--data-trigger="show"-->
-                                               <!--class="popover-link"-->
-                                               <!--data-html="true"-->
-                                               <!--data-toggle="popover"-->
-                                               <!--data-placement="top"-->
-                                               <!--data-content="&lt;h6&gt;Market Value &lt;button class='btn-link' data-toggle='modal' data-target='#market-value-modal' data-backdrop='static' data-keyboard='false'&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/button&gt; &lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;-->
-                                                             <!--&lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;-->
-                                                             <!--&lt;hr class='dotted-hr'/&gt;-->
-                                                             <!--&lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"-->
-                                            <!--&gt;$20 Discount included</a>-->
-                                        <!--</h6>-->
-                                    <!--</div>-->
+                                    <div class="price-discount-popup">
+                                        <h6 aria-describedby="popover-discount-desktop">
+                                            <a tabindex="0"
+                                               role="popover"
+                                               id="popover-discount-desktop"
+                                               data-trigger="show"
+                                               class="popover-link"
+                                               data-html="true"
+                                               data-toggle="popover"
+                                               data-placement="top"
+                                               data-content="&lt;h6&gt;Market Value  &lt;a href='#legal-regulatory' class='btn-link scroll'&gt;  &lt;sup&gt; 1 &lt;/sup&gt; &lt;/a&gt;    &lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
+                                                             &lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;
+                                                             &lt;hr class='dotted-hr'/&gt;
+                                                             &lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
+                                            >$20 Discount included</a>
+                                        </h6>
+                                    </div>
                                     <!-- /custom popover -->
                                 </div>
-
-                                <!--<h6>Market Value <button class='btn-link' data-toggle='modal' data-target='#market-value-modal' data-backdrop='static' data-keyboard='false'><sup>1</sup></button> <span class='pull-right'>$000.00</span></h6>-->
-                                <!--<h6 class="text-berry">Instant discount<span class="pull-right">-$00.00</span></h6>-->
-                                <!--<hr class="dotted-hr"/>-->
-                                <!--<h6><strong>Dell Price<span class="pull-right">$000.00</span></strong></h6>-->
-
-
-                                <div aria-labelledby="market-value-modal">
-                                    <div class="modal fade" role="modal" id="market-value-modal">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    <h3 class="modal-title">Discounts Included</h3>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h6>Market Value <button class="btn-link"><sup>1</sup></button><span class='pull-right'>$000.00</span></h6>
-                                                    <h6 class="text-berry">Instant discount<span class="pull-right">-$00.00</span></h6>
-                                                    <hr class="dotted-hr"/>
-                                                    <h6><strong>Dell Price<span class="pull-right">$000.00</span></strong></h6>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
                             </div>
+
+
+
+
+                            <!--&lt;h6&gt;Market Value  &lt;a href='#legal-regulatory' class='btn-link scroll'&gt;  &lt;sup&gt; 1 &lt;/sup&gt; &lt;/a&gt;    &lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;-->
+                            <!--&lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;-->
+                            <!--&lt;hr class='dotted-hr'/&gt;-->
+                            <!--&lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;-->
+
+
+
+
+                           <h6>Market Value<a href="#legal-regulatory" class="btn-link scroll"><sup> 1 </sup></a></h6>
+
+
 
                             <!-- /price-stack -->
                             <!-- finance-stack -->
@@ -561,12 +539,97 @@
     </div>
 
 
-<!-- ===================================== guides Layout -->
-
-    <hr class="hr-gray"/>
 
 
-    <div class="row" >
+<!--<script>-->
+
+    <!--function anchorJs($) {-->
+        <!--$('.anchor-link').anchor()-->
+    <!--}(jQuery)-->
+
+<!--</script>-->
+
+
+
+
+
+
+
+<!-- =============================== modal option for price stack details ======================================== -->
+
+    <!-- price-stack -->
+    <!--<div class="price-stack">-->
+        <!--<div class="well well-transparent-stroke">-->
+            <!--<h4 class="dell-price pull-left"><small>Dell Price</small></h4>-->
+            <!--<h4 class="price "><strong>$0,000,000.00</strong></h4>-->
+            <!--<div class="price-discount-popup">-->
+            <!--<button class="btn btn-link" data-toggle="modal" data-target="#market-value-modal" data-backdrop="static" data-keyboard="false">-->
+            <!--$20 Discount included-->
+            <!--</button>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; custom popover &ndash;&gt;-->
+            <!--<div class="price-discount-popup">-->
+                <!--<h6 aria-describedby="popover-discount-xs">-->
+                    <!--<a tabindex="0"-->
+                       <!--role="popover"-->
+                       <!--id="popover-discount-xs"-->
+                       <!--data-trigger="show"-->
+                       <!--class="popover-link"-->
+                       <!--data-html="true"-->
+                       <!--data-toggle="popover"-->
+                       <!--data-placement="top"-->
+                       <!--data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;-->
+                                                                     <!--&lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;-->
+                                                                     <!--&lt;hr class='dotted-hr'/&gt;-->
+                                                                     <!--&lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"-->
+                    <!--&gt;$20 Discount included</a>-->
+                <!--</h6>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /custom popover &ndash;&gt;-->
+        <!--</div>-->
+
+         <!--discount modal option -->
+        <!--<div aria-labelledby="market-value-modal">-->
+        <!--<div class="modal fade" role="modal" id="market-value-modal">-->
+        <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+        <!--<div class="modal-header">-->
+        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+        <!--<h3 class="modal-title">Discounts Included</h3>-->
+        <!--</div>-->
+        <!--<div class="modal-body">-->
+        <!--<h6>Market Value <button class="btn-link" data-toggle="collapse" data-target="#market-value-footer"><sup>1</sup></button><span class='pull-right'>$000.00</span></h6>-->
+        <!--<div id="market-value-footer" class="well-gray-light collapse">-->
+        <!--<h6>Market Value is estimated based on industry data including published and as-sold prices for same or comparable products in most recent survey of major online and/or offline retailers.</h6>-->
+        <!--</div>-->
+
+
+
+        <!--<h6 class="text-berry">Instant discount<span class="pull-right">-$00.00</span></h6>-->
+        <!--<hr class="dotted-hr"/>-->
+        <!--<h6 class="bottom-offset-30"><strong>Dell Price<span class="pull-right">$000.00</span></strong></h6>-->
+        <!--</div>-->
+        <!--<div class="modal-footer">-->
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+         <!--discount modal option -->
+
+    <!--</div>-->
+
+    <!-- /price-stack -->
+    <!-- =============================== modal option for price stack details ======================================== -->
+
+
+<!-- ===================================== guides Layout ======================================== -->
+
+
+
+    <div class="row hidden" >
         <div class="col-lg-12">
             <h2 class="bottom-offset-5">Overview</h2>
             <p>A Product Stack is a pattern that enables pages to display selected, at-a-glance details about a product or product bundle.</p>
@@ -1042,8 +1105,28 @@
     </div>
 
 
+    <!-- sample footer -->
+    <footer class="navbar">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li><a href="javascript:;">&copy;2015 Dell</a></li>
+                <li><a href="javascript:;">Terms of Sale</a></li>
+                <li><a href="javascript:;">Privacy Statement</a></li>
+                <li><a href="javascript:;">Ads &amp; Emails</a></li>
+                <li id="legal-regulatory"><a href="javascript:;">Legal &amp; Regulatory</a></li>
+                <li><a href="javascript:;">Corporate Social Responsibility</a></li>
+                <li id=""><a href="javascript:;">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+
+
+
+
     <div class="bottom-offset-60">
     </div>
     <div class="bottom-offset-60">
     </div>
 </section>
+
