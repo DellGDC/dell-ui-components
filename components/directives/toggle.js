@@ -1,43 +1,58 @@
-angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
+angular.module('dellUiComponents').directive('toggle', function ($rootScope,$timeout) {
     return {
         restrict: 'A',
         link: function ($scope, $element, $attrs, controller) {
             switch ($attrs.toggle) {
                 case "popover":
+                    var destroy = function() {
+                        $element.popover('destroy');
+                    };
                     if ($attrs.trigger === "hover") {
                         $element.popover({
                             trigger: 'hover'
                         });
                     } else {
-                        $element.attr('role','button');
                         $element.popover({
                             trigger: 'manual'
                         });
+                        $element.on('click',function(e){
+                            if($element.next().hasClass('popover')) {
+                                destroy();
+                            } else {
+                                $element.popover('show');
+                            }
+                            $('[data-dismiss="popover"]').off('click');
+                            $('[data-dismiss="popover"]').on('click', function(){
+                                destroy();
+                                $element.blur();
+                            });
+                        });
+                        $element.on('shown.bs.popover', function () {
+                            $element.next().off('click');
+                            $element.next().on('click', function(){
+                                $element.focus();
+                            });
+                            $element.off('click');
+                            $element.on('click', function(){
+                                destroy();
+                                //$element.blur();
+                            });
+                            $element.off('blur');
+                            $element.on('blur', function(){
+                                $timeout(function(){
+                                    if(!$element.is(':focus')) {
+                                       destroy(); 
+                                    }
+                                },300);                                
+                            });
+                        });
+                        $element.on('hidden.bs.popover', function () {
+                            $element.on('click', function(){
+                                $element.popover('show');
+                            });
+                        });
+
                     }
-                    $element.on('click', function(event){
-                        $element.popover('show');
-                        console.log('i was clicked');
-                        event.stopPropagation();
-
-                        $('.popover .close').on('click', function(){
-                            $element.popover('hide');
-                            console.log('I was closed by "X"');
-                            event.stopPropagation();
-                        });
-
-                        $('.btn-default.focus').blur(function(){
-                            $element.popover('hide');
-                            console.log('I was closed by ".btn-default.focus"');
-                            event.stopPropagation();
-                        });
-                        //$('div.popover.in').on('click', function(){
-                        //    $element.popover('show');
-                        //    console.log('I was kept open');
-                        //    event.stopPropagation();
-                        //});
-                    });
-
-
                     break;
                 case "tooltip":
                     $element.tooltip();
