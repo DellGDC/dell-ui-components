@@ -25,17 +25,16 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                             event.stopPropagation();
                         });
 
-                        $('body').on('click', function(){
+                        $('.btn-default.focus').blur(function(){
                             $element.popover('hide');
-                            console.log('I was closed by "body"');
-                            event.stopPropagation();
-
-                        });
-                        $('div.popover.in').on('click', function(){
-                            $element.popover('show');
-                            console.log('I was kept open');
+                            console.log('I was closed by ".btn-default.focus"');
                             event.stopPropagation();
                         });
+                        //$('div.popover.in').on('click', function(){
+                        //    $element.popover('show');
+                        //    console.log('I was kept open');
+                        //    event.stopPropagation();
+                        //});
                     });
 
 
