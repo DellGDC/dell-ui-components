@@ -11,9 +11,34 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                     } else {
                         $element.attr('role','button');
                         $element.popover({
-                            trigger: 'focus'
+                            trigger: 'manual'
                         });
                     }
+                    $element.on('click', function(event){
+                        $element.popover('show');
+                        console.log('i was clicked');
+                        event.stopPropagation();
+
+                        $('.popover .close').on('click', function(){
+                            $element.popover('hide');
+                            console.log('I was closed by "X"');
+                            event.stopPropagation();
+                        });
+
+                        $('body').on('click', function(){
+                            $element.popover('hide');
+                            console.log('I was closed by "body"');
+                            event.stopPropagation();
+
+                        });
+                        $('div.popover.in').on('click', function(){
+                            $element.popover('show');
+                            console.log('I was kept open');
+                            event.stopPropagation();
+                        });
+                    });
+
+
                     break;
                 case "tooltip":
                     $element.tooltip();
