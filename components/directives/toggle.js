@@ -7,6 +7,7 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                     var destroy = function () {
                         $('[data-toggle="popover"]').popover('destroy');
                     };
+
                     if ($attrs.trigger === "hover") {
                         $element.mouseover(function (event) {
                             event.preventDefault();
@@ -15,10 +16,12 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                         });
                     } else {
                         $element.popover({
-                            trigger: 'manual'
+                            trigger: 'focus'
                         });
                         $element.click(function (event) {
+                            //event.stopPropagation();
                             event.preventDefault();
+
                             if($(this).attr('aria-describedby')) {
                                 destroy();
                             } else {
@@ -30,7 +33,30 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                                 event.preventDefault();
                                 destroy();
                             });
+
                         });
+                        //$('body').bind('click', function (e){
+                        //    e.preventDefault();
+                        //    e.stopPropagation();
+                        //    if($('.popover:visible')){
+                        //        console.log('i was clicked');
+                        //        destroy();
+                        //    }
+                        //    //console.log('i was destroyed');
+                        //});
+                        //$element.click(function (event) {
+                        //
+                        //    if ($('div.popover').hasClass('in') && $('body').click() === true) {
+                        //        event.preventDefault();
+                        //    console.log('i was clicked again');
+                        //
+                        //        //destroy();
+                        //    }
+                        //
+                        //});
+
+
+
                     }
                     break;
                 case "tooltip":
