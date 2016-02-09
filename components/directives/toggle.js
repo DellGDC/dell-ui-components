@@ -4,8 +4,9 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
         link: function ($scope, $element, $attrs, controller) {
             switch ($attrs.toggle) {
                 case "popover":
-                    var destroy = function() {
-                        $element.popover('destroy');
+                    var hidePopover = function() {
+                        $element.popover('hide');
+                        $element.blur();
                     };
                     if ($attrs.trigger === "hover") {
                         $element.popover({
@@ -16,32 +17,28 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                             trigger: 'manual'
                         });
                         $element.on('click',function(e){
-                            if($element.next().hasClass('popover')) {
-                                destroy();
-                            } else {
-                                $element.popover('show');
-                            }
-                            $('[data-dismiss="popover"]').off('click');
-                            $('[data-dismiss="popover"]').on('click', function(){
-                                destroy();
-                                $element.blur();
-                            });
+                            $element.popover('toggle');
                         });
                         $element.on('shown.bs.popover', function () {
+
+
                             $element.next().off('click');
-                            $element.next().on('click', function(){
+                            $element.next().on('click', function(e){
                                 $element.focus();
                             });
-                            $element.off('click');
-                            $element.on('click', function(){
-                                destroy();
-                                //$element.blur();
+
+                            $('[data-dismiss="popover"]').on('click', function(){
+                                $timeout(function(){
+                                    $element.blur();
+                                },100);
                             });
+
+
                             $element.off('blur');
                             $element.on('blur', function(){
                                 $timeout(function(){
                                     if(!$element.is(':focus')) {
-                                       destroy(); 
+                                       hidePopover(); 
                                     }
                                 },300);                                
                             });
