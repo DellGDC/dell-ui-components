@@ -4,59 +4,15 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
         link: function ($scope, $element, $attrs, controller) {
             switch ($attrs.toggle) {
                 case "popover":
-                    var destroy = function () {
-                        $('[data-toggle="popover"]').popover('destroy');
-                    };
-
                     if ($attrs.trigger === "hover") {
-                        $element.mouseover(function (event) {
-                            event.preventDefault();
-                            destroy();
-                            $(this).popover('show');
+                        $element.popover({
+                            trigger: 'hover'
                         });
                     } else {
+                        $element.attr('role','button');
                         $element.popover({
                             trigger: 'focus'
                         });
-                        $element.click(function (event) {
-                            //event.stopPropagation();
-                            event.preventDefault();
-
-                            if($(this).attr('aria-describedby')) {
-                                destroy();
-                            } else {
-                                destroy();
-                                $(this).popover('show');
-                            }
-
-                            $('[data-dismiss="popover"]').bind('click', function (event) {
-                                event.preventDefault();
-                                destroy();
-                            });
-
-                        });
-                        //$('body').bind('click', function (e){
-                        //    e.preventDefault();
-                        //    e.stopPropagation();
-                        //    if($('.popover:visible')){
-                        //        console.log('i was clicked');
-                        //        destroy();
-                        //    }
-                        //    //console.log('i was destroyed');
-                        //});
-                        //$element.click(function (event) {
-                        //
-                        //    if ($('div.popover').hasClass('in') && $('body').click() === true) {
-                        //        event.preventDefault();
-                        //    console.log('i was clicked again');
-                        //
-                        //        //destroy();
-                        //    }
-                        //
-                        //});
-
-
-
                     }
                     break;
                 case "tooltip":

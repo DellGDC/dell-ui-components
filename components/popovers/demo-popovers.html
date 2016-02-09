@@ -1,29 +1,6 @@
 <section ng-controller="popoversCtrl" id="popovers-html-example">
 
     <div class="container">
-        <h2>Popovers Demo: Close only with the "x" or the toggle button</h2>
-        <div class="bottom-offset-60">
-            <div>
-                <ul class="unstyled list-inline">
-                    <li class="top-offset-20" aria-describedby="popover-top">
-                        <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
-                        <a tabindex="0" role="popover" id="popover-top" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on top &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on top</a>
-                    </li>
-                    <li class="top-offset-20" aria-describedby="popover-right">
-                        <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
-                        <a tabindex="1" role="popover" id="popover-right" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on right</a>
-                    </li>
-                    <li class="top-offset-20" aria-describedby="popover-bottom">
-                        <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
-                        <a tabindex="2" role="popover" id="popover-bottom" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on bottom &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on bottom</a>
-                    </li>
-                    <li class="top-offset-20" aria-describedby="popover-left">
-                        <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
-                        <a tabindex="3" role="popover" id="popover-left" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on left</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
 
         <h2>Popovers Demo : Close on the next click anywhere</h2>
         <div>
@@ -31,25 +8,47 @@
                 <ul class="unstyled list-inline">
                     <li class="top-offset-20" aria-describedby="popover-top-click-anywhere">
                         <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
-                        <a tabindex="0" role="popover" id="popover-top-click-anywhere" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on top &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on top</a>
+                        <a tabindex="0" role="button" id="popover-top-click-anywhere" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on top &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on top</a>
                     </li>
                     <li class="top-offset-20" aria-describedby="popover-right-click-anywhere">
                         <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click-->
-                        <a tabindex="1" role="popover" id="popover-right-click-anywhere" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on right</a>
+                        <a tabindex="1" role="button" id="popover-right-click-anywhere" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on right</a>
                     </li>
                     <li class="top-offset-20" aria-describedby="popover-bottom-click-anywhere">
                         <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click-->
-                        <a tabindex="2" role="popover" id="popover-bottom-click-anywhere" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on bottom &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on bottom</a>
+                        <a tabindex="2" role="button" id="popover-bottom-click-anywhere" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="bottom" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on bottom &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on bottom</a>
                     </li>
                     <li class="top-offset-20" aria-describedby="popover-left-click-anywhere">
                         <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click-->
-                        <a tabindex="3" role="popover" id="popover-left-click-anywhere" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on left</a>
+                        <a tabindex="3" role="button" id="popover-left-click-anywhere" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on left</a>
                     </li>
                 </ul>
             </div>
         </div>
 
-
+        <h2>Popovers Demo: Activate on hover</h2>
+        <div class="bottom-offset-60">
+            <div>
+                <ul class="unstyled list-inline">
+                    <li class="top-offset-20" aria-describedby="popover-top-hover">
+                        <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
+                        <a tabindex="0" role="popover" id="popover-top-hover" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="top" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on top &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on top</a>
+                    </li>
+                    <li class="top-offset-20" aria-describedby="popover-right-hover">
+                        <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
+                        <a tabindex="1" role="popover" id="popover-right-hover" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on right &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on right</a>
+                    </li>
+                    <li class="top-offset-20" aria-describedby="popover-bottom-hover">
+                        <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
+                        <a tabindex="2" role="popover" id="popover-bottom-hover" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on bottom &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on bottom</a>
+                    </li>
+                    <li class="top-offset-20" aria-describedby="popover-left-hover">
+                        <!--Note: adding [ data-trigger="focus" ] allows the popover to close on the next click : Remove it to deactivate-->
+                        <a tabindex="3" role="popover" id="popover-left-hover" class="btn btn-default" data-html="true" data-toggle="popover" data-placement="left" data-trigger="hover" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover on left &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;">Popover on left</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <div class="example-help-popover">
             <p aria-describedby="popover-with-help-icon">
