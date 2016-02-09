@@ -4,57 +4,52 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
         link: function ($scope, $element, $attrs, controller) {
             switch ($attrs.toggle) {
                 case "popover":
-                    var destroy = function () {
-                        $('[data-toggle="popover"]').popover('destroy');
-                        
-                        $element.on('hidden.bs.popover', function () {
-                          $('.modal-backdrop.in').remove();
-                        });
-                        $element.on('show.bs.popover', function () {
-                            if($rootScope.bp.isXS){
-                                $('body').append('<div class="modal-backdrop in"></div>');
-                            }
-                        });
+                    var hidePopover = function() {
+                        $element.popover('hide');
+                        $element.blur();
                     };
                     if ($attrs.trigger === "hover") {
-                        $element.mouseover(function (event) {
-                            event.preventDefault();
-                            destroy();
-                            if($rootScope.bp.isXS){
-                                $timeout(function(){
-                                    $element.popover('show');                                   
-                                },300);
-                            } else {
-                                $element.popover('show');
-                            }
+                        $element.popover({
+                            trigger: 'hover'
                         });
                     } else {
                         $element.popover({
                             trigger: 'manual'
                         });
+                        $element.on('click',function(e){
+                            $element.popover('toggle');
+                        });
+                        $element.on('shown.bs.popover', function () {
 
-                        $element.click(function (event) {
-                            
-                            event.preventDefault();
-                            destroy();
-                            if($rootScope.bp.isXS){
+
+                            $element.next().off('click');
+                            $element.next().on('click', function(e){
+                                $element.focus();
+                            });
+
+                            $('[data-dismiss="popover"]').on('click', function(){
                                 $timeout(function(){
-                                    $element.popover('show');
+                                    $element.blur();
+                                },100);
+                            });
+
+
+                            $element.off('blur');
+                            $element.on('blur', function(){
+                                $timeout(function(){
+                                    if(!$element.is(':focus')) {
+                                        hidePopover();
+                                    }
                                 },300);
-                            } else {
-                                $element.popover('show');
-                            }
-                        
-                            $('[data-dismiss="popover"]').bind('click', function (event) {
-                                event.preventDefault();
-                                destroy();
                             });
                         });
+                        $element.on('hidden.bs.popover', function () {
+                            $element.on('click', function(){
+                                $element.popover('show');
+                            });
+                        });
+
                     }
-
-
-
-
                     break;
                 case "tooltip":
                     $element.tooltip();
@@ -145,7 +140,7 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                             });
                         });
                     }
-                break;
+                    break;
             }
         }
     };
