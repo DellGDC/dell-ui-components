@@ -1,0 +1,119 @@
+<div ng-controller="GuideCtrl" id="development-guide">
+	<nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header col-sm-9">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <i class="icon-ui-dell" style="
+                          font-size: 42px;
+                          position: relative;
+                          top: -12px;
+                          ">
+                        </i>
+                      <span style="
+                            position: relative;
+                            top: -24px;
+                            left: 0px;
+                            font-size: 20px;
+                        ">
+                        Dell UI Components Development Guide
+                      </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<ul class="nav nav-pills nav-stacked side-bar">
+					<li role="presentation" ng-class="{active:!section}">
+						<a href="#guide/">Dell UI Components</a>
+					</li>
+					<li role="presentation" ng-class="{active:section==='getting-started'}">
+						<a href="#guide/getting-started">Getting Started</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='what-you-should-know-or-learn'}">
+						<a href="#guide/what-you-should-know-or-learn">What You Should Know or Learn</a>
+					</li>
+
+                    <!-- 
+						This does not belong here. There is a whole entire tutorial/learn section above.
+                    <li role="presentation" ng-class="{active:section==='git-tutorial'}">
+                        <a href="#guide/git-tutorial">Git tutorial </a>
+                    </li> -->
+
+					<li role="presentation" ng-class="{active:section==='git-workflow'}">
+						<a href="#guide/git-workflow">Git Workflow </a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='html-code-guidelines'}">
+						<a href="#guide/html-code-guidelines">HTML Code Guidelines</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='bootstrap-code-guidelines'}">
+						<a href="#guide/bootstrap-code-guidelines">Bootstrap Code Guidelines</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='css-code-guidelines'}">
+						<a href="#guide/css-code-guidelines">CSS Code Guidelines</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='js-code-guidelines'}">
+						<a href="#guide/js-code-guidelines">Javascript Code Guidelines</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='creating-new-components'}">
+						<a href="#guide/creating-new-components">Creating New Components</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='adding-function-to-components'}">
+						<a href="#guide/adding-function-to-components">Adding Function to Components</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='build-publish-package'}">
+						<a href="#guide/build-publish-package">Build and publish package</a>
+					</li>
+
+					<li role="presentation" ng-class="{active:section==='updating-sherpa-manager-with-new-package'}">
+						<a href="#guide/updating-sherpa-manager-with-new-package">Updating Sherpa Manager with New Package</a>
+					</li>
+
+					<li role="presentation">
+						<a href="#demo">Development Demo</a>
+					</li>					
+
+				</ul>
+			</div>
+			<div class="col-sm-9">
+				<div ng-if="!section">
+					<h2>Introduction</h2>
+					<p>
+						The purpose of this guide is to provide guidance on working on the Dell-UI-Components package. If you have any suggestion for things that should be clarified or improved place contact <a mailto="bo_lora@dell.com">Bo Lora</a>.
+					</p>
+					<p class="alert alert-info">
+						The information in this guide is extremely important. If you will be contributing code or patches to dell-ui-components, you will need to strictly follow these development guidelines. Code which doesn't follow the guidelines will degrade the dell-ui-components package and make it harder for maintenance in the future.
+					</p>
+					<p>
+						Some code already in place may not match these guidelines, this is mostly due to it being written before the guidelines were defined. Assistance with cleaning up any incorrect code is very inportant to the future of the package but it should be properly coordinated through our process. If you see anything that needs to be fixed, please contact <a mailto="sunny_boukadakis@dell.com">Sunny Boukadakis</a>.
+					</p>
+				</div>
+				<div ng-if="section" class="guide-content">
+					<h2>{{section | _.str:'humanize,titleize'}}</h2>
+					<div ng-include="'guide/'+section+'.html'"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<a class="scroll scroll-to-top" href="#development-guide">
+		<i class="glyphicon glyphicon-chevron-up" aria-hidden="true"></i>
+	</a>
+</div>
