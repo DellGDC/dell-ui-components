@@ -72,7 +72,7 @@ module.exports = function (grunt) {
       },
       bootstrap: {
         src: [
-          'js/anchor.js'
+          'js/scroll.js'
         ],
         dest: 'dist/js/<%= pkg.name %>.js'
       }

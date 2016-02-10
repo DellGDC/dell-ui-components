@@ -1,4 +1,4 @@
-angular.module('dellUiComponents').directive('toggle', function ($rootScope,$timeout) {
+angular.module('dellUiComponents').directive('toggle', function ($rootScope,$timeout,$compile) {
     return {
         restrict: 'A',
         link: function ($scope, $element, $attrs, controller) {
@@ -42,6 +42,7 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                                     }
                                 },300);
                             });
+                            $compile($element.next().contents())($scope);
                         });
                         $element.on('hidden.bs.popover', function () {
                             $element.on('click', function(){
