@@ -10,12 +10,24 @@
         //The "wrapper" class is required for all the following classes
         background: pink;
 
-        .badge {
-            background-color: @dell-orange;
-            border-radius: 3px;
-            position: relative;
-            top: -100px;
-            right: -150px;
+        @media (max-width: 1200px ) {
+            .badge {
+                background-color: @dell-orange;
+                border-radius: 3px;
+                position: relative;
+                top: -100px;
+                right: -150px;
+            }
+        }
+
+        @media (min-width: 1201px ) {
+            .badge {
+                background-color: @dell-orange;
+                border-radius: 3px;
+                position: relative;
+                top: -100px;
+                right: -175px;
+            }
         }
 
         .modal-title {
@@ -66,15 +78,6 @@
             h5 {
                 margin-bottom: 5px;
             }
-            .optional-price {
-                margin-bottom: 10px;
-            }
-            //.optional-price-strike {
-            //    text-decoration: line-through;
-            //    font-size: 85%;
-            //    margin-top: 0;
-            //    margin-right: 10px;
-            //}
             border-bottom: 1px solid @dell-gray;
             margin-bottom: 10px;
 
@@ -298,10 +301,7 @@
             p {
                 margin: 0 0 5px;
             }
-            //.popover {
-            //    max-width: 350px;
-            //    min-width: 300px;
-            //}
+
             .list-inline > li {
                 display: inline-block;
                 padding-left: 5px;
@@ -346,33 +346,11 @@
                     line-height: 16px;
                 }
             }
-
-            //@media (min-width: @screen-sm-min) {
-            //
-            //    .popover {
-            //        max-width: 300px;
-            //        min-width: 380px;
-            //    }
-            //}
-
         }
 
         .popover {
-            padding: 20px;
-            box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
-            border: 1px solid #999;
             max-width: 350px;
             min-width: 300px;
-            .popover-title {
-                margin: 0 0 10px 0;
-                padding: 0 0 10px;
-                font-size: 16px;
-                line-height: 18px;
-                border-bottom: 1px solid @dell-gray;
-            }
-            .popover-content {
-                padding: 0;
-            }
         }
 
         [data-toggle="popover"] {
@@ -400,9 +378,14 @@
             border-radius: 3px;
             position: relative;
             top: -100px;
-            right: -150px;
+            right: -105px;
         }
 
+        .modal-title {
+            strong {
+                font-weight: bold;
+            }
+        }
         .well {
             min-height: 20px;
             padding: 0;
@@ -414,13 +397,13 @@
         }
 
         .compare-stack {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             .compare-active {
                 position: relative;
-                top: 2px;
+                //top: 2px;
             }
             .show {
-                display: inline-block!important;
+                display: inline-block !important;
             }
         }
 
@@ -443,20 +426,22 @@
         }
 
         .product-title-stack {
+            h4 {
+                margin-top: -20px;
+            }
+
             h5 {
                 margin-bottom: 5px;
-            }
-            .optional-price {
-                margin-bottom: 10px;
-            }
-            .optional-price-strike {
-                text-decoration: line-through;
-                font-size: 85%;
                 margin-top: 0;
-                margin-right: 10px;
+
             }
-            ul.ratings li a.btn-link {
-                margin-left: 0 !important;
+
+            ul.ratings {
+                margin-bottom: 5px;
+                margin-top: -5px;
+                > li a.btn-link {
+                    margin-left: 0 !important;
+                }
             }
             border-bottom: 1px solid @dell-gray;
             margin-bottom: 10px;
@@ -537,7 +522,7 @@
 
         .price-stack {
             border-top: 1px solid @dell-gray;
-            border-bottom: 1px solid @dell-gray;
+            //border-bottom: 1px solid @dell-gray;
             margin-top: -11px;
             .h4, .h5, .h6, h4, h5, h6 {
                 margin-top: 5px;
@@ -545,10 +530,10 @@
             }
             .dell-price {
                 margin-top: 0;
-                margin-bottom: -5px;
+                margin-bottom: 0;
             }
             .price {
-                float: left!important;
+                //float: left!important;
             }
             .well {
                 min-height: 20px;
@@ -566,8 +551,17 @@
             }
         }
 
+        .legal-stack {
+            border-top: 1px solid @dell-gray;
+            border-bottom: 1px solid @dell-gray;
+            padding: 10px 0;
+            margin-bottom: 0;
+
+        }
+
         .finance-stack {
             border-bottom: 1px solid @dell-gray;
+            margin-top: -10px;
             .h4, .h5, .h6, h4, h5, h6 {
                 margin-top: 0;
                 margin-bottom: 5px;
@@ -629,13 +623,12 @@
             p {
                 margin: 0 0 5px;
             }
-            @media (min-width: @screen-sm-min) {
 
-                .popover {
-                    max-width: 100px;
-                    min-width: 150px;
-                }
+            .popover {
+                max-width: 350px;
+                min-width: 300px;
             }
+
             .list-inline > li {
                 display: inline-block;
                 padding-left: 5px;
@@ -680,41 +673,18 @@
                     line-height: 16px;
                 }
             }
-
-            //@media (min-width: @screen-sm-min) {
-            //    .popover {
-            //        max-width: 100px;
-            //        min-width: 150px;
-            //    }
-            //}
         }
-        @media (min-width: @screen-sm-min) {
 
-            .popover {
-                padding: 20px;
-                box-shadow: 0 2px 3px rgba(0,0,0,.1);
-                border: 1px solid #999;
-                //max-width: 100px;
-                //min-width: 150px;
-                .popover-title {
-                    margin: 0;
-                    margin-bottom: 10px;
-                    padding: 0 0 10px;
-                    font-size: 16px;
-                    line-height: 18px;
-                    border-bottom: 1px solid @dell-gray;
-                }
-                .popover-content {
-                    padding: 0;
-                }
-            }
+        .popover {
+            max-width: 350px;
+            min-width: 300px;
+        }
 
-            [data-toggle="popover"] {
-                padding-top: 0;
-                padding-bottom: 0;
-                &:hover{
-                    text-decoration: underline;
-                }
+        [data-toggle="popover"] {
+            padding-top: 0;
+            padding-bottom: 0;
+            &:hover{
+                text-decoration: underline;
             }
         }
     }
