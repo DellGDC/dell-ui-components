@@ -3,16 +3,16 @@
     <div class="container">
         <h2>Product-Stack Demo</h2>
         <div>
-            <!-- example html for Product-Stack component -->
-            <div class="product-stack-wrapper">
-                <div class="row">
-                    <div class="col-sm-3">
+            <!-- Product-Stack component XS/SM/MD/LG -->
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="product-stack-wrapper">
 
                         <!-- add to compare -->
                         <div class="compare-stack compare">
                             <input type="checkbox" value="option 1" class="pull-left">
-                            <span class="compare-default">Add to Compare</span>
-                            <span class="compare-active hide"><a class="btn btn-primary" href="javascript:;">Compare (1/3)</a></span>
+                            <span class="compare-default text-gray-medium">Add to Compare</span>
+                            <span class="compare-active hide">Compare 1</span>
                         </div>
                         <!-- /add to compare -->
 
@@ -31,8 +31,10 @@
                                     <a href="javascript:;">
                                         <img src="/components/product-stack/product-img/series-thumb-laptops-precision_7000.png" class="product-img"/>
                                     </a>
+                                    <div class="badge">New</div>
                                 </div>
                                 <!-- /asset sub-stack-->
+
                                 <div class="col-xs-8 col-sm-12">
                                     <a href="javascript:;">
                                         <h4 class="btn-link">Product Title Goes Here</h4>
@@ -53,11 +55,10 @@
                                     </ul>
 
                                     <!-- optional pricing overview -->
-                                    <h5 class="optional-price-strike text-gray-medium pull-left"><strong>$00.00</strong></h5><div><h5 class="optional-price"><strong>$000.00</strong></h5></div>
+                                    <h5 class="visible-xs-block visible-sm-block pull-left"><strong>$0,000,000.00</strong></h5>
                                     <!-- /optional pricing overview -->
                                 </div>
                             </div>
-
                         </div>
                         <!-- /product title and ratings sub-stack-->
 
@@ -122,155 +123,152 @@
                         <!-- /tech specs mobile -->
 
                         <!-- ================================================== -->
-                                    <!-- mobile details show/no-hide -->
-                                    <div class="visible-xs-block visible-sm-block">
-                                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#product-stack-xs">
-                                            <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>View details</span>
-                                            <!--<span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Close details</span>-->
-                                        </a>
-                                    </div>
-                                    <div id="product-stack-xs" class="collapse">
-                                        <div><!--main details xs-only-->
-                                            <!-- feature spec -->
-                                            <div class="feature-spec">
-                                                <div class="wrapper">
-                                                    <i class="icon-large-touch"></i>
-                                                    <p><strong>Touch-enabled</strong></p>
-                                                </div>
-                                            </div>
-                                            <!-- /feature spec -->
+                                <!-- mobile details show/no-hide -->
+                                    <!--<div class="visible-xs-block visible-sm-block">-->
+                                        <!--<a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#product-stack-xs">-->
+                                            <!--<span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>View details</span>-->
+                                            <!--&lt;!&ndash;<span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Close details</span>&ndash;&gt;-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                    <!--<div id="product-stack-xs" class="collapse">-->
+                                        <!--<div>&lt;!&ndash;main details xs-only&ndash;&gt;-->
+                                            <!--&lt;!&ndash; feature spec &ndash;&gt;-->
+                                            <!--<div class="feature-spec">-->
+                                                <!--<div class="wrapper">-->
+                                                    <!--<i class="icon-large-touch"></i>-->
+                                                    <!--<p><strong>Touch-enabled</strong></p>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--&lt;!&ndash; /feature spec &ndash;&gt;-->
 
-                                            <!-- product blurb -->
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <p>
-                                                        Includes a faster processor, more memory and a larger hard drive for the ultimate computing experience.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <!-- /product blurb -->
+                                            <!--&lt;!&ndash; product blurb &ndash;&gt;-->
+                                            <!--<div class="row">-->
+                                                <!--<div class="col-xs-12">-->
+                                                    <!--<p>-->
+                                                        <!--Includes a faster processor, more memory and a larger hard drive for the ultimate computing experience.-->
+                                                    <!--</p>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--&lt;!&ndash; /product blurb &ndash;&gt;-->
 
-                                            <!-- special-offers -->
-                                            <div class="special-offers">
-                                                <div>
-                                                    <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#special-offers-xs">
-                                                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Special offer</span>
-                                                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide special offer</span>
-                                                    </a>
-                                                    <div id="special-offers-xs" class="collapse">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /special-offers -->
+                                            <!--&lt;!&ndash; special-offers &ndash;&gt;-->
+                                            <!--<div class="special-offers">-->
+                                                <!--<div>-->
+                                                    <!--<a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#special-offers-xs">-->
+                                                        <!--<span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Special offer</span>-->
+                                                        <!--<span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide special offer</span>-->
+                                                    <!--</a>-->
+                                                    <!--<div id="special-offers-xs" class="collapse">-->
+                                                        <!--<ul>-->
+                                                            <!--<li>-->
+                                                                <!--<a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>-->
+                                                            <!--</li>-->
+                                                            <!--<li>-->
+                                                                <!--<a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>-->
+                                                            <!--</li>-->
+                                                        <!--</ul>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--&lt;!&ndash; /special-offers &ndash;&gt;-->
 
-                                            <!-- price-stack -->
-                                            <div class="price-stack">
-                                                <div class="well well-transparent-stroke">
-                                                    <h4 class="dell-price pull-left"><small>Dell Price</small></h4>
-                                                    <h4 class="price "><strong>$0,000,000.00</strong></h4>
-                                                    <!-- custom popover -->
-                                                    <div class="price-discount-popup">
-                                                        <h6 aria-describedby="popover-discount-xs">
-                                                            <a tabindex="1"
-                                                               role="button"
-                                                               id="popover-discount-xs"
-                                                               data-trigger="show"
-                                                               class="popover-link"
-                                                               data-html="true"
-                                                               data-toggle="popover"
-                                                               data-placement="top"
-                                                               data-original-title="Discounts included &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"
-                                                               data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
-                                                                     &lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;
-                                                                     &lt;hr class='dotted-hr'/&gt;
-                                                                     &lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
-                                                            >$20 Discount included</a>
-                                                        </h6>
-                                                    </div>
-                                                    <!-- /custom popover -->
-                                                </div>
-                                            </div>
+                                            <!--&lt;!&ndash; price-stack &ndash;&gt;-->
+                                            <!--<div class="price-stack">-->
+                                                <!--<div class="well well-transparent-stroke">-->
+                                                    <!--<h4 class="dell-price pull-left"><small>Dell Price</small></h4>-->
+                                                    <!--<h4 class="price "><strong>$0,000,000.00</strong></h4>-->
+                                                    <!--&lt;!&ndash; custom popover &ndash;&gt;-->
+                                                    <!--<div class="price-discount-popup">-->
+                                                        <!--<h6 aria-describedby="popover-discount-xs">-->
+                                                            <!--<a tabindex="1"-->
+                                                               <!--role="button"-->
+                                                               <!--id="popover-discount-xs"-->
+                                                               <!--data-trigger="show"-->
+                                                               <!--class="popover-link"-->
+                                                               <!--data-html="true"-->
+                                                               <!--data-toggle="popover"-->
+                                                               <!--data-placement="top"-->
+                                                               <!--data-original-title="Discounts included &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"-->
+                                                               <!--data-content="&lt;h6&gt;Market Value&lt;sup&gt;1&lt;/sup&gt;&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;-->
+                                                                     <!--&lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;-->
+                                                                     <!--&lt;hr class='dotted-hr'/&gt;-->
+                                                                     <!--&lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"-->
+                                                            <!--&gt;$20 Discount included</a>-->
+                                                        <!--</h6>-->
+                                                    <!--</div>-->
+                                                    <!--&lt;!&ndash; /custom popover &ndash;&gt;-->
+                                                <!--</div>-->
+                                            <!--</div>-->
 
-                                            <!-- /price-stack -->
-                                            <!-- finance-stack -->
-                                            <div class="finance-stack">
+                                            <!--&lt;!&ndash; /price-stack &ndash;&gt;-->
+                                            <!--&lt;!&ndash; finance-stack &ndash;&gt;-->
+                                            <!--<div class="finance-stack">-->
 
-                                                <h5 class="finance">Financing<sup>^</sup></h5>
-                                                <h5><small><a href="javascript:;" class="btn-link finance-discount">As low as <sup>$</sup>20/mo<sup>1</sup></a></small></h5>
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <h5><small><a href="javascript:;" class="btn-link finance-special-discount">6-month special financing</a></small></h5>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <!--<h5 class="finance">Financing<sup>^</sup></h5>-->
+                                                <!--<h5><small><a href="javascript:;" class="btn-link finance-discount">As low as <sup>$</sup>20/mo<sup>1</sup></a></small></h5>-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-xs-12">-->
+                                                        <!--<h5><small><a href="javascript:;" class="btn-link finance-special-discount">6-month special financing</a></small></h5>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
 
-                                            <!-- finance-stack -->
+                                            <!--&lt;!&ndash; finance-stack &ndash;&gt;-->
 
-                                            <!-- rewards-stack -->
-                                            <div class="rewards-stack">
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <h5 class="text-blue rewards"><i aria-hidden="true" class="icon-small-star text-blue pull-left"></i>&nbsp;Rewards</h5>
-                                                        <!-- custom popover -->
-                                                        <h6 class="rewards-discount" aria-describedby="popover-top-xs">
-                                                            <a tabindex="0"
-                                                               role="button"
-                                                               id="popover-top-xs"
-                                                               data-trigger="show"
-                                                               class="popover-link"
-                                                               data-html="true"
-                                                               data-toggle="popover"
-                                                               data-placement="top"
-                                                               data-original-title="Get up to $80 back&lt;sup&gt;*^&lt;/sup&gt; &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"
-                                                               data-content="&lt;p&gt;Get $80.00 (10%) back in rewards on financed purchases or $40.00 (5%) back in rewards, no financing required.&lt;/p&gt;
-                                                                         &lt;p &gt;With Dell Rewards, all purchases qualify for free 2nd business day shipping.^&lt;/p&gt;
-                                                                         &lt;ul class='list-inline'>
-                                                                            &lt;li&gt;&lt;a href='javascript:;' class='btn-link'&gt;With financing&lt;/a&gt;&lt;/li&gt;
-                                                                            &lt;li class='pipe'&gt;|&lt;/li&gt;
-                                                                            &lt;li&gt;&lt;a href='javascript:;' class='btn-link'>No financing required&lt;/a&gt;&lt;/li&gt;
-                                                                         &lt;/ul&gt;"
-                                                            >Up to $80 back</a>
-                                                        </h6>
-                                                        <!-- /custom popover -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- rewards-stack -->
-                                            <!-- shipping-stack -->
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <div class="shipping-stack">
-                                                        <img src="components/product-stack/product-img/Smart_Selection_Green_64px.png" class="img-responsive pull-left" alt="Responsive image">
-                                                        <div class="same-day-ship">
-                                                            <h6><strong><a href="javascript:;"
-                                                                           data-toggle="popover"
-                                                                           data-html="true"
-                                                                           data-placement="top"
-                                                                           title=""
-                                                                           data-content="&lt;p&gt;Get $80.00 (10%) back in rewards on financed purchases or $40.00 (5%) back in rewards, no financing required.&lt;/p&gt;
-                                                                                       &lt;p &gt;With Dell Rewards, all purchases qualify for free 2nd business day shipping.^&lt;/p&gt;
-                                                                                       &lt;ul class='list-inline'>
-                                                                                          &lt;li&gt;&lt;a href='javascript:;' class='btn-link'&gt;With financing&lt;/a&gt;&lt;/li&gt;
-                                                                                          &lt;li class='pipe'&gt;|&lt;/li&gt;
-                                                                                          &lt;li&gt;&lt;a href='javascript:;' class='btn-link'>No financing required&lt;/a&gt;&lt;/li&gt;
-                                                                                       &lt;/ul&gt;"
-                                                                           class="text-orange">Ships same day</a></strong></h6>
-                                                            <h6><strong>Ship date: 12/12/15</strong></h6>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- /shipping-stack -->
-                                        </div><!--/main details xs-only-->
-                                    </div>
+                                            <!--&lt;!&ndash; rewards-stack &ndash;&gt;-->
+                                            <!--<div class="rewards-stack">-->
+                                                <!--<div class="row">-->
+                                                    <!--<div class="col-xs-12">-->
+                                                        <!--<h5 class="text-blue rewards"><i aria-hidden="true" class="icon-small-star text-blue pull-left"></i>&nbsp;Rewards</h5>-->
+                                                        <!--&lt;!&ndash; custom popover &ndash;&gt;-->
+                                                        <!--<h6 class="rewards-discount" aria-describedby="popover-top-xs">-->
+                                                            <!--<a tabindex="0"-->
+                                                               <!--role="button"-->
+                                                               <!--id="popover-top-xs"-->
+                                                               <!--data-trigger="show"-->
+                                                               <!--class="popover-link"-->
+                                                               <!--data-html="true"-->
+                                                               <!--data-toggle="popover"-->
+                                                               <!--data-placement="top"-->
+                                                               <!--data-original-title="Get up to $80 back&lt;sup&gt;*^&lt;/sup&gt; &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"-->
+                                                               <!--data-content="&lt;p&gt;Get $80.00 (10%) back in rewards on financed purchases or $40.00 (5%) back in rewards, no financing required.&lt;/p&gt;-->
+                                                                         <!--&lt;p &gt;With Dell Rewards, all purchases qualify for free 2nd business day shipping.^&lt;/p&gt;-->
+                                                                         <!--&lt;ul class='list-inline'>-->
+                                                                            <!--&lt;li&gt;&lt;a href='javascript:;' class='btn-link'&gt;With financing&lt;/a&gt;&lt;/li&gt;-->
+                                                                            <!--&lt;li class='pipe'&gt;|&lt;/li&gt;-->
+                                                                            <!--&lt;li&gt;&lt;a href='javascript:;' class='btn-link'>No financing required&lt;/a&gt;&lt;/li&gt;-->
+                                                                         <!--&lt;/ul&gt;"-->
+                                                            <!--&gt;Up to $80 back</a>-->
+                                                        <!--</h6>-->
+                                                        <!--&lt;!&ndash; /custom popover &ndash;&gt;-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--&lt;!&ndash; rewards-stack &ndash;&gt;-->
+                                            <!--&lt;!&ndash; shipping-stack &ndash;&gt;-->
+                                            <!--<div class="row">-->
+                                                <!--<div class="col-xs-12">-->
+                                                    <!--<div class="shipping-stack">-->
+                                                        <!--<img src="components/product-stack/product-img/Smart_Selection_Green_64px.png" class="img-responsive pull-left" alt="Responsive image">-->
+                                                        <!--<div class="same-day-ship">-->
+                                                            <!--<h6><strong><a href="javascript:;"-->
+                                                                           <!--data-toggle="popover"-->
+                                                                           <!--data-html="true"-->
+                                                                           <!--data-placement="top"-->
+                                                                           <!--title=""-->
+                                                                           <!--data-original-title="Smart Selection &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"-->
+                                                                           <!--data-content="&lt;p&gt;Dell Smart Selection systems are our best value, ready-to-ship systems prebuilt based on customer insights. With Smart Selection, you get a simplified ordering process and fast shipping. Our experts will also recommend preselected software and accessories so that you get everything you need in one purchase. And you can add our custom-selected support services to keep your computer up and running.&lt;/p&gt;-->
+                                                                                       <!--&lt;p &gt;Limited system quantities available. Smart Selection system orders typically ship out from Dell facilities the next business day after payment processing. 3-5 day shipping method is standard. Not available for APO/FPO orders. Electronics and accessories may ship separately.&lt;/p&gt;-->
+                                                                                       <!--"-->
+                                                            <!--&gt;Smart Selection</a></strong></h6>-->
+                                                            <!--<h6><strong>Ship date: 02/10/16</strong></h6>-->
+                                                        <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <!--&lt;!&ndash; /shipping-stack &ndash;&gt;-->
+                                        <!--</div>&lt;!&ndash;/main details xs-only&ndash;&gt;-->
+                                    <!--</div>-->
                                     <!-- /mobile details show/no-hide -->
                         <!-- ================================================== -->
 
@@ -298,7 +296,7 @@
                             <!-- special-offers -->
 
                                 <!-- ============ special offers for for ONE offer: Launches Modal ================ -->
-                                <div class="special-offers hidden">
+                                <div class="special-offers">
                                     <button class="btn btn-link" data-toggle="modal" data-target="#special-single-offer-modal" data-backdrop="static" data-keyboard="false">
                                         Special offer
                                     </button>
@@ -320,7 +318,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
                                                     <button class="btn btn-success" type="button">Add to Cart</button>
                                                 </div>
                                             </div>
@@ -329,85 +327,88 @@
                                 </div>
                                 <!-- ============ special offers for for ONE offer: Launches Modal ================ -->
 
+                                <!-- ============ special offers for for TWO offers: link jumps to URL workflow ================ -->
 
-                                <!-- ============ special offers for for TWO offers: Launches Modal ================ -->
-                                <div class="special-offers">
-                                    <button class="btn btn-link" data-toggle="modal" data-target="#2-special-offer-modal" data-backdrop="static" data-keyboard="false">
-                                        Special offer
-                                    </button>
-                                </div>
+                                    <div class="hidden"><!-- special offers for for TWO offers: link jumps to URL workflow -->
+
+                                        <div class="special-offers">
+                                            <button class="btn btn-link" data-toggle="modal" data-target="#2-special-offer-modal" data-backdrop="static" data-keyboard="false">
+                                                2 Special offers
+                                            </button>
+                                        </div>
+
+                                        <div aria-labelledby="2-special-offer-modal">
+                                            <div class="modal fade" role="modal" id="2-special-offer-modal">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                            <h3 class="modal-title">Save $50 off of PCs $699 plus with coupon code <strong>50OFF699</strong> for a limited time. Coupon applies in cart.</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>
+                                                                Limited Time Offer!
+                                                            </h4>
+                                                            <p>
+                                                                <strong>Dell Coupon Offer:</strong> Offer valid 4/30/2015 7:00am - 4/29/2016 6:00am CST or 40,000 redemptions, whichever comes first. Coupon is good with select other offers, but not with other coupons. Coupon is valid on select order codes. Offer does not apply to, and is not available with, systems or items purchased through refurbished items or spare parts. Purchase limit of 3 items per order. Not valid for resellers and/or online auctions. Dell reserves the right to cancel orders arising from pricing or other errors. Only valid on select order codes.
+                                                            </p>
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <button class="btn btn-primary pull-right" type="button">Copy Coupon Code</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
 
-                                <div aria-labelledby="2-special-offer-modal">
-                                    <div class="modal fade" role="modal" id="2-special-offer-modal">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    <h3 class="modal-title">Save $50 off of PCs $699 plus with coupon code <strong>50OFF699</strong> for a limited time. Coupon applies in cart.</h3>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h4>
-                                                        Limited Time Offer!
-                                                    </h4>
-                                                    <p>
-                                                        <strong>Dell Coupon Offer:</strong> Offer valid 4/30/2015 7:00am - 4/29/2016 6:00am CST or 40,000 redemptions, whichever comes first. Coupon is good with select other offers, but not with other coupons. Coupon is valid on select order codes. Offer does not apply to, and is not available with, systems or items purchased through refurbished items or spare parts. Purchase limit of 3 items per order. Not valid for resellers and/or online auctions. Dell reserves the right to cancel orders arising from pricing or other errors. Only valid on select order codes.
-                                                    </p>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <button class="btn btn-primary pull-right" type="button">Copy Coupon Code</button>
+                                                        <div class="modal-header">
+                                                            <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                                                            <h3 class="modal-title">Free Shipping & Easy Returns!</h3>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4>
+                                                                Limited Time Offer!
+                                                            </h4>
+                                                            <p>
+                                                                Free 3-5 business day ground shipping on all orders placed on Dell.com. No minimum purchase required.
+                                                            <p>
+                                                                <strong>Easy Returns:</strong> Send the product back to Dell within 30-days of the invoice date for a full refund. Includes free return shipping and no restocking fee. Excludes software if opened or downloaded.
+                                                            </p>
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <button class="btn btn-success pull-right" type="button">Add to Cart</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                         </div>
                                                     </div>
-                                                </div>
-
-
-                                                <div class="modal-header">
-                                                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
-                                                    <h3 class="modal-title">Free Shipping & Easy Returns!</h3>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h4>
-                                                        Limited Time Offer!
-                                                    </h4>
-                                                    <p>
-                                                        Free 3-5 business day ground shipping on all orders placed on Dell.com. No minimum purchase required.
-                                                    <p>
-                                                        <strong>Easy Returns:</strong> Send the product back to Dell within 30-days of the invoice date for a full refund. Includes free return shipping and no restocking fee. Excludes software if opened or downloaded.
-                                                    </p>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <button class="btn btn-success pull-right" type="button">Add to Cart</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div><!-- /special offers for for TWO offers: link jumps to URL workflow -->
+                                <!-- ============ /special offers for for TWO offers: link jumps to URL workflow ================ -->
+
+                                <!-- ============ special offers for Deals page: offers exposed no title ================ -->
+                                <div class="hidden"><!-- special offers for Deals page: offers exposed no title -->
+                                    <div class="special-offers">
+                                        <ul>
+                                            <li>
+                                                <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
-                                <!-- ============ /special offers for for TWO offers: Launches Modal ================ -->
-
-                                <!-- ============ special offers for Deals page: offers exposed ================ -->
-                                <div class="special-offers hidden">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;" class="btn-link">Dell Precision 17 5000 Series price includes $140 instant discount.</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                </div><!-- /special offers for Deals page: offers exposed no title -->
                                 <!-- ================== special offers for Deals page: offers =============-->
-
                             <!--/special-offers-->
 
                             <!-- price-stack -->
                             <div class="price-stack">
                                 <div class="well well-transparent-stroke">
-                                    <h4 class="dell-price pull-left"><small>Dell Price</small></h4>
+                                    <h4 class="dell-price pull-left"><small>Final price</small></h4>
                                     <h4 class="price "><strong>$0,000,000.00</strong></h4>
 
                                     <!-- custom popover -->
@@ -421,11 +422,11 @@
                                                data-html="true"
                                                data-toggle="popover"
                                                data-placement="top"
-                                               data-original-title="Total Saving &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"
-                                               data-content="&lt;h6&gt;Market Value  &lt;a href='#legal-regulatory' class='btn-link scroll'&gt;  &lt;sup&gt; 1 &lt;/sup&gt; &lt;/a&gt;    &lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
+                                               data-original-title="Instant Discount&lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"
+                                               data-content="&lt;h6&gt;Market value  &lt;a href='#legal-regulatory' class='btn-link scroll'&gt;  &lt;sup&gt; 1 &lt;/sup&gt; &lt;/a&gt;    &lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;
                                                              &lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;
                                                              &lt;hr class='dotted-hr'/&gt;
-                                                             &lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
+                                                             &lt;h6&gt;&lt;strong&gt;Dell price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;"
                                             >$20 Discount included</a>
                                         </h6>
                                     </div>
@@ -433,22 +434,20 @@
                                 </div>
                             </div>
 
-
-
-
-                            <!--&lt;h6&gt;Market Value  &lt;a href='#legal-regulatory' class='btn-link scroll'&gt;  &lt;sup&gt; 1 &lt;/sup&gt; &lt;/a&gt;    &lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/h6&gt;-->
-                            <!--&lt;h6 class='text-berry'&gt;Instant discount&lt;span class='pull-right'&gt;-$00.00&lt;/span&gt;&lt;/h6&gt;-->
-                            <!--&lt;hr class='dotted-hr'/&gt;-->
-                            <!--&lt;h6&gt;&lt;strong&gt;Dell Price&lt;span class='pull-right'&gt;$000.00&lt;/span&gt;&lt;/strong&gt;&lt;/h6&gt;-->
-
-
-
-
-                           <h6>Market Value<a href="#legal-regulatory" class="btn-link scroll"><sup> 1 </sup></a></h6>
-
-
-
                             <!-- /price-stack -->
+
+                            <!-- legal-stack -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p class="legal-stack">
+                                        Legal disclosures if any including VAT and shipping.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- legal-stack -->
+
+
                             <!-- finance-stack -->
                             <div class="finance-stack">
 
@@ -467,7 +466,7 @@
                             <div class="rewards-stack">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <h5 class="text-blue rewards"><i aria-hidden="true" class="icon-small-star text-blue pull-left"></i>&nbsp;Rewards</h5>
+                                        <h5 class="rewards"><i aria-hidden="true" class="icon-small-star text-blue pull-left"></i>&nbsp;Rewards</h5>
                                         <!-- custom popover -->
                                         <h6 class="rewards-discount" aria-describedby="popover-top">
                                                 <a tabindex="0"
@@ -504,15 +503,12 @@
                                                                  data-html="true"
                                                                  data-placement="top"
                                                                  title=""
-                                                                 data-content="&lt;p&gt;Get $80.00 (10%) back in rewards on financed purchases or $40.00 (5%) back in rewards, no financing required.&lt;/p&gt;
-                                                                               &lt;p &gt;With Dell Rewards, all purchases qualify for free 2nd business day shipping.^&lt;/p&gt;
-                                                                               &lt;ul class='list-inline'>
-                                                                                  &lt;li&gt;&lt;a href='javascript:;' class='btn-link'&gt;With financing&lt;/a&gt;&lt;/li&gt;
-                                                                                  &lt;li class='pipe'&gt;|&lt;/li&gt;
-                                                                                  &lt;li&gt;&lt;a href='javascript:;' class='btn-link'>No financing required&lt;/a&gt;&lt;/li&gt;
-                                                                               &lt;/ul&gt;"
-                                                                 class="text-orange">Ships same day</a></strong></h6>
-                                            <h6><strong>Ship date: 12/12/15</strong></h6>
+                                                                 data-original-title="Smart Selection &lt;button type='button' class='close pull-right visible-phone' data-dismiss='popover'&gt;×&lt;/button&gt;"
+                                                                 data-content="&lt;p&gt;Dell Smart Selection systems are our best value, ready-to-ship systems prebuilt based on customer insights. With Smart Selection, you get a simplified ordering process and fast shipping. Our experts will also recommend preselected software and accessories so that you get everything you need in one purchase. And you can add our custom-selected support services to keep your computer up and running.&lt;/p&gt;
+                                                                                       &lt;p &gt;Limited system quantities available. Smart Selection system orders typically ship out from Dell facilities the next business day after payment processing. 3-5 day shipping method is standard. Not available for APO/FPO orders. Electronics and accessories may ship separately.&lt;/p&gt;
+                                                                                       "
+                                                                 >Smart Selection</a></strong></h6>
+                                            <h6><strong>Ship date: 02/10/16</strong></h6>
                                         </div>
                                     </div>
                                 </div>

@@ -14,7 +14,9 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                         });
                     } else {
                         $element.popover({
-                            trigger: 'manual'
+                            trigger: 'manual',
+                            //html: true,
+                            //container: 'body'
                         });
                         $element.on('click',function(e){
                             $element.popover('toggle');
@@ -40,7 +42,7 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                                     if(!$element.is(':focus')) {
                                         hidePopover();
                                     }
-                                },300);
+                                },100);
                             });
                             $compile($element.next().contents())($scope);
                         });

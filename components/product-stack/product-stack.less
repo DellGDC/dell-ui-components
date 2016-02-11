@@ -2,364 +2,406 @@
  * Product-Stack component theme overrides
  *------------------------------------------------------------------------------------------
  */
-// default desktop
-.product-stack-wrapper {
-    //The "wrapper" class is required for all the following classes
 
-    .modal-title {
-        strong {
-            font-weight: bold;
-        }
-    }
+// ========================================= medium to large device ================================
 
-    .well {
-        min-height: 20px;
-        padding: 0;
-        margin-bottom: 20px;
-        background-color: @dell-gray-light;
-        border: transparent;
-        border-radius: 0;
-        box-shadow: none;
-    }
+@media (min-width: @screen-md-min) {
+    .product-stack-wrapper {
+        //The "wrapper" class is required for all the following classes
+        background: pink;
 
-    .compare-stack {
-        margin-bottom: 20px;
-        .compare-active {
+        .badge {
+            background-color: @dell-orange;
+            border-radius: 3px;
             position: relative;
-            top: 2px;
-        }
-        .show {
-            display: inline-block!important;
-        }
-    }
-
-    .product-bug {
-        text-align: center;
-        padding-right: 12px;
-        p {
-            padding:    2px 5px 2px 0;
-            line-height: 16px;
-            margin: 5px 0;
-        }
-        .triangle{
-            border-color: @dell-red transparent transparent @dell-red;
-            border-style: solid;
-            border-width: 12px;
-            width: 0;
-            height: 0;
-            float: left !important;
-        }
-    }
-
-    .product-title-stack {
-        h5 {
-            margin-bottom: 5px;
-        }
-        .optional-price {
-            margin-bottom: 10px;
-        }
-        .optional-price-strike {
-            text-decoration: line-through;
-            font-size: 85%;
-            margin-top: 0;
-            margin-right: 10px;
-        }
-        border-bottom: 1px solid @dell-gray;
-        margin-bottom: 10px;
-    }
-
-    .product-img {
-        width: 170px;
-        height: auto;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .tech-spec {
-        .list-inline {
-            padding-left: 0;
-            list-style: none;
-            margin-left: 0;
-            line-height: 3px;
-        }
-        p {
-            font-size: 12px;
-            margin-bottom: 3px;
-        }
-        .spec-bar {
-            height: 3px;
-            max-width: 18.5%;
-            min-width: 18.1%;
-            &.default {
-                background:@dell-gray-stroke;
-            }
-            &.active {
-                background: @dell-blue;
-            }
-        }
-    }
-
-    .feature-spec {
-        border-top: 1px solid @dell-gray;
-        border-bottom: 1px solid @dell-gray;
-        margin: 20px 0 10px 0;
-        padding: 5px 0;
-        .wrapper {
-            display: table-row;
-        }
-        [class^=icon-] {
-            color: @dell-blue;
-            top: 1px;
-            position: relative;
-        }
-        p {
-            display: table-cell;
-            vertical-align: middle;
-        }
-    }
-
-    .special-offers {
-        border-top: 1px solid @dell-berry;
-        border-bottom: 1px solid @dell-berry;
-        margin-bottom: 10px;
-        z-index: 1;
-        position: relative;
-        ol, ul {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            padding-left: 15px;
-        }
-        li {
-            color: @dell-blue;
-            margin-bottom: 5px;
-        }
-        .btn-link {
-            padding: 6px 10px;
+            top: -100px;
+            right: -150px;
         }
 
-        ul .btn-link {
-            padding: 6px 0px;
-        }
-        .hide-expanded,
-        .show-collapsed,
-        .collapsed .show-collapsed {
-            padding: 9px 10px 9px 0;
-        }
-    }
-
-    .price-stack {
-        border-top: 1px solid @dell-gray;
-        border-bottom: 1px solid @dell-gray;
-        margin-top: -11px;
-        .h4, .h5, .h6, h4, h5, h6 {
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-        .dell-price {
-            margin-top: 6px;
-            margin-bottom: -5px;
-        }
-        .price {
-            float: right!important;
-            //clear-after: both;
-        }
-        .price-discount-popup {
-            content: "";
-            display: block;
-            height: 20px;
-            clear: both;
-            .btn-link {
-                padding: 0;
+        .modal-title {
+            strong {
+                font-weight: bold;
             }
         }
         .well {
-             min-height: 20px;
-             padding: 10px 10px;
-             margin-bottom: 0;
-             background-color: @dell-gray-light;
-             border: transparent;
-             border-radius: 0;
-             box-shadow: none;
-         }
-        .well-gray-light {
             min-height: 20px;
-            padding: 10px 10px;
+            padding: 0;
             margin-bottom: 20px;
             background-color: @dell-gray-light;
             border: transparent;
             border-radius: 0;
             box-shadow: none;
-            .well-gray-light {
-                margin-bottom: 20px !important;
+        }
+
+        .compare-stack {
+            margin-bottom: 20px;
+            .compare-active {
+                position: relative;
+                //top: 2px;
+            }
+            .show {
+                display: inline-block !important;
             }
         }
 
-        .dotted-hr {
-            border-top: 1px dotted @dell-gray;
-            margin-top: 0;
-            margin-bottom: 0;
+        .product-bug {
+            text-align: center;
+            padding-right: 12px;
+            p {
+                padding: 2px 5px 2px 0;
+                line-height: 16px;
+                margin: 5px 0;
+            }
+            .triangle {
+                border-color: @dell-red transparent transparent @dell-red;
+                border-style: solid;
+                border-width: 12px;
+                width: 0;
+                height: 0;
+                float: left !important;
+            }
         }
-        .modal-body sup {
-            margin-left: -10px;
-        }
-        .modal-footer {
-            text-align: right;
-            border-top: none;
-        }
-    }
 
-    .finance-stack {
-        border-bottom: 1px solid @dell-gray;
-        .h4, .h5, .h6, h4, h5, h6 {
-            margin-top: 0;
-            margin-bottom: 5px;
+        .product-title-stack {
+            h5 {
+                margin-bottom: 5px;
+            }
+            .optional-price {
+                margin-bottom: 10px;
+            }
+            //.optional-price-strike {
+            //    text-decoration: line-through;
+            //    font-size: 85%;
+            //    margin-top: 0;
+            //    margin-right: 10px;
+            //}
+            border-bottom: 1px solid @dell-gray;
+            margin-bottom: 10px;
+
+            ul.ratings {
+                margin-bottom: 5px;
+                margin-top: -5px;
+            }
         }
-        ol, ul {
-            margin-top: -3px;
-            &.list-inline{
+
+        .product-img {
+            width: 170px;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: -20px;
+        }
+
+        .tech-spec {
+            .list-inline {
+                padding-left: 0;
+                list-style: none;
+                margin-left: 0;
+                line-height: 3px;
+            }
+            p {
+                font-size: 12px;
+                margin-bottom: 3px;
+            }
+            .spec-bar {
+                height: 3px;
+                max-width: 18.5%;
+                min-width: 18.1%;
+                &.default {
+                    background: @dell-gray-stroke;
+                }
+                &.active {
+                    background: @dell-blue;
+                }
+            }
+        }
+
+        .feature-spec {
+            border-top: 1px solid @dell-gray;
+            border-bottom: 1px solid @dell-gray;
+            margin: 20px 0 10px 0;
+            padding: 5px 0;
+            .wrapper {
+                display: table-row;
+            }
+            [class^=icon-] {
+                color: @dell-blue;
+                top: 1px;
+                position: relative;
+            }
+            p {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+
+        .special-offers {
+            border-top: 1px solid @dell-berry;
+            border-bottom: 1px solid @dell-berry;
+            margin-bottom: 10px;
+            z-index: 1;
+            position: relative;
+            ol, ul {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                padding-left: 15px;
+            }
+            li {
+                color: @dell-blue;
+                margin-bottom: 5px;
+            }
+            .btn-link {
+                padding: 6px 10px;
+            }
+
+            ul .btn-link {
+                padding: 6px 0;
+            }
+            .hide-expanded,
+            .show-collapsed,
+            .collapsed .show-collapsed {
+                padding: 9px 10px 9px 0;
+            }
+        }
+
+        .price-stack {
+            border-top: 1px solid @dell-gray;
+            //border-bottom: 1px solid @dell-gray;
+            margin-top: -11px;
+            .h4, .h5, .h6, h4, h5, h6 {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            .dell-price {
+                margin-top: 6px;
+                margin-bottom: -5px;
+            }
+            .price {
+                float: right !important;
+                //clear-after: both;
+            }
+            .price-discount-popup {
+                content: "";
+                display: block;
+                height: 20px;
+                clear: both;
+                .btn-link {
+                    padding: 0;
+                }
+            }
+            .well {
+                min-height: 20px;
+                padding: 10px 10px;
+                margin-bottom: 0;
+                background-color: @dell-gray-light;
+                border: transparent;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .well-gray-light {
+                min-height: 20px;
+                padding: 10px 10px;
+                margin-bottom: 20px;
+                background-color: @dell-gray-light;
+                border: transparent;
+                border-radius: 0;
+                box-shadow: none;
+                .well-gray-light {
+                    margin-bottom: 20px !important;
+                }
+            }
+
+            .dotted-hr {
+                border-top: 1px dotted @dell-gray;
+                margin-top: 0;
                 margin-bottom: 0;
             }
-        }
-        .list-inline > li {
-            display: inline-block;
-            padding-left: 5px;
-            margin-bottom: 5px;
-            &.pipe {
-                padding-left: 0;
-                padding-right: 0;
-                color: @dell-blue;
-                margin-left: -5px;
-                margin-right: -3px;
+            .modal-body sup {
+                margin-left: -10px;
+            }
+            .modal-footer {
+                text-align: right;
+                border-top: none;
             }
         }
-        a.btn-link {
-            padding-top: 0;
-            &.pull-right {
-                margin-top: 6px;
+
+        .legal-stack {
+            border-top: 1px solid @dell-gray;
+            border-bottom: 1px solid @dell-gray;
+            padding: 10px 0;
+            margin-bottom: 0;
+
+        }
+
+        .finance-stack {
+            border-bottom: 1px solid @dell-gray;
+            margin-top: -10px;
+            .h4, .h5, .h6, h4, h5, h6 {
+                margin-top: 0;
+                margin-bottom: 5px;
+            }
+            ol, ul {
+                margin-top: -3px;
+                &.list-inline {
+                    margin-bottom: 0;
+                }
+            }
+            .list-inline > li {
+                display: inline-block;
+                padding-left: 5px;
+                margin-bottom: 5px;
+                &.pipe {
+                    padding-left: 0;
+                    padding-right: 0;
+                    color: @dell-blue;
+                    margin-left: -5px;
+                    margin-right: -3px;
+                }
+            }
+            a.btn-link {
+                padding-top: 0;
+                &.pull-right {
+                    margin-top: 6px;
+                }
+            }
+            .finance {
+                margin-top: 10px;
+                float: left !important;
+            }
+            .finance-discount {
+                float: right !important;
+                margin-top: 15px;
+            }
+            .finance-special-discount {
+                float: left !important;
+                margin-top: 0;
+                margin-bottom: 5px;
             }
         }
-        .finance {
-            margin-top: 10px;
-            float: left!important;
-        }
-        .finance-discount {
-            float: right!important;
-            margin-top: 15px;
-        }
-        .finance-special-discount {
-            float: left!important;
+
+        .rewards-stack {
+            border-bottom: 1px solid @dell-gray;
             margin-top: 0;
             margin-bottom: 5px;
-        }
-    }
-
-    .rewards-stack {
-        border-bottom: 1px solid @dell-gray;
-        margin-top: 0;
-        margin-bottom: 5px;
-        padding-bottom: 0;
-        [class^=icon-] {
-            margin-top: 1px;
-        }
-        .rewards {
-            float: left!important;
-        }
-        .rewards-discount {
-            float: right!important;
-            margin-top: 15px;
-        }
-        p {
-            margin: 0 0 5px;
-        }
-        @media (min-width: @screen-sm-min) {
-
-            .popover {
-                max-width: 300px;
-                min-width: 350px;
+            padding-bottom: 0;
+            [class^=icon-] {
+                margin-top: 1px;
+            }
+            .rewards {
+                float: left !important;
+            }
+            .rewards-discount {
+                float: right !important;
+                margin-top: 15px;
+            }
+            p {
+                margin: 0 0 5px;
+            }
+            //.popover {
+            //    max-width: 350px;
+            //    min-width: 300px;
+            //}
+            .list-inline > li {
+                display: inline-block;
+                padding-left: 5px;
+                margin-bottom: 5px;
+                &.pipe {
+                    padding-left: 0;
+                    padding-right: 0;
+                    color: @dell-blue;
+                    margin-left: -5px;
+                    margin-right: -3px;
+                }
             }
         }
-        .list-inline > li {
-            display: inline-block;
-            padding-left: 5px;
+
+        .shipping-stack {
+            border-bottom: 1px solid @dell-gray;
+            margin-top: 5px;
             margin-bottom: 5px;
-            &.pipe {
-                padding-left: 0;
-                padding-right: 0;
-                color: @dell-blue;
-                margin-left: -5px;
-                margin-right: -3px;
+            padding: 6px 0 20px 0;
+            [class^=icon-] {
+                margin-top: 3px;
             }
-        }
-    }
-
-    .shipping-stack {
-        border-bottom: 1px solid @dell-gray;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        padding: 6px 0 20px 0;
-        [class^=icon-] {
-            margin-top: 3px;
-        }
-        img {
-            margin-right: 5px;
-            margin-top: 2px;
-            width: 30px;
-            height: auto;
-        }
-
-        .tooltip-inner {
-            max-width: 275px !important;
-            padding: 3px 8px;
-            color: #444;
-            text-align: left;
-            background-color: #fff;
-            border-radius: 1px;
-        }
-        .same-day-ship {
-           h6 {
-               margin-bottom: 0;
-               margin-top: 0;
-               line-height: 16px;
+            img {
+                margin-right: 5px;
+                margin-top: 2px;
+                width: 30px;
+                height: auto;
             }
+
+            .tooltip-inner {
+                max-width: 275px !important;
+                padding: 3px 8px;
+                color: #444;
+                text-align: left;
+                background-color: #fff;
+                border-radius: 1px;
+            }
+            .same-day-ship {
+                h6 {
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    line-height: 16px;
+                }
+            }
+
+            //@media (min-width: @screen-sm-min) {
+            //
+            //    .popover {
+            //        max-width: 300px;
+            //        min-width: 380px;
+            //    }
+            //}
+
         }
-    }
-    @media (min-width: @screen-sm-min) {
 
         .popover {
             padding: 20px;
-            box-shadow: 0 2px 3px rgba(0,0,0,.1);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, .1);
             border: 1px solid #999;
-            max-width: 300px;
-            min-width: 190px;
+            max-width: 350px;
+            min-width: 300px;
             .popover-title {
-                 margin: 0;
-                 margin-bottom: 10px;
-                 padding: 0 0 10px;
-                 font-size: 16px;
-                 line-height: 18px;
-                 border-bottom: 1px solid @dell-gray;
-             }
+                margin: 0 0 10px 0;
+                padding: 0 0 10px;
+                font-size: 16px;
+                line-height: 18px;
+                border-bottom: 1px solid @dell-gray;
+            }
             .popover-content {
                 padding: 0;
             }
         }
 
         [data-toggle="popover"] {
-            //border-bottom: 1px dashed @dell-gray;
             padding-top: 0;
             padding-bottom: 0;
-            &:hover{
-
+            &:hover {
+                text-decoration: underline;
             }
         }
+
     }
 }
 
-/* Medium devices (desktops, 992px and up to 1200) */
+// ========================================= / medium to large device ================================
+
+// ========================================= medium Devices ================================
+/* Medium devices (desktops, 992px and up to 991px ) */
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
     .product-stack-wrapper {
      //The "wrapper" class is required for all the following classes
+        background: lightgoldenrodyellow;
+
+        .badge {
+            background-color: @dell-orange;
+            border-radius: 3px;
+            position: relative;
+            top: -100px;
+            right: -150px;
+        }
 
         .well {
             min-height: 20px;
@@ -590,8 +632,8 @@
             @media (min-width: @screen-sm-min) {
 
                 .popover {
-                    max-width: 300px;
-                    min-width: 350px;
+                    max-width: 100px;
+                    min-width: 150px;
                 }
             }
             .list-inline > li {
@@ -638,6 +680,13 @@
                     line-height: 16px;
                 }
             }
+
+            //@media (min-width: @screen-sm-min) {
+            //    .popover {
+            //        max-width: 100px;
+            //        min-width: 150px;
+            //    }
+            //}
         }
         @media (min-width: @screen-sm-min) {
 
@@ -645,8 +694,8 @@
                 padding: 20px;
                 box-shadow: 0 2px 3px rgba(0,0,0,.1);
                 border: 1px solid #999;
-                max-width: 300px;
-                min-width: 190px;
+                //max-width: 100px;
+                //min-width: 150px;
                 .popover-title {
                     margin: 0;
                     margin-bottom: 10px;
@@ -661,11 +710,10 @@
             }
 
             [data-toggle="popover"] {
-                //border-bottom: 1px dashed @dell-gray;
                 padding-top: 0;
                 padding-bottom: 0;
                 &:hover{
-
+                    text-decoration: underline;
                 }
             }
         }
@@ -674,347 +722,346 @@
 
 
 /* Extra small devices (phones, less than 768px) */
-@media (max-width: @screen-xs-max) {
-    .product-stack-wrapper {
-        //The "wrapper" class is required for all the following classes
-        .well {
-            min-height: 20px;
-            padding: 0;
-            margin-bottom: 20px;
-            background-color: @dell-gray-light;
-            border: transparent;
-            border-radius: 0;
-            box-shadow: none;
-        }
+//@media (max-width: @screen-xs-max) {
+//    .product-stack-wrapper {
+//        //The "wrapper" class is required for all the following classes
+//        .well {
+//            min-height: 20px;
+//            padding: 0;
+//            margin-bottom: 20px;
+//            background-color: @dell-gray-light;
+//            border: transparent;
+//            border-radius: 0;
+//            box-shadow: none;
+//        }
+//
+//        .compare-stack {
+//            margin-bottom: 10px;
+//            .compare-active {
+//                position: relative;
+//                top: 2px;
+//            }
+//            .show {
+//                display: inline-block!important;
+//            }
+//        }
+//
+//        .product-bug {
+//            text-align: center;
+//            padding-right: 12px;
+//            p {
+//                padding:    2px 5px 2px 0;
+//                line-height: 16px;
+//                margin: 5px 0;
+//            }
+//            .triangle{
+//                border-color: @dell-red transparent transparent @dell-red;
+//                border-style: solid;
+//                border-width: 12px;
+//                width: 0;
+//                height: 0;
+//                float: left !important;
+//            }
+//        }
+//
+//        .product-title-stack {
+//            h5 {
+//                margin-bottom: 5px;
+//            }
+//            .optional-price {
+//                margin-bottom: 10px;
+//            }
+//            .optional-price-strike {
+//                text-decoration: line-through;
+//                font-size: 85%;
+//                margin-top: 0;
+//                margin-right: 10px;
+//            }
+//            ul.ratings li a.btn-link {
+//                margin-left: 0 !important;
+//            }
+//            border-bottom: 1px solid @dell-gray;
+//            margin-bottom: 10px;
+//        }
+//
+//        .product-img {
+//            width: 100px;
+//            height: auto;
+//            display: block;
+//            margin-left: auto;
+//            margin-right: auto;
+//            padding-right: 15px;
+//        }
+//
+//        .tech-spec {
+//            .list-inline {
+//                padding-left: 0;
+//                list-style: none;
+//                margin-left: 0;
+//                line-height: 3px;
+//            }
+//            p {
+//                font-size: 12px;
+//                margin-bottom: 3px;
+//            }
+//            .spec-bar {
+//                height: 3px;
+//                max-width: 18.5%;
+//                min-width: 17.9%;
+//                &.default {
+//                    background:@dell-gray-stroke;
+//                }
+//                &.active {
+//                    background: @dell-blue;
+//                }
+//            }
+//        }
+//
+//        .feature-spec {
+//            border-top: 1px solid @dell-gray;
+//            border-bottom: 1px solid @dell-gray;
+//            margin: 20px 0 10px 0;
+//            padding: 5px 0;
+//            .wrapper {
+//                display: table-row;
+//            }
+//            [class^=icon-] {
+//                color: @dell-blue;
+//                top: 1px;
+//                position: relative;
+//            }
+//            p {
+//                display: table-cell;
+//                vertical-align: middle;
+//            }
+//        }
+//
+//        .special-offers {
+//            border-top: 1px solid @dell-berry;
+//            border-bottom: 1px solid @dell-berry;
+//            margin-bottom: 10px;
+//            z-index: 1;
+//            position: relative;
+//            ol, ul {
+//                margin-top: -1px;
+//                margin-bottom: 10px;
+//                padding-left: 15px;
+//            }
+//            li {
+//                color: @dell-blue;
+//                margin-bottom: 5px;
+//            }
+//            .hide-expanded,
+//            .show-collapsed,
+//            .collapsed .show-collapsed {
+//                padding: 9px 10px 9px 0;
+//            }
+//        }
+//
+//        .price-stack {
+//            border-top: 1px solid @dell-gray;
+//            border-bottom: 1px solid @dell-gray;
+//            margin-top: -11px;
+//            .h4, .h5, .h6, h4, h5, h6 {
+//                margin-top: 5px;
+//                margin-bottom: 5px;
+//            }
+//            .dell-price {
+//                margin-top: 0;
+//                margin-bottom: -5px;
+//            }
+//            .price {
+//                float: right!important;
+//            }
+//            .well {
+//                min-height: 20px;
+//                padding: 10px 10px;
+//                margin-bottom: 0;
+//                background-color: @dell-gray-light;
+//                border: transparent;
+//                border-radius: 0;
+//                box-shadow: none;
+//            }
+//            .dotted-hr {
+//                border-top: 1px dotted @dell-gray;
+//                margin-top: 0;
+//                margin-bottom: 0;
+//            }
+//            .popover .popover-content {
+//                padding-top: 0;
+//            }
+//
+//        }
+//
+//        .finance-stack {
+//            border-bottom: 1px solid @dell-gray;
+//            .h4, .h5, .h6, h4, h5, h6 {
+//                margin-top: 0;
+//                margin-bottom: 5px;
+//            }
+//            ol, ul {
+//                margin-top: -3px;
+//                &.list-inline{
+//                    margin-bottom: 0;
+//                }
+//            }
+//            .list-inline > li {
+//                display: inline-block;
+//                padding-left: 5px;
+//                margin-bottom: 5px;
+//                &.pipe {
+//                    padding-left: 0;
+//                    padding-right: 0;
+//                    color: @dell-blue;
+//                    margin-left: -5px;
+//                    margin-right: -3px;
+//                }
+//            }
+//            a.btn-link {
+//                padding-top: 0;
+//                &.pull-right {
+//                    margin-top: 6px;
+//                }
+//            }
+//            .finance {
+//                margin-top: 10px;
+//                float: left!important;
+//            }
+//            .finance-discount {
+//                float: right!important;
+//                margin-top: 15px;
+//            }
+//            .finance-special-discount {
+//                float: left!important;
+//                margin-top: 0;
+//                margin-bottom: 5px;
+//            }
+//        }
+//
+//        .rewards-stack {
+//            border-bottom: 1px solid @dell-gray;
+//            margin-top: 0;
+//            margin-bottom: 5px;
+//            padding-bottom: 0;
+//            [class^=icon-] {
+//                margin-top: 1px;
+//            }
+//            .rewards {
+//                float: left!important;
+//            }
+//            .rewards-discount {
+//                float: right!important;
+//                margin-top: 15px;
+//            }
+//            p {
+//                margin: 0 0 5px;
+//            }
+//            .popover {
+//                max-width: 300px !important;
+//                min-width: 255px !important;
+//            }
+//
+//            .popover.top {
+//                margin-top: -300px;
+//            }
+//            .list-inline > li {
+//                display: inline-block;
+//                padding-left: 5px;
+//                margin-bottom: 5px;
+//                &.pipe {
+//                    padding-left: 0;
+//                    padding-right: 0;
+//                    color: @dell-blue;
+//                    margin-left: -5px;
+//                    margin-right: -3px;
+//                }
+//            }
+//        }
+//
+//        .shipping-stack {
+//            border-bottom: 1px solid @dell-gray;
+//            margin-top: 5px;
+//            margin-bottom: 5px;
+//            padding: 6px 0 20px 0;
+//            [class^=icon-] {
+//                margin-top: 3px;
+//            }
+//            img {
+//                margin-right: 5px;
+//                margin-top: 2px;
+//                width: 30px;
+//                height: auto;
+//            }
+//
+//            .tooltip-inner {
+//                max-width: 275px !important;
+//                padding: 3px 8px;
+//                color: #444;
+//                text-align: left;
+//                background-color: #fff;
+//                border-radius: 1px;
+//            }
+//            .same-day-ship {
+//                h6 {
+//                    margin-bottom: 0;
+//                    margin-top: 0;
+//                    line-height: 16px;
+//                }
+//            }
+//        }
+//
+//        [data-toggle="popover"] {
+//            padding-top: 0;
+//            padding-bottom: 0;
+//            &:hover{
+//                text-decoration: underline;
+//            }
+//        }
+//
+//    }
+//}
 
-        .compare-stack {
-            margin-bottom: 10px;
-            .compare-active {
-                position: relative;
-                top: 2px;
-            }
-            .show {
-                display: inline-block!important;
-            }
-        }
-
-        .product-bug {
-            text-align: center;
-            padding-right: 12px;
-            p {
-                padding:    2px 5px 2px 0;
-                line-height: 16px;
-                margin: 5px 0;
-            }
-            .triangle{
-                border-color: @dell-red transparent transparent @dell-red;
-                border-style: solid;
-                border-width: 12px;
-                width: 0;
-                height: 0;
-                float: left !important;
-            }
-        }
-
-        .product-title-stack {
-            h5 {
-                margin-bottom: 5px;
-            }
-            .optional-price {
-                margin-bottom: 10px;
-            }
-            .optional-price-strike {
-                text-decoration: line-through;
-                font-size: 85%;
-                margin-top: 0;
-                margin-right: 10px;
-            }
-            ul.ratings li a.btn-link {
-                margin-left: 0 !important;
-            }
-            border-bottom: 1px solid @dell-gray;
-            margin-bottom: 10px;
-        }
-
-        .product-img {
-            width: 100px;
-            height: auto;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            padding-right: 15px;
-        }
-
-        .tech-spec {
-            .list-inline {
-                padding-left: 0;
-                list-style: none;
-                margin-left: 0;
-                line-height: 3px;
-            }
-            p {
-                font-size: 12px;
-                margin-bottom: 3px;
-            }
-            .spec-bar {
-                height: 3px;
-                max-width: 18.5%;
-                min-width: 17.9%;
-                &.default {
-                    background:@dell-gray-stroke;
-                }
-                &.active {
-                    background: @dell-blue;
-                }
-            }
-        }
-
-        .feature-spec {
-            border-top: 1px solid @dell-gray;
-            border-bottom: 1px solid @dell-gray;
-            margin: 20px 0 10px 0;
-            padding: 5px 0;
-            .wrapper {
-                display: table-row;
-            }
-            [class^=icon-] {
-                color: @dell-blue;
-                top: 1px;
-                position: relative;
-            }
-            p {
-                display: table-cell;
-                vertical-align: middle;
-            }
-        }
-
-        .special-offers {
-            border-top: 1px solid @dell-berry;
-            border-bottom: 1px solid @dell-berry;
-            margin-bottom: 10px;
-            z-index: 1;
-            position: relative;
-            ol, ul {
-                margin-top: -1px;
-                margin-bottom: 10px;
-                padding-left: 15px;
-            }
-            li {
-                color: @dell-blue;
-                margin-bottom: 5px;
-            }
-            .hide-expanded,
-            .show-collapsed,
-            .collapsed .show-collapsed {
-                padding: 9px 10px 9px 0;
-            }
-        }
-
-        .price-stack {
-            border-top: 1px solid @dell-gray;
-            border-bottom: 1px solid @dell-gray;
-            margin-top: -11px;
-            .h4, .h5, .h6, h4, h5, h6 {
-                margin-top: 5px;
-                margin-bottom: 5px;
-            }
-            .dell-price {
-                margin-top: 0;
-                margin-bottom: -5px;
-            }
-            .price {
-                float: right!important;
-            }
-            .well {
-                min-height: 20px;
-                padding: 10px 10px;
-                margin-bottom: 0;
-                background-color: @dell-gray-light;
-                border: transparent;
-                border-radius: 0;
-                box-shadow: none;
-            }
-            .dotted-hr {
-                border-top: 1px dotted @dell-gray;
-                margin-top: 0;
-                margin-bottom: 0;
-            }
-            .popover .popover-content {
-                padding-top: 0;
-            }
-
-        }
-
-        .finance-stack {
-            border-bottom: 1px solid @dell-gray;
-            .h4, .h5, .h6, h4, h5, h6 {
-                margin-top: 0;
-                margin-bottom: 5px;
-            }
-            ol, ul {
-                margin-top: -3px;
-                &.list-inline{
-                    margin-bottom: 0;
-                }
-            }
-            .list-inline > li {
-                display: inline-block;
-                padding-left: 5px;
-                margin-bottom: 5px;
-                &.pipe {
-                    padding-left: 0;
-                    padding-right: 0;
-                    color: @dell-blue;
-                    margin-left: -5px;
-                    margin-right: -3px;
-                }
-            }
-            a.btn-link {
-                padding-top: 0;
-                &.pull-right {
-                    margin-top: 6px;
-                }
-            }
-            .finance {
-                margin-top: 10px;
-                float: left!important;
-            }
-            .finance-discount {
-                float: right!important;
-                margin-top: 15px;
-            }
-            .finance-special-discount {
-                float: left!important;
-                margin-top: 0;
-                margin-bottom: 5px;
-            }
-        }
-
-        .rewards-stack {
-            border-bottom: 1px solid @dell-gray;
-            margin-top: 0;
-            margin-bottom: 5px;
-            padding-bottom: 0;
-            [class^=icon-] {
-                margin-top: 1px;
-            }
-            .rewards {
-                float: left!important;
-            }
-            .rewards-discount {
-                float: right!important;
-                margin-top: 15px;
-            }
-            p {
-                margin: 0 0 5px;
-            }
-            .popover {
-                max-width: 300px !important;
-                min-width: 255px !important;
-            }
-
-            .popover.top {
-                margin-top: -300px;
-            }
-            .list-inline > li {
-                display: inline-block;
-                padding-left: 5px;
-                margin-bottom: 5px;
-                &.pipe {
-                    padding-left: 0;
-                    padding-right: 0;
-                    color: @dell-blue;
-                    margin-left: -5px;
-                    margin-right: -3px;
-                }
-            }
-        }
-
-        .shipping-stack {
-            border-bottom: 1px solid @dell-gray;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            padding: 6px 0 20px 0;
-            [class^=icon-] {
-                margin-top: 3px;
-            }
-            img {
-                margin-right: 5px;
-                margin-top: 2px;
-                width: 30px;
-                height: auto;
-            }
-
-            .tooltip-inner {
-                max-width: 275px !important;
-                padding: 3px 8px;
-                color: #444;
-                text-align: left;
-                background-color: #fff;
-                border-radius: 1px;
-            }
-            .same-day-ship {
-                h6 {
-                    margin-bottom: 0;
-                    margin-top: 0;
-                    line-height: 16px;
-                }
-            }
-        }
-
-        [data-toggle="popover"] {
-            //border-bottom: 1px dashed @dell-gray;
-            padding-top: 0;
-            padding-bottom: 0;
-            &:hover{
-
-            }
-        }
-
-    }
-}
-
-
-// required for anchor links
-@anchor-color: @gray-dark;
-@anchor-hover-color: @link-color;
-@anchor-font-size: 1em;
-@anchor-heading-font-size: (@anchor-font-size - .25em);
-@anchor-opacity: .35;
-@anchor-padding: .25em;
-
-.anchor-wrapper {
-    position: relative;
-    code &, kbd & {
-        margin: -2px -4px;
-        padding: 2px 4px;
-    }
-}
-
-.anchor-link {
-    display: block;
-    font-size: @anchor-font-size;
-    min-width: 1.25em;
-    position: absolute;
-
-    h1 &, h2 &, h3 &, h4 &, h5 &, h6 & {
-        font-size: @anchor-heading-font-size;
-    }
-
-    &.fade a {
-        transition: color 300ms ease-in-out, opacity 300ms ease-in-out;
-    }
-
-    a {
-        .opacity(@anchor-opacity);
-        color: @anchor-color;
-        padding: @anchor-padding;
-        text-decoration: none;
-
-        &:hover {
-            .opacity(1);
-            color: @anchor-hover-color;
-            text-decoration: none;
-        }
-    }
-}
+//
+//// required for anchor links
+//@anchor-color: @gray-dark;
+//@anchor-hover-color: @link-color;
+//@anchor-font-size: 1em;
+//@anchor-heading-font-size: (@anchor-font-size - .25em);
+//@anchor-opacity: .35;
+//@anchor-padding: .25em;
+//
+//.anchor-wrapper {
+//    position: relative;
+//    code &, kbd & {
+//        margin: -2px -4px;
+//        padding: 2px 4px;
+//    }
+//}
+//
+//.anchor-link {
+//    display: block;
+//    font-size: @anchor-font-size;
+//    min-width: 1.25em;
+//    position: absolute;
+//
+//    h1 &, h2 &, h3 &, h4 &, h5 &, h6 & {
+//        font-size: @anchor-heading-font-size;
+//    }
+//
+//    &.fade a {
+//        transition: color 300ms ease-in-out, opacity 300ms ease-in-out;
+//    }
+//
+//    a {
+//        .opacity(@anchor-opacity);
+//        color: @anchor-color;
+//        padding: @anchor-padding;
+//        text-decoration: none;
+//
+//        &:hover {
+//            .opacity(1);
+//            color: @anchor-hover-color;
+//            text-decoration: none;
+//        }
+//    }
+//}
