@@ -8,8 +8,7 @@
 @media (min-width: @screen-md-min) {
     .product-stack-wrapper {
         //The "wrapper" class is required for all the following classes
-        background: pink;
-
+        //background: pink;
         .badge {
             background-color: @dell-orange;
             border-radius: 3px;
@@ -363,7 +362,7 @@
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
     .product-stack-wrapper {
      //The "wrapper" class is required for all the following classes
-        background: lightgoldenrodyellow;
+     //   background: lightgoldenrodyellow;
 
         .badge {
             background-color: @dell-orange;
@@ -692,7 +691,7 @@
 @media (max-width: @screen-xs-max) {
     .product-stack-wrapper {
         //The "wrapper" class is required for all the following classes
-        background: lightcyan;
+        //background: lightcyan;
 
 
         @media (min-width: 550px) {
@@ -915,9 +914,9 @@
                 margin-top: 0;
                 margin-bottom: 0;
             }
-            //.popover .popover-content {
-            //    padding-top: 0;
-            //}
+            .popover .popover-content {
+                padding-top: 0;
+            }
         }
 
         .legal-stack {
@@ -927,7 +926,7 @@
             margin-bottom: 0;
 
         }
-        
+
         .finance-stack {
             border-bottom: 1px solid @dell-gray;
             .h4, .h5, .h6, h4, h5, h6 {
@@ -1052,7 +1051,12 @@
                 text-decoration: underline;
             }
         }
-
+        div.popover .fade .top .in {
+            top:20px !important ;
+        }
+        .popover.in {
+            z-index: 2050;
+        }
     }
 }
 
