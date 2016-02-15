@@ -914,9 +914,6 @@
                 margin-top: 0;
                 margin-bottom: 0;
             }
-            .popover .popover-content {
-                padding-top: 0;
-            }
         }
 
         .legal-stack {
@@ -990,14 +987,7 @@
             p {
                 margin: 0 0 5px;
             }
-            .popover {
-                max-width: 300px !important;
-                min-width: 255px !important;
-            }
 
-            .popover.top {
-                margin-top: -300px;
-            }
             .list-inline > li {
                 display: inline-block;
                 padding-left: 5px;
@@ -1042,8 +1032,6 @@
                     line-height: 16px;
                 }
             }
-
-            //style="top: 401px;
         }
 
         [data-toggle="popover"] {
@@ -1053,59 +1041,12 @@
                 text-decoration: underline;
             }
         }
-        //.popover .in {
-        //    top:200px !important ;
-        //}
-        //.popover.in {
-        //    z-index: 2050;
-        //}
         .popover-overflow {
             overflow: visible;
         }
+
+        .popover {
+            overflow: scroll;
+        }
     }
 }
-
-//
-//// required for anchor links
-//@anchor-color: @gray-dark;
-//@anchor-hover-color: @link-color;
-//@anchor-font-size: 1em;
-//@anchor-heading-font-size: (@anchor-font-size - .25em);
-//@anchor-opacity: .35;
-//@anchor-padding: .25em;
-//
-//.anchor-wrapper {
-//    position: relative;
-//    code &, kbd & {
-//        margin: -2px -4px;
-//        padding: 2px 4px;
-//    }
-//}
-//
-//.anchor-link {
-//    display: block;
-//    font-size: @anchor-font-size;
-//    min-width: 1.25em;
-//    position: absolute;
-//
-//    h1 &, h2 &, h3 &, h4 &, h5 &, h6 & {
-//        font-size: @anchor-heading-font-size;
-//    }
-//
-//    &.fade a {
-//        transition: color 300ms ease-in-out, opacity 300ms ease-in-out;
-//    }
-//
-//    a {
-//        .opacity(@anchor-opacity);
-//        color: @anchor-color;
-//        padding: @anchor-padding;
-//        text-decoration: none;
-//
-//        &:hover {
-//            .opacity(1);
-//            color: @anchor-hover-color;
-//            text-decoration: none;
-//        }
-//    }
-//}
