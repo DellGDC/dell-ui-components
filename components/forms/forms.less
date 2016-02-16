@@ -2,6 +2,7 @@
  * Forms component theme overrides
  *------------------------------------------------------------------------------------------
  */
+<<<<<<< HEAD
 
 
 
@@ -29,6 +30,13 @@
         }
     }
 
+=======
+.show-password .checkbox,
+.show-password .radio {
+    margin-bottom: 5px;
+    margin-top: -5px;
+    margin-left: 20px;
+>>>>>>> b9b2a5912f476f0b55ae292d861360dcceacf546
 }
 
 // tree view
@@ -40,10 +48,50 @@
         > ul {
             list-style-type: none;
             display:none;
+            >li {
+                > ul {
+                    list-style-type: none;
+                    display:none;
+                    }    
+                }
         }
         label.open + ul {
             display:block;
         }
+        a {
+            color: #444444;
+            line-height: 0 /* 1.42857 */;
+            /*>.collapsed {
+                float: left;
+            }*/
+        }
+    }
+    
+    [data-toggle="collapse"] .icon-ui-triangledown, [data-toggle="collapse"] .icon-ui-triangleright, [data-toggle="collapse"] .icon-ui-triangleup {
+        top: 4px;
+        padding-right: 10px;
+    }
+    .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+        margin-left: -5px;
+        position: absolute;
+    }
+    .checkbox {
+        display: inline-block;
+    }
+
+    .hide-expanded, .show-collapsed, .collapsed .show-collapsed {
+        padding: 0;
+    }
+    ul.greatgrandchild {
+        list-style-type: none;
+        overflow: visible;
+    }
+    .grandchild5 {
+        position: relative;
+        left: -27px;
+    }
+    .some-kids-chekced {
+        background: @dell-blue;
     }
 }
 
@@ -938,12 +986,26 @@
     }
 }
 
+/* ----------| Jquery checktree plugin  |---------- */
 
+<<<<<<< HEAD
 .form-control[readonly]{
   background: none;
   -webkit-box-shadow: none; // iOS <4.3 & Android <4.1
   box-shadow: none;
   border: none;
+=======
+.checktree li .arrow {
+    margin: 4px 8px 0;
+    position: inherit;
+    box-shadow: none;
+    transform: none;
+    /*background: url("checktree_icon.png") no-repeat scroll 0 -22px transparent;*/
+
+    &:after {
+        content: none !important;
+    }
+>>>>>>> b9b2a5912f476f0b55ae292d861360dcceacf546
 }
 
 

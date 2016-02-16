@@ -25,11 +25,28 @@ angular.module('dellUiComponents')
                     $(this).parent().addClass('open');
                 } else {
                     $(this).parent().removeClass('open');
-                }
+                }               
             });
         }
     };
 })
+
+// -----| Added for DUC-198 |----- //
+// .directive('listTree', function () {
+//     return {
+//         restrict: 'C',
+//         link: function ($scope, $element, $attr) {
+//             $element.find('label .checked').on('click', function(){
+//                 if($(this).is(':checked')) && ($(this).hasClass('checked')) {
+//                     $(this).parent().addClass('some-kids-chekced');
+//                 } else {
+//                     $(this).parent().removeClass('some-kids-chekced');
+//                 }
+//             });
+//         }
+//     };
+// })
+// ---------------| |--------------- //
 
 
 .directive('emailValidate', function() {
@@ -607,3 +624,9 @@ return {
         }
     };
 });
+
+
+// --------------------| This is the Jquery plugin - It will need to be 
+//                       moved later....It is just here for now for testing and styling |--------------------//
+
+
