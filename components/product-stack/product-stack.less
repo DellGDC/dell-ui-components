@@ -68,6 +68,9 @@
         }
 
         .product-title-stack {
+            h4 {
+                margin-top: 20px;
+            }
             h5 {
                 margin-bottom: 5px;
             }
@@ -147,9 +150,6 @@
                 color: @dell-blue;
                 margin-bottom: 5px;
             }
-            .btn-link {
-                padding: 6px 10px;
-            }
 
             ul .btn-link {
                 padding: 6px 0;
@@ -170,12 +170,12 @@
                 margin-bottom: 5px;
             }
             .dell-price {
+                float: left !important;
                 margin-top: 6px;
                 margin-bottom: -5px;
             }
             .price {
                 float: right !important;
-                //clear-after: both;
             }
             .price-discount-popup {
                 content: "";
@@ -425,7 +425,7 @@
 
         .product-title-stack {
             h4 {
-                margin-top: -20px;
+                margin-top: 5px;
             }
 
             h5 {
@@ -507,9 +507,14 @@
                 margin-bottom: 10px;
                 padding-left: 15px;
             }
+
+            ul .btn-link {
+                padding: 6px 0;
+            }
             li {
                 color: @dell-blue;
                 margin-bottom: 5px;
+                margin-top: 10px;
             }
             .hide-expanded,
             .show-collapsed,
@@ -531,7 +536,8 @@
                 margin-bottom: 0;
             }
             .price {
-                //float: left!important;
+                margin-top: 0;
+                margin-bottom: 0;
             }
             .well {
                 min-height: 20px;
@@ -593,8 +599,8 @@
                 float: left!important;
             }
             .finance-discount {
-                float: left!important;
-                margin-top: -2px;
+                float: right!important;
+                margin-top: 15px;
             }
             .finance-special-discount {
                 float: left!important;
@@ -615,8 +621,8 @@
                 float: left!important;
             }
             .rewards-discount {
-                float: left!important;
-                margin-top: -5px;
+                float: right !important;
+                margin-top: 15px;
             }
             p {
                 margin: 0 0 5px;
@@ -879,6 +885,7 @@
             li {
                 color: @dell-blue;
                 margin-bottom: 5px;
+                margin-top: 10px;
             }
             .hide-expanded,
             .show-collapsed,

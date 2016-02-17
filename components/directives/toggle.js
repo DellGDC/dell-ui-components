@@ -15,24 +15,22 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                     } else {
                         $element.popover({
                             trigger: 'manual',
-                            //html: true,
-                            //container: 'body'
                         });
-                        $element.on('click',function(e){
+                        $element.on('click',function(){
                             $element.popover('toggle');
                         });
                         $element.on('shown.bs.popover', function () {
 
 
                             $element.next().off('click');
-                            $element.next().on('click', function(e){
+                            $element.next().on('click', function(){
                                 $element.focus();
                             });
 
                             $('[data-dismiss="popover"]').on('click', function(){
                                 $timeout(function(){
                                     $element.blur();
-                                },100);
+                                },300);
                             });
 
 
@@ -42,7 +40,7 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope,$tim
                                     if(!$element.is(':focus')) {
                                         hidePopover();
                                     }
-                                },100);
+                                },500);
                             });
                             $compile($element.next().contents())($scope);
                         });
