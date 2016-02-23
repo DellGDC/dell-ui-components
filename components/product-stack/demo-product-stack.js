@@ -12,6 +12,8 @@ angular.module('demo').controller('productStackCtrl',function($scope,$rootScope)
             }
         });
 
+
+
 });
 
 angular.module('demo').controller('productStackPLayDemoCtrl',function($scope,$rootScope,$sce) {
