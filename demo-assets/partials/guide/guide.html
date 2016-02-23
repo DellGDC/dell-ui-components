@@ -1,0 +1,4 @@
+<div class="" ng-controller="GuideCtrl">
+    <div ng-if="activeComponent" ng-include="componentGuideUrl"></div>
+    <div ng-if="!activeComponent" class="container" ng-include="'demo-assets/partials/all-components/all-components.html'"></div>
+</div>

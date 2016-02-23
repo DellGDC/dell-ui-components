@@ -8,3 +8,9 @@ angular.module('demo').controller('<%= camelId %>PLayDemoCtrl',function($scope,$
 	//this is for functionality related to play demo code
 
 });
+
+
+angular.module('demo').controller('<%= camelId %>GuideDemoCtrl',function($scope,$rootScope,$sce) {
+	//this is for functionality related to guide demo code
+
+});

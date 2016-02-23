@@ -17,6 +17,11 @@ angular.module('demo').controller('productStackCtrl',function($scope,$rootScope)
 });
 
 angular.module('demo').controller('productStackPLayDemoCtrl',function($scope,$rootScope,$sce) {
-	//this is for functionality related to play demo code
+    //this is for functionality related to play demo code
+
+});
+
+angular.module('demo').controller('productStackGuideDemoCtrl',function($scope,$rootScope,$sce) {
+    //this is for functionality related to guide demo code
 
 });
