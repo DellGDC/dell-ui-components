@@ -70,8 +70,39 @@ footer.navbar {
 }
 
 
-//.hover-demo{margin-top: 220px;}
-//.hover-demo{text-align: center;}
-.on-hover-content{position: absolute;bottom: 40px;background-color: whitesmoke;padding: 10px;border-radius: 10px;}
-.on-hover-content img{width:360px;}
-#dynamic-content{width: 360px;overflow: scroll;}
+
+
+.outer-box {
+    display: block;
+    position: relative;
+    .popover {
+        top: -75px !important;
+        left: 213px !important;
+        display: block;
+    }
+}
+
+.outer-box .inner-box {
+    background: @dell-berry;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: 0;
+    transition: opacity .5s;
+}
+.outer-box .inner-box i {
+    color: @white;
+    text-align: center;
+    top: 15px;
+    right: -150px;
+    font-size: 30px;
+    position: relative;
+    padding: 20px;
+}
+.outer-box:hover .inner-box {
+    opacity: .7;
+    transition: opacity .5s;
+}
