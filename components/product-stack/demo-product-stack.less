@@ -75,10 +75,20 @@ footer.navbar {
 .outer-box {
     display: block;
     position: relative;
+
+    @media (min-width: @screen-sm-min) {
     .popover {
-        top: -75px !important;
+        top: 0 !important;
         left: 213px !important;
         display: block;
+        position: absolute;
+            &.right > .arrow {
+                top: 25px !important;
+                left: -11px;
+                margin-top: -11px;
+                border-left-width: 0;
+            }
+        }
     }
 }
 
