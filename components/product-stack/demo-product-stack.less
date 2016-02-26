@@ -10,3 +10,119 @@
 //
 //
 //}
+
+.demo-workflow {
+    .modal-title {
+        margin: 0;
+        line-height: 18px;
+        font-size: 14px;
+    }
+
+    .modal-body {
+        position: relative;
+        padding: 20px;
+        font-size: 11px;
+    }
+    h4 {
+        font-size: 15px;
+        line-height: 18px;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 10px;
+        line-height: 1.428571429;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+
+.modal-body-shadow {
+    position: relative;
+    margin: 40px 40px 20px 40px ;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 4px 5px 10px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 4px 5px 10px 0px rgba(0,0,0,0.3);
+    box-shadow: 4px 5px 10px 0px rgba(0,0,0,0.3);
+
+    @media (max-width: 767px) {
+        header.masthead > .navbar, masthead > .navbar {
+            height: 50px;
+            margin-left: 0;
+        }
+    }
+}
+
+footer.navbar {
+    margin-bottom: 0;
+}
+
+.well-gray-very-light-stroke {
+    background: @white;
+}
+
+
+.outer-box {
+    display: block;
+    position: relative;
+
+    @media (min-width: @screen-sm-min) {
+    .popover {
+        top: 0 !important;
+        left: 225px !important;
+        display: block;
+        position: absolute;
+            &.right > .arrow {
+                top: 17px !important;
+                left: -11px;
+                margin-top: -11px;
+                border-left-width: 0;
+            }
+        }
+    }
+    .special-offers {
+        z-index:0;
+    }
+    .finance-stack{
+        margin-top: -5px;
+    }
+    .inner-box-margin-top {
+        margin-top: -5px;
+    }
+}
+
+.outer-box .inner-box {
+    background: @dell-berry;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: 0;
+    transition: opacity .5s;
+}
+.outer-box .inner-box i {
+    color: @white;
+    text-align: center;
+    top: 7px;
+    right: 7px;
+    font-size: 22px;
+    position: absolute;
+}
+.outer-box:hover .inner-box {
+    opacity: .7;
+    transition: opacity .5s;
+}
