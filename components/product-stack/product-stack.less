@@ -360,12 +360,11 @@
 // ========================================= / medium to large device ================================
 
 // ========================================= medium Devices ================================
-/* Medium devices (desktops, 992px and up to 991px ) */
+/* Medium devices (desktops, 992px and up to 1199px ) */
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
     .product-stack-wrapper {
      //The "wrapper" class is required for all the following classes
      //   background: lightgoldenrodyellow;
-
         .badge {
             background-color: @dell-orange;
             border-radius: 3px;
@@ -530,6 +529,7 @@
             .h4, .h5, .h6, h4, h5, h6 {
                 margin-top: 5px;
                 margin-bottom: 5px;
+                clear: both;
             }
             .dell-price {
                 margin-top: 0;
@@ -537,7 +537,8 @@
             }
             .price {
                 margin-top: 0;
-                margin-bottom: 0;
+                margin-bottom: 5px;
+                float: left !important;
             }
             .well {
                 min-height: 20px;
@@ -700,8 +701,6 @@
     .product-stack-wrapper {
         //The "wrapper" class is required for all the following classes
         //background: lightcyan;
-
-
         @media (min-width: 550px) {
             .badge {
                 background-color: @dell-orange;
