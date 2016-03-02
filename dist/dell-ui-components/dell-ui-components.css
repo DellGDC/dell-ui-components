@@ -5764,13 +5764,8 @@ masthead .masthead-shadow {
     margin-bottom: 5px;
     margin-top: -5px;
   }
-  .product-stack-wrapper .product-img {
-    width: 170px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: -20px;
+  .product-stack-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -5785,7 +5780,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 18.1%;
+    min-width: 17.1%;
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -6028,7 +6024,7 @@ masthead .masthead-shadow {
     text-decoration: underline;
   }
 }
-/* Medium devices (desktops, 992px and up to 991px ) */
+/* Medium devices (desktops, 992px and up to 1199px ) */
 @media (min-width: 768px) and (max-width: 991px) {
   .product-stack-wrapper .badge {
     background-color: #ee6411;
@@ -6096,12 +6092,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .product-title-stack ul.ratings > li a.btn-link {
     margin-left: 0 !important;
   }
-  .product-stack-wrapper .product-img {
-    width: 130px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  .product-stack-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -6116,7 +6108,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 17.9%;
+    min-width: 16.9%;
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -6180,6 +6173,7 @@ masthead .masthead-shadow {
   .product-stack-wrapper .price-stack h6 {
     margin-top: 5px;
     margin-bottom: 5px;
+    clear: both;
   }
   .product-stack-wrapper .price-stack .dell-price {
     margin-top: 0;
@@ -6187,7 +6181,8 @@ masthead .masthead-shadow {
   }
   .product-stack-wrapper .price-stack .price {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 5px;
+    float: left !important;
   }
   .product-stack-wrapper .price-stack .well {
     min-height: 20px;
@@ -6401,14 +6396,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .product-title-stack ul.ratings ul.rating-stars {
     margin-top: 2px;
   }
-  .product-stack-wrapper .product-img {
-    width: 100px;
-    height: auto;
-    display: inline;
-    margin-left: auto;
-    margin-right: auto;
-    padding-right: 15px;
-    position: relative;
+  .product-stack-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -6423,7 +6412,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 17.9%;
+    min-width: 16.9%;
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -6641,7 +6631,7 @@ masthead .masthead-shadow {
   }
   .product-stack-wrapper .badge-overlay {
     position: absolute;
-    left: 33%;
+    left: 70%;
     top: 20%;
   }
 }
@@ -6653,7 +6643,7 @@ masthead .masthead-shadow {
   }
   .product-stack-wrapper .badge-overlay {
     position: absolute;
-    left: 45%;
+    left: 65%;
     top: 20%;
   }
 }
@@ -6665,8 +6655,8 @@ masthead .masthead-shadow {
   }
   .product-stack-wrapper .badge-overlay {
     position: absolute;
-    left: 60%;
-    top: 20%;
+    left: 55%;
+    top: 0%;
   }
 }
 /* ==================================================   product-stack search wrapper ========================================== */
@@ -6732,13 +6722,8 @@ masthead .masthead-shadow {
     margin-bottom: 5px;
     margin-top: -5px;
   }
-  .product-stack-search-wrapper .product-img {
-    width: 170px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: -20px;
+  .product-stack-search-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-search-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -6753,7 +6738,8 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 18.1%;
+    min-width: 17.1%;
+    margin-bottom: 5px;
   }
   .product-stack-search-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -6823,9 +6809,6 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .price-stack .dell-price {
     margin-top: 6px;
     margin-bottom: -5px;
-  }
-  .product-stack-search-wrapper .price-stack .price {
-    float: right !important;
   }
   .product-stack-search-wrapper .price-stack .price-discount-popup {
     content: "";
@@ -6998,7 +6981,7 @@ masthead .masthead-shadow {
     text-decoration: underline;
   }
 }
-/* Medium devices (desktops, 992px and up to 991px ) */
+/* Medium devices (desktops, 768px and up to 991px ) */
 @media (min-width: 768px) and (max-width: 991px) {
   .product-stack-search-wrapper .badge {
     background-color: #ee6411;
@@ -7066,12 +7049,8 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .product-title-stack ul.ratings > li a.btn-link {
     margin-left: 0 !important;
   }
-  .product-stack-search-wrapper .product-img {
-    width: 130px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  .product-stack-search-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-search-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -7086,7 +7065,8 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 17.9%;
+    min-width: 16.9%;
+    margin-bottom: 5px;
   }
   .product-stack-search-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -7097,7 +7077,7 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .feature-spec {
     border-top: 1px solid #aaaaaa;
     border-bottom: 1px solid #aaaaaa;
-    margin: 10px 0 10px 0;
+    margin: 0px 0 10px 0;
     padding: 5px 0;
   }
   .product-stack-search-wrapper .feature-spec .wrapper {

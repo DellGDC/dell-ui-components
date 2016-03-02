@@ -183,6 +183,12 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 ### Older versions:
 
 ```
+1.0.19 - March 2, 2016:
+  - additional refinements for product stack
+
+1.0.18 - January 26, 2016:
+  - Test for product stack
+
 1.0.17 - January 21, 2016:
   - Got rid of hard coded reference to demo data in complex table example
 
