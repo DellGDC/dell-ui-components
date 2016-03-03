@@ -22,8 +22,8 @@ if( !Tablesaw.config ) {
 	Tablesaw.config = {};
 }
 
-;(function( $ ) {
-	var pluginName = "table",
+(function ($) {
+    var pluginName = "table",
 		classes = {
 			toolbar: "tablesaw-bar"
 		},

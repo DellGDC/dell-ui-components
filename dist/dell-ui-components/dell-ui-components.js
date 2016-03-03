@@ -3522,11 +3522,9 @@ if (!console) {
         }
         newSlides.appendChild(slide);
       }
-      ;
-      _.$slider.html(newSlides);
+        _.$slider.html(newSlides);
       _.$slider.children().children().children().width(100 / _.options.slidesPerRow + '%').css({ 'display': 'inline-block' });
     }
-    ;
   };
   Slick.prototype.checkResponsive = function (initial) {
     var _ = this, breakpoint, targetBreakpoint, respondToWidth;
@@ -4714,12 +4712,6 @@ if (!console) {
     return _;
   };
 }));
-/**
-* jquery.matchHeight.js master
-* http://brm.io/jquery-match-height/
-* License: MIT
-*/
-;
 (function ($) {
   /*
     *  internal
@@ -21530,13 +21522,6 @@ var KeyTable;
     'datatables'
   ], o) : 'object' === typeof exports ? o(require('jquery'), require('datatables')) : jQuery && !jQuery.fn.dataTable.ColReorder && o(jQuery, jQuery.fn.dataTable);
 }(window, document));
-/**
- * Copyright (c) 2007-2015 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
- * Licensed under MIT
- * @author Ariel Flesler
- * @version 2.1.1
- */
-;
 (function (f) {
   'use strict';
   'function' === typeof define && define.amd ? define(['jquery'], f) : 'undefined' !== typeof module && module.exports ? module.exports = f(require('jquery')) : f(jQuery);

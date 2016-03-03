@@ -1287,7 +1287,7 @@
 						}
 					}
 				}
-				return;
+
 			};
 
 			// computeTableHeaderCellIndexes from:

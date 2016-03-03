@@ -263,7 +263,7 @@ $(document).ready(function() {
     equal(result[0].a, 1);
 
     result = _.where(list, {a: 1}, true);
-    equal(result.b, 2, "Only get the first object matched.")
+    equal(result.b, 2, "Only get the first object matched.");
     result = _.where(list, {a: 1}, false);
     equal(result.length, 3);
   });
@@ -275,7 +275,7 @@ $(document).ready(function() {
     result = _.findWhere(list, {b: 4});
     deepEqual(result, {a: 1, b: 4});
 
-    result = _.findWhere(list, {c:1})
+    result = _.findWhere(list, {c:1});
     ok(_.isUndefined(result), "undefined when not found");
 
     result = _.findWhere([], {c:1});
@@ -381,7 +381,7 @@ $(document).ready(function() {
       [1,3],
       [2,3]
     ];
-    deepEqual(_.groupBy(matrix, 0), {1: [[1,2], [1,3]], 2: [[2,3]]})
+    deepEqual(_.groupBy(matrix, 0), {1: [[1,2], [1,3]], 2: [[2,3]]});
     deepEqual(_.groupBy(matrix, 1), {2: [[1,2]], 3: [[1,3], [2,3]]})
   });
 
@@ -500,7 +500,7 @@ $(document).ready(function() {
     equal(func(1, 2, 3, 4), 4, 'can test the size of the arguments object');
 
     equal(_.size('hello'), 5, 'can compute the size of a string literal');
-    equal(_.size(new String('hello')), 5, 'can compute the size of string object');
+    equal(_.size(String('hello')), 5, 'can compute the size of string object');
 
     equal(_.size(null), 0, 'handles nulls');
   });

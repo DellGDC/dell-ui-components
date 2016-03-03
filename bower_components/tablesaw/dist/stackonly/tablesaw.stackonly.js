@@ -15,7 +15,7 @@
 	if( !( 'querySelector' in document ) ||
 			( window.blackberry && !window.WebKitPoint ) ||
 			window.operamini ) {
-		return;
+
 	} else {
 		$doc.addClass( 'tablesaw-enhanced' );
 
@@ -49,8 +49,8 @@ if( !Tablesaw.config ) {
 	Tablesaw.config = {};
 }
 
-;(function( $ ) {
-	var pluginName = "table",
+(function ($) {
+    var pluginName = "table",
 		classes = {
 			toolbar: "tablesaw-bar"
 		},
@@ -178,9 +178,8 @@ if( !Tablesaw.config ) {
 
 }( jQuery ));
 
-;(function( win, $, undefined ){
-
-	var classes = {
+(function (win, $, undefined) {
+    var classes = {
 		stackTable: 'tablesaw-stack',
 		cellLabels: 'tablesaw-cell-label',
 		cellContentLabels: 'tablesaw-cell-content'
@@ -220,7 +219,7 @@ if( !Tablesaw.config ) {
 		// get headers in reverse order so that top-level headers are appended last
 		var reverseHeaders = $( this.allHeaders );
 		var hideempty = this.hideempty;
-		
+
 		// create the hide/show toggles
 		reverseHeaders.each(function(){
 			var $t = $( this ),

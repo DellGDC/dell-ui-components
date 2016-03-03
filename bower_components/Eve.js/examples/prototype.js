@@ -5,9 +5,8 @@ Eve.register('rot13', function(ns) {
 		el.update(el.innerHTML.replace(/[a-zA-Z]/g, function(c) {
 			return String.fromCharCode((c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
 		}));
-	};
-	
-	this.listen('ul li', 'mouseover', rot13);
+    }
+    this.listen('ul li', 'mouseover', rot13);
 	this.listen('ul li', 'mouseout', rot13);
 
 });
@@ -34,21 +33,21 @@ Eve.scope('.other-module', function() {
 });
 
 Eve.scope("#outer_scope", function() {
-	
+
 	this.scope('.inner_scope', function() {
-		
+
 		this.listen('a', 'click', function(e) {
 			$(e.target).addClassName('affected');
 		});
-		
+
 		this.scope('#another_scope', function() {
-			
+
 			this.listen('span', 'click', function(e) {
 				$(e.target).addClassName('affected');
 			});
-			
+
 		});
-		
+
 	});
-	
+
 });

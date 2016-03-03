@@ -58,7 +58,7 @@ Also includes:
   /**
    * Github fetcher.
    * Fetches from repo `repo` (in format 'user/repo').
-   * 
+   *
    * If the parameter `filepath` is supplied, it fetches the contents of that
    * given file in the repo.
    *
@@ -90,7 +90,7 @@ Also includes:
    *
    *     var data = Flatdoc.parser.parse('markdown source here');
    *     console.log(data);
-   *   
+   *
    *     data == {
    *       title: 'My Project',
    *       content: '<p>This project is a...',
@@ -437,9 +437,8 @@ Also includes:
  * https://github.com/chjj/marked
  */
 
-;(function() {
-
-/**
+(function () {
+    /**
  * Block-Level Grammar
  */
 
@@ -1317,7 +1316,7 @@ Parser.prototype.tok = function() {
       body += '</tr>\n</thead>\n';
 
       // body
-      body += '<tbody>\n'
+      body += '<tbody>\n';
       for (i = 0; i < this.token.cells.length; i++) {
         row = this.token.cells[i];
         body += '<tr>\n';
@@ -1627,11 +1626,11 @@ if (typeof exports === 'object') {
         return b.replace(/[\s\S]{1,3}/g, cb_encode);
     };
     var _encode = buffer
-        ? function (u) { return (new buffer(u)).toString('base64') } 
+        ? function (u) { return (new buffer(u)).toString('base64') }
     : function (u) { return btoa(utob(u)) }
     ;
     var encode = function(u, urisafe) {
-        return !urisafe 
+        return !urisafe
             ? _encode(u)
             : _encode(u).replace(/[+\/]/g, function(m0) {
                 return m0 == '+' ? '-' : '_';

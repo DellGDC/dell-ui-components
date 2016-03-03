@@ -22,10 +22,10 @@
     }
 
     if (ctx === undefined) {
-        Modernizr.webgl = new Boolean(false);
+        Modernizr.webgl = Boolean(false);
     }
     else {
-        Modernizr.webgl = new Boolean(true);
+        Modernizr.webgl = Boolean(true);
     }
 
 

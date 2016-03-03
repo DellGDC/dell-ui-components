@@ -9,7 +9,7 @@ function benchmark(fn, times, name){
 }
 
 function benchmarkString(fn, times, name) {
-	var fn = new Function("i", "var t=new Date; while(i--) {" + fn + "}; return new Date - t")(times)
+	var fn = new Function("i", "var t=new Date; while(i--) {" + fn + "}; return new Date - t")(times);
 	fn.displayName = name || "benchmarked";
 	return fn;
 }

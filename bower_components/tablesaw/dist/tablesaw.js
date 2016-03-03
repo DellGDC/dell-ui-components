@@ -15,7 +15,7 @@
 	if( !( 'querySelector' in document ) ||
 			( window.blackberry && !window.WebKitPoint ) ||
 			window.operamini ) {
-		return;
+
 	} else {
 		$doc.addClass( 'tablesaw-enhanced' );
 
@@ -49,8 +49,8 @@ if( !Tablesaw.config ) {
 	Tablesaw.config = {};
 }
 
-;(function( $ ) {
-	var pluginName = "table",
+(function ($) {
+    var pluginName = "table",
 		classes = {
 			toolbar: "tablesaw-bar"
 		},
@@ -178,9 +178,8 @@ if( !Tablesaw.config ) {
 
 }( jQuery ));
 
-;(function( win, $, undefined ){
-
-	var classes = {
+(function (win, $, undefined) {
+    var classes = {
 		stackTable: 'tablesaw-stack',
 		cellLabels: 'tablesaw-cell-label',
 		cellContentLabels: 'tablesaw-cell-content'
@@ -220,7 +219,7 @@ if( !Tablesaw.config ) {
 		// get headers in reverse order so that top-level headers are appended last
 		var reverseHeaders = $( this.allHeaders );
 		var hideempty = this.hideempty;
-		
+
 		// create the hide/show toggles
 		reverseHeaders.each(function(){
 			var $t = $( this ),
@@ -275,8 +274,8 @@ if( !Tablesaw.config ) {
 	} );
 
 }( this, jQuery ));
-;(function( $ ) {
-	var pluginName = "tablesawbtn",
+(function ($) {
+    var pluginName = "tablesawbtn",
 		initSelector = ".btn",
 		methods = {
 			_create: function(){
@@ -358,9 +357,8 @@ if( !Tablesaw.config ) {
 	});
 
 }( jQuery ));
-;(function( win, $, undefined ){
-
-	var ColumnToggle = function( element ) {
+(function (win, $, undefined) {
+    var ColumnToggle = function( element ) {
 
 		this.$table = $( element );
 
@@ -536,9 +534,8 @@ if( !Tablesaw.config ) {
 	} );
 
 }( this, jQuery ));
-;(function( win, $, undefined ){
-
-	$.extend( Tablesaw.config, {
+(function (win, $, undefined) {
+    $.extend( Tablesaw.config, {
 		swipe: {
 			horizontalThreshold: 15,
 			verticalThreshold: 30
@@ -838,8 +835,8 @@ if( !Tablesaw.config ) {
 
 }( this, jQuery ));
 
-;(function( $ ) {
-	function getSortValue( cell ) {
+(function ($) {
+    function getSortValue( cell ) {
 		return $.map( cell.childNodes, function( el ) {
 				var $el = $( el );
 				if( $el.is( 'input, select' ) ) {
@@ -1108,9 +1105,8 @@ if( !Tablesaw.config ) {
 
 }( jQuery ));
 
-;(function( win, $, undefined ){
-
-	var MM = {
+(function (win, $, undefined) {
+    var MM = {
 		attr: {
 			init: 'data-tablesaw-minimap'
 		}
@@ -1183,9 +1179,8 @@ if( !Tablesaw.config ) {
 
 }( this, jQuery ));
 
-;(function( win, $ ) {
-
-	var S = {
+(function (win, $) {
+    var S = {
 		selectors: {
 			init: 'table[data-tablesaw-mode-switch]'
 		},
