@@ -5378,7 +5378,7 @@
             <div class="col-sm-5">
                 <div class="img-element well well-gray-very-light-stroke" equalize-height=".img-element"><img
                     class="img-responsive bottom-offset-10 center-block"
-                    src="components/product-stack/product-img/legalDisclose.png"
+                    src="components/product-stack/product-img/finance-lease.png"
                     alt="Pricing Substack"/>
                 </div>
                 <p>Provides users the price with leasing or financing.</p>
@@ -5407,6 +5407,87 @@
         </div>
         <!-- /legal Messaging  -->
 
+        <!-- Dell Advantage -->
+        <div class="row bottom-offset-60">
+            <div class="col-xs-12">
+                <h3>Dell Advantage</h3>
+            </div>
+            <div class="col-sm-5">
+                <div class="img-element well well-gray-very-light-stroke" equalize-height=".img-element"><img
+                    class="img-responsive bottom-offset-10 center-block"
+                    src="components/product-stack/product-img/rewards.png"
+                    alt="Pricing Substack"/>
+                </div>
+                <p>Dell Advantage offers customers incentives and rewards to purchase from Dell again.</p>
+            </div>
+            <div class="col-sm-7">
+                <div class="demo-guide panel-group" id="dell-advantage-independent-accordion">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#dell-advantage-independent-accordion"
+                               href="#dell-advantage-code">
+                                Code/Logic
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="dell-advantage-code" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <p>The messaging for Dell Advantage changes dependent on the user. If a user has visited Dell.com and previously been cookied, they will be presented with a Hot state. If they are new to Dell.com or haven’t been cookied, they will be presented with a cold state. </p>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#dell-advantage-independent-accordion"
+                               href="#dell-advantage-ux" class="collapsed">
+                                UX
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="dell-advantage-ux" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <img
+                                class="img-responsive bottom-offset-10 center-block"
+                                src="components/product-stack/product-img/dell-advantage-chart.png"
+                                alt="special offers flow chart"/>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#dell-advantage-independent-accordion"
+                               href="#dell-advantage-visual" class="collapsed">
+                                Visual Notes
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="dell-advantage-visual" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>Only Dell Advantage logo can be used</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#dell-advantage-independent-accordion"
+                               href="#dell-advantage-content" class="collapsed">
+                                Content Usage
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="dell-advantage-content" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>Content and linking is business controlled but an overall strategy should be followed.</li>
+                                <li>Hot – provide users with details on their rewards</li>
+                                <li>Cold – explain Dell Advantage and link to additional details </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Dell Advantage -->
+
         <!-- Shipping Substack -->
         <div class="row bottom-offset-60">
             <div class="col-xs-12">
@@ -5418,10 +5499,7 @@
                     src="components/product-stack/product-img/shipping.png"
                     alt="Shipping Substack"/>
                 </div>
-                <p>The asset/title/review is used to highlight a unique product attribute based on logic that
-                    incorporates
-                    legal requirements, lifecycle needs, timed events, and marketing differentiation.
-                </p>
+                <p>Provides customers with realistic expectations about a product shipping date.</p>
             </div>
             <div class="col-sm-7">
                 <div class="demo-guide panel-group" id="shipping-substack-independent-accordion">
@@ -5436,26 +5514,26 @@
                     <div id="shipping-substack-code" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul>
-                                <li>Optional. Allow ON only for items at SKU/OC level.</li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>Allow ON only for items at SKU/OC level.</li>
                                 <li>Automatically toggle OFF for items at Model and Franchise levels.</li>
-                                <li>Text only. No special formatting.</li>
-                                <li>Use an inheritance model to provide Bugs that can cascade across
-                                    Franchise,
-                                    Model, and OC levels.
-                                </li>
-                                <li>In situations where there is no required legal need, display of the Bug
-                                    is
-                                    based on business logic and priority rankings. For example, business
-                                    logic
-                                    may specify that timed event Bugs can be overridden by ATS
-                                    (available-to-sell) conditions, so that Cyber Monday Special text is
-                                    replaced by Only [N] Left! when inventory levels hit a certain
-                                    threshold.
-                                </li>
-                                <li>Globalize as all other text per standard AppFramework globalization
-                                    methods.
-                                    Should read Left-to-Right or Right-to-Left based on language selection.
-                                </li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Text Label</strong></li>
+                                <li>Required (ON) if Shipping substack is ON.</li>
+                                <li>If Estimated Ship Date: label is shown, Date must also be shown.</li>
+                                <li>Is globalized using standard App Framework methods.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Date</strong></li>
+                                <li>Required if Text Label = “Estimated Ship Date:”.</li>
+                                <li>Is concatenated to the end of the Shipping Date label text.</li>
+                                <li>Is globalized using standard App Framework methods.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Logo</strong></li>
+                                <li>Required if using Smart Select Date</li>
+                                <li>Must use the approved Smart Select logo, refer to the DAM for latest logo.</li>
                             </ul>
                         </div>
                     </div>
@@ -5470,7 +5548,20 @@
                     <div id="shipping-substack-ux" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Not clickable. No interaction.</li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>The Shipping Substack can be displayed in any context. However, because of space constraints, the Shipping Substack is not recommended for display in “short stacks” such as carousels or related products contexts.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Text Label</strong></li>
+                                <li>Can be linked or unlinked. If linked, bring up additional information or shipping disclaimers using the Overlay Window pattern. The destination, content, and method of display (modal, pop-up, tooltip, etc.) are configurable by project.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Date</strong></li>
+                                <li>Required if Estimated Ship Date: label is used. Not recommended with other labels. </li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Logo</strong></li>
+                                <li>Required if using Smart Select Date</li>
                             </ul>
                         </div>
                     </div>
@@ -5485,12 +5576,21 @@
                     <div id="shipping-substack-visual" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Plain text only, formatted per visual comps. No links; no interaction.
-                                </li>
-                                <li>Text is centered or left-aligned to match with other elements in the
-                                    stack.
-                                </li>
-                                <li>Text wraps as necessary.</li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>None</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Text Label</strong></li>
+                                <li>Wraps as necessary to fit container.</li>
+                                <li>Shifts to align with container edge if Icon is not shown.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Date</strong></li>
+                                <li>Is concatenated to the end of the Shipping Date label text. If the container allows, the Date can remain on the same line as the Text Label.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Logo</strong></li>
+                                <li>Only Smart Select Logo can be used.</li>
                             </ul>
                         </div>
                     </div>
@@ -5505,28 +5605,20 @@
                     <div id="shipping-substack-content" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Business-controlled copy assigned at the OC/SKU level. Content is
-                                    ideally
-                                    concise to keep the bug on one line, without wrapping.
-                                </li>
-                                <li>The stack label can be displayed in any Product Stack context, including
-                                    search results, Browse, product carousels, and Cart.
-                                </li>
-                                <li>When the stack label is manually maintained for each Order Code, the
-                                    Business must create a solid content strategy for assigning useful
-                                    differentiators to each OC. When all OCs on a page show the same bug
-                                    text
-                                    (for example, “Dell Recommended”), the stack label no longer serves its
-                                    purpose as a useful differentiator.
-                                </li>
-                                <li>DCX recommends that the stack label be suppressed in Product Stacks for
-                                    items whose <a href="/guides/product-stack/title">Product Titles</a>are
-                                    also
-                                    using differentiator terms (such as Good, Better, or Best or Fast, Ultra
-                                    Fast, or Turbo Charged). This is to allow the user to focus on one key
-                                    differentiator per item and avoid any potential conflicts between
-                                    differentiator content in the Bug and the Title.
-                                </li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>The Shipping Substack can be displayed in any context. However, because of space constraints, the Shipping Substack is not recommended for display in “short stacks” such as carousels or related products contexts.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Text Label</strong></li>
+                                <li>Can include Estimated Ship Date:, Ships Fast or Next Business Day labels; and Inventory/ATS messaging, such as Pre-Order, Out-of-Stock, Backordered.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Date</strong></li>
+                                <li>None.</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Logo</strong></li>
+                                <li>None.</li>
                             </ul>
                         </div>
                     </div>
@@ -5546,10 +5638,7 @@
                     src="components/product-stack/product-img/e-value.png"
                     alt="e-Value Stack"/>
                 </div>
-                <p>The asset/title/review is used to highlight a unique product attribute based on logic that
-                    incorporates
-                    legal requirements, lifecycle needs, timed events, and marketing differentiation.
-                </p>
+                <p>E-Value code is the main (and sometimes the only) reference point for a customer to mention or point to when speaking to a sales support rep over the phone or over Live Chat. In essence, the e-value code becomes the unique identifier (i.e. sku number) for a customer to reference a particular configuration or Order Code on the site.</p>
             </div>
             <div class="col-sm-7">
                 <div class="demo-guide panel-group" id="e-value-substack-independent-accordion">
@@ -5564,26 +5653,9 @@
                     <div id="e-value-substack-code" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul>
-                                <li>Optional. Allow ON only for items at SKU/OC level.</li>
-                                <li>Automatically toggle OFF for items at Model and Franchise levels.</li>
-                                <li>Text only. No special formatting.</li>
-                                <li>Use an inheritance model to provide Bugs that can cascade across
-                                    Franchise,
-                                    Model, and OC levels.
-                                </li>
-                                <li>In situations where there is no required legal need, display of the Bug
-                                    is
-                                    based on business logic and priority rankings. For example, business
-                                    logic
-                                    may specify that timed event Bugs can be overridden by ATS
-                                    (available-to-sell) conditions, so that Cyber Monday Special text is
-                                    replaced by Only [N] Left! when inventory levels hit a certain
-                                    threshold.
-                                </li>
-                                <li>Globalize as all other text per standard AppFramework globalization
-                                    methods.
-                                    Should read Left-to-Right or Right-to-Left based on language selection.
-                                </li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>Allow ON for items at the OC level only.</li>
+                                <li>Text only, no special formatting.</li>
                             </ul>
                         </div>
                     </div>
@@ -5613,12 +5685,8 @@
                     <div id="e-value-substack-visual" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Plain text only, formatted per visual comps. No links; no interaction.
-                                </li>
-                                <li>Text is centered or left-aligned to match with other elements in the
-                                    stack.
-                                </li>
-                                <li>Text wraps as necessary.</li>
+                                <li>Refer to the Button pattern for all interaction notes.</li>
+                                <li>Text is centered or left aligned to match other elements.></li>
                             </ul>
                         </div>
                     </div>
@@ -5633,28 +5701,7 @@
                     <div id="e-value-substack-content" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Business-controlled copy assigned at the OC/SKU level. Content is
-                                    ideally
-                                    concise to keep the bug on one line, without wrapping.
-                                </li>
-                                <li>The stack label can be displayed in any Product Stack context, including
-                                    search results, Browse, product carousels, and Cart.
-                                </li>
-                                <li>When the stack label is manually maintained for each Order Code, the
-                                    Business must create a solid content strategy for assigning useful
-                                    differentiators to each OC. When all OCs on a page show the same bug
-                                    text
-                                    (for example, “Dell Recommended”), the stack label no longer serves its
-                                    purpose as a useful differentiator.
-                                </li>
-                                <li>DCX recommends that the stack label be suppressed in Product Stacks for
-                                    items whose <a href="/guides/product-stack/title">Product Titles</a>are
-                                    also
-                                    using differentiator terms (such as Good, Better, or Best or Fast, Ultra
-                                    Fast, or Turbo Charged). This is to allow the user to focus on one key
-                                    differentiator per item and avoid any potential conflicts between
-                                    differentiator content in the Bug and the Title.
-                                </li>
+                                <li>Each e-value code is unique and acts as the unique identifier for each product.</li>
                             </ul>
                         </div>
                     </div>
