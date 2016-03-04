@@ -4877,12 +4877,10 @@
                         <div id="tech-specs-visual" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <ul>
-                                    <li>Plain text only, formatted per visual comps. No links; no interaction.
-                                    </li>
-                                    <li>Text is centered or left-aligned to match with other elements in the
-                                        stack.
-                                    </li>
                                     <li>Text wraps as necessary.</li>
+                                    <li>Visual tech specs are accessibility compliant</li>
+                                    <li>Visual treatment is usually used in horizontal stack layouts such as Search Results.</li>
+                                    <li>Specs use text only in small/extra small, as the visuals are too hard to compare on small screens</li>
                                 </ul>
                             </div>
                         </div>
@@ -4897,28 +4895,7 @@
                         <div id="tech-specs-content" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <ul>
-                                    <li>Business-controlled copy assigned at the OC/SKU level. Content is
-                                        ideally
-                                        concise to keep the bug on one line, without wrapping.
-                                    </li>
-                                    <li>The stack label can be displayed in any Product Stack context, including
-                                        search results, Browse, product carousels, and Cart.
-                                    </li>
-                                    <li>When the stack label is manually maintained for each Order Code, the
-                                        Business must create a solid content strategy for assigning useful
-                                        differentiators to each OC. When all OCs on a page show the same bug
-                                        text
-                                        (for example, “Dell Recommended”), the stack label no longer serves its
-                                        purpose as a useful differentiator.
-                                    </li>
-                                    <li>DCX recommends that the stack label be suppressed in Product Stacks for
-                                        items whose <a href="/guides/product-stack/title">Product Titles</a>are
-                                        also
-                                        using differentiator terms (such as Good, Better, or Best or Fast, Ultra
-                                        Fast, or Turbo Charged). This is to allow the user to focus on one key
-                                        differentiator per item and avoid any potential conflicts between
-                                        differentiator content in the Bug and the Title.
-                                    </li>
+                                    <li>Ensure that lists are MDA compliant, mainly by listing processor and OS first and second respectively. See the MDA Compliance CORAL wiki for more information.</li>
                                 </ul>
                             </div>
                         </div>
@@ -4938,10 +4915,7 @@
                     src="components/product-stack/product-img/featuredSpes.png"
                     alt="Featured Specs"/>
                 </div>
-                <p>The asset/title/review is used to highlight a unique product attribute based on logic that
-                    incorporates
-                    legal requirements, lifecycle needs, timed events, and marketing differentiation.
-                </p>
+                <p>Provide a callout for a featured tech spec, such as touch-enabled or giant hard drive.</p>
             </div>
             <div class="col-sm-7">
                 <div class="demo-guide panel-group" id="featured-specs-independent-accordion">
@@ -4956,26 +4930,9 @@
                     <div id="featured-specs-code" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul>
-                                <li>Optional. Allow ON only for items at SKU/OC level.</li>
-                                <li>Automatically toggle OFF for items at Model and Franchise levels.</li>
-                                <li>Text only. No special formatting.</li>
-                                <li>Use an inheritance model to provide Bugs that can cascade across
-                                    Franchise,
-                                    Model, and OC levels.
-                                </li>
-                                <li>In situations where there is no required legal need, display of the Bug
-                                    is
-                                    based on business logic and priority rankings. For example, business
-                                    logic
-                                    may specify that timed event Bugs can be overridden by ATS
-                                    (available-to-sell) conditions, so that Cyber Monday Special text is
-                                    replaced by Only [N] Left! when inventory levels hit a certain
-                                    threshold.
-                                </li>
-                                <li>Globalize as all other text per standard AppFramework globalization
-                                    methods.
-                                    Should read Left-to-Right or Right-to-Left based on language selection.
-                                </li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>Allow ON for items at any level.</li>
+                                <li>Only simple text and image.</li>
                             </ul>
                         </div>
                     </div>
@@ -5005,11 +4962,7 @@
                     <div id="featured-specs-visual" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Plain text only, formatted per visual comps. No links; no interaction.
-                                </li>
-                                <li>Text is centered or left-aligned to match with other elements in the
-                                    stack.
-                                </li>
+                                <li>Text is centered or left-aligned to match with other elements in the stack.</li>
                                 <li>Text wraps as necessary.</li>
                             </ul>
                         </div>
@@ -5025,27 +4978,13 @@
                     <div id="featured-specs-content" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Business-controlled copy assigned at the OC/SKU level. Content is
-                                    ideally
-                                    concise to keep the bug on one line, without wrapping.
-                                </li>
-                                <li>The stack label can be displayed in any Product Stack context, including
-                                    search results, Browse, product carousels, and Cart.
-                                </li>
-                                <li>When the stack label is manually maintained for each Order Code, the
-                                    Business must create a solid content strategy for assigning useful
-                                    differentiators to each OC. When all OCs on a page show the same bug
-                                    text
-                                    (for example, “Dell Recommended”), the stack label no longer serves its
-                                    purpose as a useful differentiator.
-                                </li>
-                                <li>DCX recommends that the stack label be suppressed in Product Stacks for
-                                    items whose <a href="/guides/product-stack/title">Product Titles</a>are
-                                    also
-                                    using differentiator terms (such as Good, Better, or Best or Fast, Ultra
-                                    Fast, or Turbo Charged). This is to allow the user to focus on one key
-                                    differentiator per item and avoid any potential conflicts between
-                                    differentiator content in the Bug and the Title.
+                                <li>Use the differentiator in conjunction with these other items to fully implement the product content strategy:
+                                    <ul>
+                                        <li>Product Bug</li>
+                                        <li>Product Title</li>
+                                        <li>Tech Specs</li>
+                                        <li>Product Image, and Image Violators</li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
