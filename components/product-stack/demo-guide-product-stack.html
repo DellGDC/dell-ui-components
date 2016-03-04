@@ -5005,10 +5005,7 @@
                     src="components/product-stack/product-img/ProductBlurb.png"
                     alt="Product Blurb"/>
                 </div>
-                <p>The asset/title/review is used to highlight a unique product attribute based on logic that
-                    incorporates
-                    legal requirements, lifecycle needs, timed events, and marketing differentiation.
-                </p>
+                <p>Provide a short marketing statement about the product. Note that with the addition of the Tech Specs field, the Blurb is no longer used for showcasing tech specs or product dimensions.</p>
             </div>
             <div class="col-sm-7">
                 <div class="demo-guide panel-group" id="product-blurb-independent-accordion">
@@ -5023,26 +5020,9 @@
                     <div id="product-blurb-code" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul>
-                                <li>Optional. Allow ON only for items at SKU/OC level.</li>
-                                <li>Automatically toggle OFF for items at Model and Franchise levels.</li>
-                                <li>Text only. No special formatting.</li>
-                                <li>Use an inheritance model to provide Bugs that can cascade across
-                                    Franchise,
-                                    Model, and OC levels.
-                                </li>
-                                <li>In situations where there is no required legal need, display of the Bug
-                                    is
-                                    based on business logic and priority rankings. For example, business
-                                    logic
-                                    may specify that timed event Bugs can be overridden by ATS
-                                    (available-to-sell) conditions, so that Cyber Monday Special text is
-                                    replaced by Only [N] Left! when inventory levels hit a certain
-                                    threshold.
-                                </li>
-                                <li>Globalize as all other text per standard AppFramework globalization
-                                    methods.
-                                    Should read Left-to-Right or Right-to-Left based on language selection.
-                                </li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>Allow ON for items at any level.</li>
+                                <li>Text only, no special formatting.</li>
                             </ul>
                         </div>
                     </div>
@@ -5072,11 +5052,7 @@
                     <div id="product-blurb-visual" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Plain text only, formatted per visual comps. No links; no interaction.
-                                </li>
-                                <li>Text is centered or left-aligned to match with other elements in the
-                                    stack.
-                                </li>
+                                <li>Text is centered or left-aligned to match with other elements in the stack.</li>
                                 <li>Text wraps as necessary.</li>
                             </ul>
                         </div>
@@ -5092,28 +5068,15 @@
                     <div id="product-blurb-content" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Business-controlled copy assigned at the OC/SKU level. Content is
-                                    ideally
-                                    concise to keep the bug on one line, without wrapping.
-                                </li>
-                                <li>The stack label can be displayed in any Product Stack context, including
-                                    search results, Browse, product carousels, and Cart.
-                                </li>
-                                <li>When the stack label is manually maintained for each Order Code, the
-                                    Business must create a solid content strategy for assigning useful
-                                    differentiators to each OC. When all OCs on a page show the same bug
-                                    text
-                                    (for example, “Dell Recommended”), the stack label no longer serves its
-                                    purpose as a useful differentiator.
-                                </li>
-                                <li>DCX recommends that the stack label be suppressed in Product Stacks for
-                                    items whose <a href="/guides/product-stack/title">Product Titles</a>are
-                                    also
-                                    using differentiator terms (such as Good, Better, or Best or Fast, Ultra
-                                    Fast, or Turbo Charged). This is to allow the user to focus on one key
-                                    differentiator per item and avoid any potential conflicts between
-                                    differentiator content in the Bug and the Title.
-                                </li>
+                                <li>Use the Blurb in conjunction with these other items to fully implement the product content strategy:
+                                    <ul>
+                                        <li>Product Bug</li>
+                                        <li>Product Title</li>
+                                        <li>Tech Specs</li>
+                                        <li>Product Image</li>
+                                    </ul>
+                                <li>
+                                <li>Product blurb is owned by the business.</li>
                             </ul>
                         </div>
                     </div>
@@ -5121,6 +5084,113 @@
             </div>
         </div>
         <!-- /Product Blurb -->
+
+        <!-- Special Offers -->
+        <div class="row bottom-offset-60">
+            <div class="col-xs-12">
+                <h3>Special Offers</h3>
+            </div>
+            <div class="col-sm-5">
+                <div class="img-element well well-gray-very-light-stroke" equalize-height=".img-element"><img
+                    class="img-responsive bottom-offset-10 center-block"
+                    src="components/product-stack/product-img/specialOffers.png"
+                    alt="Pricing Substack"/>
+                </div>
+                <p>Product Offers always link to further product details. They can be displayed in one of three variants.</p>
+                <p><strong>Single offer:</strong> A single offer launches a modal where the user can read the offer and proceed from an action link.</p>
+                <p><strong>Multiple offers:</strong> Multiple Offers launch a workflow window process where each of the offer links continue to the specific product offer.</p>
+                <p><strong>Deals offer:</strong> Deal offers are always listed as links and can only appear in deals product stacks</p>
+            </div>
+            <div class="col-sm-7">
+                <div class="demo-guide panel-group" id="special-offers-independent-accordion">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#special-offers-independent-accordion"
+                               href="#special-offers-code">
+                                Code/Logic
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="special-offers-code" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <ul>
+                                <li>Allow ON for items at any level</li>
+                                <li>Text only, no special formatting.</li>
+                                <li>Offer details displayed differently depending on the number of offers and where the product stack is being displayed.</li>
+                            </ul>
+                            <div class="bottom-offset-5">
+                                <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#special-flowchart">
+                                    <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show Offer Process</span>
+                                    <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide Offer Process</span>
+                                </a>
+                            </div>
+                            <div id="special-flowchart" class="collapse">
+                                <img
+                                    class="img-responsive bottom-offset-10 center-block"
+                                    src="components/product-stack/product-img/specialOfferDiagram.png"
+                                    alt="special offers flow chart"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#special-offers-independent-accordion"
+                               href="#special-offers-ux" class="collapsed">
+                                UX
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="special-offers-ux" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li class="list-unstyled"><strong>1 Special Offer</strong></li>
+                                <li>Utilize a modal</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>2+ Special Offer</strong></li>
+                                <li>Utilize a workflow</li>
+                            </ul>
+                            <ul>
+                                <li class="list-unstyled"><strong>Product Stacks on Deals Page Page</strong></li>
+                                <li>Special Offers are listed out. They must be clearly distinguishable from the next.</li>
+                                <li>Utilize a modal if additional details for each offer are needed.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#special-offers-independent-accordion"
+                               href="#special-offers-visual" class="collapsed">
+                                Visual Notes
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="special-offers-visual" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>N/A</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#special-offers-independent-accordion"
+                               href="#special-offers-content" class="collapsed">
+                                Content Usage
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="special-offers-content" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>Offers should each have defined CTA’s. If an offer doesn’t have a defined CTA, it takes on the primary product stack CTA.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Special Offers -->
 
         <!-- Pricing Substack -->
         <div class="row bottom-offset-60">
@@ -5133,45 +5203,45 @@
                     src="components/product-stack/product-img/pricingSubstack.png"
                     alt="Pricing Substack"/>
                 </div>
-                <p>The asset/title/review is used to highlight a unique product attribute based on logic that
-                    incorporates
-                    legal requirements, lifecycle needs, timed events, and marketing differentiation.
-                </p>
+                <p>The pricing overview displays the final price and is only visible in a simplified verison of the product stack, typically for small or extra small screen sizes. Upon clicking more details, the full pricing sub stack is then displayed, and only then could the pricing sub stack and overview pricing be displayed together. The pricing sub stack and overview pricing can never be displayed together upon first arrival at the product stack.</p>
+                <p><strong>Important!</strong> The pricing overview is automatically generated through the pricing sub stack. See the Pricing Sub Stack to learn about the legal requirements of the final price.</p>
+                <p>The pricing stack itself contains other subprocesses:</p>
+                <ul>
+                    <li>Base Price</li>
+                    <li>Total Savings</li>
+                    <li>Final Price</li>
+                    <li>Currency Symbol</li>
+                </ul>
             </div>
+
             <div class="col-sm-7">
                 <div class="demo-guide panel-group" id="pricing-substack-independent-accordion">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#pricing-substack-independent-accordion"
-                               href="#pricing-substack-code">
-                                Code/Logic
+                               href="#pricing-substack-base">
+                                Base Price Subprocess
                             </a>
                         </h4>
                     </div>
-                    <div id="pricing-substack-code" class="panel-collapse collapse in">
+                    <div id="pricing-substack-base" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul>
-                                <li>Optional. Allow ON only for items at SKU/OC level.</li>
-                                <li>Automatically toggle OFF for items at Model and Franchise levels.</li>
-                                <li>Text only. No special formatting.</li>
-                                <li>Use an inheritance model to provide Bugs that can cascade across
-                                    Franchise,
-                                    Model, and OC levels.
-                                </li>
-                                <li>In situations where there is no required legal need, display of the Bug
-                                    is
-                                    based on business logic and priority rankings. For example, business
-                                    logic
-                                    may specify that timed event Bugs can be overridden by ATS
-                                    (available-to-sell) conditions, so that Cyber Monday Special text is
-                                    replaced by Only [N] Left! when inventory levels hit a certain
-                                    threshold.
-                                </li>
-                                <li>Globalize as all other text per standard AppFramework globalization
-                                    methods.
-                                    Should read Left-to-Right or Right-to-Left based on language selection.
-                                </li>
+                                <li>“Base Price” is a generic label that describes SAPP (Starting at Price Point).</li>
+                                <li>MAPP stands for Minimum Advertised Price Point. This means that we cannot show the price to the customer until they have taken further action. That action is dependent on the manufacturer’s contracts with Dell.</li>
                             </ul>
+                            <div class="bottom-offset-5">
+                                <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#base-flowchart">
+                                    <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i>Show Base Subprocess</span>
+                                    <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i>Hide Base Subprocess</span>
+                                </a>
+                            </div>
+                            <div id="base-flowchart" class="collapse">
+                                <img
+                                    class="img-responsive bottom-offset-10 center-block"
+                                    src="components/product-stack/product-img/base-price-chart.png"
+                                    alt="base flow chart"/>
+                            </div>
                         </div>
                     </div>
                     <div class="panel-heading">
