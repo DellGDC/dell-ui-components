@@ -5721,10 +5721,7 @@
                     src="components/product-stack/product-img/cta.png"
                     alt="CTA Substack"/>
                 </div>
-                <p>The asset/title/review is used to highlight a unique product attribute based on logic that
-                    incorporates
-                    legal requirements, lifecycle needs, timed events, and marketing differentiation.
-                </p>
+                <p>To provide primary and secondary calls to action for the product. These calls to action are subject to all visual and interaction rules defined in the Buttons Pattern.</p>
             </div>
             <div class="col-sm-7">
                 <div class="demo-guide panel-group" id="cta-substack-independent-accordion">
@@ -5739,26 +5736,11 @@
                     <div id="cta-substack-code" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <ul>
-                                <li>Optional. Allow ON only for items at SKU/OC level.</li>
-                                <li>Automatically toggle OFF for items at Model and Franchise levels.</li>
-                                <li>Text only. No special formatting.</li>
-                                <li>Use an inheritance model to provide Bugs that can cascade across
-                                    Franchise,
-                                    Model, and OC levels.
-                                </li>
-                                <li>In situations where there is no required legal need, display of the Bug
-                                    is
-                                    based on business logic and priority rankings. For example, business
-                                    logic
-                                    may specify that timed event Bugs can be overridden by ATS
-                                    (available-to-sell) conditions, so that Cyber Monday Special text is
-                                    replaced by Only [N] Left! when inventory levels hit a certain
-                                    threshold.
-                                </li>
-                                <li>Globalize as all other text per standard AppFramework globalization
-                                    methods.
-                                    Should read Left-to-Right or Right-to-Left based on language selection.
-                                </li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>Allow CTA Substack ON for items at any level.</li>
+                                <li>Allow max 3 CTAs for any stack: one primary, one secondary and one “Add to Compare”.</li>
+                                <li>If only Primary CTA is used, it can choose green purchase path button treatment OR general use treatment.</li>
+                                <li>Refer to Button pattern and purchase path notes for all code/logic notes.</li>
                             </ul>
                         </div>
                     </div>
@@ -5773,7 +5755,8 @@
                     <div id="cta-substack-ux" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Not clickable. No interaction.</li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>Refer to the Button pattern for all interaction notes.</li>
                             </ul>
                         </div>
                     </div>
@@ -5788,12 +5771,8 @@
                     <div id="cta-substack-visual" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Plain text only, formatted per visual comps. No links; no interaction.
-                                </li>
-                                <li>Text is centered or left-aligned to match with other elements in the
-                                    stack.
-                                </li>
-                                <li>Text wraps as necessary.</li>
+                                <li class="list-unstyled"><strong>General</strong></li>
+                                <li>Refer to the Button pattern for all interaction notes.</li>
                             </ul>
                         </div>
                     </div>
@@ -5808,27 +5787,13 @@
                     <div id="cta-substack-content" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>Business-controlled copy assigned at the OC/SKU level. Content is
-                                    ideally
-                                    concise to keep the bug on one line, without wrapping.
-                                </li>
-                                <li>The stack label can be displayed in any Product Stack context, including
-                                    search results, Browse, product carousels, and Cart.
-                                </li>
-                                <li>When the stack label is manually maintained for each Order Code, the
-                                    Business must create a solid content strategy for assigning useful
-                                    differentiators to each OC. When all OCs on a page show the same bug
-                                    text
-                                    (for example, “Dell Recommended”), the stack label no longer serves its
-                                    purpose as a useful differentiator.
-                                </li>
-                                <li>DCX recommends that the stack label be suppressed in Product Stacks for
-                                    items whose <a href="/guides/product-stack/title">Product Titles</a>are
-                                    also
-                                    using differentiator terms (such as Good, Better, or Best or Fast, Ultra
-                                    Fast, or Turbo Charged). This is to allow the user to focus on one key
-                                    differentiator per item and avoid any potential conflicts between
-                                    differentiator content in the Bug and the Title.
+                                <li>The wording of the CTA must describe the action the user will take. For example:
+                                    <ul>
+                                        <li>Franchise level stacks often use a “View Details” CTA to take users to a Model PD page</li>
+                                        <li>Model level stacks often use a “Select” CTA to take the user to the Model FS page</li>
+                                        <li>Configurable OC level stacks often use a “Customize” CTA to take the user to Cconfigure</li>
+                                        <li>Preconfigured OC or SNP SKU stacks often use an “Add to Cart” CTA to add the item directly to cart</li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
