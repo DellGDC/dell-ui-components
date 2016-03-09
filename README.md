@@ -175,14 +175,19 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.18** - January 26, 2016:
-  - adding product stack, product stack guides layout and ability to switch to a guides view to version out guides pages.
-  - build for testing updated product stack code and popovers fix
+**1.0.20** - March 9, 2016:
+  - Adding in guides layout for product stack
+  - fixes for popovers so it stays pen when clikced inside of open popover
+  - test build for staging/DesLib
 
 
 ### Older versions:
 
 ```
+1.0.20 - March 9, 2016:
+  - adding in guides layout page
+  - created p-stack sectional images for guides page
+
 1.0.19 - March 2, 2016:
   - additional refinements for product stack
 
