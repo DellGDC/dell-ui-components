@@ -281,9 +281,9 @@
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-xs-12 col-sm-2 form-label" for="inputError">Email: default error msg</label>
+                        <label class="col-xs-12 col-sm-2 form-label" for="email-1">Email: default error msg</label>
                         <div class="col-xs-6 col-sm-6">
-                            <input type="text" class="email-check form-control"/>
+                            <input id="email-1" type="text" class="email-check form-control"/>
                         </div>
                     </div>
                 </div>
@@ -298,9 +298,9 @@
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-xs-12 col-sm-2 form-label" for="inputError">Email: Custom msg/localized</label>
+                        <label class="col-xs-12 col-sm-2 form-label" for="email-2">Email: Custom msg/localized</label>
                         <div class="col-xs-6 col-sm-6">
-                            <input type="text" class="email-check form-control" data-error-message="Hello!! Please input a valid email address!"/>
+                            <input id="email-2" type="text" class="email-check form-control" data-error-message="Hello!! Please input a valid email address!"/>
                         </div>
                     </div>
                 </div>
@@ -590,7 +590,7 @@
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label for="ms" class="form-label">Multi-select with checkboxes</label>
-                                <select class="ms-checkbox" id="ms" multiple="multiple">
+                                <select class="ms-checkbox" id="ms" multiple="multiple" placeholder="Select month">
                                     <option value="1">January</option>
                                     <option value="2">February</option>
                                     <option value="3">March</option>

@@ -214,8 +214,12 @@
                 white-space: nowrap;
                 color: @dell-blue;
                 padding: 3px 3px 3px 3px;
+                cursor: pointer;
                 &.optgroup {
                     font-weight: bold;
+                }
+                input[type=checkbox] {
+                    top: 0px;
                 }
             }
             &:hover,
@@ -283,7 +287,18 @@
     height: 0;
 }
 
-
+.has-error {
+    .form-control,
+    input.form-control {
+        background: @dell-alert-yellow;
+        &:active,
+        &:focus {
+            background: @white;
+            border-color: @dell-blue;
+            box-shadow: 0 0 2px lighten(@dell-blue, 40%);
+        }
+    }
+}
 
 //============== bootstrap slider =================
 
