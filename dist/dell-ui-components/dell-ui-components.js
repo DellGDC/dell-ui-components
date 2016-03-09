@@ -22289,8 +22289,9 @@ angular.module('dellUiComponents').directive('carousel', [
 angular.module('dellUiComponents').directive('msCheckbox', function () {
   return {
     restrict: 'C',
-    link: function () {
-      $('.ms-checkbox').multipleSelect({ placeholder: 'Select title' });
+    link: function ($scope, $element, $attr) {
+      var placeholderText = typeof $attr.placeholder !== 'undefined' ? $attr.placeholder : 'Please select';
+      $element.multipleSelect({ placeholder: placeholderText });
     }
   };
 }).directive('listTree', function () {
@@ -22306,50 +22307,21 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       });
     }
   };
-}).directive('emailValidate', function () {
-  return {
-    restrict: 'C',
-    link: function ($scope, element, attributes, controller) {
-      $(element).blur(function () {
-        var email = $(this).validate();
-        var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
-        if (re.test(element)) {
-          $(element).addClass('alert alert-warning');
-          $(element).tooltip({ title: 'Please input a valid email address!' });
-        } else {
-        }
-      });
-    }
-  };
 }).directive('emailCheck', function () {
   return {
-    restrict: 'AEC',
-    link: function ($scope, element, attributes, controller) {
-      //$(element).blur(function () {
-      //    var string1 = $(element).val();
-      //    if (string1.indexOf("@") === -1){
-      //        $(element).addClass('alert alert-warning');
-      //        $(element).tooltip({
-      //            title: "Please input a valid email address!"
-      //        });
-      //    //$(element).blur();
-      //    } else {
-      //        $(element).removeClass('alert alert-warning');
-      //        $(element).tooltip('disable');
-      //    }
-      //});
-      $(element).on('keyup', function () {
-        var string1 = $(element).val();
-        var regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
+    restrict: 'C',
+    link: function ($scope, $element, attributes, controller) {
+      $element.on('blur', function () {
+        var string1 = $element.val(), regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
         if (!string1.match(regex)) {
           if (!attributes.errorMessage) {
             attributes.errorMessage = 'Please input a valid email address!';
           }
-          $(element).addClass('alert alert-warning');
-          $(element).tooltip({ title: attributes.errorMessage });
+          $element.parents('.form-group').addClass('has-error');
+          $element.tooltip({ title: attributes.errorMessage });
         } else {
-          $(element).removeClass('alert alert-warning');
-          $(element).tooltip('destroy');
+          $element.parents('.form-group').removeClass('has-error');
+          $element.tooltip('destroy');
         }
       });
     }
@@ -22360,9 +22332,9 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
     link: function ($scope, $element, $attrs, controller) {
       $element.find('.checkbox input[type=checkbox]').on('click', function () {
         if ($element.find('.checkbox input[type=checkbox]').is(':checked')) {
-          $($element).find('input[type=password]').attr('type', 'text');
+          $element.find('input[type=password]').attr('type', 'text');
         } else {
-          $($element).find('input[type=text]').attr('type', 'password');
+          $element.find('input[type=text]').attr('type', 'password');
         }
       });
     }
@@ -22371,22 +22343,24 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   // Runs during compile
   return {
     restrict: 'C',
-    link: function ($scope, element, attributes, controller) {
+    link: function ($scope, $element, $attrs, controller) {
       //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
       //TODO use $locale to create mask
-      if ($(element).is('input')) {
-        $(element).attr('data-inputmask', '\'mask\': \'(999)-999-9999\'');
-        $(element).inputmask();
+      if ($element.is('input')) {
+        $element.attr('data-inputmask', '\'mask\': \'(999)-999-9999\'');
+        $element.inputmask();
       }
     }
   };
 }).directive('phoneExtension', function () {
   return {
     restrict: 'C',
-    link: function ($scope, element, attributes, controller) {
-      if ($(element).is('input')) {
-        $(element).attr('data-inputmask', '\'mask\': \'ext: (9999)\'');
-        $(element).inputmask();
+    link: function ($scope, $element, $attrs, controller) {
+      if ($element.is('input')) {
+        if (!$attrs.inputmask) {
+          $element.attr('data-inputmask', '\'mask\': \'ext: (9999)\'');
+        }
+        $element.inputmask();
       }
     }
   };

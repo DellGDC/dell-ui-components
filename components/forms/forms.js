@@ -37,7 +37,7 @@ angular.module('dellUiComponents')
         link: function($scope, $element, attributes, controller) {
 
             $element.on('blur',function () {
-                var string1 = $(element).val(),
+                var string1 = $element.val(),
                     regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
 
                 if (!string1.match(regex)){
@@ -76,7 +76,7 @@ angular.module('dellUiComponents')
     // Runs during compile
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-        link: function($scope, $element, attributes, controller) {
+        link: function($scope, $element, $attrs, controller) {
             //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
             //TODO use $locale to create mask
             if ($element.is('input')) {
@@ -90,9 +90,9 @@ angular.module('dellUiComponents')
 .directive('phoneExtension', function() {
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-        link: function($scope, $element, attributes, controller) {
+        link: function($scope, $element, $attrs, controller) {
             if ($element.is('input')) {
-                if(!$attr.inputmask) {
+                if(!$attrs.inputmask) {
                    $element.attr('data-inputmask', "'mask': 'ext: (9999)'"); 
                 }     
                 $element.inputmask();

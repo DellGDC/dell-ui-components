@@ -304,8 +304,11 @@ module.exports = function (grunt) {
                         {
                             pattern: /..\/fonts\//ig,
                             replacement: 'fonts\/'
+                        },
+                        {
+                            pattern: /Dell-UI-Components v.*?(bower dell-ui-components)/ig,
+                            replacement: 'Dell-UI-Components v'+pkg.version+' (bower dell-ui-components'
                         }
-
 
                     ]
                 }

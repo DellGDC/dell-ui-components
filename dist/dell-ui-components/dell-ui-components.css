@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Components v1.0.14 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.18 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -1623,9 +1623,13 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   white-space: nowrap;
   color: #007db8;
   padding: 3px 3px 3px 3px;
+  cursor: pointer;
 }
 .ms-drop ul > li label.optgroup {
   font-weight: bold;
+}
+.ms-drop ul > li label input[type=checkbox] {
+  top: 0px;
 }
 .ms-drop ul > li:hover,
 .ms-drop ul > li:focus .ms-drop ul > li:active {
@@ -1686,6 +1690,18 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   content: " ";
   clear: both;
   height: 0;
+}
+.has-error .form-control,
+.has-error input.form-control {
+  background: #ffffc9;
+}
+.has-error .form-control:active,
+.has-error input.form-control:active,
+.has-error .form-control:focus,
+.has-error input.form-control:focus {
+  background: #ffffff;
+  border-color: #007db8;
+  box-shadow: 0 0 2px #85d8ff;
 }
 .slider {
   display: inline-block;
@@ -4841,6 +4857,9 @@ span.collapsed .show-collapsed a {
 .panel-collapse.collapse.in {
   border-bottom: none;
 }
+.panel-group .panel-heading {
+  padding: 10px 0 10px;
+}
 .panel-body ul {
   padding-left: 20px;
 }
@@ -7077,7 +7096,7 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .feature-spec {
     border-top: 1px solid #aaaaaa;
     border-bottom: 1px solid #aaaaaa;
-    margin: 0px 0 10px 0;
+    margin: 0 0 10px 0;
     padding: 5px 0;
   }
   .product-stack-search-wrapper .feature-spec .wrapper {

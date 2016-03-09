@@ -178,17 +178,16 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 **1.0.18** - January 26, 2016:
   - adding product stack, product stack guides layout and ability to switch to a guides view to version out guides pages.
   - build for testing updated product stack code and popovers fix
+  - Fixed issue with email check not using proper Bootstrap error classes
+  - Fixed aligment issue in multiple choice select checkboxes
+  - Removed hard coded reference in multiple select and added placeholder attribute to provide label from HTML markup
+  - Cleaned up forms js code to make it consistant accross all directives
+  - Added version string replacement so that dist css has correct version number on a grunt build.
 
 
 ### Older versions:
 
 ```
-1.0.19 - March 2, 2016:
-  - additional refinements for product stack
-
-1.0.18 - January 26, 2016:
-  - Test for product stack
-
 1.0.17 - January 21, 2016:
   - Got rid of hard coded reference to demo data in complex table example
 
