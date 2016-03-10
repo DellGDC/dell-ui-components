@@ -37,3 +37,13 @@ angular.module('dellUiComponents')
             }
         };
     });
+
+    // .directive('jscroll', function() {
+    //     return {
+    //         restrict: 'C',
+    //         link: function($scope, $element, attrs ) {
+
+    //             $('.scroll').jscroll();
+    //         }
+    //     };
+    // });

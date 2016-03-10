@@ -22,13 +22,14 @@
     $.jscroll = {
         defaults: {
             debug: false,
-            autoTrigger: true,
+            autoTrigger: false,
             autoTriggerUntil: false,
             loadingHtml: '<small>Loading...</small>',
             padding: 0,
             nextSelector: 'a:last',
-            contentSelector: '',
-            pagingSelector: '',
+            contentSelector: 'href',
+            pagingSelector: 'jscroll-next-parent',
+            idSelector: '',
             callback: false
         }
     };
