@@ -36,41 +36,40 @@ angular.module('dellUiComponents')
                 });
             }
         };
+    })
+
+    .directive('lazyLoad', function() {
+     return {
+         restrict: 'C',
+         link: function($scope, $element, attrs ) {
+             $(document).ready(function () {
+                 //Set intital divs to be hidden
+                 $(".lazy-load-content").addClass("hidden");
+                 var contentNumber = 0;
+                 console.log('doing lazy stuff');
+                 function reveal() {
+                     var constraintNumber = contentNumber + 2;
+                     //IMPORTANT - DO NOT DELETE
+                     $(window).trigger('resize');
+                     //IMPORTANT - DO NOT DELETE
+                     for (i = contentNumber; i < constraintNumber; i++) {
+                         //Get the nth div of class content, where n is the contentNumber, and make it shown
+                         $('.lazy-load-content').eq(contentNumber).removeClass("hidden");
+                         contentNumber ++;
+                     }
+                 }
+
+                 //Window scroll function
+                 $(window).scroll(function() {
+                    if ($(window).scrollTop() == $(document).height() - $(window).height() )
+                     {
+                         reveal();
+                     }
+                 });
+                 reveal();
+             });
+         }
+     };
     });
 
-    // .directive('lazy-load', function() {
-    //     return {
-    //         restrict: 'C',
-    //         link: function($scope, $element, attrs ) {
-    //             $(document).ready(function () {
-    //                 //Set intital divs to be hidden
-    //                 $(".lazy-load-content").addClass("hidden");
-    //                 var contentNumber = 0;
-                    
-    //                 function reveal() {
-    //                     var constraintNumber = contentNumber + 2;
-    //                     //IMPORTANT - DO NOT DELETE
-    //                     $(window).trigger('resize');
-    //                     //IMPORTANT - DO NOT DELETE
-    //                     for (i = contentNumber; i < constraintNumber; i++) {
-    //                         //Get the nth div of class content, where n is the contentNumber, and make it shown
-    //                         $('.lazy-load-content').eq(contentNumber).removeClass("hidden");
-    //                         contentNumber ++;
-    //                     }
-    //                 }
-                    
-    //                 //Window scroll function
-    //                 $(window).scroll(function() {
-    //                    if ($(window).scrollTop() == $(document).height() - $(window).height() )
-    //                     {
-    //                         reveal();
-    //                     }
-    //                 });
-    //                 reveal();
-    //             });
-    //         }
-    //     };
-    // });
 
-
-    
