@@ -46,6 +46,8 @@ angular.module('dellUiComponents')
                  //Set intital divs to be hidden
                  $(".lazy-load-content").addClass("hidden");
                  var contentNumber = 0;
+                 var i = 0;
+                 
                  console.log('doing lazy stuff');
                  function reveal() {
                      var constraintNumber = contentNumber + 2;
@@ -61,7 +63,7 @@ angular.module('dellUiComponents')
 
                  //Window scroll function
                  $(window).scroll(function() {
-                    if ($(window).scrollTop() == $(document).height() - $(window).height() )
+                    if ($(window).scrollTop() === $(document).height() - $(window).height() )
                      {
                          reveal();
                      }
