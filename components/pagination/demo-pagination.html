@@ -145,58 +145,95 @@
 
 <!-- ==========|Lazy-Load|==========  -->
 
+            <script type="text/javascript">
+    
+                //Set intital divs to be hidden
+                $(".lazy-load-content").addClass("hidden");
+                var contentNumber = 0;
+                
+                function reveal() {
+                    var constraintNumber = contentNumber + 2;
+                    //IMPORTANT - DO NOT DELETE
+                    $(window).trigger('resize');
+                    //IMPORTANT - DO NOT DELETE
+                    for (i = contentNumber; i < constraintNumber; i++) {
+                        //Get the nth div of class content, where n is the contentNumber, and make it shown
+                        $('.lazy-load-content').eq(contentNumber).removeClass("hidden");
+                        contentNumber ++;
+                    }
+                }
+                
+                //Window scroll function
+                $(window).scroll(function() {
+                   if ($(window).scrollTop() == $(document).height() - $(window).height() )
+                    {
+                        reveal();
+                    }
+                });
+                reveal();
 
+            </script>
 
                 <div class="top-offset-40 bottom-offset-5">
                     <h3 class="bottom-offset-40">Lazy-Load</h3>
                 </div>
                 <div class="bottom-offset-60">
                     <div class="row">
-                        <div class="col-xs-12">
-
-                        <script type="text/javascript">
-                            $('.infinite-scroll').jscroll();
-                        </script> 
-                                               
-                        <div class="infinite-scroll" data-ui="jscroll-default">
-                            <div class="jscroll-inner">
+                        <div class="col-xs-12 lazy-load">                   
+                            <div class="lazy-load-content">
                                 <h3>Page 1 of Lazy-Load - jQuery Infinite Scrolling Plugin</h3>
-                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed. Vis eu reque regione, impetus oportere pro te, ridens iriure consetetur et duo. Ut semper nominavi duo, ei modo principes abhorreant eos.</p>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
                                 <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                <p>Vix an nisl oratio quaeque, expetenda neglegentur vim cu, quis animal ex has. Nec ea sumo partem dolores, at mel elit nihil volutpat. Per ludus dolorem ne. Dicunt omittam mea ei, usu quaestio reprehendunt te, regione urbanitas te vis. Graeco iuvaret oporteat his ad, ad vix velit congue verterem.</p>
-
-
-                                <div class="jscroll-next-parent" style="display: none;">
-                                    <a href="/pagination #page2" class="jscroll-next" data-ui="jscroll-next">next</a>
-                                </div>    
-                                    <div class="jscroll-added" style="display: none;">
-                                       <div name="page2" id="page2"></div>
-                                       <hr />
-                                       <h3>Page 2 of Lazy-Load - jQuery Infinite Scrolling Plugin</h3>
-                                        <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed. Vis eu reque regione, impetus oportere pro te, ridens iriure consetetur et duo. Ut semper nominavi duo, ei modo principes abhorreant eos.</p>
-                                        <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                        <p>Vix an nisl oratio quaeque, expetenda neglegentur vim cu, quis animal ex has. Nec ea sumo partem dolores, at mel elit nihil volutpat. Per ludus dolorem ne. Dicunt omittam mea ei, usu quaestio reprehendunt te, regione urbanitas te vis. Graeco iuvaret oporteat his ad, ad vix velit congue verterem.</p>
-                                        <div class="next jscroll-next-parent" style="display: none;">
-                                            <a href="page3.html">next</a>
-                                        </div>
-                                    </div>
-                                
-
                             </div>
-                        </div>    
+                            <div class="lazy-load-content">
+                                <h3>Page 2</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>
+                            <div class="lazy-load-content">
+                                <h3>Page 3</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>
+                            <div class="lazy-load-content">
+                                <h3>Page 4</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>
+                            <div class="lazy-load-content">
+                                <h3>Page 5</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>
+                            <div class="lazy-load-content">
+                                <h3>Page 6</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>
+                            <div class="lazy-load-content">
+                                <h3>Page 7</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>
+                            <div class="lazy-load-content">
+                                <h3>Page 8</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>
+                            <div class="lazy-load-content">
+                                <h3>Page 9</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>
+                            <div class="lazy-load-content">
+                                <h3>Page 10</h3>
+                                <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
+                                <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
+                            </div>    
                         </div>
                     </div>
                 </div>
 <!-- ==========|Lazy-Load END|==========  -->
-
-<script type="text/javascript">
-    $('.infinite-scroll').jscroll({
-        loadingHtml: 'Loading...',
-        padding: 20,
-        nextSelector: 'a.jscroll-next:last',
-        contentSelector: 'div'
-    });
-</script>
 
     </div><!-- end container -->
 
