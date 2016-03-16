@@ -38,12 +38,23 @@ angular.module('dellUiComponents')
         };
     });
 
-    // .directive('jscroll', function() {
-    //     return {
-    //         restrict: 'C',
-    //         link: function($scope, $element, attrs ) {
+    .directive('jscroll', function() {
+        return {
+            restrict: 'C',
+            link: function($scope, $element, attrs ) {
 
-    //             $('.scroll').jscroll();
-    //         }
-    //     };
-    // });
+                $('.infinite-scroll').jscroll({
+                    loadingHtml: 'Loading...',
+                    padding: 20,
+                    nextSelector: 'a.jscroll-next:last',
+                    contentSelector: 'div'
+                });
+
+            }
+        };
+    });
+
+
+
+
+    
