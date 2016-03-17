@@ -35,12 +35,22 @@ span.collapsed .show-collapsed {
     }
 }
 
+a.hide-expanded {
+    display:none;
+    &.collapsed {
+        display:inline;
+    }
+}
+
 .collapse {
     overflow: hidden;
     -webkit-transition: height .3 .5s ease;
     -moz-transition: height .3 .5s ease;
     -o-transition: height .3 .5s ease;
     transition: height .3 .5s ease;
+    &.inline.in {
+        display:inline;
+    }
 }
 
 //data-toggle
@@ -84,18 +94,7 @@ span.collapsed .show-collapsed {
     border-bottom: none;
 }
 
-.panel-group .panel-heading {
-    padding: 10px 0 10px;
-}
-
 // -------------- /fix for accordions in wells ---------------------
-
-//------- fix accordions with ul li --------------------
-
-.panel-body ul {
-    padding-left: 20px;
-}
-
 
 //social links show/hide
 //----------------------------------------------------------------------
@@ -314,5 +313,4 @@ span.collapsed .show-collapsed {
 
     }
 }
-
 

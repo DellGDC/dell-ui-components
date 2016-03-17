@@ -4841,6 +4841,9 @@ span.collapsed .show-collapsed a {
 .panel-collapse.collapse.in {
   border-bottom: none;
 }
+.panel-group .panel-heading {
+  padding: 10px 0 10px;
+}
 .panel-body ul {
   padding-left: 20px;
 }
@@ -7077,7 +7080,7 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .feature-spec {
     border-top: 1px solid #aaaaaa;
     border-bottom: 1px solid #aaaaaa;
-    margin: 0px 0 10px 0;
+    margin: 0 0 10px 0;
     padding: 5px 0;
   }
   .product-stack-search-wrapper .feature-spec .wrapper {
