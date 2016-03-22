@@ -56,14 +56,14 @@ angular.module('dellUiComponents')
                      //IMPORTANT - DO NOT DELETE
                      for (i = contentNumber; i < constraintNumber; i++) {
                          //Get the nth div of class content, where n is the contentNumber, and make it shown
-                         $('.lazy-load-content').eq(contentNumber).removeClass("hidden");
+                         $('.lazy-load-content').eq(contentNumber).removeClass("hidden").delay(2000).fadeIn('slow');
                          contentNumber ++;
                      }
                  }
 
                  //Window scroll function
                  $(window).scroll(function() {
-                    if ($(window).scrollTop() === $(document).height() - $(window).height() )
+                    if ($(window).scrollTop() === $('.large-viewing-window').height() - $('.lazyload').height() )
                      {
                          reveal();
                      }

@@ -150,6 +150,7 @@
                 //Set intital divs to be hidden
                 $(".lazy-load-content").addClass("hidden");
                 var contentNumber = 0;
+                var i = 0;
 
                 function reveal() {
                     var constraintNumber = contentNumber + 2;
@@ -158,14 +159,14 @@
                     //IMPORTANT - DO NOT DELETE
                     for (i = contentNumber; i < constraintNumber; i++) {
                         //Get the nth div of class content, where n is the contentNumber, and make it shown
-                        $('.lazy-load-content').eq(contentNumber).removeClass("hidden");
+                        $('.lazy-load-content').eq(contentNumber).removeClass("hidden").delay(2000).fadeIn('slow');
                         contentNumber ++;
                     }
                 }
 
                 //Window scroll function
                 $(window).scroll(function() {
-                   if ($(window).scrollTop() == $(document).height() - $(window).height() )
+                   if ($(window).scrollTop() == $(document).height() - $('.lazyload').height() )
                     {
                         reveal();
                     }
@@ -177,105 +178,130 @@
                 <div class="top-offset-40 bottom-offset-5">
                     <h3 class="bottom-offset-40">Lazy-Load</h3>
                 </div>
-                <div class="bottom-offset-60">
-                    <div class="row">
-                        <div class="col-xs-12"> 
-                            <div class="lazy-load">
-                                <div class="lazy-load-content">
-                                <hr />
-                                    <h3>Item 1 of Lazy-Load - jQuery Infinite Scrolling Plugin</h3>
-                                    <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                    <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                </div>
-                                <div class="lazy-load-content">
-                                <hr />
-                                    <h3>Item 2</h3>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <img src="components/pagination/laptop-inspiron169x149.png" class="img-responsive" />
-                                        </div>
-                                        <div class="col-md-10">
-                                            <h3>Title goes here</h3>
-                                            <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                            <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                            <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>        
-                                        </div>
-                                </div>
-                                <div class="lazy-load-content">
-                                <hr />
-                                    <h3>Item 3</h3>
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                            <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <img src="components/pagination/laptop-inspiron-5559-169x149.png" class="img-responsive" />
-                                        </div>
-                                    </div>
 
-                                    
-                                </div>
-                                <div class="lazy-load-content">
-                                <hr />
-                                    <h3>Item 4</h3>
+                <div class="large-view-window">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="viewing-window bottom-offset-200">
+                                <div class="bottom-offset-60">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <img src="components/pagination/banner1.jpg" class="img-responsive" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <img src="components/pagination/banner2.jpg" class="img-responsive" />
+                                        <div class="col-xs-12">
+                                            <ul id="" class="list-unstyled lazy-load">
+                                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>A</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>B</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>C</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>D</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>E</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>F</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>G</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>H</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>I</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>J</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>K</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>L</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>M</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>N</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>O</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>P</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>Q</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>R</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>S</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>T</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>U</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>V</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>W</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>X</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>Y</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>Z</strong></p></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="lazy-load-content top-offset-40 bottom-offset-20">
-                                <hr />
-                                    <h3>Item 5</h3>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <img src="components/pagination/download.svg" alt="" class="img-circle" align="left">
-                                            <h3>Title goes here</h3>
-                                            <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                            <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                            <a href="#">more info . . .</a>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="lazy-load-content top-offset-40 bottom-offset-20">
-                                <hr />
-                                    <h3>Item 6</h3>
-                                    <img src="components/pagination/download.svg" alt="" class="img-rounded" align="right">
-                                            <h3>Title goes here</h3>
-                                            <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                            <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                            <a href="#">more info . . .</a>
-                                </div>
-                                <div class="lazy-load-content">
-                                <hr />
-                                    <h3>Item 7</h3>
-                                    <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                    <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                </div>
-                                <div class="lazy-load-content">
-                                    <h3>Item 8</h3>
-                                    <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                    <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                </div>
-                                <div class="lazy-load-content">
-                                    <h3>Item 9</h3>
-                                    <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                    <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
-                                </div>
-                                <div class="lazy-load-content">
-                                    <h3>Item 10</h3>
-                                    <p>Lorem ipsum dolor sit amet, dicta utinam meliore ex per. Detracto noluisse vituperata mea et, te ius aeterno legendos, stet tempor discere at usu. In legere suscipiantur duo. Nam ex odio scaevola, at salutatus voluptatum sed.</p>
-                                    <p>Nec te patrioque delicatissimi, at pri saepe constituto necessitatibus. At cum novum audiam, vix odio sale dolorum an. Cum modus iudico appareat ex. Eum an atomorum adversarium, erant partem ea est. Per te cibo inimicus recteque, nostro intellegebat te nam. An commodo platonem mei, liber debet contentiones eu sed.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+<!-- | FULL Width | 
+
+                <div class="bottom-offset-60">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul id="" class="list-unstyled lazy-load">
+                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>A</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>B</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>C</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>D</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set <strong>E</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>F</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>G</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>H</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>I</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>J</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set <strong>K</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>L</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>M</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>N</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>O</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set <strong>P</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>Q</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>R</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>S</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>T</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set <strong>U</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>V</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>W</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>X</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>Y</strong></p></li>
+                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set <strong>Z</strong></p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> 
+
+
+                <!-- <div class="large-view-window">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="viewing-window bottom-offset-200">
+                                <div class="bottom-offset-60">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <ul id="" class="list-unstyled lazy-load">
+                                                <li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>A</strong></p></li>
+                                                <li class="well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>B</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>C</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>D</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-blue bottom-offset-5"><p>This is data set example <strong>E</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>F</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>G</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>H</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>I</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>J</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-berry bottom-offset-5"><p>This is data set example <strong>K</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>L</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>M</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>N</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>O</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-orange bottom-offset-5"><p>This is data set example <strong>P</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>Q</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>R</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>S</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>T</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-light-green bottom-offset-5"><p>This is data set example <strong>U</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>V</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>W</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>X</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>Y</strong></p></li>
+                                                <li class="lazy-load-content well well-transparent-stroke well-purple bottom-offset-5"><p>This is data set example <strong>Z</strong></p></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->        
 <!-- ==========|Lazy-Load END|==========  -->
 
     </div><!-- end container -->
