@@ -50,7 +50,7 @@ angular.module('dellUiComponents')
                  
                  console.log('doing lazy stuff');
                  function reveal() {
-                     var constraintNumber = contentNumber + 2;
+                     var constraintNumber = contentNumber + 5;
                      //IMPORTANT - DO NOT DELETE
                      $(window).trigger('resize');
                      //IMPORTANT - DO NOT DELETE
@@ -63,7 +63,7 @@ angular.module('dellUiComponents')
 
                  //Window scroll function
                  $('.viewing-window').scroll(function() {
-                    if ($('.viewing-window').scrollTo() === $('.large-viewing-window').height() - $('.lazyload').height() )
+                    if ($('.viewing-window').scrollTop() === $('.large-viewing-window').height() - $('.lazyload').height() )
                      {
                          reveal();
                      }
