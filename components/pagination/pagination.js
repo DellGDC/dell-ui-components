@@ -62,8 +62,8 @@ angular.module('dellUiComponents')
                  }
 
                  //Window scroll function
-                 $(window).scroll(function() {
-                    if ($(window).scrollTop() === $('.large-viewing-window').height() - $('.lazyload').height() )
+                 $('.viewing-window').scroll(function() {
+                    if ($('.viewing-window').scrollTo() === $('.large-viewing-window').height() - $('.lazyload').height() )
                      {
                          reveal();
                      }

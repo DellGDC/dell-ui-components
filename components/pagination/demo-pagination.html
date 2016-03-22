@@ -145,7 +145,7 @@
 
 <!-- ==========|Lazy-Load|==========  -->
 
-            <script type="text/javascript">
+           <!--  <script type="text/javascript">
 
                 //Set intital divs to be hidden
                 $(".lazy-load-content").addClass("hidden");
@@ -166,22 +166,20 @@
 
                 //Window scroll function
                 $(window).scroll(function() {
-                   if ($(window).scrollTop() == $(document).height() - $('.lazyload').height() )
+                   if ($('.lazy-load').scrollTop() === $('.viewing-window').height() - $(window).height() )
                     {
                         reveal();
                     }
                 });
                 reveal();
 
-            </script>
+            </script> -->
 
                 <div class="top-offset-40 bottom-offset-5">
                     <h3 class="bottom-offset-40">Lazy-Load</h3>
                 </div>
 
                 <div class="large-view-window">
-                    <div class="row">
-                        <div class="col-xs-12">
                             <div class="viewing-window bottom-offset-200">
                                 <div class="bottom-offset-60">
                                     <div class="row">
@@ -218,11 +216,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
                 </div>
 
-<!-- | FULL Width | 
+<!-- | FULL Width Example | 
 
                 <div class="bottom-offset-60">
                     <div class="row">
