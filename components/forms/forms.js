@@ -98,19 +98,18 @@ angular.module('dellUiComponents')
 
 
 
-.directive('showPassword', function() {
+.directive('showHidePassword', function() {
 return {
     restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
 
         link: function($scope, $element, $attrs, controller) {
-            $scope.togglePassword = function() {
-                $scope.showPassword = !$scope.showPassword;
-                if ($scope.showPassword) {
+            $element.find('.checkbox input[type=checkbox]').on('click',function(){
+                if($element.find('.checkbox input[type=checkbox]').is(":checked")){
                     $($element).find('input[type=password]').attr('type', 'text');
                 } else {
                     $($element).find('input[type=text]').attr('type', 'password');
                 }
-            };
+            });
         }
     };
 })
@@ -145,21 +144,19 @@ return {
 
 .directive('bsSlider', function() {
     return {
-        restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
-        link: function($scope, element, attributes, controller) {
+        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, $element, $attrs, controller) {
 
-            // With JQuery
-            $('#single-handle-ex1').slider({
-                formatter: function(value) {
-                    return 'Current value: ' + value;
-                }
-            });
+            // Angular implementation for Boostrap Slider: http://seiyria.com/bootstrap-slider/
+            var options = {};
 
-            $("#single-handle-ex2").slider({
-                tooltip: 'always'
-            });
+            if($attrs.sliderLabel) {
+                options.formatter = function(value) {
+                    return $attrs.sliderLabel + value;
+                };
+            }
 
-            $("#double-handle-ex1").slider({ id: "slider12c", min: 0, max: 10, range: true, value: [3, 7] });
+            $element.slider(options);
 
         }
     };
@@ -531,11 +528,11 @@ return {
         restrict: 'AC', // E = Element, A = Attribute, C = Class, M = Comment
         template: template,
         link: function($scope, $element, $attributes, controller) {
-            $scope.emptyName = $attributes.emptyName || '*State';
+            $scope.emptyName = $attributes.emptyName || 'State';
         }
     };
 })
-.directive('dateSelector', function(){
+.directive('dateSelector', function($timeout){
     // Runs during compile
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
@@ -568,21 +565,23 @@ return {
                 };
 
 
-
-
-
-
             //TODO, check to see if the field is at the bottom of the viewport and position it on top
             inputField.datetimepicker(dateSelectorConfig);
 
             inputField.on("dp.show",function (e) {
 
+                viewPortWidth = $(window).width();
+                viewPortHeight = $(window).height();
+                inputFieldWidth = inputField.width();
+                inputFieldOffset = inputField.offset();
                 calendarWidget = $element.find('.bootstrap-datetimepicker-widget'); //have to repeat this because it is destroyed everytime focus is gone
 
                 //check to see if the right side is big enough for the widget
                 if(inputFieldOffset.left + inputFieldWidth + 215 > viewPortWidth) {
                     calendarWidget.removeClass('pull-right');
+                    calendarWidget.addClass('pull-left');
                 } else {
+                    calendarWidget.removeClass('pull-left');
                     calendarWidget.addClass('pull-right');
                 }
 
@@ -592,22 +591,19 @@ return {
                     calendarWidget.removeClass('bottom').addClass('top');
                 } else {
                     calendarWidget.removeClass('bottom, top').addClass(dateSelectorConfig.widgetPositioning.vertical);
-                }              
+                }         
+
+                calendarWidget.find(".datepicker tr > td.day").on("click",function(){
+                    $timeout(function(){
+                        inputField.data("DateTimePicker").hide();
+                    });
+                    
+                });
 
             });
             calendarIcon.on("click",function (e) {
                 inputField.focus();                
             });
-
-            inputField.on("blur",function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                inputField.data("DateTimePicker").show();
-            });
-
-
-
-
         }
     };
 });

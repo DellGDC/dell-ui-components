@@ -26,7 +26,8 @@ angular.module('dellUiComponents')
                 }),
                 waypointObjs = $element.find('> li > a[href^=#]'),
                 waypoints=[],
-                triggerClicked = false;
+                triggerClicked = false,
+                offsetHeight = $element.height() + 5;
                 //console.log(waypointObjs);
 
                 function clearActiveTab() {
@@ -41,7 +42,7 @@ angular.module('dellUiComponents')
                         var target = $($(e.currentTarget).attr("href"));
 
                         $('html, body').stop().animate({
-                            'scrollTop': target.offset().top - 60
+                            'scrollTop': target.offset().top - offsetHeight
                         }, 900, 'swing');
 
                         if ($element.find('> li').hasClass('active')) {

@@ -135,47 +135,47 @@ $(document).ready(function() {
 
     // String object and primitive comparisons.
     ok(_.isEqual("Curly", "Curly"), "Identical string primitives are equal");
-    ok(_.isEqual(new String("Curly"), new String("Curly")), "String objects with identical primitive values are equal");
-    ok(_.isEqual(new String("Curly"), "Curly"), "String primitives and their corresponding object wrappers are equal");
-    ok(_.isEqual("Curly", new String("Curly")), "Commutative equality is implemented for string objects and primitives");
+    ok(_.isEqual(String("Curly"), String("Curly")), "String objects with identical primitive values are equal");
+    ok(_.isEqual(String("Curly"), "Curly"), "String primitives and their corresponding object wrappers are equal");
+    ok(_.isEqual("Curly", String("Curly")), "Commutative equality is implemented for string objects and primitives");
 
     ok(!_.isEqual("Curly", "Larry"), "String primitives with different values are not equal");
-    ok(!_.isEqual(new String("Curly"), new String("Larry")), "String objects with different primitive values are not equal");
-    ok(!_.isEqual(new String("Curly"), {toString: function(){ return "Curly"; }}), "String objects and objects with a custom `toString` method are not equal");
+    ok(!_.isEqual(String("Curly"), String("Larry")), "String objects with different primitive values are not equal");
+    ok(!_.isEqual(String("Curly"), {toString: function(){ return "Curly"; }}), "String objects and objects with a custom `toString` method are not equal");
 
     // Number object and primitive comparisons.
     ok(_.isEqual(75, 75), "Identical number primitives are equal");
-    ok(_.isEqual(new Number(75), new Number(75)), "Number objects with identical primitive values are equal");
-    ok(_.isEqual(75, new Number(75)), "Number primitives and their corresponding object wrappers are equal");
-    ok(_.isEqual(new Number(75), 75), "Commutative equality is implemented for number objects and primitives");
-    ok(!_.isEqual(new Number(0), -0), "`new Number(0)` and `-0` are not equal");
-    ok(!_.isEqual(0, new Number(-0)), "Commutative equality is implemented for `new Number(0)` and `-0`");
+    ok(_.isEqual(Number(75), Number(75)), "Number objects with identical primitive values are equal");
+    ok(_.isEqual(75, Number(75)), "Number primitives and their corresponding object wrappers are equal");
+    ok(_.isEqual(Number(75), 75), "Commutative equality is implemented for number objects and primitives");
+    ok(!_.isEqual(Number(0), -0), "`new Number(0)` and `-0` are not equal");
+    ok(!_.isEqual(0, Number(-0)), "Commutative equality is implemented for `new Number(0)` and `-0`");
 
-    ok(!_.isEqual(new Number(75), new Number(63)), "Number objects with different primitive values are not equal");
-    ok(!_.isEqual(new Number(63), {valueOf: function(){ return 63; }}), "Number objects and objects with a `valueOf` method are not equal");
+    ok(!_.isEqual(Number(75), Number(63)), "Number objects with different primitive values are not equal");
+    ok(!_.isEqual(Number(63), {valueOf: function(){ return 63; }}), "Number objects and objects with a `valueOf` method are not equal");
 
     // Comparisons involving `NaN`.
     ok(_.isEqual(NaN, NaN), "`NaN` is equal to `NaN`");
     ok(!_.isEqual(61, NaN), "A number primitive is not equal to `NaN`");
-    ok(!_.isEqual(new Number(79), NaN), "A number object is not equal to `NaN`");
+    ok(!_.isEqual(Number(79), NaN), "A number object is not equal to `NaN`");
     ok(!_.isEqual(Infinity, NaN), "`Infinity` is not equal to `NaN`");
 
     // Boolean object and primitive comparisons.
     ok(_.isEqual(true, true), "Identical boolean primitives are equal");
-    ok(_.isEqual(new Boolean, new Boolean), "Boolean objects with identical primitive values are equal");
-    ok(_.isEqual(true, new Boolean(true)), "Boolean primitives and their corresponding object wrappers are equal");
-    ok(_.isEqual(new Boolean(true), true), "Commutative equality is implemented for booleans");
-    ok(!_.isEqual(new Boolean(true), new Boolean), "Boolean objects with different primitive values are not equal");
+    ok(_.isEqual(Boolean, Boolean), "Boolean objects with identical primitive values are equal");
+    ok(_.isEqual(true, Boolean(true)), "Boolean primitives and their corresponding object wrappers are equal");
+    ok(_.isEqual(Boolean(true), true), "Commutative equality is implemented for booleans");
+    ok(!_.isEqual(Boolean(true), Boolean), "Boolean objects with different primitive values are not equal");
 
     // Common type coercions.
-    ok(!_.isEqual(true, new Boolean(false)), "Boolean objects are not equal to the boolean primitive `true`");
+    ok(!_.isEqual(true, Boolean(false)), "Boolean objects are not equal to the boolean primitive `true`");
     ok(!_.isEqual("75", 75), "String and number primitives with like values are not equal");
-    ok(!_.isEqual(new Number(63), new String(63)), "String and number objects with like values are not equal");
+    ok(!_.isEqual(Number(63), String(63)), "String and number objects with like values are not equal");
     ok(!_.isEqual(75, "75"), "Commutative equality is implemented for like string and number values");
     ok(!_.isEqual(0, ""), "Number and string primitives with like values are not equal");
     ok(!_.isEqual(1, true), "Number and boolean primitives with like values are not equal");
-    ok(!_.isEqual(new Boolean(false), new Number(0)), "Boolean and number objects with like values are not equal");
-    ok(!_.isEqual(false, new String("")), "Boolean primitives and string objects with like values are not equal");
+    ok(!_.isEqual(Boolean(false), Number(0)), "Boolean and number objects with like values are not equal");
+    ok(!_.isEqual(false, String("")), "Boolean primitives and string objects with like values are not equal");
     ok(!_.isEqual(12564504e5, new Date(2009, 9, 25)), "Dates and their corresponding numeric primitive values are not equal");
 
     // Dates.
@@ -213,8 +213,8 @@ $(document).ready(function() {
     ok(_.isEqual([(/Moe/g), new Date(2009, 9, 25)], [(/Moe/g), new Date(2009, 9, 25)]), "Arrays containing equivalent elements are equal");
 
     // Multi-dimensional arrays.
-    var a = [new Number(47), false, "Larry", /Moe/, new Date(2009, 11, 13), ['running', 'biking', new String('programming')], {a: 47}];
-    var b = [new Number(47), false, "Larry", /Moe/, new Date(2009, 11, 13), ['running', 'biking', new String('programming')], {a: 47}];
+    var a = [Number(47), false, "Larry", /Moe/, new Date(2009, 11, 13), ['running', 'biking', String('programming')], {a: 47}];
+    var b = [Number(47), false, "Larry", /Moe/, new Date(2009, 11, 13), ['running', 'biking', String('programming')], {a: 47}];
     ok(_.isEqual(a, b), "Arrays containing nested arrays and objects are recursively compared");
 
     // Overwrite the methods defined in ES 5.1 section 15.4.4.
@@ -244,30 +244,30 @@ $(document).ready(function() {
 
     // `A` contains nested objects and arrays.
     a = {
-      name: new String("Moe Howard"),
-      age: new Number(77),
+      name: String("Moe Howard"),
+      age: Number(77),
       stooge: true,
       hobbies: ["acting"],
       film: {
         name: "Sing a Song of Six Pants",
         release: new Date(1947, 9, 30),
-        stars: [new String("Larry Fine"), "Shemp Howard"],
-        minutes: new Number(16),
+        stars: [String("Larry Fine"), "Shemp Howard"],
+        minutes: Number(16),
         seconds: 54
       }
     };
 
     // `B` contains equivalent nested objects and arrays.
     b = {
-      name: new String("Moe Howard"),
-      age: new Number(77),
+      name: String("Moe Howard"),
+      age: Number(77),
       stooge: true,
       hobbies: ["acting"],
       film: {
         name: "Sing a Song of Six Pants",
         release: new Date(1947, 9, 30),
-        stars: [new String("Larry Fine"), "Shemp Howard"],
-        minutes: new Number(16),
+        stars: [String("Larry Fine"), "Shemp Howard"],
+        minutes: Number(16),
         seconds: 54
       }
     };
@@ -283,8 +283,8 @@ $(document).ready(function() {
     (a = []).push(a);
     (b = []).push(b);
     ok(_.isEqual(a, b), "Arrays containing circular references are equal");
-    a.push(new String("Larry"));
-    b.push(new String("Larry"));
+    a.push(String("Larry"));
+    b.push(String("Larry"));
     ok(_.isEqual(a, b), "Arrays containing circular references and equivalent properties are equal");
     a.push("Shemp");
     b.push("Curly");
@@ -305,8 +305,8 @@ $(document).ready(function() {
     a.def = 75;
     b.def = 75;
     ok(_.isEqual(a, b), "Objects containing circular references and equivalent properties are equal");
-    a.def = new Number(75);
-    b.def = new Number(63);
+    a.def = Number(75);
+    b.def = Number(63);
     ok(!_.isEqual(a, b), "Objects containing circular references and different properties are not equal");
 
     // More circular objects #767.
@@ -324,8 +324,8 @@ $(document).ready(function() {
     a[0].def = "Larry";
     b[0].def = "Larry";
     ok(_.isEqual(a, b), "Cyclic structures containing equivalent properties are equal");
-    a[0].def = new String("Larry");
-    b[0].def = new String("Curly");
+    a[0].def = String("Larry");
+    b[0].def = String("Curly");
     ok(!_.isEqual(a, b), "Cyclic structures containing different properties are not equal");
 
     // Complex Circular References.
@@ -377,14 +377,14 @@ $(document).ready(function() {
       parent.iElement   = document.createElement('div');\
       parent.iArguments = (function(){ return arguments; })(1, 2, 3);\
       parent.iArray     = [1, 2, 3];\
-      parent.iString    = new String('hello');\
-      parent.iNumber    = new Number(100);\
+      parent.iString    = String('hello');\
+      parent.iNumber    = Number(100);\
       parent.iFunction  = (function(){});\
       parent.iDate      = new Date();\
       parent.iRegExp    = /hi/;\
       parent.iNaN       = NaN;\
       parent.iNull      = null;\
-      parent.iBoolean   = new Boolean(false);\
+      parent.iBoolean   = Boolean(false);\
       parent.iUndefined = undefined;\
       parent.iObject     = {};\
     </script>"
@@ -419,7 +419,7 @@ $(document).ready(function() {
     ok(!_.isObject('string'), 'and not string');
     ok(!_.isObject(12), 'and not number');
     ok(!_.isObject(true), 'and not boolean');
-    ok(_.isObject(new String('string')), 'but new String()');
+    ok(_.isObject(String('string')), 'but new String()');
   });
 
   test("isArray", function() {
@@ -486,7 +486,7 @@ $(document).ready(function() {
     ok(!_.isFinite(Infinity), 'Infinity is not Finite');
     ok(!_.isFinite(-Infinity), '-Infinity is not Finite');
     ok(!_.isFinite('12'), 'Strings are not numbers');
-    var obj = new Number(5);
+    var obj = Number(5);
     ok(_.isFinite(obj), 'Number instances can be finite');
     ok(_.isFinite(0), '0 is Finite');
     ok(_.isFinite(123), 'Ints are Finite');
@@ -499,7 +499,7 @@ $(document).ready(function() {
     ok(!_.isNaN(0), '0 is not NaN');
     ok(_.isNaN(NaN), 'but NaN is');
     ok(_.isNaN(iNaN), 'even from another frame');
-    ok(_.isNaN(new Number(NaN)), 'wrapped NaN is still NaN');
+    ok(_.isNaN(Number(NaN)), 'wrapped NaN is still NaN');
   });
 
   test("isNull", function() {

@@ -8,7 +8,6 @@ angular.module('demo').config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: 'demo-assets/partials/home/home.html'
     });
 
-
     /* Add New States Above */
     $urlRouterProvider.otherwise('/demo/');
 

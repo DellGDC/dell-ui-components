@@ -17,8 +17,8 @@
 }(function($) {
 
 /*! Widget: storage - updated 3/26/2015 (v2.21.3) */
-;(function ($, window, document) {
-'use strict';
+    (function ($, window, document) {
+        'use strict';
 
 var ts = $.tablesorter || {};
 // *** Store data in local storage, with a cookie fallback ***
@@ -107,8 +107,8 @@ ts.storage = function(table, key, value, options) {
 })(jQuery, window, document);
 
 /*! Widget: uitheme - updated 3/26/2015 (v2.21.3) */
-;(function ($) {
-'use strict';
+    (function ($) {
+        'use strict';
 var ts = $.tablesorter || {};
 
 ts.themes = {
@@ -293,8 +293,8 @@ ts.addWidget({
 })(jQuery);
 
 /*! Widget: columns */
-;(function ($) {
-'use strict';
+    (function ($) {
+        'use strict';
 var ts = $.tablesorter || {};
 
 ts.addWidget({
@@ -375,8 +375,8 @@ ts.addWidget({
  * Requires tablesorter v2.8+ and jQuery 1.7+
  * by Rob Garrison
  */
-;( function ( $ ) {
-'use strict';
+    (function ($) {
+        'use strict';
 var ts = $.tablesorter || {},
 	tscss = ts.css;
 
@@ -1984,8 +1984,8 @@ ts.setFilters = function( table, filter, apply, skipFirst ) {
  * Requires tablesorter v2.8+ and jQuery 1.4.3+
  * by Rob Garrison
  */
-;(function ($, window) {
-'use strict';
+    (function ($, window) {
+        'use strict';
 var ts = $.tablesorter || {};
 
 $.extend(ts.css, {
@@ -2271,8 +2271,8 @@ ts.addWidget({
 
 /*! Widget: resizable - updated 6/26/2015 (v2.22.2) */
 /*jshint browser:true, jquery:true, unused:false */
-;(function ($, window) {
-'use strict';
+    (function ($, window) {
+        'use strict';
 var ts = $.tablesorter || {};
 
 $.extend(ts.css, {
@@ -2664,8 +2664,8 @@ ts.resizableReset = function( table, refreshing ) {
 })( jQuery, window );
 
 /*! Widget: saveSort */
-;(function ($) {
-'use strict';
+    (function ($) {
+        'use strict';
 var ts = $.tablesorter || {};
 
 // this widget saves the last sort only if the

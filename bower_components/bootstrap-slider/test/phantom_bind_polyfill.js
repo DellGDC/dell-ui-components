@@ -31,8 +31,9 @@ Function.prototype.bind = function bind(that) { // .length is 1
           }
 
       };
-      function Empty() {};
-      if(target.prototype) {
+    function Empty() {
+    }
+    if(target.prototype) {
           Empty.prototype = target.prototype;
           bound.prototype = new Empty();
           Empty.prototype = null;

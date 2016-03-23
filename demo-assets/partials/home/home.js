@@ -19,6 +19,7 @@ angular.module('demo').controller('HomeCtrl',function($scope,$rootScope,$http,$s
             init = function (componentId) {
                 if (componentId) {
                     $rootScope.componentDemoUrl = "components/" + componentId + "/demo-" + componentId + ".html";
+                    $rootScope.componentGuideUrl = "components/" + componentId + "/guide-" + componentId + ".html";
                     $rootScope.componentPlayUrl = "components/" + componentId + "/demo-play-" + componentId + ".html";
                     $rootScope.activeComponent = _.find($rootScope.components, function (c) {
                         return c.id === componentId;

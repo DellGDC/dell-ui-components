@@ -102,7 +102,7 @@ function initialize( next ) {
 
 	console.log( "Current version is " + pkg.version + "; generating release " + releaseVersion );
 	version = pkg.version.match( rsemver );
-	oldver = ( +version[1] ) * 10000 + ( +version[2] * 100 ) + ( +version[3] )
+	oldver = ( +version[1] ) * 10000 + ( +version[2] * 100 ) + ( +version[3] );
 	newver = ( +major ) * 10000 + ( +minor * 100 ) + ( +patch );
 	if ( newver < oldver ) {
 		die( "Next version is older than current version!" );

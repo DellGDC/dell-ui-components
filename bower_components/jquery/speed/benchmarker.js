@@ -43,12 +43,12 @@
       try {
         jQuery(this).parent().children("*:gt(1)").remove();
       } catch(e) { }
-    })
+    });
     // set # times to run the test in index.html
     var times = parseInt(jQuery("#times").val());
     jQuery.benchmarker.startingList = this.get();
     benchmark(this.get(), times, jQuery.benchmarker.libraries);
-  }
+  };
 
   jQuery(function() {
     for(i = 0; i < jQuery.benchmarker.tests.length; i++) {
@@ -60,21 +60,21 @@
       jQuery('td:has(input:checked) + td.test').benchmark();
     });
 
-    jQuery("button.retryTies").bind("click", function() { jQuery("tr:has(td.tie) td.test").benchmark() })
+    jQuery("button.retryTies").bind("click", function() { jQuery("tr:has(td.tie) td.test").benchmark() });
 
-    jQuery("button.selectAll").bind("click", function() { jQuery("input[type=checkbox]").each(function() { this.checked = true }) })
-    jQuery("button.deselectAll").bind("click", function() { jQuery("input[type=checkbox]").each(function() { this.checked = false }) })
+    jQuery("button.selectAll").bind("click", function() { jQuery("input[type=checkbox]").each(function() { this.checked = true }) });
+    jQuery("button.deselectAll").bind("click", function() { jQuery("input[type=checkbox]").each(function() { this.checked = false }) });
 
     jQuery("#addTest").bind("click", function() {
       jQuery("table").append("<tr><td><input type='checkbox' /></td><td><input type='text' /><button>Add</button></td></tr>");
-      jQuery("div#time-test > button").each(function() { this.disabled = true; })
+      jQuery("div#time-test > button").each(function() { this.disabled = true; });
       jQuery("tbody tr:last button").bind("click", function() {
         var td = jQuery(this).parent();
         td.html("<button>-</button>" + jQuery(this).prev().val()).addClass("test");
-        jQuery("div#time-test > button").each(function() { this.disabled = false; })
+        jQuery("div#time-test > button").each(function() { this.disabled = false; });
         jQuery("button", td).bind("click", function() { jQuery(this).parents("tr").remove(); })
       })
-    })
+    });
 
     var headers = jQuery.map(jQuery.benchmarker.libraries, function(i,n) {
       var extra = n == 0 ? "basis - " : "";
@@ -101,9 +101,9 @@
        var times = times || 50;
        var el = list[0];
        var code = jQuery(el).text().replace(/^-/, "");
-         var timeArr = []
+         var timeArr = [];
          for(i = 0; i < times + 2; i++) {
-           var time = new Date()
+           var time = new Date();
            try {
              window[libraries[0]](code);
            } catch(e) { }
@@ -136,7 +136,7 @@
        });
        setTimeout(count, 100);
      }
-   }
+   };
 
   function benchmarkList(list, times, libraries) {
     return function() {
@@ -163,10 +163,10 @@
    return this.filter(function() {
      if( withinTolerance(parseFloat(this.innerHTML.replace(/[^\.\d]/g, "")), target, tolerance, percentage) ) return true;
    })
- }
+ };
 
- jQuery.fn.max = function(tolerance, percentage) { return this.maxmin(tolerance, "max", percentage) }
- jQuery.fn.min = function(tolerance, percentage) { return this.maxmin(tolerance, "min", percentage) }
+ jQuery.fn.max = function(tolerance, percentage) { return this.maxmin(tolerance, "max", percentage) };
+ jQuery.fn.min = function(tolerance, percentage) { return this.maxmin(tolerance, "min", percentage) };
 
  function withinTolerance(number, target, tolerance, percentage) {
    if(percentage) { var high = target + ((tolerance / 100) * target); var low = target - ((tolerance / 100) * target); }
@@ -178,4 +178,4 @@
    var sum = 0;
    for(i = 0; i < arr.length; i++) sum += arr[i];
    return sum;
- }
+ };

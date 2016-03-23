@@ -553,13 +553,12 @@
                     slide.appendChild(row);
                 }
                 newSlides.appendChild(slide);
-            };
+            }
             _.$slider.html(newSlides);
             _.$slider.children().children().children()
                 .width((100 / _.options.slidesPerRow) + "%")
                 .css({'display': 'inline-block'});
-        };
-
+        }
     };
 
     Slick.prototype.checkResponsive = function(initial) {

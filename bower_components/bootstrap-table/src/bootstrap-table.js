@@ -543,7 +543,7 @@
                         break;
                     case 'select':
                         html.push(sprintf('<select class="%s form-control" style="width: 100%; visibility: %s"></select>',
-                            column.field, isVisible))
+                            column.field, isVisible));
                         break;
                 }
             } else {
@@ -879,7 +879,7 @@
 
     BootstrapTable.prototype.onColumnSearch = function (event, isSelectControl) {
         var text = $.trim($(event.currentTarget).val());
-        var $field = $(event.currentTarget).parent().parent().data('field')
+        var $field = $(event.currentTarget).parent().parent().data('field');
 
         // trim search input
         //$(event.currentTarget).val(text);
@@ -1642,7 +1642,7 @@
         // fix bug: get $el.css('width') error sometime (height = 500)
         clearTimeout(this.timeoutId_);
         this.timeoutId_ = setTimeout($.proxy(this.fitHeader, this), this.$el.is(':hidden') ? 100 : 0);
-        return;
+
     };
 
     BootstrapTable.prototype.fitHeader = function () {
@@ -1941,7 +1941,7 @@
             }
         }
         return rows;
-    }
+    };
 
     BootstrapTable.prototype.mergeCells = function (options) {
         var row = options.index,

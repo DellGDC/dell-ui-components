@@ -10,7 +10,7 @@
 	if( !( 'querySelector' in document ) ||
 			( window.blackberry && !window.WebKitPoint ) ||
 			window.operamini ) {
-		return;
+
 	} else {
 		$( document.documentElement ).addClass( 'tablesaw-enhanced' );
 

@@ -5,18 +5,18 @@ Licensed under the MIT license.
 https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
 */
 (function() {
-  'use strict'
+  'use strict';
 
   function noop() {}
 
-  var Waypoint = window.Waypoint
+  var Waypoint = window.Waypoint;
 
   /* http://imakewebthings.com/waypoints/shortcuts/inview */
   function Inview(options) {
-    this.options = Waypoint.Adapter.extend({}, Inview.defaults, options)
-    this.axis = this.options.horizontal ? 'horizontal' : 'vertical'
-    this.waypoints = []
-    this.element = this.options.element
+    this.options = Waypoint.Adapter.extend({}, Inview.defaults, options);
+    this.axis = this.options.horizontal ? 'horizontal' : 'vertical';
+    this.waypoints = [];
+    this.element = this.options.element;
     this.createWaypoints()
   }
 
@@ -61,17 +61,17 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
           return -this.adapter.outerWidth()
         }
       }]
-    }
+    };
 
     for (var i = 0, end = configs[this.axis].length; i < end; i++) {
-      var config = configs[this.axis][i]
+      var config = configs[this.axis][i];
       this.createWaypoint(config)
     }
-  }
+  };
 
   /* Private */
   Inview.prototype.createWaypoint = function(config) {
-    var self = this
+    var self = this;
     this.waypoints.push(new Waypoint({
       context: this.options.context,
       element: this.options.element,
@@ -84,7 +84,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
       offset: config.offset,
       horizontal: this.options.horizontal
     }))
-  }
+  };
 
   /* Public */
   Inview.prototype.destroy = function() {
@@ -92,19 +92,19 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
       this.waypoints[i].destroy()
     }
     this.waypoints = []
-  }
+  };
 
   Inview.prototype.disable = function() {
     for (var i = 0, end = this.waypoints.length; i < end; i++) {
       this.waypoints[i].disable()
     }
-  }
+  };
 
   Inview.prototype.enable = function() {
     for (var i = 0, end = this.waypoints.length; i < end; i++) {
       this.waypoints[i].enable()
     }
-  }
+  };
 
   Inview.defaults = {
     context: window,
@@ -113,7 +113,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
     entered: noop,
     exit: noop,
     exited: noop
-  }
+  };
 
   Waypoint.Inview = Inview
 }())

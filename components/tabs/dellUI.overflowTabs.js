@@ -3,11 +3,11 @@
         // To avoid scope issues, use 'base' instead of 'this'
         // to reference this class from internal events and functions.
         var base = this;
-        
+
         // Access to jQuery and DOM versions of element
         base.$el = $(el);
         base.el = el;
-        
+
         // Add a reverse reference to the DOM object
         base.$el.data("dellUIoverflowTab", base);
 
@@ -26,14 +26,14 @@
             right:"glyphicon glyphicon-menu-right"
         }
     };
-    
 
-    
+
+
     $.fn.dellUIoverflowTab = function(options){
         if(options) {
             $.dellUIoverflowTab.defaultOptions = $.extend($.dellUIoverflowTab.defaultOptions, options);
         }
-        
+
         return this.each(function(){
             (new $.dellUIoverflowTab(this));
             var options = $.dellUIoverflowTab.defaultOptions,
@@ -55,11 +55,11 @@
                 breakpoint = function() {
                     var window_size = $(window).width(),
                         breakpoint = {
-                            isXS: false, 
-                            isSM: false, 
-                            isMD: false, 
+                            isXS: false,
+                            isSM: false,
+                            isMD: false,
                             isLG: false
-                        };        
+                        };
                     switch(true) {
                         case (window_size < options.xsMax):
                             breakpoint.isXS = true;
@@ -89,7 +89,7 @@
                         };
 
                         //visibility = 0: none 1: fully visible 2: partially visible
-                       
+
                         if(tabObjs.length === index + 1) {
                         } else {
                             offsetTotal = offsetTotal - tObj.width - 1;
@@ -172,7 +172,10 @@
                                 leftPosition = tabInContext.tabContainerWidth - tabInContext.rightMostPoint -60 ;
                             }
                         }
-                        element.css('left',leftPosition + "px");
+                        if(!breakpoint().isXS) {
+                            element.css('left',leftPosition + "px");
+                        }
+                        
                     } else {
                         isHome = true;
                     }
@@ -193,13 +196,13 @@
                 element.parent().addClass('nav-tabs-overflow-container'); //css wrapper for styling
                 element.before('<div class="prev disabled"><a href="javascript:;"><i class="'+options.iconClasses.left+'"></i></a></div>'); //left arrow
                 element.after('<div class="next"><a href="javascript:;"><i class="'+options.iconClasses.right+'"></i></a></div>'); //right arrow
-                
+
                 changeHeight = function(h){
                     if(h) {
                         element.css("height", (h+2)+"px");//2 pixels account for top and bottom border
                         element.find("> li").find("a").css("height", h+"px");
                         element.parent().find(".prev,.next").find("a").css("height", (h)+"px");
-                        element.parent().find(".prev,.next").find("a").css("padding-top", (h/2 - 8)+"px"); //moves the arrow to center when the content pushes the height beyond default (42px)                            
+                        element.parent().find(".prev,.next").find("a").css("padding-top", (h/2 - 8)+"px"); //moves the arrow to center when the content pushes the height beyond default (42px)
                     } else {
                         //if no height is provided everything is reset.
                         element.removeAttr("style").width(totalWidth+200); //removes height and resets width
@@ -265,5 +268,5 @@
 
         });
     };
-    
+
 })(jQuery);

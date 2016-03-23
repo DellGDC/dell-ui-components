@@ -40,8 +40,8 @@
 
                     // example of removing matchHeight
                     $('.btn-remove').click(function() {
-                        $('.item').matchHeight({ 
-                            remove: true 
+                        $('.item').matchHeight({
+                            remove: true
                         });
                     });
 
@@ -54,7 +54,7 @@
                     $.fn.matchHeight._beforeUpdate = function(event, groups) {
                         //var eventType = event ? event.type + ' event, ' : '';
                         //console.log("beforeUpdate, " + eventType + groups.length + " groups");
-                    }
+                    };
 
                     $.fn.matchHeight._afterUpdate = function(event, groups) {
                         //var eventType = event ? event.type + ' event, ' : '';

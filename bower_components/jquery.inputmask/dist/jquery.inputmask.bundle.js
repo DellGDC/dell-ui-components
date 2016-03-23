@@ -47,8 +47,7 @@
                     this.isQuantifier = isQuantifier || false;
                     this.isAlternator = isAlternator || false;
                     this.quantifier = { min: 1, max: 1 };
-                };
-
+                }
                 //test definition => {fn: RegExp/function, cardinality: int, optionality: bool, newBlockMarker: bool, offset: int, casing: null/upper/lower, def: definitionSymbol, placeholder: placeholder}
                 function insertTestDefinition(mtoken, element, position) {
                     var maskdef = opts.definitions[element];
@@ -397,7 +396,7 @@
                     }
                 }
                 return valid;
-            };
+            }
             function getTests(pos, ndxIntlzr, tstPs) {
                 var maskTokens = getMaskSet()["maskToken"], testPos = ndxIntlzr ? tstPs : 0, ndxInitializer = ndxIntlzr || [0], matches = [], insertStop = false;
                 function ResolveTestFromToken(maskToken, ndxInitializer, loopNdx, quantifierRecurse) { //ndxInitilizer contains a set of indexes to speedup searches in the mtokens
@@ -551,7 +550,7 @@
             }
 
             function isValid(pos, c, strict, fromSetValid) { //strict true ~ no correction or autofill
-                strict = strict === true; //always set a value to strict to prevent possible strange behavior in the extensions 
+                strict = strict === true; //always set a value to strict to prevent possible strange behavior in the extensions
 
                 function _isValid(position, c, strict, fromSetValid) {
                     var rslt = false;
@@ -691,7 +690,7 @@
                 if (position <= 0) return 0;
 
                 while (--position > 0 && !isMask(position)) {
-                };
+                }
                 return position;
             }
 
@@ -1531,8 +1530,7 @@
                         break;
                 }
             }
-        };
-
+        }
         $.inputmask = {
             //options default
             defaults: {
@@ -1657,7 +1655,7 @@
                             return targetScope({ "action": "getemptymask", "el": this });
                         }
                         else return "";
-                    case "hasMaskedValue": //check wheter the returned value is masked or not; currently only works reliable when using jquery.val fn to retrieve the value 
+                    case "hasMaskedValue": //check wheter the returned value is masked or not; currently only works reliable when using jquery.val fn to retrieve the value
                         return this.data(targetData) ? !this.data(targetData)['opts'].autoUnmask : false;
                     case "isComplete":
                         if (this.data(targetData)) {
@@ -1836,7 +1834,7 @@
                     if ($.isFunction(opts.determineActiveMasksetIndex))
                         activeMasksetIndex = opts.determineActiveMasksetIndex.call($el, eventType, elmasks);
                     else {
-                        var lpc = -1, cp = -1, lvp = -1;;
+                        var lpc = -1, cp = -1, lvp = -1;
                         $.each(elmasks, function (ndx, lmsk) {
                             var data = $(lmsk).data('_inputmask');
                             var maskset = data["maskset"];
@@ -2061,8 +2059,7 @@
                         break;
                 }
             }
-        };
-
+        }
         $.extend($.inputmask.defaults, {
             //multi-masks
             multi: false, //do not alter - internal use
@@ -3029,8 +3026,7 @@ Allows for using regular expressions as a mask
 
                             if (currentToken.matches.length > 0)
                                 opts.regexTokens.push(currentToken);
-                        };
-
+                        }
                         function validateRegexToken(token, fromGroup) {
                             var isvalid = false;
                             if (fromGroup) {
@@ -3135,10 +3131,10 @@ Phone extension.
 When using this extension make sure you specify the correct url to get the masks
 
  $(selector).inputmask("phone", {
-                url: "Scripts/jquery.inputmask/phone-codes/phone-codes.json", 
+                url: "Scripts/jquery.inputmask/phone-codes/phone-codes.json",
                 onKeyValidation: function () { //show some metadata in the console
                     console.log($(this).inputmask("getmetadata")["name_en"]);
-                } 
+                }
   });
 
 

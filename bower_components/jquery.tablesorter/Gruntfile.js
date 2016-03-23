@@ -79,7 +79,7 @@ module.exports = function( grunt ) {
 							widgets.push( deps[ dep ] );
 							// keep checking newly added widgets, in case 'filter' is added and 'storage' hasn't been
 							if ( len < maxDeps ) { len++; }
-							continue;
+
 						}
 					}
 				}

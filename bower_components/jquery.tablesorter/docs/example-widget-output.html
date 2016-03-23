@@ -170,7 +170,7 @@
 		// make separator & replace quotes buttons update the value
 		$this.find('.output-separator').click(function(){
 			$this.find('.output-separator').removeClass('active');
-			var txt = $(this).addClass('active').html()
+			var txt = $(this).addClass('active').html();
 			$this.find('.output-separator-input').val( txt );
 			$this.find('.output-filename').val(function(i, v){
 				// change filename extension based on separator

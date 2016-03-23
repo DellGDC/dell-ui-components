@@ -125,8 +125,10 @@ module.exports = function (grunt) {
                     {src: ['temp/demo.js'], dest: 'dist/dell-ui-components/demo/demo.js'},
                     {src: ['components/**/*.gif','components/**/*.jpg','components/**/*.png','components/**/*.svg','!components/**/demo*','!components/**/test*','!components/**/FPO*'], dest: 'dist/dell-ui-components/img/'},
                     {src: ['components/**/FPO*'], dest: 'dist/dell-ui-components/demo/'},
+                    {src: ['components/**/*.json'], dest: 'dist/dell-ui-components/demo/'},
                     {src: ['README.md'], dest: 'dist/README.md'},
                     {src: ['LICENSE'], dest: 'dist/LICENSE'},
+                    {src: ['bower_components/font-awesome/fonts/*.*'], dest:'dist/dell-ui-components/fonts/',flatten:true,expand:true},
                     {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components/dell-ui-components.css'},
                     {cwd: 'bower_components/dell-ui-bootstrap/', src: ['**'], dest: 'dist/dell-ui-bootstrap/', expand:true}
                 ]
@@ -298,8 +300,15 @@ module.exports = function (grunt) {
                         {
                             pattern: /url\(\'standard-buttons/g,
                             replacement: "url('img/components/standard-buttons"
+                        },
+                        {
+                            pattern: /..\/fonts\//ig,
+                            replacement: 'fonts\/'
+                        },
+                        {
+                            pattern: ", url('fonts/glyphicons-halflings-regular.woff2') format('woff2')",
+                            replacement: ''
                         }
-
 
                     ]
                 }
