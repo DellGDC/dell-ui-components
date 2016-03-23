@@ -1,6 +1,6 @@
 angular.module('dellUiComponents').directive('toggle', function () {
     return {
-        restrict: 'A',
+        restrict: 'AC',
         link: function ($scope, element, attributes, controller) {
             switch (attributes.toggle) {
                 case "popover":
@@ -75,7 +75,7 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         }, 1500);
                     });
                     break;
-// -------Content Teaser------- //                    
+// -------Content Teaser------- //
                 case "list-truncated":
                     var target = attributes.target;
                     if (!target) {
@@ -110,6 +110,36 @@ angular.module('dellUiComponents').directive('toggle', function () {
                                 });
                             });
                         }
+                    break;
+
+                case "div-link":
+                    $(element).on('hover', function (event) {
+                        //event.preventDefault();
+
+
+                        //window.open($(this).find("a:first").attr("href"));
+                        //console.log('im active')
+                        //return false;
+                    });
+
+                    //$(".box1").click(function () {
+                    //    window.open($(this).find("a:first").attr("href"));
+                    //    return false;
+                    //});
+
+                     //Or use this to Open link in same window (similar to target=_blank)
+                    //$(element).click(function(){
+                    //    window.location = $(this).find("a:first").attr("href");
+                    //    return false;
+                    //});
+                    //
+                    //// Show URL on Mouse Hover
+                    //$(element).hover(function () {
+                    //    window.status = $(this).find("a:first").attr("href");
+                    //    console.log('im active');
+                    //}, function () {
+                    //    window.status = "";
+                    //});
                     break;
             }
         }
