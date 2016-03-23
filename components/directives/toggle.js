@@ -1,60 +1,92 @@
-angular.module('dellUiComponents').directive('toggle', function () {
+angular.module('dellUiComponents').directive('toggle', function ($rootScope,$timeout,$compile) {
     return {
         restrict: 'A',
-        link: function ($scope, element, attributes, controller) {
-            switch (attributes.toggle) {
+        link: function ($scope, $element, $attrs, controller) {
+            switch ($attrs.toggle) {
                 case "popover":
-                    var destroy = function () {
-                        $('[data-toggle="popover"]').popover('destroy');
+                    var hidePopover = function() {
+                        $element.popover('hide');
+                        $element.blur();
                     };
-                    if (attributes.trigger === "hover") {
-
-                        $(element).mouseover(function (event) {
-                            event.preventDefault();
-                            destroy();
-                            $(this).popover('show');
+                    if ($attrs.trigger === "hover") {
+                        $element.popover({
+                            trigger: 'hover'
                         });
                     } else {
-                        $(element).popover({
-                            trigger: 'manual'
+                        $element.popover({
+                            trigger: 'manual',
                         });
-                        $(element).click(function (event) {
-                            event.preventDefault();
-                            destroy();
-                            $(this).popover('show');
-                            $('[data-dismiss="popover"]').bind('click', function (event) {
-                                event.preventDefault();
-                                destroy();
+                        $element.on('click',function(){
+                            $element.popover('toggle');
+                        });
+                        $element.on('shown.bs.popover', function () {
+
+
+                            $element.next().off('click');
+                            $element.next().on('click', function(){
+                                $element.focus();
+                            });
+
+                            $('[data-dismiss="popover"]').on('click', function(){
+                                $timeout(function(){
+                                    $element.blur();
+                                },300);
+                            });
+
+
+                            $element.off('blur');
+                            $element.on('blur', function(){
+                                $timeout(function(){
+                                    if(!$element.is(':focus')) {
+                                        hidePopover();
+                                    }
+                                },500);
+                            });
+                            $compile($element.next().contents())($scope);
+                        });
+                        $element.on('hidden.bs.popover', function () {
+                            $element.on('click', function(){
+                                $element.popover('show');
                             });
                         });
+
                     }
                     break;
                 case "tooltip":
-                    $(element).tooltip();
+                    $element.tooltip();
+                    $element.on("click",function(){
+                        if($rootScope.bp.isXS){
+                            $element.tooltip('show');
+                        }
+                    });
+                    $element.on("mouseenter",function(){
+                        if($rootScope.bp.isXS){
+                            $element.tooltip('hide');
+                        }
+                    });
                     break;
                 case "offcanvas":
-                    $(element).on('click', function (event) {
+                    $element.on('click', function (event) {
                         event.preventDefault();
-                        $(element).parents('.row-offcanvas').find('.tab-content').removeClass('active');
-                        $(element).parents('.row-offcanvas').removeClass('active');
+                        $element.parents('.row-offcanvas').find('.tab-content').removeClass('active');
+                        $element.parents('.row-offcanvas').removeClass('active');
                     });
                     break;
                 case "tab":
-                    $(element).on('click', function (event) {
+                    $element.on('click', function (event) {
                         event.preventDefault();
                         $(this).tab('show');
                         $(this).parents('.row-offcanvas').find('.tab-content').addClass('active');
                         $(this).parents('.row-offcanvas').addClass('active');
                     });
                     break;
-
                 case "collapse":
-                    $(element).on('click', function (event) {
+                    $element.on('click', function (event) {
                         event.preventDefault();
                     });
                     break;
                 case "load-more":
-                    var selector = attributes.target,
+                    var selector = $attrs.target,
                         size_li = $(selector + " li").size(),
                         x=3;
                     if (!selector) {
@@ -62,11 +94,11 @@ angular.module('dellUiComponents').directive('toggle', function () {
                     }
 
                     $(selector + ' li:lt('+x+')').show();
-                    $(element).click(function () {
+                    $element.click(function () {
                         x= (x+5 <= size_li) ? x+5 : size_li;
                         $(selector + ' li:lt('+x+')').fadeIn(1500);
                         if ($(selector  + " li:visible").size() === size_li) {
-                            $(element).hide();
+                            $element.hide();
                         }
                         var $this = $(this);
                         $this.button('loading');
@@ -75,43 +107,41 @@ angular.module('dellUiComponents').directive('toggle', function () {
                         }, 1500);
                     });
                     break;
-// -------Content Teaser------- //
                 case "list-truncated":
-                    var target = attributes.target;
+                    var target = $attrs.target;
                     if (!target) {
-                        target = $(element).prev();
+                        target = $element.prev();
                     }
 
-                        if($(target).find("li").length <= 5) {
-                            $(element).hide();
-                        } else {
-                            var maxHeight = 0, minHeight = 0;
-                            _.each($(target).find("li"), function(listItem,index){
-                                if(index < 5) {
-                                    minHeight = minHeight + $(listItem).height();
-                                }
-                                maxHeight = maxHeight + $(listItem).height();
-                            });
+                    if($(target).find("li").length <= 5) {
+                        $element.hide();
+                    } else {
+                        var maxHeight = 0, minHeight = 0;
+                        _.each($(target).find("li"), function(listItem,index){
+                            if(index < 5) {
+                                minHeight = minHeight + $(listItem).height();
+                            }
+                            maxHeight = maxHeight + $(listItem).height();
+                        });
 
-                            $(target).height(minHeight);
-                            $(element).on('click', function(){
-                                var height = minHeight;
-                                if($(element).hasClass('collapsed')) {
-                                    height = maxHeight;
+                        $(target).height(minHeight);
+                        $element.on('click', function(){
+                            var height = minHeight;
+                            if($element.hasClass('collapsed')) {
+                                height = maxHeight;
+                            }
+                            $element.toggleClass('collapsed');
+                            $(target).animate({
+                                height: height
+                            }, {
+                                duration: 300,
+                                specialEasing: {
+                                    height: "swing"
                                 }
-                                $(element).toggleClass('collapsed');
-                                $(target).animate({
-                                    height: height
-                                }, {
-                                    duration: 300,
-                                    specialEasing: {
-                                        height: "swing"
-                                    }
-                                });
                             });
-                        }
+                        });
+                    }
                     break;
-                
             }
         }
     };
