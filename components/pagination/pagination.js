@@ -54,9 +54,9 @@ angular.module('dellUiComponents')
                  //Set intital divs to be hidden
                  $element.find('.lazy-load-content').addClass("hidden");
                  var contentNumber = 0;
-                 var i = 0;
+                 // var i = 0;
                  
-                 console.log('doing lazy stuff');
+                 // console.log('doing lazy stuff');
                  function reveal() {
                      var constraintNumber = contentNumber + 5;
                      //IMPORTANT - DO NOT DELETE
