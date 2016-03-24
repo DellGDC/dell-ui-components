@@ -250,37 +250,6 @@ blockquote .blockquote-links li + li::before {
  * Standard-Buttons component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.tap-to-load {
-  height: 34px;
-  color: #00618f;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
-  border: 1px solid #cccccc;
-  padding: 6px 12px;
-  background: #eeeeee;
-}
-.tap-to-load:hover,
-.tap-to-load:focus {
-  color: #005a85;
-  outline: none;
-  border: 1px solid transparent;
-  background: #f9f9f9;
-}
-/* tap-to-load-rule NOTE: not part of Bootstrap*/
-.tap-to-load-rule {
-  text-align: center;
-  background: url('img/components/standard-buttons/gray-dark-dot-line.png') repeat-x;
-  background-position: 50% 30%;
-  margin-bottom: 20px;
-  display: block;
-}
-.tap-to-load-rule p {
-  display: inline-block;
-  background: #ffffff;
-  padding: 0px 10px;
-  max-width: 80%;
-}
 .btn-video {
   font-size: 60px !important;
   vertical-align: middle;
@@ -373,6 +342,9 @@ fieldset[disabled] a.btn.btn-success,
 a.btn.btn-primary.disabled,
 fieldset[disabled] a.btn.btn-primary {
   color: #ffffff;
+}
+.btn-toolbar > .btn-group {
+  margin-bottom: 5px;
 }
 /*
  * Block-Buttons component theme overrides
@@ -3063,6 +3035,9 @@ input:focus + [role="modal"] {
  * Progress-Bars component theme overrides
  *------------------------------------------------------------------------------------------
  */
+.progress {
+  overflow: visible;
+}
 .progress.progress-status .bar {
   position: relative;
 }
@@ -3070,7 +3045,7 @@ input:focus + [role="modal"] {
   position: relative;
   color: #444444;
   text-shadow: none;
-  top: 30px;
+  top: 20px;
   font-size: 14px;
 }
 .progress.progress-status .bar-disabled span {
@@ -3083,13 +3058,12 @@ input:focus + [role="modal"] {
 }
 .progress.progress-status .bar-complete:after {
   position: absolute;
-  right: 45%;
+  right: 49%;
   top: 2px;
   content: "\e611";
   font-family: "icon-small";
   font-size: 11px;
   font-weight: normal;
-  margin-right: 2px;
 }
 .progress.progress-status .bar-progress {
   background: #cce5f1;
@@ -3155,7 +3129,7 @@ input:focus + [role="modal"] {
 }
 .btn-progress + .dropdown-menu li.completed > a::before,
 .btn-progress + .dropdown-menu li.active > a::before {
-  color: #6ea204;
+  color: #007db8;
   content: "\e611";
   font-family: icon-small;
   font-size: 11px;
