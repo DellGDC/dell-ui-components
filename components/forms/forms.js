@@ -31,24 +31,6 @@ angular.module('dellUiComponents')
     };
 })
 
-// -----| Added for DUC-198 |----- //
-// .directive('listTree', function () {
-//     return {
-//         restrict: 'C',
-//         link: function ($scope, $element, $attr) {
-//             $element.find('label .checked').on('click', function(){
-//                 if($(this).is(':checked')) && ($(this).hasClass('checked')) {
-//                     $(this).parent().addClass('some-kids-chekced');
-//                 } else {
-//                     $(this).parent().removeClass('some-kids-chekced');
-//                 }
-//             });
-//         }
-//     };
-// })
-// ---------------| |--------------- //
-
-
 .directive('emailValidate', function() {
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
@@ -74,21 +56,6 @@ angular.module('dellUiComponents')
     return {
         restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
         link: function($scope, element, attributes, controller) {
-
-            //$(element).blur(function () {
-            //    var string1 = $(element).val();
-            //    if (string1.indexOf("@") === -1){
-            //        $(element).addClass('alert alert-warning');
-            //        $(element).tooltip({
-            //            title: "Please input a valid email address!"
-            //        });
-            //    //$(element).blur();
-            //    } else {
-            //        $(element).removeClass('alert alert-warning');
-            //        $(element).tooltip('disable');
-            //    }
-            //});
-
 
             $(element).on('keyup',function () {
                 var string1 = $(element).val();
