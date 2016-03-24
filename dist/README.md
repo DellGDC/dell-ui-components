@@ -184,12 +184,17 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   - additional refinements for product stack
   - removed reference to woff2 file in the build process because none of the Dell production servers are configured to handle this format.
   - show/hide enhancement to handle show hide inline within a paragraph
+  - Fixed issue with email check not using proper Bootstrap error classes
+  - Fixed aligment issue in multiple choice select checkboxes
+  - Removed hard coded reference in multiple select and added placeholder attribute to provide label from HTML markup
+  - Cleaned up forms js code to make it consistant accross all directives
+  - Added version string replacement so that dist css has correct version number on a grunt build.
 
 
 ### Older versions:
 
 ```
--1.0.17 - January 21, 2016:
+1.0.17 - January 21, 2016:
   - Got rid of hard coded reference to demo data in complex table example
 
 -1.0.16 - January 20, 2016:

@@ -308,6 +308,10 @@ module.exports = function (grunt) {
                         {
                             pattern: ", url('fonts/glyphicons-halflings-regular.woff2') format('woff2')",
                             replacement: ''
+                        },
+                        {
+                            pattern: /Dell-UI-Components v.*?(bower dell-ui-components)/ig,
+                            replacement: 'Dell-UI-Components v'+pkg.version+' (bower dell-ui-components'
                         }
 
                     ]

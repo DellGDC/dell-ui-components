@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Components v1.0.14 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.18 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -1685,9 +1685,13 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   white-space: nowrap;
   color: #007db8;
   padding: 3px 3px 3px 3px;
+  cursor: pointer;
 }
 .show-hide-password .ms-drop ul > li label.optgroup {
   font-weight: bold;
+}
+.show-hide-password .ms-drop ul > li label input[type=checkbox] {
+  top: 0px;
 }
 .show-hide-password .ms-drop ul > li:hover,
 .show-hide-password .ms-drop ul > li:focus .show-hide-password .ms-drop ul > li:active {
@@ -1748,6 +1752,18 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   content: " ";
   clear: both;
   height: 0;
+}
+.show-hide-password .has-error .form-control,
+.show-hide-password .has-error input.form-control {
+  background: #ffffc9;
+}
+.show-hide-password .has-error .form-control:active,
+.show-hide-password .has-error input.form-control:active,
+.show-hide-password .has-error .form-control:focus,
+.show-hide-password .has-error input.form-control:focus {
+  background: #ffffff;
+  border-color: #007db8;
+  box-shadow: 0 0 2px #85d8ff;
 }
 .show-hide-password .slider {
   display: inline-block;
