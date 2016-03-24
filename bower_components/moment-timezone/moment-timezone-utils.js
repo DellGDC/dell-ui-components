@@ -169,7 +169,7 @@
 				if (zonesAreEqual(a, b)) {
 					links.push(b.name + '|' + a.name);
 					isUnique = false;
-					continue;
+
 				}
 			}
 

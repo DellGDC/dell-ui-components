@@ -203,7 +203,7 @@ $.fn.extend({
 					next;
 
 				if (e.ctrlKey || e.altKey || e.metaKey || k < 32) {//Ignore
-					return;
+
 				} else if (k) {
 					if (pos.end - pos.begin !== 0){
 						clearBuffer(pos.begin, pos.end);

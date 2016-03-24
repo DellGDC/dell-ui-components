@@ -11,13 +11,12 @@ function wait(con, fun, max) {
 		phantom.exit(1);
 		clearInterval(waiter);
 	}, max);
-};
-
-var page = new WebPage(), options = phantom.args[0] || "", 
+}
+var page = new WebPage(), options = phantom.args[0] || "",
     path = "/tests/run_tests.html?auto=on&log_to_json=1&"+options,
     lastFramework;
 
-page.onConsoleMessage = function (msg) { 
+page.onConsoleMessage = function (msg) {
 	var d = JSON.parse(msg);
 	if (!d.failed) return;
 	if (d.framework!=lastFramework) console.log(d.framework+":");

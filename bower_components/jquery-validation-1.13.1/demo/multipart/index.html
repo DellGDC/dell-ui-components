@@ -23,7 +23,7 @@
 		var current = 0;
 
 		$.validator.addMethod("pageRequired", function(value, element) {
-			var $element = $(element)
+			var $element = $(element);
 
 				function match(index) {
 					return current == index && $(element).parents("#sf" + (index + 1)).length;
@@ -32,7 +32,7 @@
 				return !this.optional(element);
 			}
 			return "dependency-mismatch";
-		}, $.validator.messages.required)
+		}, $.validator.messages.required);
 
 		var v = $("#cmaForm").validate({
 			errorClass: "warning",

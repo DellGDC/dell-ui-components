@@ -1,5 +1,5 @@
 (function() {
-	
+
 	//We'll grab the frameworks from CDNs.
 	var frameworks = {
 		eve       : "../src/eve.js",
@@ -11,7 +11,7 @@
 		yui		  : "http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js",
 		prototype : "http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"
 	};
-	
+
 	//Grab the query parameters.
 	var params = {}, i, d,
 	    query  = window.location.search.substring(1);
@@ -20,23 +20,23 @@
 		d = query[i].split('=');
 		params[d[0]] = d[1];
 	}
-	
-	function getEveLocation() {	
-		
+
+	function getEveLocation() {
+
 		//If nothing is set, just return the default.
 		if (!params.eve_file) return frameworks.eve;
-		
+
 		//If we're looking for a normal HTTP request (ie, we're trying to test
 		//the CDN), continue.
 		if (params.eve_file.match(/^https?:\/\//)) return loc;
-		
+
 		//Otherwise, use the framework list for the proper file path.
 		return frameworks[params.eve_file];
-	
+
 	}
-	
+
 	//Outputs the final results to a pretty list.
-	function outputResults(results, tests) {	
+	function outputResults(results, tests) {
 		var o, ul, li, passes, total, status, els, finals = {passes:0,total:0};
 		pstring = "";
 		for (var k in params) {
@@ -56,7 +56,7 @@
 			    name   : els[i].innerHTML,
 			    status : status,
 				href   : els[i].href+pstring
-			}
+			};
 			ul = document.createElement('ul'),
 			ul.appendChild(document.getElementById('status-template').cloneNode(true));
 			ul.innerHTML = ul.innerHTML.replace(/\{\{(.+?)\}\}/g, function(rep, key) {
@@ -70,21 +70,20 @@
 		}
 		var eve_loc = getEveLocation(),
 		    testedAgainst = document.getElementById('tested-against');
-		
+
 		testedAgainst.href = eve_loc;
 		testedAgainst.innerHTML = eve_loc;
-		
+
 		finals.failures = finals.total - finals.passes;
 		window.Eve_results = finals;
-	};
-	
-	//Pull out the previous test history.
+    }
+    //Pull out the previous test history.
 	params.results = (params.results) ? params.results.split(';') : [];
-	
+
 	var framework = params.runner,
 		els = document.getElementById('framework-list').getElementsByTagName('a'),
 		tests = [], i;
-	
+
 	for (i=0;i<els.length;i++) {
 		tests[i] = els[i].getAttribute('href');
 		//Display previous test results
@@ -95,7 +94,7 @@
 			els[i].className = 'failed';
 		}
 	}
-	
+
 	//Autorun if someone's just hanging around the index.
 	if (!framework&&params.auto&&params.results.length==0) {
 		framework   = 'jquery';
@@ -108,13 +107,13 @@
 		document.body.className = "tests-finished";
 		outputResults(params.results,tests);
 	}
-	
+
 	if (!framework) return;
-	
+
 	document.title = "Eve.js Test: "+framework;
-	
+
 	document.getElementById('fw-'+framework).className = 'active';
-	
+
 	function loadScript(url, callback) {
 		var script	 = document.createElement('script');
 		script.type	 = "text/javascript";
@@ -152,11 +151,10 @@
 					} window.location = next;
 				});
 			});
-			loadScript("tests.js");	
+			loadScript("tests.js");
 		});
-	};
-	
-	//Setting ?conflict= in the URL will load the conflicting framework first,
+    }
+    //Setting ?conflict= in the URL will load the conflicting framework first,
 	//then run Eve.setFramework on the current framework.
 	if (params.conflict) {
 		loadScript(frameworks[params.conflict], function() {
@@ -164,7 +162,7 @@
 			loadEnvironment();
 		});
 	} else { loadEnvironment(); }
-	
+
 	var link	 = document.createElement('link');
 	link.rel	 = "stylesheet";
 	link.href	 = "http://code.jquery.com/qunit/qunit-git.css";

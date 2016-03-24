@@ -171,7 +171,7 @@ $(function() {
 				// ui-theme is added by the themeswitcher
 				files = $('link.theme').each(function(){
 					this.disabled = true;
-				})
+				});
 			files.filter('.' + theme).each(function(){
 				this.disabled = false;
 			});

@@ -304,8 +304,11 @@ module.exports = function (grunt) {
                         {
                             pattern: /..\/fonts\//ig,
                             replacement: 'fonts\/'
+                        },
+                        {
+                            pattern: ", url('fonts/glyphicons-halflings-regular.woff2') format('woff2')",
+                            replacement: ''
                         }
-
 
                     ]
                 }

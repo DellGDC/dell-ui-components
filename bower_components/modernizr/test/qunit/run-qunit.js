@@ -30,9 +30,7 @@ function waitFor(testFx, onReady, timeOutMillis) {
                 }
             }
         }, 100); //< repeat check every 250ms
-};
-
-
+}
 if (phantom.args.length === 0 || phantom.args.length > 2) {
     console.log('Usage: run-qunit.js URL');
     phantom.exit();

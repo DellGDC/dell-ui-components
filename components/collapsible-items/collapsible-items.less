@@ -35,12 +35,22 @@ span.collapsed .show-collapsed {
     }
 }
 
+a.hide-expanded {
+    display:none;
+    &.collapsed {
+        display:inline;
+    }
+}
+
 .collapse {
     overflow: hidden;
     -webkit-transition: height .3 .5s ease;
     -moz-transition: height .3 .5s ease;
     -o-transition: height .3 .5s ease;
     transition: height .3 .5s ease;
+    &.inline.in {
+        display:inline;
+    }
 }
 
 //data-toggle
@@ -303,5 +313,4 @@ span.collapsed .show-collapsed {
 
     }
 }
-
 

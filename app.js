@@ -15,7 +15,6 @@ angular.module('demo').config(function ($stateProvider, $urlRouterProvider) {
 
 
 
-
     /* Add New States Above */
     $urlRouterProvider.otherwise('/demo/');
 

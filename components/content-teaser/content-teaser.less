@@ -3,7 +3,6 @@
  *------------------------------------------------------------------------------------------
  */
 
-
 .stacked-detail-links  {
     min-height: 20px;
     margin-bottom: 10px;
@@ -35,6 +34,11 @@
         margin-bottom: -5px;
     }
 }
+
+h5, p {
+    color: #444444;
+}
+
 
 @media (max-width: @screen-xs-max) {
    .detail-links {
@@ -91,6 +95,10 @@
     padding: 10px 20px;
     margin-left: -15px;
     margin-right: -15px;
+
+    p {
+        margin: 0;
+    }
 }
 
 
@@ -113,11 +121,18 @@
     }
 }
 
+.detail-links.view-all {
+        > li {
+            display: block;
+        }
+    }
+
+
 .content-toggle {
     margin-top: -15px;
 }
 
-
+//TODO this should be in DUB
 .dropdown-menu {
     i {
         margin-left: -6px;

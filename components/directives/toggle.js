@@ -1,36 +1,55 @@
-angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
+angular.module('dellUiComponents').directive('toggle', function ($rootScope,$timeout,$compile) {
     return {
         restrict: 'A',
         link: function ($scope, $element, $attrs, controller) {
             switch ($attrs.toggle) {
                 case "popover":
-                    var destroy = function () {
-                        $('[data-toggle="popover"]').popover('destroy');
+                    var hidePopover = function() {
+                        $element.popover('hide');
+                        $element.blur();
                     };
                     if ($attrs.trigger === "hover") {
-                        $element.mouseover(function (event) {
-                            event.preventDefault();
-                            destroy();
-                            $(this).popover('show');
+                        $element.popover({
+                            trigger: 'hover'
                         });
                     } else {
                         $element.popover({
-                            trigger: 'manual'
+                            trigger: 'manual',
                         });
-                        $element.click(function (event) {
-                            event.preventDefault();
-                            if($(this).attr('aria-describedby')) {
-                                destroy();
-                            } else {
-                                destroy();
-                                $(this).popover('show');
-                            }
-                            
-                            $('[data-dismiss="popover"]').bind('click', function (event) {
-                                event.preventDefault();
-                                destroy();
+                        $element.on('click',function(){
+                            $element.popover('toggle');
+                        });
+                        $element.on('shown.bs.popover', function () {
+
+
+                            $element.next().off('click');
+                            $element.next().on('click', function(){
+                                $element.focus();
+                            });
+
+                            $('[data-dismiss="popover"]').on('click', function(){
+                                $timeout(function(){
+                                    $element.blur();
+                                },300);
+                            });
+
+
+                            $element.off('blur');
+                            $element.on('blur', function(){
+                                $timeout(function(){
+                                    if(!$element.is(':focus')) {
+                                        hidePopover();
+                                    }
+                                },500);
+                            });
+                            $compile($element.next().contents())($scope);
+                        });
+                        $element.on('hidden.bs.popover', function () {
+                            $element.on('click', function(){
+                                $element.popover('show');
                             });
                         });
+
                     }
                     break;
                 case "tooltip":
@@ -122,7 +141,7 @@ angular.module('dellUiComponents').directive('toggle', function ($rootScope) {
                             });
                         });
                     }
-                break;
+                    break;
             }
         }
     };
