@@ -42,24 +42,45 @@
 
 //============== load more ============
 .load-more {
+    list-style: none;
+    padding:0;
+    margin:0;
     li {
-        display: none;
+        display:none;
+        opacity:0;
+        &.in {
+            display:block;
+        }
+        &.fade {
+            -webkit-transition: opacity 1s linear;
+            -o-transition: opacity 1s linear;
+            transition: opacity 1s linear;
+        }
     }
 }
 
-.pager .btn-load-more{
+
+
+//============== lazy-load ============
+
+.img-circle {
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
+.img-rounded {
+    margin-left: 20px;
+    margin-right: 0px;
+    border: 1px solid #999999;
+}
+
+.viewing-window {
     display: block;
-    width: 100%;
-    background-color: @dell-gray-light;
-    border: 1px solid @dell-gray-stroke;
-    border-radius: 1px;
-    &:hover {
-        background-color: @dell-gray-hover;
-        text-decoration: none;
-    }
-    &:active,
-    &:focus {
-        -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-        box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-    }
+    width: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 250px;
+}
+.large-view-window {
+    widows: 100%;
+    height: 700px;
 }
