@@ -21891,6 +21891,73 @@ angular.module('dellUiComponents').config(function () {
   };
 }(jQuery));
 (function ($) {
+  $.dellUIcontentGallery = function (el) {
+    // To avoid scope issues, use 'base' instead of 'this'
+    // to reference this class from internal events and functions.
+    var base = this;
+    // Access to jQuery and DOM versions of element
+    base.$el = $(el);
+    base.el = el;
+    // Add a reverse reference to the DOM object
+    base.$el.data('dellUIcontentGallery', base);
+  };
+  $.fn.dellUIcontentGallery = function () {
+    return this.each(function () {
+      new $.dellUIcontentGallery(this);
+      var element = $(this), allListItems = element.find('li'), showMoreToggle = element.find('.content-gallery-show-more'), initGallery = function () {
+          showMoreToggle.on('click', function (e) {
+            var parentLi = $($(e.currentTarget).parents('li')[0]), rowWidth = 0, rowMaxWidth = Math.abs(element.parent().innerWidth() - element.parent().css('padding-left').replace(/px/, '') - element.parent().css('padding-right').replace(/px/, '')), targetFound, targetIndex, done, content;
+            if (parentLi.hasClass('open')) {
+              element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function () {
+                $(this).remove();
+              });
+              element.find('.open').removeClass('open');
+            } else {
+              element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function () {
+                $(this).remove();
+              });
+              element.find('.open').removeClass('open');
+              setTimeout(function () {
+                parentLi.addClass('open');
+                $.each(allListItems, function (index, i) {
+                  if (!done) {
+                    var itemWidth = $(i).outerWidth();
+                    if (!targetFound) {
+                      targetFound = $(i).hasClass('open');
+                      targetIndex = index;
+                      content = '<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">\xd7</button></span>' + $(i).find('.content-gallery-details').html() + '</div></li>';
+                    }
+                    rowWidth = rowWidth + itemWidth;
+                    if (rowWidth >= rowMaxWidth || index === allListItems.length - 1) {
+                      if (targetFound) {
+                        $(i).after(content);
+                        element.find('.details-container').attr('display', 'block').slideDown(450);
+                        element.find('.details-container .close').on('click', function (e) {
+                          e.preventDefault();
+                          element.find('li.details-container').attr('display', 'none').slideUp(450).delay(500).queue(function () {
+                            $(this).remove();
+                          });
+                          element.find('.open').removeClass('open');
+                        });
+                        element.find('.details-container').on('click', function (e) {
+                          e.stopPropagation();
+                        });
+                        done = true;
+                      } else {
+                        rowWidth = 0;
+                      }
+                    }
+                  }
+                });
+              }, 100);
+            }
+          });
+        };
+      initGallery();
+    });
+  };
+}(jQuery));
+(function ($) {
   $.dellUIuniversalFooter = function (el, options) {
     // To avoid scope issues, use 'base' instead of 'this'
     // to reference this class from internal events and functions.
@@ -22813,32 +22880,6 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
     };
   }
 ]);
-angular.module('dellUiComponents').directive('alertCollapsible', function () {
-  return {
-    restrict: 'C',
-    link: function ($scope, $element, $attrs) {
-      //toggle x
-      $element.find('.close').on('click', function () {
-        $(event.currentTarget).parent().addClass('collapsed');
-      });
-      $element.find('> .show-collapsed').on('click', function () {
-        $(event.currentTarget).parent().removeClass('collapsed');
-      });
-    }
-  };
-});
-angular.module('dellUiComponents').directive('tableResponsive', [
-  '$timeout',
-  function ($timeout) {
-    // Runs during compile
-    return {
-      restrict: 'AC',
-      link: function ($scope, $element, $attrs, controller) {
-        $element.rtResponsiveTables({ containerBreakPoint: 300 });
-      }
-    };
-  }
-]);
 /**
  * Created by Clint_Batte on 5/7/2015.
  */
@@ -22943,70 +22984,6 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     });
   });
 }(jQuery, Eve));
-/**
- * Created by Clint_Batte on 8/6/2015.
- */
-angular.module('dellUiComponents').directive('contentGallery', [
-  '$timeout',
-  '$rootScope',
-  function ($timeout, $rootScope) {
-    // Runs during compile
-    return {
-      restrict: 'C',
-      link: function ($scope, $element, iAttrs, controller) {
-        $element.find('.content-gallery-show-more').on('click', function (e) {
-          e.preventDefault();
-          var parentLi = $(e.currentTarget).parents('li')[0], allListItems = $element.find('li'), rowWidth = 0, rowMaxWidth = Math.abs($element.parent().innerWidth() - $element.parent().css('padding-left').replace(/px/, '') - $element.parent().css('padding-right').replace(/px/, '')), targetFound, done, content;
-          //bodyMinusContainer = $('body' - $element.innerWidth());
-          if ($(parentLi).hasClass('open')) {
-            $element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function () {
-              $(this).remove();
-            });
-            $element.find('.open').removeClass('open');
-          } else {
-            $element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function () {
-              $(this).remove();
-            });
-            $element.find('.open').removeClass('open');
-            $timeout(function () {
-              $(parentLi).addClass('open');
-              _.each(allListItems, function (i, index) {
-                if (!done) {
-                  var itemWidth = Math.abs($(i).css('width').replace(/px/, ''));
-                  if (!targetFound) {
-                    targetFound = $(i).hasClass('open');
-                    content = $(i).find('.content-gallery-details').html();
-                  }
-                  rowWidth = rowWidth + itemWidth;
-                  if (rowWidth >= rowMaxWidth || index === allListItems.length - 1) {
-                    if (targetFound) {
-                      //console.log("Found target and inserting!!!");
-                      $(i).after('<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">\xd7</button></span>' + content + '</div></li>');
-                      $('.details-container').attr('display', 'block').slideDown(450);
-                      $('body, li.details-container .close').on('click', function (e) {
-                        e.preventDefault();
-                        $element.find('li.details-container').attr('display', 'none').slideUp(450).delay(500).queue(function () {
-                          $(this).remove();
-                        });
-                        $element.find('.open').removeClass('open');
-                      });
-                      $('.details-container').on('click', function (e) {
-                        e.stopPropagation();
-                      });
-                      done = true;
-                    } else {
-                      rowWidth = 0;
-                    }
-                  }
-                }
-              });
-            }, 100);
-          }
-        });  //---------------------------------------------
-      }
-    };
-  }
-]);
 /**
  * Created by Clint_Batte on 5/18/2015.
  */
