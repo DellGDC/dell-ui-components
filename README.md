@@ -189,6 +189,7 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   - created p-stack sectional images for guides page
   - additional refinements for product stack
   - fixed progress bar issue that was hiding labels
+  -
 
 
 
