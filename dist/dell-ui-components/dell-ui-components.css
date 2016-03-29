@@ -2855,24 +2855,42 @@ input:focus + [role="modal"] {
   left: 0.5em;
   margin-right: -50%;
 }
+.load-more {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .load-more li {
   display: none;
+  opacity: 0;
 }
-.pager .btn-load-more {
+.load-more li.in {
   display: block;
-  width: 100%;
-  background-color: #eeeeee;
-  border: 1px solid #cccccc;
-  border-radius: 1px;
 }
-.pager .btn-load-more:hover {
-  background-color: #f3f3f3;
-  text-decoration: none;
+.load-more li.fade {
+  -webkit-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+  transition: opacity 1s linear;
 }
-.pager .btn-load-more:active,
-.pager .btn-load-more:focus {
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+.img-circle {
+  margin-right: 20px;
+  margin-bottom: 30px;
+}
+.img-rounded {
+  margin-left: 20px;
+  margin-right: 0px;
+  border: 1px solid #999999;
+}
+.viewing-window {
+  display: block;
+  width: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 250px;
+}
+.large-view-window {
+  widows: 100%;
+  height: 700px;
 }
 /*
  * Popovers component theme overrides
