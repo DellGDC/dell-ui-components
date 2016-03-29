@@ -3,7 +3,7 @@
  *------------------------------------------------------------------------------------------
  */
 .progress {
-
+    overflow: visible;
     &.progress-status {
         .bar {
             position: relative;
@@ -11,7 +11,7 @@
                 position:    relative;
                 color:       @dell-gray-dark;
                 text-shadow: none;
-                top:         30px;
+                top:         20px;
                 font-size:   14px;
             }
             &-disabled {
@@ -29,13 +29,12 @@
 
                 &:after {
                     position:     absolute;
-                    right:        45%;
+                    right:        49%;
                     top:          2px;
                     content:      "\e611";
                     font-family:  "icon-small";
                     font-size:    11px;
                     font-weight:  normal;
-                    margin-right: 2px;
                 }
             }
 
@@ -111,7 +110,7 @@
 .btn-progress + .dropdown-menu li {
     position: relative;
     a {
-        color: #007db8;
+        color: @dell-blue;
         padding-left: 30px;
     }
     &.disabled > a {
@@ -122,11 +121,11 @@
         color: #444;
     }
     &.completed > a {
-        color: #007db8;
+        color: @dell-blue;
     }
     &.completed > a::before,
     &.active > a::before {
-        color: #6ea204;
+        color: @dell-blue;
         content: "\e611";
         font-family: icon-small;
         font-size: 11px;

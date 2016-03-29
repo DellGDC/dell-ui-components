@@ -175,21 +175,24 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.18** - March 9, 2016:
-  - Adding in guides layout for product stack
-  - fixes for popovers so it stays pen when clikced inside of open popover
-  - test build for staging/DesLib  
-  - adding in guides layout page
-  - created p-stack sectional images for guides page
-  - additional refinements for product stack
-  - removed reference to woff2 file in the build process because none of the Dell production servers are configured to handle this format.
-  - show/hide enhancement to handle show hide inline within a paragraph
+**1.0.18** - March 25, 2016:
+  - Added product stack component with examples and guide
+  - Bugfix for popovers so it stays open when clikced inside of open popover
+  - Added guides layout page for component demos
+  - Removed reference in build to woff2 file in the build process because none of the Dell production servers are configured to handle this format.
+  - Added Show/hide enhancement to handle show hide inline within a paragraph
+  - Fixed issue with email check not using proper Bootstrap error classes
+  - Fixed aligment issue in multiple choice select checkboxes
+  - Removed hard coded reference in multiple select and added placeholder attribute to provide label from HTML markup
+  - Cleaned up forms js code to make it consistant accross all directives
+  - Added version string replacement so that dist css has correct version number on a grunt build.
+  - Fixed issue with progress tracker labels not showing for md/lg breakpoints
 
 
 ### Older versions:
 
 ```
--1.0.17 - January 21, 2016:
+1.0.17 - January 21, 2016:
   - Got rid of hard coded reference to demo data in complex table example
 
 -1.0.16 - January 20, 2016:

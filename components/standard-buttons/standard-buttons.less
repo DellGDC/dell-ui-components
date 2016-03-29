@@ -9,40 +9,6 @@
 
 
 
-.tap-to-load {
-  height: 34px;
-  color: @btn-default-color;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
-  border: 1px solid @dell-gray-stroke;
-  padding: 6px 12px;
-  background: @btn-default-bg;
-  &:hover,
-  &:focus {
-    color: darken(@dell-blue, 10%);
-    outline: none;
-    border: 1px solid transparent;
-    background: @dell-gray-very-light;
-  }
-}
-
-/* tap-to-load-rule NOTE: not part of Bootstrap*/
-.tap-to-load-rule {
-  text-align: center;
-  background: url('standard-buttons/gray-dark-dot-line.png') repeat-x;
-  background-position: 50% 30%;
-  margin-bottom: 20px;
-  display: block;
-}
-
-.tap-to-load-rule p {
-  display: inline-block;
-  background: #ffffff;
-  padding: 0px 10px;
-  max-width: 80%;
-}
-
 
 // TODO need to move this to dell-ui-components
 
@@ -186,4 +152,10 @@ fieldset[disabled] a.btn.btn-success,
 a.btn.btn-primary.disabled,
 fieldset[disabled] a.btn.btn-primary {
     color: @white;
+}
+
+
+//TOD this needs to go to UI bootstrap. This is in case a button toolbar button wraps to line below
+.btn-toolbar > .btn-group {
+    margin-bottom:5px;
 }
