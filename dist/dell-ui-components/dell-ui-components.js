@@ -22948,6 +22948,32 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
     };
   }
 ]);
+angular.module('dellUiComponents').directive('alertCollapsible', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, $attrs) {
+      //toggle x
+      $element.find('.close').on('click', function () {
+        $(event.currentTarget).parent().addClass('collapsed');
+      });
+      $element.find('> .show-collapsed').on('click', function () {
+        $(event.currentTarget).parent().removeClass('collapsed');
+      });
+    }
+  };
+});
+angular.module('dellUiComponents').directive('tableResponsive', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    return {
+      restrict: 'AC',
+      link: function ($scope, $element, $attrs, controller) {
+        $element.rtResponsiveTables({ containerBreakPoint: 300 });
+      }
+    };
+  }
+]);
 /**
  * Created by Clint_Batte on 5/7/2015.
  */
@@ -23066,6 +23092,18 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     });
   });
 }(jQuery, Eve));
+angular.module('dellUiComponents').directive('contentGallery', [
+  '$timeout',
+  '$rootScope',
+  function ($timeout, $rootScope) {
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, iAttrs, controller) {
+        $element.dellUIcontentGallery();
+      }
+    };
+  }
+]);
 /**
  * Created by Clint_Batte on 5/18/2015.
  */
