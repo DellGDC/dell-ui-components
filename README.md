@@ -175,13 +175,32 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.17** - January 21, 2016:
-  - Got rid of hard coded reference to demo data in complex table example
+**1.0.18** - March 29, 2016:
+  - fixes for popovers so it stays pen when clicked inside of open popover
+  - fixes for Show Password in an email input
+  - adding in guides layout page
+  - additional refinements for product stack
+  - removed reference to woff2 file in the build process because none of the Dell production servers are configured to handle this format.
+  - adding in guides layout page
+  - created p-stack sectional images for guides page
+  - additional refinements for product stack
+  - fixed progress bar issue that was hiding labels
+  - fixed bug in content gallery and updated content headlines to have hover state
+  - Added New Lazy-Load and updated Tap-to-Load components
+  - Added New Show/Hide enhancement to handle show hide inline within a paragraph
+  - Adding in Product Stacks
+  - Adding in guides layout for Product Stacks
+  - Updated Content teasers with clickable headline and image links
+
 
 
 ### Older versions:
 
 ```
+
+-1.0.17 - January 21, 2016:
+  - Got rid of hard coded reference to demo data in complex table example
+
 -1.0.16 - January 20, 2016:
   - Fixed issue with erroneous masthead element - now header.masthead
   - Added Uber Tables
@@ -220,7 +239,7 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 - 1.0.10 Updated to dell-ui-bootstrap 1.2.2 which includes updates to icon font files and added icon-ui-handle
 - 1.0.9 Changes to carousel (dots and css), collapsible items (added content gallery), social media icons, edits to blockquote icon positioning, added contextual help component
 - 1.0.8 Changes to tables, breadcrumbs, show/hide, addition of contact drawer
-- 1.0.7 Changes to tabs and cleaned up README instructions 
+- 1.0.7 Changes to tabs and cleaned up README instructions
 - 1.0.6 - Updated Value Props so the content aligns left in mobile XS view, updated tool-tip hover and removed underline onconnect with dell component, made fix on show/hide toggle in XS view, updated grouped form to view in DesLib. Restructured package to remove development files from distribution.
 - 1.0.5 - Fixed carousels slider dots disappearing in DesLib, added Content-teasers, additional colors, banners, grid example patterns. Moved progress bar and pagination demo.js to non-demo.js files. added code patch for forms.less
 - 1.0.4 - Fixed issues accordions not displaying in wells correctly. Fixed tool-tip transparent background. Fix offsets examples.
