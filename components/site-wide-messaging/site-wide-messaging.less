@@ -1,0 +1,119 @@
+/*
+ * Site-Wide-Messaging component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+
+.site-wide-messaging {
+    height:50px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+.site-wide-messaging .mobile-countdown > span {
+    display:inline;
+}
+.site-wide-messaging ul {
+    margin-bottom:0;
+    margin-right:10px;
+}
+.site-wide-messaging-copy {
+    display:table-cell;
+    vertical-align:middle;
+    padding-left:15px;
+    padding-right:15px;
+    float:none;
+}
+.site-wide-messaging .desktop-countdown {
+    visibility:hidden;
+}
+.site-wide-messaging .mobile-countdown{
+    visibility:visible;
+}
+.site-wide-messaging small {
+    display:none;
+}
+.site-wide-messaging ul .desktop-countdown ul > li {
+    padding:0;
+    margin:0;
+    display: inline-block;
+}
+.site-wide-messaging ul .desktop-countdown ul li > span{
+    font-size:14px;
+    display: inline-block;
+    text-align:center;
+}
+.site-wide-messaging-product-image {
+    display:table-cell;
+    visibility:hidden;
+
+}
+.site-wide-messaging  img {
+    width:0;
+    height:40px;
+}
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+    .site-wide-messaging .mobile-countdown > span {
+        display:none;
+    }
+    .site-wide-messaging-copy {
+        padding-left:0;
+    }
+    .site-wide-messaging .mobile-countdown span:first-child {
+        visibility:hidden;
+    }
+    .site-wide-messaging  .desktop-countdown {
+        visibility:visible;
+        top:2px;
+    }
+    .site-wide-messaging  .desktop-countdown ul{
+        display:table-cell;
+        vertical-align:middle;
+    }
+    .site-wide-messaging ul .desktop-countdown ul > li:nth-child(2n) {
+        position:relative;
+        top:-16px;
+    }
+    .site-wide-messaging ul .desktop-countdown ul li > span{
+        font-weight:bold;
+        font-size:16px;
+        display: inline-block;
+        text-align:center;
+    }
+    .site-wide-messaging small {
+        display:block;
+        font-weight:bold;
+        font-size: 10px;
+        text-align:center;
+        color: @dell-gray;
+    }
+    .site-wide-messaging-product-image {
+        display:table-cell;
+        vertical-align:middle;
+        visibility:visible;
+        float:none;
+        width:78px;
+    }
+    .site-wide-messaging  img {
+        width:78px;
+        height:40px;
+    }
+    .site-wide-messaging-cta-optional {
+        display:inline;
+    }
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+
+}
+
+
+
