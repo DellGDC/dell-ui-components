@@ -28,8 +28,8 @@
 */
 /*jshint browser:true, jquery:true, unused:false, expr: true */
 /*global console:false, alert:false, require:false, define:false, module:false */
-;(function($){
-	'use strict';
+    (function ($) {
+        'use strict';
 	$.extend({
 		/*jshint supernew:true */
 		tablesorter: new function() {
@@ -1283,7 +1283,7 @@
 						}
 					}
 				}
-				return;
+
 			};
 
 			// computeTableHeaderCellIndexes from:

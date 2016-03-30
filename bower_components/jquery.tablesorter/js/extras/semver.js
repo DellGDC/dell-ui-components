@@ -282,7 +282,7 @@ function SemVer(version, loose) {
   }
 
   if (version.length > MAX_LENGTH)
-    throw new TypeError('version is longer than ' + MAX_LENGTH + ' characters')
+    throw new TypeError('version is longer than ' + MAX_LENGTH + ' characters');
 
   if (!(this instanceof SemVer))
     return new SemVer(version, loose);
@@ -302,13 +302,13 @@ function SemVer(version, loose) {
   this.patch = +m[3];
 
   if (this.major > MAX_SAFE_INTEGER || this.major < 0)
-    throw new TypeError('Invalid major version')
+    throw new TypeError('Invalid major version');
 
   if (this.minor > MAX_SAFE_INTEGER || this.minor < 0)
-    throw new TypeError('Invalid minor version')
+    throw new TypeError('Invalid minor version');
 
   if (this.patch > MAX_SAFE_INTEGER || this.patch < 0)
-    throw new TypeError('Invalid patch version')
+    throw new TypeError('Invalid patch version');
 
   // numberify any prerelease numeric ids
   if (!m[4])
@@ -316,7 +316,7 @@ function SemVer(version, loose) {
   else
     this.prerelease = m[4].split('.').map(function(id) {
       if (/^[0-9]+$/.test(id)) {
-        var num = +id
+        var num = +id;
         if (num >= 0 && num < MAX_SAFE_INTEGER)
           return num
       }
@@ -383,7 +383,7 @@ SemVer.prototype.comparePre = function(other) {
     else if (a === undefined)
       return -1;
     else if (a === b)
-      continue;
+
     else
       return compareIdentifiers(a, b);
   } while (++i);
@@ -979,9 +979,9 @@ function replaceXRange(comp, loose) {
       } else if (gtlt === '<=') {
         // <=0.7.x is actually <0.8.0, since any 0.7.x should
         // pass.  Similarly, <=7.x is actually <8.0.0, etc.
-        gtlt = '<'
+        gtlt = '<';
         if (xm)
-          M = +M + 1
+          M = +M + 1;
         else
           m = +m + 1
       }

@@ -250,37 +250,6 @@ blockquote .blockquote-links li + li::before {
  * Standard-Buttons component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.tap-to-load {
-  height: 34px;
-  color: #00618f;
-  -webkit-border-radius: 1px;
-  -moz-border-radius: 1px;
-  border-radius: 1px;
-  border: 1px solid #cccccc;
-  padding: 6px 12px;
-  background: #eeeeee;
-}
-.tap-to-load:hover,
-.tap-to-load:focus {
-  color: #005a85;
-  outline: none;
-  border: 1px solid transparent;
-  background: #f9f9f9;
-}
-/* tap-to-load-rule NOTE: not part of Bootstrap*/
-.tap-to-load-rule {
-  text-align: center;
-  background: url('img/components/standard-buttons/gray-dark-dot-line.png') repeat-x;
-  background-position: 50% 30%;
-  margin-bottom: 20px;
-  display: block;
-}
-.tap-to-load-rule p {
-  display: inline-block;
-  background: #ffffff;
-  padding: 0px 10px;
-  max-width: 80%;
-}
 .btn-video {
   font-size: 60px !important;
   vertical-align: middle;
@@ -373,6 +342,9 @@ fieldset[disabled] a.btn.btn-success,
 a.btn.btn-primary.disabled,
 fieldset[disabled] a.btn.btn-primary {
   color: #ffffff;
+}
+.btn-toolbar > .btn-group {
+  margin-bottom: 5px;
 }
 /*
  * Block-Buttons component theme overrides
@@ -2883,24 +2855,42 @@ input:focus + [role="modal"] {
   left: 0.5em;
   margin-right: -50%;
 }
+.load-more {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .load-more li {
   display: none;
+  opacity: 0;
 }
-.pager .btn-load-more {
+.load-more li.in {
   display: block;
-  width: 100%;
-  background-color: #eeeeee;
-  border: 1px solid #cccccc;
-  border-radius: 1px;
 }
-.pager .btn-load-more:hover {
-  background-color: #f3f3f3;
-  text-decoration: none;
+.load-more li.fade {
+  -webkit-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+  transition: opacity 1s linear;
 }
-.pager .btn-load-more:active,
-.pager .btn-load-more:focus {
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+.img-circle {
+  margin-right: 20px;
+  margin-bottom: 30px;
+}
+.img-rounded {
+  margin-left: 20px;
+  margin-right: 0px;
+  border: 1px solid #999999;
+}
+.viewing-window {
+  display: block;
+  width: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 250px;
+}
+.large-view-window {
+  widows: 100%;
+  height: 700px;
 }
 /*
  * Popovers component theme overrides
@@ -2970,6 +2960,9 @@ input:focus + [role="modal"] {
  * Progress-Bars component theme overrides
  *------------------------------------------------------------------------------------------
  */
+.progress {
+  overflow: visible;
+}
 .progress.progress-status .bar {
   position: relative;
 }
@@ -2977,7 +2970,7 @@ input:focus + [role="modal"] {
   position: relative;
   color: #444444;
   text-shadow: none;
-  top: 30px;
+  top: 20px;
   font-size: 14px;
 }
 .progress.progress-status .bar-disabled span {
@@ -2990,13 +2983,12 @@ input:focus + [role="modal"] {
 }
 .progress.progress-status .bar-complete:after {
   position: absolute;
-  right: 45%;
+  right: 49%;
   top: 2px;
   content: "\e611";
   font-family: "icon-small";
   font-size: 11px;
   font-weight: normal;
-  margin-right: 2px;
 }
 .progress.progress-status .bar-progress {
   background: #cce5f1;
@@ -3062,7 +3054,7 @@ input:focus + [role="modal"] {
 }
 .btn-progress + .dropdown-menu li.completed > a::before,
 .btn-progress + .dropdown-menu li.active > a::before {
-  color: #6ea204;
+  color: #007db8;
   content: "\e611";
   font-family: icon-small;
   font-size: 11px;
@@ -4805,12 +4797,21 @@ span.collapsed .show-collapsed a {
 .show-collapsed:focus {
   outline: none;
 }
+a.hide-expanded {
+  display: none;
+}
+a.hide-expanded.collapsed {
+  display: inline;
+}
 .collapse {
   overflow: hidden;
   -webkit-transition: height .3 .5s ease;
   -moz-transition: height .3 .5s ease;
   -o-transition: height .3 .5s ease;
   transition: height .3 .5s ease;
+}
+.collapse.inline.in {
+  display: inline;
 }
 [data-toggle="collapse"].collapsed .when-expanded {
   display: none;
@@ -4840,9 +4841,6 @@ span.collapsed .show-collapsed a {
 }
 .panel-collapse.collapse.in {
   border-bottom: none;
-}
-.panel-body ul {
-  padding-left: 20px;
 }
 .inline-image-content-links {
   min-height: 20px;
@@ -5051,6 +5049,10 @@ span.collapsed .show-collapsed a {
   margin-top: -5px;
   margin-bottom: -5px;
 }
+h5,
+p {
+  color: #444444;
+}
 @media (max-width: 767px) {
   .detail-links li {
     width: 100%;
@@ -5106,6 +5108,9 @@ span.collapsed .show-collapsed a {
   margin-left: -15px;
   margin-right: -15px;
 }
+.well-site-wide p {
+  margin: 0;
+}
 .detail-links > li {
   display: none;
   padding-bottom: 20px;
@@ -5114,6 +5119,9 @@ span.collapsed .show-collapsed a {
   .detail-links > li:nth-child(-n+4) {
     display: block;
   }
+}
+.detail-links.view-all > li {
+  display: block;
 }
 .detail-links.view-all > li {
   display: block;
@@ -5384,12 +5392,15 @@ span.collapsed .show-collapsed a {
   border-radius: 0;
 }
 .jumbotron {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   max-height: 600px;
   width: 100%;
   overflow: hidden;
   background: none;
+}
+.jumbotron img {
+  margin: 0 auto;
 }
 .jumbotron > .img-responsive {
   width: 100%;
@@ -5764,13 +5775,8 @@ masthead .masthead-shadow {
     margin-bottom: 5px;
     margin-top: -5px;
   }
-  .product-stack-wrapper .product-img {
-    width: 170px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: -20px;
+  .product-stack-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -5785,7 +5791,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 18.1%;
+    min-width: 17.1%;
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -6028,7 +6035,7 @@ masthead .masthead-shadow {
     text-decoration: underline;
   }
 }
-/* Medium devices (desktops, 992px and up to 991px ) */
+/* Medium devices (desktops, 992px and up to 1199px ) */
 @media (min-width: 768px) and (max-width: 991px) {
   .product-stack-wrapper .badge {
     background-color: #ee6411;
@@ -6096,12 +6103,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .product-title-stack ul.ratings > li a.btn-link {
     margin-left: 0 !important;
   }
-  .product-stack-wrapper .product-img {
-    width: 130px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  .product-stack-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -6116,7 +6119,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 17.9%;
+    min-width: 16.9%;
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -6180,6 +6184,7 @@ masthead .masthead-shadow {
   .product-stack-wrapper .price-stack h6 {
     margin-top: 5px;
     margin-bottom: 5px;
+    clear: both;
   }
   .product-stack-wrapper .price-stack .dell-price {
     margin-top: 0;
@@ -6187,7 +6192,8 @@ masthead .masthead-shadow {
   }
   .product-stack-wrapper .price-stack .price {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 5px;
+    float: left !important;
   }
   .product-stack-wrapper .price-stack .well {
     min-height: 20px;
@@ -6401,14 +6407,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .product-title-stack ul.ratings ul.rating-stars {
     margin-top: 2px;
   }
-  .product-stack-wrapper .product-img {
-    width: 100px;
-    height: auto;
-    display: inline;
-    margin-left: auto;
-    margin-right: auto;
-    padding-right: 15px;
-    position: relative;
+  .product-stack-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -6423,7 +6423,8 @@ masthead .masthead-shadow {
   .product-stack-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 17.9%;
+    min-width: 16.9%;
+    margin-bottom: 5px;
   }
   .product-stack-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -6641,7 +6642,7 @@ masthead .masthead-shadow {
   }
   .product-stack-wrapper .badge-overlay {
     position: absolute;
-    left: 33%;
+    left: 70%;
     top: 20%;
   }
 }
@@ -6653,7 +6654,7 @@ masthead .masthead-shadow {
   }
   .product-stack-wrapper .badge-overlay {
     position: absolute;
-    left: 45%;
+    left: 65%;
     top: 20%;
   }
 }
@@ -6665,8 +6666,8 @@ masthead .masthead-shadow {
   }
   .product-stack-wrapper .badge-overlay {
     position: absolute;
-    left: 60%;
-    top: 20%;
+    left: 55%;
+    top: 0%;
   }
 }
 /* ==================================================   product-stack search wrapper ========================================== */
@@ -6732,13 +6733,8 @@ masthead .masthead-shadow {
     margin-bottom: 5px;
     margin-top: -5px;
   }
-  .product-stack-search-wrapper .product-img {
-    width: 170px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: -20px;
+  .product-stack-search-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-search-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -6753,7 +6749,8 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 18.1%;
+    min-width: 17.1%;
+    margin-bottom: 5px;
   }
   .product-stack-search-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -6823,9 +6820,6 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .price-stack .dell-price {
     margin-top: 6px;
     margin-bottom: -5px;
-  }
-  .product-stack-search-wrapper .price-stack .price {
-    float: right !important;
   }
   .product-stack-search-wrapper .price-stack .price-discount-popup {
     content: "";
@@ -6998,7 +6992,7 @@ masthead .masthead-shadow {
     text-decoration: underline;
   }
 }
-/* Medium devices (desktops, 992px and up to 991px ) */
+/* Medium devices (desktops, 768px and up to 991px ) */
 @media (min-width: 768px) and (max-width: 991px) {
   .product-stack-search-wrapper .badge {
     background-color: #ee6411;
@@ -7066,12 +7060,8 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .product-title-stack ul.ratings > li a.btn-link {
     margin-left: 0 !important;
   }
-  .product-stack-search-wrapper .product-img {
-    width: 130px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  .product-stack-search-wrapper .tech-spec {
+    margin-bottom: 5px;
   }
   .product-stack-search-wrapper .tech-spec .list-inline {
     padding-left: 0;
@@ -7086,7 +7076,8 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .tech-spec .spec-bar {
     height: 3px;
     max-width: 18.5%;
-    min-width: 17.9%;
+    min-width: 16.9%;
+    margin-bottom: 5px;
   }
   .product-stack-search-wrapper .tech-spec .spec-bar.default {
     background: #cccccc;
@@ -7097,7 +7088,7 @@ masthead .masthead-shadow {
   .product-stack-search-wrapper .feature-spec {
     border-top: 1px solid #aaaaaa;
     border-bottom: 1px solid #aaaaaa;
-    margin: 10px 0 10px 0;
+    margin: 0 0 10px 0;
     padding: 5px 0;
   }
   .product-stack-search-wrapper .feature-spec .wrapper {

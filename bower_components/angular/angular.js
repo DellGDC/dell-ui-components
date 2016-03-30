@@ -83,8 +83,8 @@ function minErr(module) {
 /* global angular: true,
     msie: true,
     jqLite: true,
-    jQuery: true,
-    slice: true,
+ jQuery: true,
+ slice: true,
     push: true,
     toString: true,
     ngMinErr: true,
@@ -18107,7 +18107,7 @@ var requiredDirective = function() {
       var validator = function(value) {
         if (attr.required && ctrl.$isEmpty(value)) {
           ctrl.$setValidity('required', false);
-          return;
+
         } else {
           ctrl.$setValidity('required', true);
           return value;

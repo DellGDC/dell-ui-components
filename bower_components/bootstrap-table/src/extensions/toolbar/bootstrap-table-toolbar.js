@@ -105,7 +105,7 @@
             '</form>');
 
         return htmlForm;
-    }
+    };
 
 
 
@@ -128,7 +128,7 @@
 
 
     var BootstrapTable = $.fn.bootstrapTable.Constructor,
-        _initToolbar = BootstrapTable.prototype.initToolbar,        
+        _initToolbar = BootstrapTable.prototype.initToolbar,
         _load = BootstrapTable.prototype.load;
 
     BootstrapTable.prototype.initToolbar = function() {
@@ -157,7 +157,7 @@
             // Añadimos el botón al toolbar.
             that.$toolbar.find('.columns').prepend(htmlBtns.join(''));
 
-            // Creamos el onclick para el booton            
+            // Creamos el onclick para el booton
             that.$toolbar.find('button[name="avdSearch"]')
                 .off('click').on('click', function() {
                     showAvdSearch(that.options.columns, advSearch);

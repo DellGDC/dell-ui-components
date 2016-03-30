@@ -728,7 +728,7 @@ $(document).ready(function() {
     equal(_.numberFormat(), '');
     equal(_.numberFormat(null, '.', ','), '');
     equal(_.numberFormat(undefined, '.', ','), '');
-    equal(_.numberFormat(new Number(5000)), '5,000');
+    equal(_.numberFormat(Number(5000)), '5,000');
   });
 
   test('String: strRight', function() {

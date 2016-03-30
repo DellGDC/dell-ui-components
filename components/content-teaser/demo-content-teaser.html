@@ -1,364 +1,354 @@
-<section ng-controller="contentTeaserCtrl" id="content-teaser-html-example">
 
+
+<section ng-controller="contentTeaserCtrl" id="content-teaser-html-example">
 
     <div class="container">
         <h2>Teasers Demo</h2>
         <h3 class="bottom-offset-20">Vertical Teaser – Show/no-hide</h3>
         <div class="row" equalize-height=".content-teaser-container">
             <!--Example 1-->
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="content-teaser-container">
-                        <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                        <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                        <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                        <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
-                            <ul class="list-unstyled detail-links list-group content-card" ng-class="{'view-all': viewAll['parent-link-1']}">
-                                <li><a href="javascript:;">1 Sample Link</a></li>
-                                <li><a href="javascript:;">2 Sample Link</a></li>
-                                <li><a href="javascript:;">3 Sample Link</a></li>
-                                <li><a href="javascript:;">4 Sample Link</a></li>
-                                <li><a href="javascript:;">5 Sample Link</a></li>
-                                <li><a href="javascript:;">6 Sample Link</a></li>
-                                <li><a href="javascript:;">7 Sample Link</a></li>
-                                <li><a href="javascript:;">8 Sample Link</a></li>
-                                <li><a href="javascript:;">9 Sample Link</a></li>
-                            </ul>
-                            <div class="content-toggle" ng-hide="viewAll['parent-link-1']">
-                                <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-1'] = true">View All</a>
-                                <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-1'] = true">More</a>
-                            </div>
-                        </div><!--/parent show/hide wrapper for links-->
+            <div class="col-xs-12 col-sm-3">
+                <div class="content-teaser-container" id="content-teaser-no-hide">
+                    <a href="javascript:;"><img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/></a>
+                    <h4><a href="javascript:;" class="btn-link">Content headline title</a></h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+
+
+                    <div class="stacked-detail-links">
+                        <ul class="list-unstyled detail-links list-group content-card" ng-class="{'view-all': viewAll['parent-link-1']}">
+                            <li><a href="javascript:;" class="btn-link">1 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">2 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">3 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">4 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">5 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">6 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">7 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">8 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">9 Sample Link</a></li>
+                        </ul>
+                        <div class="content-toggle" ng-hide="viewAll['parent-link-1']">
+                            <a href="javascript:;" class="hidden-xs btn-link" ng-click="viewAll['parent-link-1'] = true">View All</a>
+                            <a href="javascript:;" class="visible-xs btn-link" id="viewAll-no-hide"  ng-click="viewAll['parent-link-1'] = true">More</a>
+                        </div>
                     </div>
+
                 </div>
-                <!--/Example 1-->
+            </div>
+            <!--/Example 1-->
 
-
-                <!--Example 2-->
-
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="content-teaser-container">
-                        <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                        <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                        <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                        <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
-                            <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-2']}">
-                                <li><a href="javascript:;">1 Sample Link</a></li>
-                                <li><a href="javascript:;">2 Sample Link</a></li>
-                                <li><a href="javascript:;">3 Sample Link</a></li>
-                                <li><a href="javascript:;">4 Sample Link</a></li>
-                                <li><a href="javascript:;">5 Sample Link</a></li>
-                                <li><a href="javascript:;">6 Sample Link</a></li>
-                                <li><a href="javascript:;">7 Sample Link</a></li>
-                                <li><a href="javascript:;">8 Sample Link</a></li>
-                                <li><a href="javascript:;">9 Sample Link</a></li>
-                            </ul>
-                            <div class="content-toggle" ng-hide="viewAll['parent-link-2']">
-                                <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-2'] = true">View All</a>
-                                <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-2'] = true">More</a>
-                            </div>
-                        </div><!--/parent show/hide wrapper for links-->
-                    </div>
+            <!--Example 2-->
+            <div class="col-xs-12 col-sm-3">
+                <div class="content-teaser-container">
+                    <a href="javascript:;"><img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/></a>
+                    <h4><a href="javascript:;" class="btn-link">Content headline title</a></h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                    <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
+                        <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-2']}">
+                            <li><a href="javascript:;" class="btn-link">1 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">2 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">3 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">4 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">5 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">6 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">7 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">8 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">9 Sample Link</a></li>
+                        </ul>
+                        <div class="content-toggle" ng-hide="viewAll['parent-link-2']">
+                            <a href="javascript:;" class="hidden-xs btn-link" ng-click="viewAll['parent-link-2'] = true">View All</a>
+                            <a href="javascript:;" class="visible-xs btn-link"  ng-click="viewAll['parent-link-2'] = true">More</a>
+                        </div>
+                    </div><!--/parent show/hide wrapper for links-->
                 </div>
-                <!--/Example 2-->
+            </div>
+            <!--/Example 2-->
 
-                <!--Example 3-->
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="content-teaser-container">
-                        <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                        <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                        <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                        <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
-                            <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-3']}">
-                                <li><a href="javascript:;">1 Sample Link</a></li>
-                                <li><a href="javascript:;">2 Sample Link</a></li>
-                                <li><a href="javascript:;">3 Sample Link</a></li>
-                                <li><a href="javascript:;">4 Sample Link</a></li>
-                                <li><a href="javascript:;">5 Sample Link</a></li>
-                                <li><a href="javascript:;">6 Sample Link</a></li>
-                                <li><a href="javascript:;">7 Sample Link</a></li>
-                                <li><a href="javascript:;">8 Sample Link</a></li>
-                                <li><a href="javascript:;">9 Sample Link</a></li>
-                            </ul>
-                            <div class="content-toggle" ng-hide="viewAll['parent-link-3']">
-                                <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-3'] = true">View All</a>
-                                <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-3'] = true">More</a>
-                            </div>
-                        </div> <!--/parent show/hide wrapper for links-->
-                    </div>
+            <!--Example 3-->
+            <div class="col-xs-12 col-sm-3">
+                <div class="content-teaser-container">
+                    <a href="javascript:;"><img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/></a>
+                    <h4><a href="javascript:;" class="btn-link">Content headline title</a></h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                    <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
+                        <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-3']}">
+                            <li><a href="javascript:;" class="btn-link">1 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">2 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">3 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">4 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">5 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">6 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">7 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">8 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">9 Sample Link</a></li>
+                        </ul>
+                        <div class="content-toggle" ng-hide="viewAll['parent-link-3']">
+                            <a href="javascript:;" class="hidden-xs btn-link" ng-click="viewAll['parent-link-3'] = true">View All</a>
+                            <a href="javascript:;" class="visible-xs btn-link"  ng-click="viewAll['parent-link-3'] = true">More</a>
+                        </div>
+                    </div> <!--/parent show/hide wrapper for links-->
                 </div>
-                <!--/Example 3-->
+            </div>
+            <!--/Example 3-->
 
-                <!--Example 4-->
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="content-teaser-container">
-                        <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                        <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                        <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                        <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
-                            <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-4']}">
-                                <li><a href="javascript:;">1 Sample Link</a></li>
-                                <li><a href="javascript:;">2 Sample Link</a></li>
-                                <li><a href="javascript:;">3 Sample Link</a></li>
-                                <li><a href="javascript:;">4 Sample Link</a></li>
-                                <li><a href="javascript:;">5 Sample Link</a></li>
-                                <li><a href="javascript:;">6 Sample Link</a></li>
-                                <li><a href="javascript:;">7 Sample Link</a></li>
-                                <li><a href="javascript:;">8 Sample Link</a></li>
-                                <li><a href="javascript:;">9 Sample Link</a></li>
-                            </ul>
-                            <div class="content-toggle" ng-hide="viewAll['parent-link-4']">
-                                <a href="javascript:;" class="hidden-xs" ng-click="viewAll['parent-link-4'] = true">View All</a>
-                                <a href="javascript:;" class="visible-xs"  ng-click="viewAll['parent-link-4'] = true">More</a>
-                            </div>
-                        </div> <!--/parent show/hide wrapper for links-->
-                    </div>
+            <!--Example 4-->
+            <div class="col-xs-12 col-sm-3">
+                <div class="content-teaser-container">
+                    <a href="javascript:;"><img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/></a>
+                    <h4><a href="javascript:;" class="btn-link">Content headline title</a></h4>
+                    <p>Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                    <div class="stacked-detail-links"><!--parent show/hide wrapper for links-->
+                        <ul class="list-unstyled detail-links list-group" ng-class="{'view-all': viewAll['parent-link-4']}">
+                            <li><a href="javascript:;" class="btn-link">1 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">2 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">3 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">4 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">5 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">6 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">7 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">8 Sample Link</a></li>
+                            <li><a href="javascript:;" class="btn-link">9 Sample Link</a></li>
+                        </ul>
+                        <div class="content-toggle" ng-hide="viewAll['parent-link-4']">
+                            <a href="javascript:;" class="hidden-xs btn-link" ng-click="viewAll['parent-link-4'] = true">View All</a>
+                            <a href="javascript:;" class="visible-xs btn-link"  ng-click="viewAll['parent-link-4'] = true">More</a>
+                        </div>
+                    </div> <!--/parent show/hide wrapper for links-->
                 </div>
-                <!--/Example 4-->
+            </div>
+            <!--/Example 4-->
         </div>
 
         <hr/>
 
         <h3 class="bottom-offset-20">Vertical Teaser – truncated content with dropdown CTA</h3>
-
         <div class="row">
             <!--Example 1-->
-            <div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30">
-                <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                <p class="multiline-ellipsis">Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                <div class="stacked-detail-links">
-                    <ul class="list-unstyled list-group bottom-offset-10">
-                        <li class="text-gray-medium">Updated: 3/25/2015</li>
-                    </ul>
-                </div>
-                <div class="btn-group">
-                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <i
-                        class="caret"></i></a>
-                    <ul class="dropdown-menu dropdown-icon-menu">
-                        <li><a href="javascript:;"><i class="icon-small-download"></i>&nbsp;&nbsp;Download</a></li>
-                        <li><a href="javascript:;"><i class="icon-small-share"></i>&nbsp;&nbsp;Share</a></li>
-                        <li><a href="javascript:;"><i class="icon-small-chat"></i>&nbsp;&nbsp;Contact an Expert</a></li>
-                    </ul>
-                </div>
-            </div>
-        <!--/Example 1-->
+            <div class="col-xs-12 col-sm-3 bottom-offset-30">
 
-        <!--Example 2-->
-            <div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30">
-                <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                <h4 class="text-blue">Content Headline Title Goes Here</h4>
+                <a href="javascript:;"><img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/></a>
+                <a href="javascript:;" class="btn-link"><h4 class="text-blue">Content headline title</h4></a>
                 <p class="multiline-ellipsis">Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
                 <div class="stacked-detail-links">
                     <ul class="list-unstyled list-group bottom-offset-10">
                         <li class="text-gray-medium">Updated: 3/25/2015</li>
                     </ul>
                 </div>
-                <div class="btn-group">
-                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <i
-                        class="caret"></i></a>
-                    <ul class="dropdown-menu dropdown-icon-menu">
-                        <li><a href="javascript:;"><i class="icon-small-download"></i>&nbsp;&nbsp;Download</a></li>
-                        <li><a href="javascript:;"><i class="icon-small-share"></i>&nbsp;&nbsp;Share</a></li>
-                        <li><a href="javascript:;"><i class="icon-small-chat"></i>&nbsp;&nbsp;Contact an Expert</a></li>
-                    </ul>
-                </div>
-            </div>
-        <!--/Example 2-->
 
-        <!--Example 3-->
-            <div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30">
-                <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                <h4 class="text-blue">Content Headline Title Goes Here</h4>
-                <p class="multiline-ellipsis">Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                <div class="stacked-detail-links">
-                    <ul class="list-unstyled list-group bottom-offset-10">
-                        <li class="text-gray-medium">Updated: 3/25/2015</li>
-                    </ul>
-                </div>
                 <div class="btn-group">
                     <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <i
                         class="caret"></i></a>
                     <ul class="dropdown-menu dropdown-icon-menu">
-                        <li><a href="javascript:;"><i class="icon-small-download"></i>&nbsp;&nbsp;Download</a></li>
-                        <li><a href="javascript:;"><i class="icon-small-share"></i>&nbsp;&nbsp;Share</a></li>
-                        <li><a href="javascript:;"><i class="icon-small-chat"></i>&nbsp;&nbsp;Contact an Expert</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-download"></i>&nbsp;&nbsp;Download</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-share"></i>&nbsp;&nbsp;Share</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-chat"></i>&nbsp;&nbsp;Contact an Expert</a></li>
                     </ul>
                 </div>
             </div>
-        <!--/Example 3-->
+            <!--/Example 1-->
 
-        <!--Example 4-->
-            <div class="col-xs-12 col-sm-4 col-md-3 bottom-offset-30">
-                <img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/>
-                <h4 class="text-blue">Content Headline Title Goes Here</h4>
+            <!--Example 2-->
+            <div class="col-xs-12 col-sm-3 bottom-offset-30">
+
+                <a href="javascript:;"><img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/></a>
+                <a href="javascript:;" class="btn-link"><h4 class="text-blue">Content headline title</h4></a>
                 <p class="multiline-ellipsis">Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
                 <div class="stacked-detail-links">
                     <ul class="list-unstyled list-group bottom-offset-10">
                         <li class="text-gray-medium">Updated: 3/25/2015</li>
                     </ul>
                 </div>
+
                 <div class="btn-group">
                     <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <i
                         class="caret"></i></a>
                     <ul class="dropdown-menu dropdown-icon-menu">
-                        <li><a href="javascript:;"><i class="icon-small-download"></i>&nbsp;&nbsp;Download</a></li>
-                        <li><a href="javascript:;"><i class="icon-small-share"></i>&nbsp;&nbsp;Share</a></li>
-                        <li><a href="javascript:;"><i class="icon-small-chat"></i>&nbsp;&nbsp;Contact an Expert</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-download"></i>&nbsp;&nbsp;Download</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-share"></i>&nbsp;&nbsp;Share</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-chat"></i>&nbsp;&nbsp;Contact an Expert</a></li>
                     </ul>
                 </div>
             </div>
-        <!--/Example 4-->
+            <!--/Example 2-->
+
+            <!--Example 3-->
+            <div class="col-xs-12 col-sm-3 bottom-offset-30">
+
+                <a href="javascript:;"><img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/></a>
+                <a href="javascript:;" class="btn-link"><h4 class="text-blue">Content headline title</h4></a>
+                <p class="multiline-ellipsis">Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                <div class="stacked-detail-links">
+                    <ul class="list-unstyled list-group bottom-offset-10">
+                        <li class="text-gray-medium">Updated: 3/25/2015</li>
+                    </ul>
+                </div>
+
+                <div class="btn-group">
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <i
+                        class="caret"></i></a>
+                    <ul class="dropdown-menu dropdown-icon-menu">
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-download"></i>&nbsp;&nbsp;Download</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-share"></i>&nbsp;&nbsp;Share</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-chat"></i>&nbsp;&nbsp;Contact an Expert</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--/Example 3-->
+
+            <!--Example 4-->
+            <div class="col-xs-12 col-sm-3 bottom-offset-30">
+
+                <a href="javascript:;"><img src="http://placehold.it/260x155" class="img-responsive bottom-offset-10"/></a>
+                <a href="javascript:;" class="btn-link"><h4 class="text-blue">Content headline title</h4></a>
+                <p class="multiline-ellipsis">Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                <div class="stacked-detail-links">
+                    <ul class="list-unstyled list-group bottom-offset-10">
+                        <li class="text-gray-medium">Updated: 3/25/2015</li>
+                    </ul>
+                </div>
+
+                <div class="btn-group">
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="javascript:;">Actions <i
+                        class="caret"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-download"></i>&nbsp;&nbsp;Download</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-share"></i>&nbsp;&nbsp;Share</a></li>
+                        <li><a href="javascript:;" class="btn-link"><i class="icon-small-chat"></i>&nbsp;&nbsp;Contact an Expert</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--/Example 4-->
         </div>
 
         <hr/>
 
-
-
-        <div class="top-offset-60">
-            <h3 class="bottom-offset-20">Vertical Teaser – truncated content</h3>
-                    <div class="row">
-                <!--Example 1-->
-                <div class="col-xs-12 col-sm-6 col-md-6 stacked-detail-links">
-                    <img src="http://placehold.it/555x275" class="img-responsive bottom-offset-10" />
-                    <h4 class="text-blue">Headline Title Goes Here <img src="components/content-teaser/demo-pdficon_small.png"/></h4>
-                    <p class="multiline-ellipsis">Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
-                    <div class="stacked-detail-links">
-                        <ul class="list-unstyled list-group">
-                            <li class="text-gray-medium">Updated: 3/25/2015</li>
-                            <li class="text-gray-medium">Category:<a href="javascript:;">&nbsp;&nbsp;Security Solutions</a></li>
-                            <li><a href="javascript:;">View all Security resources</a></li>
-                        </ul>
-                    </div>
+        <h3 class="bottom-offset-20">Vertical Teaser – truncated content</h3>
+        <div class="row">
+            <!--Example 1-->
+            <div class="col-xs-12 col-sm-6 stacked-detail-links">
+                <a href="javascript:;"><img src="http://placehold.it/555x275" class="img-responsive bottom-offset-10" /></a>
+                <h4><a href="javascript:;" class="btn-link">Headline Title Goes Here <img src="components/content-teaser/demo-pdficon_small.png"/></a></h4>
+                <p class="multiline-ellipsis">Controlling access and achieving governance has become more complicated than ever. Today’s diverse mix of applications and access scenarios make identity and access management (IAM) extremely complex and time-consuming.</p>
+                <div class="stacked-detail-links">
+                    <ul class="list-unstyled list-group">
+                        <li class="text-gray-medium">Updated: 3/25/2015</li>
+                        <li><a href="javascript:;" class="btn-link">View all Security resources</a></li>
+                    </ul>
                 </div>
-                <!-- /Example 1-->
             </div>
+            <!-- /Example 1-->
         </div>
 
+        <hr/>
 
-        <hr class="bottom-offset-60 top-offset-60"/>
-
-        <h3 class="bottom-offset-20">horizontal teaser image left (responsive image)</h3>
-
-
-        <div class="clearfix">
-            <!-- horizontal image left (responsive image)-->
-            <div class="form-compressed">
-                <div class="row">
-                    <div class="col-xs-3 vertical-center">
-                        <a href="javascript:;">
-                            <img class="img-responsive" alt="275x175" src="http://placehold.it/275x175" data-holder-rendered="true">
-                        </a>
-                    </div>
-                    <div class="col-xs-8 vertical-center">
-                        <a href="javascript:;"><h5 class="teaser-media-heading">Middle aligned media</h5></a>
-                        <p class="bottom-offset-5">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p>
-                        <button class="btn btn-success hidden-xs hidden-sm">Call to Action</button>
-                        <a class="btn-link visible-xs-block visible-sm-block" href="javascript:;">Call to Action</a>
-                    </div>
+        <h3 class="bottom-offset-20">Horizontal teaser image left (responsive image)</h3>
+        <!-- horizontal image left (responsive image)-->
+        <div class="form-compressed">
+            <div class="row">
+                <div class="col-xs-3 vertical-center">
+                    <a href="javascript:;"><img class="img-responsive" alt="275x175" src="http://placehold.it/275x175" data-holder-rendered="true"></a>
+                </div>
+                <div class="col-xs-8 vertical-center">
+                    <h5 class="teaser-media-heading"><a href="javascript:;" class="btn-link">Middle aligned left</a></h5>
+                    <p class="bottom-offset-5">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p>
+                    <button class="btn btn-success hidden-xs hidden-sm" type="submit">Call to Action</button>
+                    <a href="javascript:;" class="btn-link visible-xs-block visible-sm-block">Call to Action</a>
                 </div>
             </div>
         </div>
+        <!-- /horizontal image left (responsive image)-->
 
-        <hr class="bottom-offset-60 top-offset-60"/>
 
-        <h3 class="bottom-offset-20">horizontal teaser image right (responsive)</h3>
+        <hr/>
 
-        <div class="clearfix">
-            <!-- horizontal image right (responsive image)-->
-            <div class="form-compressed">
-                <div class="row">
-                    <div class="col-xs-8 vertical-center">
-                        <a href="javascript:;"><h5 class="teaser-media-heading">Middle aligned media</h5></a>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p>
-                        <button class="btn btn-success hidden-xs hidden-sm">Call to Action</button>
-                        <a class="btn-link visible-xs-block visible-sm-block" href="javascript:;">Call to Action</a>
-                    </div>
-                    <div class="col-xs-3 vertical-center">
-                        <a href="javascript:;">
-                            <img class="img-responsive" alt="275x175" src="http://placehold.it/275x175" data-holder-rendered="true">
-                        </a>
-                    </div>
+        <h3 class="bottom-offset-20">Horizontal teaser image right (responsive)</h3>
+        <!-- horizontal image right (responsive image)-->
+
+        <div class="form-compressed">
+            <div class="row">
+                <div class="col-xs-8 vertical-center">
+                    <h5 class="teaser-media-heading"><a href="javascript:;" class="btn-link">Middle aligned right</a></h5>
+                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo as purus odio.</p>
+                    <button class="btn btn-success hidden-xs hidden-sm" type="submit">Call to Action</button>
+                    <a href="javascript:;" class="btn-link visible-xs-block visible-sm-block">Call to Action</a>
+                </div>
+                <div class="col-xs-3 vertical-center">
+                    <a href="javascript:;"><img class="img-responsive" alt="275x175" src="http://placehold.it/275x175" data-holder-rendered="true"></a>
                 </div>
             </div>
-            <!-- /horizontal image right (responsive image)-->
         </div>
 
+        <!-- /horizontal image right (responsive image)-->
 
+        <hr/>
 
-        <hr class="bottom-offset-60 top-offset-60"/>
-        <h3 class="bottom-offset-20">horizontal teaser full-bleed text overlay</h3>
-
+        <h3 class="bottom-offset-20">Horizontal teaser full-bleed text overlay</h3>
 
         <!-- horizontal full-bleed text overlay -->
-
-        <div class="container-fluid-no-padding">
-            <div class="row">
-                <div class="col-xs-12 col-sm-7">
-                    <div class="well well-teaser">
-                        <img alt="665x155" src="http://placehold.it/750x275" class="img-responsive">
-                    </div>
-                    <div class="well-caption">
-                        <a href="javascript:;">Sed susscipt ligua nec lorem semper, velimydfgentum.</a>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-7">
+                        <div class="well well-teaser">
+                            <a href="javascript:;"><img alt="750x275" src="http://placehold.it/750x275" class="img-responsive"></a>
+                        </div>
+                        <div class="well-caption">
+                            <a href="javascript:;" class="btn-link">Sed susscipt ligua nec lorem semper, velimydfgentum.</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
         <!-- /horizontal full-bleed text overlay -->
-
-
-        <hr class="bottom-offset-60 top-offset-60"/>
-        <h3 class="bottom-offset-20">horizontal teaser full-width gradient </h3>
-
-
-        <!-- horizontal full-bleed with gradient. text link overlay -->
-        <div class="container-fluid">
-            <!-- ************ NOTE: class="container-fluid" is required and the component must be placed outside the container for full-width ************ -->
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="well well-site-wide">
-                        <p class="text-center">Text area may contain centered text up to 140 characters including spaces and call-to-action.<a href="javascript:;"> Call to Action</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /horizontal full-bleed with gradient. text link overlay -->
-
-        <hr class="bottom-offset-60 top-offset-60"/>
-        <h3 class="bottom-offset-20">Value props </h3>
-
     </div>
 
-    <div id="teasers-content-teaser-groupings-value-props">
+    <!-- horizontal full-bleed with gradient. text link overlay -->
+    <div class="container-fluid">
+    <!-- ************ NOTE: class="container-fluid" is required and the component must be placed outside the container for full-width ************ -->
+        <div class="container">
+            <h3 class="bottom-offset-20">Horizontal teaser full-width gradient </h3>
+        </div>
 
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="well-site-wide">
+                        <p class="text-center">Text area may contain centered text up to 140 characters including spaces and call-to-action.&nbsp;&nbsp;<a href="javascript:;" class="btn-link div-link">Call to Action</a></p>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <!-- /horizontal full-bleed with gradient. text link overlay -->
+
+
+
+    <div class="container">
+        <h3 class="bottom-offset-20">Value props </h3>
+    </div>
         <!-- value props -->
         <!-- ************ NOTE: If you want the component to break outside of the container, the component must be placed outside the main <div class="container"></div> for full-width. The Class="container-fluid" is required.  ************ -->
-        <div id="value-props" class="value-props-gallery"  equalize-height="#value-props .gallery-item">
+        <div id="value-props" class="container-fluid value-props-gallery"  equalize-height="#value-props .gallery-item">
             <!-- ************ NOTE: If you want the below value props to align within the main page container, change <div class="container-fluid"></div> to <div class="container"></div>  ************ -->
-            <div class="container">
+            <!-- <div class="container-fluid"> -->
                 <div class="col-xs-12 col-sm-4 gallery-item">
                     <a href="javascript:;">
                         <i class="icon-large-shipping text-blue"></i>
-                        <h5 class="text-blue">Free shipping, free returns</h5>
+                        <h5>Free shipping, free returns</h5>
                         <p class="text-gray-dark">Shop now with free shipping and no-cost returns.</p>
                     </a>
                 </div>
                 <div class="col-xs-12 col-sm-4 gallery-item">
                     <a href="javascript:;">
                         <i class="icon-large-calculator text-blue"></i>
-                        <h5 class="text-blue">Fast. Easy. Financing.*</h5>
+                        <h5>Fast. Easy. Financing.*</h5>
                         <p class="text-gray-dark">Dell Preferred Account <sup>TM</sup> makes purchasing easier.</p>
                     </a>
                 </div>
                 <div class="col-xs-12 col-sm-4 gallery-item">
                     <a href="javascript:;">
                         <i class="icon-large-giftcard text-blue"></i>
-                        <h5 class="text-blue">Dell Advantage Loyalty Program.</h5>
+                        <h5>Dell Advantage Loyalty Program.</h5>
                         <p class="text-gray-dark">Here's how much we appreciate our customers.</p>
                     </a>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
+   <!--  </div> -->
         <!-- /value props -->
 
 </section>

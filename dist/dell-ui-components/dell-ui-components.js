@@ -3522,11 +3522,9 @@ if (!console) {
         }
         newSlides.appendChild(slide);
       }
-      ;
       _.$slider.html(newSlides);
       _.$slider.children().children().children().width(100 / _.options.slidesPerRow + '%').css({ 'display': 'inline-block' });
     }
-    ;
   };
   Slick.prototype.checkResponsive = function (initial) {
     var _ = this, breakpoint, targetBreakpoint, respondToWidth;
@@ -21893,6 +21891,141 @@ angular.module('dellUiComponents').config(function () {
   };
 }(jQuery));
 (function ($) {
+  $.dellUIloadMore = function (el, options) {
+    // To avoid scope issues, use 'base' instead of 'this'
+    // to reference this class from internal events and functions.
+    var base = this;
+    // Access to jQuery and DOM versions of element
+    base.$el = $(el);
+    base.el = el;
+    // Add a reverse reference to the DOM object
+    base.$el.data('dellUIloadMore', base);
+  };
+  $.dellUIloadMore.defaultOptions = {
+    lazyLoad: false,
+    scrollTarget: window,
+    fadeIn: true,
+    loadMoreButtonText: 'Load more',
+    loadMoreIncrement: 5
+  };
+  $.fn.dellUIloadMore = function (options) {
+    if (options) {
+      $.dellUIloadMore.defaultOptions = $.extend($.dellUIloadMore.defaultOptions, options);
+    }
+    return this.each(function () {
+      new $.dellUIloadMore(this);
+      var options = $.dellUIloadMore.defaultOptions, element = $(this), visibleCount = 0, items = element.find('li'), elementId = typeof $(this).attr('id') !== 'undefined' ? $(this).attr('id') : Math.random(1 + Math.random() * 100000000000), button = '<p><button id="load-more-button-' + elementId + '" rel="' + elementId + '" type="button" class="btn btn-block">' + options.loadMoreButtonText + '</button></p>', loadMore = function () {
+          visibleCount = visibleCount + options.loadMoreIncrement;
+          items = element.find('li');
+          items.each(function (index) {
+            if (index < visibleCount && $(items[index]).is(':hidden')) {
+              $(this).addClass('in');
+              if (index + 1 === items.length) {
+                $('#load-more-button-' + elementId).remove();
+              }
+            }
+          });
+        }, initPagination = function () {
+          if (element.hasClass('load-more-lazy')) {
+            options.lazyLoad = true;
+          }
+          if (options.fadeIn) {
+            items.addClass('fade');
+          }
+          loadMore();
+          if (!options.lazyLoad) {
+            element.after(button);
+            $('#load-more-button-' + elementId).click(function () {
+              loadMore();
+            });
+          } else {
+            if (options.scrollTarget === window) {
+              $(options.scrollTarget).scroll(function () {
+                if ($(options.scrollTarget).scrollTop() + $(options.scrollTarget).height() === $(document).height()) {
+                  loadMore();
+                }
+              });
+            } else {
+              $(options.scrollTarget).scroll(function () {
+                if ($(this).scrollTop() + $(this).height() === $(this)[0].scrollHeight) {
+                  loadMore();
+                }
+              });
+            }
+          }
+        };
+      initPagination();
+    });
+  };
+}(jQuery));
+(function ($) {
+  $.dellUIcontentGallery = function (el) {
+    // To avoid scope issues, use 'base' instead of 'this'
+    // to reference this class from internal events and functions.
+    var base = this;
+    // Access to jQuery and DOM versions of element
+    base.$el = $(el);
+    base.el = el;
+    // Add a reverse reference to the DOM object
+    base.$el.data('dellUIcontentGallery', base);
+  };
+  $.fn.dellUIcontentGallery = function () {
+    return this.each(function () {
+      new $.dellUIcontentGallery(this);
+      var element = $(this), allListItems = element.find('li'), showMoreToggle = element.find('.content-gallery-show-more'), initGallery = function () {
+          showMoreToggle.on('click', function (e) {
+            var parentLi = $($(e.currentTarget).parents('li')[0]), rowWidth = 0, rowMaxWidth = Math.abs(element.parent().innerWidth() - element.parent().css('padding-left').replace(/px/, '') - element.parent().css('padding-right').replace(/px/, '')), targetFound, targetIndex, done, content;
+            if (parentLi.hasClass('open')) {
+              element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function () {
+                $(this).remove();
+              });
+              element.find('.open').removeClass('open');
+            } else {
+              element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function () {
+                $(this).remove();
+              });
+              element.find('.open').removeClass('open');
+              setTimeout(function () {
+                parentLi.addClass('open');
+                $.each(allListItems, function (index, i) {
+                  if (!done) {
+                    var itemWidth = $(i).outerWidth();
+                    if (!targetFound) {
+                      targetFound = $(i).hasClass('open');
+                      targetIndex = index;
+                      content = '<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">\xd7</button></span>' + $(i).find('.content-gallery-details').html() + '</div></li>';
+                    }
+                    rowWidth = rowWidth + itemWidth;
+                    if (rowWidth >= rowMaxWidth || index === allListItems.length - 1) {
+                      if (targetFound) {
+                        $(i).after(content);
+                        element.find('.details-container').attr('display', 'block').slideDown(450);
+                        element.find('.details-container .close').on('click', function (e) {
+                          e.preventDefault();
+                          element.find('li.details-container').attr('display', 'none').slideUp(450).delay(500).queue(function () {
+                            $(this).remove();
+                          });
+                          element.find('.open').removeClass('open');
+                        });
+                        element.find('.details-container').on('click', function (e) {
+                          e.stopPropagation();
+                        });
+                        done = true;
+                      } else {
+                        rowWidth = 0;
+                      }
+                    }
+                  }
+                });
+              }, 100);
+            }
+          });
+        };
+      initGallery();
+    });
+  };
+}(jQuery));
+(function ($) {
   $.dellUIuniversalFooter = function (el, options) {
     // To avoid scope issues, use 'base' instead of 'this'
     // to reference this class from internal events and functions.
@@ -22870,6 +23003,20 @@ angular.module('dellUiComponents').directive('tapToLoad', function () {
       });
     }
   };
+}).directive('loadMore', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, attrs) {
+      var options = {
+          lazyLoad: typeof attrs.lazyLoad !== 'undefined' ? attrs.lazyLoad === 'true' : false,
+          scrollTarget: typeof attrs.scrollTarget !== 'undefined' ? attrs.scrollTarget : window,
+          fadeIn: typeof attrs.fadeIn !== 'undefined' ? attrs.fadeIn === 'true' : true,
+          loadMoreButtonText: typeof attrs.loadMoreButtonText !== 'undefined' ? attrs.loadMoreButtonText : 'Load more',
+          loadMoreIncrement: typeof attrs.loadMoreIncrement !== 'undefined' ? parseInt(attrs.loadMoreIncrement) : 5
+        };
+      $element.dellUIloadMore(options);
+    }
+  };
 });
 /**
  * Created by Clint_Batte on 5/18/2015.
@@ -22945,66 +23092,14 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     });
   });
 }(jQuery, Eve));
-/**
- * Created by Clint_Batte on 8/6/2015.
- */
 angular.module('dellUiComponents').directive('contentGallery', [
   '$timeout',
   '$rootScope',
   function ($timeout, $rootScope) {
-    // Runs during compile
     return {
       restrict: 'C',
       link: function ($scope, $element, iAttrs, controller) {
-        $element.find('.content-gallery-show-more').on('click', function (e) {
-          e.preventDefault();
-          var parentLi = $(e.currentTarget).parents('li')[0], allListItems = $element.find('li'), rowWidth = 0, rowMaxWidth = Math.abs($element.parent().innerWidth() - $element.parent().css('padding-left').replace(/px/, '') - $element.parent().css('padding-right').replace(/px/, '')), targetFound, done, content;
-          //bodyMinusContainer = $('body' - $element.innerWidth());
-          if ($(parentLi).hasClass('open')) {
-            $element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function () {
-              $(this).remove();
-            });
-            $element.find('.open').removeClass('open');
-          } else {
-            $element.find('li.details-container').attr('display', 'none').slideUp(250).delay(200).queue(function () {
-              $(this).remove();
-            });
-            $element.find('.open').removeClass('open');
-            $timeout(function () {
-              $(parentLi).addClass('open');
-              _.each(allListItems, function (i, index) {
-                if (!done) {
-                  var itemWidth = Math.abs($(i).css('width').replace(/px/, ''));
-                  if (!targetFound) {
-                    targetFound = $(i).hasClass('open');
-                    content = $(i).find('.content-gallery-details').html();
-                  }
-                  rowWidth = rowWidth + itemWidth;
-                  if (rowWidth >= rowMaxWidth || index === allListItems.length - 1) {
-                    if (targetFound) {
-                      //console.log("Found target and inserting!!!");
-                      $(i).after('<li class="col-xs-12 details-container"><div class="gallery"><span class="close"><button type="button" class="close">\xd7</button></span>' + content + '</div></li>');
-                      $('.details-container').attr('display', 'block').slideDown(450);
-                      $('body, li.details-container .close').on('click', function (e) {
-                        e.preventDefault();
-                        $element.find('li.details-container').attr('display', 'none').slideUp(450).delay(500).queue(function () {
-                          $(this).remove();
-                        });
-                        $element.find('.open').removeClass('open');
-                      });
-                      $('.details-container').on('click', function (e) {
-                        e.stopPropagation();
-                      });
-                      done = true;
-                    } else {
-                      rowWidth = 0;
-                    }
-                  }
-                }
-              });
-            }, 100);
-          }
-        });  //---------------------------------------------
+        $element.dellUIcontentGallery();
       }
     };
   }

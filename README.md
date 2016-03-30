@@ -175,15 +175,30 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.18** - January 26, 2016:
-  - adding product stack, product stack guides layout and ability to switch to a guides view to version out guides pages.
-  - build for testing updated product stack code and popovers fix
+**1.0.18** - March 29, 2016:
+  - fixes for popovers so it stays pen when clicked inside of open popover
+  - fixes for Show Password in an email input
+  - adding in guides layout page
+  - additional refinements for product stack
+  - removed reference to woff2 file in the build process because none of the Dell production servers are configured to handle this format.
+  - adding in guides layout page
+  - created p-stack sectional images for guides page
+  - additional refinements for product stack
+  - fixed progress bar issue that was hiding labels
+  - fixed bug in content gallery and updated content headlines to have hover state
+  - Added New Lazy-Load and updated Tap-to-Load components
+  - Added New Show/Hide enhancement to handle show hide inline within a paragraph
+  - Adding in Product Stacks
+  - Adding in guides layout for Product Stacks
+  - Updated Content teasers with clickable headline and image links
+
 
 
 ### Older versions:
 
 ```
-1.0.17 - January 21, 2016:
+
+-1.0.17 - January 21, 2016:
   - Got rid of hard coded reference to demo data in complex table example
 
 -1.0.16 - January 20, 2016:

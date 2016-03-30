@@ -42,16 +42,14 @@ function detectFramework() {
 		}
 	} console.error("Eve doesn't support your JavaScript framework.");
 
-};
-
+}
 //Either matches the chosen JS framework to the passed guess, or returns the
 //current framework.
 function using(guess) {
 	var fw = _framework || detectFramework();
 	return (guess) ? (_framework == guess.toLowerCase()) : _framework;
-};
-
-function dbug(name, message) {
+}
+    function dbug(name, message) {
 		if (!window.console) { return; }
 		var debug = _debugAll;
 		if (!_debugAll) {
@@ -64,9 +62,8 @@ function dbug(name, message) {
 		while (name.length<10) { name=name+' '; }
 		name = name.substring(0, 10)+" - ";
 		console.info(name, message);
-};
-
-function bindToScope(fun, obj, reg, name) {
+}
+    function bindToScope(fun, obj, reg, name) {
 
 	for (var k in Scope) obj[k] = Scope[k];
 	for (k in _extensions) obj[k] = _extensions[k];
@@ -85,8 +82,7 @@ function bindToScope(fun, obj, reg, name) {
 		reg[name] = fun.apply(obj);
 	}
 
-};
-
+}
 //The primary Eve API.
 ns.Eve = {
 
@@ -130,7 +126,7 @@ ns.Eve = {
 	attach: function(moduleName, namespace) {
 		var fun, args = [], i=0;
 		for (i;i<arguments.length;i++) args[args.length] = arguments[i];
-		fun = function() { _registry[moduleName].apply(this, args.slice(2)); }
+		fun = function() { _registry[moduleName].apply(this, args.slice(2)); };
 		dbug(moduleName, "attached to "+namespace);
 		//We're delegating off the window, so there's no need to reattach for
 		//multiple instances of a single given module.
@@ -178,9 +174,8 @@ var Scope = {
 				if (using("jQuery") || using("Zepto"))   { e.target = e.currentTarget; }
 				if (using("dojo"))     { e.target = e.explicitOriginalTarget; }
 				handler.apply(obj, arguments);
-			};
-
-		//JavaScript framework development is so much easier when you let some
+            }
+        //JavaScript framework development is so much easier when you let some
 		//other framework do most of the work.
 		if (using("jQuery") || using("Zepto")) {
 			$(scope).delegate(sel, event, fun);

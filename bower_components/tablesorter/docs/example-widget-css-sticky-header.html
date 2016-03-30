@@ -128,7 +128,7 @@ $(function() {
 			var theme = $(this).val().toLowerCase(),
 				files = $('link.theme').each(function(){
 					this.disabled = true;
-				})
+				});
 			files.filter('[href$="theme.' + theme + '.css"]').each(function(){
 				this.disabled = false;
 			});

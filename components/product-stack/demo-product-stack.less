@@ -103,6 +103,20 @@ footer.navbar {
     }
 }
 
+.compare.outer-box .inner-box {
+    background: #b7295a;
+    height: 200%;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    padding: 0;
+    transition: opacity .5s;
+}
+
+
+
 .outer-box .inner-box {
     background: @dell-berry;
     height: 100%;
@@ -125,4 +139,14 @@ footer.navbar {
 .outer-box:hover .inner-box {
     opacity: .7;
     transition: opacity .5s;
+}
+
+.demo-guides {
+    .panel-body ul {
+        padding-left: 10px;
+        margin-bottom: 15px;
+        > li > ul {
+            padding-left: 16px;
+        }
+    }
 }

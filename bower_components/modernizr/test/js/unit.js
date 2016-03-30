@@ -206,7 +206,7 @@ test('html classes are looking good',function(){
   equal(/[^\s]no-/.test(docElClass), false, 'whitespace between all classes.');
 
 
-})
+});
 
 
 test('Modernizr properties are looking good',function(){
@@ -229,7 +229,7 @@ test('Modernizr properties are looking good',function(){
       equal(prop,prop.toLowerCase(),'all properties are lowerCase.')
     }
   }
-})
+});
 
 
 
@@ -241,7 +241,7 @@ test('Modernizr.audio and Modernizr.video',function(){
     if (Modernizr[prop].toString() == 'true'){
 
       ok(Modernizr[prop],                             'Modernizr.'+prop+' is truthy.');
-      equal(Modernizr[prop] == true,true,            'Modernizr.'+prop+' is == true')
+      equal(Modernizr[prop] == true,true,            'Modernizr.'+prop+' is == true');
       equal(typeof Modernizr[prop] === 'object',true,'Moderizr.'+prop+' is truly an object');
       equal(Modernizr[prop] !== true,true,           'Modernizr.'+prop+' is !== true')
 
@@ -444,7 +444,7 @@ test('Modernizr.testStyles()',function(){
   var style = '#modernizr{ width: 9px; height: 4px; font-size: 0; color: papayawhip; }';
 
   Modernizr.testStyles(style, function(elem, rule){
-      equal(style, rule, 'rule passsed back matches what i gave it.')
+      equal(style, rule, 'rule passsed back matches what i gave it.');
       equal(elem.offsetWidth, 9, 'width was set through the style');
       equal(elem.offsetHeight, 4, 'height was set through the style');
       equal(elem.id, 'modernizr', 'element is indeed the modernizr element');
@@ -566,7 +566,7 @@ test('Modernizr.prefixed autobind', function(){
     equal(
       'function',
       typeof Modernizr.prefixed('requestAnimationFrame', window),
-      "Modernizr.prefixed('requestAnimationFrame', window) returns a function")
+      "Modernizr.prefixed('requestAnimationFrame', window) returns a function");
 
     // unless we false it to a string
     equal(
