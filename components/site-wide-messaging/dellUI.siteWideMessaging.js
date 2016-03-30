@@ -1,5 +1,5 @@
-(function($){
-    $.dellUIsiteWideMessaging = function(el,options){
+(function($) {
+    $.dellUIsiteWideMessaging = function (el, options) {
         // To avoid scope issues, use 'base' instead of 'this'
         // to reference this class from internal events and functions.
         var base = this;
@@ -19,73 +19,70 @@
         mdMax: 1141,
         dosomething: ""
     };
-
-
-    $.fn.dellUIsiteWideMessaging = function(options){
-
-        if(options) {
+    $.fn.dellUIsiteWideMessaging = function (options) {
+        if (options) {
             $.dellUIsiteWideMessaging.defaultOptions = $.extend($.dellUIsiteWideMessaging.defaultOptions, options);
         }
-
         var message = document.getElementById('siteWideMessage');
-        var deadline = message.dataset.counterDeadline;
-        var desktopText = message.dataset.desktopOriginalText;
-        var desktopText2 = message.dataset.desktopReplacementText;
-        var mobileText = message.dataset.mobileOriginalText;
-        var mobileText2 = message.dataset.mobileReplacementText;
-        var cta = message.dataset.cta;
-        var optionalCta = message.dataset.optionalCta;
-        var mobileCta = message.dataset.optionalCtaMobile;
-        var imageOption = message.dataset.optionalImage;
-        var templates = {};
-        var changeText;
+         var deadline = message.dataset.counterDeadline;
+         var desktopText = message.dataset.desktopOriginalText;
+         var desktopText2 = message.dataset.desktopReplacementText;
+         var mobileText = message.dataset.mobileOriginalText;
+         var mobileText2 = message.dataset.mobileReplacementText;
+         var cta = message.dataset.cta;
+         var optionalCta = message.dataset.optionalCta;
+         var mobileCta = message.dataset.optionalCtaMobile;
+         var imageOption = message.dataset.optionalImage;
+         var templates = {};
+         var changeText;
 
-        if (!desktopText) {
-            alert('Please enter desktop text');
-        }
-        if (!mobileText) {
-            alert('Please enter mobile text');
-        }
-        if (!cta) {
-            alert('Please enter CTA text');
-        }
-        function changeDesktopText() {
-            desktopText = message.dataset.desktopReplacementText;
-            $('.desktop-countdown').css('display', 'none');
-        }
-        function changeMobileText() {
-            mobileText = message.dataset.mobileReplacementText;
-            $('.mobile-countdown').css('display', 'none');
-        }
-        templates.desktopCountDown = [
-            "<ul class='list-inline pull-right'>",
-            "<li>",
-            " <span class='hours'></span>",
-            "<small>HRS</small>",
-            "</li>",
-            "<li>:</li>",
-            "<li>",
-            "<span class='minutes'></span>",
-            "<small>MIN</small>",
-            "</li>",
-            "<li>:</li>",
-            "<li>",
-            "<span class='seconds'></span>",
-            "<small>SEC</small>",
-            "</li>",
-            "</ul>"
-        ].join("\n");
+         if (!desktopText) {
+         alert('Please enter desktop text');
+         }
+         if (!mobileText) {
+         alert('Please enter mobile text');
+         }
+         if (!cta) {
+         alert('Please enter CTA text');
+         }
+         function changeDesktopText() {
+         desktopText = message.dataset.desktopReplacementText;
+         $('.desktop-countdown').css('display', 'none');
+         }
+         function changeMobileText() {
+         mobileText = message.dataset.mobileReplacementText;
+         $('.mobile-countdown').css('display', 'none');
+         }
+         templates.desktopCountDown = [
+             "<ul class='list-inline pull-right'>",
+             "<li>",
+             " <span class='hours'></span>",
+             "<small>HRS</small>",
+             "</li>",
+             "<li>:</li>",
+             "<li>",
+             "<span class='minutes'></span>",
+             "<small>MIN</small>",
+             "</li>",
+             "<li>:</li>",
+             "<li>",
+             "<span class='seconds'></span>",
+             "<small>SEC</small>",
+             "</li>",
+             "</ul>"
+         ].join("\n");
 
-        templates.mobileCountDown = [
-            " <span><span class='hours'></span>&nbsp;:&nbsp;<span class='minutes'>&nbsp;:&nbsp;</span>&nbsp;:&nbsp;<span class='seconds'></span>&nbsp;|</span>"
-        ].join("\n");
+         templates.mobileCountDown = [
+             "<span><span class='hours'></span>&nbsp;:&nbsp;<span class='minutes'>&nbsp;:&nbsp;</span>&nbsp;:&nbsp;<span class='seconds'></span>&nbsp;|</span>"
+         ].join("\n");
 
-        $('#desktopCountDown').append(templates.desktopCountDown);
-        $('#mobileCountDown').append(templates.mobileCountDown);
-        return this.each(function(){
+         $('#desktopCountDown').append(templates.desktopCountDown);
+         $('#mobileCountDown').append(templates.mobileCountDown);
+
+        return this.each(function () {
             (new $.dellUIsiteWideMessaging(this));
             var options = $.dellUIsiteWideMessaging.defaultOptions,
-            breakpoint = function() {
+            breakpoint = function () {
                 var window_size = $(window).width(),
                     breakpoint = {
                         isXS: false,
@@ -93,7 +90,7 @@
                         isMD: false,
                         isLG: false
                     };
-                switch(true) {
+                switch (true) {
                     case (window_size < options.xsMax):
                         breakpoint.isXS = true;
                         break;
@@ -110,7 +107,7 @@
                 return breakpoint;
 
             },
-            // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
+        // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
             writeDesktopTxt = function () {
                 //checks to see if deadline is met and loads replacement text
                 if (changeText === true) {
@@ -128,7 +125,7 @@
                     }
                 );
             },
-            // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
+        // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
             writeMobileTxt = function () {
                 //checks to see if deadline is met and loads replacement text
                 if (changeText === true) {
@@ -219,79 +216,80 @@
                         }
                     });
                 }
+
                 console.log('breakpoint', breakpoint().isXS);
                 updateClock();
                 var timeinterval = setInterval(updateClock, 1000);
-                };
-                // initializes clock based on message ID in view and deadline set it view
-                initializeClock(message.id, deadline);
+            };
+            // initializes clock based on message ID in view and deadline set it view
+            initializeClock(message.id, deadline);
 
-                // These conditions load the original content based on data attributes that are populated by designer in the view
+            // These conditions load the original content based on data attributes that are populated by designer in the view
 
-                if ((desktopText !== '') && !breakpoint().isXS) {
-                    $('.site-wide-messaging-text').append(desktopText);
-                }
-                if ((mobileText !== '') && breakpoint().isXS) {
-                    $('.site-wide-messaging-text').append(mobileText);
-                }
-                if (cta === '') {
-                    $('#cta').append('Add CTA');
-                } else {
-                    $('#cta').append('&nbsp;' + cta);
-                }
-                if (optionalCta !== '') {
-                    $('.site-wide-messaging-cta-optional > a').append(optionalCta);
-                } else {
-                    $('.site-wide-messaging-cta-optional').css('display', 'none');
-                }
-                if ((mobileCta === 'true') && breakpoint().isXS) {
-                    $('.site-wide-messaging-cta-optional').css('visibility', 'visible');
-                }
-                if ((mobileCta === 'false') && breakpoint().isXS) {
-                    $('.site-wide-messaging-cta-optional').css('visibility', 'hidden');
-                }
-                if (!breakpoint().isXS) {
-                    $('.site-wide-messaging-cta-optional').css('visibility', 'visible');
-                }
+            if ((desktopText !== '') && !breakpoint().isXS) {
+                $('.site-wide-messaging-text').append(desktopText);
+            }
+            if ((mobileText !== '') && breakpoint().isXS) {
+                $('.site-wide-messaging-text').append(mobileText);
+            }
+            if (cta === '') {
+                $('#cta').append('Add CTA');
+            } else {
+                $('#cta').append('&nbsp;' + cta);
+            }
+            if (optionalCta !== '') {
+                $('.site-wide-messaging-cta-optional > a').append(optionalCta);
+            } else {
+                $('.site-wide-messaging-cta-optional').css('display', 'none');
+            }
+            if ((mobileCta === 'true') && breakpoint().isXS) {
+                $('.site-wide-messaging-cta-optional').css('visibility', 'visible');
+            }
+            if ((mobileCta === 'false') && breakpoint().isXS) {
+                $('.site-wide-messaging-cta-optional').css('visibility', 'hidden');
+            }
+            if (!breakpoint().isXS) {
+                $('.site-wide-messaging-cta-optional').css('visibility', 'visible');
+            }
 
-                if ((imageOption !== '') && !breakpoint().isXS) {
-                    $('.site-wide-messaging-product-image > img').attr("src", imageOption);
-                } else {
-                    $('.site-wide-messaging-product-image')
-                        .css({
-                            'visibility': 'hidden',
-                            'width': '0'
-                        }
-                    );
-                }
-                var breakUpdate1 = breakpoint().isXS;
-                // if not XS - this calculates window size and  loads the right text on breakpoint transition
-                if (breakUpdate1 === false) {
-                    $(window).resize(function () {
-                        breakpoint();
-                        var breakUpdate2 = breakpoint().isXS;
-                        console.log('breakUpdate2', breakUpdate2);
-                        if (breakUpdate2) {
-                            writeMobileTxt();
-                        } else {
-                            writeDesktopTxt();
-                        }
-                    });
-                }
-                // if is XS - this calculates window size and  loads the right text on breakpoint transition
-                if (breakUpdate1 === true) {
-                    $(window).resize(function () {
-                        breakpoint();
-                        var breakUpdate2 = breakpoint().isXS;
-                        console.log('breakUpdate2', breakUpdate2);
-                        if (!breakUpdate2) {
-                            writeDesktopTxt();
-                        } else {
-                            writeMobileTxt();
+            if ((imageOption !== '') && !breakpoint().isXS) {
+                $('.site-wide-messaging-product-image > img').attr("src", imageOption);
+            } else {
+                $('.site-wide-messaging-product-image')
+                    .css({
+                        'visibility': 'hidden',
+                        'width': '0'
+                    }
+                );
+            }
+            var breakUpdate1 = breakpoint().isXS;
+            // if not XS - this calculates window size and  loads the right text on breakpoint transition
+            if (breakUpdate1 === false) {
+                $(window).resize(function () {
+                    breakpoint();
+                    var breakUpdate2 = breakpoint().isXS;
+                    console.log('breakUpdate2', breakUpdate2);
+                    if (breakUpdate2) {
+                        writeMobileTxt();
+                    } else {
+                        writeDesktopTxt();
+                    }
+                });
+            }
+            // if is XS - this calculates window size and  loads the right text on breakpoint transition
+            if (breakUpdate1 === true) {
+                $(window).resize(function () {
+                    breakpoint();
+                    var breakUpdate2 = breakpoint().isXS;
+                    console.log('breakUpdate2', breakUpdate2);
+                    if (!breakUpdate2) {
+                        writeDesktopTxt();
+                    } else {
+                        writeMobileTxt();
 
-                        }
-                    });
-                }
+                    }
+                });
+            }
 
         });
     };
