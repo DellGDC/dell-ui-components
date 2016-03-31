@@ -179,39 +179,9 @@
     }
 }
 
-//
-//.container .jumbotron,
-//.container-fluid .jumbotron {
-//    border-radius: 0;
-//}
-
-
-//
-//.jumbotron {
-//    margin: 0 auto;
-//    padding: 0;
-//    max-height: 600px;
-//    width: 100%;
-//    overflow: hidden;
-//    background: none;
-//    img {
-//        margin: 0 auto;
-//    }
-//    .img-responsive {
-//        width:100%;
-//    }
-//    .well {
-//        margin-top: 20px;
-//        -webkit-border-radius: 5px;
-//        -moz-border-radius:    5px;
-//        border-radius:         5px;
-//        overflow:           hidden;
-//        background: rgba(255,255,255,.92);
-//    }
-//}
 
 .jumbotron-hero {
-    margin: 0 auto;
+    margin: 0 auto 20px auto;
     padding: 0;
     max-height: 600px;
     width: 100%;
@@ -237,3 +207,39 @@
 }
 
 
+@media (max-width: @screen-sm-max) {
+
+    .jumbotron-hero {
+        margin: 0 auto;
+        padding: 0;
+        max-height: 600px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+
+        .well {
+            margin-top: 0;
+            -webkit-border-radius: 0;
+            -moz-border-radius:    0;
+            border-radius:         0;
+            overflow:         hidden;
+            border: none;
+            background: none;
+        }
+
+        .hero-overlay {
+            position: relative;
+            top: 0;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .well-sm {
+            width: 970px;
+            background: @dell-gray-light;
+            min-height: 102px;
+            z-index: -1;
+            position: absolute;
+        }
+    }
+}
