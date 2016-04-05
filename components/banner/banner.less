@@ -1,0 +1,319 @@
+/*
+*banner component .LESS
+*------------------------------------------------------------------------------------------
+*/
+
+.jumbotron {
+    // Typography for Desktop
+    // Medium devices (desktops, 992px and up)
+    @media (min-width: @screen-md-min) {
+
+        h1, .h1 {
+            font-size: ceil((@font-size-base * 2.28)); // ~32px
+            line-height: ceil((@line-height-base * 27.9px)); // ~40px
+        }
+
+        h2, .h2 {
+            font-size: floor((@font-size-base * 2)); // ~28px
+            line-height: ceil((@line-height-base * 22.3px)); // ~32px
+        }
+
+        h3, .h3 {
+            &.feature {
+                font-family: @font-family-serif;
+                font-size: ceil((@font-size-base * 1.7)); // ~24px
+                line-height: floor((@line-height-base * 19.6px)); // ~28px
+            }
+        }
+
+        h3, .h3 {
+            font-size: ceil((@font-size-base * 1.4)); // ~20px
+            line-height: ceil((@line-height-base * 16.7px)); // ~24px
+        }
+
+        h4, .h4 {
+            font-size: ceil((@font-size-base * 1.28)); // ~18px
+            line-height: ceil((@line-height-base * 15.3px)); // ~22px
+        }
+
+        h5, .h5 {
+            font-size: ceil((@font-size-base * 1.14)); // ~16px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+        }
+
+        .bold-16 {
+            font-size: ceil((@font-size-base * 1.14)); // ~16px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            font-weight: bold;
+        }
+
+        .bold-14 {
+            font-size: ceil((@font-size-base)); // ~14px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            font-weight: bold;
+        }
+
+        .bold-12 {
+            font-size: 12px; // ~12px
+            line-height: ceil((@line-height-base * 10.4px)); // ~15px
+            font-weight: bold;
+        }
+    }
+
+    // Typography for Tablet
+    // Small devices (tablets, 768px and up)
+    @media (min-width: @screen-sm-min)and(max-width: @screen-sm-max) {
+        h1, .h1 {
+            font-size: ceil((@font-size-base * 2.14)); // ~30px
+            line-height: ceil((@line-height-base * 25.1px)); // ~36px
+        }
+
+        h2, .h2 {
+            font-size: ceil((@font-size-base * 1.85)); // ~26px
+            line-height: ceil((@line-height-base * 20.9px)); // ~30px
+        }
+
+        h3, .h3 {
+            &.feature {
+                font-family: @font-family-serif;
+                font-size: ceil((@font-size-base * 1.57)); // ~22px
+                line-height: ceil((@line-height-base * 18.1px)); // ~26px
+            }
+        }
+
+        h3, .h3 {
+            font-size: ceil((@font-size-base * 1.4)); // ~20px
+            line-height: ceil((@line-height-base * 16.7px)); // ~24px
+        }
+
+        h4, .h4 {
+            font-size: ceil((@font-size-base * 1.28)); // ~18px
+            line-height: ceil((@line-height-base * 15.3px)); // ~22px
+        }
+
+        h5, .h5 {
+            font-size: ceil((@font-size-base * 1.14)); // ~16px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+        }
+
+        .bold-16 {
+            font-size: ceil((@font-size-base * 1.14)); // ~16px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            font-weight: bold;
+        }
+
+        .bold-14 {
+            font-size: ceil((@font-size-base)); // ~14px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            font-weight: bold;
+        }
+
+        .bold-12 {
+            font-size: 12px; // ~12px
+            line-height: ceil((@line-height-base * 10.4px)); // ~15px
+            font-weight: bold;
+        }
+    }
+
+    // Typography for Extra small devices (phones, less than 768px)
+    @media (max-width: @screen-xs-max) {
+
+        h1, .h1 {
+            font-size: ceil((@font-size-base * 1.71)); // ~24px
+            line-height: floor((@line-height-base * 19.6px)); // ~28px
+        }
+
+        h2, .h2 {
+            font-size: ceil((@font-size-base * 1.42)); // ~20px
+            line-height: floor((@line-height-base * 16.8px)); // ~24px
+        }
+
+        h3, .h3 {
+            &.feature {
+                font-family: @font-family-serif;
+                font-size: ceil((@font-size-base * 1.28)); // ~18px
+                line-height: floor((@line-height-base * 15.4px)); // ~22px
+            }
+        }
+
+        h3, .h3 {
+            font-size: ceil((@font-size-base * 1.21)); // ~17px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+        }
+
+        h4, .h4 {
+            font-size: ceil((@font-size-base * 1.14)); // ~16px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+        }
+
+        h5, .h5 {
+            font-size: ceil((@font-size-base)); // ~14px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+        }
+
+        .bold-16 {
+            font-size: ceil((@font-size-base * 1.14)); // ~16px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            font-weight: bold;
+        }
+
+        .bold-14 {
+            font-size: ceil((@font-size-base)); // ~14px
+            line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            font-weight: bold;
+        }
+
+        .bold-12 {
+            font-size: 12px; // ~12px
+            line-height: ceil((@line-height-base * 10.4px)); // ~15px
+            font-weight: bold;
+        }
+    }
+
+    p {
+        font-size: 14px;
+    }
+    p small {
+        font-size: 85%;
+        line-height: 15px;
+    }
+}
+
+
+.container .jumbotron,
+.container-fluid .jumbotron {
+    border-radius: 0;
+}
+
+
+
+.jumbotron {
+    margin: 0 auto;
+    padding: 0;
+    max-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    background: none;
+    img {
+        margin: 0 auto;
+    }
+    > .img-responsive {
+        width:100%;
+        position:absolute;
+    }
+    .well {
+        margin-top: 20px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius:    5px;
+        border-radius:         5px;
+        overflow:hidden;
+        background: rgba(255,255,255,.92);
+    }
+}
+
+
+@media (max-width: @screen-sm-max) {
+
+    .jumbotron {
+        > .img-responsive {
+            position: relative;
+        }
+        .well {
+            background: none;
+            border: none;
+            box-shadow: none;
+            margin-top: 0;
+        }
+        [class^=col] {
+            background: @dell-gray-light;
+        }
+
+        .container {
+            width: 100%;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+/* -------old....needed to be more bootstrap style------ */
+/*
+.banner {
+    position: relative;
+    .img-responsive-constrained {
+        max-height: 600px;
+        .img-responsive {
+        display: block;
+        width: 100%;
+        }
+    }
+}
+
+
+.container-fluid {
+    .banner {
+        margin-left: -15px;
+        margin-right: -15px;
+        max-height: 600px !important;
+        overflow: hidden;
+    }
+}
+
+.banner-inside {
+    left: 0;
+    top: 20px;
+    width: 45%;
+    //max-width: 420px;
+    margin-left: 20px;
+    padding: 5px 20px 20px 20px;
+    vertical-align: middle;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    background: @white;
+    background: rgba(600,600,600,.92);
+    color: @dell-gray-dark;
+    -ms-text-shadow: none;
+    text-shadow: none;
+    right: auto;
+    bottom: auto;
+    position: absolute;
+}
+
+
+@media (min-width: @screen-xs-max) and (max-width: @screen-sm-max) {
+    .banner-inside {
+        padding: 20px;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .banner-inside {
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: none;
+        margin-left: 0;
+        padding: 10px 20px 10px 20px;
+        vertical-align: middle;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 5px;
+        border-radius: 0;
+        background: @white;
+        background: @dell-gray-light;
+        color: #444444;
+        -ms-text-shadow: none;
+        text-shadow: none;
+        right: auto;
+        bottom: auto;
+        position: relative;
+    }
+}
+*/

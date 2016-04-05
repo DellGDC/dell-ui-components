@@ -1,0 +1,64 @@
+<div ng-controller="HomeCtrl">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header col-sm-9">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <i class="icon-ui-dell" style="
+                          font-size: 42px;
+                          position: relative;
+                          top: -12px;
+                          ">
+                        </i>
+                      <span style="
+                            position: relative;
+                            top: -24px;
+                            left: 0px;
+                            font-size: 20px;
+                        ">
+                        Dell UI Components Demo
+                      </span>
+                    </a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse col-sm-3 pull-right" ng-if="activeComponent">
+                    <!--                    <ul class="nav navbar-nav pull-right">
+                                            <li><a href="https://github.com/DellGDC/dell-ui-bootstrap">Github</a></li>
+                                        </ul>-->
+
+                    <div class="btn-group pull-right top-offset-10">
+                        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                           href="javascript:;">
+                            <span ng-if="activeComponent">{{activeComponent.label}}</span>
+                            <i class="caret"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/demo">All components</a>
+                            </li>
+                            <li ng-repeat="item in components"><a href="#{{pageType}}/{{item.id}}">{{item.label}}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </nav>
+    <div class="container" ng-if="activeComponent">
+        <div class="btn-group demo-play-switcher">
+            <a href="#demo/{{activeComponent.id}}" class="btn btn-default btn-xs" ng-class="{'btn-primary':pageType === 'demo'}">Demo</a>
+            <a href="#play/{{activeComponent.id}}" class="btn btn-default btn-xs" ng-class="{'btn-primary':pageType === 'play'}">Play</a>
+            <a href="#guide/{{activeComponent.id}}" class="btn btn-default btn-xs" ng-class="{'btn-primary':pageType === 'guide'}">Guide</a>
+
+        </div>
+    </div>
+    <div id="component-{{pageType}}" ng-include="'demo-assets/partials/'+pageType+'/'+pageType+'.html'"></div>
+
+</div>

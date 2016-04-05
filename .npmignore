@@ -1,0 +1,5 @@
+temp/
+dist/
+_SpecRunner.html
+.DS_Store
+test-results.xml
