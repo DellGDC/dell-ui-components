@@ -127,6 +127,7 @@ module.exports = function (grunt) {
                     {src: ['components/**/FPO*'], dest: 'dist/dell-ui-components/demo/'},
                     {src: ['components/**/*.json'], dest: 'dist/dell-ui-components/demo/'},
                     {src: ['README.md'], dest: 'dist/README.md'},
+                    {src: ['package.json'], dest: 'dist/package.json'},
                     {src: ['LICENSE'], dest: 'dist/LICENSE'},
                     {src: ['bower_components/font-awesome/fonts/*.*'], dest:'dist/dell-ui-components/fonts/',flatten:true,expand:true},
                     {src: ['temp/dell-ui-components.css'], dest: 'dist/dell-ui-components/dell-ui-components.css'},
@@ -308,6 +309,10 @@ module.exports = function (grunt) {
                         {
                             pattern: ", url('fonts/glyphicons-halflings-regular.woff2') format('woff2')",
                             replacement: ''
+                        },
+                        {
+                            pattern: /Dell-UI-Components v.*?(bower dell-ui-components)/ig,
+                            replacement: 'Dell-UI-Components v'+pkg.version+' (bower dell-ui-components'
                         }
 
                     ]
