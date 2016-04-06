@@ -26,74 +26,74 @@ angular.module('dellUiComponents')
     };
 });
 
-<<<<<<< Updated upstream
-=======
-    .directive('tapToLoad', function() {
-        return {
-            restrict: 'C',
-            link: function($scope, $element, attrs ) {
+// <<<<<<< Updated upstream
+// =======
+//     .directive('tapToLoad', function() {
+//         return {
+//             restrict: 'C',
+//             link: function($scope, $element, attrs ) {
 
-                $(document).ready(function () {
+//                 $(document).ready(function () {
 
-                    $('.news-pagination li').slice(5).hide();
+//                     $('.news-pagination li').slice(5).hide();
 
-                    $('#loadmore').jqPagination({
-                        max_page: Math.ceil($('.news-pagination li').length / 5),
-                        paged: function (page) {
-                            $('.news-pagination li').hide();
-                            $('.news-pagination li').slice((page - 1) * 5, (page * 5)).fadeIn('slow');
-                        }
-                    });
-                });
+//                     $('#loadmore').jqPagination({
+//                         max_page: Math.ceil($('.news-pagination li').length / 5),
+//                         paged: function (page) {
+//                             $('.news-pagination li').hide();
+//                             $('.news-pagination li').slice((page - 1) * 5, (page * 5)).fadeIn('slow');
+//                         }
+//                     });
+//                 });
 
-            }
-        };
-    })
+//             }
+//         };
+//     })
 
-    .directive('pagination', function() {
-        return {
-            restrict: 'C',
-            link: function($scope, $element, attrs ) {
+//     .directive('pagination', function() {
+//         return {
+//             restrict: 'C',
+//             link: function($scope, $element, attrs ) {
 
-                $('.pagination').jqPagination({
-                    paged: function(page) {
-                    }
-                });
-            }
-        };
-    })
+//                 $('.pagination').jqPagination({
+//                     paged: function(page) {
+//                     }
+//                 });
+//             }
+//         };
+//     })
 
-     .directive('lazyLoad', function() {
-     return {
-         restrict: 'C',
-         link: function($scope, $element, attrs ) {
-             $(document).ready(function () {
-                 //Set intital divs to be hidden
-                 $element.addClass("hidden");
-                 var contentNumber = 0;
-                 var i = 0;
-                 console.log('doing lazy stuff');
-                 function reveal() {
-                     var constraintNumber = contentNumber + 2;
-                     //IMPORTANT - DO NOT DELETE
-                     $(window).trigger('resize');
-                     //IMPORTANT - DO NOT DELETE
-                     for (i = contentNumber; i < constraintNumber; i++) {
-                         //Get the nth div of class content, where n is the contentNumber, and make it shown
-                         $element.eq(contentNumber).removeClass("hidden");
-                         contentNumber ++;
-                     }
-                 }
+//      .directive('lazyLoad', function() {
+//      return {
+//          restrict: 'C',
+//          link: function($scope, $element, attrs ) {
+//              $(document).ready(function () {
+//                  //Set intital divs to be hidden
+//                  $element.addClass("hidden");
+//                  var contentNumber = 0;
+//                  var i = 0;
+//                  console.log('doing lazy stuff');
+//                  function reveal() {
+//                      var constraintNumber = contentNumber + 2;
+//                      //IMPORTANT - DO NOT DELETE
+//                      $(window).trigger('resize');
+//                      //IMPORTANT - DO NOT DELETE
+//                      for (i = contentNumber; i < constraintNumber; i++) {
+//                          //Get the nth div of class content, where n is the contentNumber, and make it shown
+//                          $element.eq(contentNumber).removeClass("hidden");
+//                          contentNumber ++;
+//                      }
+//                  }
 
-                 //Window scroll function
-                 $(window).scroll(function() {
-                    if ($(window).scrollTop() === $(document).height() - $(window).height() )
-                     {
-                         reveal();
-                     }
-                 });
-                 reveal();
-             });
-         }
-     };
->>>>>>> Stashed changes
+//                  //Window scroll function
+//                  $(window).scroll(function() {
+//                     if ($(window).scrollTop() === $(document).height() - $(window).height() )
+//                      {
+//                          reveal();
+//                      }
+//                  });
+//                  reveal();
+//              });
+//          }
+//      };
+// >>>>>>> Stashed changes
