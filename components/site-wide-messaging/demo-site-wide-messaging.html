@@ -14,8 +14,8 @@
                              * Original text for mobile and desktop is required.
                              * CTA is required.
                              * All other data fields are optional. To opt out, leave no characters or spaces within the quotes.
-                             * Component will be removed from page when deadline is reached if no replacement text is set for both desktop and mobile.
-                             * Only the timer is removed from the page if replacement text is set for mobile and desktop
+                             * The timer is removed but the component remains if replacement text is set for both mobile and desktop. If no replacement text is set for mobile or desktop,
+                               then the entire component will be removed from the page when the deadline is reached.
                              * Central Daylight Savings Time = GMT-05:00
                              * Central Standard Time =  GMT-06:00
                          -->
@@ -37,7 +37,7 @@
                                             <span class="mobile-countdown" id="mobileCountDown"> <!--mobile counter goes here--></span>
                                             <span class="site-wide-messaging-text"></span>
                                             <a href="javascript:;" id="cta"></a>
-                                            <span class="site-wide-messaging-cta-optional">&nbsp;|&nbsp;<a href="javascript:;"></a></span>
+                                            <span class="site-wide-messaging-cta-optional text-blue">|&nbsp;<a href="javascript:;"></a></span>
                                         </div>
                                     </li>
                                     <li class="col-lg-2 col-md-2 col-sm-2 desktop-countdown " id="desktopCountDown">
