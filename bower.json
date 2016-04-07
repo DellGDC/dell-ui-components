@@ -1,6 +1,7 @@
 {
-  "name": "dellUi",
-  "version": "1.0.0",
+  "name": "delluicomponents",
+  "description": "Dell Inc's addition of components to Twitter Bootstrap for dell.com (Based om TWBS 3.3.5)",
+  "version": "1.0.10",
   "main": "index.html",
   "ignore": [
     "**/.*",
@@ -10,8 +11,9 @@
   "dependencies": {
     "jquery": "~2.0",
     "underscore": "~1.5",
-    "bootstrap": "~3.1",
-    "angular": "~1.2",
+    "bootstrap": "~3",
+    "dell-ui-bootstrap": "~1",
+    "angular": "~1.2.15",
     "angular-ui-router": "~0.2",
     "angular-animate": "~1.2",
     "angular-resource": "~1.2",
@@ -19,8 +21,8 @@
     "angular-mocks": "~1.2",
     "angular-ui-utils": "~0.1",
     "angular-bootstrap": "~0.10",
-    "moment": "~2.5",
-    "less.js": "~1.6",
-    "font-awesome": "~4.0"
+    "less.js": "~2",
+    "bootstrap-table": "~1.7.0",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
   }
 }

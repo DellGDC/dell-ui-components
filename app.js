@@ -1,29 +1,27 @@
-angular.module('dellUi', ['ui.bootstrap', 'ui.utils', 'ui.router', 'ngAnimate', 'dellUiSite', 'dellUiTheme', 'dellUiTest']);
+/* globals s */
+angular.module('demo', ['ui.utils', 'ui.router', 'ngAnimate', 'dellUiComponents']);
 
-angular.module('dellUi').config(function($stateProvider, $urlRouterProvider) {
+angular.module('demo').config(function ($stateProvider, $urlRouterProvider) {
+
+    $stateProvider.state('guide', {
+        url: '/guide/:section',
+        templateUrl: '/guide/guide.html'
+    });
+
+    $stateProvider.state('demo', {
+        url: '/:typeId/:componentId',
+        templateUrl: 'demo-assets/partials/home/home.html'
+    });
+
 
 
     /* Add New States Above */
-    $urlRouterProvider.otherwise('/demo');
+    $urlRouterProvider.otherwise('/demo/');
 
 });
 
-angular.module('dellUi').run(function($rootScope, utils, $state) {
-
-    $rootScope.safeApply = function(fn) {
-        var phase = $rootScope.$$phase;
-        if (phase === '$apply' || phase === '$digest') {
-            if (fn && (typeof(fn) === 'function')) {
-                fn();
-            }
-        } else {
-            this.$apply(fn);
-        }
-    };
-    $rootScope.$state = $state;
-    $rootScope.messages = {};
-    utils.getJSON("app/data/messages.json", function(data){
-        $rootScope.messages = data;
-    });
-
+angular.module('demo').run(function($rootScope) {
+    _.str = s;
 });
+
+

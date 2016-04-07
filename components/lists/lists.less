@@ -1,0 +1,53 @@
+/*
+ * Lists component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
+
+//TODO need to refactor DUC-311 - Refactor link collector component
+
+.inline-content-links {
+    min-height: 20px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background-color: @dell-gray-light;
+
+    .list-inline {
+        //padding-left: 0;
+        //list-style: none;
+        //margin-left: -5px;
+        margin-bottom: 0;
+    }
+    .content-links {
+        li + li::before {
+            content: " | ";
+            padding-right: 10px;
+            color: @dell-blue;
+        }
+    }
+    li {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        a {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .inline-content-links {
+        .content-links {
+            li {
+                width: 100%;
+                padding-bottom: 20px;
+            }
+            li + li::before {
+                content: "";
+                padding-right: 0;
+            }
+            li + li:last-of-type {
+                padding-bottom: 0;
+            }
+        }
+    }
+}

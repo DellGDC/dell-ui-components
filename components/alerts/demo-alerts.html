@@ -1,0 +1,256 @@
+<section ng-controller="alertsCtrl" id="alerts-html-example">
+
+    <div class="container">
+        <h2>Alerts Demo</h2>
+
+            <!-- example html for Alerts component -->
+
+            <h3 class="bottom-offset-20">Alert types </h3>
+
+                <!-- -Warning alert: -->
+                <div class="alert alert-warning">
+                    <p><strong>User Errors: </strong>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p>
+                </div>
+
+                <!-- -/Warning alert: -->
+
+
+            <div class="row bottom-offset-20">
+                <!-- -Success alert: -->
+                <div class="col-xs-12 col-md-4">
+                    <div class="alert alert-success alert-collapsible">
+                        <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-2">×</button>
+                        <p class="show-expanded">
+                            <strong>Success Alerts: </strong>
+                            Indicates the task has been completed successfully. Can be collapsed and reopened.
+                        </p>
+                        <p class="show-collapsed">
+                            Re-open dismissed info alert
+                        </p>
+                    </div>
+                </div>
+                <!-- -/Success alert: -->
+
+
+
+                <!-- -Information alert: -->
+                <div class="col-xs-12 col-md-4">
+                    <div class="alert alert-info alert-collapsible">
+                        <button type="button" class="close">×</button>
+                        <p class="show-expanded">
+                            <strong>Information Alerts: </strong>
+                            Information alerts display important information for the page. Can be collapsed and reopened.
+                        </p>
+                        <p class="show-collapsed">
+                            Re-open dismissed info alert
+                        </p>
+                    </div>
+                </div>
+                <!-- -/Information alert: -->
+
+
+
+                <!-- -Catastrophic Error: -->
+                <div class="col-xs-12 col-md-4">
+                    <div class="alert alert-error">
+                        <p><strong>Catastrophic Errors: </strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p>
+                    </div>
+                </div>
+                <!-- -/Catastrophic Error: -->
+
+
+            </div>  <!-- row close -->
+
+
+            <!--Informational Alerts-->
+            <h3 class="top-offset-40 bottom-offset-20">Informational alerts</h3>
+
+            <!-- informational alert no title -->
+            <div class="alert alert-info alert-collapsible">
+                <button type="button" class="close">×</button>
+                <p class="show-expanded">
+                    <strong>Informational alerts: </strong>
+                    Information alerts display important information for the page. Can be collapsed and reopened.
+                </p>
+                <p class="show-collapsed">
+                    Re-open dismissed alert
+                </p>
+            </div>
+            <!-- /informational alert no title -->
+
+        <!-- informational alert WITH title -->
+            <div class="alert alert-info alert-collapsible">
+                <button type="button" class="close" data-toggle="collapse" data-target=".cssDataTargetDismiss-5 ">×</button>
+                <div class="show-expanded">
+                    <h4>Informational alerts example with a title.</h4>
+                    <p>Information alerts display important information for the page. Can be collapsed and reopened.</p>
+                </div>
+                <p class="show-collapsed">
+                    Re-open dismissed alert
+                </p>
+            </div>
+        <!-- /informational alert WITH title -->
+
+
+        <!-- informational alert WITH title and multiple links -->
+            <div class="alert">
+                <div class="alert-info alert-collapsible">
+                    <button type="button" class="close">×</button>
+                    <div class="show-expanded">
+                        <h4>Informational alerts example with a title and multiple links.</h4>
+                        <p class="bottom-offset-0">Information alerts display important information for the page. Can be collapsed and reopened.</p>
+                        <ul>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        </ul>
+                    </div>
+                    <p class="show-collapsed">
+                        Re-open <strong>first</strong> dismissed alert
+                    </p>
+                </div>
+
+                <div class="alert-info alert-collapsible">
+                    <button type="button" class="close">×</button>
+                    <div class="show-expanded">
+                        <h4>Additional alert example.</h4>
+                        <p class="bottom-offset-0">Information alerts display important information for the page. Can be collapsed and reopened.</p>
+                        <ul>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        </ul>
+                    </div>
+                    <p class="show-collapsed">
+                        Re-open <strong>second</strong> dismissed alert
+                    </p>
+
+                </div>
+            </div>
+        <!-- /informational alert WITH title and multiple links -->
+
+
+
+        <!--Success Alerts-->
+            <h3 class="top-offset-40 bottom-offset-20">Success alerts</h3>
+
+            <!-- success alerts no title -->
+                <div class="alert alert-success alert-collapsible">
+                    <button type="button" class="close">×</button>
+                    <p class="show-expanded">
+                        <strong>Success alerts: </strong>
+                        Indicates the task has been completed successfully. Can be collapsed and reopened.
+                    </p>
+                    <p class="show-collapsed">
+                        Re-open dismissed alert
+                    </p>
+                </div>
+        <!-- /success alerts no title -->
+
+
+        <!-- success alerts with title -->
+                <div class="alert alert-success alert-collapsible">
+                    <button type="button" class="close">×</button>
+                    <div class="show-expanded">
+                        <h4>Success alerts example with a title.</h4>
+                        <p><strong>Success alerts: </strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p>
+                    </div>
+                    <p class="show-collapsed">
+                        Re-open dismissed alert
+                    </p>
+                </div>
+        <!-- /success alerts with title -->
+
+
+        <!-- success alert WITH title and multiple links -->
+                <div class="alert alert-success alert-collapsible">
+                    <button type="button" class="close">×</button>
+                    <div class="show-expanded">
+                        <h4>Success alerts example with a title and multiple links.</h4>
+                        <p class="bottom-offset-0">Indicates the task has been completed successfully. Can be collapsed and reopened.</p>
+                        <ul>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        </ul>
+                    </div>
+                    <p class="show-collapsed">
+                        Re-open dismissed alert
+                    </p>
+                </div>
+        <!-- /success alert WITH title and multiple links -->
+
+
+
+
+
+        <!--user error -->
+            <h3 class="top-offset-40 bottom-offset-20">User Error</h3>
+
+            <!-- user error alert no title -->
+            <div class="alert alert-warning alert-collapsible">
+                <p class="show-expanded">
+                    <strong>User Errors: </strong>
+                    A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.
+                </p>
+                <p class="show-collapsed">
+                    Re-open dismissed alert
+                </p>
+            </div>
+            <!-- /user error alert no title -->
+
+
+
+        <!-- User alert WITH title and multiple links -->
+            <div class="alert">
+                <div class="alert-warning">
+                    <h4>User Errors example with a title and multiple links.</h4>
+                    <p class="bottom-offset-0">A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p>
+                    <ul>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                    </ul>
+                </div>
+
+                <div class="alert-info alert-collapsible">
+                    <button type="button" class="close">×</button>
+                    <div class="show-expanded">
+                        <h4>Dismissible informational alert example with title.</h4>
+                        <p class="bottom-offset-0">Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas
+                            scelerisque porttitor.</p>
+                        <ul>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                            <li>Lorum ipsum with <a href="javascript:;">anchor link</a></li>
+                        </ul>
+                    </div>
+                    <p class="show-collapsed">
+                        Re-open dismissed alert
+                    </p>
+                </div>
+                
+            </div>
+        <!-- /User alert WITH title and multiple links -->
+
+
+
+
+        <!--Catastrophic error -->
+            <h3 class="top-offset-40 bottom-offset-20">Catastrophic Error</h3>
+
+            <div class="alert alert-error">
+                <p><strong>Catastrophic Errors: </strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p>
+            </div>
+
+            <div class="alert alert-error">
+                <h4>Catastrophic Errors example with a title</h4>
+                <p>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p>
+            </div>
+        <!--/Catastrophic error -->
+
+
+
+    </div>
+
+</section>

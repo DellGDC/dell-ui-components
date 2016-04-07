@@ -1,0 +1,209 @@
+<div>
+	<h4>General</h4>
+	<p>
+		Your code should not stick out — make it consistent with the rest of the code you are contributing to. You will see this rule stressed over and over throughout the guidelines and when submitting fixes or new components.
+	</p>
+
+	<h4>Indenting and white space</h4>
+	<ul>
+		<li>Set your editor to 4 spaces per tab.</li>
+		<li>Use tabs to indent blocks.</li>
+		<li>Avoid lines longer than 80 characters.</li>
+		<li>If a line longer than 80 characters is broken up with a comma, the line below should be indented.</li>
+		<li>In general, you use one tab per expression level.</li>
+	</ul>
+
+	<h4>Use of Comments</h4>
+	<ul>
+		<li>Be generous with comments.</li>
+		<li>It is useful to leave information that will be read at a later time by people (possibly yourself) who will need to understand what you have done.</li>
+		<li>The comments should be well-written and clear, just like the code they are annotating.</li>
+		<li>It is important that comments be kept up-to-date.</li>
+		<li>Erroneous comments can make programs even harder to read and understand.</li>
+		<li>Make comments meaningful.</li>
+		<li>Focus on what is not immediately visible. Don't waste the reader's time with stuff like <code>i = 0; // Set i to zero.</code></li>
+		<li>Generally use line comments (//). Save block comments (/* */) for formal documentation.</li>
+	</ul>
+	<h4>Variable Declarations</h4>
+	<ul>
+		<li>All variables should be declared before used.</li>
+		<li>Use of global variables should be minimized.</li>
+		<li>The var statement should be the first statement in the function body.</li>
+		<li>It is preferred that each variable be given its own line and comment.</li>
+		<li>They should be listed in alphabetical order if possible.</li>
+		<li>Functions should have a single var statement with declared variables separated by commas. Example:<br/><br/>
+
+	<h5>Good <i class="icon-small-checkmark text-green" aria-hidden="true"></i></h5>
+	<p><pre><code>var currentEntry, // currently selected table entry
+    level = 0,    // indentation level
+    size =10;     // size of table</code></pre></p>
+
+	<h5>Bad <i class="icon-ui-closecircle text-red-dark" aria-hidden="true"></i></h5>
+	<p><pre><code>var currentEntry; // currently selected table entry
+var level = 0;    // indentation level
+var size =10;     // size of table</code></pre></p>
+
+		</li>
+		<li>When declaring an object variable use {} instead of new Object()</li>
+		<li>Use [] instead of new Array().</li>
+	</ul>
+	<h4>Function Declarations</h4>
+	<ul>
+		<li>All functions should be declared before they are used.</li>
+		<li>Inner functions should follow the var statement. (This helps make it clear what variables are included in its scope)</li>
+		<li>There should be no space between the name of a function and the ( (left parenthesis) of its parameter list.</li>
+		<li>There should be one space between the ) (right parenthesis) and the { (left curly brace) that begins the statement body.</li>
+		<li>The body itself is indented with tab. </li>
+		<li>The } (right curly brace) is aligned with the line containing the beginning of the declaration of the function.</li>
+		<li>Example:<br/>
+<pre><code>function outer(c, d) {
+    var e = c * d;
+
+    function inner(a, b) {
+        return (e * a) + b;
+    }
+
+    return inner(0, 1);
+}</code></pre>
+
+		</li>
+	</ul>
+	<h4>Names</h4>
+	<ul>
+		<li>Javascript variable names should be in camelCase.</li>
+		<li>CSS class names should be dasherized.</li>
+		<li>Do not use $ (dollar sign) in variable names. Angular variables have $</li>
+		<li>Most variables and functions should start with a lower case letter.</li>
+		<li>If a function is declared as a constructor (using a new prefix) it should start with a capital letter.</li>
+	</ul>
+	<h4>Statements</h4>
+	<h5>Simple Statements</h5>
+	<ul>
+		<li>Each line should contain at most one statement.</li>
+		<li>Put a ; (semicolon) at the end of every simple statement. </li>
+		<li>Note that an assignment statement that is assigning a function literal or object literal is still an assignment statement and must end with a semicolon. Example:<br/>
+<pre><code>var foobar = {
+	foo:true,
+	bar:false
+};</code></pre></li>
+
+	</ul>
+
+	<h5><em>return</em> Statements</h5>
+	<ul>
+		<li>A return statement with a value should not use ( ) (parentheses) around the value. </li>
+		<li>The return value expression must start on the same line as the return keyword in order to avoid semicolon insertion. (in other words, if the expresion return is in another line the return value will be undefined)</li>
+	</ul>
+	<h5><em>if</em> Statements</h5>
+	<ul>
+		<li>The if class of statements should have the following form:<br/>
+<pre><code>if (condition) {
+	statements
+}
+
+if (condition) {
+	statements
+} else {
+	statements
+}
+
+if (condition) {
+	statements
+} else if (condition) {
+	statements
+} else {
+	statements
+}
+</code></pre>
+	</li>
+	<li>For logic comparisons use the === and !== operators. </li>
+	<li>The == and != operators do type coercion and should not be used. <br>
+	<p class="alert alert-info">
+		<strong>Type coercion</strong> means that when the operands of an operator are different types, one of them will be converted to an "equivalent" value of the other operand's type. For instance, if you do:<br/>
+		<code>boolean == integer</code><br/>
+		the boolean operand will be converted to an integer: false becomes 0, true becomes 1. Then the two values are compared.
+	</p>
+	</li>
+		</ul>
+
+	<h5><em>for</em> Statement, <em>while</em> Statement, <em>do</em> Statement</h5>
+	<p>Avoid use of native JS looping statements. The package includes <a href="http://underscorejs.org/" target="_new">underscore.js</a> which provides many functions useful for looping, searching, filtering etc.</p>
+
+	<h5><em>switch</em> Statement</h5>
+	<ul>
+		<li>A switch statement should have the following form:<br/>
+
+<pre><code>switch (expression) {
+	case expression:
+		statements;
+		break;
+	default:
+		statements;
+}</code></pre>
+		</li>
+		<li>Each case is indented from the switch.</li>
+		<li>Each group of statements (except the default) should end with break, return, or throw. </li>
+	</ul>
+
+
+	<h5><em>try</em> Statement</h5>
+	<ul>
+		<li>The try class of statements should have the following form:<br/>
+<pre><code>try {
+	statements
+} catch (variable) {
+	statements
+}
+
+try {
+	statements
+} catch (variable) {
+	statements
+} finally {
+	statements
+}</code></pre>
+		</li>
+	</ul>
+
+	<h5><em>with</em> Statement</h5>
+
+	<p>The with statement <a href="http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/" target="_new">should not be used</a>.</p>
+
+	<h5><em>continue</em> Statement</h5>
+
+	<p>Avoid use of the continue statement. It tends to obscure the control flow of the function.</p>
+
+	<h4>Whitespace</h4>
+	<p>Blank lines improve readability by setting off sections of code that are logically related.</p>
+	<p>Blank spaces should be used in the following circumstances:</p>
+	<ul>
+		<li>A keyword followed by ( (left parenthesis) should be separated by a space. example: switch (foobar) {</li>
+		<li>A blank space should not be used between a function value and its ( (left parenthesis). This helps to distinguish between keywords and function invocations.</li>
+		<li>All binary operators except . (period) and ( (left parenthesis) and [ (left bracket) should be separated from their operands by a space.</li>
+		<li>Whitespace should follow every , (comma).</li>
+	</ul>
+
+	<h4><em>eval</em> is Evil</h4>
+	<ul>
+		<li>The eval function is the most misused feature of JavaScript. Avoid it.</li>
+		<li>eval has aliases you may not be aware of:
+			<ul>
+				<li>Do not use the Function constructor. var func = new Function(...</li>
+				<li>Do not pass strings to setTimeout or setInterval.</li>
+			</ul>
+		</li>
+	</ul>
+
+	<h4>Javascript frameworks</h4>
+	<ul>
+		<li>Use <a href="http://underscorejs.org/" target="_new">underscore.js</a> whenever possible.</li>
+		<li>Do not mix javascript framework syntax, use underscore first. Example:
+			<ul>
+				<li>_.each(...</li>
+				<li>$.each(...</li>
+				<li>angular.each(...</li>
+				<li>for(...</li>
+			</ul>
+		</li>
+	</ul>
+</div>

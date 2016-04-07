@@ -1,88 +1,139 @@
 <!DOCTYPE html>
-<html ng-app="dellUi">
+<html ng-app="demo">
 <head>
   <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
-  <link href="app.less" type="text/css" rel="stylesheet/less">
-  <link href="app/dell-ui-test/test-page/test-page.less" type="text/css" rel="stylesheet/less">
-  <link href="bower_components/angular-json-human/dist/angular-json-human.min.css" type="text/css" rel="stylesheet">
-  <link href="bower_components/angular-loading-bar/build/loading-bar.min.css" type="text/css" rel="stylesheet">
+
+    <link href="bower_components/dell-ui-bootstrap/dell-ui-bootstrap.min.css" type="text/css" rel="stylesheet">
+
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" data-concat="dellUiComponentsLess"/>
+
+    <link href="components/dell-ui-components.less" type="text/css" rel="stylesheet/less" data-concat="dellUiComponentsLess">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" data-concat="dellUiComponentsLess">
+    <link href="app.less" type="text/css" rel="stylesheet/less" data-concat="demoLess">
 </head>
 <body>
 
+
   <!-- Livereload script for development only (stripped during dist build) -->
-  <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
+  <script src="http://localhost:35728/livereload.js" data-concat="false"></script>
 
   <!-- JS from Bower Components -->
-  <script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>
-  <script src="bower_components/jquery/jquery.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/lodash/dist/lodash.min.js"></script>
-  <script src="bower_components/underscore.string/dist/underscore.string.min.js"></script>
-  <script src="bower_components/moment/moment.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
-  <script src="bower_components/restangular/dist/restangular.min.js"></script>
-  <script src="bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
-  <script src="bower_components/angular-file-upload/angular-file-upload.min.js"></script>
-  <script src="bower_components/angular-hotkeys/angular-hotkeys.min.js"></script>
-  <script src="bower_components/angular-json-human/dist/angular-json-human.min.js"></script>
-  <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
-  <script src="bower_components/angular-scrollto/angular-scrollto.min.js"></script>
-  <script src="bower_components/angular-themer/src/themer.js"></script>
-  <script src="bower_components/AngularAgility/dist/angular-agility.min.js"></script>
+  <script src="bower_components/less.js/dist/less.min.js" data-concat="false"></script>
+  <script src="bower_components/jquery/jquery.js" data-concat="libsJs"></script>
+  <script src="bower_components/underscore/underscore.js" data-concat="libsJs"></script>
+  <script src="bower_components/angular/angular.js" data-concat="libsJs"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js" data-concat="libsJs"></script>
+  <script src="bower_components/angular-animate/angular-animate.js" data-concat="libsJs"></script>
+  <script src="bower_components/angular-resource/angular-resource.js" data-concat="libsJs"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js" data-concat="libsJs"></script>
+  <script src="bower_components/angular-ui-utils/ui-utils.js" data-concat="libsJs"></script>
+  <script src="bower_components/underscore.string/dist/underscore.string.min.js" data-concat="libsJs"></script>
+  <script src="bower_components/Eve.js/eve.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/beneverard-jqPagination/js/jquery.jqpagination.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/jquery.inputmask/dist/jquery.inputmask.bundle.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/multiple-select/jquery.multiple.select.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/slick-1.5.0/slick/slick.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/matchHeight/jquery.matchHeight.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/bootstrap-slider/js/bootstrap-slider.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/Eve.js/eve.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/rt-Responsive-Tables/jquery.rtResponsiveTables.js" data-concat="dellUiComponentsJs"></script>
+  <script type="text/javascript" src="bower_components/moment/min/moment.min.js" data-concat="dellUiComponentsJs"></script>
+  <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/waypoints/lib/jquery.waypoints.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/waypoints/lib/shortcuts/sticky.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/waypoints/lib/shortcuts/inview.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/media/js/jquery.dataTables.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/media/js/DataTables_bootstrap3.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/FixedHeader/js/dataTables.fixedHeader.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/FixedColumns/js/dataTables.fixedColumns.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/Responsive/js/dataTables.responsive.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/Buttons/js/dataTables.buttons.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/ColVis/js/dataTables.colVis.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/Select/js/dataTables.select.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/KeyTable/js/dataTables.keyTable.min.js" data-concat="dellUiComponentsJs"></script>
+  <script src="bower_components/DataTables-1.10.7/extensions/ColReorder/js/dataTables.colReorder.min.js" data-concat="dellUiComponentsJs"></script>
+  
+
   <!-- Add New Bower Component JS Above -->
 
-
   <!-- Main App JS -->
-  <script src="app/dell-ui-theme/dell-ui-theme.js"></script>
-  <script src="app/dell-ui-test/dell-ui-test.js"></script>
-  <script src="app/dell-ui-site.js"></script>
-  <script src="app.js"></script>
-  <script src="app/shared/masthead/masthead.js"></script>
-  <script src="app/demo-components/alerts/alerts.js"></script>
-  <script src="app/demo-components/breadcrumbs/breadcrumbs.js"></script>
-  <script src="app/dell-ui-test/test-page/test-page.js"></script>
-  <script src="app/filters/_.str.js"></script>
-  <script src="app/demo/demo.js"></script>
-  <script src="app/demo-components/buttons/buttons.js"></script>
-  <script src="app/demo-components/carousel/carousel.js"></script>
-  <script src="app/demo-components/collapsible-items/collapsible-items.js"></script>
-  <script src="app/demo-components/colors/colors.js"></script>
-  <script src="app/demo-components/containers/containers.js"></script>
-  <script src="app/demo-components/forms/forms.js"></script>
-  <script src="app/demo-components/icons/icons.js"></script>
-  <script src="app/demo-components/labels-and-badges/labels-and-badges.js"></script>
-  <script src="app/demo-components/lists/lists.js"></script>
-  <script src="app/demo-components/modals/modals.js"></script>
-  <script src="app/demo-components/offsets/offsets.js"></script>
-  <script src="app/demo-components/pagers/pagers.js"></script>
-  <script src="app/demo-components/popovers/popovers.js"></script>
-  <script src="app/demo-components/progress-bars/progress-bars.js"></script>
-  <script src="app/demo-components/responsive-utilities/responsive-utilities.js"></script>
-  <script src="app/demo-components/tables/tables.js"></script>
-  <script src="app/demo-components/tabs/tabs.js"></script>
-  <script src="app/demo-components/typography/typography.js"></script>
-  <script src="app/demo-components/tooltips/tooltips.js"></script>
-  <script src="app/demo-components/pagination/pagination.js"></script>
-  <script src="app/services/utils.js"></script>
-  <script src="app/shared/side-bar/side-bar.js"></script>
+  <script src="app.js" data-concat="demoJs"></script>
+  <script src="components/dell-ui-components.js" data-concat="dellUiComponentsJs"></script>
+  <script src="demo-assets/partials/home/home.js" data-concat="demoJs"></script>
+  <script src="demo-assets/partials/demo/demo.js" data-concat="demoJs"></script>
+  <script src="demo-assets/partials/play/play.js" data-concat="demoJs"></script>
+  <script src="demo-assets/partials/all-components/all-components.js" data-concat="demoJs"></script>
+  <script src="components/alerts/demo-alerts.js" data-concat="demoJs"></script>
+  <script src="components/announcements/demo-announcements.js" data-concat="demoJs"></script>
+  <script src="components/breadcrumbs/demo-breadcrumbs.js" data-concat="demoJs"></script>
+  <script src="components/standard-buttons/demo-standard-buttons.js" data-concat="demoJs"></script>
+  <script src="components/block-buttons/demo-block-buttons.js" data-concat="demoJs"></script>
+  <script src="components/dropdown-buttons/demo-dropdown-buttons.js" data-concat="demoJs"></script>
+  <script src="components/mini-buttons/demo-mini-buttons.js" data-concat="demoJs"></script>
+  <script src="components/carousel/demo-carousel.js" data-concat="demoJs"></script>
+  <script src="components/collapsible-items/demo-collapsible-items.js" data-concat="demoJs"></script>
+  <script src="components/colors/demo-colors.js" data-concat="demoJs"></script>
+  <script src="components/containers/demo-containers.js" data-concat="demoJs"></script>
+  <script src="components/dividers/demo-dividers.js" data-concat="demoJs"></script>
+  <script src="components/footer/demo-footer.js" data-concat="demoJs"></script>
+  <script src="components/forms/demo-forms.js" data-concat="demoJs"></script>
+  <script src="components/icons/demo-icons.js" data-concat="demoJs"></script>
+  <script src="components/lists/demo-lists.js" data-concat="demoJs"></script>
+  <script src="components/labels-and-badges/demo-labels-and-badges.js" data-concat="demoJs"></script>
+  <script src="components/modals/demo-modals.js" data-concat="demoJs"></script>
+  <script src="components/offsets/demo-offsets.js" data-concat="demoJs"></script>
+  <script src="components/pagers/demo-pagers.js" data-concat="demoJs"></script>
+  <script src="components/pagination/demo-pagination.js" data-concat="demoJs"></script>
+  <script src="components/popovers/demo-popovers.js" data-concat="demoJs"></script>
+  <script src="components/responsive-utilities/demo-responsive-utilities.js" data-concat="demoJs"></script>
+  <script src="components/progress-bars/demo-progress-bars.js" data-concat="demoJs"></script>
+  <script src="components/tables/demo-tables.js" data-concat="demoJs"></script>
+  <script src="components/tabs/dellUI.overflowTabs.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/pagination/dellUI.loadMore.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/collapsible-items/dellUI.contentGallery.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/footer/dellUI.universalFooter.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/tabs/demo-tabs.js" data-concat="demoJs"></script>
+  <script src="components/tooltips/demo-tooltips.js" data-concat="demoJs"></script>
+  <script src="components/typography/demo-typography.js" data-concat="demoJs"></script>
+  <script src="components/directives/toggle.js" data-concat="dellUiComponentsJs"></script>
+  <script src="demo-assets/filters/_.str.js" data-concat="demoJs"></script>
+  <script src="components/tabs/tabs.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/footer/footer.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/ratings-and-reviews/demo-ratings-and-reviews.js" data-concat="demoJs"></script>
+  <script src="components/carousel/carousel.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/forms/forms.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/content-teaser/demo-content-teaser.js" data-concat="demoJs"></script>
+  <script src="components/search-and-navigation/demo-search-and-navigation.js" data-concat="demoJs"></script>
+  <!--<script src="components/alerts/directive-alert-collapsible.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/tables/directive-table-responsive.js" data-concat="dellUiComponentsJs"></script>-->
+  <script src="components/content-teaser/content-teaser.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/pagination/pagination.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/progress-bars/progress-bars.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/directives/directive-equalize-height.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/contact-drawer/demo-contact-drawer.js" data-concat="demoJs"></script>
+  <script src="components/contact-drawer/contact-drawer.js" data-concat="dellUiComponentsJs"></script>
+  <!--<script src="components/collapsible-items/collapsible-items.js"  data-concat="dellUiComponentsJs"></script>-->
+  <script src="components/anchored-nav/demo-anchored-nav.js" data-concat="demoJs"></script>
+  <script src="components/anchored-nav/anchored-nav.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/tables-uber/demo-tables-uber.js" data-concat="demoJs"></script>
+  <script src="components/tables/tables.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/tables-uber/tables-uber.js" data-concat="dellUiComponentsJs"></script>
+  <script src="components/masthead/demo-masthead.js" data-concat="demoJs"></script>
+  <script src="components/product-stack/demo-product-stack.js" data-concat="demoJs"></script>
+  <script src="guide/guide.js" data-concat="demoJs"></script>
+  <script src="components/directives/scroll.js" data-concat="dellUiComponentsJs"></script>
+
+
+  <script src="demo-assets/partials/guide/guide.js" data-concat="demoJs"></script>
   <!-- Add New Component JS Above -->
 
-  <div id="dell-ui-site">
-    <div dell-ui-site-masthead></div>
-    <div class="container">
-      <div class="row">
-        <div ui-view class="" id="content" ng-class="{'col-xs-9':$state.current.name !== 'test-page','col-xs-12':$state.current.name === 'test-page'}"></div>
-        <div class="col-xs-3" id="sidebar" ng-if="$state.current.name !== 'test-page'">
-          <div dell-ui-site-side-bar></div>
+  <div>
+    <div id="content">
+        <div ui-view>
         </div>
-      </div>
     </div>
   </div>
 

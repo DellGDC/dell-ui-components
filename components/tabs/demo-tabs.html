@@ -1,0 +1,507 @@
+<section ng-controller="tabsCtrl" id="tabs-html-example">
+
+    <div class="container">
+        <h2>Tabs Demo</h2>
+        <!-- Nav tabs -->
+        <h3>Tabs
+            <small>(default)</small>
+        </h3>
+        <div class="bottom-offset-60">
+            <div class="row-offcanvas row-offcanvas-right">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active">
+                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">
+                            Home <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                            Profile <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">
+                            Messages <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">
+                            Settings  <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="profile">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="messages">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="settings">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+
+        <h3>Tabs
+            <small>(overflow: more tabs than the container width can handle)</small>
+        </h3>
+        <div class="bottom-offset-60">
+            <div class="row-offcanvas row-offcanvas-right">
+                <ul class="nav nav-tabs" id="overflow-tabs-example">
+                    <li role="presentation" class="active">
+                        <a href="#overflow-1" aria-controls="home" role="tab" data-toggle="tab">
+                            Home <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-2" aria-controls="profile" role="tab" data-toggle="tab">
+                            Profile <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-3" aria-controls="messages" role="tab" data-toggle="tab">
+                            Messages <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-4" aria-controls="settings" role="tab" data-toggle="tab">
+                            Settings  <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-5" aria-controls="more-stuff" role="tab" data-toggle="tab">
+                            Sed at sapien turpis  <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-6" aria-controls="even-more-stuff" role="tab" data-toggle="tab">
+                            Nulla iaculis rhoncus  <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-7" aria-controls="too-much-stuff" role="tab" data-toggle="tab">
+                            Curabitur eleifend  <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-8" aria-controls="way-too-much-stuff" role="tab" data-toggle="tab">
+                            Sociis natoque penatibus  <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-9" aria-controls="absolutely-way-too-much-stuff" role="tab" data-toggle="tab">
+                            Morbi sed sagittis puru <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-10" aria-controls="this-needs-to-stop" role="tab" data-toggle="tab">
+                            Nam sed velit vel tortor suscipit egestas  <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-11" aria-controls="seriously-stop" role="tab" data-toggle="tab">
+                            Etiam tincidunt ut <br/>ante sed ultrices <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-12" aria-controls="ok-done" role="tab" data-toggle="tab">
+                            Sed condimentum interdum est nec imperdiet <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#overflow-13" aria-controls="ok-done" role="tab" data-toggle="tab">
+                            Sed quis egestas libero <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="overflow-1">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-2">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-3">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-4">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-5">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Sed at sapien turpis. Ut at nulla eget ligula facilisis feugiat. Mauris egestas erat tortor, sit amet blandit enim sollicitudin eu. Curabitur malesuada metus est, vel bibendum tortor mollis id. Nunc efficitur non quam quis porttitor. Nam odio tellus, efficitur et suscipit a, rutrum quis magna. Fusce luctus leo ut justo fringilla, in pellentesque nisl fringilla. Aliquam ullamcorper ex et nunc egestas, eget venenatis magna varius. Morbi in tortor eu quam ullamcorper porta sed at nisi. Sed sed sapien eros. Praesent rutrum purus ut libero feugiat cursus. Fusce in justo lorem. Phasellus consequat felis sapien, sit amet tempor mi hendrerit sed. Nullam nulla eros, condimentum quis elit tristique, convallis blandit sem.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-6">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Nulla iaculis rhoncus lacus ac dictum. Aenean ut sem mi. Quisque nec sapien porta, iaculis justo eu, feugiat mi. Proin vel tellus in nulla pretium dignissim sit amet pulvinar justo. Donec ac tempus eros. Morbi pretium turpis diam, id imperdiet nibh tempor sed. In scelerisque eros quis ultricies hendrerit. Aenean aliquam ante sed metus rhoncus, eget ornare libero imperdiet. Nam erat nunc, vestibulum vel lacinia nec, ultrices nec justo. Curabitur interdum massa leo, vel tempor velit accumsan quis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris felis augue, porttitor ut lacinia id, volutpat at lorem. Phasellus accumsan vestibulum odio, sit amet elementum ex rhoncus eu.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-7">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Curabitur eleifend, ligula sed commodo imperdiet, odio quam pellentesque nulla, ornare ullamcorper lorem augue vel sapien. Ut pretium, ligula eu elementum semper, ipsum dui auctor eros, eget tincidunt est arcu nec arcu. Sed sapien odio, mollis et elit in, dapibus viverra orci. Duis nec lacus ut libero molestie bibendum at at justo. Integer blandit massa nec elit aliquet, nec commodo metus semper. Donec lectus tortor, dapibus eu sodales at, dictum a nibh. Duis in justo et nibh placerat sodales in eget magna.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-8">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sit amet eros egestas, rhoncus enim suscipit, aliquam leo. Vestibulum non porta risus. Phasellus sit amet mattis purus. Aenean arcu mi, consequat vel faucibus et, tincidunt ut lectus. Curabitur eget tincidunt augue. Praesent id pellentesque elit. Ut ultricies, ligula quis faucibus finibus, dolor massa fringilla eros, ac porttitor odio nisl at enim. Nullam condimentum lobortis massa nec pellentesque. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-9">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Morbi sed sagittis purus. Pellentesque pretium tortor eget aliquam faucibus. Sed vestibulum scelerisque consequat. Maecenas commodo pellentesque auctor. Proin sed eros sit amet felis condimentum maximus. Quisque in nibh lacinia elit consectetur ultrices nec et dolor. Fusce tempus nisi vitae lectus accumsan sollicitudin. Donec non tempus erat. Aliquam semper eleifend ornare. Nulla elementum dignissim libero sit amet tincidunt. Ut mattis mi neque, vel fermentum enim elementum vel. Vivamus lobortis congue massa a hendrerit. Morbi sed aliquam mauris, non ultrices ipsum.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-10">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Nam sed velit vel tortor suscipit egestas. Vestibulum lobortis felis et elit facilisis lobortis. Quisque at nulla eleifend, rhoncus tortor id, convallis leo. Donec malesuada ex nibh, et auctor libero consequat porta. Donec a elementum metus. Morbi dolor elit, gravida id elementum nec, ullamcorper at lorem. In sodales turpis eu nisl aliquet, in mollis mi efficitur. Cras sagittis pharetra dapibus. Pellentesque lacinia a tortor sit amet mattis. Suspendisse potenti. Nullam id lacus diam. Mauris laoreet elit a orci tincidunt dignissim. Quisque tristique ex vitae libero commodo, a suscipit mi consequat. Donec sed rutrum augue. Nullam ornare condimentum tempus.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-11">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Etiam tincidunt ut ante sed ultrices. Proin vitae vulputate arcu. Nulla vehicula scelerisque tincidunt. Pellentesque a sollicitudin nulla, quis pellentesque libero. In pharetra, urna et lobortis scelerisque, ipsum mi commodo massa, vel cursus lectus dolor sit amet lectus. Curabitur eget lobortis nibh. Nulla rhoncus orci tincidunt, porta sapien ut, cursus tellus. Quisque pretium nisi sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam felis odio, fermentum ac laoreet sit amet, tempor eu nisl. Phasellus sed augue eu lectus dictum ornare in ut tortor.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-12">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Sed condimentum interdum est nec imperdiet. Proin eu purus blandit, finibus felis id, ultrices magna. Curabitur consectetur dolor sit amet tellus ultricies, in auctor turpis lacinia. Donec sagittis ligula commodo, vehicula sapien at, eleifend mauris. Vestibulum ac elit eget nibh vulputate efficitur sit amet at orci. Ut sit amet pulvinar nunc. Praesent condimentum eu felis non tincidunt. Duis malesuada turpis vel elit vulputate, a fermentum erat tincidunt.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="overflow-13">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Sed quis egestas libero. Suspendisse lobortis viverra velit, vel lacinia justo consequat vel. Proin ipsum elit, ultricies non erat quis, auctor molestie lacus. Phasellus sodales commodo eros, id ullamcorper tellus posuere ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent quis suscipit urna. Sed porta odio ligula, a varius eros hendrerit nec. Cras et ante in sem tempor pretium sit amet vitae odio. Vivamus efficitur tortor id metus eleifend pellentesque. Cras semper mi enim, at dapibus turpis fermentum eu. Fusce porta scelerisque elit vitae tincidunt.
+                        </p>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+<!--
+
+        <hr/>
+
+        <h3>Tabs
+            <small>(right to left)</small>
+        </h3>
+        <div class="bottom-offset-60">
+            <div class="row-offcanvas row-offcanvas-left">
+                <ul class="nav nav-tabs pull-right">
+                    <li role="presentation" class="active">
+                        <a href="#home-2" aria-controls="home" role="tab" data-toggle="tab">
+                           <i class="icon-ui-arrowleft visible-xs"></i> Home
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#profile-2" aria-controls="profile" role="tab" data-toggle="tab">
+                            <i class="icon-ui-arrowleft visible-xs"></i> Profile
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#messages-2" aria-controls="messages" role="tab" data-toggle="tab">
+                            <i class="icon-ui-arrowleft visible-xs"></i> Messages
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#settings-2" aria-controls="settings" role="tab" data-toggle="tab">
+                            <i class="icon-ui-arrowleft visible-xs"></i> Settings
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <!--
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="home-2">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            Back <i class="icon-ui-arrowright "></i>
+                        </button>
+                        <p>
+                            Home vestibulum bibendum tellus eget risus consectetur, eu pharetra mi luctus. Etiam congue a massa et lacinia. Maecenas tellus ipsum, scelerisque id massa eu, condimentum viverra velit. Donec nec lorem nulla. Sed justo arcu, tincidunt eu lacus et, placerat egestas urna.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="profile-2">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            Back <i class="icon-ui-arrowright "></i>
+                        </button>
+                        <p>
+                            Profile ellentesque porta quam id turpis commodo, eget malesuada risus malesuada. Nullam sit amet varius urna. In finibus scelerisque lacus, sed rutrum ex molestie vitae. vestibulum at faucibus nisi. Maecenas lacinia congue venenatis.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="messages-2">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            Back <i class="icon-ui-arrowright "></i>
+                        </button>
+                        <p>
+                            Messages sed justo arcu, tincidunt eu lacus et, placerat egestas urna. Ut varius purus id aliquet tristique.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="settings-2">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            Back <i class="icon-ui-arrowright "></i>
+                        </button>
+                        <p>
+                            Settings sivamus nec tristique felis, vitae accumsan enim. Aenean in volutpat justo. Sed dui elit, tristique non felis quis, posuere sodales nisi.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+        <!-- Nav tabs justify -->
+
+        <hr/>
+
+        <h3>Tabs
+            <small>(justified)</small>
+        </h3>
+        <div class="bottom-offset-60">
+            <div class="row-offcanvas row-offcanvas-right">
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#long-example" aria-controls="long-example" role="tab" data-toggle="tab">
+                            Example to show the auto adjusted tab height. <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#automobile" aria-controls="Automobile" role="tab" data-toggle="tab">
+                            Automobile<i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#boats" aria-controls="Boats" role="tab" data-toggle="tab">
+                            Boats<i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#planes" aria-controls="Planes" role="tab" data-toggle="tab">
+                            Planes<i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="long-example">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                                Long example ipsum dolor sit amet, consectetur adipiscing elit. Curabitur semper vulputate justo, nec fermentum ante pellentesque at. Aliquam erat volutpat. Mauris vehicula rhoncus velit vitae scelerisque.
+                            </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="automobile">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                                Automobile et metus at urna auctor varius. Cras mattis tincidunt eros facilisis efficitur. Nam ullamcorper faucibus neque nec eleifend.
+                            </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="boats">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                                Boats sapien quam, facilisis gravida magna sit amet, dignissim vehicula mauris. Proin tellus purus, condimentum in ex nec, varius malesuada neque.
+                            </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="planes">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                                Planes condimentum urna sit amet interdum mattis. Vivamus fermentum porttitor libero id faucibus. Duis nec suscipit nisi. Aenean in egestas metus.
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Nav tabs centered -->
+
+        <hr/>
+
+        <h3>Tabs
+            <small>(centered)</small>
+        </h3>
+        <div class="bottom-offset-60">
+            <!-- Tabs Centered with images-->
+
+            <div class="row-offcanvas row-offcanvas-right">
+                <ul class="nav nav-tabs nav-centered" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#inspiron" role="tab" data-toggle="tab">
+                            <img class="tab-image" alt="80x80" src="http://placehold.it/80x80">
+                            <h4>Inspiron Laptops</h4>
+                            <p class="text-gray-dark">For home and home office</p>
+                            <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#latitude" role="tab" data-toggle="tab">
+                            <img class="tab-image" alt="80x80" src="http://placehold.it/80x80">
+                            <h4>Latitude Laptops</h4>
+                            <p class="text-gray-dark">For business-class security and reliability</p>
+                            <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#vostro" role="tab" data-toggle="tab">
+                            <img class="tab-image" alt="80x80" src="http://placehold.it/80x80">
+                            <h4>Vostro Laptops</h4>
+                            <p class="text-gray-dark">For small business computing</p>
+                            <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#XPS" role="tab" data-toggle="tab">
+                            <img class="tab-image" alt="80x80" src="http://placehold.it/80x80">
+                            <h4>XPS Laptops</h4>
+                            <p class="text-gray-dark">For the ultimate experience</p>
+                            <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#precision" role="tab" data-toggle="tab">
+                            <img class="tab-image" alt="80x80" src="http://placehold.it/80x80">
+                            <h4>Dell Precision Mobile Workstation's</h4>
+                            <p class="text-gray-dark">For professional creators</p>
+                            <i class="icon-ui-arrowright visible-xs"></i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="inspiron">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Inspiron condimentum urna sit amet interdum mattis. Vivamus fermentum porttitor libero id faucibus. Duis nec suscipit nisi. Aenean in egestas metus.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="latitude">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Latitude as et metus at urna auctor varius. Cras mattis tincidunt eros facilisis efficitur. Nam ullamcorper faucibus neque nec eleifend.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="vostro">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Vostro estibulum nec pharetra magna, vitae auctor erat. Suspendisse quam enim, bibendum quis ante quis, hendrerit condimentum len.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="XPS">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            XPS sollicitudin, metus eget venenatis bibendum, ex neque posuere diam, sed pharetra urna tortor in justo. Maecenas faucibus quam sit amet fermentum sodales.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="precision">
+                        <button class="btn btn-default btn-block visible-xs" data-toggle="offcanvas">
+                            <i class="icon-ui-arrowleft"></i> Back
+                        </button>
+                        <p>
+                            Precision vel nibh et risus fringilla molestie. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- /Tabs Centered with images-->
+
+        </div>
+    </div>
+
+</section>
