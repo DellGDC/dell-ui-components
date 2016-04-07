@@ -200,34 +200,25 @@
     }
 
 
-@media (max-width: @screen-sm-max) {
+    @media (max-width: @screen-sm-max) {
 
-        margin: 0 auto;
+        margin: 0 auto 20px;
         padding: 0;
         max-height: 600px;
         width: 100%;
         overflow: hidden;
         position: relative;
+        background:@dell-gray-light;
+
 
         .well {
-            margin-top: 0;
+            margin: 0 auto 0 -5px;
             .border-radius(0);
-            overflow:         hidden;
+            overflow: hidden;
             border: none;
             background: none;
             position: relative;
             top: 0;
-            margin-left: -5px;
-            margin-right: auto;
-            height: 135px;
-        }
-
-        .well-sm {
-            width: 970px;
-            background: @dell-gray-light;
-            height: 136px;
-            z-index: -1;
-            position: absolute;
         }
     }
 }
