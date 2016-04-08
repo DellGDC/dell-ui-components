@@ -192,8 +192,11 @@
             top: 0;
         }
     }
-    a:hover {
-        text-decoration: none !important;
+    a:not(.btn) {
+        &:hover {
+            text-decoration: none !important;
+        }
+        display:block;
     }
     p {
         font-size: @font-size-base;
@@ -210,17 +213,14 @@
     overflow: hidden;
     background: none;
     position: relative;
-
     .well {
-        margin-top: 20px;
+        margin: 20px auto 0 15px;
         .border-radius(5px);
-        overflow:           hidden;
+        overflow: hidden;
         background: rgba(255,255,255,.92);
         position: absolute;
         top: 20px;
         max-width: 500px;
-        margin-left: 15px;
-        margin-right: auto;
     }
 
 
