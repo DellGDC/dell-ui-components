@@ -4,6 +4,44 @@
 */
 
 .jumbotron {
+
+
+    a:not(.btn) {
+        &:hover {
+            text-decoration: none !important;
+            h5 {
+                color: @text-color !important;
+            }
+        }
+        display:block;
+    }
+    p {
+        font-size: @font-size-base;
+    }
+    p small {
+        font-size: 85%;
+        line-height: 15px;
+    }
+
+    margin: 0 auto 20px auto;
+    padding: 0;
+    max-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    background: none;
+    position: relative;
+    .well {
+        margin: 20px auto 0 15px;
+        .border-radius(5px);
+        overflow: hidden;
+        background: rgba(255,255,255,.92);
+        position: absolute;
+        top: 20px;
+        max-width: 500px;
+    }
+
+
+
     // NOTE: Bootstrap jumbostron overides all default typography
     // Typography for Desktop
     // Medium devices (desktops, 992px and up)
@@ -40,6 +78,7 @@
         h5, .h5 {
             font-size: ceil((@font-size-base * 1.14)); // ~16px
             line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            color: @text-color !important;
         }
 
         .bold-16 {
@@ -169,9 +208,6 @@
             line-height: ceil((@line-height-base * 10.4px)); // ~15px
             font-weight: bold;
         }
-    }
-
-    @media (max-width: @screen-sm-max) {
 
         margin: 0 auto 20px;
         padding: 0;
@@ -190,38 +226,10 @@
             background: none;
             position: relative;
             top: 0;
+            box-shadow: none;
         }
-    }
-    a:not(.btn) {
-        &:hover {
-            text-decoration: none !important;
-        }
-        display:block;
-    }
-    p {
-        font-size: @font-size-base;
-    }
-    p small {
-        font-size: 85%;
-        line-height: 15px;
     }
 
-    margin: 0 auto 20px auto;
-    padding: 0;
-    max-height: 600px;
-    width: 100%;
-    overflow: hidden;
-    background: none;
-    position: relative;
-    .well {
-        margin: 20px auto 0 15px;
-        .border-radius(5px);
-        overflow: hidden;
-        background: rgba(255,255,255,.92);
-        position: absolute;
-        top: 20px;
-        max-width: 500px;
-    }
 
 
 }

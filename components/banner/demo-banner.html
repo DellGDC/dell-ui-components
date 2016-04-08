@@ -1,4 +1,4 @@
-<section>
+<section ng-controller="bannerCtrl">
     <div class="container">
         <div class="">
             <h2>Banners (Jumbotron)</h2>
@@ -13,15 +13,15 @@
             <div class="row">
                 <a href="javascript:alert('hello');">
                     <div class="well">
-                        <h5 class="hidden-xs hidden-sm hidden-md">Sample event title</h5>
-                        <h2 class="hidden-xs hidden-sm text-blue">Sample Headline ipsum dolor ligula hoppen santorum.</h2>
-                        <p truncate="100">Mauris eleifend ut purus ut vehicula. Praesent in felis sit amet enim bibendum interdum. Sed commodo malesuada rutrum. Sed aliquam velit id tortor pellentesque cursus. Nam fermentum, ligula ac dictum malesuada, urna neque fermentum magna, vel aliquet est nunc in mauris. Vivamus eget dolor laoreet nibh porta commodo nec eu enim. Nullam scelerisque diam quis eros mattis, ac viverra odio finibus.</p>
+                        <h5 class="visible-lg">Sample event title</h5>
+                        <h2 class="hidden-xs hidden-sm">Headline lorem ipsum dolor sit amet orc.</h2>
+                        <p>Subhead lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in purus sed dolor posuerat.</p>
                         <p>
                             <small>Sample Legal text for placement only.</small>
                         </p>
                         <p>
-                            <a href="javascript:;" class="btn btn-primary hidden-xs">Sample CTA</a>
-                            <a href="javascript:;" class="visible-xs">Sample CTA</a>
+                            <a href="javascript:;" class="btn btn-primary hidden-xs hidden-sm">Sample CTA</a>
+                            <a href="javascript:;" class="visible-xs visible-sm">Sample CTA</a>
                         </p>
                     </div>
                 </a>
@@ -32,5 +32,19 @@
     <div class="col-xs-12 well well-berry">
         place holder text to show another element below the banner
     </div>
+
+    <div ng-init="initOptions()" class="container">
+        <h5>Optional event title and legal statement cannot appear at the same time</h5>
+        <label class="radio-inline">
+            <input type="radio" name="bannerOptions" id="none" value="none" checked> No options
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="bannerOptions" id="eventTitle" value="eventTitle"> Show optional event title
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="bannerOptions" id="legal" value="legal"> Show optional legal
+        </label>
+    </div>
+
 
 </section>
