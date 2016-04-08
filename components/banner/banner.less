@@ -171,6 +171,30 @@
         }
     }
 
+    @media (max-width: @screen-sm-max) {
+
+        margin: 0 auto 20px;
+        padding: 0;
+        max-height: 600px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        background:@dell-gray-light;
+
+
+        .well {
+            margin: 0 auto 0 -5px;
+            .border-radius(0);
+            overflow: hidden;
+            border: none;
+            background: none;
+            position: relative;
+            top: 0;
+        }
+    }
+    a:hover {
+        text-decoration: none !important;
+    }
     p {
         font-size: @font-size-base;
     }
@@ -200,25 +224,4 @@
     }
 
 
-    @media (max-width: @screen-sm-max) {
-
-        margin: 0 auto 20px;
-        padding: 0;
-        max-height: 600px;
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-        background:@dell-gray-light;
-
-
-        .well {
-            margin: 0 auto 0 -5px;
-            .border-radius(0);
-            overflow: hidden;
-            border: none;
-            background: none;
-            position: relative;
-            top: 0;
-        }
-    }
 }
