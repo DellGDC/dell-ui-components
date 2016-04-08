@@ -6,17 +6,7 @@
 .jumbotron {
 
 
-    a:not(.btn) {
-        padding-top:0;
-        padding-bottom:0;
-        &:hover {
-            text-decoration: none !important;
-            h5 {
-                color: @text-color !important;
-            }
-        }
-        display:block;
-    }
+
     p {
         font-size: @font-size-base;
     }
@@ -232,6 +222,16 @@
         }
     }
 
-
+    a:not(.btn) {
+        padding-top:0;
+        padding-bottom:0;
+        h5 {
+            color: @text-color !important;
+        }
+        &:hover {
+            text-decoration: none !important;
+        }
+        display:block;
+    }
 
 }
