@@ -25,18 +25,18 @@
             </div>
 
             <div class="bottom-offset-20">
-                <!-- uneditable input fields -->
+                <!-- read only input fields -->
                 <form class="form-compressed" role="form">
                     <div class="row">
                         <div class="form-group">
-                            <label class="col-xs-12 col-sm-2 form-label" for="uneditable">Uneditable input</label>
+                            <label class="col-xs-12 col-sm-2 form-label" for="text-read-only">Read only (uneditable) input</label>
                             <div class="col-xs-12 col-sm-5">
-                                <span id="uneditable" class="uneditable-input form-control">Some value here</span>
+                                    <input type="text" class="form-control" id="text-read-only" value="This is a read only input value" readonly>
                             </div>
                         </div>
                     </div>
                 </form>
-                <!-- /uneditable input fields -->
+                <!-- /read only input fields -->
             </div>
 
             <div class="bottom-offset-20">
@@ -147,66 +147,108 @@
                 </div>
             </div>
 
+                    <!-- <p>
+                        <a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#collapsible-example-area-5">
+                        <span class="show-collapsed"><i aria-hidden="true" class="icon-ui-triangleright"></i></span>
+                        <span class="hide-expanded"><i aria-hidden="true" class="icon-ui-triangledown"></i></span>
+                        </a>
+                    </p>
+                    <p id="collapsible-example-area-5" class="collapse">
+                        Etiam odio velit, eleifend id vehicula non, vulputate quis metus. Ut sit amet justo nec urna tincidunt porttitor. Phasellus massa nisl, fringilla ac ligula vitae, ultrices vulputate turpis. Pellentesque molestie posuere tortor. Mauris feugiat elit et lacus tristique, et aliquet risus fermentum.
+                    </p> -->
 
             <div class="row">
                 <div class="col-xs-12 col-sm-8 bottom-offset-40">
                     <h4>Tree Checkboxes</h4>
                     <!-- tree checkboxes -->
-                    <ul class="list-tree">
+                    <!-- <ul class="list-tree">
                         <li>
+                            <a class="collapsed pull-left" data-target="#collapsible-example-parent-1" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+                                <span class="show-collapsed">
+                                    <i class="icon-ui-triangleright" aria-hidden="true"></i>
+                                </span>
+                                <span class="hide-expanded">
+                                    <i class="icon-ui-triangledown" aria-hidden="true"></i>        
+                                </span>
+                            </a>       
                             <label class="checkbox">
-                                <input type="checkbox" value="option1-parent1"> Checkbox value (parent 1)
-                            </label>
-                            <ul>
+                                <input type="checkbox" id="treelist-parent1" value="option1-parent1"> Checkbox value (parent 1)
+                            </label>          
+                            <ul id="collapsible-example-parent-1" class="collapse">                    
                                 <li>
+                                    <a class="collapsed pull-left" data-target="#collapsible-example-child-1" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+                                        <span class="show-collapsed">
+                                            <i class="icon-ui-triangleright" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="hide-expanded">
+                                            <i class="icon-ui-triangledown" aria-hidden="true"></i>
+                                        </span>
+                                    </a>
                                     <label class="checkbox">
-                                        <input type="checkbox" value="option1-parent1-child1"> Checkbox value (child 1)
+                                        <input type="checkbox" id="treelist-parent1-child1" value="option1-parent1-child1"> Checkbox value (child 1)
                                     </label>
-                                    <ul>
-                                        <li>
+                                    <ul id="collapsible-example-child-1" class="collapse">
+                                        <li>                                
                                             <label class="checkbox">
-                                                <input type="checkbox" value="option1-parent1-grandchild1"> Checkbox value (grand child 1)</label>
+                                                <input type="checkbox" id="treelist-parent1-grandchild1" value="option1-parent1-grandchild1"> Checkbox value (grand child 1)
+                                            </label>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>                        
                                 <li>
+                                    <a class="collapsed pull-left" data-target="#collapsible-example-child-2" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+                                        <span class="show-collapsed">
+                                            <i class="icon-ui-triangleright" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="hide-expanded">
+                                            <i class="icon-ui-triangledown" aria-hidden="true"></i>
+                                        </span>
+                                    </a>
                                     <label class="checkbox">
-                                        <input type="checkbox" value="option1-parent1-child2"> Checkbox value (child 2)
-                                    </label>
-                                    <ul>
-                                        <li>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="option1-parent1-grandchild3"> Checkbox value (grand child 3)
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="option1-parent1-grandchild4"> Checkbox value (grand child 4)
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="checkbox">
-                                                <input type="checkbox" value="option1-parent1-grandchild5"> Checkbox value (grand child 5)
-                                            </label>
-                                            <ul>
+                                        <input type="checkbox" id="treelist-parent1-child2" value="option1-parent1-child2"> Checkbox value (child 2)
+                                    </label>    
+                                            <ul id="collapsible-example-child-2" class="collapse">
                                                 <li>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="option1-parent1-greatgrandchild1"> Checkbox value (great grand child 1)
+                                                   <label class="checkbox">
+                                                        <input type="checkbox" value="option1-parent1-grandchild3"> Checkbox value (grand child 3)
                                                     </label>
                                                 </li>
                                                 <li>
                                                     <label class="checkbox">
-                                                        <input type="checkbox" value="option1-parent1-greatgrandchild2"> Checkbox value (great grand child 2)
+                                                        <input type="checkbox" value="option1-parent1-grandchild4"> Checkbox value (grand child 4)
                                                     </label>
                                                 </li>
-                                                <li>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="option1-parent1-greatgrandchild3"> Checkbox value (great grand child 3)
-                                                    </label>
+                                                <li>                                                
+                                                    <a class="collapsed grandchild5 pull-left" data-target="#collapsible-example-grandchild-5" data-toggle="collapse" href="javascript:;" aria-expanded="false">
+                                                        <span class="show-collapsed">
+                                                            <i class="icon-ui-triangleright" aria-hidden="true"></i>
+                                                        </span>
+                                                        <span class="hide-expanded">
+                                                            <i class="icon-ui-triangledown" aria-hidden="true"></i>
+                                                        </span>
+                                                    </a>
+                                                    <label class="checkbox grandchild5">
+                                                        <input type="checkbox" id="treelist-parent1-grandchild5" value="option1-parent1-grandchild5"> Checkbox value (grand child 5)
+                                                    </label>    
+                                                        <ul id="collapsible-example-grandchild-5" class="collapse greatgrandchild">
+                                                            <li>
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" value="option1-parent1-greatgrandchild1"> Checkbox value (great grand child 1)
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" value="option1-parent1-greatgrandchild2"> Checkbox value (great grand child 2)
+                                                                </label>
+                                                            </li>
+                                                            <li>
+                                                                <label class="checkbox">
+                                                                    <input type="checkbox" value="option1-parent1-greatgrandchild3"> Checkbox value (great grand child 3)
+                                                                </label>
+                                                            </li>
+                                                        </ul>    
                                                 </li>
                                             </ul>
-                                        </li>
-                                    </ul>
                                 </li>
                             </ul>
                         <li>
@@ -226,8 +268,125 @@
                                     </ul>
                                 </li>
                             </ul>
-                    </ul>
+                    </ul> -->
                     <!-- /tree checkboxes -->
+
+                    <!-- | Jquery Plugin - Treelist checkboxes | --> 
+                    
+                <div id="main-container" class="container">
+                    <div id="tree-container"></div>
+                </div>
+                 <script>
+                    var mockData = [];
+                    mockData.push({
+                        item:{
+                            id: 'id1',
+                            label: 'Parent 1',
+                            checked: false
+                        },
+                        children: [{
+                         item:{
+                            id: 'id11',
+                            label: 'child 1',
+                            checked: false
+                        } 
+                    },{
+                     item:{
+                        id: 'id12',
+                        label: 'child 2',
+                        checked: false
+                    } 
+                },{
+                 item:{
+                    id: 'id13',
+                    label: 'child 3',
+                    checked: false
+                } 
+            }]
+        });
+
+                    mockData.push({
+                        item:{
+                            id: 'id2',
+                            label: 'Parent 2',
+                            checked: false
+                        },
+                        children: [{
+                         item:{
+                            id: 'id21',
+                            label: 'child 4',
+                            checked: false
+                        } 
+                    },{
+                     item:{
+                        id: 'id22',
+                        label: 'child 5',
+                        checked: true
+                    } 
+                },{
+                 item:{
+                    id: 'id23',
+                    label: 'child 6',
+                    checked: false
+                } 
+            }]
+        });
+
+                    mockData.push({
+                        item:{
+                            id: 'id3',
+                            label: 'Parent 3',
+                            checked: false
+                        },
+                        children: [{
+                         item:{
+                            id: 'id31',
+                            label: 'child 7',
+                            checked: true
+                        } 
+                    },{
+                     item:{
+                        id: 'id32',
+                        label: 'child 8',
+                        checked: false
+                    },
+                    children: [{
+                        item:{
+                            id: 'id321',
+                            label: 'grandchild 1',
+                            checked: false
+                        }
+                    },{
+                        item:{
+                            id: 'id322',
+                            label: 'grandchild 2',
+                            checked: false
+                        }
+                    }]
+                }]
+            });
+
+$('#tree-container').highCheckTree({
+    data: mockData
+});
+</script> 
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-36251023-1']);
+          _gaq.push(['_setDomainName', 'jqueryscript.net']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
+                    <!-- | /Treelist checkboxes END | -->  
+
+                                                         
                 </div>
             </div>
 
@@ -281,9 +440,9 @@
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-xs-12 col-sm-2 form-label" for="inputError">Email: default error msg</label>
+                        <label class="col-xs-12 col-sm-2 form-label" for="email-1">Email: default error msg</label>
                         <div class="col-xs-6 col-sm-6">
-                            <input type="text" class="email-check form-control"/>
+                            <input id="email-1" type="text" class="email-check form-control"/>
                         </div>
                     </div>
                 </div>
@@ -298,9 +457,9 @@
             <form class="form-compressed" role="form">
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-xs-12 col-sm-2 form-label" for="inputError">Email: Custom msg/localized</label>
+                        <label class="col-xs-12 col-sm-2 form-label" for="email-2">Email: Custom msg/localized</label>
                         <div class="col-xs-6 col-sm-6">
-                            <input type="text" class="email-check form-control" data-error-message="Hello!! Please input a valid email address!"/>
+                            <input id="email-2" type="text" class="email-check form-control" data-error-message="Hello!! Please input a valid email address!"/>
                         </div>
                     </div>
                 </div>
@@ -590,7 +749,7 @@
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label for="ms" class="form-label">Multi-select with checkboxes</label>
-                                <select class="ms-checkbox" id="ms" multiple="multiple">
+                                <select class="ms-checkbox" id="ms" multiple="multiple" placeholder="Select month">
                                     <option value="1">January</option>
                                     <option value="2">February</option>
                                     <option value="3">March</option>
