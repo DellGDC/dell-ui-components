@@ -4999,6 +4999,11 @@ a.hide-expanded.collapsed {
 .inline-image-content-links ul > span span {
   padding-top: 10px;
   padding-bottom: 10px;
+  text-decoration: none !important;
+}
+.inline-image-content-links [data-toggle=tooltip] {
+  color: inherit;
+  border-bottom: none;
 }
 @media (max-width: 767px) {
   .image-content-links li {
