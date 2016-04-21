@@ -59202,6 +59202,109 @@ var KeyTable;
     'datatables'
   ], o) : 'object' === typeof exports ? o(require('jquery'), require('datatables')) : jQuery && !jQuery.fn.dataTable.ColReorder && o(jQuery, jQuery.fn.dataTable);
 }(window, document));
+/**
+ * Copyright (c) 2007-2015 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+ * Licensed under MIT
+ * @author Ariel Flesler
+ * @version 2.1.1
+ */
+;
+(function (f) {
+  'use strict';
+  'function' === typeof define && define.amd ? define(['jquery'], f) : 'undefined' !== typeof module && module.exports ? module.exports = f(require('jquery')) : f(jQuery);
+}(function ($) {
+  'use strict';
+  function n(a) {
+    return !a.nodeName || -1 !== $.inArray(a.nodeName.toLowerCase(), [
+      'iframe',
+      '#document',
+      'html',
+      'body'
+    ]);
+  }
+  function h(a) {
+    return $.isFunction(a) || $.isPlainObject(a) ? a : {
+      top: a,
+      left: a
+    };
+  }
+  var p = $.scrollTo = function (a, d, b) {
+      return $(window).scrollTo(a, d, b);
+    };
+  p.defaults = {
+    axis: 'xy',
+    duration: 0,
+    limit: !0
+  };
+  $.fn.scrollTo = function (a, d, b) {
+    'object' === typeof d && (b = d, d = 0);
+    'function' === typeof b && (b = { onAfter: b });
+    'max' === a && (a = 9000000000);
+    b = $.extend({}, p.defaults, b);
+    d = d || b.duration;
+    var u = b.queue && 1 < b.axis.length;
+    u && (d /= 2);
+    b.offset = h(b.offset);
+    b.over = h(b.over);
+    return this.each(function () {
+      function k(a) {
+        var k = $.extend({}, b, {
+            queue: !0,
+            duration: d,
+            complete: a && function () {
+              a.call(q, e, b);
+            }
+          });
+        r.animate(f, k);
+      }
+      if (null !== a) {
+        var l = n(this), q = l ? this.contentWindow || window : this, r = $(q), e = a, f = {}, t;
+        switch (typeof e) {
+        case 'number':
+        case 'string':
+          if (/^([+-]=?)?\d+(\.\d+)?(px|%)?$/.test(e)) {
+            e = h(e);
+            break;
+          }
+          e = l ? $(e) : $(e, q);
+          if (!e.length)
+            return;
+        case 'object':
+          if (e.is || e.style)
+            t = (e = $(e)).offset();
+        }
+        var v = $.isFunction(b.offset) && b.offset(q, e) || b.offset;
+        $.each(b.axis.split(''), function (a, c) {
+          var d = 'x' === c ? 'Left' : 'Top', m = d.toLowerCase(), g = 'scroll' + d, h = r[g](), n = p.max(q, c);
+          t ? (f[g] = t[m] + (l ? 0 : h - r.offset()[m]), b.margin && (f[g] -= parseInt(e.css('margin' + d), 10) || 0, f[g] -= parseInt(e.css('border' + d + 'Width'), 10) || 0), f[g] += v[m] || 0, b.over[m] && (f[g] += e['x' === c ? 'width' : 'height']() * b.over[m])) : (d = e[m], f[g] = d.slice && '%' === d.slice(-1) ? parseFloat(d) / 100 * n : d);
+          b.limit && /^\d+$/.test(f[g]) && (f[g] = 0 >= f[g] ? 0 : Math.min(f[g], n));
+          !a && 1 < b.axis.length && (h === f[g] ? f = {} : u && (k(b.onAfterFirst), f = {}));
+        });
+        k(b.onAfter);
+      }
+    });
+  };
+  p.max = function (a, d) {
+    var b = 'x' === d ? 'Width' : 'Height', h = 'scroll' + b;
+    if (!n(a))
+      return a[h] - $(a)[b.toLowerCase()]();
+    var b = 'client' + b, k = a.ownerDocument || a.document, l = k.documentElement, k = k.body;
+    return Math.max(l[h], k[h]) - Math.min(l[b], k[b]);
+  };
+  $.Tween.propHooks.scrollLeft = $.Tween.propHooks.scrollTop = {
+    get: function (a) {
+      return $(a.elem)[a.prop]();
+    },
+    set: function (a) {
+      var d = this.get(a);
+      if (a.options.interrupt && a._last && a._last !== d)
+        return $(a.elem).stop();
+      var b = Math.round(a.now);
+      d !== b && ($(a.elem)[a.prop](b), a._last = this.get(a));
+    }
+  };
+  return p;
+}));
 angular.module('dellUiComponents', []);
 angular.module('dellUiComponents').config(function () {
 }).run([
@@ -59458,74 +59561,6 @@ angular.module('dellUiComponents').config(function () {
           }
         });
       }
-    });
-  };
-}(jQuery));
-(function ($) {
-  $.dellUIloadMore = function (el, options) {
-    // To avoid scope issues, use 'base' instead of 'this'
-    // to reference this class from internal events and functions.
-    var base = this;
-    // Access to jQuery and DOM versions of element
-    base.$el = $(el);
-    base.el = el;
-    // Add a reverse reference to the DOM object
-    base.$el.data('dellUIloadMore', base);
-  };
-  $.dellUIloadMore.defaultOptions = {
-    lazyLoad: false,
-    scrollTarget: window,
-    fadeIn: true,
-    loadMoreButtonText: 'Load more',
-    loadMoreIncrement: 5
-  };
-  $.fn.dellUIloadMore = function (options) {
-    if (options) {
-      $.dellUIloadMore.defaultOptions = $.extend($.dellUIloadMore.defaultOptions, options);
-    }
-    return this.each(function () {
-      new $.dellUIloadMore(this);
-      var options = $.dellUIloadMore.defaultOptions, element = $(this), visibleCount = 0, items = element.find('li'), elementId = typeof $(this).attr('id') !== 'undefined' ? $(this).attr('id') : Math.random(1 + Math.random() * 100000000000), button = '<p><button id="load-more-button-' + elementId + '" rel="' + elementId + '" type="button" class="btn btn-block">' + options.loadMoreButtonText + '</button></p>', loadMore = function () {
-          visibleCount = visibleCount + options.loadMoreIncrement;
-          items = element.find('li');
-          items.each(function (index) {
-            if (index < visibleCount && $(items[index]).is(':hidden')) {
-              $(this).addClass('in');
-              if (index + 1 === items.length) {
-                $('#load-more-button-' + elementId).remove();
-              }
-            }
-          });
-        }, initPagination = function () {
-          if (element.hasClass('load-more-lazy')) {
-            options.lazyLoad = true;
-          }
-          if (options.fadeIn) {
-            items.addClass('fade');
-          }
-          loadMore();
-          if (!options.lazyLoad) {
-            element.after(button);
-            $('#load-more-button-' + elementId).click(function () {
-              loadMore();
-            });
-          } else {
-            if (options.scrollTarget === window) {
-              $(options.scrollTarget).scroll(function () {
-                if ($(options.scrollTarget).scrollTop() + $(options.scrollTarget).height() === $(document).height()) {
-                  loadMore();
-                }
-              });
-            } else {
-              $(options.scrollTarget).scroll(function () {
-                if ($(this).scrollTop() + $(this).height() === $(this)[0].scrollHeight) {
-                  loadMore();
-                }
-              });
-            }
-          }
-        };
-      initPagination();
     });
   };
 }(jQuery));
@@ -60493,6 +60528,32 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
     };
   }
 ]);
+angular.module('dellUiComponents').directive('alertCollapsible', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, $attrs) {
+      //toggle x
+      $element.find('.close').on('click', function () {
+        $(event.currentTarget).parent().addClass('collapsed');
+      });
+      $element.find('> .show-collapsed').on('click', function () {
+        $(event.currentTarget).parent().removeClass('collapsed');
+      });
+    }
+  };
+});
+angular.module('dellUiComponents').directive('tableResponsive', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    return {
+      restrict: 'AC',
+      link: function ($scope, $element, $attrs, controller) {
+        $element.rtResponsiveTables({ containerBreakPoint: 300 });
+      }
+    };
+  }
+]);
 angular.module('dellUiComponents').directive('pagination', function () {
   return {
     restrict: 'C',
@@ -60592,6 +60653,18 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     });
   });
 }(jQuery, Eve));
+angular.module('dellUiComponents').directive('contentGallery', [
+  '$timeout',
+  '$rootScope',
+  function ($timeout, $rootScope) {
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, iAttrs, controller) {
+        $element.dellUIcontentGallery();
+      }
+    };
+  }
+]);
 /**
  * Created by Clint_Batte on 5/18/2015.
  */
@@ -61728,41 +61801,6 @@ angular.module('demo').controller('listsPLayDemoCtrl', [
   function ($scope, $rootScope, $sce) {
   }
 ]);
-angular.module('demo').controller('bannerCtrl', [
-  '$scope',
-  '$rootScope',
-  '$timeout',
-  function ($scope, $rootScope, $timeout) {
-    //this is for functionality related to demo code
-    $scope.initOptions = function () {
-      $('.jumbotron a>p+p').hide();
-      $('.jumbotron h5').hide();
-      $('[name="bannerOptions"]').on('click', function () {
-        console.log($(this).val());
-        switch ($(this).val()) {
-        case 'eventTitle':
-          $('.jumbotron h5').show();
-          $('.jumbotron a>p+p').hide();
-          break;
-        case 'legal':
-          $('.jumbotron h5').hide();
-          $('.jumbotron a>p+p').show();
-          break;
-        default:
-          $('.jumbotron a>p+p').hide();
-          $('.jumbotron h5').hide();
-        }
-      });
-    };
-  }
-]);
-angular.module('demo').controller('bannerPLayDemoCtrl', [
-  '$scope',
-  '$rootScope',
-  '$sce',
-  function ($scope, $rootScope, $sce) {
-  }
-]);
 angular.module('demo').controller('labelsAndBadgesCtrl', [
   '$scope',
   '$rootScope',
@@ -62255,35 +62293,6 @@ angular.module('demo').controller('productStackGuideDemoCtrl', [
 ]);
 angular.module('demo').controller('GuideCtrl', [
   '$scope',
-  '$state',
-  function ($scope, $state) {
-    $scope.section = $state.params.section;
-  }
-]).directive('scroll', function () {
-  return {
-    restrict: 'C',
-    link: function ($scope, $element, $attr, fn) {
-      $element.click(function (event) {
-        event.preventDefault();
-        if ($($attr.href)[0]) {
-          $('html, body').animate({ scrollTop: $($attr.href).offset().top - 72 }, 300);
-        }
-      });
-    }
-  };
-}).directive('sideBar', function () {
-  return {
-    restrict: 'C',
-    link: function ($scope, $element, $attr, fn) {
-      $element.width($element.parent().width());
-      $(window).resize(function () {
-        $element.width($element.parent().width());
-      });
-    }
-  };
-});
-angular.module('demo').controller('GuideCtrl', [
-  '$scope',
   '$rootScope',
   '$state',
   function ($scope, $rootScope, $state) {
@@ -62298,28 +62307,13 @@ angular.module('demo').controller('GuideCtrl', [
     });
   }
 ]);
-angular.module('dellUiComponents').directive('truncate', function () {
-  return {
-    restrict: 'A',
-    link: function (scope, element, attrs, fn) {
-      var textToTruncate = element.text(), charCount = attrs.truncate;
-      if (!charCount) {
-        charCount = 140;
-      }
-      if (textToTruncate.length > charCount) {
-        textToTruncate = textToTruncate.substring(0, charCount) + '...';
-        element.text(textToTruncate);
-      }
-    }
-  };
-});
 angular.module('dellUiComponents').run([
   '$templateCache',
   function ($templateCache) {
     'use strict';
     $templateCache.put('components/alerts/demo-alerts.html', '<section ng-controller=alertsCtrl id=alerts-html-example><div class=container><h2>Alerts Demo</h2><h3 class=bottom-offset-20>Alert types</h3><div class="alert alert-warning"><p><strong>User Errors:</strong>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p></div><div class="row bottom-offset-20"><div class="col-xs-12 col-md-4"><div class="alert alert-success alert-collapsible"><button type=button class=close data-toggle=collapse data-target=.cssDataTargetDismiss-2>\xd7</button><p class=show-expanded><strong>Success Alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Information Alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed info alert</p></div></div><div class="col-xs-12 col-md-4"><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></div><h3 class="top-offset-40 bottom-offset-20">Informational alerts</h3><div class="alert alert-info alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Informational alerts:</strong> Information alerts display important information for the page. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-info alert-collapsible"><button type=button class=close data-toggle=collapse data-target=".cssDataTargetDismiss-5 ">\xd7</button><div class=show-expanded><h4>Informational alerts example with a title.</h4><p>Information alerts display important information for the page. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Informational alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>first</strong> dismissed alert</p></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Additional alert example.</h4><p class=bottom-offset-0>Information alerts display important information for the page. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open <strong>second</strong> dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Success alerts</h3><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><p class=show-expanded><strong>Success alerts:</strong> Indicates the task has been completed successfully. Can be collapsed and reopened.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title.</h4><p><strong>Success alerts:</strong>Indicates the task has been completed successfully. Can be collapsed and reopened.</p></div><p class=show-collapsed>Re-open dismissed alert</p></div><div class="alert alert-success alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Success alerts example with a title and multiple links.</h4><p class=bottom-offset-0>Indicates the task has been completed successfully. Can be collapsed and reopened.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div><h3 class="top-offset-40 bottom-offset-20">User Error</h3><div class="alert alert-warning alert-collapsible"><p class=show-expanded><strong>User Errors:</strong> A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><p class=show-collapsed>Re-open dismissed alert</p></div><div class=alert><div class=alert-warning><h4>User Errors example with a title and multiple links.</h4><p class=bottom-offset-0>A soft stop, requiring users to take an action before proceeding. The error cannot be dismissed and is visible until the error is fixed.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><div class="alert-info alert-collapsible"><button type=button class=close>\xd7</button><div class=show-expanded><h4>Dismissible informational alert example with title.</h4><p class=bottom-offset-0>Dolor sit amet, con Maecenas egestas scelerisque porttitor. Dolor sit amet, con Maecenas egestas scelerisque porttitor.</p><ul><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li><li>Lorum ipsum with <a href=javascript:;>anchor link</a></li></ul></div><p class=show-collapsed>Re-open dismissed alert</p></div></div><h3 class="top-offset-40 bottom-offset-20">Catastrophic Error</h3><div class="alert alert-error"><p><strong>Catastrophic Errors:</strong>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div><div class="alert alert-error"><h4>Catastrophic Errors example with a title</h4><p>A hard stop, meaning users cannot go forward. Cannot be collapsed.</p></div></div></section>');
     $templateCache.put('components/alerts/demo-play-alerts.html', '<section ng-controller=alertsPLayDemoCtrl id=alerts-play-demo><div class=container><h2>Alerts Builder</h2><div></div></div></section>');
-    $templateCache.put('components/anchored-nav/demo-anchored-nav.html', '<section ng-controller=anchoredNavCtrl id=anchored-nav-html-example><div class=container><h2>Anchored Nav Demo</h2><div class=row><h3 class="col-xs-12 top-offset-60">Affixed Tabs</h3></div></div><div class=container><div class=row><div class=col-sm-9><nav class="navbar hidden-xs"><ul id=nav-achored-example class="nav navbar-nav nav-anchored"><li class=active><a href=#section1>Section 1</a></li><li><a href=#section2>Section 2</a></li><li><a href=#section3>Section 3</a></li><li><a href=#section4>Section 4</a></li></ul></nav><section id=section1 class=bottom-offset-30><h3 class=text-blue><a href=javascript:;>Section 1</a></h3><div class="row bottom-offset-20"><div class=col-sm-9><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div><div class=col-sm-3><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"></div></div><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div></section><hr class="hr-gray-light"><section id=section2 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 2</a></h3><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section><hr class="hr-gray-light"><section id=section3 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 3</a></h3><div class="row bottom-offset-20"><p class=col-sm-8>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><img src=http://placehold.it/175x125 class="img-responsive col-sm-4 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div></section><hr class="hr-gray-light"><section id=section4 class=bottom-offset-30><h3 class="text-blue scroll-spy-header-spacing"><a href=javascript:;>Section 4</a></h3><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section></div><div class=col-sm-3><div class=well style=height:1000px>Sidebar</div></div></div></div></section>');
+    $templateCache.put('components/anchored-nav/demo-anchored-nav.html', '<section ng-controller=anchoredNavCtrl id=anchored-nav-html-example><div class=container><h2>Anchored Nav Demo</h2><div class=row><h3 class="col-xs-12 top-offset-60">Affixed Tabs</h3></div></div><div class=container><div class=row><div class=col-sm-9><nav class="navbar hidden-xs"><ul id=nav-achored-example class="nav navbar-nav nav-anchored"><li class=active><a href=#section1>Section 1</a></li><li><a href=#section2>Section 2</a></li><li><a href=#section3>Section 3</a></li><li><a href=#section4>Section 4</a></li></ul></nav><section id=section1 class=bottom-offset-30><h3>Section 1</h3><div class="row bottom-offset-20"><div class=col-sm-9><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div><div class=col-sm-3><img src=http://placehold.it/260x155 class="img-responsive bottom-offset-10"></div></div><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div></section><hr class="hr-gray-light"><section id=section2 class=bottom-offset-30><h3 class=scroll-spy-header-spacing>Section 2</h3><div class="row bottom-offset-20"><img src=http://placehold.it/175x125 class="img-responsive col-sm-2 bottom-offset-10"><p class=col-sm-5>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p><p class=col-sm-5>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section><hr class="hr-gray-light"><section id=section3 class=bottom-offset-30><h3 class=scroll-spy-header-spacing>Section 3</h3><div class="row bottom-offset-20"><p class=col-sm-8>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><img src=http://placehold.it/175x125 class="img-responsive col-sm-4 bottom-offset-10"></div><div class="row bottom-offset-20"><img src=http://placehold.it/260x155 class="img-responsive col-sm-3 bottom-offset-10"><p class=col-sm-9>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ut tempor sapien. Aliquam vitae porttitor turpis, eget porta neque. Quisque dolor sapien, maximus pellentesque mattis vitae, scelerisque egestas magna. Proin facilisis auctor tortor eu venenatis. Nulla tempor mi eu lorem porttitor condimentum. Cras ut purus molestie, tempor justo vitae, consectetur augue. In eu felis sem. Donec id ultricies sem. Phasellus efficitur ex arcu, sit amet mollis justo egestas sed. Integer luctus elit ac felis volutpat, at accumsan sapien posuere. Fusce nec lectus ex. Fusce a sagittis ante.</p></div></section><hr class="hr-gray-light"><section id=section4 class=bottom-offset-30><h3 class=scroll-spy-header-spacing>Section 4</h3><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div><div class="row bottom-offset-20"><p class=col-sm-6>Fusce condimentum hendrerit elementum. Curabitur pulvinar augue id venenatis malesuada. Curabitur tortor odio, faucibus ullamcorper augue id, maximus fermentum nibh. Proin id nibh leo. Aliquam lobortis augue non nisi tempor maximus. Quisque convallis pulvinar libero ut consectetur. Praesent volutpat ligula non magna.</p><p class=col-sm-6>Integer vestibulum vitae lectus non scelerisque. Integer sit amet dui pretium, elementum ex a, fermentum magna. Donec dictum purus eget ipsum mollis, sollicitudin mattis urna molestie. Mauris in pulvinar neque. Vivamus pretium dapibus sollicitudin. Sed bibendum mauris eget tortor interdum, ut consectetur ipsum vulputate.</p></div></section></div><div class=col-sm-3><div class=well style=height:1000px>Sidebar</div></div></div></div></section>');
     $templateCache.put('components/anchored-nav/demo-play-anchored-nav.html', '<section ng-controller=anchoredNavPLayDemoCtrl id=anchored-nav-play-demo><div class=container><h2>Anchored_nav Builder</h2><div></div></div></section>');
     $templateCache.put('components/announcements/demo-announcements.html', '<section ng-controller=announcementsCtrl id=announcements-html-example><div class=container><h2>Announcements Demo</h2><div><h3>Default announcement (Bootstrap blockquote)</h3><blockquote><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Right justified announcement (Bootstrap blockquote - pull right)</h3><blockquote class=pull-right><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with links</h3><p>An Announcement can include a maximum of 2 links. Links are stacked vertically</p><div class="bottom-offset-10 clearfix"><h3>Colored bar with title and call to action link</h3><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li></ul></blockquote></div><div class="bottom-offset-10 clearfix"><h3>Colored bar with two call to action links</h3><blockquote class=blockquote-blue><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><ul class="list-unstyled list-inline blockquote-links"><li><a href=javascript:;>Claim your rewards</a></li><li><a href=javascript:;>Register now for free</a></li></ul></blockquote></div></div><h3>Announcements with color treatment (Bootstrap enhancement)</h3><blockquote class=blockquote-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-green><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-purple><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-berry><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-dark-blue><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with icon treatment (Dell specific enhancement)</h3><blockquote class=blockquote-icon><div class=blockquote-dell-dpa></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Announcements with icon treatment (in a well) (Dell specific enhancement)</h3><div class="well well-white well-white-stroke"><blockquote class=blockquote-icon><div class=blockquote-dell-dpa></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-advantage pull-right"></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div><blockquote class=blockquote-icon><div class=blockquote-dell-advantage></div><h4>Lorem ipsum dolor sit amet</h4><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><h3>Right justified announcements with icon treatment (Dell specific enhancement)</h3><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-dpa pull-right"></div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote><blockquote class="blockquote-icon pull-right"><div class="blockquote-dell-advantage pull-right"></div><h4 class=text-rtl>Lorem ipsum dolor sit amet</h4><p class=text-rtl>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></blockquote></div></section>');
     $templateCache.put('components/announcements/demo-play-announcements.html', '<section ng-controller=announcementsPLayDemoCtrl id=announcements-play-demo><div class=container><h2>Announcements Builder</h2><div><h4>Rendered Example</h4><div id=announcement-play-code ng-bind-html=renderingHTML></div><h4>Rendered HTML Code</h4><div class=play-code><button to-clipboard clipboard-target=#announcement-play-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code>{{playHtmlCode}}</code></pre></div><hr><div class=row><div class=col-sm-5><h4>Customize</h4><div class=form-group><label for=text-label-input>ID</label><div><input type=text class=form-control id=sample-announcement-id placeholder=optional ng-model=sampleAnnouncementConfig.id></div></div><div class=form-group><label for=sample-announcement-type>Type</label><select class=form-control id=sample-announcement-type ng-model=sampleAnnouncementConfig.type><option value=blue>Blue (Default)</option><option value=purple>Purple</option><option value=green>Green</option><option value=orange>Orange</option><option value=berry>Berry</option><option value=dark-blue>Dark blue</option><option value=red>Red</option><option value=red-dark>Dark red</option><option value=gray>Gray</option><option value=gray-dark>Dark gray</option><option value=icon>Icon</option></select></div><div class=form-group ng-if="sampleAnnouncementConfig.type===\'icon\'"><label for=sample-announcement-icon>Icon</label><select class=form-control id=sample-announcement-icon ng-model=sampleAnnouncementConfig.icon><option value=dell-advantage-star>Star (Default)</option><option value=dpa-card>Dell Prefered Card</option></select></div><div class=form-group><label for=text-label-input>Title</label><div><input type=text class=form-control id=sample-announcement-title placeholder=optional ng-model=sampleAnnouncementConfig.title></div></div><div class=form-group><label for=textarea>Body text</label><textarea id=sample-announcement-body class=form-control rows=5 ng-model=sampleAnnouncementConfig.body></textarea></div><div class=form-group><label for=text-label-input>First Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_0.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_0.url></div></div><div class=form-group><label for=text-label-input>Second Link</label><div><input type=text class="form-control bottom-offset-10" placeholder=label ng-model=sampleAnnouncementConfig.cta_1.label> <input type=text class=form-control placeholder=url ng-model=sampleAnnouncementConfig.cta_1.url></div></div></div><div class=col-sm-7><prototype-code-title></prototype-code-title><div ng-if=sampleAnnouncementConfig.id><h5>HTML code</h5><div class=play-code><button to-clipboard clipboard-target=#announcement-sherpa-code class="btn btn-xs btn-default copy-play-code">copy html</button><pre><code id=announcement-sherpa-code>&lt;blockquote id="{{sampleSherpaConfig.id | _.str: \'dasherize\'}}" class="blockquote-{{sampleSherpaConfig.type}}"&gt;\r' + '\n' + '\t&lt;h4 msg="title_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/h4&gt;\r' + '\n' + '\t&lt;p msg="text_{{sampleSherpaConfig.id | _.str: \'underscored\'}}"&gt;&lt;/p&gt;\r' + '\n' + '&lt;/blockquote&gt;</code></pre></div><h5>Textkeys to add to messages file</h5><div class=play-code ng-if=textkeysToAdd><button to-clipboard clipboard-target=#announcement-sherpa-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-keys>{{textkeysToAdd}}</code></pre></div><pre ng-if=!textkeysToAdd>None specified until custom body or title is entered.</pre><h5>Resource keys to add to resources file</h5><div class=play-code ng-if=resourcesToAdd><button to-clipboard clipboard-target=#announcement-sherpa-resource-keys class="btn btn-xs btn-default copy-play-code">copy keys</button><pre><code id=announcement-sherpa-resource-keys>{{resourcesToAdd}}</code></pre></div><pre ng-if=!resourcesToAdd>None specified until cta is specified.</pre></div><p ng-if=!sampleAnnouncementConfig.id>Must enter id to see Sherpa code</p></div></div></div></div></section>');

@@ -1,5 +1,9 @@
 /*!
- * Dell-UI-Bootstrap v1.2.5 (bower dell-ui-bootstrap)
+ * Dell-UI-Bootstrap v1.2.4 (bower dell-ui-bootstrap)
+
+
+
+
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -324,7 +328,7 @@ a {
 a:hover,
 a:focus {
   color: #005a85;
-  text-decoration: none;
+  text-decoration: underline; /* --| This has been changed back to just underline  per DUC-337 |-- */
 }
 a:focus {
   outline: thin dotted;
