@@ -97,7 +97,6 @@ footer.navbar.default-footer {
                 float:right;
                 top:2px;
                 text-align:right;
-                right: -35px;
                 ul {
                     padding:0;
                     margin:0;
@@ -181,16 +180,15 @@ footer.navbar.default-footer {
 
         @media (min-width:@screen-sm-min) {
             ul.navbar-nav.about-links   {
-                margin:0 0 0 -15px;
+                margin:0 0 0 -10px;
                 padding:6px 0 6px 0;
                 width:100%;
                 height:44px;
-
                 z-index:140;
                 li {
                     display:inline-block;
                     margin:0;
-                    padding:4px 0 0 0;
+                    padding:5px;
                     border-bottom:none;
                     a {
                         padding:6px 8px 6px 8px;
@@ -255,7 +253,7 @@ footer.navbar.default-footer {
 
                         display:inline-block;
                         border-bottom:none;
-                        padding:4px 0 0 0;
+                        padding:5px;
                         a {
                             &:focus,
                             &:hover {
@@ -281,6 +279,9 @@ footer.navbar.default-footer {
                             padding-left:20px;
                         }
                     }
+                    li {
+                        margin-left: -10px;
+                    }
                 }
             }
         }
@@ -289,7 +290,7 @@ footer.navbar.default-footer {
             position:relative;
             z-index:0;
             .disclaimer {
-                padding:30px;
+                padding:30px 7px;
                 font-size:11px;
                 line-height:1.6em;
                 letter-spacing:.04em;
@@ -303,7 +304,7 @@ footer.navbar.default-footer {
         @media (max-width:@screen-xs-max) {
             .footer-bottom-section {
                 .disclaimer {
-                    padding: 30px 20px;
+                    padding:30px 0;
                 }
             }
         }
