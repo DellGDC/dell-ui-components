@@ -1378,8 +1378,11 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   font-size: 11px;
   line-height: 1.6em;
   letter-spacing: .04em;
-  color: #cce5f1;
-  opacity: .6;
+  color: #ffffff;
+  opacity: 1;
+}
+footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer p {
+  color: #ffffff;
 }
 @media (max-width: 767px) {
   footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer {
@@ -1414,16 +1417,6 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
 }
 .btn-group.dropup .dropdown-menu a:hover {
   width: 100%;
-}
-footer.navbar.default-footer .footer-about ul.navbar-nav.about-links a {
-  color: #444444 !important;
-  /*&:hover {
-            color: #444444 !important;
-        }*/
-}
-footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer {
-  color: #ffffff;
-  opacity: 75;
 }
 /*
  * Forms component theme overrides
