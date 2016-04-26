@@ -4,6 +4,37 @@
 */
 
 .jumbotron {
+
+
+
+    p {
+        font-size: @font-size-base;
+    }
+    p small {
+        font-size: 85%;
+        line-height: 15px;
+    }
+
+    margin: 0 auto 20px auto;
+    padding: 0;
+    max-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    background: none;
+    position: relative;
+    .well {
+        margin: 20px auto 0 15px;
+        .border-radius(5px);
+        overflow: hidden;
+        background: rgba(255,255,255,.92);
+        position: absolute;
+        top: 20px;
+        max-width: 500px;
+    }
+
+
+
+    // NOTE: Bootstrap jumbostron overides all default typography
     // Typography for Desktop
     // Medium devices (desktops, 992px and up)
     @media (min-width: @screen-md-min) {
@@ -39,6 +70,7 @@
         h5, .h5 {
             font-size: ceil((@font-size-base * 1.14)); // ~16px
             line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            color: @text-color !important;
         }
 
         .bold-16 {
@@ -168,81 +200,38 @@
             line-height: ceil((@line-height-base * 10.4px)); // ~15px
             font-weight: bold;
         }
-    }
 
-    p {
-        font-size: 14px;
-    }
-    p small {
-        font-size: 85%;
-        line-height: 15px;
-    }
-}
-
-
-.jumbotron-hero {
-    margin: 0 auto 20px auto;
-    padding: 0;
-    max-height: 600px;
-    width: 100%;
-    overflow: hidden;
-    background: none;
-    position: relative;
-
-    .well {
-        margin-top: 20px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius:    5px;
-        border-radius:         5px;
-        overflow:           hidden;
-        background: rgba(255,255,255,.92);
-    }
-
-    .hero-overlay {
-        position: absolute;
-        top: 20px;
-        max-width: 500px;
-        margin-left: 15px;
-        margin-right: auto;
-    }
-}
-
-
-@media (max-width: @screen-sm-max) {
-
-    .jumbotron-hero {
-        margin: 0 auto;
+        margin: 0 auto 20px;
         padding: 0;
         max-height: 600px;
         width: 100%;
         overflow: hidden;
         position: relative;
+        background:@dell-gray-light;
+
 
         .well {
-            margin-top: 0;
-            -webkit-border-radius: 0;
-            -moz-border-radius:    0;
-            border-radius:         0;
-            overflow:         hidden;
+            margin: 0 auto 0 -5px;
+            .border-radius(0);
+            overflow: hidden;
             border: none;
             background: none;
-        }
-
-        .hero-overlay {
             position: relative;
             top: 0;
-            margin-left: -5px;
-            margin-right: auto;
-            height: 135px;
-            background: none;
-        }
-
-        .well-sm {
-            width: 970px;
-            background: @dell-gray-light;
-            height: 136px;
-            z-index: -1;
-            position: absolute;
+            box-shadow: none;
         }
     }
+
+    a:not(.btn) {
+        padding-top:0;
+        padding-bottom:0;
+        h5 {
+            color: @text-color !important;
+        }
+        &:hover {
+            text-decoration: none !important;
+        }
+        display:block;
+    }
+
 }

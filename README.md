@@ -175,7 +175,7 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.18** - March 29, 2016:
+**1.0.18** - April 5, 2016:
   - fixes for popovers so it stays pen when clicked inside of open popover
   - fixes for Show Password in an email input
   - adding in guides layout page

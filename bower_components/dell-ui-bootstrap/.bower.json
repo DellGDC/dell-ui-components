@@ -6,9 +6,9 @@
   "_resolution": {
     "type": "version",
     "tag": "1.2.5",
-    "commit": "19e9b583d1c7f2e8c3b3882ec7fea6058bdb7b0c"
+    "commit": "f76fd0448f3ff23dd4c0a5144741876f3890d9a6"
   },
-  "_source": "git://github.com/DellGDC/dell-ui-bootstrap.git",
-  "_target": "~1",
+  "_source": "https://github.com/DellGDC/dell-ui-bootstrap.git",
+  "_target": "1.2.5",
   "_originalSource": "dell-ui-bootstrap"
 }

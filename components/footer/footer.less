@@ -293,8 +293,11 @@ footer.navbar.default-footer {
                 font-size:11px;
                 line-height:1.6em;
                 letter-spacing:.04em;
-                color:@dell-highlight-blue;
-                opacity:.6;
+                color:@white;
+                opacity:1;
+                p {
+                    color: @white;
+                }
             }
         }
         @media (max-width:@screen-xs-max) {
@@ -305,6 +308,9 @@ footer.navbar.default-footer {
             }
         }
     }
+}
+.footer-menu .footer-top-section a:hover {
+    color: #444;
 }
 .gallery-shadow-section {
     content: "";
@@ -334,4 +340,3 @@ footer.navbar.default-footer {
         }
     }
 }
-
