@@ -114,12 +114,13 @@ blockquote .blockquote-dell-advantage {
   background-size: 30px 30px;
   float: left;
 }
-blockquote .blockquote-dell-advantage.pull-right {
+blockquote .blockquote-dell-advantage-right {
   display: block;
   width: 40px;
   height: 40px;
-  margin-right: -51px;
+  margin-right: -56px;
   margin-top: 2px;
+  background: url('http://localhost:9002/components/announcements/dell-advantage-star.svg') no-repeat;
   background-size: 30px 30px;
   float: right;
 }
@@ -133,15 +134,15 @@ blockquote .blockquote-dell-dpa {
   background-size: 35px 35px;
   float: left;
 }
-blockquote .blockquote-dell-dpa.pull-right {
+blockquote .blockquote-dell-dpa-right {
   display: block;
   width: 40px;
   height: 40px;
-  margin-right: -50px;
+  margin-right: -53px;
   margin-top: -5px;
   background: url('img/components/announcements/dell-preferred-account.svg') no-repeat;
   background-size: 35px 35px;
-  float: left;
+  float: right;
 }
 blockquote.blockquote-icon {
   border: none;
@@ -149,6 +150,19 @@ blockquote.blockquote-icon {
   overflow: hidden;
 }
 blockquote.blockquote-icon.pull-right {
+  border-left: 0;
+  border-right: 10px solid #aaa;
+  width: 100%;
+  padding-right: 56px;
+  border-right: 0;
+}
+blockquote.blockquote-icon-right {
+  border: none;
+  padding-right: 65px !important;
+  overflow: hidden;
+  padding-top: 15px;
+}
+blockquote.blockquote-icon-right.pull-right {
   border-left: 0;
   border-right: 10px solid #aaa;
   width: 100%;
@@ -168,9 +182,6 @@ blockquote .blockquote-links li + li::before {
     content: "";
     padding-right: 0;
   }
-}
-.well {
-  overflow: hidden;
 }
 .well blockquote .blockquote-dell-dpa {
   display: block;
@@ -202,12 +213,13 @@ blockquote .blockquote-links li + li::before {
   background-size: 30px 30px;
   float: left;
 }
-.well blockquote .blockquote-dell-advantage.pull-right {
+.well blockquote .blockquote-dell-advantage-right {
   display: block;
   width: 40px;
   height: 40px;
-  margin-right: -51px;
+  margin-right: -56px;
   margin-top: 2px;
+  background: url('http://localhost:9002/components/announcements/dell-advantage-star.svg') no-repeat;
   background-size: 30px 30px;
   float: right;
 }
@@ -217,7 +229,13 @@ blockquote .blockquote-links li + li::before {
   overflow: hidden;
   padding-top: 15px;
 }
-.well blockquote.blockquote-icon.pull-right {
+.well blockquote.blockquote-icon-right {
+  border: none;
+  padding-right: 65px !important;
+  overflow: hidden;
+  padding-top: 15px;
+}
+.well blockquote.blockquote-icon-right.pull-right {
   border-left: 0;
   border-right: 10px solid #aaa;
   width: 100%;
@@ -1189,7 +1207,6 @@ footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-
   float: right;
   top: 2px;
   text-align: right;
-  right: -35px;
 }
 footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-selector ul {
   padding: 0;
@@ -1273,7 +1290,7 @@ footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-
 }
 @media (min-width: 768px) {
   footer.navbar.default-footer .footer-about ul.navbar-nav.about-links {
-    margin: 0 0 0 -15px;
+    margin: 0 0 0 -10px;
     padding: 6px 0 6px 0;
     width: 100%;
     height: 44px;
@@ -1282,7 +1299,7 @@ footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-
   footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li {
     display: inline-block;
     margin: 0;
-    padding: 4px 0 0 0;
+    padding: 5px;
     border-bottom: none;
   }
   footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li a {
@@ -1343,9 +1360,10 @@ footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-n
     min-height: 44px;
   }
   footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-nav li {
+    margin-left: -10px;
     display: inline-block;
     border-bottom: none;
-    padding: 4px 0 0 0;
+    padding: 5px;
   }
   footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-nav li a:focus,
   footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-nav li a:hover {
@@ -1367,6 +1385,9 @@ footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-n
     margin-left: 0;
     padding-left: 20px;
   }
+  footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-nav li.language ul li {
+    margin-left: 0;
+  }
 }
 footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section {
   color: #ffffff;
@@ -1374,7 +1395,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section {
   z-index: 0;
 }
 footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer {
-  padding: 30px;
+  padding: 30px 7px;
   font-size: 11px;
   line-height: 1.6em;
   letter-spacing: .04em;
@@ -1386,7 +1407,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
 }
 @media (max-width: 767px) {
   footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer {
-    padding: 30px 20px;
+    padding: 30px 0;
   }
 }
 .footer-menu .footer-top-section a:hover {
