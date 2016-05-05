@@ -324,9 +324,7 @@ a {
 a:hover,
 a:focus {
   color: #005a85;
-  /*text-decoration: none;*/     /* --| This has been changed back according to DUC-337 |-- */
-  text-decoration: underline;
-  i {text-decoration: none;}
+  text-decoration: none;
 }
 a:focus {
   outline: thin dotted;
@@ -4386,7 +4384,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   font-size: 18px;
   line-height: 20px;
   height: 50px;
-  a {text-decoration: none;}
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -5983,7 +5980,6 @@ button.list-group-item-danger.active:focus {
   border-radius: 1px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  a {text-decoration: none;}
 }
 .well blockquote {
   border-color: #ddd;
@@ -7770,10 +7766,6 @@ code {
 a[data-toggle="collapse"] {
   text-decoration: none;
 }
-/*a[data-toggle="collapse"]:hover {
-    text-decoration: underline;
-  }*/
-
 .panel {
   border-radius: 1px;
 }
