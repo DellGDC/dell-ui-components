@@ -114,12 +114,13 @@ blockquote .blockquote-dell-advantage {
   background-size: 30px 30px;
   float: left;
 }
-blockquote .blockquote-dell-advantage.pull-right {
+blockquote .blockquote-dell-advantage-right {
   display: block;
   width: 40px;
   height: 40px;
-  margin-right: -51px;
+  margin-right: -56px;
   margin-top: 2px;
+  background: url('http://localhost:9002/components/announcements/dell-advantage-star.svg') no-repeat;
   background-size: 30px 30px;
   float: right;
 }
@@ -133,15 +134,15 @@ blockquote .blockquote-dell-dpa {
   background-size: 35px 35px;
   float: left;
 }
-blockquote .blockquote-dell-dpa.pull-right {
+blockquote .blockquote-dell-dpa-right {
   display: block;
   width: 40px;
   height: 40px;
-  margin-right: -50px;
+  margin-right: -53px;
   margin-top: -5px;
   background: url('img/components/announcements/dell-preferred-account.svg') no-repeat;
   background-size: 35px 35px;
-  float: left;
+  float: right;
 }
 blockquote.blockquote-icon {
   border: none;
@@ -149,6 +150,19 @@ blockquote.blockquote-icon {
   overflow: hidden;
 }
 blockquote.blockquote-icon.pull-right {
+  border-left: 0;
+  border-right: 10px solid #aaa;
+  width: 100%;
+  padding-right: 56px;
+  border-right: 0;
+}
+blockquote.blockquote-icon-right {
+  border: none;
+  padding-right: 65px !important;
+  overflow: hidden;
+  padding-top: 15px;
+}
+blockquote.blockquote-icon-right.pull-right {
   border-left: 0;
   border-right: 10px solid #aaa;
   width: 100%;
@@ -168,9 +182,6 @@ blockquote .blockquote-links li + li::before {
     content: "";
     padding-right: 0;
   }
-}
-.well {
-  overflow: hidden;
 }
 .well blockquote .blockquote-dell-dpa {
   display: block;
@@ -202,12 +213,13 @@ blockquote .blockquote-links li + li::before {
   background-size: 30px 30px;
   float: left;
 }
-.well blockquote .blockquote-dell-advantage.pull-right {
+.well blockquote .blockquote-dell-advantage-right {
   display: block;
   width: 40px;
   height: 40px;
-  margin-right: -51px;
+  margin-right: -56px;
   margin-top: 2px;
+  background: url('http://localhost:9002/components/announcements/dell-advantage-star.svg') no-repeat;
   background-size: 30px 30px;
   float: right;
 }
@@ -217,7 +229,13 @@ blockquote .blockquote-links li + li::before {
   overflow: hidden;
   padding-top: 15px;
 }
-.well blockquote.blockquote-icon.pull-right {
+.well blockquote.blockquote-icon-right {
+  border: none;
+  padding-right: 65px !important;
+  overflow: hidden;
+  padding-top: 15px;
+}
+.well blockquote.blockquote-icon-right.pull-right {
   border-left: 0;
   border-right: 10px solid #aaa;
   width: 100%;
@@ -1189,7 +1207,6 @@ footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-
   float: right;
   top: 2px;
   text-align: right;
-  right: -35px;
 }
 footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-selector ul {
   padding: 0;
@@ -1273,7 +1290,7 @@ footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-
 }
 @media (min-width: 768px) {
   footer.navbar.default-footer .footer-about ul.navbar-nav.about-links {
-    margin: 0 0 0 -15px;
+    margin: 0 0 0 -10px;
     padding: 6px 0 6px 0;
     width: 100%;
     height: 44px;
@@ -1282,7 +1299,7 @@ footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li.country-
   footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li {
     display: inline-block;
     margin: 0;
-    padding: 4px 0 0 0;
+    padding: 5px;
     border-bottom: none;
   }
   footer.navbar.default-footer .footer-about ul.navbar-nav.about-links li a {
@@ -1343,9 +1360,10 @@ footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-n
     min-height: 44px;
   }
   footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-nav li {
+    margin-left: -10px;
     display: inline-block;
     border-bottom: none;
-    padding: 4px 0 0 0;
+    padding: 5px;
   }
   footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-nav li a:focus,
   footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-nav li a:hover {
@@ -1367,6 +1385,9 @@ footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-n
     margin-left: 0;
     padding-left: 20px;
   }
+  footer.navbar.default-footer .navbar.footer-menu .footer-top-section ul.navbar-nav li.language ul li {
+    margin-left: 0;
+  }
 }
 footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section {
   color: #ffffff;
@@ -1374,7 +1395,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section {
   z-index: 0;
 }
 footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer {
-  padding: 30px;
+  padding: 30px 7px;
   font-size: 11px;
   line-height: 1.6em;
   letter-spacing: .04em;
@@ -1383,7 +1404,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
 }
 @media (max-width: 767px) {
   footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer {
-    padding: 30px 20px;
+    padding: 30px 0;
   }
 }
 .gallery-shadow-section {
@@ -5228,6 +5249,9 @@ p {
     padding-lift: 20px;
   }
 }
+.gallery-item a {
+  text-decoration: none;
+}
 /*
  * Search-And-Navigation component theme overrides
  *------------------------------------------------------------------------------------------
@@ -5236,6 +5260,33 @@ p {
 *banner component .LESS
 *------------------------------------------------------------------------------------------
 */
+.jumbotron {
+  margin: 0 auto 20px auto;
+  padding: 0;
+  max-height: 600px;
+  width: 100%;
+  overflow: hidden;
+  background: none;
+  position: relative;
+}
+.jumbotron p {
+  font-size: 14px;
+}
+.jumbotron p small {
+  font-size: 85%;
+  line-height: 15px;
+}
+.jumbotron .well {
+  margin: 20px auto 0 15px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.92);
+  position: absolute;
+  top: 20px;
+  max-width: 500px;
+}
 @media (min-width: 992px) {
   .jumbotron h1,
   .jumbotron .h1 {
@@ -5267,6 +5318,7 @@ p {
   .jumbotron .h5 {
     font-size: 16px;
     line-height: 20px;
+    color: #444444 !important;
   }
   .jumbotron .bold-16 {
     font-size: 16px;
@@ -5333,6 +5385,15 @@ p {
   }
 }
 @media (max-width: 767px) {
+  .jumbotron {
+    margin: 0 auto 20px;
+    padding: 0;
+    max-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: #eeeeee;
+  }
   .jumbotron h1,
   .jumbotron .h1 {
     font-size: 24px;
@@ -5379,134 +5440,30 @@ p {
     line-height: 15px;
     font-weight: bold;
   }
-}
-.jumbotron p {
-  font-size: 14px;
-}
-.jumbotron p small {
-  font-size: 85%;
-  line-height: 15px;
-}
-.container .jumbotron,
-.container-fluid .jumbotron {
-  border-radius: 0;
-}
-.jumbotron {
-  margin: 0 auto;
-  padding: 0;
-  max-height: 600px;
-  width: 100%;
-  overflow: hidden;
-  background: none;
-}
-.jumbotron img {
-  margin: 0 auto;
-}
-.jumbotron > .img-responsive {
-  width: 100%;
-  position: absolute;
-}
-.jumbotron .well {
-  margin-top: 20px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.92);
-}
-@media (max-width: 991px) {
-  .jumbotron > .img-responsive {
-    position: relative;
-  }
   .jumbotron .well {
-    background: none;
+    margin: 0 auto 0 -5px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    overflow: hidden;
     border: none;
-    box-shadow: none;
-    margin-top: 0;
-  }
-  .jumbotron [class^=col] {
-    background: #eeeeee;
-  }
-  .jumbotron .container {
-    width: 100%;
-  }
-}
-/* -------old....needed to be more bootstrap style------ */
-/*
-.banner {
+    background: none;
     position: relative;
-    .img-responsive-constrained {
-        max-height: 600px;
-        .img-responsive {
-        display: block;
-        width: 100%;
-        }
-    }
+    top: 0;
+    box-shadow: none;
+  }
 }
-
-
-.container-fluid {
-    .banner {
-        margin-left: -15px;
-        margin-right: -15px;
-        max-height: 600px !important;
-        overflow: hidden;
-    }
+.jumbotron a:not(.btn) {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: block;
 }
-
-.banner-inside {
-    left: 0;
-    top: 20px;
-    width: 45%;
-    //max-width: 420px;
-    margin-left: 20px;
-    padding: 5px 20px 20px 20px;
-    vertical-align: middle;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 5px;
-    border-radius: 5px;
-    background: @white;
-    background: rgba(600,600,600,.92);
-    color: @dell-gray-dark;
-    -ms-text-shadow: none;
-    text-shadow: none;
-    right: auto;
-    bottom: auto;
-    position: absolute;
+.jumbotron a:not(.btn) h5 {
+  color: #444444 !important;
 }
-
-
-@media (min-width: @screen-xs-max) and (max-width: @screen-sm-max) {
-    .banner-inside {
-        padding: 20px;
-    }
+.jumbotron a:not(.btn):hover {
+  text-decoration: none !important;
 }
-
-@media (max-width: @screen-xs-max) {
-    .banner-inside {
-        left: 0;
-        top: 0;
-        width: 100%;
-        max-width: none;
-        margin-left: 0;
-        padding: 10px 20px 10px 20px;
-        vertical-align: middle;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 15px;
-        -ms-border-radius: 5px;
-        border-radius: 0;
-        background: @white;
-        background: @dell-gray-light;
-        color: #444444;
-        -ms-text-shadow: none;
-        text-shadow: none;
-        right: auto;
-        bottom: auto;
-        position: relative;
-    }
-}
-*/
 /*
  * Contact-Drawer component theme overrides
  *------------------------------------------------------------------------------------------
