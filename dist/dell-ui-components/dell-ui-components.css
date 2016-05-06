@@ -1399,19 +1399,13 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   font-size: 11px;
   line-height: 1.6em;
   letter-spacing: .04em;
-  color: #ffffff;
-  opacity: 1;
-}
-footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer p {
-  color: #ffffff;
+  color: #cce5f1;
+  opacity: .6;
 }
 @media (max-width: 767px) {
   footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer {
     padding: 30px 0;
   }
-}
-.footer-menu .footer-top-section a:hover {
-  color: #444;
 }
 .gallery-shadow-section {
   content: "";
@@ -1443,21 +1437,6 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
  * Forms component theme overrides
  *------------------------------------------------------------------------------------------
  */
-.show-hide-password {
-  /* spinbox */
-  /* multi-select with checkboxes */
-  /*============== |bootstrap slider| =================*/
-  /*============== |bootstrap slider| ================*/
-  /* Extra small devices (phones, less than 768px) */
-  /*===================== |slider| ============================*/
-  /*==================== |slider| ============================*/
-  /* date-selector */
-  /*!
- * Datetimepicker for Bootstrap 3
- * version : 4.17.37
- * https://github.com/Eonasdan/bootstrap-datetimepicker/
- */
-}
 .show-hide-password .checkbox,
 .show-hide-password .radio {
   margin-bottom: 5px;
@@ -1473,65 +1452,18 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
 .show-hide-password input[type=checkbox]:checked + .show-password {
   display: none;
 }
-.show-hide-password .show-password .checkbox,
-.show-hide-password .show-password .radio {
-  margin-bottom: 5px;
-  margin-top: -5px;
-  margin-left: 20px;
-}
-.show-hide-password .list-tree {
+.list-tree {
   list-style-type: none;
   margin-left: -20px;
 }
-.show-hide-password .list-tree li > ul {
+.list-tree li > ul {
   list-style-type: none;
   display: none;
 }
-.show-hide-password .list-tree li > ul > li > ul {
-  list-style-type: none;
-  display: none;
-}
-.show-hide-password .list-tree li label.open + ul {
+.list-tree li label.open + ul {
   display: block;
 }
-.show-hide-password .list-tree li a {
-  color: #444444;
-  line-height: 0 /* 1.42857 */;
-  /*>.collapsed {
-                float: left;
-            }*/
-}
-.show-hide-password .list-tree [data-toggle="collapse"] .icon-ui-triangledown,
-.show-hide-password .list-tree [data-toggle="collapse"] .icon-ui-triangleright,
-.show-hide-password .list-tree [data-toggle="collapse"] .icon-ui-triangleup {
-  top: 4px;
-  padding-right: 10px;
-}
-.show-hide-password .list-tree .checkbox input[type="checkbox"],
-.show-hide-password .list-tree .checkbox-inline input[type="checkbox"] {
-  margin-left: -5px;
-  position: absolute;
-}
-.show-hide-password .list-tree .checkbox {
-  display: inline-block;
-}
-.show-hide-password .list-tree .hide-expanded,
-.show-hide-password .list-tree .show-collapsed,
-.show-hide-password .list-tree .collapsed .show-collapsed {
-  padding: 0;
-}
-.show-hide-password .list-tree ul.greatgrandchild {
-  list-style-type: none;
-  overflow: visible;
-}
-.show-hide-password .list-tree .grandchild5 {
-  position: relative;
-  left: -27px;
-}
-.show-hide-password .list-tree .some-kids-chekced {
-  background: #007db8;
-}
-.show-hide-password .form-label {
+.form-label {
   float: left;
   text-align: right;
   top: 5px;
@@ -1540,27 +1472,27 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   margin-bottom: 5px;
   padding-bottom: 10px;
 }
-.show-hide-password .help-ext {
+.help-ext {
   float: left;
   margin-top: -20px;
   text-align: left;
   margin-bottom: -20px;
 }
-.show-hide-password .hide-expanded,
-.show-hide-password .show-collapsed,
-.show-hide-password .collapsed .show-collapsed {
+.hide-expanded,
+.show-collapsed,
+.collapsed .show-collapsed {
   padding: 10px 10px 10px 0;
 }
-.show-hide-password .dpui-numberPicker i {
+.dpui-numberPicker i {
   font-size: 10px;
   vertical-align: middle;
 }
-.show-hide-password .ms-parent {
+.ms-parent {
   display: inline-block;
   position: relative;
   vertical-align: middle;
 }
-.show-hide-password .ms-choice {
+.ms-choice {
   display: block;
   width: 100%;
   height: 34px;
@@ -1582,13 +1514,13 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
-.show-hide-password .ms-choice.disabled {
+.ms-choice.disabled {
   background-color: #f9f9f9;
   background-image: none;
   border: 1px solid #cccccc;
   cursor: default;
 }
-.show-hide-password .ms-choice > span {
+.ms-choice > span {
   position: absolute;
   top: 0;
   left: 0;
@@ -1600,10 +1532,10 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   display: block;
   padding-left: 8px;
 }
-.show-hide-password .ms-choice > span.placeholder {
+.ms-choice > span.placeholder {
   color: #444444;
 }
-.show-hide-password .ms-choice > div {
+.ms-choice > div {
   position: absolute;
   top: 4px;
   right: 0;
@@ -1612,17 +1544,17 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   content: "\e252";
   background: url('img/components/forms/multiple-select.png') left top no-repeat;
 }
-.show-hide-password .ms-choice > div.open {
+.ms-choice > div.open {
   background: url('img/components/forms/multiple-select.png') right top no-repeat;
   right: -2px;
 }
-.show-hide-password .ms-choice:focus {
+.ms-choice:focus {
   border-color: #007db8;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 125, 184, 0.6);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 125, 184, 0.6);
 }
-.show-hide-password .ms-drop {
+.ms-drop {
   width: 100%;
   overflow: hidden;
   display: none;
@@ -1637,72 +1569,68 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-.show-hide-password .ms-drop.bottom {
+.ms-drop.bottom {
   top: 100%;
   -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
 }
-.show-hide-password .ms-drop.top {
+.ms-drop.top {
   bottom: 100%;
   -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
   box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
 }
-.show-hide-password .ms-drop ul {
+.ms-drop ul {
   overflow: auto;
   margin: 0;
   padding: 5px 8px;
 }
-.show-hide-password .ms-drop ul > li {
+.ms-drop ul > li {
   list-style: none;
   display: list-item;
   background-image: none;
   position: static;
 }
-.show-hide-password .ms-drop ul > li .disabled {
+.ms-drop ul > li .disabled {
   opacity: .35;
   filter: alpha(opacity=35);
 }
-.show-hide-password .ms-drop ul > li.multiple {
+.ms-drop ul > li.multiple {
   display: block;
   float: left;
 }
-.show-hide-password .ms-drop ul > li.multiple label {
+.ms-drop ul > li.multiple label {
   width: 100%;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.show-hide-password .ms-drop ul > li.group {
+.ms-drop ul > li.group {
   clear: both;
 }
-.show-hide-password .ms-drop ul > li label {
+.ms-drop ul > li label {
   font-weight: normal;
   display: block;
   white-space: nowrap;
   color: #007db8;
   padding: 3px 3px 3px 3px;
-  cursor: pointer;
 }
-.show-hide-password .ms-drop ul > li label.optgroup {
+.ms-drop ul > li label.optgroup {
   font-weight: bold;
 }
-.show-hide-password .ms-drop ul > li label input[type=checkbox] {
-  top: 0px;
-}
-.show-hide-password .ms-drop ul > li:hover,
-.show-hide-password .ms-drop ul > li:focus .show-hide-password .ms-drop ul > li:active {
+.ms-drop ul > li:hover,
+.ms-drop ul > li:focus .ms-drop ul > li:active {
   background: #cce5f1;
 }
-.show-hide-password .ms-drop input[type="checkbox"] {
+.ms-drop input[type="checkbox"] {
   vertical-align: middle;
 }
-.show-hide-password .ms-drop .ms-no-results {
+.ms-drop .ms-no-results {
   display: none;
 }
-.show-hide-password .ms-search {
+.ms-search {
   display: inline-block;
   margin: 0;
   min-height: 26px;
@@ -1712,7 +1640,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   width: 100%;
   z-index: 10000;
 }
-.show-hide-password .ms-search input {
+.ms-search input {
   width: 100%;
   height: auto !important;
   min-height: 24px;
@@ -1736,15 +1664,15 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
   background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
 }
-.show-hide-password .ms-search,
-.show-hide-password .ms-search input {
+.ms-search,
+.ms-search input {
   -webkit-box-sizing: border-box;
   -khtml-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
-.show-hide-password .form-group:after {
+.form-group:after {
   visibility: hidden;
   display: block;
   font-size: 0;
@@ -1752,134 +1680,122 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   clear: both;
   height: 0;
 }
-.show-hide-password .has-error .form-control,
-.show-hide-password .has-error input.form-control {
-  background: #ffffc9;
-}
-.show-hide-password .has-error .form-control:active,
-.show-hide-password .has-error input.form-control:active,
-.show-hide-password .has-error .form-control:focus,
-.show-hide-password .has-error input.form-control:focus {
-  background: #ffffff;
-  border-color: #007db8;
-  box-shadow: 0 0 2px #85d8ff;
-}
-.show-hide-password .slider {
+.slider {
   display: inline-block;
   vertical-align: middle;
   position: relative;
 }
-.show-hide-password .slider.slider-horizontal {
+.slider.slider-horizontal {
   width: 210px;
   height: 20px;
 }
-.show-hide-password .slider.slider-horizontal .slider-track {
+.slider.slider-horizontal .slider-track {
   height: 10px;
   width: 100%;
   margin-top: -5px;
   top: 50%;
   left: 0;
 }
-.show-hide-password .slider.slider-horizontal .slider-selection,
-.show-hide-password .slider.slider-horizontal .slider-track-low,
-.show-hide-password .slider.slider-horizontal .slider-track-high {
+.slider.slider-horizontal .slider-selection,
+.slider.slider-horizontal .slider-track-low,
+.slider.slider-horizontal .slider-track-high {
   height: 100%;
   top: 0;
   bottom: 0;
 }
-.show-hide-password .slider.slider-horizontal .slider-tick,
-.show-hide-password .slider.slider-horizontal .slider-handle {
+.slider.slider-horizontal .slider-tick,
+.slider.slider-horizontal .slider-handle {
   margin-left: -10px;
   margin-top: -5px;
 }
-.show-hide-password .slider.slider-horizontal .slider-tick.triangle,
-.show-hide-password .slider.slider-horizontal .slider-handle.triangle {
+.slider.slider-horizontal .slider-tick.triangle,
+.slider.slider-horizontal .slider-handle.triangle {
   border-width: 0 10px 10px 10px;
   width: 0;
   height: 0;
   border-bottom-color: #0480be;
   margin-top: 0;
 }
-.show-hide-password .slider.slider-horizontal .slider-tick-label-container {
+.slider.slider-horizontal .slider-tick-label-container {
   white-space: nowrap;
   margin-top: 20px;
 }
-.show-hide-password .slider.slider-horizontal .slider-tick-label-container .slider-tick-label {
+.slider.slider-horizontal .slider-tick-label-container .slider-tick-label {
   padding-top: 4px;
   display: inline-block;
   text-align: center;
 }
-.show-hide-password .slider.slider-vertical {
+.slider.slider-vertical {
   height: 210px;
   width: 20px;
 }
-.show-hide-password .slider.slider-vertical .slider-track {
+.slider.slider-vertical .slider-track {
   width: 10px;
   height: 100%;
   margin-left: -5px;
   left: 50%;
   top: 0;
 }
-.show-hide-password .slider.slider-vertical .slider-selection {
+.slider.slider-vertical .slider-selection {
   width: 100%;
   left: 0;
   top: 0;
   bottom: 0;
 }
-.show-hide-password .slider.slider-vertical .slider-track-low,
-.show-hide-password .slider.slider-vertical .slider-track-high {
+.slider.slider-vertical .slider-track-low,
+.slider.slider-vertical .slider-track-high {
   width: 100%;
   left: 0;
   right: 0;
 }
-.show-hide-password .slider.slider-vertical .slider-tick,
-.show-hide-password .slider.slider-vertical .slider-handle {
+.slider.slider-vertical .slider-tick,
+.slider.slider-vertical .slider-handle {
   margin-left: -5px;
   margin-top: -10px;
 }
-.show-hide-password .slider.slider-vertical .slider-tick.triangle,
-.show-hide-password .slider.slider-vertical .slider-handle.triangle {
+.slider.slider-vertical .slider-tick.triangle,
+.slider.slider-vertical .slider-handle.triangle {
   border-width: 10px 0 10px 10px;
   width: 1px;
   height: 1px;
   border-left-color: #0480be;
   margin-left: 0;
 }
-.show-hide-password .slider.slider-disabled .slider-handle {
+.slider.slider-disabled .slider-handle {
   background: red;
 }
-.show-hide-password .slider.slider-disabled .slider-track {
+.slider.slider-disabled .slider-track {
   background: red;
   cursor: not-allowed;
 }
-.show-hide-password .slider input {
+.slider input {
   display: none;
 }
-.show-hide-password .slider .tooltip.top {
+.slider .tooltip.top {
   margin-top: -36px;
 }
-.show-hide-password .slider .tooltip-inner {
+.slider .tooltip-inner {
   white-space: nowrap;
 }
-.show-hide-password .slider .hide {
+.slider .hide {
   display: none;
 }
-.show-hide-password .slider-track {
+.slider-track {
   position: absolute;
   cursor: pointer;
   border-radius: 1px;
 }
-.show-hide-password .slider-selection {
+.slider-selection {
   position: absolute;
   border-radius: 1px;
 }
-.show-hide-password .slider-track-low,
-.show-hide-password .slider-track-high {
+.slider-track-low,
+.slider-track-high {
   position: absolute;
   background: transparent;
   border-radius: 1px;
 }
-.show-hide-password .slider-handle {
+.slider-handle {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -1887,22 +1803,22 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   filter: none;
   border: 0px solid transparent;
 }
-.show-hide-password .slider-handle.round {
+.slider-handle.round {
   border-radius: 50%;
 }
-.show-hide-password .slider-handle.triangle {
+.slider-handle.triangle {
   background: transparent none;
 }
-.show-hide-password .slider-handle.custom {
+.slider-handle.custom {
   background: transparent none;
 }
-.show-hide-password .slider-handle.custom::before {
+.slider-handle.custom::before {
   line-height: 20px;
   font-size: 20px;
   content: '\2605';
   color: #726204;
 }
-.show-hide-password .slider-tick {
+.slider-tick {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -1910,41 +1826,42 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   opacity: 0.8;
   border: 0px solid transparent;
 }
-.show-hide-password .slider-tick.round {
+.slider-tick.round {
   border-radius: 50%;
 }
-.show-hide-password .slider-tick.triangle {
+.slider-tick.triangle {
   background: transparent none;
 }
-.show-hide-password .slider-tick.custom {
+.slider-tick.custom {
   background: transparent none;
 }
-.show-hide-password .slider-tick.custom::before {
+.slider-tick.custom::before {
   line-height: 20px;
   font-size: 20px;
   content: '\2605';
   color: #726204;
 }
-.show-hide-password .slider-tick.in-selection {
+.slider-tick.in-selection {
   opacity: 1;
 }
+/* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
-  .show-hide-password .form-compressed [class^=col-] {
+  .form-compressed [class^=col-] {
     position: relative;
     min-height: 1px;
     padding-bottom: 0;
   }
-  .show-hide-password .form-group {
+  .form-group {
     margin-right: 0;
   }
-  .show-hide-password .control-label {
+  .control-label {
     float: left;
     width: 100%;
     padding-top: 5px;
     margin-bottom: -5px;
     text-align: left;
   }
-  .show-hide-password .form-label {
+  .form-label {
     float: left;
     padding-top: 2px;
     text-align: left;
@@ -1952,108 +1869,108 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
     margin-bottom: 5px;
     padding-bottom: 10px !important;
   }
-  .show-hide-password .help-ext {
+  .help-ext {
     float: left;
     margin-top: -3px;
     text-align: left;
     margin-bottom: -10px;
     margin-left: -20px;
   }
-  .show-hide-password .form-compressed .hide-expanded,
-  .show-hide-password .form-compressed .show-collapsed,
-  .show-hide-password .form-compressed .collapsed .show-collapsed {
+  .form-compressed .hide-expanded,
+  .form-compressed .show-collapsed,
+  .form-compressed .collapsed .show-collapsed {
     padding: 10px 10px 10px 20px;
   }
 }
-.show-hide-password .slider {
+.slider {
   display: inline-block;
   vertical-align: middle;
   position: relative;
 }
-.show-hide-password .slider.slider-horizontal {
+.slider.slider-horizontal {
   width: 210px;
   height: 20px;
 }
-.show-hide-password .slider.slider-horizontal .slider-track {
+.slider.slider-horizontal .slider-track {
   height: 10px;
   width: 100%;
   margin-top: -5px;
   top: 50%;
   left: 0;
 }
-.show-hide-password .slider.slider-horizontal .slider-selection,
-.show-hide-password .slider.slider-horizontal .slider-track-low,
-.show-hide-password .slider.slider-horizontal .slider-track-high {
+.slider.slider-horizontal .slider-selection,
+.slider.slider-horizontal .slider-track-low,
+.slider.slider-horizontal .slider-track-high {
   height: 100%;
   top: 0;
   bottom: 0;
 }
-.show-hide-password .slider.slider-horizontal .slider-tick,
-.show-hide-password .slider.slider-horizontal .slider-handle {
+.slider.slider-horizontal .slider-tick,
+.slider.slider-horizontal .slider-handle {
   margin-left: -9px;
   margin-top: -5px;
 }
-.show-hide-password .slider.slider-horizontal .slider-tick.triangle,
-.show-hide-password .slider.slider-horizontal .slider-handle.triangle {
+.slider.slider-horizontal .slider-tick.triangle,
+.slider.slider-horizontal .slider-handle.triangle {
   border-width: 0 10px 10px 10px;
   width: 0;
   height: 0;
   border-bottom-color: #0480be;
   margin-top: 0;
 }
-.show-hide-password .slider.slider-horizontal .slider-tick-label-container {
+.slider.slider-horizontal .slider-tick-label-container {
   white-space: nowrap;
   margin-top: 20px;
 }
-.show-hide-password .slider.slider-horizontal .slider-tick-label-container .slider-tick-label {
+.slider.slider-horizontal .slider-tick-label-container .slider-tick-label {
   padding-top: 4px;
   display: inline-block;
   text-align: center;
 }
-.show-hide-password .slider.slider-vertical {
+.slider.slider-vertical {
   height: 210px;
   width: 20px;
 }
-.show-hide-password .slider.slider-vertical .slider-track {
+.slider.slider-vertical .slider-track {
   width: 10px;
   height: 100%;
   margin-left: -5px;
   left: 50%;
   top: 0;
 }
-.show-hide-password .slider.slider-vertical .slider-selection {
+.slider.slider-vertical .slider-selection {
   width: 100%;
   left: 0;
   top: 0;
   bottom: 0;
 }
-.show-hide-password .slider.slider-vertical .slider-track-low,
-.show-hide-password .slider.slider-vertical .slider-track-high {
+.slider.slider-vertical .slider-track-low,
+.slider.slider-vertical .slider-track-high {
   width: 100%;
   left: 0;
   right: 0;
 }
-.show-hide-password .slider.slider-vertical .slider-tick,
-.show-hide-password .slider.slider-vertical .slider-handle {
+.slider.slider-vertical .slider-tick,
+.slider.slider-vertical .slider-handle {
   margin-left: -5px;
   margin-top: -10px;
 }
-.show-hide-password .slider.slider-vertical .slider-tick.triangle,
-.show-hide-password .slider.slider-vertical .slider-handle.triangle {
+.slider.slider-vertical .slider-tick.triangle,
+.slider.slider-vertical .slider-handle.triangle {
   border-width: 10px 0 10px 10px;
   width: 1px;
   height: 1px;
   border-left-color: #0480be;
   margin-left: 0;
 }
-.show-hide-password .slider.slider-disabled .slider-handle {
+.slider.slider-disabled .slider-handle {
   background-image: -webkit-linear-gradient(top, #dfdfdf 0%, #bebebe 100%);
   background-image: -o-linear-gradient(top, #dfdfdf 0%, #bebebe 100%);
   background-image: linear-gradient(to bottom, #dfdfdf 0%, #bebebe 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdfdfdf', endColorstr='#ffbebebe', GradientType=0);
 }
-.show-hide-password .slider.slider-disabled .slider-track {
+.slider.slider-disabled .slider-track {
   background-image: -webkit-linear-gradient(top, #e5e5e5 0%, #e9e9e9 100%);
   background-image: -o-linear-gradient(top, #e5e5e5 0%, #e9e9e9 100%);
   background-image: linear-gradient(to bottom, #e5e5e5 0%, #e9e9e9 100%);
@@ -2061,19 +1978,19 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe5e5e5', endColorstr='#ffe9e9e9', GradientType=0);
   cursor: not-allowed;
 }
-.show-hide-password .slider input {
+.slider input {
   display: none;
 }
-.show-hide-password .slider .tooltip.top {
+.slider .tooltip.top {
   margin-top: -36px;
 }
-.show-hide-password .slider .tooltip-inner {
+.slider .tooltip-inner {
   white-space: nowrap;
 }
-.show-hide-password .slider .hide {
+.slider .hide {
   display: none;
 }
-.show-hide-password .slider-track {
+.slider-track {
   position: absolute;
   cursor: pointer;
   background: #eee;
@@ -2088,7 +2005,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 }
-.show-hide-password .slider-selection {
+.slider-selection {
   position: absolute;
   background-color: #007db8;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
@@ -2101,15 +2018,15 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   box-sizing: border-box;
   border-radius: 4px;
 }
-.show-hide-password .slider-selection.tick-slider-selection {
+.slider-selection.tick-slider-selection {
   background-image: -webkit-linear-gradient(top, #89cdef 0%, #81bfde 100%);
   background-image: -o-linear-gradient(top, #89cdef 0%, #81bfde 100%);
   background-image: linear-gradient(to bottom, #89cdef 0%, #81bfde 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff89cdef', endColorstr='#ff81bfde', GradientType=0);
 }
-.show-hide-password .slider-track-low,
-.show-hide-password .slider-track-high {
+.slider-track-low,
+.slider-track-high {
   position: absolute;
   background: transparent;
   -webkit-box-sizing: border-box;
@@ -2117,7 +2034,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   box-sizing: border-box;
   border-radius: 4px;
 }
-.show-hide-password .slider-handle {
+.slider-handle {
   position: absolute;
   width: 22px;
   height: 19px;
@@ -2132,12 +2049,12 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
   border: 0 solid transparent;
 }
-.show-hide-password .slider-handle.square {
+.slider-handle.square {
   border-radius: 10%;
   border: 1px solid #007db8;
   background: #ffffff !important;
 }
-.show-hide-password .slider-handle.square:before {
+.slider-handle.square:before {
   font-family: 'Glyphicons Halflings';
   content: "\e236";
   -webkit-transform: rotate(90deg) scale(0.9, 1.2);
@@ -2156,19 +2073,19 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   line-height: 1;
   -webkit-font-smoothing: antialiased;
 }
-.show-hide-password .slider-handle.triangle {
+.slider-handle.triangle {
   background: transparent none;
 }
-.show-hide-password .slider-handle.custom {
+.slider-handle.custom {
   background: transparent none;
 }
-.show-hide-password .slider-handle.custom::before {
+.slider-handle.custom::before {
   line-height: 20px;
   font-size: 20px;
   content: '\2605';
   color: #726204;
 }
-.show-hide-password .slider-tick {
+.slider-tick {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -2186,22 +2103,22 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   opacity: 0.8;
   border: 0px solid transparent;
 }
-.show-hide-password .slider-tick.round {
+.slider-tick.round {
   border-radius: 50%;
 }
-.show-hide-password .slider-tick.triangle {
+.slider-tick.triangle {
   background: transparent none;
 }
-.show-hide-password .slider-tick.custom {
+.slider-tick.custom {
   background: transparent none;
 }
-.show-hide-password .slider-tick.custom::before {
+.slider-tick.custom::before {
   line-height: 20px;
   font-size: 20px;
   content: '\2605';
   color: #726204;
 }
-.show-hide-password .slider-tick.in-selection {
+.slider-tick.in-selection {
   background-image: -webkit-linear-gradient(top, #89cdef 0%, #81bfde 100%);
   background-image: -o-linear-gradient(top, #89cdef 0%, #81bfde 100%);
   background-image: linear-gradient(to bottom, #89cdef 0%, #81bfde 100%);
@@ -2209,7 +2126,8 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff89cdef', endColorstr='#ff81bfde', GradientType=0);
   opacity: 1;
 }
-.show-hide-password .sr-only {
+/* date-selector */
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2219,36 +2137,41 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-.show-hide-password .bootstrap-datetimepicker-widget {
+/*!
+ * Datetimepicker for Bootstrap 3
+ * version : 4.17.37
+ * https://github.com/Eonasdan/bootstrap-datetimepicker/
+ */
+.bootstrap-datetimepicker-widget {
   list-style: none;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu {
+.bootstrap-datetimepicker-widget.dropdown-menu {
   margin: 2px 0;
   padding: 4px;
   width: 19em;
 }
 @media (min-width: 768px) {
-  .show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
     width: 38em;
   }
 }
 @media (min-width: 992px) {
-  .show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
     width: 38em;
   }
 }
 @media (min-width: 1200px) {
-  .show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+  .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
     width: 38em;
   }
 }
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu:before,
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu:after {
+.bootstrap-datetimepicker-widget.dropdown-menu:before,
+.bootstrap-datetimepicker-widget.dropdown-menu:after {
   content: '';
   display: inline-block;
   position: absolute;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-bottom: 7px solid #cccccc;
@@ -2256,14 +2179,14 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   top: -7px;
   left: 7px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-bottom: 6px solid #ffffff;
   top: -6px;
   left: 8px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.top:before {
+.bootstrap-datetimepicker-widget.dropdown-menu.top:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #cccccc;
@@ -2271,42 +2194,42 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   bottom: -7px;
   left: 6px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.top:after {
+.bootstrap-datetimepicker-widget.dropdown-menu.top:after {
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 6px solid #ffffff;
   bottom: -6px;
   left: 7px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
+.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
   left: auto;
   right: 6px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {
+.bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {
   left: auto;
   right: 7px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget .list-unstyled {
+.bootstrap-datetimepicker-widget .list-unstyled {
   margin: 0;
 }
-.show-hide-password .bootstrap-datetimepicker-widget a[data-action] {
+.bootstrap-datetimepicker-widget a[data-action] {
   padding: 6px 0;
 }
-.show-hide-password .bootstrap-datetimepicker-widget a[data-action]:active {
+.bootstrap-datetimepicker-widget a[data-action]:active {
   box-shadow: none;
 }
-.show-hide-password .bootstrap-datetimepicker-widget .timepicker-hour,
-.show-hide-password .bootstrap-datetimepicker-widget .timepicker-minute,
-.show-hide-password .bootstrap-datetimepicker-widget .timepicker-second {
+.bootstrap-datetimepicker-widget .timepicker-hour,
+.bootstrap-datetimepicker-widget .timepicker-minute,
+.bootstrap-datetimepicker-widget .timepicker-second {
   width: 54px;
   font-weight: bold;
   font-size: 1.2em;
   margin: 0;
 }
-.show-hide-password .bootstrap-datetimepicker-widget button[data-action] {
+.bootstrap-datetimepicker-widget button[data-action] {
   padding: 6px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="incrementHours"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2317,7 +2240,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Increment Hours";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="incrementMinutes"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2328,7 +2251,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Increment Minutes";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="decrementHours"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2339,7 +2262,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Decrement Hours";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="decrementMinutes"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2350,7 +2273,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Decrement Minutes";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="showHours"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2361,7 +2284,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Show Hours";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="showMinutes"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2372,7 +2295,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Show Minutes";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="togglePeriod"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2383,7 +2306,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Toggle AM/PM";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="clear"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="clear"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2394,7 +2317,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Clear the picker";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .btn[data-action="today"]::after {
+.bootstrap-datetimepicker-widget .btn[data-action="today"]::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2405,10 +2328,10 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Set the date to today";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .picker-switch {
+.bootstrap-datetimepicker-widget .picker-switch {
   text-align: center;
 }
-.show-hide-password .bootstrap-datetimepicker-widget .picker-switch::after {
+.bootstrap-datetimepicker-widget .picker-switch::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2419,42 +2342,42 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Toggle Date and Time Screens";
 }
-.show-hide-password .bootstrap-datetimepicker-widget .picker-switch td {
+.bootstrap-datetimepicker-widget .picker-switch td {
   padding: 0;
   margin: 0;
   height: auto;
   width: auto;
   line-height: inherit;
 }
-.show-hide-password .bootstrap-datetimepicker-widget .picker-switch td span {
+.bootstrap-datetimepicker-widget .picker-switch td span {
   line-height: 2.5;
   height: 2.5em;
   width: 100%;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table {
+.bootstrap-datetimepicker-widget table {
   width: 100%;
   margin: 0;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td,
-.show-hide-password .bootstrap-datetimepicker-widget table th {
+.bootstrap-datetimepicker-widget table td,
+.bootstrap-datetimepicker-widget table th {
   text-align: center;
   border-radius: 1px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table th {
+.bootstrap-datetimepicker-widget table th {
   height: 20px;
   line-height: 20px;
   width: 20px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table th.picker-switch {
+.bootstrap-datetimepicker-widget table th.picker-switch {
   width: 145px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table th.disabled,
-.show-hide-password .bootstrap-datetimepicker-widget table th.disabled:hover {
+.bootstrap-datetimepicker-widget table th.disabled,
+.bootstrap-datetimepicker-widget table th.disabled:hover {
   background: none;
   color: #eeeeee;
   cursor: not-allowed;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table th.prev::after {
+.bootstrap-datetimepicker-widget table th.prev::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2465,7 +2388,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Previous Month";
 }
-.show-hide-password .bootstrap-datetimepicker-widget table th.next::after {
+.bootstrap-datetimepicker-widget table th.next::after {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2476,43 +2399,43 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border: 0;
   content: "Next Month";
 }
-.show-hide-password .bootstrap-datetimepicker-widget table thead tr:first-child th {
+.bootstrap-datetimepicker-widget table thead tr:first-child th {
   cursor: pointer;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+.bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
   background: #f9f9f9;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td {
+.bootstrap-datetimepicker-widget table td {
   height: 54px;
   line-height: 54px;
   width: 54px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.cw {
+.bootstrap-datetimepicker-widget table td.cw {
   font-size: .8em;
   height: 20px;
   line-height: 20px;
   color: #eeeeee;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.day {
+.bootstrap-datetimepicker-widget table td.day {
   height: 20px;
   line-height: 20px;
   width: 20px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.day:hover,
-.show-hide-password .bootstrap-datetimepicker-widget table td.hour:hover,
-.show-hide-password .bootstrap-datetimepicker-widget table td.minute:hover,
-.show-hide-password .bootstrap-datetimepicker-widget table td.second:hover {
+.bootstrap-datetimepicker-widget table td.day:hover,
+.bootstrap-datetimepicker-widget table td.hour:hover,
+.bootstrap-datetimepicker-widget table td.minute:hover,
+.bootstrap-datetimepicker-widget table td.second:hover {
   background: #f9f9f9;
   cursor: pointer;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.old,
-.show-hide-password .bootstrap-datetimepicker-widget table td.new {
+.bootstrap-datetimepicker-widget table td.old,
+.bootstrap-datetimepicker-widget table td.new {
   color: #eeeeee;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.today {
+.bootstrap-datetimepicker-widget table td.today {
   position: relative;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.today:before {
+.bootstrap-datetimepicker-widget table td.today:before {
   content: '';
   display: inline-block;
   border: solid transparent;
@@ -2523,22 +2446,22 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   bottom: 4px;
   right: 4px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.active,
-.show-hide-password .bootstrap-datetimepicker-widget table td.active:hover {
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
   background-color: #007db8;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.active.today:before {
+.bootstrap-datetimepicker-widget table td.active.today:before {
   border-bottom-color: #fff;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td.disabled,
-.show-hide-password .bootstrap-datetimepicker-widget table td.disabled:hover {
+.bootstrap-datetimepicker-widget table td.disabled,
+.bootstrap-datetimepicker-widget table td.disabled:hover {
   background: none;
   color: #eeeeee;
   cursor: not-allowed;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td span {
+.bootstrap-datetimepicker-widget table td span {
   display: inline-block;
   width: 54px;
   height: 54px;
@@ -2547,40 +2470,40 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   cursor: pointer;
   border-radius: 1px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td span:hover {
+.bootstrap-datetimepicker-widget table td span:hover {
   background: #f9f9f9;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td span.active {
+.bootstrap-datetimepicker-widget table td span.active {
   background-color: #007db8;
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td span.old {
+.bootstrap-datetimepicker-widget table td span.old {
   color: #eeeeee;
 }
-.show-hide-password .bootstrap-datetimepicker-widget table td span.disabled,
-.show-hide-password .bootstrap-datetimepicker-widget table td span.disabled:hover {
+.bootstrap-datetimepicker-widget table td span.disabled,
+.bootstrap-datetimepicker-widget table td span.disabled:hover {
   background: none;
   color: #eeeeee;
   cursor: not-allowed;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.usetwentyfour td.hour {
+.bootstrap-datetimepicker-widget.usetwentyfour td.hour {
   height: 27px;
   line-height: 27px;
 }
-.show-hide-password .bootstrap-datetimepicker-widget.wider {
+.bootstrap-datetimepicker-widget.wider {
   width: 21em;
 }
-.show-hide-password .bootstrap-datetimepicker-widget .datepicker-decades .decade {
+.bootstrap-datetimepicker-widget .datepicker-decades .decade {
   line-height: 1.8em !important;
 }
-.show-hide-password .input-group.date .input-group-addon {
+.input-group.date .input-group-addon {
   cursor: pointer;
 }
-.show-hide-password .date-selector {
+.date-selector {
   position: relative;
 }
-.show-hide-password .date-selector .icon-small-calendar {
+.date-selector .icon-small-calendar {
   position: absolute;
   top: 3px;
   right: 4px;
@@ -2589,16 +2512,16 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   cursor: pointer;
   float: right;
 }
-.show-hide-password .date-selector .icon-small-calendar:hover {
+.date-selector .icon-small-calendar:hover {
   background: #cce5f1;
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
 }
-.show-hide-password .date-selector .help-block {
+.date-selector .help-block {
   position: absolute;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget {
+.date-selector .bootstrap-datetimepicker-widget {
   margin: 2px 0;
   padding: 4px;
   width: 210px;
@@ -2607,192 +2530,188 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   border-radius: 1px;
   font-size: 14px;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget.pull-right {
+.date-selector .bootstrap-datetimepicker-widget.pull-right {
   top: -2px !important;
   right: -220px !important;
 }
 @media (max-width: 767px) {
-  .show-hide-password .date-selector .bootstrap-datetimepicker-widget.pull-left {
+  .date-selector .bootstrap-datetimepicker-widget.pull-left {
     left: 0 !important;
   }
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget.top {
+.date-selector .bootstrap-datetimepicker-widget.top {
   top: -264px !important;
   bottom: auto !important;
   position: absolute;
 }
 @media (max-width: 767px) {
-  .show-hide-password .date-selector .bootstrap-datetimepicker-widget.top {
+  .date-selector .bootstrap-datetimepicker-widget.top {
     top: -225px !important;
-    /*TODO this assumes that the label for date is full width*/
   }
-  .show-hide-password .date-selector .bootstrap-datetimepicker-widget.top.pull-left {
+  .date-selector .bootstrap-datetimepicker-widget.top.pull-left {
     top: -260px !important;
   }
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget.top.pull-right {
-  /*position:relative;*/
+.date-selector .bootstrap-datetimepicker-widget.top.pull-right {
   top: -220px !important;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget:before,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget:after {
-  /*the caret*/
+.date-selector .bootstrap-datetimepicker-widget:before,
+.date-selector .bootstrap-datetimepicker-widget:after {
   display: none;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget table {
+.date-selector .bootstrap-datetimepicker-widget table {
   border: 0;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days thead > tr:first-child > th:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months thead > tr:first-child > th:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years thead > tr:first-child > th:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades thead > tr:first-child > th:hover {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days thead > tr:first-child > th:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months thead > tr:first-child > th:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years thead > tr:first-child > th:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades thead > tr:first-child > th:hover {
   background: #007db8;
   color: #fff;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days td,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months td,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years td,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades td {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days td,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months td,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years td,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades td {
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days td.day,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months td.day,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years td.day,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades td.day {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days td.day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months td.day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years td.day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades td.day {
   width: 34px;
-  /*otherwise the colum with active is about 4 pixels wider*/
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days td span,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months td span,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years td span,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades td span {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days td span,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months td span,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years td span,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades td span {
   -webkit-border-radius: 1px;
   -moz-border-radius: 1px;
   border-radius: 1px;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .picker-switch,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .picker-switch,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .picker-switch,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .picker-switch {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .picker-switch,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .picker-switch,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .picker-switch,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .picker-switch {
   border-radius: 0;
   background: #007db8;
   color: #fff;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .prev,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .prev,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .prev,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .prev {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .prev,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .prev,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .prev,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .prev {
   -webkit-border-radius: 1px 0 0 1px;
   -moz-border-radius: 1px 0 0 1px;
   border-radius: 1px 0 0 1px;
   background: #007db8;
   color: #fff;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .next,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .next,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .next,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .next {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .next,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .next,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .next,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .next {
   -webkit-border-radius: 0 1px 1px 0;
   -moz-border-radius: 0 1px 1px 0;
   border-radius: 0 1px 1px 0;
   background: #007db8;
   color: #fff;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .day,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .day,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .day,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .month,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .month,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .month,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .year,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .year,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .year,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .month,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .month,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .month,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .year,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .year,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .year,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades {
   text-shadow: none;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .day.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .day.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .day.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .month.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .month.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .month.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .year.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .year.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .year.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades.active {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .day.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .day.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .day.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .month.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .month.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .month.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .year.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .year.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .year.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades.active {
   background: #007db8;
   color: #ffffff;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .day:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .day:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .day:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .month:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .month:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .month:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .year:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .year:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .year:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades:hover,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades:hover {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .day:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .day:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .day:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .month:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .month:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .month:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .year:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .year:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .year:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades:hover,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades:hover {
   background: #cce5f1;
   color: #444444;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .day:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .day:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .day:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .month:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .month:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .month:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .year:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .year:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .year:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades:hover.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades:hover.active {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .day:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .day:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .day:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .day:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .month:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .month:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .month:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .month:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .year:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .year:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .year:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .year:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .decades:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .decades:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .decades:hover.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .decades:hover.active {
   color: #ffffff;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .today,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .today,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .today,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .today,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .today,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .today,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today {
   border: 1px solid #007db8;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .today.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .today.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .today.active,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today.active {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .today.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .today.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .today.active,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today.active {
   background: #007db8;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-days .today:before,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-months .today:before,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-years .today:before,
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today:before {
+.date-selector .bootstrap-datetimepicker-widget .datepicker-days .today:before,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-months .today:before,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-years .today:before,
+.date-selector .bootstrap-datetimepicker-widget .datepicker-decades .today:before {
   display: none;
 }
-.show-hide-password .date-selector .bootstrap-datetimepicker-widget li.picker-switch {
+.date-selector .bootstrap-datetimepicker-widget li.picker-switch {
   display: none;
 }
 /*
@@ -4817,60 +4736,6 @@ div.DTCR_pointer {
  * Typography component theme overrides
  *------------------------------------------------------------------------------------------
  */
-/* TODO temp changes that need to be made in DUB package */
-a:hover {
-  text-decoration: underline !important;
-}
-a.btn:not(.btn-link):hover,
-a.carousel-control:hover,
-.dropdown-menu a,
-.nav-tabs a:hover,
-.next a:hover,
-.prev a:hover,
-.nav-stacked a:hover,
-.nav-pills a:hover,
-.gallery-item a:hover,
-.pager a:hover,
-a[data-toggle="collapse"]:hover,
-.panel-title a:hover,
-.carousel .itme > a:hover,
-.navbar a:hover {
-  text-decoration: none !important;
-}
-a > h1,
-a > h2,
-a > h3,
-a > h4,
-a > h5,
-a > h6 {
-  color: #007db8 !important;
-}
-a:hover > h1,
-a:hover > h2,
-a:hover > h3,
-a:hover > h4,
-a:hover > h5,
-a:hover > h6,
-.list-unstyled a:hover {
-  color: #007db8 !important;
-}
-.navbar-inverse a h1,
-.navbar-inverse a:hover h1 {
-  color: white !important;
-}
-.navbar-nav .subLinks a:hover,
-.value-props-gallery:hover a:hover {
-  color: #007db8 !important;
-}
-.nav-pills .active a:hover {
-  color: #FFFFFF !important;
-}
-a[data-toggle=popover]:hover,
-[data-toggle=tooltip]:hover {
-  text-decoration: none !important;
-  color: inherit !important;
-}
-/* end of temp changes that need to be made in DUB package */
 /*
  * Ratings-And-Reviews component theme overrides - OLD
  *------------------------------------------------------------------------------------------
@@ -5013,11 +4878,6 @@ a.hide-expanded.collapsed {
 .inline-image-content-links ul > span span {
   padding-top: 10px;
   padding-bottom: 10px;
-  text-decoration: none !important;
-}
-.inline-image-content-links [data-toggle=tooltip] {
-  color: inherit;
-  border-bottom: none;
 }
 @media (max-width: 767px) {
   .image-content-links li {

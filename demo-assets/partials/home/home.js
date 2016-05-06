@@ -3,11 +3,6 @@ angular.module('demo').controller('HomeCtrl',function($scope,$rootScope,$http,$s
     $rootScope.activeComponent = "";
     $rootScope.pageType = "demo";
     var init;
-    $scope.branch = "";
-    $http.get('.git/HEAD').
-        success(function(data) {
-           $scope.branch = data.replace('ref: refs/heads/',''); 
-        });
     $http.get('components/components-list.json').
         success(function(data) {
             $rootScope.components =[];
