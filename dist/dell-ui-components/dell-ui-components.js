@@ -22319,9 +22319,8 @@ angular.module('dellUiComponents').directive('carousel', [
 angular.module('dellUiComponents').directive('msCheckbox', function () {
   return {
     restrict: 'C',
-    link: function ($scope, $element, $attr) {
-      var placeholderText = typeof $attr.placeholder !== 'undefined' ? $attr.placeholder : 'Please select';
-      $element.multipleSelect({ placeholder: placeholderText });
+    link: function () {
+      $('.ms-checkbox').multipleSelect({ placeholder: 'Select title' });
     }
   };
 }).directive('listTree', function () {
@@ -22337,21 +22336,50 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       });
     }
   };
-}).directive('emailCheck', function () {
+}).directive('emailValidate', function () {
   return {
     restrict: 'C',
-    link: function ($scope, $element, attributes, controller) {
-      $element.on('blur', function () {
-        var string1 = $element.val(), regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
+    link: function ($scope, element, attributes, controller) {
+      $(element).blur(function () {
+        var email = $(this).validate();
+        var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
+        if (re.test(element)) {
+          $(element).addClass('alert alert-warning');
+          $(element).tooltip({ title: 'Please input a valid email address!' });
+        } else {
+        }
+      });
+    }
+  };
+}).directive('emailCheck', function () {
+  return {
+    restrict: 'AEC',
+    link: function ($scope, element, attributes, controller) {
+      //$(element).blur(function () {
+      //    var string1 = $(element).val();
+      //    if (string1.indexOf("@") === -1){
+      //        $(element).addClass('alert alert-warning');
+      //        $(element).tooltip({
+      //            title: "Please input a valid email address!"
+      //        });
+      //    //$(element).blur();
+      //    } else {
+      //        $(element).removeClass('alert alert-warning');
+      //        $(element).tooltip('disable');
+      //    }
+      //});
+      $(element).on('keyup', function () {
+        var string1 = $(element).val();
+        var regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
         if (!string1.match(regex)) {
           if (!attributes.errorMessage) {
             attributes.errorMessage = 'Please input a valid email address!';
           }
-          $element.parents('.form-group').addClass('has-error');
-          $element.tooltip({ title: attributes.errorMessage });
+          $(element).addClass('alert alert-warning');
+          $(element).tooltip({ title: attributes.errorMessage });
         } else {
-          $element.parents('.form-group').removeClass('has-error');
-          $element.tooltip('destroy');
+          $(element).removeClass('alert alert-warning');
+          $(element).tooltip('destroy');
         }
       });
     }
@@ -22362,9 +22390,9 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
     link: function ($scope, $element, $attrs, controller) {
       $element.find('.checkbox input[type=checkbox]').on('click', function () {
         if ($element.find('.checkbox input[type=checkbox]').is(':checked')) {
-          $element.find('input[type=password]').attr('type', 'text');
+          $($element).find('input[type=password]').attr('type', 'text');
         } else {
-          $element.find('input[type=text]').attr('type', 'password');
+          $($element).find('input[type=text]').attr('type', 'password');
         }
       });
     }
@@ -22373,24 +22401,22 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   // Runs during compile
   return {
     restrict: 'C',
-    link: function ($scope, $element, $attrs, controller) {
+    link: function ($scope, element, attributes, controller) {
       //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
       //TODO use $locale to create mask
-      if ($element.is('input')) {
-        $element.attr('data-inputmask', '\'mask\': \'(999)-999-9999\'');
-        $element.inputmask();
+      if ($(element).is('input')) {
+        $(element).attr('data-inputmask', '\'mask\': \'(999)-999-9999\'');
+        $(element).inputmask();
       }
     }
   };
 }).directive('phoneExtension', function () {
   return {
     restrict: 'C',
-    link: function ($scope, $element, $attrs, controller) {
-      if ($element.is('input')) {
-        if (!$attrs.inputmask) {
-          $element.attr('data-inputmask', '\'mask\': \'ext: (9999)\'');
-        }
-        $element.inputmask();
+    link: function ($scope, element, attributes, controller) {
+      if ($(element).is('input')) {
+        $(element).attr('data-inputmask', '\'mask\': \'ext: (9999)\'');
+        $(element).inputmask();
       }
     }
   };
@@ -22819,7 +22845,52 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
     };
   }
 ]);
-angular.module('dellUiComponents').directive('pagination', function () {
+angular.module('dellUiComponents').directive('alertCollapsible', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, $attrs) {
+      //toggle x
+      $element.find('.close').on('click', function () {
+        $(event.currentTarget).parent().addClass('collapsed');
+      });
+      $element.find('> .show-collapsed').on('click', function () {
+        $(event.currentTarget).parent().removeClass('collapsed');
+      });
+    }
+  };
+});
+angular.module('dellUiComponents').directive('tableResponsive', [
+  '$timeout',
+  function ($timeout) {
+    // Runs during compile
+    return {
+      restrict: 'AC',
+      link: function ($scope, $element, $attrs, controller) {
+        $element.rtResponsiveTables({ containerBreakPoint: 300 });
+      }
+    };
+  }
+]);
+/**
+ * Created by Clint_Batte on 5/7/2015.
+ */
+angular.module('dellUiComponents').directive('tapToLoad', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, attrs) {
+      $(document).ready(function () {
+        $('.news-pagination li').slice(5).hide();
+        $('#loadmore').jqPagination({
+          max_page: Math.ceil($('.news-pagination li').length / 5),
+          paged: function (page) {
+            $('.news-pagination li').hide();
+            $('.news-pagination li').slice((page - 1) * 5, page * 5).fadeIn('slow');
+          }
+        });
+      });
+    }
+  };
+}).directive('pagination', function () {
   return {
     restrict: 'C',
     link: function ($scope, $element, attrs) {
@@ -22918,6 +22989,18 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     });
   });
 }(jQuery, Eve));
+angular.module('dellUiComponents').directive('contentGallery', [
+  '$timeout',
+  '$rootScope',
+  function ($timeout, $rootScope) {
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, iAttrs, controller) {
+        $element.dellUIcontentGallery();
+      }
+    };
+  }
+]);
 /**
  * Created by Clint_Batte on 5/18/2015.
  */

@@ -3,6 +3,10 @@
  *------------------------------------------------------------------------------------------
  */
 
+
+
+
+
 .show-hide-password {
     .checkbox,
     .radio {
@@ -25,12 +29,6 @@
         }
     }
 
-
-.show-password .checkbox,
-.show-password .radio {
-    margin-bottom: 5px;
-    margin-top: -5px;
-    margin-left: 20px;
 }
 
 // tree view
@@ -42,50 +40,10 @@
         > ul {
             list-style-type: none;
             display:none;
-            >li {
-                > ul {
-                    list-style-type: none;
-                    display:none;
-                    }    
-                }
         }
         label.open + ul {
             display:block;
         }
-        a {
-            color: #444444;
-            line-height: 0 /* 1.42857 */;
-            /*>.collapsed {
-                float: left;
-            }*/
-        }
-    }
-    
-    [data-toggle="collapse"] .icon-ui-triangledown, [data-toggle="collapse"] .icon-ui-triangleright, [data-toggle="collapse"] .icon-ui-triangleup {
-        top: 4px;
-        padding-right: 10px;
-    }
-    .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
-        margin-left: -5px;
-        position: absolute;
-    }
-    .checkbox {
-        display: inline-block;
-    }
-
-    .hide-expanded, .show-collapsed, .collapsed .show-collapsed {
-        padding: 0;
-    }
-    ul.greatgrandchild {
-        list-style-type: none;
-        overflow: visible;
-    }
-    .grandchild5 {
-        position: relative;
-        left: -27px;
-    }
-    .some-kids-chekced {
-        background: @dell-blue;
     }
 }
 
@@ -117,13 +75,13 @@
     padding: 10px 10px 10px 0;
 }
 
-/* spinbox */
+// spinbox
 .dpui-numberPicker i {
     font-size: 10px;
     vertical-align: middle;
 }
 
-/* multi-select with checkboxes */
+// multi-select with checkboxes
 
 .ms-parent {
     display: inline-block;
@@ -256,12 +214,8 @@
                 white-space: nowrap;
                 color: @dell-blue;
                 padding: 3px 3px 3px 3px;
-                cursor: pointer;
                 &.optgroup {
                     font-weight: bold;
-                }
-                input[type=checkbox] {
-                    top: 0px;
                 }
             }
             &:hover,
@@ -329,20 +283,9 @@
     height: 0;
 }
 
-.has-error {
-    .form-control,
-    input.form-control {
-        background: @dell-alert-yellow;
-        &:active,
-        &:focus {
-            background: @white;
-            border-color: @dell-blue;
-            box-shadow: 0 0 2px lighten(@dell-blue, 40%);
-        }
-    }
-}
 
-/*============== |bootstrap slider| =================*/
+
+//============== bootstrap slider =================
 
 
 
@@ -529,7 +472,7 @@
 
 
 
-/*============== |bootstrap slider| ================*/
+//============== /bootstrap slider ================
 
 
 /* Extra small devices (phones, less than 768px) */
@@ -578,7 +521,7 @@
 
 
 
-/*===================== |slider| ============================*/
+//===================== slider ============================
 
 .slider {
     display: inline-block;
@@ -833,7 +776,7 @@
 
 
 
-/*==================== |slider| ============================*/
+//==================== /slider ============================
 
 
 
@@ -857,9 +800,13 @@
 
 .date-selector {
     position:relative;
+    //width: 15em;
     .icon-small-calendar {
         position:absolute;
         top: 3px;
+        // @media (max-width: @screen-xs-max) {
+        //     top: 3px; //TODO this assumes that the label for date is full width
+        // }
         right: 4px;
         padding: 5px;
         color: @dell-blue;
@@ -896,7 +843,7 @@
         &.top {
             top: -264px !important;
             @media (max-width: @screen-xs-max) {
-                top: -225px !important; /*TODO this assumes that the label for date is full width*/
+                top: -225px !important; //TODO this assumes that the label for date is full width
                 &.pull-left {
                     top: -260px !important;
                 }
@@ -904,14 +851,14 @@
             bottom: auto !important;
             position:absolute;
             &.pull-right {
-                /*position:relative;*/
+                //position:relative;
                 top: -220px !important;
             }
 
 
         }
         &:before,&:after {
-            /*the caret*/
+            //the caret
             display:none;
         }
         table {
@@ -932,7 +879,7 @@
                 -moz-border-radius:    @border-radius-small;
                 border-radius:         @border-radius-small;
                 &.day {
-                    width: 34px; /*otherwise the colum with active is about 4 pixels wider*/
+                    width: 34px; //otherwise the colum with active is about 4 pixels wider
                 }
                 span {
                     -webkit-border-radius: @border-radius-small;
@@ -987,10 +934,13 @@
 
         }
 
-        li.picker-switch {
-            display: none;
-        }
-
-    }
+        li.picker-switch {display: none;}
     }
 }
+
+
+
+
+
+
+

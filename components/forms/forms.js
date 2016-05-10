@@ -6,11 +6,11 @@ angular.module('dellUiComponents')
 .directive('msCheckbox', function() {
     return {
         restrict: 'C',
-        link: function ($scope, $element, $attr) {
-            var placeholderText = typeof $attr.placeholder !== 'undefined' ? $attr.placeholder : "Please select";
-            $element.multipleSelect({
-                placeholder: placeholderText
+        link: function () {
+            $('.ms-checkbox').multipleSelect({
+                placeholder: "Select title"
             });
+
         }
     };
 
@@ -31,41 +31,83 @@ angular.module('dellUiComponents')
     };
 })
 
-.directive('emailCheck', function() {
+
+.directive('emailValidate', function() {
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-        link: function($scope, $element, attributes, controller) {
-
-            $element.on('blur',function () {
-                var string1 = $element.val(),
-                    regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
-
-                if (!string1.match(regex)){
-                    if(!attributes.errorMessage) {
-                        attributes.errorMessage = "Please input a valid email address!";
-                    }
-                    $element.parents('.form-group').addClass('has-error');
-                    $element.tooltip({
-                        title: attributes.errorMessage,
+        link: function($scope, element, attributes, controller) {
+            $(element).blur(function () {
+                var email = $(this).validate();
+                var re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+                if (re.test(element)) {
+                    $(element).addClass('alert alert-warning');
+                    $(element).tooltip({
+                        title: "Please input a valid email address!",
                     });
                 } else {
-                    $element.parents('.form-group').removeClass('has-error');
-                    $element.tooltip('destroy');
+                    //$(this).addClass('alert alert-warning');
                 }
             });
         }
     };
 })
 
-.directive('showHidePassword', function() {
+
+    .directive('emailCheck', function() {
     return {
-        restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+        restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
+        link: function($scope, element, attributes, controller) {
+
+            //$(element).blur(function () {
+            //    var string1 = $(element).val();
+            //    if (string1.indexOf("@") === -1){
+            //        $(element).addClass('alert alert-warning');
+            //        $(element).tooltip({
+            //            title: "Please input a valid email address!"
+            //        });
+            //    //$(element).blur();
+            //    } else {
+            //        $(element).removeClass('alert alert-warning');
+            //        $(element).tooltip('disable');
+            //    }
+            //});
+
+
+            $(element).on('keyup',function () {
+                var string1 = $(element).val();
+                var regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
+
+                if (!string1.match(regex)){
+                    if(!attributes.errorMessage) {
+                        attributes.errorMessage = "Please input a valid email address!";
+                    }
+                    $(element).addClass('alert alert-warning');
+                    $(element).tooltip({
+                        title: attributes.errorMessage,
+                    });
+                } else {
+                    $(element).removeClass('alert alert-warning');
+                    $(element).tooltip('destroy');
+                }
+            });
+        }
+    };
+})
+
+
+
+
+
+.directive('showHidePassword', function() {
+return {
+    restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
+
         link: function($scope, $element, $attrs, controller) {
             $element.find('.checkbox input[type=checkbox]').on('click',function(){
                 if($element.find('.checkbox input[type=checkbox]').is(":checked")){
-                    $element.find('input[type=password]').attr('type', 'text');
+                    $($element).find('input[type=password]').attr('type', 'text');
                 } else {
-                    $element.find('input[type=text]').attr('type', 'password');
+                    $($element).find('input[type=text]').attr('type', 'password');
                 }
             });
         }
@@ -76,12 +118,12 @@ angular.module('dellUiComponents')
     // Runs during compile
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-        link: function($scope, $element, $attrs, controller) {
+        link: function($scope, element, attributes, controller) {
             //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
             //TODO use $locale to create mask
-            if ($element.is('input')) {
-                $element.attr('data-inputmask', "'mask': '(999)-999-9999'");
-                $element.inputmask();
+            if ($(element).is('input')) {
+                $(element).attr('data-inputmask', "'mask': '(999)-999-9999'");
+                $(element).inputmask();
             }
         }
     };
@@ -90,12 +132,11 @@ angular.module('dellUiComponents')
 .directive('phoneExtension', function() {
     return {
         restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-        link: function($scope, $element, $attrs, controller) {
-            if ($element.is('input')) {
-                if(!$attrs.inputmask) {
-                   $element.attr('data-inputmask', "'mask': 'ext: (9999)'"); 
-                }     
-                $element.inputmask();
+        link: function($scope, element, attributes, controller) {
+
+            if ($(element).is('input')) {
+                $(element).attr('data-inputmask', "'mask': 'ext: (9999)'");
+                $(element).inputmask();
             }
         }
     };
@@ -127,7 +168,6 @@ angular.module('dellUiComponents')
 
 
 //----------- spin box -------------------------------------------------------
-//TODO all this needs to be looked at - the directive needs to be properly scoped to the element not $( ".spinbox" )
 
 .directive('spinbox', function() {
     return {
