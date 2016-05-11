@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="" ng-class="{alienware:alienware}">
     <head>
         <title>Dell UI Bootstrap Theme Implementation</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         
     <!--[if !IE]><!--><link rel="stylesheet" href="../dell-ui-bootstrap.min.css"><![endif]--><!--[if IE]><link rel="stylesheet" href="../dell-ui-bootstrap-ie.min.css"><![endif]--></head>
-    <body ng-app="">
+    <body>
         
         
         
@@ -46,11 +46,19 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                   <ul class="nav navbar-nav pull-right">
+                    <li>
+                      <a href="javascript:;" ng-click="alienware = !alienware">
+                        <span ng-show="!alienware">Show</span>
+                        <span ng-show="alienware">Hide</span>
+                        Alienware
+                      </a>
+                    </li>
                     <li><a href="https://github.com/DellGDC/dell-ui-bootstrap">Github</a></li>
                   </ul>
                 </div><!--/.nav-collapse -->
               </div>
             </nav>
+
             <div id="content" ng-include="&apos;demo.html&apos;"></div>
         </div>
         
