@@ -5,14 +5,15 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 @font-face {
-  font-family: "Roboto-Bold";
-  src: url("fonts/Roboto-bold.ttf") format('truetype');
+  font-family: 'museo-sans-for-dell-100';
+  src: url('fonts/museosansfordell-100-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/museosansfordell-100-webfont.woff') format('woff'), url('fonts/museosansfordell-100-webfont.ttf') format('truetype'), url('fonts/museosansfordell-100-webfont.svg#MuseoSansForDell100') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "Roboto-Regular";
-  src: url("fonts/Roboto-regular.ttf") format('truetype');
+  font-family: 'museo-sans-for-dell-300';
+  src: url('fonts/museosansfordell-300-webfont.eot');
+  src: url('fonts/museosansfordell-300-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/museosansfordell-300-webfont.woff') format('woff'), url('fonts/museosansfordell-300-webfont.ttf') format('truetype'), url('fonts/museosansfordell-300-webfont.svg#MuseoSansForDell300') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -34,13 +35,6 @@
   font-family: 'icon-large';
   src: url('fonts/icon-large.eot');
   src: url('fonts/icon-large.eot?#iefix') format('embedded-opentype'), url('fonts/icon-large.woff') format('woff'), url('fonts/icon-large.ttf') format('truetype'), url('fonts/icon-large.svg#icon-large') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'icon-brand';
-  src: url('fonts/icon-brand.eot?dqow80');
-  src: url('fonts/icon-brand.eot?dqow80#iefix') format('embedded-opentype'), url('fonts/icon-brand.ttf?dqow80') format('truetype'), url('fonts/icon-brand.woff?dqow80') format('woff'), url('fonts/icon-brand.svg?dqow80#icon-brand') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -309,7 +303,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: 'Roboto-Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
   color: #444444;
@@ -411,7 +405,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+  font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-weight: normal;
   line-height: 1.1;
   color: inherit;
@@ -6152,7 +6146,7 @@ button.close {
   position: absolute;
   z-index: 1030;
   display: block;
-  font-family: 'Roboto-Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -6270,7 +6264,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: 'Roboto-Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -9937,43 +9931,6 @@ textarea + .help-block,
 .icon-ui-triangleup:before {
   content: "\e611";
 }
-/* Use the following CSS code if you want to use data attributes for inserting your icons */
-[data-icon]:before {
-  font-family: 'icon-brand';
-  content: attr(data-icon);
-  speak: none;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.icon-brand-dell,
-.icon-brand-dellemc,
-.icon-brand-delltechnologies {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icon-brand' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.icon-brand-dell:before {
-  content: "\e900";
-}
-.icon-brand-dellemc:before {
-  content: "\e901";
-}
-.icon-brand-delltechnologies:before {
-  content: "\e902";
-}
 [class*=icon-small-favorite] {
   background-image: url("img/dell-glyphons-halflings-multi-color.png");
   background-position: -281px -43px;
@@ -10048,19 +10005,11 @@ label {
   display: block;
   padding: 10px 10px 10px 0;
 }
-.label {
-  font-weight: normal;
-  font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
-}
 ul.unstyled,
 ol.unstyled {
   margin-left: 0;
   padding-left: 0;
   list-style: none;
-}
-dt {
-  font-weight: normal;
-  font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
 }
 .modal-header {
   padding: 15px 0;
@@ -10481,7 +10430,7 @@ dt {
   margin: 0;
   padding: 0 0 10px 0;
   font-size: 16px;
-  font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+  font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-weight: bold;
   line-height: 18px;
   border-bottom: 1px solid #aaaaaa;
@@ -10685,10 +10634,6 @@ dt {
 .table h5 {
   margin: 5px 0px;
 }
-th {
-  font-weight: normal;
-  font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
-}
 .tooltip {
   font-size: 12px;
   border: 1px solid #cccccc;
@@ -10815,7 +10760,7 @@ h3,
 .h3,
 h4,
 .h4 {
-  margin: 0 0 10px 0;
+  margin: 0px 0px 10px 0px;
 }
 h1 strong,
 .h1 strong,
@@ -10833,7 +10778,7 @@ h2,
 .h2,
 h3,
 .h3 {
-  font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+  font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
 }
 h4,
 .h4,
@@ -10841,7 +10786,7 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-family: 'Roboto-Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
 }
 /* Header - title - NOTE: not part of Bootstrap*/
 .title {
@@ -10854,7 +10799,7 @@ h6,
 .title h1 {
   display: inline-block;
   background: #ffffff;
-  padding: 0 10px;
+  padding: 0px 10px;
   max-width: 80%;
 }
 .strike-through {
@@ -10873,7 +10818,7 @@ h6,
   }
   h3.feature,
   .h3.feature {
-    font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 24px;
     line-height: 28px;
   }
@@ -10921,7 +10866,7 @@ h6,
   }
   h3.feature,
   .h3.feature {
-    font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 22px;
     line-height: 26px;
   }
@@ -10969,7 +10914,7 @@ h6,
   }
   h3.feature,
   .h3.feature {
-    font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 18px;
     line-height: 22px;
   }
@@ -11011,10 +10956,6 @@ p small {
 .text-rtl {
   direction: rtl;
   unicode-bidi: bidi-override;
-}
-strong {
-  font-weight: normal;
-  font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
 }
 /* Add Component LESS Above */
 /*
