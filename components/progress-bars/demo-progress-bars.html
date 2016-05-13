@@ -94,6 +94,32 @@
 
         </div>
 
+        <div class="well well-gray-very-light-stroke bottom-offset-60">
+            <div class="bottom-offset-60">
+                <h4>Progress status 6-Step maximum</h4>
+                <div class="progress progress-status">
+                    <a href="javascript:;" class="bar bar-complete" style="width: 16.666%">
+                        <span class="hidden-xs hidden-sm">Step 1</span>
+                    </a>
+                    <a href="javascript:;" class="bar bar-complete" style="width: 16.666%">
+                        <span class="hidden-xs hidden-sm">Step 2</span>
+                    </a>
+                    <a href="javascript:;" class="bar bar-complete" style="width: 16.666%">
+                        <span class="hidden-xs hidden-sm">Step 3</span>
+                    </a>
+                    <div class="bar bar-progress" style="width: 16.666%">
+                        <span class="hidden-xs hidden-sm">Step 4</span>
+                    </div>
+                    <div class="bar bar-incomplete" style="width: 16.666%">
+                        <span class="hidden-xs hidden-sm">Step 5</span>
+                    </div>
+                    <div class="bar bar-incomplete" style="width: 16.666%">
+                        <span class="hidden-xs hidden-sm">Step 6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
 
@@ -111,25 +137,25 @@
             <h4>Striped progress</h4>
 
             <div ng-init="fakeAnimation()" class="interactive-progress-bar">
-                <div class="pull-right progress-counter hidden-xs">
-                    <h4 class="pull-right">{{fakeAnimationValue}}%</h4>
-                </div>
                 <div class="progress bottom-offset-5">
                     <div ng-class="stripeAnimate" class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="{{fakeAnimationValue}}" aria-valuemin="0" aria-valuemax="100" style="width: {{fakeAnimationValue}}%">
                     </div>
+                    <div class="">
+                        <div class="pull-right progress-counter hidden-xs">
+                            <h5>{{fakeAnimationValue}}%</h5>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <p class="pull-left">Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5</p>
-                    <div class="btn-group pull-right fake-animation-controls">
-
-                        <button type="reset" class="btn btn-default" ng-click="resetFakeAnimation()" ng-if="fakeAnimationValue !== 100">Cancel</button>
-
-                        <button type="submit" class="btn btn-primary" ng-click="pauseFakeAnimation()" ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button>
-
-                        <button type="submit" class="btn btn-primary" ng-click="fakeAnimation()" ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button>
-
-                        <button type="submit" class="btn btn-primary" ng-if="fakeAnimationValue === 100" ng-click="resetFakeAnimation()" >Ok</button>
-
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="">Download<span ng-if="fakeAnimationValue < 100">ing</span><span ng-if="fakeAnimationValue === 100">ed</span> {{fakeAnimationSteps}} of 5
+                            <div class="btn-group pull-right fake-animation-controls">
+                                <button type="reset" class="btn btn-default" ng-click="resetFakeAnimation()" ng-if="fakeAnimationValue !== 100">Cancel</button>
+                                <button type="submit" class="btn btn-primary" ng-click="pauseFakeAnimation()" ng-if="fakeAnimationId && fakeAnimationValue !== 100">Pause</button>
+                                <button type="submit" class="btn btn-primary" ng-click="fakeAnimation()" ng-if="!fakeAnimationId && fakeAnimationValue !== 100">Resume</button>
+                                <button type="submit" class="btn btn-primary" ng-if="fakeAnimationValue === 100" ng-click="resetFakeAnimation()" >Ok</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
