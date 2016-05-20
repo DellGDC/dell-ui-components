@@ -5,15 +5,16 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 @font-face {
-  font-family: "Roboto-Light";
-  src: url("fonts/Roboto-Light.ttf") format('truetype');
-  font-weight: 300;
+  font-family: 'museo-sans-for-dell-100';
+  src: url('fonts/museosansfordell-100-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/museosansfordell-100-webfont.woff') format('woff'), url('fonts/museosansfordell-100-webfont.ttf') format('truetype'), url('fonts/museosansfordell-100-webfont.svg#MuseoSansForDell100') format('svg');
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "Roboto-Regular";
-  src: url("fonts/Roboto-Regular.ttf") format('truetype');
-  font-weight: 400;
+  font-family: 'museo-sans-for-dell-300';
+  src: url('fonts/museosansfordell-300-webfont.eot');
+  src: url('fonts/museosansfordell-300-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/museosansfordell-300-webfont.woff') format('woff'), url('fonts/museosansfordell-300-webfont.ttf') format('truetype'), url('fonts/museosansfordell-300-webfont.svg#MuseoSansForDell300') format('svg');
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
@@ -34,162 +35,6 @@
   font-family: 'icon-large';
   src: url('fonts/icon-large.eot');
   src: url('fonts/icon-large.eot?#iefix') format('embedded-opentype'), url('fonts/icon-large.woff') format('woff'), url('fonts/icon-large.ttf') format('truetype'), url('fonts/icon-large.svg#icon-large') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoKufiArabic-Regular";
-  src: url("fonts/NotoKufiArabic-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoNaskhArabic-Regular";
-  src: url("fonts/NotoNaskhArabic-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoNastaliqUrdu-Regular";
-  src: url("fonts/NotoNastaliqUrdu-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSans-Regular";
-  src: url("fonts/NotoSans-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansBengali-Regular";
-  src: url("fonts/NotoSansBengali-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansCJKjp-Regular";
-  src: url("fonts/NotoSansCJKjp-Regular.otf") format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansCJKjp-Regular";
-  src: url("fonts/NotoSansCJKkr-Regular.otf") format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansCJKsc-Regular";
-  src: url("fonts/NotoSansCJKsc-Regular.otf") format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansCJKtc-Regular";
-  src: url("fonts/NotoSansCJKtc-Regular.otf") format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansCypriot-Regular";
-  src: url("fonts/NotoSansCypriot-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansDevanagari-Regular";
-  src: url("fonts/NotoSansDevanagari-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansGujarati-Regular";
-  src: url("fonts/NotoSansGujarati-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansHebrew-Regular";
-  src: url("fonts/NotoSansHebrew-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansKannada-Regular";
-  src: url("fonts/NotoSansKannada-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansLinearB-Regular";
-  src: url("fonts/NotoSansLinearB-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansMalayalam-Regular";
-  src: url("fonts/NotoSansMalayalam-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansMalayalam-Regular";
-  src: url("fonts/NotoSansMalayalam-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansMonoCJKjp-Regular";
-  src: url("fonts/NotoSansMonoCJKjp-Regular.otf") format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansMonoCJKkr-Regular";
-  src: url("fonts/NotoSansMonoCJKkr-Regular.otf") format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansMonoCJKsc-Regular";
-  src: url("fonts/NotoSansMonoCJKsc-Regular.otf") format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansPhagsPa-Regular";
-  src: url("fonts/NotoSansPhagsPa-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansSyriacEstrangela-Regular";
-  src: url("fonts/NotoSansSyriacEstrangela-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansSyriacWestern-Regular";
-  src: url("fonts/NotoSansSyriacWestern-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansTaiTham-Regular";
-  src: url("fonts/NotoSansTaiTham-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansTamil-Regular";
-  src: url("fonts/NotoSansTamil-Regular.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: "NotoSansThai-Regular";
-  src: url("fonts/NotoSansThai-Regular.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -458,7 +303,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
   color: #444444;
@@ -560,7 +405,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: 'Roboto-Bold', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Arial', sans-serif;
+  font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-weight: normal;
   line-height: 1.1;
   color: inherit;
@@ -6301,7 +6146,7 @@ button.close {
   position: absolute;
   z-index: 1030;
   display: block;
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -6419,7 +6264,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -10086,47 +9931,6 @@ textarea + .help-block,
 .icon-ui-triangleup:before {
   content: "\e611";
 }
-/* Use the following CSS code if you want to use data attributes for inserting your icons */
-[data-icon]:before {
-  font-family: 'icon-brand';
-  content: attr(data-icon);
-  speak: none;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.icon-brand-dell,
-.icon-brand-dellemc,
-.icon-brand-delltechnologies,
-.icon-brand-delltechnologiesVert {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icon-brand' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.icon-brand-dell:before {
-  content: "\e900";
-}
-.icon-brand-dellemc:before {
-  content: "\e901";
-}
-.icon-brand-delltechnologies:before {
-  content: "\e902";
-}
-.icon-brand-delltechnologiesVert:before {
-  content: "\e903";
-}
 [class*=icon-small-favorite] {
   background-image: url("img/dell-glyphons-halflings-multi-color.png");
   background-position: -281px -43px;
@@ -10201,19 +10005,11 @@ label {
   display: block;
   padding: 10px 10px 10px 0;
 }
-.label {
-  font-weight: normal;
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
-}
 ul.unstyled,
 ol.unstyled {
   margin-left: 0;
   padding-left: 0;
   list-style: none;
-}
-dt {
-  font-weight: normal;
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
 }
 .modal-header {
   padding: 15px 0;
@@ -10634,7 +10430,7 @@ dt {
   margin: 0;
   padding: 0 0 10px 0;
   font-size: 16px;
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
+  font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
   font-weight: bold;
   line-height: 18px;
   border-bottom: 1px solid #aaaaaa;
@@ -10838,10 +10634,6 @@ dt {
 .table h5 {
   margin: 5px 0px;
 }
-th {
-  font-weight: normal;
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
-}
 .tooltip {
   font-size: 12px;
   border: 1px solid #cccccc;
@@ -10968,7 +10760,7 @@ h3,
 .h3,
 h4,
 .h4 {
-  margin: 0 0 10px 0;
+  margin: 0px 0px 10px 0px;
 }
 h1 strong,
 .h1 strong,
@@ -10985,14 +10777,16 @@ h1,
 h2,
 .h2,
 h3,
-.h3,
+.h3 {
+  font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
+}
 h4,
 .h4,
 h5,
 .h5,
 h6,
 .h6 {
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
 }
 /* Header - title - NOTE: not part of Bootstrap*/
 .title {
@@ -11005,7 +10799,7 @@ h6,
 .title h1 {
   display: inline-block;
   background: #ffffff;
-  padding: 0 10px;
+  padding: 0px 10px;
   max-width: 80%;
 }
 .strike-through {
@@ -11016,62 +10810,47 @@ h6,
   .h1 {
     font-size: 32px;
     line-height: 40px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h2,
   .h2 {
     font-size: 28px;
     line-height: 32px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h3.feature,
   .h3.feature {
-    font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 24px;
     line-height: 28px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h3,
   .h3 {
     font-size: 20px;
     line-height: 24px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h4,
   .h4 {
     font-size: 18px;
     line-height: 22px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
   }
   h5,
   .h5 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
   }
   .bold-16 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
   .bold-14 {
     font-size: 14px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
   .bold-12 {
     font-size: 12px;
     line-height: 15px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -11079,62 +10858,47 @@ h6,
   .h1 {
     font-size: 30px;
     line-height: 36px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h2,
   .h2 {
     font-size: 26px;
     line-height: 30px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h3.feature,
   .h3.feature {
-    font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 22px;
     line-height: 26px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h3,
   .h3 {
     font-size: 20px;
     line-height: 24px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h4,
   .h4 {
     font-size: 18px;
     line-height: 22px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
   }
   h5,
   .h5 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
   }
   .bold-16 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
   .bold-14 {
     font-size: 14px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
   .bold-12 {
     font-size: 12px;
     line-height: 15px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
 }
 @media (max-width: 767px) {
@@ -11142,77 +10906,56 @@ h6,
   .h1 {
     font-size: 24px;
     line-height: 28px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h2,
   .h2 {
     font-size: 20px;
     line-height: 24px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h3.feature,
   .h3.feature {
-    font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
+    font-family: 'museo-sans-for-dell-300', 'Tanseek Modern Book', 'M Yuen PRC SemiBold', 'M Yuen HK Medium ', 'Museo Sans Std Cyrillic 300', 'Rockwell WGL Light', 'David Hadash Sans Medium', 'Motoya Cedar W3', 'Yoon Design - YD Gothic 200 230', 'DilleniaUPC Regular', 'Vietnamese Museo 300', 'Shree Devanagari 0714 Regular', 'Latha Regular', 'Gautami Regular', 'Tunga Regular', 'Kartika Regular', 'Shruti Regular', 'Vrinda Regular', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
     font-size: 18px;
     line-height: 22px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h3,
   .h3 {
     font-size: 17px;
     line-height: 20px;
-    font-weight: 300;
-    font-family: Roboto-Light;
   }
   h4,
   .h4 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
   }
   h5,
   .h5 {
     font-size: 14px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
   }
   .bold-16 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
   .bold-14 {
     font-size: 14px;
     line-height: 20px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
   .bold-12 {
     font-size: 12px;
     line-height: 15px;
-    font-weight: 400;
-    font-family: Roboto-Regular;
+    font-weight: bold;
   }
 }
 p small {
   font-size: 85%;
   line-height: 15px;
-  font-weight: 400;
-  font-family: Roboto-Regular;
 }
 .text-rtl {
   direction: rtl;
   unicode-bidi: bidi-override;
-}
-strong {
-  font-weight: normal;
-  font-family: 'Roboto-Regular', 'Roboto-Light', 'Noto Sans', 'Noto Kufi Arabic', 'Noto Naskh Arabic', 'Noto Nastaliq Urdu', 'Noto Sans Syriac Eastern', 'Noto Sans Syriac Estrangela', 'Noto Sans Syriac Western', 'Noto Sans Phags Pa', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Noto Sans Cypriot', 'Noto Sans Linear B', 'Noto Sans Hebrew', 'Noto Sans CJK JP', 'Noto Sans CJK KR', 'Noto Sans Thai', 'Noto Sans Tai Tham', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Kannada', 'Noto Sans Malayalam', 'Noto Sans Gujarati', 'Noto Sans Bengali', 'Arial', 'Arial Unicode MS', sans-serif;
 }
 /* Add Component LESS Above */
 /*
