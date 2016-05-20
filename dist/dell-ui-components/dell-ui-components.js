@@ -23151,7 +23151,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             paging: false,
             scrollY: '300px',
             scrollX: true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            'bRetrieve': true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -23210,7 +23211,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             paging: false,
             scrollY: '300px',
             scrollX: true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            'bRetrieve': true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -23261,7 +23263,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true
+            scrollX: true,
+            'bRetrieve': true
           });
         });
       }
@@ -23373,7 +23376,8 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
               //console.log('i was clicked');
               $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);  //console.log('i was sorted');
             },
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            'bRetrieve': true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -23594,7 +23598,8 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
               $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);  //console.log('i was sorted');
             },
             'responsive': true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            'bRetrieve': true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {

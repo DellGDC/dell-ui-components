@@ -206,8 +206,8 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
 
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
-
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    'bRetrieve':true
                 });
 
                  //change the position of the sorting toggle arrows
@@ -488,7 +488,8 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
                     'responsive': true,
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    'bRetrieve':true
                 });
 
                 //change the position of the sorting toggle arrows

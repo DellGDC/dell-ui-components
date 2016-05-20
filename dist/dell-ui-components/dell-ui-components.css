@@ -183,6 +183,17 @@ blockquote .blockquote-links li + li::before {
     padding-right: 0;
   }
 }
+.well blockquote .h1,
+.well blockquote .h2,
+.well blockquote .h3,
+.well blockquote .h4,
+.well blockquote .h5 h1,
+.well blockquote h2,
+.well blockquote h3,
+.well blockquote h4,
+.well blockquote h5 {
+  color: #444444 !important;
+}
 .well blockquote .blockquote-dell-dpa {
   display: block;
   width: 40px;
@@ -659,11 +670,6 @@ fieldset[disabled] a.btn.btn-primary {
     font-size: 30px;
   }
 }
-.carousel .item,
-.carousel .carousel-inner .item {
-  margin-left: 10px;
-  margin-right: 10px;
-}
 .carousel .carousel-indicators li {
   width: 14px;
   height: 6px;
@@ -726,6 +732,10 @@ fieldset[disabled] a.btn.btn-primary {
   -ms-touch-action: pan-y;
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
+}
+.slick-slider .item {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .slick-list {
   position: relative;
@@ -1399,13 +1409,19 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   font-size: 11px;
   line-height: 1.6em;
   letter-spacing: .04em;
-  color: #cce5f1;
-  opacity: .6;
+  color: #ffffff;
+  opacity: 1;
+}
+footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer p {
+  color: #ffffff;
 }
 @media (max-width: 767px) {
   footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclaimer {
     padding: 30px 0;
   }
+}
+.footer-menu .footer-top-section a:hover {
+  color: #444;
 }
 .gallery-shadow-section {
   content: "";
@@ -1626,6 +1642,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
 }
 .ms-drop input[type="checkbox"] {
   vertical-align: middle;
+  top: 0;
 }
 .ms-drop .ms-no-results {
   display: none;
@@ -3086,12 +3103,35 @@ input:focus + [role="modal"] {
   position: relative;
 }
 .progress-counter {
-  margin-left: 15px;
+  margin-left: 0;
+  margin-bottom: 0;
   width: 4%;
+  top: -1px;
+  text-align: center;
+  right: 0;
+  position: absolute;
+  background: #ffffff;
+  opacity: .8;
+  border: 1px solid #ccc;
+}
+.progress-counter .h1,
+.progress-counter .h2,
+.progress-counter .h3,
+.progress-counter .h4,
+.progress-counter .h5 h1,
+.progress-counter h2,
+.progress-counter h3,
+.progress-counter h4,
+.progress-counter h5 {
+  margin: 0;
+  opacity: 1;
 }
 @media only screen and (max-width: 767px) {
   .progress.progress-status .bar span {
     display: none;
+  }
+  .btn {
+    padding: 1px 5px;
   }
 }
 @media only screen and (max-width: 991px) {
@@ -3103,6 +3143,13 @@ input:focus + [role="modal"] {
   position: relative;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.interactive-progress-bar .btn-group .btn {
+  margin-left: 5px;
+}
+.interactive-progress-bar .progress {
+  position: relative;
+  overflow: hidden;
 }
 div.dataTables_length label {
   font-weight: normal;
@@ -3414,7 +3461,7 @@ table.dataTable {
 table.dataTable thead th,
 table.dataTable tfoot th {
   font-weight: bold;
-  font-size: .9em;
+  font-size: 1em;
 }
 table.dataTable thead th,
 table.dataTable thead td {
@@ -3790,7 +3837,7 @@ ul.ColVis_collection li:hover {
   background: #cce5f1;
 }
 button.ColVis_Button {
-  height: 30px;
+  height: 34px;
   padding: 3px 8px;
   margin-left: 10px;
 }
@@ -3876,6 +3923,18 @@ div.DTE_Inline input:focus {
   outline: none;
   background-color: transparent;
 }
+.overflow-visible {
+  overflow: visible !important;
+}
+.overflow-hidden {
+  overflow: hidden !important;
+}
+.overflow-x {
+  overflow: scroll;
+}
+.overflow-y {
+  overflow: scroll;
+}
 /*
  * Tables-Uber component theme overrides
  *------------------------------------------------------------------------------------------
@@ -3919,7 +3978,7 @@ div.dataTables_paginate {
   width: 135px !important;
   vertical-align: top;
   margin-right: 10px;
-  height: 30px;
+  height: 34px;
   line-height: 30px;
   padding: 3px 5px;
 }
@@ -3931,9 +3990,11 @@ div.dataTables_paginate {
   margin-bottom: 0;
   vertical-align: middle;
   text-align: left;
+  top: 3px;
   float: left;
   width: auto;
   padding: 9px 5px 9px 0;
+  position: relative;
 }
 div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
   right: 24px;
@@ -3966,8 +4027,9 @@ div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
     margin-right: 0;
     height: 31px !important;
   }
-  select.form-control {
+  select.form-control.input-sm {
     width: 50px !important;
+    height: 34px !important;
   }
   div.dataTables_paginate ul.pagination {
     margin: 2px 0;
@@ -3989,8 +4051,16 @@ div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
     margin-bottom: 20px;
   }
 }
-input.form-control.input-sm.col-xs-12.col-sm-4 {
-  height: 31px !important;
+@media (max-width: 320px) {
+  .dt-form-inline .form-control {
+    display: inline-block;
+    width: 90px !important;
+    vertical-align: top;
+    margin-right: 10px;
+    height: 34px;
+    line-height: 30px;
+    padding: 3px 5px;
+  }
 }
 .ColVis_Button i.glyphicon.glyphicon-option-horizontal.text-blue {
   padding-top: 3px;
@@ -4047,6 +4117,17 @@ div.DTCR_pointer {
   width: 1px;
   background-color: #0259C4;
   z-index: 201;
+}
+select.form-control.input-sm {
+  height: 34px !important;
+  font-size: 14px !important;
+}
+.input-sm {
+  height: 34px;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 1px;
 }
 .nav-tabs-overflow-container {
   overflow-x: hidden;
@@ -4878,6 +4959,11 @@ a.hide-expanded.collapsed {
 .inline-image-content-links ul > span span {
   padding-top: 10px;
   padding-bottom: 10px;
+  text-decoration: none !important;
+}
+.inline-image-content-links [data-toggle=tooltip] {
+  color: inherit;
+  border-bottom: none;
 }
 @media (max-width: 767px) {
   .image-content-links li {

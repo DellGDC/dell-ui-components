@@ -98,7 +98,8 @@ angular.module('dellUiComponents')
                         paging: false,
                         scrollY:"300px",
                         scrollX: true,
-                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                        'bRetrieve':true
                     });
 
                     //change the position of the sorting toggle arrows
@@ -176,7 +177,8 @@ angular.module('dellUiComponents')
                         paging: false,
                         scrollY:"300px",
                         scrollX: true,
-                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                        'bRetrieve':true
 
                     });
 
@@ -239,7 +241,8 @@ angular.module('dellUiComponents')
                         displayLength: 5,
                         paging: false,
                         scrollY:"300px",
-                        scrollX: true
+                        scrollX: true,
+                        'bRetrieve':true
                     });
                 });
 
