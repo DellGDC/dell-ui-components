@@ -23,6 +23,7 @@ angular.module('dellUiComponents')
 
                     var table = $('.table-sort').DataTable({
                         "pagingType": "simple",
+                        retrieve:true,
                         "language": {
                             "paginate": {
                                 "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
@@ -48,7 +49,7 @@ angular.module('dellUiComponents')
                         scrollX:        true,
                         scrollCollapse: true,
                         paging:         false,
-
+                        retrieve:true,
                         'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
 
                     });
@@ -99,7 +100,7 @@ angular.module('dellUiComponents')
                         scrollY:"300px",
                         scrollX: true,
                         'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
-                        'bRetrieve':true
+                        retrieve:true
                     });
 
                     //change the position of the sorting toggle arrows
@@ -178,8 +179,7 @@ angular.module('dellUiComponents')
                         scrollY:"300px",
                         scrollX: true,
                         'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
-                        'bRetrieve':true
-
+                        retrieve:true
                     });
 
                     //change the position of the sorting toggle arrows
@@ -242,7 +242,7 @@ angular.module('dellUiComponents')
                         paging: false,
                         scrollY:"300px",
                         scrollX: true,
-                        'bRetrieve':true
+                        retrieve:true
                     });
                 });
 

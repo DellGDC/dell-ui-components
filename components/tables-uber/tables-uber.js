@@ -207,7 +207,7 @@ angular.module('dellUiComponents')
                     },
 
                     'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
-                    'bRetrieve':true
+                    retrieve:true
                 });
 
                  //change the position of the sorting toggle arrows
@@ -489,7 +489,7 @@ angular.module('dellUiComponents')
                     },
                     'responsive': true,
                     'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
-                    'bRetrieve':true
+                    retrieve:true
                 });
 
                 //change the position of the sorting toggle arrows
