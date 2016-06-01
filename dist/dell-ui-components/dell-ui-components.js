@@ -23089,7 +23089,6 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
         $(document).ready(function () {
           var table = $('.table-sort').DataTable({
               'pagingType': 'simple',
-              retrieve: true,
               'language': {
                 'paginate': {
                   'next': 'Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span>',
@@ -23114,7 +23113,6 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             scrollX: true,
             scrollCollapse: true,
             paging: false,
-            retrieve: true,
             'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
@@ -23153,8 +23151,7 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             paging: false,
             scrollY: '300px',
             scrollX: true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
-            retrieve: true
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -23213,8 +23210,7 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             paging: false,
             scrollY: '300px',
             scrollX: true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
-            retrieve: true
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -23265,8 +23261,7 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             displayLength: 5,
             paging: false,
             scrollY: '300px',
-            scrollX: true,
-            retrieve: true
+            scrollX: true
           });
         });
       }
@@ -23378,8 +23373,7 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
               //console.log('i was clicked');
               $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);  //console.log('i was sorted');
             },
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
-            retrieve: true
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -23600,8 +23594,7 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
               $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);  //console.log('i was sorted');
             },
             'responsive': true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
-            retrieve: true
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {

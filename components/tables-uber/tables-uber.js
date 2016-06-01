@@ -83,12 +83,10 @@ angular.module('dellUiComponents')
                         '<hr class="hr-gray top-offset-10">'+
                         '</div>'+
                         '</div>'+
-
-
+                            
                         '<div class="col-xs-12">'+
                         '<h3 class="text-blue">Account Details</h3>'+
                         '</div>'+
-
 
                         '<div class="col-xs-6 col-sm-3">' +
                         '<p class="text-gray-medium small">Contact Number</p>'+
@@ -144,11 +142,8 @@ angular.module('dellUiComponents')
                         '</div>'+
                         '</div>'+
                         '</row>';
-
                 }
-
-
-
+                
                 // Array holding selected row IDs
                 var rows_selected = [];
                 var tableData;
@@ -409,7 +404,7 @@ angular.module('dellUiComponents')
                 // Array holding selected row IDs
                 var rows_selected = [];
                 var tableData;
-                var table = $('#table-uber').DataTable({
+                var table = $element.DataTable({
                     "ajax": datafile,
                     'columnDefs': [{
                         'targets': 0,
