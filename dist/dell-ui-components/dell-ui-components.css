@@ -4129,6 +4129,42 @@ select.form-control.input-sm {
   line-height: 1.5;
   border-radius: 1px;
 }
+.paginate_button > .page-link {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  color: #00618f;
+  background-color: #eee;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.dataTables_paginate .pagination > li > a {
+  border: 1px solid #ccc;
+  color: #00618f;
+  background-color: #eee;
+}
+.dataTables_paginate .pagination > li > a:hover {
+  color: #00618f;
+  background: #dadada!important;
+  border: 1px solid #adadad;
+}
+.dataTables_paginate .pagination > li.disabled a {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: #007db8;
+  opacity: .65;
+}
 .nav-tabs-overflow-container {
   overflow-x: hidden;
 }
