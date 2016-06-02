@@ -28,10 +28,10 @@ angular.module('dellUiComponents')
                                 "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
                                 "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
                             }
-                        }
+                        },
+                        retrieve: true
                     });
                     new $.fn.dataTable.FixedHeader( table );
-
                 });
             }
         };
@@ -43,13 +43,13 @@ angular.module('dellUiComponents')
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
 
-                var table = $('.table-column').DataTable({
+                var table = $element.DataTable({
                     scrollY:        "300px",
                     scrollX:        true,
                     scrollCollapse: true,
                     paging:         false,
-
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
 
                 });
 
@@ -57,8 +57,6 @@ angular.module('dellUiComponents')
                 table.columns().iterator( 'column', function (ctx, idx) {
                     $( table.column(idx).header() ).append('<span class="sort-icon"/>');
                 });
-
-
 
                 new $.fn.dataTable.FixedColumns( table );
 
@@ -92,13 +90,14 @@ angular.module('dellUiComponents')
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
 
-                var table = $('table.responsive-data-table').DataTable( {
+                var table = $element.DataTable( {
                     dom: 'C<"clear">lfrtip',
                     displayLength: 5,
                     paging: false,
                     scrollY:"300px",
                     scrollX: true,
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
                 });
 
                 //change the position of the sorting toggle arrows
@@ -156,7 +155,7 @@ angular.module('dellUiComponents')
                         '</table>';
                 }
 
-                var table = $('table.table-complex').DataTable( {
+                var table = $element.DataTable( {
                     "ajax": "../components/tables/data.json",
                     "columns": [
                         {
@@ -176,7 +175,8 @@ angular.module('dellUiComponents')
                     paging: false,
                     scrollY:"300px",
                     scrollX: true,
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
 
                 });
 

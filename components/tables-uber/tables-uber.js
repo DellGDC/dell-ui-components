@@ -83,7 +83,7 @@ angular.module('dellUiComponents')
                         '<hr class="hr-gray top-offset-10">'+
                         '</div>'+
                         '</div>'+
-                            
+
                         '<div class="col-xs-12">'+
                         '<h3 class="text-blue">Account Details</h3>'+
                         '</div>'+
@@ -143,7 +143,7 @@ angular.module('dellUiComponents')
                         '</div>'+
                         '</row>';
                 }
-                
+
                 // Array holding selected row IDs
                 var rows_selected = [];
                 var tableData;
@@ -201,7 +201,8 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
 
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
 
                 });
 
@@ -483,7 +484,8 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
                     'responsive': true,
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
                 });
 
                 //change the position of the sorting toggle arrows
@@ -621,12 +623,10 @@ angular.module('dellUiComponents')
                     var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
                     search_label.addClass('hide-text');
 
-
                     // SEARCH - Add the placeholder for Search and Turn this into in-line form control
                     var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
                     search_input.attr('placeholder', 'Search');
                     search_input.addClass('form-control col-xs-12 col-sm-4');
-
 
                     // LENGTH - Inline-Form control
                     // code below for select

@@ -55042,16 +55042,15 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
   var DataTable = $.fn.dataTable;
   /* Set the defaults for DataTables initialisation */
   $.extend(true, DataTable.defaults, {
-    dom: '<\'row\'<\'col-md-6\'l><\'col-md-6\'f>>' + '<\'row\'<\'col-md-12\'tr>>' + '<\'row\'<\'col-md-5\'i><\'col-md-7\'p>>',
+    dom: '<\'row\'<\'col-sm-6\'l><\'col-sm-6\'f>>' + '<\'row\'<\'col-sm-12\'tr>>' + '<\'row\'<\'col-sm-5\'i><\'col-sm-7\'p>>',
     renderer: 'bootstrap'
   });
   /* Default class modification */
   $.extend(DataTable.ext.classes, {
-    sWrapper: 'dataTables_wrapper form-inline dt-bootstrap4',
+    sWrapper: 'dataTables_wrapper form-inline dt-bootstrap',
     sFilterInput: 'form-control input-sm',
     sLengthSelect: 'form-control input-sm',
-    sProcessing: 'dataTables_processing panel panel-default',
-    sPageButton: 'paginate_button page-item'
+    sProcessing: 'dataTables_processing panel panel-default'
   });
   /* Bootstrap paging button renderer */
   DataTable.ext.renderer.pageButton.bootstrap = function (settings, host, idx, buttons, page, pages) {
@@ -55110,8 +55109,7 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
               'aria-controls': settings.sTableId,
               'aria-label': aria[button],
               'data-dt-idx': counter,
-              'tabindex': settings.iTabIndex,
-              'class': 'page-link'
+              'tabindex': settings.iTabIndex
             }).html(btnDisplay)).appendTo(container);
             settings.oApi._fnBindAction(node, { action: button }, clickHandler);
             counter++;
@@ -55137,638 +55135,1230 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
   };
   return DataTable;
 }));
-/*!
- FixedHeader 3.1.2
- ©2009-2016 SpryMedia Ltd - datatables.net/license
-*/
-(function (d) {
-  'function' === typeof define && define.amd ? define([
-    'jquery',
-    'datatables.net'
-  ], function (g) {
-    return d(g, window, document);
-  }) : 'object' === typeof exports ? module.exports = function (g, h) {
-    g || (g = window);
-    if (!h || !h.fn.dataTable)
-      h = require('datatables.net')(g, h).$;
-    return d(h, g, g.document);
-  } : d(jQuery, window, document);
-}(function (d, g, h, k) {
-  var j = d.fn.dataTable, l = 0, i = function (b, a) {
-      if (!(this instanceof i))
-        throw 'FixedHeader must be initialised with the \'new\' keyword.';
-      !0 === a && (a = {});
-      b = new j.Api(b);
-      this.c = d.extend(!0, {}, i.defaults, a);
-      this.s = {
-        dt: b,
-        position: {
-          theadTop: 0,
-          tbodyTop: 0,
-          tfootTop: 0,
-          tfootBottom: 0,
-          width: 0,
-          left: 0,
-          tfootHeight: 0,
-          theadHeight: 0,
-          windowHeight: d(g).height(),
-          visible: !0
-        },
-        headerMode: null,
-        footerMode: null,
-        autoWidth: b.settings()[0].oFeatures.bAutoWidth,
-        namespace: '.dtfc' + l++,
-        scrollLeft: {
-          header: -1,
-          footer: -1
-        },
-        enable: !0
-      };
-      this.dom = {
-        floatingHeader: null,
-        thead: d(b.table().header()),
-        tbody: d(b.table().body()),
-        tfoot: d(b.table().footer()),
-        header: {
-          host: null,
-          floating: null,
-          placeholder: null
-        },
-        footer: {
-          host: null,
-          floating: null,
-          placeholder: null
-        }
-      };
-      this.dom.header.host = this.dom.thead.parent();
-      this.dom.footer.host = this.dom.tfoot.parent();
-      var e = b.settings()[0];
-      if (e._fixedHeader)
-        throw 'FixedHeader already initialised on table ' + e.nTable.id;
-      e._fixedHeader = this;
-      this._constructor();
+/*! FixedHeader 3.1.2
+ * ©2009-2016 SpryMedia Ltd - datatables.net/license
+ */
+/**
+ * @summary     FixedHeader
+ * @description Fix a table's header or footer, so it is always visible while
+ *              scrolling
+ * @version     3.1.2
+ * @file        dataTables.fixedHeader.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     www.sprymedia.co.uk/contact
+ * @copyright   Copyright 2009-2016 SpryMedia Ltd.
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license - http://datatables.net/license/mit
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: http://www.datatables.net
+ */
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define([
+      'jquery',
+      'datatables.net'
+    ], function ($) {
+      return factory($, window, document);
+    });
+  } else if (typeof exports === 'object') {
+    // CommonJS
+    module.exports = function (root, $) {
+      if (!root) {
+        root = window;
+      }
+      if (!$ || !$.fn.dataTable) {
+        $ = require('datatables.net')(root, $).$;
+      }
+      return factory($, root, root.document);
     };
-  d.extend(i.prototype, {
-    enable: function (b) {
-      this.s.enable = b;
-      this.c.header && this._modeChange('in-place', 'header', !0);
-      this.c.footer && this.dom.tfoot.length && this._modeChange('in-place', 'footer', !0);
+  } else {
+    // Browser
+    factory(jQuery, window, document);
+  }
+}(function ($, window, document, undefined) {
+  'use strict';
+  var DataTable = $.fn.dataTable;
+  var _instCounter = 0;
+  var FixedHeader = function (dt, config) {
+    // Sanity check - you just know it will happen
+    if (!(this instanceof FixedHeader)) {
+      throw 'FixedHeader must be initialised with the \'new\' keyword.';
+    }
+    // Allow a boolean true for defaults
+    if (config === true) {
+      config = {};
+    }
+    dt = new DataTable.Api(dt);
+    this.c = $.extend(true, {}, FixedHeader.defaults, config);
+    this.s = {
+      dt: dt,
+      position: {
+        theadTop: 0,
+        tbodyTop: 0,
+        tfootTop: 0,
+        tfootBottom: 0,
+        width: 0,
+        left: 0,
+        tfootHeight: 0,
+        theadHeight: 0,
+        windowHeight: $(window).height(),
+        visible: true
+      },
+      headerMode: null,
+      footerMode: null,
+      autoWidth: dt.settings()[0].oFeatures.bAutoWidth,
+      namespace: '.dtfc' + _instCounter++,
+      scrollLeft: {
+        header: -1,
+        footer: -1
+      },
+      enable: true
+    };
+    this.dom = {
+      floatingHeader: null,
+      thead: $(dt.table().header()),
+      tbody: $(dt.table().body()),
+      tfoot: $(dt.table().footer()),
+      header: {
+        host: null,
+        floating: null,
+        placeholder: null
+      },
+      footer: {
+        host: null,
+        floating: null,
+        placeholder: null
+      }
+    };
+    this.dom.header.host = this.dom.thead.parent();
+    this.dom.footer.host = this.dom.tfoot.parent();
+    var dtSettings = dt.settings()[0];
+    if (dtSettings._fixedHeader) {
+      throw 'FixedHeader already initialised on table ' + dtSettings.nTable.id;
+    }
+    dtSettings._fixedHeader = this;
+    this._constructor();
+  };
+  /*
+ * Variable: FixedHeader
+ * Purpose:  Prototype for FixedHeader
+ * Scope:    global
+ */
+  $.extend(FixedHeader.prototype, {
+    enable: function (enable) {
+      this.s.enable = enable;
+      if (this.c.header) {
+        this._modeChange('in-place', 'header', true);
+      }
+      if (this.c.footer && this.dom.tfoot.length) {
+        this._modeChange('in-place', 'footer', true);
+      }
       this.update();
     },
-    headerOffset: function (b) {
-      b !== k && (this.c.headerOffset = b, this.update());
+    headerOffset: function (offset) {
+      if (offset !== undefined) {
+        this.c.headerOffset = offset;
+        this.update();
+      }
       return this.c.headerOffset;
     },
-    footerOffset: function (b) {
-      b !== k && (this.c.footerOffset = b, this.update());
+    footerOffset: function (offset) {
+      if (offset !== undefined) {
+        this.c.footerOffset = offset;
+        this.update();
+      }
       return this.c.footerOffset;
     },
     update: function () {
       this._positions();
-      this._scroll(!0);
+      this._scroll(true);
     },
     _constructor: function () {
-      var b = this, a = this.s.dt;
-      d(g).on('scroll' + this.s.namespace, function () {
-        b._scroll();
+      var that = this;
+      var dt = this.s.dt;
+      $(window).on('scroll' + this.s.namespace, function () {
+        that._scroll();
       }).on('resize' + this.s.namespace, function () {
-        b.s.position.windowHeight = d(g).height();
-        b.update();
+        that.s.position.windowHeight = $(window).height();
+        that.update();
       });
-      var e = d('.fh-fixedHeader');
-      !this.c.headerOffset && e.length && (this.c.headerOffset = e.outerHeight());
-      e = d('.fh-fixedFooter');
-      !this.c.footerOffset && e.length && (this.c.footerOffset = e.outerHeight());
-      a.on('column-reorder.dt.dtfc column-visibility.dt.dtfc draw.dt.dtfc column-sizing.dt.dtfc', function () {
-        b.update();
+      var autoHeader = $('.fh-fixedHeader');
+      if (!this.c.headerOffset && autoHeader.length) {
+        this.c.headerOffset = autoHeader.outerHeight();
+      }
+      var autoFooter = $('.fh-fixedFooter');
+      if (!this.c.footerOffset && autoFooter.length) {
+        this.c.footerOffset = autoFooter.outerHeight();
+      }
+      dt.on('column-reorder.dt.dtfc column-visibility.dt.dtfc draw.dt.dtfc column-sizing.dt.dtfc', function () {
+        that.update();
       });
-      a.on('destroy.dtfc', function () {
-        a.off('.dtfc');
-        d(g).off(b.s.namespace);
+      dt.on('destroy.dtfc', function () {
+        dt.off('.dtfc');
+        $(window).off(that.s.namespace);
       });
       this._positions();
       this._scroll();
     },
-    _clone: function (b, a) {
-      var e = this.s.dt, c = this.dom[b], f = 'header' === b ? this.dom.thead : this.dom.tfoot;
-      !a && c.floating ? c.floating.removeClass('fixedHeader-floating fixedHeader-locked') : (c.floating && (c.placeholder.remove(), this._unsize(b), c.floating.children().detach(), c.floating.remove()), c.floating = d(e.table().node().cloneNode(!1)).css('table-layout', 'fixed').removeAttr('id').append(f).appendTo('body'), c.placeholder = f.clone(!1), c.host.prepend(c.placeholder), this._matchWidths(c.placeholder, c.floating));
+    _clone: function (item, force) {
+      var dt = this.s.dt;
+      var itemDom = this.dom[item];
+      var itemElement = item === 'header' ? this.dom.thead : this.dom.tfoot;
+      if (!force && itemDom.floating) {
+        // existing floating element - reuse it
+        itemDom.floating.removeClass('fixedHeader-floating fixedHeader-locked');
+      } else {
+        if (itemDom.floating) {
+          itemDom.placeholder.remove();
+          this._unsize(item);
+          itemDom.floating.children().detach();
+          itemDom.floating.remove();
+        }
+        itemDom.floating = $(dt.table().node().cloneNode(false)).css('table-layout', 'fixed').removeAttr('id').append(itemElement).appendTo('body');
+        // Insert a fake thead/tfoot into the DataTable to stop it jumping around
+        itemDom.placeholder = itemElement.clone(false);
+        itemDom.host.prepend(itemDom.placeholder);
+        // Clone widths
+        this._matchWidths(itemDom.placeholder, itemDom.floating);
+      }
     },
-    _matchWidths: function (b, a) {
-      var e = function (a) {
-          return d(a, b).map(function () {
-            return d(this).width();
-          }).toArray();
-        }, c = function (b, c) {
-          d(b, a).each(function (a) {
-            d(this).css({
-              width: c[a],
-              minWidth: c[a]
-            });
+    _matchWidths: function (from, to) {
+      var get = function (name) {
+        return $(name, from).map(function () {
+          return $(this).width();
+        }).toArray();
+      };
+      var set = function (name, toWidths) {
+        $(name, to).each(function (i) {
+          $(this).css({
+            width: toWidths[i],
+            minWidth: toWidths[i]
           });
-        }, f = e('th'), e = e('td');
-      c('th', f);
-      c('td', e);
+        });
+      };
+      var thWidths = get('th');
+      var tdWidths = get('td');
+      set('th', thWidths);
+      set('td', tdWidths);
     },
-    _unsize: function (b) {
-      var a = this.dom[b].floating;
-      a && ('footer' === b || 'header' === b && !this.s.autoWidth) ? d('th, td', a).css({
-        width: '',
-        minWidth: ''
-      }) : a && 'header' === b && d('th, td', a).css('min-width', '');
+    _unsize: function (item) {
+      var el = this.dom[item].floating;
+      if (el && (item === 'footer' || item === 'header' && !this.s.autoWidth)) {
+        $('th, td', el).css({
+          width: '',
+          minWidth: ''
+        });
+      } else if (el && item === 'header') {
+        $('th, td', el).css('min-width', '');
+      }
     },
-    _horizontal: function (b, a) {
-      var e = this.dom[b], c = this.s.position, d = this.s.scrollLeft;
-      e.floating && d[b] !== a && (e.floating.css('left', c.left - a), d[b] = a);
+    _horizontal: function (item, scrollLeft) {
+      var itemDom = this.dom[item];
+      var position = this.s.position;
+      var lastScrollLeft = this.s.scrollLeft;
+      if (itemDom.floating && lastScrollLeft[item] !== scrollLeft) {
+        itemDom.floating.css('left', position.left - scrollLeft);
+        lastScrollLeft[item] = scrollLeft;
+      }
     },
-    _modeChange: function (b, a, e) {
-      var c = this.dom[a], f = this.s.position, g = d.contains(this.dom['footer' === a ? 'tfoot' : 'thead'][0], h.activeElement) ? h.activeElement : null;
-      if ('in-place' === b) {
-        if (c.placeholder && (c.placeholder.remove(), c.placeholder = null), this._unsize(a), 'header' === a ? c.host.prepend(this.dom.thead) : c.host.append(this.dom.tfoot), c.floating)
-          c.floating.remove(), c.floating = null;
-      } else
-        'in' === b ? (this._clone(a, e), c.floating.addClass('fixedHeader-floating').css('header' === a ? 'top' : 'bottom', this.c[a + 'Offset']).css('left', f.left + 'px').css('width', f.width + 'px'), 'footer' === a && c.floating.css('top', '')) : 'below' === b ? (this._clone(a, e), c.floating.addClass('fixedHeader-locked').css('top', f.tfootTop - f.theadHeight).css('left', f.left + 'px').css('width', f.width + 'px')) : 'above' === b && (this._clone(a, e), c.floating.addClass('fixedHeader-locked').css('top', f.tbodyTop).css('left', f.left + 'px').css('width', f.width + 'px'));
-      g && g !== h.activeElement && g.focus();
+    _modeChange: function (mode, item, forceChange) {
+      var dt = this.s.dt;
+      var itemDom = this.dom[item];
+      var position = this.s.position;
+      // Record focus. Browser's will cause input elements to loose focus if
+      // they are inserted else where in the doc
+      var tablePart = this.dom[item === 'footer' ? 'tfoot' : 'thead'];
+      var focus = $.contains(tablePart[0], document.activeElement) ? document.activeElement : null;
+      if (mode === 'in-place') {
+        // Insert the header back into the table's real header
+        if (itemDom.placeholder) {
+          itemDom.placeholder.remove();
+          itemDom.placeholder = null;
+        }
+        this._unsize(item);
+        if (item === 'header') {
+          itemDom.host.prepend(this.dom.thead);
+        } else {
+          itemDom.host.append(this.dom.tfoot);
+        }
+        if (itemDom.floating) {
+          itemDom.floating.remove();
+          itemDom.floating = null;
+        }
+      } else if (mode === 'in') {
+        // Remove the header from the read header and insert into a fixed
+        // positioned floating table clone
+        this._clone(item, forceChange);
+        itemDom.floating.addClass('fixedHeader-floating').css(item === 'header' ? 'top' : 'bottom', this.c[item + 'Offset']).css('left', position.left + 'px').css('width', position.width + 'px');
+        if (item === 'footer') {
+          itemDom.floating.css('top', '');
+        }
+      } else if (mode === 'below') {
+        // only used for the header
+        // Fix the position of the floating header at base of the table body
+        this._clone(item, forceChange);
+        itemDom.floating.addClass('fixedHeader-locked').css('top', position.tfootTop - position.theadHeight).css('left', position.left + 'px').css('width', position.width + 'px');
+      } else if (mode === 'above') {
+        // only used for the footer
+        // Fix the position of the floating footer at top of the table body
+        this._clone(item, forceChange);
+        itemDom.floating.addClass('fixedHeader-locked').css('top', position.tbodyTop).css('left', position.left + 'px').css('width', position.width + 'px');
+      }
+      // Restore focus if it was lost
+      if (focus && focus !== document.activeElement) {
+        focus.focus();
+      }
       this.s.scrollLeft.header = -1;
       this.s.scrollLeft.footer = -1;
-      this.s[a + 'Mode'] = b;
+      this.s[item + 'Mode'] = mode;
     },
     _positions: function () {
-      var b = this.s.dt.table(), a = this.s.position, e = this.dom, b = d(b.node()), c = b.children('thead'), f = b.children('tfoot'), e = e.tbody;
-      a.visible = b.is(':visible');
-      a.width = b.outerWidth();
-      a.left = b.offset().left;
-      a.theadTop = c.offset().top;
-      a.tbodyTop = e.offset().top;
-      a.theadHeight = a.tbodyTop - a.theadTop;
-      f.length ? (a.tfootTop = f.offset().top, a.tfootBottom = a.tfootTop + f.outerHeight(), a.tfootHeight = a.tfootBottom - a.tfootTop) : (a.tfootTop = a.tbodyTop + e.outerHeight(), a.tfootBottom = a.tfootTop, a.tfootHeight = a.tfootTop);
+      var dt = this.s.dt;
+      var table = dt.table();
+      var position = this.s.position;
+      var dom = this.dom;
+      var tableNode = $(table.node());
+      // Need to use the header and footer that are in the main table,
+      // regardless of if they are clones, since they hold the positions we
+      // want to measure from
+      var thead = tableNode.children('thead');
+      var tfoot = tableNode.children('tfoot');
+      var tbody = dom.tbody;
+      position.visible = tableNode.is(':visible');
+      position.width = tableNode.outerWidth();
+      position.left = tableNode.offset().left;
+      position.theadTop = thead.offset().top;
+      position.tbodyTop = tbody.offset().top;
+      position.theadHeight = position.tbodyTop - position.theadTop;
+      if (tfoot.length) {
+        position.tfootTop = tfoot.offset().top;
+        position.tfootBottom = position.tfootTop + tfoot.outerHeight();
+        position.tfootHeight = position.tfootBottom - position.tfootTop;
+      } else {
+        position.tfootTop = position.tbodyTop + tbody.outerHeight();
+        position.tfootBottom = position.tfootTop;
+        position.tfootHeight = position.tfootTop;
+      }
     },
-    _scroll: function (b) {
-      var a = d(h).scrollTop(), e = d(h).scrollLeft(), c = this.s.position, f;
-      if (this.s.enable && (this.c.header && (f = !c.visible || a <= c.theadTop - this.c.headerOffset ? 'in-place' : a <= c.tfootTop - c.theadHeight - this.c.headerOffset ? 'in' : 'below', (b || f !== this.s.headerMode) && this._modeChange(f, 'header', b), this._horizontal('header', e)), this.c.footer && this.dom.tfoot.length))
-        a = !c.visible || a + c.windowHeight >= c.tfootBottom + this.c.footerOffset ? 'in-place' : c.windowHeight + a > c.tbodyTop + c.tfootHeight + this.c.footerOffset ? 'in' : 'above', (b || a !== this.s.footerMode) && this._modeChange(a, 'footer', b), this._horizontal('footer', e);
+    _scroll: function (forceChange) {
+      var windowTop = $(document).scrollTop();
+      var windowLeft = $(document).scrollLeft();
+      var position = this.s.position;
+      var headerMode, footerMode;
+      if (!this.s.enable) {
+        return;
+      }
+      if (this.c.header) {
+        if (!position.visible || windowTop <= position.theadTop - this.c.headerOffset) {
+          headerMode = 'in-place';
+        } else if (windowTop <= position.tfootTop - position.theadHeight - this.c.headerOffset) {
+          headerMode = 'in';
+        } else {
+          headerMode = 'below';
+        }
+        if (forceChange || headerMode !== this.s.headerMode) {
+          this._modeChange(headerMode, 'header', forceChange);
+        }
+        this._horizontal('header', windowLeft);
+      }
+      if (this.c.footer && this.dom.tfoot.length) {
+        if (!position.visible || windowTop + position.windowHeight >= position.tfootBottom + this.c.footerOffset) {
+          footerMode = 'in-place';
+        } else if (position.windowHeight + windowTop > position.tbodyTop + position.tfootHeight + this.c.footerOffset) {
+          footerMode = 'in';
+        } else {
+          footerMode = 'above';
+        }
+        if (forceChange || footerMode !== this.s.footerMode) {
+          this._modeChange(footerMode, 'footer', forceChange);
+        }
+        this._horizontal('footer', windowLeft);
+      }
     }
   });
-  i.version = '3.1.2';
-  i.defaults = {
-    header: !0,
-    footer: !1,
+  /**
+ * Version
+ * @type {String}
+ * @static
+ */
+  FixedHeader.version = '3.1.2';
+  /**
+ * Defaults
+ * @type {Object}
+ * @static
+ */
+  FixedHeader.defaults = {
+    header: true,
+    footer: false,
     headerOffset: 0,
     footerOffset: 0
   };
-  d.fn.dataTable.FixedHeader = i;
-  d.fn.DataTable.FixedHeader = i;
-  d(h).on('init.dt.dtfh', function (b, a) {
-    if ('dt' === b.namespace) {
-      var e = a.oInit.fixedHeader, c = j.defaults.fixedHeader;
-      if ((e || c) && !a._fixedHeader)
-        c = d.extend({}, c, e), !1 !== e && new i(a, c);
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables interfaces
+ */
+  // Attach for constructor access
+  $.fn.dataTable.FixedHeader = FixedHeader;
+  $.fn.DataTable.FixedHeader = FixedHeader;
+  // DataTables creation - check if the FixedHeader option has been defined on the
+  // table and if so, initialise
+  $(document).on('init.dt.dtfh', function (e, settings, json) {
+    if (e.namespace !== 'dt') {
+      return;
+    }
+    var init = settings.oInit.fixedHeader;
+    var defaults = DataTable.defaults.fixedHeader;
+    if ((init || defaults) && !settings._fixedHeader) {
+      var opts = $.extend({}, defaults, init);
+      if (init !== false) {
+        new FixedHeader(settings, opts);
+      }
     }
   });
-  j.Api.register('fixedHeader()', function () {
+  // DataTables API methods
+  DataTable.Api.register('fixedHeader()', function () {
   });
-  j.Api.register('fixedHeader.adjust()', function () {
-    return this.iterator('table', function (b) {
-      (b = b._fixedHeader) && b.update();
+  DataTable.Api.register('fixedHeader.adjust()', function () {
+    return this.iterator('table', function (ctx) {
+      var fh = ctx._fixedHeader;
+      if (fh) {
+        fh.update();
+      }
     });
   });
-  j.Api.register('fixedHeader.enable()', function (b) {
-    return this.iterator('table', function (a) {
-      (a = a._fixedHeader) && a.enable(b !== k ? b : !0);
+  DataTable.Api.register('fixedHeader.enable()', function (flag) {
+    return this.iterator('table', function (ctx) {
+      var fh = ctx._fixedHeader;
+      if (fh) {
+        fh.enable(flag !== undefined ? flag : true);
+      }
     });
   });
-  j.Api.register('fixedHeader.disable()', function () {
-    return this.iterator('table', function (b) {
-      (b = b._fixedHeader) && b.enable(!1);
+  DataTable.Api.register('fixedHeader.disable()', function () {
+    return this.iterator('table', function (ctx) {
+      var fh = ctx._fixedHeader;
+      if (fh) {
+        fh.enable(false);
+      }
     });
   });
-  d.each([
+  $.each([
     'header',
     'footer'
-  ], function (b, a) {
-    j.Api.register('fixedHeader.' + a + 'Offset()', function (b) {
-      var c = this.context;
-      return b === k ? c.length && c[0]._fixedHeader ? c[0]._fixedHeader[a + 'Offset']() : k : this.iterator('table', function (c) {
-        if (c = c._fixedHeader)
-          c[a + 'Offset'](b);
+  ], function (i, el) {
+    DataTable.Api.register('fixedHeader.' + el + 'Offset()', function (offset) {
+      var ctx = this.context;
+      if (offset === undefined) {
+        return ctx.length && ctx[0]._fixedHeader ? ctx[0]._fixedHeader[el + 'Offset']() : undefined;
+      }
+      return this.iterator('table', function (ctx) {
+        var fh = ctx._fixedHeader;
+        if (fh) {
+          fh[el + 'Offset'](offset);
+        }
       });
     });
   });
-  return i;
+  return FixedHeader;
 }));
-/*!
- FixedColumns 3.2.2
- ©2010-2016 SpryMedia Ltd - datatables.net/license
-*/
-(function (d) {
-  'function' === typeof define && define.amd ? define([
-    'jquery',
-    'datatables.net'
-  ], function (q) {
-    return d(q, window, document);
-  }) : 'object' === typeof exports ? module.exports = function (q, r) {
-    q || (q = window);
-    if (!r || !r.fn.dataTable)
-      r = require('datatables.net')(q, r).$;
-    return d(r, q, q.document);
-  } : d(jQuery, window, document);
-}(function (d, q, r, t) {
-  var s = d.fn.dataTable, u, m = function (a, b) {
-      var c = this;
-      if (this instanceof m) {
-        if (b === t || !0 === b)
-          b = {};
-        var e = d.fn.dataTable.camelToHungarian;
-        e && (e(m.defaults, m.defaults, !0), e(m.defaults, b));
-        e = new d.fn.dataTable.Api(a).settings()[0];
-        this.s = {
-          dt: e,
-          iTableColumns: e.aoColumns.length,
-          aiOuterWidths: [],
-          aiInnerWidths: [],
-          rtl: 'rtl' === d(e.nTable).css('direction')
-        };
-        this.dom = {
-          scroller: null,
-          header: null,
-          body: null,
-          footer: null,
-          grid: {
-            wrapper: null,
-            dt: null,
-            left: {
-              wrapper: null,
-              head: null,
-              body: null,
-              foot: null
-            },
-            right: {
-              wrapper: null,
-              head: null,
-              body: null,
-              foot: null
-            }
-          },
-          clone: {
-            left: {
-              header: null,
-              body: null,
-              footer: null
-            },
-            right: {
-              header: null,
-              body: null,
-              footer: null
-            }
-          }
-        };
-        if (e._oFixedColumns)
-          throw 'FixedColumns already initialised on this table';
-        e._oFixedColumns = this;
-        e._bInitComplete ? this._fnConstruct(b) : e.oApi._fnCallbackReg(e, 'aoInitComplete', function () {
-          c._fnConstruct(b);
-        }, 'FixedColumns');
-      } else
-        alert('FixedColumns warning: FixedColumns must be initialised with the \'new\' keyword.');
+/*! FixedColumns 3.2.2
+ * ©2010-2016 SpryMedia Ltd - datatables.net/license
+ */
+/**
+ * @summary     FixedColumns
+ * @description Freeze columns in place on a scrolling DataTable
+ * @version     3.2.2
+ * @file        dataTables.fixedColumns.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     www.sprymedia.co.uk/contact
+ * @copyright   Copyright 2010-2016 SpryMedia Ltd.
+ *
+ * This source file is free software, available under the following license:
+ *   MIT license - http://datatables.net/license/mit
+ *
+ * This source file is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the license files for details.
+ *
+ * For details please refer to: http://www.datatables.net
+ */
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define([
+      'jquery',
+      'datatables.net'
+    ], function ($) {
+      return factory($, window, document);
+    });
+  } else if (typeof exports === 'object') {
+    // CommonJS
+    module.exports = function (root, $) {
+      if (!root) {
+        root = window;
+      }
+      if (!$ || !$.fn.dataTable) {
+        $ = require('datatables.net')(root, $).$;
+      }
+      return factory($, root, root.document);
     };
-  d.extend(m.prototype, {
-    fnUpdate: function () {
-      this._fnDraw(!0);
+  } else {
+    // Browser
+    factory(jQuery, window, document);
+  }
+}(function ($, window, document, undefined) {
+  'use strict';
+  var DataTable = $.fn.dataTable;
+  var _firefoxScroll;
+  /**
+ * When making use of DataTables' x-axis scrolling feature, you may wish to
+ * fix the left most column in place. This plug-in for DataTables provides
+ * exactly this option (note for non-scrolling tables, please use the
+ * FixedHeader plug-in, which can fix headers, footers and columns). Key
+ * features include:
+ *
+ * * Freezes the left or right most columns to the side of the table
+ * * Option to freeze two or more columns
+ * * Full integration with DataTables' scrolling options
+ * * Speed - FixedColumns is fast in its operation
+ *
+ *  @class
+ *  @constructor
+ *  @global
+ *  @param {object} dt DataTables instance. With DataTables 1.10 this can also
+ *    be a jQuery collection, a jQuery selector, DataTables API instance or
+ *    settings object.
+ *  @param {object} [init={}] Configuration object for FixedColumns. Options are
+ *    defined by {@link FixedColumns.defaults}
+ *
+ *  @requires jQuery 1.7+
+ *  @requires DataTables 1.8.0+
+ *
+ *  @example
+ *      var table = $('#example').dataTable( {
+ *        "scrollX": "100%"
+ *      } );
+ *      new $.fn.dataTable.fixedColumns( table );
+ */
+  var FixedColumns = function (dt, init) {
+    var that = this;
+    /* Sanity check - you just know it will happen */
+    if (!(this instanceof FixedColumns)) {
+      alert('FixedColumns warning: FixedColumns must be initialised with the \'new\' keyword.');
+      return;
+    }
+    if (init === undefined || init === true) {
+      init = {};
+    }
+    // Use the DataTables Hungarian notation mapping method, if it exists to
+    // provide forwards compatibility for camel case variables
+    var camelToHungarian = $.fn.dataTable.camelToHungarian;
+    if (camelToHungarian) {
+      camelToHungarian(FixedColumns.defaults, FixedColumns.defaults, true);
+      camelToHungarian(FixedColumns.defaults, init);
+    }
+    // v1.10 allows the settings object to be got form a number of sources
+    var dtSettings = new $.fn.dataTable.Api(dt).settings()[0];
+    /**
+	 * Settings object which contains customisable information for FixedColumns instance
+	 * @namespace
+	 * @extends FixedColumns.defaults
+	 * @private
+	 */
+    this.s = {
+      'dt': dtSettings,
+      'iTableColumns': dtSettings.aoColumns.length,
+      'aiOuterWidths': [],
+      'aiInnerWidths': [],
+      rtl: $(dtSettings.nTable).css('direction') === 'rtl'
+    };
+    /**
+	 * DOM elements used by the class instance
+	 * @namespace
+	 * @private
+	 *
+	 */
+    this.dom = {
+      'scroller': null,
+      'header': null,
+      'body': null,
+      'footer': null,
+      'grid': {
+        'wrapper': null,
+        'dt': null,
+        'left': {
+          'wrapper': null,
+          'head': null,
+          'body': null,
+          'foot': null
+        },
+        'right': {
+          'wrapper': null,
+          'head': null,
+          'body': null,
+          'foot': null
+        }
+      },
+      'clone': {
+        'left': {
+          'header': null,
+          'body': null,
+          'footer': null
+        },
+        'right': {
+          'header': null,
+          'body': null,
+          'footer': null
+        }
+      }
+    };
+    if (dtSettings._oFixedColumns) {
+      throw 'FixedColumns already initialised on this table';
+    }
+    /* Attach the instance to the DataTables instance so it can be accessed easily */
+    dtSettings._oFixedColumns = this;
+    /* Let's do it */
+    if (!dtSettings._bInitComplete) {
+      dtSettings.oApi._fnCallbackReg(dtSettings, 'aoInitComplete', function () {
+        that._fnConstruct(init);
+      }, 'FixedColumns');
+    } else {
+      this._fnConstruct(init);
+    }
+  };
+  $.extend(FixedColumns.prototype, {
+    'fnUpdate': function () {
+      this._fnDraw(true);
     },
-    fnRedrawLayout: function () {
+    'fnRedrawLayout': function () {
       this._fnColCalc();
       this._fnGridLayout();
       this.fnUpdate();
     },
-    fnRecalculateHeight: function (a) {
-      delete a._DTTC_iHeight;
-      a.style.height = 'auto';
+    'fnRecalculateHeight': function (nTr) {
+      delete nTr._DTTC_iHeight;
+      nTr.style.height = 'auto';
     },
-    fnSetRowHeight: function (a, b) {
-      a.style.height = b + 'px';
+    'fnSetRowHeight': function (nTarget, iHeight) {
+      nTarget.style.height = iHeight + 'px';
     },
-    fnGetPosition: function (a) {
-      var b = this.s.dt.oInstance;
-      if (d(a).parents('.DTFC_Cloned').length) {
-        if ('tr' === a.nodeName.toLowerCase())
-          return a = d(a).index(), b.fnGetPosition(d('tr', this.s.dt.nTBody)[a]);
-        var c = d(a).index(), a = d(a.parentNode).index();
-        return [
-          b.fnGetPosition(d('tr', this.s.dt.nTBody)[a]),
-          c,
-          b.oApi._fnVisibleToColumnIndex(this.s.dt, c)
-        ];
-      }
-      return b.fnGetPosition(a);
-    },
-    _fnConstruct: function (a) {
-      var b = this;
-      if ('function' != typeof this.s.dt.oInstance.fnVersionCheck || !0 !== this.s.dt.oInstance.fnVersionCheck('1.8.0'))
-        alert('FixedColumns ' + m.VERSION + ' required DataTables 1.8.0 or later. Please upgrade your DataTables installation');
-      else if ('' === this.s.dt.oScroll.sX)
-        this.s.dt.oInstance.oApi._fnLog(this.s.dt, 1, 'FixedColumns is not needed (no x-scrolling in DataTables enabled), so no action will be taken. Use \'FixedHeader\' for column fixing when scrolling is not enabled');
-      else {
-        this.s = d.extend(!0, this.s, m.defaults, a);
-        a = this.s.dt.oClasses;
-        this.dom.grid.dt = d(this.s.dt.nTable).parents('div.' + a.sScrollWrapper)[0];
-        this.dom.scroller = d('div.' + a.sScrollBody, this.dom.grid.dt)[0];
-        this._fnColCalc();
-        this._fnGridSetup();
-        var c, e = !1;
-        d(this.s.dt.nTableWrapper).on('mousedown.DTFC', function () {
-          e = !0;
-          d(r).one('mouseup', function () {
-            e = !1;
-          });
-        });
-        d(this.dom.scroller).on('mouseover.DTFC touchstart.DTFC', function () {
-          e || (c = 'main');
-        }).on('scroll.DTFC', function (a) {
-          !c && a.originalEvent && (c = 'main');
-          if ('main' === c && (0 < b.s.iLeftColumns && (b.dom.grid.left.liner.scrollTop = b.dom.scroller.scrollTop), 0 < b.s.iRightColumns))
-            b.dom.grid.right.liner.scrollTop = b.dom.scroller.scrollTop;
-        });
-        var f = 'onwheel' in r.createElement('div') ? 'wheel.DTFC' : 'mousewheel.DTFC';
-        if (0 < b.s.iLeftColumns)
-          d(b.dom.grid.left.liner).on('mouseover.DTFC touchstart.DTFC', function () {
-            e || (c = 'left');
-          }).on('scroll.DTFC', function (a) {
-            !c && a.originalEvent && (c = 'left');
-            'left' === c && (b.dom.scroller.scrollTop = b.dom.grid.left.liner.scrollTop, 0 < b.s.iRightColumns && (b.dom.grid.right.liner.scrollTop = b.dom.grid.left.liner.scrollTop));
-          }).on(f, function (a) {
-            b.dom.scroller.scrollLeft -= 'wheel' === a.type ? -a.originalEvent.deltaX : a.originalEvent.wheelDeltaX;
-          });
-        if (0 < b.s.iRightColumns)
-          d(b.dom.grid.right.liner).on('mouseover.DTFC touchstart.DTFC', function () {
-            e || (c = 'right');
-          }).on('scroll.DTFC', function (a) {
-            !c && a.originalEvent && (c = 'right');
-            'right' === c && (b.dom.scroller.scrollTop = b.dom.grid.right.liner.scrollTop, 0 < b.s.iLeftColumns && (b.dom.grid.left.liner.scrollTop = b.dom.grid.right.liner.scrollTop));
-          }).on(f, function (a) {
-            b.dom.scroller.scrollLeft -= 'wheel' === a.type ? -a.originalEvent.deltaX : a.originalEvent.wheelDeltaX;
-          });
-        d(q).on('resize.DTFC', function () {
-          b._fnGridLayout.call(b);
-        });
-        var g = !0, h = d(this.s.dt.nTable);
-        h.on('draw.dt.DTFC', function () {
-          b._fnColCalc();
-          b._fnDraw.call(b, g);
-          g = !1;
-        }).on('column-sizing.dt.DTFC', function () {
-          b._fnColCalc();
-          b._fnGridLayout(b);
-        }).on('column-visibility.dt.DTFC', function (a, c, d, e, f) {
-          if (f === t || f)
-            b._fnColCalc(), b._fnGridLayout(b), b._fnDraw(!0);
-        }).on('select.dt.DTFC deselect.dt.DTFC', function (a) {
-          'dt' === a.namespace && b._fnDraw(!1);
-        }).on('destroy.dt.DTFC', function () {
-          h.off('.DTFC');
-          d(b.dom.scroller).off('.DTFC');
-          d(q).off('.DTFC');
-          d(b.s.dt.nTableWrapper).off('.DTFC');
-          d(b.dom.grid.left.liner).off('.DTFC ' + f);
-          d(b.dom.grid.left.wrapper).remove();
-          d(b.dom.grid.right.liner).off('.DTFC ' + f);
-          d(b.dom.grid.right.wrapper).remove();
-        });
-        this._fnGridLayout();
-        this.s.dt.oInstance.fnDraw(!1);
+    'fnGetPosition': function (node) {
+      var idx;
+      var inst = this.s.dt.oInstance;
+      if (!$(node).parents('.DTFC_Cloned').length) {
+        // Not in a cloned table
+        return inst.fnGetPosition(node);
+      } else {
+        // Its in the cloned table, so need to look up position
+        if (node.nodeName.toLowerCase() === 'tr') {
+          idx = $(node).index();
+          return inst.fnGetPosition($('tr', this.s.dt.nTBody)[idx]);
+        } else {
+          var colIdx = $(node).index();
+          idx = $(node.parentNode).index();
+          var row = inst.fnGetPosition($('tr', this.s.dt.nTBody)[idx]);
+          return [
+            row,
+            colIdx,
+            inst.oApi._fnVisibleToColumnIndex(this.s.dt, colIdx)
+          ];
+        }
       }
     },
-    _fnColCalc: function () {
-      var a = this, b = 0, c = 0;
+    '_fnConstruct': function (oInit) {
+      var i, iLen, iWidth, that = this;
+      /* Sanity checking */
+      if (typeof this.s.dt.oInstance.fnVersionCheck != 'function' || this.s.dt.oInstance.fnVersionCheck('1.8.0') !== true) {
+        alert('FixedColumns ' + FixedColumns.VERSION + ' required DataTables 1.8.0 or later. ' + 'Please upgrade your DataTables installation');
+        return;
+      }
+      if (this.s.dt.oScroll.sX === '') {
+        this.s.dt.oInstance.oApi._fnLog(this.s.dt, 1, 'FixedColumns is not needed (no ' + 'x-scrolling in DataTables enabled), so no action will be taken. Use \'FixedHeader\' for ' + 'column fixing when scrolling is not enabled');
+        return;
+      }
+      /* Apply the settings from the user / defaults */
+      this.s = $.extend(true, this.s, FixedColumns.defaults, oInit);
+      /* Set up the DOM as we need it and cache nodes */
+      var classes = this.s.dt.oClasses;
+      this.dom.grid.dt = $(this.s.dt.nTable).parents('div.' + classes.sScrollWrapper)[0];
+      this.dom.scroller = $('div.' + classes.sScrollBody, this.dom.grid.dt)[0];
+      /* Set up the DOM that we want for the fixed column layout grid */
+      this._fnColCalc();
+      this._fnGridSetup();
+      /* Event handlers */
+      var mouseController;
+      var mouseDown = false;
+      // When the mouse is down (drag scroll) the mouse controller cannot
+      // change, as the browser keeps the original element as the scrolling one
+      $(this.s.dt.nTableWrapper).on('mousedown.DTFC', function () {
+        mouseDown = true;
+        $(document).one('mouseup', function () {
+          mouseDown = false;
+        });
+      });
+      // When the body is scrolled - scroll the left and right columns
+      $(this.dom.scroller).on('mouseover.DTFC touchstart.DTFC', function () {
+        if (!mouseDown) {
+          mouseController = 'main';
+        }
+      }).on('scroll.DTFC', function (e) {
+        if (!mouseController && e.originalEvent) {
+          mouseController = 'main';
+        }
+        if (mouseController === 'main') {
+          if (that.s.iLeftColumns > 0) {
+            that.dom.grid.left.liner.scrollTop = that.dom.scroller.scrollTop;
+          }
+          if (that.s.iRightColumns > 0) {
+            that.dom.grid.right.liner.scrollTop = that.dom.scroller.scrollTop;
+          }
+        }
+      });
+      var wheelType = 'onwheel' in document.createElement('div') ? 'wheel.DTFC' : 'mousewheel.DTFC';
+      if (that.s.iLeftColumns > 0) {
+        // When scrolling the left column, scroll the body and right column
+        $(that.dom.grid.left.liner).on('mouseover.DTFC touchstart.DTFC', function () {
+          if (!mouseDown) {
+            mouseController = 'left';
+          }
+        }).on('scroll.DTFC', function (e) {
+          if (!mouseController && e.originalEvent) {
+            mouseController = 'left';
+          }
+          if (mouseController === 'left') {
+            that.dom.scroller.scrollTop = that.dom.grid.left.liner.scrollTop;
+            if (that.s.iRightColumns > 0) {
+              that.dom.grid.right.liner.scrollTop = that.dom.grid.left.liner.scrollTop;
+            }
+          }
+        }).on(wheelType, function (e) {
+          // Pass horizontal scrolling through
+          var xDelta = e.type === 'wheel' ? -e.originalEvent.deltaX : e.originalEvent.wheelDeltaX;
+          that.dom.scroller.scrollLeft -= xDelta;
+        });
+      }
+      if (that.s.iRightColumns > 0) {
+        // When scrolling the right column, scroll the body and the left column
+        $(that.dom.grid.right.liner).on('mouseover.DTFC touchstart.DTFC', function () {
+          if (!mouseDown) {
+            mouseController = 'right';
+          }
+        }).on('scroll.DTFC', function (e) {
+          if (!mouseController && e.originalEvent) {
+            mouseController = 'right';
+          }
+          if (mouseController === 'right') {
+            that.dom.scroller.scrollTop = that.dom.grid.right.liner.scrollTop;
+            if (that.s.iLeftColumns > 0) {
+              that.dom.grid.left.liner.scrollTop = that.dom.grid.right.liner.scrollTop;
+            }
+          }
+        }).on(wheelType, function (e) {
+          // Pass horizontal scrolling through
+          var xDelta = e.type === 'wheel' ? -e.originalEvent.deltaX : e.originalEvent.wheelDeltaX;
+          that.dom.scroller.scrollLeft -= xDelta;
+        });
+      }
+      $(window).on('resize.DTFC', function () {
+        that._fnGridLayout.call(that);
+      });
+      var bFirstDraw = true;
+      var jqTable = $(this.s.dt.nTable);
+      jqTable.on('draw.dt.DTFC', function () {
+        that._fnColCalc();
+        that._fnDraw.call(that, bFirstDraw);
+        bFirstDraw = false;
+      }).on('column-sizing.dt.DTFC', function () {
+        that._fnColCalc();
+        that._fnGridLayout(that);
+      }).on('column-visibility.dt.DTFC', function (e, settings, column, vis, recalc) {
+        if (recalc === undefined || recalc) {
+          that._fnColCalc();
+          that._fnGridLayout(that);
+          that._fnDraw(true);
+        }
+      }).on('select.dt.DTFC deselect.dt.DTFC', function (e, dt, type, indexes) {
+        if (e.namespace === 'dt') {
+          that._fnDraw(false);
+        }
+      }).on('destroy.dt.DTFC', function () {
+        jqTable.off('.DTFC');
+        $(that.dom.scroller).off('.DTFC');
+        $(window).off('.DTFC');
+        $(that.s.dt.nTableWrapper).off('.DTFC');
+        $(that.dom.grid.left.liner).off('.DTFC ' + wheelType);
+        $(that.dom.grid.left.wrapper).remove();
+        $(that.dom.grid.right.liner).off('.DTFC ' + wheelType);
+        $(that.dom.grid.right.wrapper).remove();
+      });
+      /* Get things right to start with - note that due to adjusting the columns, there must be
+		 * another redraw of the main table. It doesn't need to be a full redraw however.
+		 */
+      this._fnGridLayout();
+      this.s.dt.oInstance.fnDraw(false);
+    },
+    '_fnColCalc': function () {
+      var that = this;
+      var iLeftWidth = 0;
+      var iRightWidth = 0;
       this.s.aiInnerWidths = [];
       this.s.aiOuterWidths = [];
-      d.each(this.s.dt.aoColumns, function (e, f) {
-        var g = d(f.nTh), h;
-        if (g.filter(':visible').length) {
-          var i = g.outerWidth();
-          0 === a.s.aiOuterWidths.length && (h = d(a.s.dt.nTable).css('border-left-width'), i += 'string' === typeof h ? 1 : parseInt(h, 10));
-          a.s.aiOuterWidths.length === a.s.dt.aoColumns.length - 1 && (h = d(a.s.dt.nTable).css('border-right-width'), i += 'string' === typeof h ? 1 : parseInt(h, 10));
-          a.s.aiOuterWidths.push(i);
-          a.s.aiInnerWidths.push(g.width());
-          e < a.s.iLeftColumns && (b += i);
-          a.s.iTableColumns - a.s.iRightColumns <= e && (c += i);
-        } else
-          a.s.aiInnerWidths.push(0), a.s.aiOuterWidths.push(0);
+      $.each(this.s.dt.aoColumns, function (i, col) {
+        var th = $(col.nTh);
+        var border;
+        if (!th.filter(':visible').length) {
+          that.s.aiInnerWidths.push(0);
+          that.s.aiOuterWidths.push(0);
+        } else {
+          // Inner width is used to assign widths to cells
+          // Outer width is used to calculate the container
+          var iWidth = th.outerWidth();
+          // When working with the left most-cell, need to add on the
+          // table's border to the outerWidth, since we need to take
+          // account of it, but it isn't in any cell
+          if (that.s.aiOuterWidths.length === 0) {
+            border = $(that.s.dt.nTable).css('border-left-width');
+            iWidth += typeof border === 'string' ? 1 : parseInt(border, 10);
+          }
+          // Likewise with the final column on the right
+          if (that.s.aiOuterWidths.length === that.s.dt.aoColumns.length - 1) {
+            border = $(that.s.dt.nTable).css('border-right-width');
+            iWidth += typeof border === 'string' ? 1 : parseInt(border, 10);
+          }
+          that.s.aiOuterWidths.push(iWidth);
+          that.s.aiInnerWidths.push(th.width());
+          if (i < that.s.iLeftColumns) {
+            iLeftWidth += iWidth;
+          }
+          if (that.s.iTableColumns - that.s.iRightColumns <= i) {
+            iRightWidth += iWidth;
+          }
+        }
       });
-      this.s.iLeftWidth = b;
-      this.s.iRightWidth = c;
+      this.s.iLeftWidth = iLeftWidth;
+      this.s.iRightWidth = iRightWidth;
     },
-    _fnGridSetup: function () {
-      var a = this._fnDTOverflow(), b;
+    '_fnGridSetup': function () {
+      var that = this;
+      var oOverflow = this._fnDTOverflow();
+      var block;
       this.dom.body = this.s.dt.nTable;
       this.dom.header = this.s.dt.nTHead.parentNode;
       this.dom.header.parentNode.parentNode.style.position = 'relative';
-      var c = d('<div class="DTFC_ScrollWrapper" style="position:relative; clear:both;"><div class="DTFC_LeftWrapper" style="position:absolute; top:0; left:0;"><div class="DTFC_LeftHeadWrapper" style="position:relative; top:0; left:0; overflow:hidden;"></div><div class="DTFC_LeftBodyWrapper" style="position:relative; top:0; left:0; overflow:hidden;"><div class="DTFC_LeftBodyLiner" style="position:relative; top:0; left:0; overflow-y:scroll;"></div></div><div class="DTFC_LeftFootWrapper" style="position:relative; top:0; left:0; overflow:hidden;"></div></div><div class="DTFC_RightWrapper" style="position:absolute; top:0; right:0;"><div class="DTFC_RightHeadWrapper" style="position:relative; top:0; left:0;"><div class="DTFC_RightHeadBlocker DTFC_Blocker" style="position:absolute; top:0; bottom:0;"></div></div><div class="DTFC_RightBodyWrapper" style="position:relative; top:0; left:0; overflow:hidden;"><div class="DTFC_RightBodyLiner" style="position:relative; top:0; left:0; overflow-y:scroll;"></div></div><div class="DTFC_RightFootWrapper" style="position:relative; top:0; left:0;"><div class="DTFC_RightFootBlocker DTFC_Blocker" style="position:absolute; top:0; bottom:0;"></div></div></div></div>')[0], e = c.childNodes[0], f = c.childNodes[1];
-      this.dom.grid.dt.parentNode.insertBefore(c, this.dom.grid.dt);
-      c.appendChild(this.dom.grid.dt);
-      this.dom.grid.wrapper = c;
-      0 < this.s.iLeftColumns && (this.dom.grid.left.wrapper = e, this.dom.grid.left.head = e.childNodes[0], this.dom.grid.left.body = e.childNodes[1], this.dom.grid.left.liner = d('div.DTFC_LeftBodyLiner', c)[0], c.appendChild(e));
-      0 < this.s.iRightColumns && (this.dom.grid.right.wrapper = f, this.dom.grid.right.head = f.childNodes[0], this.dom.grid.right.body = f.childNodes[1], this.dom.grid.right.liner = d('div.DTFC_RightBodyLiner', c)[0], f.style.right = a.bar + 'px', b = d('div.DTFC_RightHeadBlocker', c)[0], b.style.width = a.bar + 'px', b.style.right = -a.bar + 'px', this.dom.grid.right.headBlock = b, b = d('div.DTFC_RightFootBlocker', c)[0], b.style.width = a.bar + 'px', b.style.right = -a.bar + 'px', this.dom.grid.right.footBlock = b, c.appendChild(f));
-      if (this.s.dt.nTFoot && (this.dom.footer = this.s.dt.nTFoot.parentNode, 0 < this.s.iLeftColumns && (this.dom.grid.left.foot = e.childNodes[2]), 0 < this.s.iRightColumns))
-        this.dom.grid.right.foot = f.childNodes[2];
-      this.s.rtl && d('div.DTFC_RightHeadBlocker', c).css({
-        left: -a.bar + 'px',
-        right: ''
-      });
-    },
-    _fnGridLayout: function () {
-      var a = this, b = this.dom.grid;
-      d(b.wrapper).width();
-      var c = d(this.s.dt.nTable.parentNode).outerHeight(), e = d(this.s.dt.nTable.parentNode.parentNode).outerHeight(), f = this._fnDTOverflow(), g = this.s.iLeftWidth, h = this.s.iRightWidth, i = 'rtl' === d(this.dom.body).css('direction'), j = function (b, c) {
-          f.bar ? a._firefoxScrollError() ? 34 < d(b).height() && (b.style.width = c + f.bar + 'px') : b.style.width = c + f.bar + 'px' : (b.style.width = c + 20 + 'px', b.style.paddingRight = '20px', b.style.boxSizing = 'border-box');
-        };
-      f.x && (c -= f.bar);
-      b.wrapper.style.height = e + 'px';
-      0 < this.s.iLeftColumns && (e = b.left.wrapper, e.style.width = g + 'px', e.style.height = '1px', i ? (e.style.left = '', e.style.right = 0) : (e.style.left = 0, e.style.right = ''), b.left.body.style.height = c + 'px', b.left.foot && (b.left.foot.style.top = (f.x ? f.bar : 0) + 'px'), j(b.left.liner, g), b.left.liner.style.height = c + 'px');
-      0 < this.s.iRightColumns && (e = b.right.wrapper, e.style.width = h + 'px', e.style.height = '1px', this.s.rtl ? (e.style.left = f.y ? f.bar + 'px' : 0, e.style.right = '') : (e.style.left = '', e.style.right = f.y ? f.bar + 'px' : 0), b.right.body.style.height = c + 'px', b.right.foot && (b.right.foot.style.top = (f.x ? f.bar : 0) + 'px'), j(b.right.liner, h), b.right.liner.style.height = c + 'px', b.right.headBlock.style.display = f.y ? 'block' : 'none', b.right.footBlock.style.display = f.y ? 'block' : 'none');
-    },
-    _fnDTOverflow: function () {
-      var a = this.s.dt.nTable, b = a.parentNode, c = {
-          x: !1,
-          y: !1,
-          bar: this.s.dt.oScroll.iBarWidth
-        };
-      a.offsetWidth > b.clientWidth && (c.x = !0);
-      a.offsetHeight > b.clientHeight && (c.y = !0);
-      return c;
-    },
-    _fnDraw: function (a) {
-      this._fnGridLayout();
-      this._fnCloneLeft(a);
-      this._fnCloneRight(a);
-      null !== this.s.fnDrawCallback && this.s.fnDrawCallback.call(this, this.dom.clone.left, this.dom.clone.right);
-      d(this).trigger('draw.dtfc', {
-        leftClone: this.dom.clone.left,
-        rightClone: this.dom.clone.right
-      });
-    },
-    _fnCloneRight: function (a) {
-      if (!(0 >= this.s.iRightColumns)) {
-        var b, c = [];
-        for (b = this.s.iTableColumns - this.s.iRightColumns; b < this.s.iTableColumns; b++)
-          this.s.dt.aoColumns[b].bVisible && c.push(b);
-        this._fnClone(this.dom.clone.right, this.dom.grid.right, c, a);
+      var nSWrapper = $('<div class="DTFC_ScrollWrapper" style="position:relative; clear:both;">' + '<div class="DTFC_LeftWrapper" style="position:absolute; top:0; left:0;">' + '<div class="DTFC_LeftHeadWrapper" style="position:relative; top:0; left:0; overflow:hidden;"></div>' + '<div class="DTFC_LeftBodyWrapper" style="position:relative; top:0; left:0; overflow:hidden;">' + '<div class="DTFC_LeftBodyLiner" style="position:relative; top:0; left:0; overflow-y:scroll;"></div>' + '</div>' + '<div class="DTFC_LeftFootWrapper" style="position:relative; top:0; left:0; overflow:hidden;"></div>' + '</div>' + '<div class="DTFC_RightWrapper" style="position:absolute; top:0; right:0;">' + '<div class="DTFC_RightHeadWrapper" style="position:relative; top:0; left:0;">' + '<div class="DTFC_RightHeadBlocker DTFC_Blocker" style="position:absolute; top:0; bottom:0;"></div>' + '</div>' + '<div class="DTFC_RightBodyWrapper" style="position:relative; top:0; left:0; overflow:hidden;">' + '<div class="DTFC_RightBodyLiner" style="position:relative; top:0; left:0; overflow-y:scroll;"></div>' + '</div>' + '<div class="DTFC_RightFootWrapper" style="position:relative; top:0; left:0;">' + '<div class="DTFC_RightFootBlocker DTFC_Blocker" style="position:absolute; top:0; bottom:0;"></div>' + '</div>' + '</div>' + '</div>')[0];
+      var nLeft = nSWrapper.childNodes[0];
+      var nRight = nSWrapper.childNodes[1];
+      this.dom.grid.dt.parentNode.insertBefore(nSWrapper, this.dom.grid.dt);
+      nSWrapper.appendChild(this.dom.grid.dt);
+      this.dom.grid.wrapper = nSWrapper;
+      if (this.s.iLeftColumns > 0) {
+        this.dom.grid.left.wrapper = nLeft;
+        this.dom.grid.left.head = nLeft.childNodes[0];
+        this.dom.grid.left.body = nLeft.childNodes[1];
+        this.dom.grid.left.liner = $('div.DTFC_LeftBodyLiner', nSWrapper)[0];
+        nSWrapper.appendChild(nLeft);
       }
-    },
-    _fnCloneLeft: function (a) {
-      if (!(0 >= this.s.iLeftColumns)) {
-        var b, c = [];
-        for (b = 0; b < this.s.iLeftColumns; b++)
-          this.s.dt.aoColumns[b].bVisible && c.push(b);
-        this._fnClone(this.dom.clone.left, this.dom.grid.left, c, a);
+      if (this.s.iRightColumns > 0) {
+        this.dom.grid.right.wrapper = nRight;
+        this.dom.grid.right.head = nRight.childNodes[0];
+        this.dom.grid.right.body = nRight.childNodes[1];
+        this.dom.grid.right.liner = $('div.DTFC_RightBodyLiner', nSWrapper)[0];
+        nRight.style.right = oOverflow.bar + 'px';
+        block = $('div.DTFC_RightHeadBlocker', nSWrapper)[0];
+        block.style.width = oOverflow.bar + 'px';
+        block.style.right = -oOverflow.bar + 'px';
+        this.dom.grid.right.headBlock = block;
+        block = $('div.DTFC_RightFootBlocker', nSWrapper)[0];
+        block.style.width = oOverflow.bar + 'px';
+        block.style.right = -oOverflow.bar + 'px';
+        this.dom.grid.right.footBlock = block;
+        nSWrapper.appendChild(nRight);
       }
-    },
-    _fnCopyLayout: function (a, b, c) {
-      for (var e = [], f = [], g = [], h = 0, i = a.length; h < i; h++) {
-        var j = [];
-        j.nTr = d(a[h].nTr).clone(c, !1)[0];
-        for (var l = 0, o = this.s.iTableColumns; l < o; l++)
-          if (-1 !== d.inArray(l, b)) {
-            var p = d.inArray(a[h][l].cell, g);
-            -1 === p ? (p = d(a[h][l].cell).clone(c, !1)[0], f.push(p), g.push(a[h][l].cell), j.push({
-              cell: p,
-              unique: a[h][l].unique
-            })) : j.push({
-              cell: f[p],
-              unique: a[h][l].unique
-            });
-          }
-        e.push(j);
-      }
-      return e;
-    },
-    _fnClone: function (a, b, c, e) {
-      var f = this, g, h, i, j, l, o, p, n, m, k = this.s.dt;
-      if (e) {
-        d(a.header).remove();
-        a.header = d(this.dom.header).clone(!0, !1)[0];
-        a.header.className += ' DTFC_Cloned';
-        a.header.style.width = '100%';
-        b.head.appendChild(a.header);
-        n = this._fnCopyLayout(k.aoHeader, c, !0);
-        j = d('>thead', a.header);
-        j.empty();
-        g = 0;
-        for (h = n.length; g < h; g++)
-          j[0].appendChild(n[g].nTr);
-        k.oApi._fnDrawHead(k, n, !0);
-      } else {
-        n = this._fnCopyLayout(k.aoHeader, c, !1);
-        m = [];
-        k.oApi._fnDetectHeader(m, d('>thead', a.header)[0]);
-        g = 0;
-        for (h = n.length; g < h; g++) {
-          i = 0;
-          for (j = n[g].length; i < j; i++)
-            m[g][i].cell.className = n[g][i].cell.className, d('span.DataTables_sort_icon', m[g][i].cell).each(function () {
-              this.className = d('span.DataTables_sort_icon', n[g][i].cell)[0].className;
-            });
+      if (this.s.dt.nTFoot) {
+        this.dom.footer = this.s.dt.nTFoot.parentNode;
+        if (this.s.iLeftColumns > 0) {
+          this.dom.grid.left.foot = nLeft.childNodes[2];
+        }
+        if (this.s.iRightColumns > 0) {
+          this.dom.grid.right.foot = nRight.childNodes[2];
         }
       }
-      this._fnEqualiseHeights('thead', this.dom.header, a.header);
-      'auto' == this.s.sHeightMatch && d('>tbody>tr', f.dom.body).css('height', 'auto');
-      null !== a.body && (d(a.body).remove(), a.body = null);
-      a.body = d(this.dom.body).clone(!0)[0];
-      a.body.className += ' DTFC_Cloned';
-      a.body.style.paddingBottom = k.oScroll.iBarWidth + 'px';
-      a.body.style.marginBottom = 2 * k.oScroll.iBarWidth + 'px';
-      null !== a.body.getAttribute('id') && a.body.removeAttribute('id');
-      d('>thead>tr', a.body).empty();
-      d('>tfoot', a.body).remove();
-      var q = d('tbody', a.body)[0];
-      d(q).empty();
-      if (0 < k.aiDisplay.length) {
-        h = d('>thead>tr', a.body)[0];
-        for (p = 0; p < c.length; p++)
-          l = c[p], o = d(k.aoColumns[l].nTh).clone(!0)[0], o.innerHTML = '', j = o.style, j.paddingTop = '0', j.paddingBottom = '0', j.borderTopWidth = '0', j.borderBottomWidth = '0', j.height = 0, j.width = f.s.aiInnerWidths[l] + 'px', h.appendChild(o);
-        d('>tbody>tr', f.dom.body).each(function (a) {
-          var a = f.s.dt.oFeatures.bServerSide === false ? f.s.dt.aiDisplay[f.s.dt._iDisplayStart + a] : a, b = f.s.dt.aoData[a].anCells || d(this).children('td, th'), e = this.cloneNode(false);
-          e.removeAttribute('id');
-          e.setAttribute('data-dt-row', a);
-          for (p = 0; p < c.length; p++) {
-            l = c[p];
-            if (b.length > 0) {
-              o = d(b[l]).clone(true, true)[0];
-              o.setAttribute('data-dt-row', a);
-              o.setAttribute('data-dt-column', p);
-              e.appendChild(o);
+      // RTL support - swap the position of the left and right columns (#48)
+      if (this.s.rtl) {
+        $('div.DTFC_RightHeadBlocker', nSWrapper).css({
+          left: -oOverflow.bar + 'px',
+          right: ''
+        });
+      }
+    },
+    '_fnGridLayout': function () {
+      var that = this;
+      var oGrid = this.dom.grid;
+      var iWidth = $(oGrid.wrapper).width();
+      var iBodyHeight = $(this.s.dt.nTable.parentNode).outerHeight();
+      var iFullHeight = $(this.s.dt.nTable.parentNode.parentNode).outerHeight();
+      var oOverflow = this._fnDTOverflow();
+      var iLeftWidth = this.s.iLeftWidth;
+      var iRightWidth = this.s.iRightWidth;
+      var rtl = $(this.dom.body).css('direction') === 'rtl';
+      var wrapper;
+      var scrollbarAdjust = function (node, width) {
+        if (!oOverflow.bar) {
+          // If there is no scrollbar (Macs) we need to hide the auto scrollbar
+          node.style.width = width + 20 + 'px';
+          node.style.paddingRight = '20px';
+          node.style.boxSizing = 'border-box';
+        } else if (that._firefoxScrollError()) {
+          // See the above function for why this is required
+          if ($(node).height() > 34) {
+            node.style.width = width + oOverflow.bar + 'px';
+          }
+        } else {
+          // Otherwise just overflow by the scrollbar
+          node.style.width = width + oOverflow.bar + 'px';
+        }
+      };
+      // When x scrolling - don't paint the fixed columns over the x scrollbar
+      if (oOverflow.x) {
+        iBodyHeight -= oOverflow.bar;
+      }
+      oGrid.wrapper.style.height = iFullHeight + 'px';
+      if (this.s.iLeftColumns > 0) {
+        wrapper = oGrid.left.wrapper;
+        wrapper.style.width = iLeftWidth + 'px';
+        wrapper.style.height = '1px';
+        // Swap the position of the left and right columns for rtl (#48)
+        // This is always up against the edge, scrollbar on the far side
+        if (rtl) {
+          wrapper.style.left = '';
+          wrapper.style.right = 0;
+        } else {
+          wrapper.style.left = 0;
+          wrapper.style.right = '';
+        }
+        oGrid.left.body.style.height = iBodyHeight + 'px';
+        if (oGrid.left.foot) {
+          oGrid.left.foot.style.top = (oOverflow.x ? oOverflow.bar : 0) + 'px';  // shift footer for scrollbar
+        }
+        scrollbarAdjust(oGrid.left.liner, iLeftWidth);
+        oGrid.left.liner.style.height = iBodyHeight + 'px';
+      }
+      if (this.s.iRightColumns > 0) {
+        wrapper = oGrid.right.wrapper;
+        wrapper.style.width = iRightWidth + 'px';
+        wrapper.style.height = '1px';
+        // Need to take account of the vertical scrollbar
+        if (this.s.rtl) {
+          wrapper.style.left = oOverflow.y ? oOverflow.bar + 'px' : 0;
+          wrapper.style.right = '';
+        } else {
+          wrapper.style.left = '';
+          wrapper.style.right = oOverflow.y ? oOverflow.bar + 'px' : 0;
+        }
+        oGrid.right.body.style.height = iBodyHeight + 'px';
+        if (oGrid.right.foot) {
+          oGrid.right.foot.style.top = (oOverflow.x ? oOverflow.bar : 0) + 'px';
+        }
+        scrollbarAdjust(oGrid.right.liner, iRightWidth);
+        oGrid.right.liner.style.height = iBodyHeight + 'px';
+        oGrid.right.headBlock.style.display = oOverflow.y ? 'block' : 'none';
+        oGrid.right.footBlock.style.display = oOverflow.y ? 'block' : 'none';
+      }
+    },
+    '_fnDTOverflow': function () {
+      var nTable = this.s.dt.nTable;
+      var nTableScrollBody = nTable.parentNode;
+      var out = {
+          'x': false,
+          'y': false,
+          'bar': this.s.dt.oScroll.iBarWidth
+        };
+      if (nTable.offsetWidth > nTableScrollBody.clientWidth) {
+        out.x = true;
+      }
+      if (nTable.offsetHeight > nTableScrollBody.clientHeight) {
+        out.y = true;
+      }
+      return out;
+    },
+    '_fnDraw': function (bAll) {
+      this._fnGridLayout();
+      this._fnCloneLeft(bAll);
+      this._fnCloneRight(bAll);
+      /* Draw callback function */
+      if (this.s.fnDrawCallback !== null) {
+        this.s.fnDrawCallback.call(this, this.dom.clone.left, this.dom.clone.right);
+      }
+      /* Event triggering */
+      $(this).trigger('draw.dtfc', {
+        'leftClone': this.dom.clone.left,
+        'rightClone': this.dom.clone.right
+      });
+    },
+    '_fnCloneRight': function (bAll) {
+      if (this.s.iRightColumns <= 0) {
+        return;
+      }
+      var that = this, i, jq, aiColumns = [];
+      for (i = this.s.iTableColumns - this.s.iRightColumns; i < this.s.iTableColumns; i++) {
+        if (this.s.dt.aoColumns[i].bVisible) {
+          aiColumns.push(i);
+        }
+      }
+      this._fnClone(this.dom.clone.right, this.dom.grid.right, aiColumns, bAll);
+    },
+    '_fnCloneLeft': function (bAll) {
+      if (this.s.iLeftColumns <= 0) {
+        return;
+      }
+      var that = this, i, jq, aiColumns = [];
+      for (i = 0; i < this.s.iLeftColumns; i++) {
+        if (this.s.dt.aoColumns[i].bVisible) {
+          aiColumns.push(i);
+        }
+      }
+      this._fnClone(this.dom.clone.left, this.dom.grid.left, aiColumns, bAll);
+    },
+    '_fnCopyLayout': function (aoOriginal, aiColumns, events) {
+      var aReturn = [];
+      var aClones = [];
+      var aCloned = [];
+      for (var i = 0, iLen = aoOriginal.length; i < iLen; i++) {
+        var aRow = [];
+        aRow.nTr = $(aoOriginal[i].nTr).clone(events, false)[0];
+        for (var j = 0, jLen = this.s.iTableColumns; j < jLen; j++) {
+          if ($.inArray(j, aiColumns) === -1) {
+            continue;
+          }
+          var iCloned = $.inArray(aoOriginal[i][j].cell, aCloned);
+          if (iCloned === -1) {
+            var nClone = $(aoOriginal[i][j].cell).clone(events, false)[0];
+            aClones.push(nClone);
+            aCloned.push(aoOriginal[i][j].cell);
+            aRow.push({
+              'cell': nClone,
+              'unique': aoOriginal[i][j].unique
+            });
+          } else {
+            aRow.push({
+              'cell': aClones[iCloned],
+              'unique': aoOriginal[i][j].unique
+            });
+          }
+        }
+        aReturn.push(aRow);
+      }
+      return aReturn;
+    },
+    '_fnClone': function (oClone, oGrid, aiColumns, bAll) {
+      var that = this, i, iLen, j, jLen, jq, nTarget, iColumn, nClone, iIndex, aoCloneLayout, jqCloneThead, aoFixedHeader, dt = this.s.dt;
+      /*
+		 * Header
+		 */
+      if (bAll) {
+        $(oClone.header).remove();
+        oClone.header = $(this.dom.header).clone(true, false)[0];
+        oClone.header.className += ' DTFC_Cloned';
+        oClone.header.style.width = '100%';
+        oGrid.head.appendChild(oClone.header);
+        /* Copy the DataTables layout cache for the header for our floating column */
+        aoCloneLayout = this._fnCopyLayout(dt.aoHeader, aiColumns, true);
+        jqCloneThead = $('>thead', oClone.header);
+        jqCloneThead.empty();
+        /* Add the created cloned TR elements to the table */
+        for (i = 0, iLen = aoCloneLayout.length; i < iLen; i++) {
+          jqCloneThead[0].appendChild(aoCloneLayout[i].nTr);
+        }
+        /* Use the handy _fnDrawHead function in DataTables to do the rowspan/colspan
+			 * calculations for us
+			 */
+        dt.oApi._fnDrawHead(dt, aoCloneLayout, true);
+      } else {
+        /* To ensure that we copy cell classes exactly, regardless of colspan, multiple rows
+			 * etc, we make a copy of the header from the DataTable again, but don't insert the
+			 * cloned cells, just copy the classes across. To get the matching layout for the
+			 * fixed component, we use the DataTables _fnDetectHeader method, allowing 1:1 mapping
+			 */
+        aoCloneLayout = this._fnCopyLayout(dt.aoHeader, aiColumns, false);
+        aoFixedHeader = [];
+        dt.oApi._fnDetectHeader(aoFixedHeader, $('>thead', oClone.header)[0]);
+        for (i = 0, iLen = aoCloneLayout.length; i < iLen; i++) {
+          for (j = 0, jLen = aoCloneLayout[i].length; j < jLen; j++) {
+            aoFixedHeader[i][j].cell.className = aoCloneLayout[i][j].cell.className;
+            // If jQuery UI theming is used we need to copy those elements as well
+            $('span.DataTables_sort_icon', aoFixedHeader[i][j].cell).each(function () {
+              this.className = $('span.DataTables_sort_icon', aoCloneLayout[i][j].cell)[0].className;
+            });
+          }
+        }
+      }
+      this._fnEqualiseHeights('thead', this.dom.header, oClone.header);
+      /*
+		 * Body
+		 */
+      if (this.s.sHeightMatch == 'auto') {
+        /* Remove any heights which have been applied already and let the browser figure it out */
+        $('>tbody>tr', that.dom.body).css('height', 'auto');
+      }
+      if (oClone.body !== null) {
+        $(oClone.body).remove();
+        oClone.body = null;
+      }
+      oClone.body = $(this.dom.body).clone(true)[0];
+      oClone.body.className += ' DTFC_Cloned';
+      oClone.body.style.paddingBottom = dt.oScroll.iBarWidth + 'px';
+      oClone.body.style.marginBottom = dt.oScroll.iBarWidth * 2 + 'px';
+      /* For IE */
+      if (oClone.body.getAttribute('id') !== null) {
+        oClone.body.removeAttribute('id');
+      }
+      $('>thead>tr', oClone.body).empty();
+      $('>tfoot', oClone.body).remove();
+      var nBody = $('tbody', oClone.body)[0];
+      $(nBody).empty();
+      if (dt.aiDisplay.length > 0) {
+        /* Copy the DataTables' header elements to force the column width in exactly the
+			 * same way that DataTables does it - have the header element, apply the width and
+			 * colapse it down
+			 */
+        var nInnerThead = $('>thead>tr', oClone.body)[0];
+        for (iIndex = 0; iIndex < aiColumns.length; iIndex++) {
+          iColumn = aiColumns[iIndex];
+          nClone = $(dt.aoColumns[iColumn].nTh).clone(true)[0];
+          nClone.innerHTML = '';
+          var oStyle = nClone.style;
+          oStyle.paddingTop = '0';
+          oStyle.paddingBottom = '0';
+          oStyle.borderTopWidth = '0';
+          oStyle.borderBottomWidth = '0';
+          oStyle.height = 0;
+          oStyle.width = that.s.aiInnerWidths[iColumn] + 'px';
+          nInnerThead.appendChild(nClone);
+        }
+        /* Add in the tbody elements, cloning form the master table */
+        $('>tbody>tr', that.dom.body).each(function (z) {
+          var i = that.s.dt.oFeatures.bServerSide === false ? that.s.dt.aiDisplay[that.s.dt._iDisplayStart + z] : z;
+          var aTds = that.s.dt.aoData[i].anCells || $(this).children('td, th');
+          var n = this.cloneNode(false);
+          n.removeAttribute('id');
+          n.setAttribute('data-dt-row', i);
+          for (iIndex = 0; iIndex < aiColumns.length; iIndex++) {
+            iColumn = aiColumns[iIndex];
+            if (aTds.length > 0) {
+              nClone = $(aTds[iColumn]).clone(true, true)[0];
+              nClone.setAttribute('data-dt-row', i);
+              nClone.setAttribute('data-dt-column', iIndex);
+              n.appendChild(nClone);
             }
           }
-          q.appendChild(e);
+          nBody.appendChild(n);
         });
-      } else
-        d('>tbody>tr', f.dom.body).each(function () {
-          o = this.cloneNode(true);
-          o.className = o.className + ' DTFC_NoData';
-          d('td', o).html('');
-          q.appendChild(o);
+      } else {
+        $('>tbody>tr', that.dom.body).each(function (z) {
+          nClone = this.cloneNode(true);
+          nClone.className += ' DTFC_NoData';
+          $('td', nClone).html('');
+          nBody.appendChild(nClone);
         });
-      a.body.style.width = '100%';
-      a.body.style.margin = '0';
-      a.body.style.padding = '0';
-      k.oScroller !== t && (h = k.oScroller.dom.force, b.forcer ? b.forcer.style.height = h.style.height : (b.forcer = h.cloneNode(!0), b.liner.appendChild(b.forcer)));
-      b.liner.appendChild(a.body);
-      this._fnEqualiseHeights('tbody', f.dom.body, a.body);
-      if (null !== k.nTFoot) {
-        if (e) {
-          null !== a.footer && a.footer.parentNode.removeChild(a.footer);
-          a.footer = d(this.dom.footer).clone(!0, !0)[0];
-          a.footer.className += ' DTFC_Cloned';
-          a.footer.style.width = '100%';
-          b.foot.appendChild(a.footer);
-          n = this._fnCopyLayout(k.aoFooter, c, !0);
-          b = d('>tfoot', a.footer);
-          b.empty();
-          g = 0;
-          for (h = n.length; g < h; g++)
-            b[0].appendChild(n[g].nTr);
-          k.oApi._fnDrawHead(k, n, !0);
+      }
+      oClone.body.style.width = '100%';
+      oClone.body.style.margin = '0';
+      oClone.body.style.padding = '0';
+      // Interop with Scroller - need to use a height forcing element in the
+      // scrolling area in the same way that Scroller does in the body scroll.
+      if (dt.oScroller !== undefined) {
+        var scrollerForcer = dt.oScroller.dom.force;
+        if (!oGrid.forcer) {
+          oGrid.forcer = scrollerForcer.cloneNode(true);
+          oGrid.liner.appendChild(oGrid.forcer);
         } else {
-          n = this._fnCopyLayout(k.aoFooter, c, !1);
-          b = [];
-          k.oApi._fnDetectHeader(b, d('>tfoot', a.footer)[0]);
-          g = 0;
-          for (h = n.length; g < h; g++) {
-            i = 0;
-            for (j = n[g].length; i < j; i++)
-              b[g][i].cell.className = n[g][i].cell.className;
+          oGrid.forcer.style.height = scrollerForcer.style.height;
+        }
+      }
+      oGrid.liner.appendChild(oClone.body);
+      this._fnEqualiseHeights('tbody', that.dom.body, oClone.body);
+      /*
+		 * Footer
+		 */
+      if (dt.nTFoot !== null) {
+        if (bAll) {
+          if (oClone.footer !== null) {
+            oClone.footer.parentNode.removeChild(oClone.footer);
+          }
+          oClone.footer = $(this.dom.footer).clone(true, true)[0];
+          oClone.footer.className += ' DTFC_Cloned';
+          oClone.footer.style.width = '100%';
+          oGrid.foot.appendChild(oClone.footer);
+          /* Copy the footer just like we do for the header */
+          aoCloneLayout = this._fnCopyLayout(dt.aoFooter, aiColumns, true);
+          var jqCloneTfoot = $('>tfoot', oClone.footer);
+          jqCloneTfoot.empty();
+          for (i = 0, iLen = aoCloneLayout.length; i < iLen; i++) {
+            jqCloneTfoot[0].appendChild(aoCloneLayout[i].nTr);
+          }
+          dt.oApi._fnDrawHead(dt, aoCloneLayout, true);
+        } else {
+          aoCloneLayout = this._fnCopyLayout(dt.aoFooter, aiColumns, false);
+          var aoCurrFooter = [];
+          dt.oApi._fnDetectHeader(aoCurrFooter, $('>tfoot', oClone.footer)[0]);
+          for (i = 0, iLen = aoCloneLayout.length; i < iLen; i++) {
+            for (j = 0, jLen = aoCloneLayout[i].length; j < jLen; j++) {
+              aoCurrFooter[i][j].cell.className = aoCloneLayout[i][j].cell.className;
+            }
           }
         }
-        this._fnEqualiseHeights('tfoot', this.dom.footer, a.footer);
+        this._fnEqualiseHeights('tfoot', this.dom.footer, oClone.footer);
       }
-      b = k.oApi._fnGetUniqueThs(k, d('>thead', a.header)[0]);
-      d(b).each(function (a) {
-        l = c[a];
-        this.style.width = f.s.aiInnerWidths[l] + 'px';
+      /* Equalise the column widths between the header footer and body - body get's priority */
+      var anUnique = dt.oApi._fnGetUniqueThs(dt, $('>thead', oClone.header)[0]);
+      $(anUnique).each(function (i) {
+        iColumn = aiColumns[i];
+        this.style.width = that.s.aiInnerWidths[iColumn] + 'px';
       });
-      null !== f.s.dt.nTFoot && (b = k.oApi._fnGetUniqueThs(k, d('>tfoot', a.footer)[0]), d(b).each(function (a) {
-        l = c[a];
-        this.style.width = f.s.aiInnerWidths[l] + 'px';
-      }));
+      if (that.s.dt.nTFoot !== null) {
+        anUnique = dt.oApi._fnGetUniqueThs(dt, $('>tfoot', oClone.footer)[0]);
+        $(anUnique).each(function (i) {
+          iColumn = aiColumns[i];
+          this.style.width = that.s.aiInnerWidths[iColumn] + 'px';
+        });
+      }
     },
-    _fnGetTrNodes: function (a) {
-      for (var b = [], c = 0, d = a.childNodes.length; c < d; c++)
-        'TR' == a.childNodes[c].nodeName.toUpperCase() && b.push(a.childNodes[c]);
-      return b;
+    '_fnGetTrNodes': function (nIn) {
+      var aOut = [];
+      for (var i = 0, iLen = nIn.childNodes.length; i < iLen; i++) {
+        if (nIn.childNodes[i].nodeName.toUpperCase() == 'TR') {
+          aOut.push(nIn.childNodes[i]);
+        }
+      }
+      return aOut;
     },
-    _fnEqualiseHeights: function (a, b, c) {
-      if (!('none' == this.s.sHeightMatch && 'thead' !== a && 'tfoot' !== a)) {
-        var e, f, g = b.getElementsByTagName(a)[0], c = c.getElementsByTagName(a)[0], a = d('>' + a + '>tr:eq(0)', b).children(':first');
-        a.outerHeight();
-        a.height();
-        for (var g = this._fnGetTrNodes(g), b = this._fnGetTrNodes(c), h = [], c = 0, a = b.length; c < a; c++)
-          e = g[c].offsetHeight, f = b[c].offsetHeight, e = f > e ? f : e, 'semiauto' == this.s.sHeightMatch && (g[c]._DTTC_iHeight = e), h.push(e);
-        c = 0;
-        for (a = b.length; c < a; c++)
-          b[c].style.height = h[c] + 'px', g[c].style.height = h[c] + 'px';
+    '_fnEqualiseHeights': function (nodeName, original, clone) {
+      if (this.s.sHeightMatch == 'none' && nodeName !== 'thead' && nodeName !== 'tfoot') {
+        return;
+      }
+      var that = this, i, iLen, iHeight, iHeight2, iHeightOriginal, iHeightClone, rootOriginal = original.getElementsByTagName(nodeName)[0], rootClone = clone.getElementsByTagName(nodeName)[0], jqBoxHack = $('>' + nodeName + '>tr:eq(0)', original).children(':first'), iBoxHack = jqBoxHack.outerHeight() - jqBoxHack.height(), anOriginal = this._fnGetTrNodes(rootOriginal), anClone = this._fnGetTrNodes(rootClone), heights = [];
+      for (i = 0, iLen = anClone.length; i < iLen; i++) {
+        iHeightOriginal = anOriginal[i].offsetHeight;
+        iHeightClone = anClone[i].offsetHeight;
+        iHeight = iHeightClone > iHeightOriginal ? iHeightClone : iHeightOriginal;
+        if (this.s.sHeightMatch == 'semiauto') {
+          anOriginal[i]._DTTC_iHeight = iHeight;
+        }
+        heights.push(iHeight);
+      }
+      for (i = 0, iLen = anClone.length; i < iLen; i++) {
+        anClone[i].style.height = heights[i] + 'px';
+        anOriginal[i].style.height = heights[i] + 'px';
       }
     },
     _firefoxScrollError: function () {
-      if (u === t) {
-        var a = d('<div/>').css({
+      if (_firefoxScroll === undefined) {
+        var test = $('<div/>').css({
             position: 'absolute',
             top: 0,
             left: 0,
@@ -55776,62 +56366,113 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
             width: 50,
             overflow: 'scroll'
           }).appendTo('body');
-        u = a[0].clientWidth === a[0].offsetWidth && 0 !== this._fnDTOverflow().bar;
-        a.remove();
+        // Make sure this doesn't apply on Macs with 0 width scrollbars
+        _firefoxScroll = test[0].clientWidth === test[0].offsetWidth && this._fnDTOverflow().bar !== 0;
+        test.remove();
       }
-      return u;
+      return _firefoxScroll;
     }
   });
-  m.defaults = {
-    iLeftColumns: 1,
-    iRightColumns: 0,
-    fnDrawCallback: null,
-    sHeightMatch: 'semiauto'
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Statics
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /**
+ * FixedColumns default settings for initialisation
+ *  @name FixedColumns.defaults
+ *  @namespace
+ *  @static
+ */
+  FixedColumns.defaults = {
+    'iLeftColumns': 1,
+    'iRightColumns': 0,
+    'fnDrawCallback': null,
+    'sHeightMatch': 'semiauto'
   };
-  m.version = '3.2.2';
-  s.Api.register('fixedColumns()', function () {
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Constants
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  /**
+ * FixedColumns version
+ *  @name      FixedColumns.version
+ *  @type      String
+ *  @default   See code
+ *  @static
+ */
+  FixedColumns.version = '3.2.2';
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables API integration
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  DataTable.Api.register('fixedColumns()', function () {
     return this;
   });
-  s.Api.register('fixedColumns().update()', function () {
-    return this.iterator('table', function (a) {
-      a._oFixedColumns && a._oFixedColumns.fnUpdate();
+  DataTable.Api.register('fixedColumns().update()', function () {
+    return this.iterator('table', function (ctx) {
+      if (ctx._oFixedColumns) {
+        ctx._oFixedColumns.fnUpdate();
+      }
     });
   });
-  s.Api.register('fixedColumns().relayout()', function () {
-    return this.iterator('table', function (a) {
-      a._oFixedColumns && a._oFixedColumns.fnRedrawLayout();
+  DataTable.Api.register('fixedColumns().relayout()', function () {
+    return this.iterator('table', function (ctx) {
+      if (ctx._oFixedColumns) {
+        ctx._oFixedColumns.fnRedrawLayout();
+      }
     });
   });
-  s.Api.register('rows().recalcHeight()', function () {
-    return this.iterator('row', function (a, b) {
-      a._oFixedColumns && a._oFixedColumns.fnRecalculateHeight(this.row(b).node());
+  DataTable.Api.register('rows().recalcHeight()', function () {
+    return this.iterator('row', function (ctx, idx) {
+      if (ctx._oFixedColumns) {
+        ctx._oFixedColumns.fnRecalculateHeight(this.row(idx).node());
+      }
     });
   });
-  s.Api.register('fixedColumns().rowIndex()', function (a) {
-    a = d(a);
-    return a.parents('.DTFC_Cloned').length ? this.rows({ page: 'current' }).indexes()[a.index()] : this.row(a).index();
+  DataTable.Api.register('fixedColumns().rowIndex()', function (row) {
+    row = $(row);
+    return row.parents('.DTFC_Cloned').length ? this.rows({ page: 'current' }).indexes()[row.index()] : this.row(row).index();
   });
-  s.Api.register('fixedColumns().cellIndex()', function (a) {
-    a = d(a);
-    if (a.parents('.DTFC_Cloned').length) {
-      var b = a.parent().index(), b = this.rows({ page: 'current' }).indexes()[b], a = a.parents('.DTFC_LeftWrapper').length ? a.index() : this.columns().flatten().length - this.context[0]._oFixedColumns.s.iRightColumns + a.index();
+  DataTable.Api.register('fixedColumns().cellIndex()', function (cell) {
+    cell = $(cell);
+    if (cell.parents('.DTFC_Cloned').length) {
+      var rowClonedIdx = cell.parent().index();
+      var rowIdx = this.rows({ page: 'current' }).indexes()[rowClonedIdx];
+      var columnIdx;
+      if (cell.parents('.DTFC_LeftWrapper').length) {
+        columnIdx = cell.index();
+      } else {
+        var columns = this.columns().flatten().length;
+        columnIdx = columns - this.context[0]._oFixedColumns.s.iRightColumns + cell.index();
+      }
       return {
-        row: b,
-        column: this.column.index('toData', a),
-        columnVisible: a
+        row: rowIdx,
+        column: this.column.index('toData', columnIdx),
+        columnVisible: columnIdx
       };
-    }
-    return this.cell(a).index();
-  });
-  d(r).on('init.dt.fixedColumns', function (a, b) {
-    if ('dt' === a.namespace) {
-      var c = b.oInit.fixedColumns, e = s.defaults.fixedColumns;
-      if (c || e)
-        e = d.extend({}, c, e), !1 !== c && new m(b, e);
+    } else {
+      return this.cell(cell).index();
     }
   });
-  d.fn.dataTable.FixedColumns = m;
-  return d.fn.DataTable.FixedColumns = m;
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Initialisation
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  // Attach a listener to the document which listens for DataTables initialisation
+  // events so we can automatically initialise
+  $(document).on('init.dt.fixedColumns', function (e, settings) {
+    if (e.namespace !== 'dt') {
+      return;
+    }
+    var init = settings.oInit.fixedColumns;
+    var defaults = DataTable.defaults.fixedColumns;
+    if (init || defaults) {
+      var opts = $.extend({}, init, defaults);
+      if (init !== false) {
+        new FixedColumns(settings, opts);
+      }
+    }
+  });
+  // Make FixedColumns accessible from the DataTables instance
+  $.fn.dataTable.FixedColumns = FixedColumns;
+  $.fn.DataTable.FixedColumns = FixedColumns;
+  return FixedColumns;
 }));
 /*! Responsive 2.1.0
  * 2014-2016 SpryMedia Ltd - datatables.net/license
@@ -56684,665 +57325,1167 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
   });
   return Responsive;
 }));
-/*!
- Bootstrap 4 integration for DataTables' Responsive
- ©2016 SpryMedia Ltd - datatables.net/license
-*/
-(function (c) {
-  'function' === typeof define && define.amd ? define([
-    'jquery',
-    'datatables.net-bs4',
-    'datatables.net-responsive'
-  ], function (a) {
-    return c(a, window, document);
-  }) : 'object' === typeof exports ? module.exports = function (a, b) {
-    a || (a = window);
-    if (!b || !b.fn.dataTable)
-      b = require('datatables.net-bs4')(a, b).$;
-    b.fn.dataTable.Responsive || require('datatables.net-responsive')(a, b);
-    return c(b, a, a.document);
-  } : c(jQuery, window, document);
-}(function (c) {
-  var a = c.fn.dataTable, b = a.Responsive.display, g = b.modal, d = c('<div class="modal fade dtr-bs-modal" role="dialog"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body"/></div></div></div>');
-  b.modal = function (a) {
-    return function (b, e, f) {
-      c.fn.modal ? e || (a && a.header && d.find('div.modal-header').empty().append('<h4 class="modal-title">' + a.header(b) + '</h4>'), d.find('div.modal-body').empty().append(f()), d.appendTo('body').modal()) : g(b, e, f);
+/*! Buttons for DataTables 1.2.0
+ * ©2016 SpryMedia Ltd - datatables.net/license
+ */
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD
+    define([
+      'jquery',
+      'datatables.net'
+    ], function ($) {
+      return factory($, window, document);
+    });
+  } else if (typeof exports === 'object') {
+    // CommonJS
+    module.exports = function (root, $) {
+      if (!root) {
+        root = window;
+      }
+      if (!$ || !$.fn.dataTable) {
+        $ = require('datatables.net')(root, $).$;
+      }
+      return factory($, root, root.document);
     };
+  } else {
+    // Browser
+    factory(jQuery, window, document);
+  }
+}(function ($, window, document, undefined) {
+  'use strict';
+  var DataTable = $.fn.dataTable;
+  // Used for namespacing events added to the document by each instance, so they
+  // can be removed on destroy
+  var _instCounter = 0;
+  // Button namespacing counter for namespacing events on individual buttons
+  var _buttonCounter = 0;
+  var _dtButtons = DataTable.ext.buttons;
+  /**
+ * [Buttons description]
+ * @param {[type]}
+ * @param {[type]}
+ */
+  var Buttons = function (dt, config) {
+    // Allow a boolean true for defaults
+    if (config === true) {
+      config = {};
+    }
+    // For easy configuration of buttons an array can be given
+    if ($.isArray(config)) {
+      config = { buttons: config };
+    }
+    this.c = $.extend(true, {}, Buttons.defaults, config);
+    // Don't want a deep copy for the buttons
+    if (config.buttons) {
+      this.c.buttons = config.buttons;
+    }
+    this.s = {
+      dt: new DataTable.Api(dt),
+      buttons: [],
+      listenKeys: '',
+      namespace: 'dtb' + _instCounter++
+    };
+    this.dom = { container: $('<' + this.c.dom.container.tag + '/>').addClass(this.c.dom.container.className) };
+    this._constructor();
   };
-  return a.Responsive;
-}));
-/*!
- Buttons for DataTables 1.0.3
- ©2015 SpryMedia Ltd - datatables.net/license
-*/
-(function (r, n, m) {
-  var p = function (e, j) {
-    var p = 0, s = 0, k = j.ext.buttons, l = function (a, b) {
-        !0 === b && (b = {});
-        e.isArray(b) && (b = { buttons: b });
-        this.c = e.extend(!0, {}, l.defaults, b);
-        b.buttons && (this.c.buttons = b.buttons);
-        this.s = {
-          dt: new j.Api(a),
-          buttons: [],
-          subButtons: [],
-          listenKeys: '',
-          namespace: 'dtb' + p++
-        };
-        this.dom = { container: e('<' + this.c.dom.container.tag + '/>').addClass(this.c.dom.container.className) };
-        this._constructor();
+  $.extend(Buttons.prototype, {
+    action: function (node, action) {
+      var button = this._nodeToButton(node);
+      if (action === undefined) {
+        return button.conf.action;
+      }
+      button.conf.action = action;
+      return this;
+    },
+    active: function (node, flag) {
+      var button = this._nodeToButton(node);
+      var klass = this.c.dom.button.active;
+      var jqNode = $(button.node);
+      if (flag === undefined) {
+        return jqNode.hasClass(klass);
+      }
+      jqNode.toggleClass(klass, flag === undefined ? true : flag);
+      return this;
+    },
+    add: function (config, idx) {
+      var buttons = this.s.buttons;
+      if (typeof idx === 'string') {
+        var split = idx.split('-');
+        var base = this.s;
+        for (var i = 0, ien = split.length - 1; i < ien; i++) {
+          base = base.buttons[split[i] * 1];
+        }
+        buttons = base.buttons;
+        idx = split[split.length - 1] * 1;
+      }
+      this._expandButton(buttons, config, false, idx);
+      this._draw();
+      return this;
+    },
+    container: function () {
+      return this.dom.container;
+    },
+    disable: function (node) {
+      var button = this._nodeToButton(node);
+      $(button.node).addClass(this.c.dom.button.disabled);
+      return this;
+    },
+    destroy: function () {
+      // Key event listener
+      $('body').off('keyup.' + this.s.namespace);
+      // Individual button destroy (so they can remove their own events if
+      // needed
+      var buttons = this.s.buttons;
+      var i, ien;
+      for (i = 0, ien = buttons.length; i < ien; i++) {
+        this.remove(buttons[i].node);
+      }
+      // Container
+      this.dom.container.remove();
+      // Remove from the settings object collection
+      var buttonInsts = this.s.dt.settings()[0];
+      for (i = 0, ien = buttonInsts.length; i < ien; i++) {
+        if (buttonInsts.inst === this) {
+          buttonInsts.splice(i, 1);
+          break;
+        }
+      }
+      return this;
+    },
+    enable: function (node, flag) {
+      if (flag === false) {
+        return this.disable(node);
+      }
+      var button = this._nodeToButton(node);
+      $(button.node).removeClass(this.c.dom.button.disabled);
+      return this;
+    },
+    name: function () {
+      return this.c.name;
+    },
+    node: function (node) {
+      var button = this._nodeToButton(node);
+      return $(button.node);
+    },
+    remove: function (node) {
+      var button = this._nodeToButton(node);
+      var host = this._nodeToHost(node);
+      var dt = this.s.dt;
+      // Remove any child buttons first
+      if (button.buttons.length) {
+        for (var i = button.buttons.length - 1; i >= 0; i--) {
+          this.remove(button.buttons[i].node);
+        }
+      }
+      // Allow the button to remove event handlers, etc
+      if (button.conf.destroy) {
+        button.conf.destroy.call(dt.button(node), dt, $(node), button.conf);
+      }
+      this._removeKey(button.conf);
+      $(button.node).remove();
+      var idx = $.inArray(button, host);
+      host.splice(idx, 1);
+      return this;
+    },
+    text: function (node, label) {
+      var button = this._nodeToButton(node);
+      var buttonLiner = this.c.dom.collection.buttonLiner;
+      var linerTag = button.inCollection && buttonLiner && buttonLiner.tag ? buttonLiner.tag : this.c.dom.buttonLiner.tag;
+      var dt = this.s.dt;
+      var jqNode = $(button.node);
+      var text = function (opt) {
+        return typeof opt === 'function' ? opt(dt, jqNode, button.conf) : opt;
       };
-    e.extend(l.prototype, {
-      action: function (a, b) {
-        var c = this._indexToButton(a).conf;
-        if (b === m)
-          return c.action;
-        c.action = b;
-        return this;
-      },
-      active: function (a, b) {
-        this._indexToButton(a).node.toggleClass(this.c.dom.button.active, b === m ? !0 : b);
-        return this;
-      },
-      add: function (a, b) {
-        if ('string' === typeof a && -1 !== a.indexOf('-')) {
-          var c = a.split('-');
-          this.c.buttons[1 * c[0]].buttons.splice(1 * c[1], 0, b);
-        } else
-          this.c.buttons.splice(1 * a, 0, b);
-        this.dom.container.empty();
-        this._buildButtons(this.c.buttons);
-        return this;
-      },
-      container: function () {
-        return this.dom.container;
-      },
-      disable: function (a) {
-        this._indexToButton(a).node.addClass(this.c.dom.button.disabled);
-        return this;
-      },
-      destroy: function () {
-        e('body').off('keyup.' + this.s.namespace);
-        var a = this.s.buttons, b = this.s.subButtons, c, d, f;
-        c = 0;
-        for (a = a.length; c < a; c++) {
-          this.removePrep(c);
-          d = 0;
-          for (f = b[c].length; d < f; d++)
-            this.removePrep(c + '-' + d);
-        }
-        this.removeCommit();
-        this.dom.container.remove();
-        b = this.s.dt.settings()[0];
-        c = 0;
-        for (a = b.length; c < a; c++)
-          if (b.inst === this) {
-            b.splice(c, 1);
-            break;
+      if (label === undefined) {
+        return text(button.conf.text);
+      }
+      button.conf.text = label;
+      if (linerTag) {
+        jqNode.children(linerTag).html(text(label));
+      } else {
+        jqNode.html(text(label));
+      }
+      return this;
+    },
+    _constructor: function () {
+      var that = this;
+      var dt = this.s.dt;
+      var dtSettings = dt.settings()[0];
+      var buttons = this.c.buttons;
+      if (!dtSettings._buttons) {
+        dtSettings._buttons = [];
+      }
+      dtSettings._buttons.push({
+        inst: this,
+        name: this.c.name
+      });
+      for (var i = 0, ien = buttons.length; i < ien; i++) {
+        this.add(buttons[i]);
+      }
+      dt.on('destroy', function () {
+        that.destroy();
+      });
+      // Global key event binding to listen for button keys
+      $('body').on('keyup.' + this.s.namespace, function (e) {
+        if (!document.activeElement || document.activeElement === document.body) {
+          // SUse a string of characters for fast lookup of if we need to
+          // handle this
+          var character = String.fromCharCode(e.keyCode).toLowerCase();
+          if (that.s.listenKeys.toLowerCase().indexOf(character) !== -1) {
+            that._keypress(character, e);
           }
-        return this;
-      },
-      enable: function (a, b) {
-        if (!1 === b)
-          return this.disable(a);
-        this._indexToButton(a).node.removeClass(this.c.dom.button.disabled);
-        return this;
-      },
-      name: function () {
-        return this.c.name;
-      },
-      node: function (a) {
-        return this._indexToButton(a).node;
-      },
-      removeCommit: function () {
-        var a = this.s.buttons, b = this.s.subButtons, c, d;
-        for (c = a.length - 1; 0 <= c; c--)
-          null === a[c] && (a.splice(c, 1), b.splice(c, 1), this.c.buttons.splice(c, 1));
-        c = 0;
-        for (a = b.length; c < a; c++)
-          for (d = b[c].length - 1; 0 <= d; d--)
-            null === b[c][d] && (b[c].splice(d, 1), this.c.buttons[c].buttons.splice(d, 1));
-        return this;
-      },
-      removePrep: function (a) {
-        var b, c = this.s.dt;
-        if ('number' === typeof a || -1 === a.indexOf('-'))
-          b = this.s.buttons[1 * a], b.conf.destroy && b.conf.destroy.call(c.button(a), c, b, b.conf), b.node.remove(), this._removeKey(b.conf), this.s.buttons[1 * a] = null;
-        else {
-          var d = a.split('-');
-          b = this.s.subButtons[1 * d[0]][1 * d[1]];
-          b.conf.destroy && b.conf.destroy.call(c.button(a), c, b, b.conf);
-          b.node.remove();
-          this._removeKey(b.conf);
-          this.s.subButtons[1 * d[0]][1 * d[1]] = null;
         }
-        return this;
-      },
-      text: function (a, b) {
-        var c = this._indexToButton(a), d = this.c.dom.buttonLiner.tag, e = this.s.dt, g = function (a) {
-            return 'function' === typeof a ? a(e, c.node, c.conf) : a;
-          };
-        if (b === m)
-          return g(c.conf.text);
-        c.conf.text = b;
-        d ? c.node.children(d).html(g(b)) : c.node.html(g(b));
-        return this;
-      },
-      toIndex: function (a) {
-        var b, c, d, e;
-        d = this.s.buttons;
-        var g = this.s.subButtons;
-        b = 0;
-        for (c = d.length; b < c; b++)
-          if (d[b].node[0] === a)
-            return b + '';
-        b = 0;
-        for (c = g.length; b < c; b++) {
-          d = 0;
-          for (e = g[b].length; d < e; d++)
-            if (g[b][d].node[0] === a)
-              return b + '-' + d;
+      });
+    },
+    _addKey: function (conf) {
+      if (conf.key) {
+        this.s.listenKeys += $.isPlainObject(conf.key) ? conf.key.key : conf.key;
+      }
+    },
+    _draw: function (container, buttons) {
+      if (!container) {
+        container = this.dom.container;
+        buttons = this.s.buttons;
+      }
+      container.children().detach();
+      for (var i = 0, ien = buttons.length; i < ien; i++) {
+        container.append(buttons[i].inserter);
+        if (buttons[i].buttons && buttons[i].buttons.length) {
+          this._draw(buttons[i].collection, buttons[i].buttons);
         }
-      },
-      _constructor: function () {
-        var a = this, b = this.s.dt, c = b.settings()[0];
-        c._buttons || (c._buttons = []);
-        c._buttons.push({
-          inst: this,
-          name: this.c.name
-        });
-        this._buildButtons(this.c.buttons);
-        b.on('destroy', function () {
-          a.destroy();
-        });
-        e('body').on('keyup.' + this.s.namespace, function (b) {
-          if (!n.activeElement || n.activeElement === n.body) {
-            var c = String.fromCharCode(b.keyCode).toLowerCase();
-            a.s.listenKeys.toLowerCase().indexOf(c) !== -1 && a._keypress(c, b);
+      }
+    },
+    _expandButton: function (attachTo, button, inCollection, attachPoint) {
+      var dt = this.s.dt;
+      var buttonCounter = 0;
+      var buttons = !$.isArray(button) ? [button] : button;
+      for (var i = 0, ien = buttons.length; i < ien; i++) {
+        var conf = this._resolveExtends(buttons[i]);
+        if (!conf) {
+          continue;
+        }
+        // If the configuration is an array, then expand the buttons at this
+        // point
+        if ($.isArray(conf)) {
+          this._expandButton(attachTo, conf, inCollection, attachPoint);
+          continue;
+        }
+        var built = this._buildButton(conf, inCollection);
+        if (!built) {
+          continue;
+        }
+        if (attachPoint !== undefined) {
+          attachTo.splice(attachPoint, 0, built);
+          attachPoint++;
+        } else {
+          attachTo.push(built);
+        }
+        if (built.conf.buttons) {
+          var collectionDom = this.c.dom.collection;
+          built.collection = $('<' + collectionDom.tag + '/>').addClass(collectionDom.className);
+          built.conf._collection = built.collection;
+          this._expandButton(built.buttons, built.conf.buttons, true, attachPoint);
+        }
+        // init call is made here, rather than buildButton as it needs to
+        // be selectable, and for that it needs to be in the buttons array
+        if (conf.init) {
+          conf.init.call(dt.button(built.node), dt, $(built.node), conf);
+        }
+        buttonCounter++;
+      }
+    },
+    _buildButton: function (config, inCollection) {
+      var buttonDom = this.c.dom.button;
+      var linerDom = this.c.dom.buttonLiner;
+      var collectionDom = this.c.dom.collection;
+      var dt = this.s.dt;
+      var text = function (opt) {
+        return typeof opt === 'function' ? opt(dt, button, config) : opt;
+      };
+      if (inCollection && collectionDom.button) {
+        buttonDom = collectionDom.button;
+      }
+      if (inCollection && collectionDom.buttonLiner) {
+        linerDom = collectionDom.buttonLiner;
+      }
+      // Make sure that the button is available based on whatever requirements
+      // it has. For example, Flash buttons require Flash
+      if (config.available && !config.available(dt, config)) {
+        return false;
+      }
+      var action = function (e, dt, button, config) {
+        config.action.call(dt.button(button), e, dt, button, config);
+        $(dt.table().node()).triggerHandler('buttons-action.dt', [
+          dt.button(button),
+          dt,
+          button,
+          config
+        ]);
+      };
+      var button = $('<' + buttonDom.tag + '/>').addClass(buttonDom.className).attr('tabindex', this.s.dt.settings()[0].iTabIndex).attr('aria-controls', this.s.dt.table().node().id).on('click.dtb', function (e) {
+          e.preventDefault();
+          if (!button.hasClass(buttonDom.disabled) && config.action) {
+            action(e, dt, button, config);
           }
-        });
-      },
-      _addKey: function (a) {
-        a.key && (this.s.listenKeys += e.isPlainObject(a.key) ? a.key.key : a.key);
-      },
-      _buildButtons: function (a, b, c) {
-        var d = this.s.dt;
-        b || (b = this.dom.container, this.s.buttons = [], this.s.subButtons = []);
-        for (var f = 0, g = a.length; f < g; f++) {
-          var h = this._resolveExtends(a[f]);
-          if (h)
-            if (e.isArray(h))
-              this._buildButtons(h, b, c);
-            else {
-              var i = this._buildButton(h, c !== m ? !0 : !1);
-              if (i) {
-                var q = i.node;
-                b.append(i.inserter);
-                c === m ? (this.s.buttons.push({
-                  node: q,
-                  conf: h,
-                  inserter: i.inserter
-                }), this.s.subButtons.push([])) : this.s.subButtons[c].push({
-                  node: q,
-                  conf: h,
-                  inserter: i.inserter
-                });
-                h.buttons && (i = this.c.dom.collection, h._collection = e('<' + i.tag + '/>').addClass(i.className), this._buildButtons(h.buttons, h._collection, f));
-                h.init && h.init.call(d.button(q), d, q, h);
-              }
+          button.blur();
+        }).on('keyup.dtb', function (e) {
+          if (e.keyCode === 13) {
+            if (!button.hasClass(buttonDom.disabled) && config.action) {
+              action(e, dt, button, config);
             }
-        }
-      },
-      _buildButton: function (a, b) {
-        var c = this.c.dom.button, d = this.c.dom.buttonLiner, f = this.c.dom.collection, g = this.s.dt, h = function (b) {
-            return 'function' === typeof b ? b(g, i, a) : b;
-          };
-        b && f.button && (c = f.button);
-        b && f.buttonLiner && (d = f.buttonLiner);
-        if (a.available && !a.available(g, a))
-          return !1;
-        var i = e('<' + c.tag + '/>').addClass(c.className).attr('tabindex', this.s.dt.settings()[0].iTabIndex).attr('aria-controls', this.s.dt.table().node().id).on('click.dtb', function (b) {
-            b.preventDefault();
-            !i.hasClass(c.disabled) && a.action && a.action.call(g.button(i), b, g, i, a);
-            i.blur();
-          }).on('keyup.dtb', function (b) {
-            b.keyCode === 13 && !i.hasClass(c.disabled) && a.action && a.action.call(g.button(i), b, g, i, a);
-          });
-        d.tag ? i.append(e('<' + d.tag + '/>').html(h(a.text)).addClass(d.className)) : i.html(h(a.text));
-        !1 === a.enabled && i.addClass(c.disabled);
-        a.className && i.addClass(a.className);
-        a.namespace || (a.namespace = '.dt-button-' + s++);
-        d = (d = this.c.dom.buttonContainer) ? e('<' + d.tag + '/>').addClass(d.className).append(i) : i;
-        this._addKey(a);
-        return {
-          node: i,
-          inserter: d
-        };
-      },
-      _indexToButton: function (a) {
-        if ('number' === typeof a || -1 === a.indexOf('-'))
-          return this.s.buttons[1 * a];
-        a = a.split('-');
-        return this.s.subButtons[1 * a[0]][1 * a[1]];
-      },
-      _keypress: function (a, b) {
-        var c, d, f, g;
-        f = this.s.buttons;
-        var h = this.s.subButtons, i = function (c, d) {
-            if (c.key)
-              if (c.key === a)
-                d.click();
-              else if (e.isPlainObject(c.key) && c.key.key === a && (!c.key.shiftKey || b.shiftKey))
-                if (!c.key.altKey || b.altKey)
-                  if (!c.key.ctrlKey || b.ctrlKey)
-                    (!c.key.metaKey || b.metaKey) && d.click();
-          };
-        c = 0;
-        for (d = f.length; c < d; c++)
-          i(f[c].conf, f[c].node);
-        c = 0;
-        for (d = h.length; c < d; c++) {
-          f = 0;
-          for (g = h[c].length; f < g; f++)
-            i(h[c][f].conf, h[c][f].node);
-        }
-      },
-      _removeKey: function (a) {
-        if (a.key) {
-          var b = e.isPlainObject(a.key) ? a.key.key : a.key, a = this.s.listenKeys.split(''), b = e.inArray(b, a);
-          a.splice(b, 1);
-          this.s.listenKeys = a.join('');
-        }
-      },
-      _resolveExtends: function (a) {
-        for (var b = this.s.dt, c, d, f = function (c) {
-              for (var d = 0; !e.isPlainObject(c) && !e.isArray(c);) {
-                if ('function' === typeof c) {
-                  if (c = c(b, a), !c)
-                    return !1;
-                } else if ('string' === typeof c) {
-                  if (!k[c])
-                    throw 'Unknown button type: ' + c;
-                  c = k[c];
-                }
-                d++;
-                if (30 < d)
-                  throw 'Buttons: Too many iterations';
-              }
-              return e.isArray(c) ? c : e.extend({}, c);
-            }, a = f(a); a && a.extend;) {
-          var g = f(k[a.extend]);
-          if (e.isArray(g))
-            return g;
-          c = g.className;
-          a = e.extend({}, g, a);
-          c && a.className !== c && (a.className = c + ' ' + a.className);
-          var h = a.postfixButtons;
-          if (h) {
-            a.buttons || (a.buttons = []);
-            c = 0;
-            for (d = h.length; c < d; c++)
-              a.buttons.push(h[c]);
-            a.postfixButtons = null;
           }
-          if (h = a.prefixButtons) {
-            a.buttons || (a.buttons = []);
-            c = 0;
-            for (d = h.length; c < d; c++)
-              a.buttons.splice(c, 0, h[c]);
-            a.prefixButtons = null;
-          }
-          a.extend = g.extend;
-        }
-        return a;
-      }
-    });
-    l.background = function (a, b, c) {
-      c === m && (c = 400);
-      a ? e('<div/>').addClass(b).css('display', 'none').appendTo('body').fadeIn(c) : e('body > div.' + b).fadeOut(c, function () {
-        e(this).remove();
-      });
-    };
-    l.instanceSelector = function (a, b) {
-      if (!a)
-        return e.map(b, function (a) {
-          return a.inst;
         });
-      var c = [], d = e.map(b, function (a) {
-          return a.name;
-        }), f = function (a) {
-          if (e.isArray(a))
-            for (var h = 0, i = a.length; h < i; h++)
-              f(a[h]);
-          else
-            'string' === typeof a ? -1 !== a.indexOf(',') ? f(a.split(',')) : (a = e.inArray(e.trim(a), d), -1 !== a && c.push(b[a].inst)) : 'number' === typeof a && c.push(b[a].inst);
-        };
-      f(a);
-      return c;
-    };
-    l.buttonSelector = function (a, b) {
-      for (var c = [], d = function (a, b) {
-            var f, g, j = [];
-            e.each(b.s.buttons, function (a, b) {
-              null !== b && j.push({
-                node: b.node[0],
-                name: b.name
-              });
-            });
-            e.each(b.s.subButtons, function (a, b) {
-              e.each(b, function (a, b) {
-                null !== b && j.push({
-                  node: b.node[0],
-                  name: b.name
-                });
-              });
-            });
-            f = e.map(j, function (a) {
-              return a.node;
-            });
-            if (e.isArray(a) || a instanceof e) {
-              f = 0;
-              for (g = a.length; f < g; f++)
-                d(a[f], b);
-            } else if (null === a || a === m || '*' === a) {
-              f = 0;
-              for (g = j.length; f < g; f++)
-                c.push({
-                  inst: b,
-                  idx: b.toIndex(j[f].node)
-                });
-            } else if ('number' === typeof a)
-              c.push({
-                inst: b,
-                idx: a
-              });
-            else if ('string' === typeof a)
-              if (-1 !== a.indexOf(',')) {
-                var k = a.split(',');
-                f = 0;
-                for (g = k.length; f < g; f++)
-                  d(e.trim(k[f]), b);
-              } else if (a.match(/^\d+(\-\d+)?$/))
-                c.push({
-                  inst: b,
-                  idx: a
-                });
-              else if (-1 !== a.indexOf(':name')) {
-                k = a.replace(':name', '');
-                f = 0;
-                for (g = j.length; f < g; f++)
-                  j[f].name === k && c.push({
-                    inst: b,
-                    idx: b.toIndex(j[f].node)
-                  });
-              } else
-                e(f).filter(a).each(function () {
-                  c.push({
-                    inst: b,
-                    idx: b.toIndex(this)
-                  });
-                });
-            else
-              'object' === typeof a && a.nodeName && (g = e.inArray(a, f), -1 !== g && c.push({
-                inst: b,
-                idx: b.toIndex(f[g])
-              }));
-          }, f = 0, g = a.length; f < g; f++)
-        d(b, a[f]);
-      return c;
-    };
-    l.defaults = {
-      buttons: [
-        'copy',
-        'excel',
-        'csv',
-        'pdf',
-        'print'
-      ],
-      name: 'main',
-      tabIndex: 0,
-      dom: {
-        container: {
-          tag: 'div',
-          className: 'dt-buttons'
-        },
-        collection: {
-          tag: 'div',
-          className: 'dt-button-collection'
-        },
-        button: {
-          tag: 'a',
-          className: 'dt-button',
-          active: 'active',
-          disabled: 'disabled'
-        },
-        buttonLiner: {
-          tag: 'span',
-          className: ''
+      // Make `a` tags act like a link
+      if (buttonDom.tag.toLowerCase() === 'a') {
+        button.attr('href', '#');
+      }
+      if (linerDom.tag) {
+        var liner = $('<' + linerDom.tag + '/>').html(text(config.text)).addClass(linerDom.className);
+        if (linerDom.tag.toLowerCase() === 'a') {
+          liner.attr('href', '#');
+        }
+        button.append(liner);
+      } else {
+        button.html(text(config.text));
+      }
+      if (config.enabled === false) {
+        button.addClass(buttonDom.disabled);
+      }
+      if (config.className) {
+        button.addClass(config.className);
+      }
+      if (config.titleAttr) {
+        button.attr('title', config.titleAttr);
+      }
+      if (!config.namespace) {
+        config.namespace = '.dt-button-' + _buttonCounter++;
+      }
+      var buttonContainer = this.c.dom.buttonContainer;
+      var inserter;
+      if (buttonContainer && buttonContainer.tag) {
+        inserter = $('<' + buttonContainer.tag + '/>').addClass(buttonContainer.className).append(button);
+      } else {
+        inserter = button;
+      }
+      this._addKey(config);
+      return {
+        conf: config,
+        node: button.get(0),
+        inserter: inserter,
+        buttons: [],
+        inCollection: inCollection,
+        collection: null
+      };
+    },
+    _nodeToButton: function (node, buttons) {
+      if (!buttons) {
+        buttons = this.s.buttons;
+      }
+      for (var i = 0, ien = buttons.length; i < ien; i++) {
+        if (buttons[i].node === node) {
+          return buttons[i];
+        }
+        if (buttons[i].buttons.length) {
+          var ret = this._nodeToButton(node, buttons[i].buttons);
+          if (ret) {
+            return ret;
+          }
         }
       }
-    };
-    l.version = '1.0.3';
-    e.extend(k, {
-      collection: {
-        text: function (a) {
-          return a.i18n('buttons.collection', 'Collection');
-        },
-        className: 'buttons-collection',
-        action: function (a, b, c, d) {
-          a = c.offset();
-          b = e(b.table().container());
-          d._collection.addClass(d.collectionLayout).css('display', 'none').appendTo('body').fadeIn(d.fade);
-          'absolute' === d._collection.css('position') ? (d._collection.css({
-            top: a.top + c.outerHeight(),
-            left: a.left
-          }), c = a.left + d._collection.outerWidth(), b = b.offset().left + b.width(), c > b && d._collection.css('left', a.left - (c - b))) : (a = d._collection.height() / 2, a > e(r).height() / 2 && (a = e(r).height() / 2), d._collection.css('marginTop', -1 * a));
-          d.background && l.background(!0, d.backgroundClassName, d.fade);
-          setTimeout(function () {
-            e(n).on('click.dtb-collection', function (a) {
-              if (!e(a.target).parents().andSelf().filter(d._collection).length) {
-                d._collection.fadeOut(d.fade, function () {
-                  d._collection.detach();
-                });
-                l.background(false, d.backgroundClassName, d.fade);
-                e(n).off('click.dtb-collection');
-              }
-            });
-          }, 10);
-        },
-        background: !0,
-        collectionLayout: '',
-        backgroundClassName: 'dt-button-background',
-        fade: 400
-      },
-      copy: function (a, b) {
-        if (b.preferHtml && k.copyHtml5)
-          return 'copyHtml5';
-        if (k.copyFlash && k.copyFlash.available(a, b))
-          return 'copyFlash';
-        if (k.copyHtml5)
-          return 'copyHtml5';
-      },
-      csv: function (a, b) {
-        if (k.csvHtml5 && k.csvHtml5.available(a, b))
-          return 'csvHtml5';
-        if (k.csvFlash && k.csvFlash.available(a, b))
-          return 'csvFlash';
-      },
-      excel: function (a, b) {
-        if (k.excelHtml5 && k.excelHtml5.available(a, b))
-          return 'excelHtml5';
-        if (k.excelFlash && k.excelFlash.available(a, b))
-          return 'excelFlash';
-      },
-      pdf: function (a, b) {
-        if (k.pdfHtml5 && k.pdfHtml5.available(a, b))
-          return 'pdfHtml5';
-        if (k.pdfFlash && k.pdfFlash.available(a, b))
-          return 'pdfFlash';
+    },
+    _nodeToHost: function (node, buttons) {
+      if (!buttons) {
+        buttons = this.s.buttons;
       }
-    });
-    j.Api.register('buttons()', function (a, b) {
-      b === m && (b = a, a = m);
-      return this.iterator(!0, 'table', function (c) {
-        if (c._buttons)
-          return l.buttonSelector(l.instanceSelector(a, c._buttons), b);
-      }, !0);
-    });
-    j.Api.register('button()', function (a, b) {
-      var c = this.buttons(a, b);
-      1 < c.length && c.splice(1, c.length);
-      return c;
-    });
-    j.Api.register([
-      'buttons().active()',
-      'button().active()'
-    ], function (a) {
-      return this.each(function (b) {
-        b.inst.active(b.idx, a);
-      });
-    });
-    j.Api.registerPlural('buttons().action()', 'button().action()', function (a) {
-      return a === m ? this.map(function (a) {
-        return a.inst.action(a.idx);
-      }) : this.each(function (b) {
-        b.inst.action(b.idx, a);
-      });
-    });
-    j.Api.register([
-      'buttons().enable()',
-      'button().enable()'
-    ], function (a) {
-      return this.each(function (b) {
-        b.inst.enable(b.idx, a);
-      });
-    });
-    j.Api.register([
-      'buttons().disable()',
-      'button().disable()'
-    ], function () {
-      return this.each(function (a) {
-        a.inst.disable(a.idx);
-      });
-    });
-    j.Api.registerPlural('buttons().nodes()', 'button().node()', function () {
-      var a = e();
-      e(this.each(function (b) {
-        a = a.add(b.inst.node(b.idx));
-      }));
-      return a;
-    });
-    j.Api.registerPlural('buttons().text()', 'button().text()', function (a) {
-      return a === m ? this.map(function (a) {
-        return a.inst.text(a.idx);
-      }) : this.each(function (b) {
-        b.inst.text(b.idx, a);
-      });
-    });
-    j.Api.registerPlural('buttons().trigger()', 'button().trigger()', function () {
-      return this.each(function (a) {
-        a.inst.node(a.idx).trigger('click');
-      });
-    });
-    j.Api.registerPlural('buttons().containers()', 'buttons().container()', function () {
-      var a = e();
-      e(this.each(function (b) {
-        a = a.add(b.inst.container());
-      }));
-      return a;
-    });
-    j.Api.register('button().add()', function (a, b) {
-      1 === this.length && this[0].inst.add(a, b);
-      return this.button(a);
-    });
-    j.Api.register('buttons().destroy()', function () {
-      this.pluck('inst').unique().each(function (a) {
-        a.destroy();
-      });
-      return this;
-    });
-    j.Api.registerPlural('buttons().remove()', 'buttons().remove()', function () {
-      this.each(function (a) {
-        a.inst.removePrep(a.idx);
-      });
-      this.pluck('inst').unique().each(function (a) {
-        a.removeCommit();
-      });
-      return this;
-    });
-    var o;
-    j.Api.register('buttons.info()', function (a, b, c) {
-      var d = this;
-      if (!1 === a)
-        return e('#datatables_buttons_info').fadeOut(function () {
-          e(this).remove();
-        }), clearTimeout(o), o = null, this;
-      o && clearTimeout(o);
-      e('#datatables_buttons_info').length && e('#datatables_buttons_info').remove();
-      e('<div id="datatables_buttons_info" class="dt-button-info"/>').html(a ? '<h2>' + a + '</h2>' : '').append(e('<div/>')['string' === typeof b ? 'html' : 'append'](b)).css('display', 'none').appendTo('body').fadeIn();
-      c !== m && 0 !== c && (o = setTimeout(function () {
-        d.buttons.info(!1);
-      }, c));
-      return this;
-    });
-    j.Api.register('buttons.exportData()', function (a) {
-      if (this.context.length) {
-        for (var b = new j.Api(this.context[0]), c = e.extend(!0, {}, {
-              rows: null,
-              columns: '',
-              modifier: {
-                search: 'applied',
-                order: 'applied'
-              },
-              orthogonal: 'display',
-              stripHtml: !0,
-              stripNewlines: !0,
-              trim: !0
-            }, a), d = function (a) {
-              if ('string' !== typeof a)
-                return a;
-              c.stripHtml && (a = a.replace(/<.*?>/g, ''));
-              c.trim && (a = a.replace(/^\s+|\s+$/g, ''));
-              c.stripNewlines && (a = a.replace(/\n/g, ' '));
-              return a;
-            }, a = b.columns(c.columns).indexes().map(function (a) {
-              return d(b.column(a).header().innerHTML);
-            }).toArray(), f = b.table().footer() ? b.columns(c.columns).indexes().map(function (a) {
-              return (a = b.column(a).footer()) ? d(a.innerHTML) : '';
-            }).toArray() : null, g = b.cells(c.rows, c.columns, c.modifier).render(c.orthogonal).toArray(), h = a.length, i = g.length / h, k = Array(i), l = 0, m = 0; m < i; m++) {
-          for (var n = Array(h), o = 0; o < h; o++)
-            n[o] = d(g[l]), l++;
-          k[m] = n;
+      for (var i = 0, ien = buttons.length; i < ien; i++) {
+        if (buttons[i].node === node) {
+          return buttons;
         }
-        return {
-          header: a,
-          footer: f,
-          body: k
-        };
+        if (buttons[i].buttons.length) {
+          var ret = this._nodeToHost(node, buttons[i].buttons);
+          if (ret) {
+            return ret;
+          }
+        }
       }
-    });
-    e.fn.dataTable.Buttons = l;
-    e.fn.DataTable.Buttons = l;
-    e(n).on('init.dt.dtb', function (a, b) {
-      if ('dt' === a.namespace) {
-        var c = b.oInit.buttons || j.defaults.buttons;
-        c && !b._buttons && new l(b, c).container();
+    },
+    _keypress: function (character, e) {
+      var run = function (conf, node) {
+        if (!conf.key) {
+          return;
+        }
+        if (conf.key === character) {
+          $(node).click();
+        } else if ($.isPlainObject(conf.key)) {
+          if (conf.key.key !== character) {
+            return;
+          }
+          if (conf.key.shiftKey && !e.shiftKey) {
+            return;
+          }
+          if (conf.key.altKey && !e.altKey) {
+            return;
+          }
+          if (conf.key.ctrlKey && !e.ctrlKey) {
+            return;
+          }
+          if (conf.key.metaKey && !e.metaKey) {
+            return;
+          }
+          // Made it this far - it is good
+          $(node).click();
+        }
+      };
+      var recurse = function (a) {
+        for (var i = 0, ien = a.length; i < ien; i++) {
+          run(a[i].conf, a[i].node);
+          if (a[i].buttons.length) {
+            recurse(a[i].buttons);
+          }
+        }
+      };
+      recurse(this.s.buttons);
+    },
+    _removeKey: function (conf) {
+      if (conf.key) {
+        var character = $.isPlainObject(conf.key) ? conf.key.key : conf.key;
+        // Remove only one character, as multiple buttons could have the
+        // same listening key
+        var a = this.s.listenKeys.split('');
+        var idx = $.inArray(character, a);
+        a.splice(idx, 1);
+        this.s.listenKeys = a.join('');
       }
-    });
-    j.ext.feature.push({
-      fnInit: function (a) {
-        var a = new j.Api(a), b = a.init().buttons;
-        return new l(a, b).container();
-      },
-      cFeature: 'B'
-    });
-    return l;
+    },
+    _resolveExtends: function (conf) {
+      var dt = this.s.dt;
+      var i, ien;
+      var toConfObject = function (base) {
+        var loop = 0;
+        // Loop until we have resolved to a button configuration, or an
+        // array of button configurations (which will be iterated
+        // separately)
+        while (!$.isPlainObject(base) && !$.isArray(base)) {
+          if (base === undefined) {
+            return;
+          }
+          if (typeof base === 'function') {
+            base = base(dt, conf);
+            if (!base) {
+              return false;
+            }
+          } else if (typeof base === 'string') {
+            if (!_dtButtons[base]) {
+              throw 'Unknown button type: ' + base;
+            }
+            base = _dtButtons[base];
+          }
+          loop++;
+          if (loop > 30) {
+            // Protect against misconfiguration killing the browser
+            throw 'Buttons: Too many iterations';
+          }
+        }
+        return $.isArray(base) ? base : $.extend({}, base);
+      };
+      conf = toConfObject(conf);
+      while (conf && conf.extend) {
+        // Use `toConfObject` in case the button definition being extended
+        // is itself a string or a function
+        if (!_dtButtons[conf.extend]) {
+          throw 'Cannot extend unknown button type: ' + conf.extend;
+        }
+        var objArray = toConfObject(_dtButtons[conf.extend]);
+        if ($.isArray(objArray)) {
+          return objArray;
+        } else if (!objArray) {
+          // This is a little brutal as it might be possible to have a
+          // valid button without the extend, but if there is no extend
+          // then the host button would be acting in an undefined state
+          return false;
+        }
+        // Stash the current class name
+        var originalClassName = objArray.className;
+        conf = $.extend({}, objArray, conf);
+        // The extend will have overwritten the original class name if the
+        // `conf` object also assigned a class, but we want to concatenate
+        // them so they are list that is combined from all extended buttons
+        if (originalClassName && conf.className !== originalClassName) {
+          conf.className = originalClassName + ' ' + conf.className;
+        }
+        // Buttons to be added to a collection  -gives the ability to define
+        // if buttons should be added to the start or end of a collection
+        var postfixButtons = conf.postfixButtons;
+        if (postfixButtons) {
+          if (!conf.buttons) {
+            conf.buttons = [];
+          }
+          for (i = 0, ien = postfixButtons.length; i < ien; i++) {
+            conf.buttons.push(postfixButtons[i]);
+          }
+          conf.postfixButtons = null;
+        }
+        var prefixButtons = conf.prefixButtons;
+        if (prefixButtons) {
+          if (!conf.buttons) {
+            conf.buttons = [];
+          }
+          for (i = 0, ien = prefixButtons.length; i < ien; i++) {
+            conf.buttons.splice(i, 0, prefixButtons[i]);
+          }
+          conf.prefixButtons = null;
+        }
+        // Although we want the `conf` object to overwrite almost all of
+        // the properties of the object being extended, the `extend`
+        // property should come from the object being extended
+        conf.extend = objArray.extend;
+      }
+      return conf;
+    }
+  });
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Statics
+ */
+  /**
+ * Show / hide a background layer behind a collection
+ * @param  {boolean} Flag to indicate if the background should be shown or
+ *   hidden 
+ * @param  {string} Class to assign to the background
+ * @static
+ */
+  Buttons.background = function (show, className, fade) {
+    if (fade === undefined) {
+      fade = 400;
+    }
+    if (show) {
+      $('<div/>').addClass(className).css('display', 'none').appendTo('body').fadeIn(fade);
+    } else {
+      $('body > div.' + className).fadeOut(fade, function () {
+        $(this).remove();
+      });
+    }
   };
-  'function' === typeof define && define.amd ? define([
-    '../../../../jquery/jquery',
-    'datatables'
-  ], p) : 'object' === typeof exports ? p(require('jquery'), require('datatables')) : jQuery && !jQuery.fn.dataTable.Buttons && p(jQuery, jQuery.fn.dataTable);
-}(window, document));
+  /**
+ * Instance selector - select Buttons instances based on an instance selector
+ * value from the buttons assigned to a DataTable. This is only useful if
+ * multiple instances are attached to a DataTable.
+ * @param  {string|int|array} Instance selector - see `instance-selector`
+ *   documentation on the DataTables site
+ * @param  {array} Button instance array that was attached to the DataTables
+ *   settings object
+ * @return {array} Buttons instances
+ * @static
+ */
+  Buttons.instanceSelector = function (group, buttons) {
+    if (!group) {
+      return $.map(buttons, function (v) {
+        return v.inst;
+      });
+    }
+    var ret = [];
+    var names = $.map(buttons, function (v) {
+        return v.name;
+      });
+    // Flatten the group selector into an array of single options
+    var process = function (input) {
+      if ($.isArray(input)) {
+        for (var i = 0, ien = input.length; i < ien; i++) {
+          process(input[i]);
+        }
+        return;
+      }
+      if (typeof input === 'string') {
+        if (input.indexOf(',') !== -1) {
+          // String selector, list of names
+          process(input.split(','));
+        } else {
+          // String selector individual name
+          var idx = $.inArray($.trim(input), names);
+          if (idx !== -1) {
+            ret.push(buttons[idx].inst);
+          }
+        }
+      } else if (typeof input === 'number') {
+        // Index selector
+        ret.push(buttons[input].inst);
+      }
+    };
+    process(group);
+    return ret;
+  };
+  /**
+ * Button selector - select one or more buttons from a selector input so some
+ * operation can be performed on them.
+ * @param  {array} Button instances array that the selector should operate on
+ * @param  {string|int|node|jQuery|array} Button selector - see
+ *   `button-selector` documentation on the DataTables site
+ * @return {array} Array of objects containing `inst` and `idx` properties of
+ *   the selected buttons so you know which instance each button belongs to.
+ * @static
+ */
+  Buttons.buttonSelector = function (insts, selector) {
+    var ret = [];
+    var nodeBuilder = function (a, buttons, baseIdx) {
+      var button;
+      var idx;
+      for (var i = 0, ien = buttons.length; i < ien; i++) {
+        button = buttons[i];
+        if (button) {
+          idx = baseIdx !== undefined ? baseIdx + i : i + '';
+          a.push({
+            node: button.node,
+            name: button.conf.name,
+            idx: idx
+          });
+          if (button.buttons) {
+            nodeBuilder(a, button.buttons, idx + '-');
+          }
+        }
+      }
+    };
+    var run = function (selector, inst) {
+      var i, ien;
+      var buttons = [];
+      nodeBuilder(buttons, inst.s.buttons);
+      var nodes = $.map(buttons, function (v) {
+          return v.node;
+        });
+      if ($.isArray(selector) || selector instanceof $) {
+        for (i = 0, ien = selector.length; i < ien; i++) {
+          run(selector[i], inst);
+        }
+        return;
+      }
+      if (selector === null || selector === undefined || selector === '*') {
+        // Select all
+        for (i = 0, ien = buttons.length; i < ien; i++) {
+          ret.push({
+            inst: inst,
+            node: buttons[i].node
+          });
+        }
+      } else if (typeof selector === 'number') {
+        // Main button index selector
+        ret.push({
+          inst: inst,
+          node: inst.s.buttons[selector].node
+        });
+      } else if (typeof selector === 'string') {
+        if (selector.indexOf(',') !== -1) {
+          // Split
+          var a = selector.split(',');
+          for (i = 0, ien = a.length; i < ien; i++) {
+            run($.trim(a[i]), inst);
+          }
+        } else if (selector.match(/^\d+(\-\d+)*$/)) {
+          // Sub-button index selector
+          var indexes = $.map(buttons, function (v) {
+              return v.idx;
+            });
+          ret.push({
+            inst: inst,
+            node: buttons[$.inArray(selector, indexes)].node
+          });
+        } else if (selector.indexOf(':name') !== -1) {
+          // Button name selector
+          var name = selector.replace(':name', '');
+          for (i = 0, ien = buttons.length; i < ien; i++) {
+            if (buttons[i].name === name) {
+              ret.push({
+                inst: inst,
+                node: buttons[i].node
+              });
+            }
+          }
+        } else {
+          // jQuery selector on the nodes
+          $(nodes).filter(selector).each(function () {
+            ret.push({
+              inst: inst,
+              node: this
+            });
+          });
+        }
+      } else if (typeof selector === 'object' && selector.nodeName) {
+        // Node selector
+        var idx = $.inArray(selector, nodes);
+        if (idx !== -1) {
+          ret.push({
+            inst: inst,
+            node: nodes[idx]
+          });
+        }
+      }
+    };
+    for (var i = 0, ien = insts.length; i < ien; i++) {
+      var inst = insts[i];
+      run(selector, inst);
+    }
+    return ret;
+  };
+  /**
+ * Buttons defaults. For full documentation, please refer to the docs/option
+ * directory or the DataTables site.
+ * @type {Object}
+ * @static
+ */
+  Buttons.defaults = {
+    buttons: [
+      'copy',
+      'excel',
+      'csv',
+      'pdf',
+      'print'
+    ],
+    name: 'main',
+    tabIndex: 0,
+    dom: {
+      container: {
+        tag: 'div',
+        className: 'dt-buttons'
+      },
+      collection: {
+        tag: 'div',
+        className: 'dt-button-collection'
+      },
+      button: {
+        tag: 'a',
+        className: 'dt-button',
+        active: 'active',
+        disabled: 'disabled'
+      },
+      buttonLiner: {
+        tag: 'span',
+        className: ''
+      }
+    }
+  };
+  /**
+ * Version information
+ * @type {string}
+ * @static
+ */
+  Buttons.version = '1.2.0';
+  $.extend(_dtButtons, {
+    collection: {
+      text: function (dt) {
+        return dt.i18n('buttons.collection', 'Collection');
+      },
+      className: 'buttons-collection',
+      action: function (e, dt, button, config) {
+        var host = button;
+        var hostOffset = host.offset();
+        var tableContainer = $(dt.table().container());
+        var multiLevel = false;
+        // Remove any old collection
+        if ($('div.dt-button-background').length) {
+          multiLevel = $('div.dt-button-collection').offset();
+          $('body').trigger('click.dtb-collection');
+        }
+        config._collection.addClass(config.collectionLayout).css('display', 'none').appendTo('body').fadeIn(config.fade);
+        var position = config._collection.css('position');
+        if (multiLevel && position === 'absolute') {
+          config._collection.css({
+            top: multiLevel.top + 5,
+            left: multiLevel.left + 5
+          });
+        } else if (position === 'absolute') {
+          config._collection.css({
+            top: hostOffset.top + host.outerHeight(),
+            left: hostOffset.left
+          });
+          var listRight = hostOffset.left + config._collection.outerWidth();
+          var tableRight = tableContainer.offset().left + tableContainer.width();
+          if (listRight > tableRight) {
+            config._collection.css('left', hostOffset.left - (listRight - tableRight));
+          }
+        } else {
+          // Fix position - centre on screen
+          var top = config._collection.height() / 2;
+          if (top > $(window).height() / 2) {
+            top = $(window).height() / 2;
+          }
+          config._collection.css('marginTop', top * -1);
+        }
+        if (config.background) {
+          Buttons.background(true, config.backgroundClassName, config.fade);
+        }
+        // Need to break the 'thread' for the collection button being
+        // activated by a click - it would also trigger this event
+        setTimeout(function () {
+          // This is bonkers, but if we don't have a click listener on the
+          // background element, iOS Safari will ignore the body click
+          // listener below. An empty function here is all that is
+          // required to make it work...
+          $('div.dt-button-background').on('click.dtb-collection', function () {
+          });
+          $('body').on('click.dtb-collection', function (e) {
+            if (!$(e.target).parents().andSelf().filter(config._collection).length) {
+              config._collection.fadeOut(config.fade, function () {
+                config._collection.detach();
+              });
+              $('div.dt-button-background').off('click.dtb-collection');
+              Buttons.background(false, config.backgroundClassName, config.fade);
+              $('body').off('click.dtb-collection');
+              dt.off('buttons-action.b-internal');
+            }
+          });
+        }, 10);
+        if (config.autoClose) {
+          dt.on('buttons-action.b-internal', function () {
+            $('div.dt-button-background').click();
+          });
+        }
+      },
+      background: true,
+      collectionLayout: '',
+      backgroundClassName: 'dt-button-background',
+      autoClose: false,
+      fade: 400
+    },
+    copy: function (dt, conf) {
+      if (_dtButtons.copyHtml5) {
+        return 'copyHtml5';
+      }
+      if (_dtButtons.copyFlash && _dtButtons.copyFlash.available(dt, conf)) {
+        return 'copyFlash';
+      }
+    },
+    csv: function (dt, conf) {
+      // Common option that will use the HTML5 or Flash export buttons
+      if (_dtButtons.csvHtml5 && _dtButtons.csvHtml5.available(dt, conf)) {
+        return 'csvHtml5';
+      }
+      if (_dtButtons.csvFlash && _dtButtons.csvFlash.available(dt, conf)) {
+        return 'csvFlash';
+      }
+    },
+    excel: function (dt, conf) {
+      // Common option that will use the HTML5 or Flash export buttons
+      if (_dtButtons.excelHtml5 && _dtButtons.excelHtml5.available(dt, conf)) {
+        return 'excelHtml5';
+      }
+      if (_dtButtons.excelFlash && _dtButtons.excelFlash.available(dt, conf)) {
+        return 'excelFlash';
+      }
+    },
+    pdf: function (dt, conf) {
+      // Common option that will use the HTML5 or Flash export buttons
+      if (_dtButtons.pdfHtml5 && _dtButtons.pdfHtml5.available(dt, conf)) {
+        return 'pdfHtml5';
+      }
+      if (_dtButtons.pdfFlash && _dtButtons.pdfFlash.available(dt, conf)) {
+        return 'pdfFlash';
+      }
+    },
+    pageLength: function (dt) {
+      var lengthMenu = dt.settings()[0].aLengthMenu;
+      var vals = $.isArray(lengthMenu[0]) ? lengthMenu[0] : lengthMenu;
+      var lang = $.isArray(lengthMenu[0]) ? lengthMenu[1] : lengthMenu;
+      var text = function (dt) {
+        return dt.i18n('buttons.pageLength', {
+          '-1': 'Show all rows',
+          _: 'Show %d rows'
+        }, dt.page.len());
+      };
+      return {
+        extend: 'collection',
+        text: text,
+        className: 'buttons-page-length',
+        autoClose: true,
+        buttons: $.map(vals, function (val, i) {
+          return {
+            text: lang[i],
+            action: function (e, dt) {
+              dt.page.len(val).draw();
+            },
+            init: function (dt, node, conf) {
+              var that = this;
+              var fn = function () {
+                that.active(dt.page.len() === val);
+              };
+              dt.on('length.dt' + conf.namespace, fn);
+              fn();
+            },
+            destroy: function (dt, node, conf) {
+              dt.off('length.dt' + conf.namespace);
+            }
+          };
+        }),
+        init: function (dt, node, conf) {
+          var that = this;
+          dt.on('length.dt' + conf.namespace, function () {
+            that.text(text(dt));
+          });
+        },
+        destroy: function (dt, node, conf) {
+          dt.off('length.dt' + conf.namespace);
+        }
+      };
+    }
+  });
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables API
+ *
+ * For complete documentation, please refer to the docs/api directory or the
+ * DataTables site
+ */
+  // Buttons group and individual button selector
+  DataTable.Api.register('buttons()', function (group, selector) {
+    // Argument shifting
+    if (selector === undefined) {
+      selector = group;
+      group = undefined;
+    }
+    return this.iterator(true, 'table', function (ctx) {
+      if (ctx._buttons) {
+        return Buttons.buttonSelector(Buttons.instanceSelector(group, ctx._buttons), selector);
+      }
+    }, true);
+  });
+  // Individual button selector
+  DataTable.Api.register('button()', function (group, selector) {
+    // just run buttons() and truncate
+    var buttons = this.buttons(group, selector);
+    if (buttons.length > 1) {
+      buttons.splice(1, buttons.length);
+    }
+    return buttons;
+  });
+  // Active buttons
+  DataTable.Api.registerPlural('buttons().active()', 'button().active()', function (flag) {
+    if (flag === undefined) {
+      return this.map(function (set) {
+        return set.inst.active(set.node);
+      });
+    }
+    return this.each(function (set) {
+      set.inst.active(set.node, flag);
+    });
+  });
+  // Get / set button action
+  DataTable.Api.registerPlural('buttons().action()', 'button().action()', function (action) {
+    if (action === undefined) {
+      return this.map(function (set) {
+        return set.inst.action(set.node);
+      });
+    }
+    return this.each(function (set) {
+      set.inst.action(set.node, action);
+    });
+  });
+  // Enable / disable buttons
+  DataTable.Api.register([
+    'buttons().enable()',
+    'button().enable()'
+  ], function (flag) {
+    return this.each(function (set) {
+      set.inst.enable(set.node, flag);
+    });
+  });
+  // Disable buttons
+  DataTable.Api.register([
+    'buttons().disable()',
+    'button().disable()'
+  ], function () {
+    return this.each(function (set) {
+      set.inst.disable(set.node);
+    });
+  });
+  // Get button nodes
+  DataTable.Api.registerPlural('buttons().nodes()', 'button().node()', function () {
+    var jq = $();
+    // jQuery will automatically reduce duplicates to a single entry
+    $(this.each(function (set) {
+      jq = jq.add(set.inst.node(set.node));
+    }));
+    return jq;
+  });
+  // Get / set button text (i.e. the button labels)
+  DataTable.Api.registerPlural('buttons().text()', 'button().text()', function (label) {
+    if (label === undefined) {
+      return this.map(function (set) {
+        return set.inst.text(set.node);
+      });
+    }
+    return this.each(function (set) {
+      set.inst.text(set.node, label);
+    });
+  });
+  // Trigger a button's action
+  DataTable.Api.registerPlural('buttons().trigger()', 'button().trigger()', function () {
+    return this.each(function (set) {
+      set.inst.node(set.node).trigger('click');
+    });
+  });
+  // Get the container elements for the button sets selected
+  DataTable.Api.registerPlural('buttons().containers()', 'buttons().container()', function () {
+    var jq = $();
+    // jQuery will automatically reduce duplicates to a single entry
+    $(this.each(function (set) {
+      jq = jq.add(set.inst.container());
+    }));
+    return jq;
+  });
+  // Add a new button
+  DataTable.Api.register('button().add()', function (idx, conf) {
+    if (this.length === 1) {
+      this[0].inst.add(conf, idx);
+    }
+    return this.button(idx);
+  });
+  // Destroy the button sets selected
+  DataTable.Api.register('buttons().destroy()', function () {
+    this.pluck('inst').unique().each(function (inst) {
+      inst.destroy();
+    });
+    return this;
+  });
+  // Remove a button
+  DataTable.Api.registerPlural('buttons().remove()', 'buttons().remove()', function () {
+    this.each(function (set) {
+      set.inst.remove(set.node);
+    });
+    return this;
+  });
+  // Information box that can be used by buttons
+  var _infoTimer;
+  DataTable.Api.register('buttons.info()', function (title, message, time) {
+    var that = this;
+    if (title === false) {
+      $('#datatables_buttons_info').fadeOut(function () {
+        $(this).remove();
+      });
+      clearTimeout(_infoTimer);
+      _infoTimer = null;
+      return this;
+    }
+    if (_infoTimer) {
+      clearTimeout(_infoTimer);
+    }
+    if ($('#datatables_buttons_info').length) {
+      $('#datatables_buttons_info').remove();
+    }
+    title = title ? '<h2>' + title + '</h2>' : '';
+    $('<div id="datatables_buttons_info" class="dt-button-info"/>').html(title).append($('<div/>')[typeof message === 'string' ? 'html' : 'append'](message)).css('display', 'none').appendTo('body').fadeIn();
+    if (time !== undefined && time !== 0) {
+      _infoTimer = setTimeout(function () {
+        that.buttons.info(false);
+      }, time);
+    }
+    return this;
+  });
+  // Get data from the table for export - this is common to a number of plug-in
+  // buttons so it is included in the Buttons core library
+  DataTable.Api.register('buttons.exportData()', function (options) {
+    if (this.context.length) {
+      return _exportData(new DataTable.Api(this.context[0]), options);
+    }
+  });
+  var _exportTextarea = $('<textarea/>')[0];
+  var _exportData = function (dt, inOpts) {
+    var config = $.extend(true, {}, {
+        rows: null,
+        columns: '',
+        modifier: {
+          search: 'applied',
+          order: 'applied'
+        },
+        orthogonal: 'display',
+        stripHtml: true,
+        stripNewlines: true,
+        decodeEntities: true,
+        trim: true,
+        format: {
+          header: function (d) {
+            return strip(d);
+          },
+          footer: function (d) {
+            return strip(d);
+          },
+          body: function (d) {
+            return strip(d);
+          }
+        }
+      }, inOpts);
+    var strip = function (str) {
+      if (typeof str !== 'string') {
+        return str;
+      }
+      if (config.stripHtml) {
+        str = str.replace(/<[^>]*>/g, '');
+      }
+      if (config.trim) {
+        str = str.replace(/^\s+|\s+$/g, '');
+      }
+      if (config.stripNewlines) {
+        str = str.replace(/\n/g, ' ');
+      }
+      if (config.decodeEntities) {
+        _exportTextarea.innerHTML = str;
+        str = _exportTextarea.value;
+      }
+      return str;
+    };
+    var header = dt.columns(config.columns).indexes().map(function (idx) {
+        return config.format.header(dt.column(idx).header().innerHTML, idx);
+      }).toArray();
+    var footer = dt.table().footer() ? dt.columns(config.columns).indexes().map(function (idx) {
+        var el = dt.column(idx).footer();
+        return config.format.footer(el ? el.innerHTML : '', idx);
+      }).toArray() : null;
+    var rowIndexes = dt.rows(config.rows, config.modifier).indexes().toArray();
+    var cells = dt.cells(rowIndexes, config.columns).render(config.orthogonal).toArray();
+    var columns = header.length;
+    var rows = columns > 0 ? cells.length / columns : 0;
+    var body = new Array(rows);
+    var cellCounter = 0;
+    for (var i = 0, ien = rows; i < ien; i++) {
+      var row = new Array(columns);
+      for (var j = 0; j < columns; j++) {
+        row[j] = config.format.body(cells[cellCounter], j, i);
+        cellCounter++;
+      }
+      body[i] = row;
+    }
+    return {
+      header: header,
+      footer: footer,
+      body: body
+    };
+  };
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables interface
+ */
+  // Attach to DataTables objects for global access
+  $.fn.dataTable.Buttons = Buttons;
+  $.fn.DataTable.Buttons = Buttons;
+  // DataTables creation - check if the buttons have been defined for this table,
+  // they will have been if the `B` option was used in `dom`, otherwise we should
+  // create the buttons instance here so they can be inserted into the document
+  // using the API. Listen for `init` for compatibility with pre 1.10.10, but to
+  // be removed in future.
+  $(document).on('init.dt plugin-init.dt', function (e, settings) {
+    if (e.namespace !== 'dt') {
+      return;
+    }
+    var opts = settings.oInit.buttons || DataTable.defaults.buttons;
+    if (opts && !settings._buttons) {
+      new Buttons(settings, opts).container();
+    }
+  });
+  // DataTables `dom` feature option
+  DataTable.ext.feature.push({
+    fnInit: function (settings) {
+      var api = new DataTable.Api(settings);
+      var opts = api.init().buttons || DataTable.defaults.buttons;
+      return new Buttons(api, opts).container();
+    },
+    cFeature: 'B'
+  });
+  return Buttons;
+}));
 /*!
  Bootstrap integration for DataTables' Buttons
  ©2016 SpryMedia Ltd - datatables.net/license
@@ -57384,43 +58527,6 @@ https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
   a.ext.buttons.collection.text = function (a) {
     return a.i18n('buttons.collection', 'Collection <span class="caret"/>');
   };
-  return a.Buttons;
-}));
-/*!
- Bootstrap integration for DataTables' Buttons
- ©2016 SpryMedia Ltd - datatables.net/license
-*/
-(function (c) {
-  'function' === typeof define && define.amd ? define([
-    'jquery',
-    'datatables.net-bs4',
-    'datatables.net-buttons'
-  ], function (a) {
-    return c(a, window, document);
-  }) : 'object' === typeof exports ? module.exports = function (a, b) {
-    a || (a = window);
-    if (!b || !b.fn.dataTable)
-      b = require('datatables.net-bs4')(a, b).$;
-    b.fn.dataTable.Buttons || require('datatables.net-buttons')(a, b);
-    return c(b, a, a.document);
-  } : c(jQuery, window, document);
-}(function (c) {
-  var a = c.fn.dataTable;
-  c.extend(!0, a.Buttons.defaults, {
-    dom: {
-      container: { className: 'dt-buttons btn-group' },
-      button: { className: 'btn btn-secondary' },
-      collection: {
-        tag: 'div',
-        className: 'dt-button-collection dropdown-menu',
-        button: {
-          tag: 'a',
-          className: 'dt-button dropdown-item'
-        }
-      }
-    }
-  });
-  a.ext.buttons.collection.className += ' dropdown-toggle';
   return a.Buttons;
 }));
 /*!
@@ -60125,7 +61231,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
                   'next': 'Next&nbsp;<span aria-hidden="true" class="icon-ui-arrowright"></span>',
                   'previous': '<span aria-hidden="true" class="icon-ui-arrowleft"></span>&nbsp;Previous'
                 }
-              }
+              },
+              retrieve: true
             });
           new $.fn.dataTable.FixedHeader(table);
         });
@@ -60139,12 +61246,13 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
     return {
       restrict: 'C',
       link: function ($scope, $element, iAttrs, controller) {
-        var table = $('.table-column').DataTable({
+        var table = $element.DataTable({
             scrollY: '300px',
             scrollX: true,
             scrollCollapse: true,
             paging: false,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            retrieve: true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -60176,13 +61284,14 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
     return {
       restrict: 'C',
       link: function ($scope, $element, iAttrs, controller) {
-        var table = $('table.responsive-data-table').DataTable({
+        var table = $element.DataTable({
             dom: 'C<"clear">lfrtip',
             displayLength: 5,
             paging: false,
             scrollY: '300px',
             scrollX: true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            retrieve: true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -60218,7 +61327,7 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
           // `d` is the original data object for the row
           return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' + '<tr>' + '<td>Full name:</td>' + '<td>' + d.name + '</td>' + '</tr>' + '<tr>' + '<td>Extension number:</td>' + '<td>' + d.extn + '</td>' + '</tr>' + '<tr>' + '<td>Extra info:</td>' + '<td>And any further details here (images etc)...</td>' + '</tr>' + '</table>';
         }
-        var table = $('table.table-complex').DataTable({
+        var table = $element.DataTable({
             'ajax': '../components/tables/data.json',
             'columns': [
               {
@@ -60241,7 +61350,8 @@ angular.module('dellUiComponents').directive('tableFixedHeader', [
             paging: false,
             scrollY: '300px',
             scrollX: true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            retrieve: true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -60404,7 +61514,8 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
               //console.log('i was clicked');
               $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);  //console.log('i was sorted');
             },
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            retrieve: true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -60625,7 +61736,8 @@ angular.module('dellUiComponents').directive('tableExpandableRow', [
               $('th.editable.sorting_asc' || 'th.editable.sorting_desc').bind('click', dataReloadClick);  //console.log('i was sorted');
             },
             'responsive': true,
-            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' }
+            'oLanguage': { 'sSearch': '<i class="icon-small-magnifying-glass text-blue"></i>' },
+            retrieve: true
           });
         //change the position of the sorting toggle arrows
         table.columns().iterator('column', function (ctx, idx) {
@@ -61786,7 +62898,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/standard-buttons/demo-play-standard-buttons.html', '<section ng-controller=standardButtonsPLayDemoCtrl id=standard-buttons-play-demo><div class=container><h2>Standard-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/standard-buttons/demo-standard-buttons.html', '<section ng-controller=standardButtonsCtrl id=standard-buttons-html-example><div class=container><h2 class=bottom-offset-20>Standard-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase</h4><a class="btn btn-primary" href=javascript:;>Primary</a> </div><div class=bottom-offset-30><h4>Primary Non-Purchase disabled</h4><a class="btn btn-primary disabled" href=javascript:;>Primary</a> </div><hr><div class=bottom-offset-30><h4>Primary Purchase</h4><a class="btn btn-success" href=javascript:;>Purchase</a> </div><div class=bottom-offset-30><h4>Primary Purchase disabled</h4><a class="btn btn-success disabled" href=javascript:;>Purchase</a> </div><hr><div class=bottom-offset-30><h4>Secondary or General Use</h4><a class="btn btn-default" href=javascript:;>General Use</a> </div><div class=bottom-offset-30><h4>Secondary or General Use disabled</h4><a class="btn btn-default disabled" href=javascript:;>General Use</a> </div><hr><div class=bottom-offset-30><h4>Primary link</h4><a class="btn btn-link" href=javascript:;>Link</a> </div><div class=bottom-offset-30><h4>Primary link disabled</h4><a class="btn btn-link disabled" href=javascript:;>Link</a> </div></div></section>');
     $templateCache.put('components/tables-uber/demo-play-tables-uber.html', '<section ng-controller=tablesUberPLayDemoCtrl id=tables-uber-play-demo><div class=container><h2>Tables-Uber Builder</h2><div></div></div></section>');
-    $templateCache.put('components/tables-uber/demo-tables-uber.html', '<section ng-controller=tablesUberCtrl id=tables-uber-html-example><div class=container><h2>Tables-Uber Demo</h2><div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Expandable Details</h3><div class=bottom-offset-60><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=expand-details class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=expand-details><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-expandable-row table-pagination table-editable nowrap compact" data-datafile=components/tables-uber/data-responsive.json><thead><tr><th><input name=select_all value=1 type=checkbox></th><th class=truncate>Company name</th><th class=truncate>Solution ID</th><th class=truncate>List price</th><th class=truncate>Quote number</th></tr></thead></table></div><div class=bottom-offset-60><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=expand-details-1 class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=expand-details-1><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-expandable-row table-pagination table-editable nowrap compact" data-datafile=components/tables-uber/data-responsive.json><thead><tr><th><input name=select_all value=1 type=checkbox></th><th class=truncate>Company name</th><th class=truncate>Solution ID</th><th class=truncate>List price</th><th class=truncate>Quote number</th></tr></thead></table></div><h3 class="bottom-offset-20 top-offset-60">Data Tables - Responsive Collapsing Column</h3><div class=bottom-offset-60><div class="well well-gray-very-light-stroke overflow-hidden"><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=collapse-columns class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=collapse-columns><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile=components/tables-uber/dataColumn.json><thead><tr><th><span><input name=select_all value=1 type=checkbox></span></th><th>Company name</th><th>Solution name</th><th>Solution ID</th><th>Owner</th><th>Last edited</th><th>List price</th><th>Customer number</th><th>Quote number</th><th>Status</th></tr></thead></table></div></div><hr><div class=bottom-offset-60><div class="well well-gray-very-light-stroke overflow-hidden"><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=collapse-columns class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=collapse-columns><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile=components/tables-uber/dataColumn.json><thead><tr><th><span><input name=select_all value=1 type=checkbox></span></th><th>Company name</th><th>Solution name</th><th>Solution ID</th><th>Owner</th><th>Last edited</th><th>List price</th><th>Customer number</th><th>Quote number</th><th>Status</th></tr></thead></table></div></div><hr><div class=bottom-offset-60><div class="well well-gray-very-light-stroke overflow-hidden"><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=collapse-columns class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=collapse-columns><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile=components/tables-uber/dataColumn.json><thead><tr><th><span><input name=select_all value=1 type=checkbox></span></th><th>Company name</th><th>Solution name</th><th>Solution ID</th><th>Owner</th><th>Last edited</th><th>List price</th><th>Customer number</th><th>Quote number</th><th>Status</th></tr></thead></table></div></div></div></div></section>');
+    $templateCache.put('components/tables-uber/demo-tables-uber.html', '<section ng-controller=tablesUberCtrl id=tables-uber-html-example><div class=container><h2>Tables-Uber Demo</h2><div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Expandable Details</h3><div class=bottom-offset-60><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=expand-details class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=expand-details><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-expandable-row table-pagination table-editable nowrap compact" data-datafile=components/tables-uber/data-responsive.json><thead><tr><th><input name=select_all value=1 type=checkbox></th><th class=truncate>Company name</th><th class=truncate>Solution ID</th><th class=truncate>List price</th><th class=truncate>Quote number</th></tr></thead></table></div><div class=bottom-offset-60><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=expand-details-1 class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=expand-details-1><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-expandable-row table-pagination table-editable nowrap compact" data-datafile=components/tables-uber/data-responsive.json><thead><tr><th><input name=select_all value=1 type=checkbox></th><th class=truncate>Company name</th><th class=truncate>Solution ID</th><th class=truncate>List price</th><th class=truncate>Quote number</th></tr></thead></table></div><h3 class="bottom-offset-20 top-offset-60">Data Tables - Responsive Collapsing Column</h3><div class=bottom-offset-60><div class="well well-gray-very-light-stroke overflow-hidden"><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=collapse-columns-2 class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=collapse-columns-2><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile=components/tables-uber/dataColumn.json><thead><tr><th><span><input name=select_all value=1 type=checkbox></span></th><th>Company name</th><th>Solution name</th><th>Solution ID</th><th>Owner</th><th>Last edited</th><th>List price</th><th>Customer number</th><th>Quote number</th><th>Status</th></tr></thead></table></div></div><hr><div class=bottom-offset-60><div class="well well-gray-very-light-stroke overflow-hidden"><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=collapse-columns-3 class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=collapse-columns-3><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile=components/tables-uber/dataColumn.json><thead><tr><th><span><input name=select_all value=1 type=checkbox></span></th><th>Company name</th><th>Solution name</th><th>Solution ID</th><th>Owner</th><th>Last edited</th><th>List price</th><th>Customer number</th><th>Quote number</th><th>Status</th></tr></thead></table></div></div><hr><div class=bottom-offset-60><div class="well well-gray-very-light-stroke overflow-hidden"><form class=dt-form-inline role=form><div class="form-group pull-left"><label for=collapse-columns class=control-label>Bulk actions</label><div class=form-group><select class=form-control id=collapse-columns><option disabled selected>choose option</option><option>Export</option><option>Delete</option><option>Add to group</option><option>Remove from group</option></select></div></div></form><table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile=components/tables-uber/dataColumn.json><thead><tr><th><span><input name=select_all value=1 type=checkbox></span></th><th>Company name</th><th>Solution name</th><th>Solution ID</th><th>Owner</th><th>Last edited</th><th>List price</th><th>Customer number</th><th>Quote number</th><th>Status</th></tr></thead></table></div></div></div></div></section>');
     $templateCache.put('components/tables/demo-play-tables.html', '<section ng-controller=tablesPLayDemoCtrl id=tables-play-demo><div class=container><h2>Tables Builder</h2><div></div></div></section>');
     $templateCache.put('components/tables/demo-tables.html', '<section ng-controller=tablesCtrl id=tables-html-example><div class=container><h2>Tables Demo</h2><h3 class="bottom-offset-5 top-offset-60">Data Tables - Simple</h3><div class=bottom-offset-60><div class=table-responsive><table class="table table-hover"><thead><tr><th>Date</th><th>Order</th><th>Product</th><th>Description</th><th>Status</th><th>Delivery</th><th>Tracking</th></tr></thead><tbody><tr><th scope=row>03/19/15</th><td>#42568</td><td><a href=javascript:;>Optiplex 9020</a></td><td>OptiPlex 9020-Dell\u2019s premium business-class desktop.</td><td>In process</td><td>03/22/15</td><td>TBD</td></tr><tr><th scope=row>03/22/15</th><td>#77475</td><td><a href=javascript:;>OptiPlex 7020</a></td><td>Mainstream performance, and advanced security and manageability.</td><td>Shipping</td><td>04/05/15</td><td><a href=javascript:;>#de467ft53s</a></td></tr><tr><th scope=row>03/24/15</th><td>#44356</td><td><a href=javascript:;>OptiPlex XE2</a></td><td>Long-term computing solution and highly durable OptiPlex XE2</td><td>Out for Delivery</td><td>04/08/15</td><td><a href=javascript:;>#0U812-90210s</a></td></tr></tbody></table></div></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Simple w/ optional zebra striping</h3><div class=bottom-offset-60><div class=table-responsive><table class="table table-hover table-striped"><thead><tr><th>&nbsp;</th><th>Column 1</th><th>Column 2</th><th>Column 3</th><th>Column 4</th><th>Column 5</th><th>Column 6</th></tr></thead><tbody><tr><th scope=row>1</th><td>value 1:1</td><td><a href=javascript:;>value 1:2</a></td><td>value 1:3</td><td>value 1:4</td><td>value 1:5</td><td>value 1:6</td></tr><tr><th scope=row>2</th><td>value 2:1</td><td>value 2:2</td><td><a href=javascript:;>value 2:3</a></td><td>value 2:4</td><td>value 2:5</td><td>value 2:6</td></tr><tr><th scope=row>3</th><td>value 3:1</td><td>value 3:2</td><td>value 3:3</td><td>value 3:4</td><td>value 3:5</td><td>value 3:6</td></tr></tbody></table></div></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Responsive Simple Table</h3><div class=bottom-offset-60><div id=responsive-simple-table><table class="table table-hover table-striped table-responsive"><thead data-rtcontainerbreakpoint=1000><tr><th>Date</th><th>Order</th><th>Product</th><th>Description</th><th>Status</th><th>Delivery</th><th>Tracking</th></tr></thead><tbody><tr><td scope=row><strong>03/19/15</strong></td><td>#42568</td><td><a href=javascript:;>Optiplex 9020</a></td><td>OptiPlex 9020-Dell\u2019s premium business-class desktop.</td><td>In process</td><td>03/22/15</td><td>TBD</td></tr><tr><td scope=row><strong>03/22/15</strong></td><td>#77475</td><td><a href=javascript:;>OptiPlex 7020</a></td><td>Mainstream performance, and advanced security and manageability.</td><td>Shipping</td><td>04/05/15</td><td><a href=javascript:;>#de467ft53s</a></td></tr><tr><td scope=row><strong>03/24/15</strong></td><td>#44356</td><td><a href=javascript:;>OptiPlex XE2</a></td><td>Long-term computing solution and highly durable OptiPlex XE2</td><td>Out for Delivery</td><td>04/08/15</td><td><a href=javascript:;>#0U812-90210s</a></td></tr></tbody></table></div></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Carousel (Fixed 1st Column)</h3><div class=bottom-offset-60><table class="table table-hover table-striped table-fixed-column table-column" cellspacing=0 width=100%><thead><tr><th>First name</th><th>Last name</th><th>Position</th><th>Office</th><th>Age</th><th>Start date</th><th>Salary</th><th>Extn.</th><th>E-mail</th></tr></thead><tbody><tr><td>Tiger</td><td>Nixon</td><td>System Architect</td><td>Edinburgh</td><td>61</td><td>2011/04/25</td><td>$320,800</td><td>5421</td><td>t.nixon@datatables.net</td></tr><tr><td>Garrett</td><td>Winters</td><td>Accountant</td><td>Tokyo</td><td>63</td><td>2011/07/25</td><td>$170,750</td><td>8422</td><td>g.winters@datatables.net</td></tr><tr><td>Ashton</td><td>Cox</td><td>Junior Technical Author</td><td>San Francisco</td><td>66</td><td>2009/01/12</td><td>$86,000</td><td>1562</td><td>a.cox@datatables.net</td></tr><tr><td>Cedric</td><td>Kelly</td><td>Senior Javascript Developer</td><td>Edinburgh</td><td>22</td><td>2012/03/29</td><td>$433,060</td><td>6224</td><td>c.kelly@datatables.net</td></tr><tr><td>Airi</td><td>Satou</td><td>Accountant</td><td>Tokyo</td><td>33</td><td>2008/11/28</td><td>$162,700</td><td>5407</td><td>a.satou@datatables.net</td></tr><tr><td>Brielle</td><td>Williamson</td><td>Integration Specialist</td><td>New York</td><td>61</td><td>2012/12/02</td><td>$372,000</td><td>4804</td><td>b.williamson@datatables.net</td></tr><tr><td>Herrod</td><td>Chandler</td><td>Sales Assistant</td><td>San Francisco</td><td>59</td><td>2012/08/06</td><td>$137,500</td><td>9608</td><td>h.chandler@datatables.net</td></tr><tr><td>Rhona</td><td>Davidson</td><td>Integration Specialist</td><td>Tokyo</td><td>55</td><td>2010/10/14</td><td>$327,900</td><td>6200</td><td>r.davidson@datatables.net</td></tr><tr><td>Colleen</td><td>Hurst</td><td>Javascript Developer</td><td>San Francisco</td><td>39</td><td>2009/09/15</td><td>$205,500</td><td>2360</td><td>c.hurst@datatables.net</td></tr><tr><td>Sonya</td><td>Frost</td><td>Software Engineer</td><td>Edinburgh</td><td>23</td><td>2008/12/13</td><td>$103,600</td><td>1667</td><td>s.frost@datatables.net</td></tr><tr><td>Jena</td><td>Gaines</td><td>Office Manager</td><td>London</td><td>30</td><td>2008/12/19</td><td>$90,560</td><td>3814</td><td>j.gaines@datatables.net</td></tr><tr><td>Quinn</td><td>Flynn</td><td>Support Lead</td><td>Edinburgh</td><td>22</td><td>2013/03/03</td><td>$342,000</td><td>9497</td><td>q.flynn@datatables.net</td></tr><tr><td>Charde</td><td>Marshall</td><td>Regional Director</td><td>San Francisco</td><td>36</td><td>2008/10/16</td><td>$470,600</td><td>6741</td><td>c.marshall@datatables.net</td></tr><tr><td>Haley</td><td>Kennedy</td><td>Senior Marketing Designer</td><td>London</td><td>43</td><td>2012/12/18</td><td>$313,500</td><td>3597</td><td>h.kennedy@datatables.net</td></tr><tr><td>Tatyana</td><td>Fitzpatrick</td><td>Regional Director</td><td>London</td><td>19</td><td>2010/03/17</td><td>$385,750</td><td>1965</td><td>t.fitzpatrick@datatables.net</td></tr><tr><td>Michael</td><td>Silva</td><td>Marketing Designer</td><td>London</td><td>66</td><td>2012/11/27</td><td>$198,500</td><td>1581</td><td>m.silva@datatables.net</td></tr><tr><td>Paul</td><td>Byrd</td><td>Chief Financial Officer (CFO)</td><td>New York</td><td>64</td><td>2010/06/09</td><td>$725,000</td><td>3059</td><td>p.byrd@datatables.net</td></tr><tr><td>Gloria</td><td>Little</td><td>Systems Administrator</td><td>New York</td><td>59</td><td>2009/04/10</td><td>$237,500</td><td>1721</td><td>g.little@datatables.net</td></tr><tr><td>Bradley</td><td>Greer</td><td>Software Engineer</td><td>London</td><td>41</td><td>2012/10/13</td><td>$132,000</td><td>2558</td><td>b.greer@datatables.net</td></tr><tr><td>Dai</td><td>Rios</td><td>Personnel Lead</td><td>Edinburgh</td><td>35</td><td>2012/09/26</td><td>$217,500</td><td>2290</td><td>d.rios@datatables.net</td></tr><tr><td>Jenette</td><td>Caldwell</td><td>Development Lead</td><td>New York</td><td>30</td><td>2011/09/03</td><td>$345,000</td><td>1937</td><td>j.caldwell@datatables.net</td></tr><tr><td>Yuri</td><td>Berry</td><td>Chief Marketing Officer (CMO)</td><td>New York</td><td>40</td><td>2009/06/25</td><td>$675,000</td><td>6154</td><td>y.berry@datatables.net</td></tr><tr><td>Caesar</td><td>Vance</td><td>Pre-Sales Support</td><td>New York</td><td>21</td><td>2011/12/12</td><td>$106,450</td><td>8330</td><td>c.vance@datatables.net</td></tr><tr><td>Doris</td><td>Wilder</td><td>Sales Assistant</td><td>Sidney</td><td>23</td><td>2010/09/20</td><td>$85,600</td><td>3023</td><td>d.wilder@datatables.net</td></tr><tr><td>Angelica</td><td>Ramos</td><td>Chief Executive Officer (CEO)</td><td>London</td><td>47</td><td>2009/10/09</td><td>$1,200,000</td><td>5797</td><td>a.ramos@datatables.net</td></tr><tr><td>Gavin</td><td>Joyce</td><td>Developer</td><td>Edinburgh</td><td>42</td><td>2010/12/22</td><td>$92,575</td><td>8822</td><td>g.joyce@datatables.net</td></tr><tr><td>Jennifer</td><td>Chang</td><td>Regional Director</td><td>Singapore</td><td>28</td><td>2010/11/14</td><td>$357,650</td><td>9239</td><td>j.chang@datatables.net</td></tr><tr><td>Brenden</td><td>Wagner</td><td>Software Engineer</td><td>San Francisco</td><td>28</td><td>2011/06/07</td><td>$206,850</td><td>1314</td><td>b.wagner@datatables.net</td></tr><tr><td>Fiona</td><td>Green</td><td>Chief Operating Officer (COO)</td><td>San Francisco</td><td>48</td><td>2010/03/11</td><td>$850,000</td><td>2947</td><td>f.green@datatables.net</td></tr><tr><td>Shou</td><td>Itou</td><td>Regional Marketing</td><td>Tokyo</td><td>20</td><td>2011/08/14</td><td>$163,000</td><td>8899</td><td>s.itou@datatables.net</td></tr><tr><td>Michelle</td><td>House</td><td>Integration Specialist</td><td>Sidney</td><td>37</td><td>2011/06/02</td><td>$95,400</td><td>2769</td><td>m.house@datatables.net</td></tr><tr><td>Suki</td><td>Burks</td><td>Developer</td><td>London</td><td>53</td><td>2009/10/22</td><td>$114,500</td><td>6832</td><td>s.burks@datatables.net</td></tr><tr><td>Prescott</td><td>Bartlett</td><td>Technical Author</td><td>London</td><td>27</td><td>2011/05/07</td><td>$145,000</td><td>3606</td><td>p.bartlett@datatables.net</td></tr><tr><td>Gavin</td><td>Cortez</td><td>Team Leader</td><td>San Francisco</td><td>22</td><td>2008/10/26</td><td>$235,500</td><td>2860</td><td>g.cortez@datatables.net</td></tr><tr><td>Martena</td><td>Mccray</td><td>Post-Sales support</td><td>Edinburgh</td><td>46</td><td>2011/03/09</td><td>$324,050</td><td>8240</td><td>m.mccray@datatables.net</td></tr><tr><td>Unity</td><td>Butler</td><td>Marketing Designer</td><td>San Francisco</td><td>47</td><td>2009/12/09</td><td>$85,675</td><td>5384</td><td>u.butler@datatables.net</td></tr><tr><td>Howard</td><td>Hatfield</td><td>Office Manager</td><td>San Francisco</td><td>51</td><td>2008/12/16</td><td>$164,500</td><td>7031</td><td>h.hatfield@datatables.net</td></tr><tr><td>Hope</td><td>Fuentes</td><td>Secretary</td><td>San Francisco</td><td>41</td><td>2010/02/12</td><td>$109,850</td><td>6318</td><td>h.fuentes@datatables.net</td></tr><tr><td>Vivian</td><td>Harrell</td><td>Financial Controller</td><td>San Francisco</td><td>62</td><td>2009/02/14</td><td>$452,500</td><td>9422</td><td>v.harrell@datatables.net</td></tr><tr><td>Timothy</td><td>Mooney</td><td>Office Manager</td><td>London</td><td>37</td><td>2008/12/11</td><td>$136,200</td><td>7580</td><td>t.mooney@datatables.net</td></tr><tr><td>Jackson</td><td>Bradshaw</td><td>Director</td><td>New York</td><td>65</td><td>2008/09/26</td><td>$645,750</td><td>1042</td><td>j.bradshaw@datatables.net</td></tr><tr><td>Olivia</td><td>Liang</td><td>Support Engineer</td><td>Singapore</td><td>64</td><td>2011/02/03</td><td>$234,500</td><td>2120</td><td>o.liang@datatables.net</td></tr><tr><td>Bruno</td><td>Nash</td><td>Software Engineer</td><td>London</td><td>38</td><td>2011/05/03</td><td>$163,500</td><td>6222</td><td>b.nash@datatables.net</td></tr><tr><td>Sakura</td><td>Yamamoto</td><td>Support Engineer</td><td>Tokyo</td><td>37</td><td>2009/08/19</td><td>$139,575</td><td>9383</td><td>s.yamamoto@datatables.net</td></tr><tr><td>Thor</td><td>Walton</td><td>Developer</td><td>New York</td><td>61</td><td>2013/08/11</td><td>$98,540</td><td>8327</td><td>t.walton@datatables.net</td></tr><tr><td>Finn</td><td>Camacho</td><td>Support Engineer</td><td>San Francisco</td><td>47</td><td>2009/07/07</td><td>$87,500</td><td>2927</td><td>f.camacho@datatables.net</td></tr><tr><td>Serge</td><td>Baldwin</td><td>Data Coordinator</td><td>Singapore</td><td>64</td><td>2012/04/09</td><td>$138,575</td><td>8352</td><td>s.baldwin@datatables.net</td></tr><tr><td>Zenaida</td><td>Frank</td><td>Software Engineer</td><td>New York</td><td>63</td><td>2010/01/04</td><td>$125,250</td><td>7439</td><td>z.frank@datatables.net</td></tr><tr><td>Zorita</td><td>Serrano</td><td>Software Engineer</td><td>San Francisco</td><td>56</td><td>2012/06/01</td><td>$115,000</td><td>4389</td><td>z.serrano@datatables.net</td></tr><tr><td>Jennifer</td><td>Acosta</td><td>Junior Javascript Developer</td><td>Edinburgh</td><td>43</td><td>2013/02/01</td><td>$75,650</td><td>3431</td><td>j.acosta@datatables.net</td></tr><tr><td>Cara</td><td>Stevens</td><td>Sales Assistant</td><td>New York</td><td>46</td><td>2011/12/06</td><td>$145,600</td><td>3990</td><td>c.stevens@datatables.net</td></tr><tr><td>Hermione</td><td>Butler</td><td>Regional Director</td><td>London</td><td>47</td><td>2011/03/21</td><td>$356,250</td><td>1016</td><td>h.butler@datatables.net</td></tr><tr><td>Lael</td><td>Greer</td><td>Systems Administrator</td><td>London</td><td>21</td><td>2009/02/27</td><td>$103,500</td><td>6733</td><td>l.greer@datatables.net</td></tr><tr><td>Jonas</td><td>Alexander</td><td>Developer</td><td>San Francisco</td><td>30</td><td>2010/07/14</td><td>$86,500</td><td>8196</td><td>j.alexander@datatables.net</td></tr><tr><td>Shad</td><td>Decker</td><td>Regional Director</td><td>Edinburgh</td><td>51</td><td>2008/11/13</td><td>$183,000</td><td>6373</td><td>s.decker@datatables.net</td></tr><tr><td>Michael</td><td>Bruce</td><td>Javascript Developer</td><td>Singapore</td><td>29</td><td>2011/06/27</td><td>$183,000</td><td>5384</td><td>m.bruce@datatables.net</td></tr><tr><td>Donna</td><td>Snider</td><td>Customer Support</td><td>New York</td><td>27</td><td>2011/01/25</td><td>$112,000</td><td>4226</td><td>d.snider@datatables.net</td></tr></tbody></table></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Responsive (Sorting )</h3><div class=bottom-offset-60><table id=example-rdt class="table table-striped table-hover responsive-data-table display" cellspacing=0 width=100%><thead><tr><th>First name</th><th>Last name</th><th>Position</th><th>Office</th><th>Age</th><th>Start date</th><th>Salary</th><th>Extn.</th></tr></thead><tbody><tr><td>Tiger</td><td>Nixon</td><td>System Architect</td><td>Edinburgh</td><td>61</td><td>2011/04/25</td><td>$320,800</td><td>5421</td></tr><tr><td>Garrett</td><td>Winters</td><td>Accountant</td><td>Tokyo</td><td>63</td><td>2011/07/25</td><td>$170,750</td><td>8422</td></tr><tr><td>Ashton</td><td>Cox</td><td>Junior Technical Author</td><td>San Francisco</td><td>66</td><td>2009/01/12</td><td>$86,000</td><td>1562</td></tr><tr><td>Cedric</td><td>Kelly</td><td>Senior Javascript Developer</td><td>Edinburgh</td><td>22</td><td>2012/03/29</td><td>$433,060</td><td>6224</td></tr><tr><td>Airi</td><td>Satou</td><td>Accountant</td><td>Tokyo</td><td>33</td><td>2008/11/28</td><td>$162,700</td><td>5407</td></tr><tr><td>Brielle</td><td>Williamson</td><td>Integration Specialist</td><td>New York</td><td>61</td><td>2012/12/02</td><td>$372,000</td><td>4804</td></tr><tr><td>Herrod</td><td>Chandler</td><td>Sales Assistant</td><td>San Francisco</td><td>59</td><td>2012/08/06</td><td>$137,500</td><td>9608</td></tr><tr><td>Rhona</td><td>Davidson</td><td>Integration Specialist</td><td>Tokyo</td><td>55</td><td>2010/10/14</td><td>$327,900</td><td>6200</td></tr><tr><td>Colleen</td><td>Hurst</td><td>Javascript Developer</td><td>San Francisco</td><td>39</td><td>2009/09/15</td><td>$205,500</td><td>2360</td></tr><tr><td>Sonya</td><td>Frost</td><td>Software Engineer</td><td>Edinburgh</td><td>23</td><td>2008/12/13</td><td>$103,600</td><td>1667</td></tr><tr><td>Jena</td><td>Gaines</td><td>Office Manager</td><td>London</td><td>30</td><td>2008/12/19</td><td>$90,560</td><td>3814</td></tr><tr><td>Quinn</td><td>Flynn</td><td>Support Lead</td><td>Edinburgh</td><td>22</td><td>2013/03/03</td><td>$342,000</td><td>9497</td></tr><tr><td>Charde</td><td>Marshall</td><td>Regional Director</td><td>San Francisco</td><td>36</td><td>2008/10/16</td><td>$470,600</td><td>6741</td></tr><tr><td>Haley</td><td>Kennedy</td><td>Senior Marketing Designer</td><td>London</td><td>43</td><td>2012/12/18</td><td>$313,500</td><td>3597</td></tr><tr><td>Tatyana</td><td>Fitzpatrick</td><td>Regional Director</td><td>London</td><td>19</td><td>2010/03/17</td><td>$385,750</td><td>1965</td></tr><tr><td>Michael</td><td>Silva</td><td>Marketing Designer</td><td>London</td><td>66</td><td>2012/11/27</td><td>$198,500</td><td>1581</td></tr><tr><td>Paul</td><td>Byrd</td><td>Chief Financial Officer (CFO)</td><td>New York</td><td>64</td><td>2010/06/09</td><td>$725,000</td><td>3059</td></tr><tr><td>Gloria</td><td>Little</td><td>Systems Administrator</td><td>New York</td><td>59</td><td>2009/04/10</td><td>$237,500</td><td>1721</td></tr><tr><td>Bradley</td><td>Greer</td><td>Software Engineer</td><td>London</td><td>41</td><td>2012/10/13</td><td>$132,000</td><td>2558</td></tr><tr><td>Dai</td><td>Rios</td><td>Personnel Lead</td><td>Edinburgh</td><td>35</td><td>2012/09/26</td><td>$217,500</td><td>2290</td></tr><tr><td>Jenette</td><td>Caldwell</td><td>Development Lead</td><td>New York</td><td>30</td><td>2011/09/03</td><td>$345,000</td><td>1937</td></tr><tr><td>Yuri</td><td>Berry</td><td>Chief Marketing Officer (CMO)</td><td>New York</td><td>40</td><td>2009/06/25</td><td>$675,000</td><td>6154</td></tr><tr><td>Caesar</td><td>Vance</td><td>Pre-Sales Support</td><td>New York</td><td>21</td><td>2011/12/12</td><td>$106,450</td><td>8330</td></tr><tr><td>Doris</td><td>Wilder</td><td>Sales Assistant</td><td>Sidney</td><td>23</td><td>2010/09/20</td><td>$85,600</td><td>3023</td></tr><tr><td>Angelica</td><td>Ramos</td><td>Chief Executive Officer (CEO)</td><td>London</td><td>47</td><td>2009/10/09</td><td>$1,200,000</td><td>5797</td></tr><tr><td>Gavin</td><td>Joyce</td><td>Developer</td><td>Edinburgh</td><td>42</td><td>2010/12/22</td><td>$92,575</td><td>8822</td></tr><tr><td>Jennifer</td><td>Chang</td><td>Regional Director</td><td>Singapore</td><td>28</td><td>2010/11/14</td><td>$357,650</td><td>9239</td></tr><tr><td>Brenden</td><td>Wagner</td><td>Software Engineer</td><td>San Francisco</td><td>28</td><td>2011/06/07</td><td>$206,850</td><td>1314</td></tr><tr><td>Fiona</td><td>Green</td><td>Chief Operating Officer (COO)</td><td>San Francisco</td><td>48</td><td>2010/03/11</td><td>$850,000</td><td>2947</td></tr><tr><td>Shou</td><td>Itou</td><td>Regional Marketing</td><td>Tokyo</td><td>20</td><td>2011/08/14</td><td>$163,000</td><td>8899</td></tr><tr><td>Michelle</td><td>House</td><td>Integration Specialist</td><td>Sidney</td><td>37</td><td>2011/06/02</td><td>$95,400</td><td>2769</td></tr><tr><td>Suki</td><td>Burks</td><td>Developer</td><td>London</td><td>53</td><td>2009/10/22</td><td>$114,500</td><td>6832</td></tr><tr><td>Prescott</td><td>Bartlett</td><td>Technical Author</td><td>London</td><td>27</td><td>2011/05/07</td><td>$145,000</td><td>3606</td></tr><tr><td>Gavin</td><td>Cortez</td><td>Team Leader</td><td>San Francisco</td><td>22</td><td>2008/10/26</td><td>$235,500</td><td>2860</td></tr><tr><td>Martena</td><td>Mccray</td><td>Post-Sales support</td><td>Edinburgh</td><td>46</td><td>2011/03/09</td><td>$324,050</td><td>8240</td></tr><tr><td>Unity</td><td>Butler</td><td>Marketing Designer</td><td>San Francisco</td><td>47</td><td>2009/12/09</td><td>$85,675</td><td>5384</td></tr><tr><td>Howard</td><td>Hatfield</td><td>Office Manager</td><td>San Francisco</td><td>51</td><td>2008/12/16</td><td>$164,500</td><td>7031</td></tr><tr><td>Hope</td><td>Fuentes</td><td>Secretary</td><td>San Francisco</td><td>41</td><td>2010/02/12</td><td>$109,850</td><td>6318</td></tr><tr><td>Vivian</td><td>Harrell</td><td>Financial Controller</td><td>San Francisco</td><td>62</td><td>2009/02/14</td><td>$452,500</td><td>9422</td></tr><tr><td>Timothy</td><td>Mooney</td><td>Office Manager</td><td>London</td><td>37</td><td>2008/12/11</td><td>$136,200</td><td>7580</td></tr><tr><td>Jackson</td><td>Bradshaw</td><td>Director</td><td>New York</td><td>65</td><td>2008/09/26</td><td>$645,750</td><td>1042</td></tr><tr><td>Olivia</td><td>Liang</td><td>Support Engineer</td><td>Singapore</td><td>64</td><td>2011/02/03</td><td>$234,500</td><td>2120</td></tr><tr><td>Bruno</td><td>Nash</td><td>Software Engineer</td><td>London</td><td>38</td><td>2011/05/03</td><td>$163,500</td><td>6222</td></tr><tr><td>Sakura</td><td>Yamamoto</td><td>Support Engineer</td><td>Tokyo</td><td>37</td><td>2009/08/19</td><td>$139,575</td><td>9383</td></tr><tr><td>Thor</td><td>Walton</td><td>Developer</td><td>New York</td><td>61</td><td>2013/08/11</td><td>$98,540</td><td>8327</td></tr><tr><td>Finn</td><td>Camacho</td><td>Support Engineer</td><td>San Francisco</td><td>47</td><td>2009/07/07</td><td>$87,500</td><td>2927</td></tr><tr><td>Serge</td><td>Baldwin</td><td>Data Coordinator</td><td>Singapore</td><td>64</td><td>2012/04/09</td><td>$138,575</td><td>8352</td></tr><tr><td>Zenaida</td><td>Frank</td><td>Software Engineer</td><td>New York</td><td>63</td><td>2010/01/04</td><td>$125,250</td><td>7439</td></tr><tr><td>Zorita</td><td>Serrano</td><td>Software Engineer</td><td>San Francisco</td><td>56</td><td>2012/06/01</td><td>$115,000</td><td>4389</td></tr><tr><td>Jennifer</td><td>Acosta</td><td>Junior Javascript Developer</td><td>Edinburgh</td><td>43</td><td>2013/02/01</td><td>$75,650</td><td>3431</td></tr><tr><td>Cara</td><td>Stevens</td><td>Sales Assistant</td><td>New York</td><td>46</td><td>2011/12/06</td><td>$145,600</td><td>3990</td></tr><tr><td>Hermione</td><td>Butler</td><td>Regional Director</td><td>London</td><td>47</td><td>2011/03/21</td><td>$356,250</td><td>1016</td></tr><tr><td>Lael</td><td>Greer</td><td>Systems Administrator</td><td>London</td><td>21</td><td>2009/02/27</td><td>$103,500</td><td>6733</td></tr><tr><td>Jonas</td><td>Alexander</td><td>Developer</td><td>San Francisco</td><td>30</td><td>2010/07/14</td><td>$86,500</td><td>8196</td></tr><tr><td>Shad</td><td>Decker</td><td>Regional Director</td><td>Edinburgh</td><td>51</td><td>2008/11/13</td><td>$183,000</td><td>6373</td></tr><tr><td>Michael</td><td>Bruce</td><td>Javascript Developer</td><td>Singapore</td><td>29</td><td>2011/06/27</td><td>$183,000</td><td>5384</td></tr><tr><td>Donna</td><td>Snider</td><td>Customer Support</td><td>New York</td><td>27</td><td>2011/01/25</td><td>$112,000</td><td>4226</td></tr></tbody></table></div><h3 class="bottom-offset-5 top-offset-60">Data Tables - Responsive (Complex)</h3><div class=bottom-offset-60><table id=example-complex class="table table-striped table-hover table-complex display" cellspacing=0 width=100%><thead><tr><th></th><th>Name</th><th>Position</th><th>Office</th><th>Salary</th></tr></thead></table></div></div></section>');
     $templateCache.put('components/tabs/demo-play-tabs.html', '<section ng-controller=tabsPLayDemoCtrl id=tabs-play-demo><div class=container><h2>Tabs Builder</h2><div></div></div></section>');
