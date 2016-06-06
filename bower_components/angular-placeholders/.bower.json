@@ -1,0 +1,14 @@
+{
+  "name": "angular-placeholders",
+  "homepage": "https://github.com/joshdmiller/angular-placeholders",
+  "_release": "f0397ab0f7",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f0397ab0f7ab0163f9a47c481898d15b62268efb"
+  },
+  "_source": "git://github.com/joshdmiller/angular-placeholders.git",
+  "_target": "*",
+  "_originalSource": "angular-placeholders",
+  "_direct": true
+}

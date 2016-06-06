@@ -4,6 +4,37 @@
 */
 
 .jumbotron {
+
+
+
+    p {
+        font-size: @font-size-base;
+    }
+    p small {
+        font-size: 85%;
+        line-height: 15px;
+    }
+
+    margin: 0 auto 20px auto;
+    padding: 0;
+    max-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    background: none;
+    position: relative;
+    .well {
+        margin: 20px auto 0 15px;
+        .border-radius(5px);
+        overflow: hidden;
+        background: rgba(255,255,255,.92);
+        position: absolute;
+        top: 20px;
+        max-width: 500px;
+    }
+
+
+
+    // NOTE: Bootstrap jumbostron overides all default typography
     // Typography for Desktop
     // Medium devices (desktops, 992px and up)
     @media (min-width: @screen-md-min) {
@@ -39,6 +70,7 @@
         h5, .h5 {
             font-size: ceil((@font-size-base * 1.14)); // ~16px
             line-height: ceil((@line-height-base * 13.9px)); // ~20px
+            color: @text-color !important;
         }
 
         .bold-16 {
@@ -168,6 +200,7 @@
             line-height: ceil((@line-height-base * 10.4px)); // ~15px
             font-weight: bold;
         }
+<<<<<<< HEAD
     }
 
     p {
@@ -210,110 +243,40 @@
         background: rgba(255,255,255,.92);
     }
 }
+=======
+>>>>>>> development
 
-
-@media (max-width: @screen-sm-max) {
-
-    .jumbotron {
-        > .img-responsive {
-            position: relative;
-        }
-        .well {
-            background: none;
-            border: none;
-            box-shadow: none;
-            margin-top: 0;
-        }
-        [class^=col] {
-            background: @dell-gray-light;
-        }
-
-        .container {
-            width: 100%;
-        }
-    }
-}
-
-
-
-
-
-
-
-
-/* -------old....needed to be more bootstrap style------ */
-/*
-.banner {
-    position: relative;
-    .img-responsive-constrained {
+        margin: 0 auto 20px;
+        padding: 0;
         max-height: 600px;
-        .img-responsive {
-        display: block;
         width: 100%;
+        overflow: hidden;
+        position: relative;
+        background:@dell-gray-light;
+
+
+        .well {
+            margin: 0 auto 0 -5px;
+            .border-radius(0);
+            overflow: hidden;
+            border: none;
+            background: none;
+            position: relative;
+            top: 0;
+            box-shadow: none;
         }
     }
-}
 
-
-.container-fluid {
-    .banner {
-        margin-left: -15px;
-        margin-right: -15px;
-        max-height: 600px !important;
-        overflow: hidden;
+    a:not(.btn) {
+        padding-top:0;
+        padding-bottom:0;
+        h5 {
+            color: @text-color !important;
+        }
+        &:hover {
+            text-decoration: none !important;
+        }
+        display:block;
     }
-}
 
-.banner-inside {
-    left: 0;
-    top: 20px;
-    width: 45%;
-    //max-width: 420px;
-    margin-left: 20px;
-    padding: 5px 20px 20px 20px;
-    vertical-align: middle;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 5px;
-    border-radius: 5px;
-    background: @white;
-    background: rgba(600,600,600,.92);
-    color: @dell-gray-dark;
-    -ms-text-shadow: none;
-    text-shadow: none;
-    right: auto;
-    bottom: auto;
-    position: absolute;
 }
-
-
-@media (min-width: @screen-xs-max) and (max-width: @screen-sm-max) {
-    .banner-inside {
-        padding: 20px;
-    }
-}
-
-@media (max-width: @screen-xs-max) {
-    .banner-inside {
-        left: 0;
-        top: 0;
-        width: 100%;
-        max-width: none;
-        margin-left: 0;
-        padding: 10px 20px 10px 20px;
-        vertical-align: middle;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 15px;
-        -ms-border-radius: 5px;
-        border-radius: 0;
-        background: @white;
-        background: @dell-gray-light;
-        color: #444444;
-        -ms-text-shadow: none;
-        text-shadow: none;
-        right: auto;
-        bottom: auto;
-        position: relative;
-    }
-}
-*/

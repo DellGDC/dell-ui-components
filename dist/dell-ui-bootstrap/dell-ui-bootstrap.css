@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Bootstrap v1.2.4 (bower dell-ui-bootstrap)
+ * Dell-UI-Bootstrap v1.2.5 (bower dell-ui-bootstrap)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -37,6 +37,13 @@
   src: url('fonts/icon-large.eot?#iefix') format('embedded-opentype'), url('fonts/icon-large.woff') format('woff'), url('fonts/icon-large.ttf') format('truetype'), url('fonts/icon-large.svg#icon-large') format('svg');
   font-weight: normal;
   font-style: normal;
+}
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('fonts/fontawesome-webfont.eot');
+  src: url('fonts/fontawesome-webfont.eot') format('embedded-opentype'), url('fonts/fontawesome-webfont.woff') format('woff'), url('fonts/fontawesome-webfont.ttf') format('truetype'), url('fonts/fontawesome-webfont.svg') format('svg');
+  font-style: normal;
+  font-weight: normal;
 }
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {

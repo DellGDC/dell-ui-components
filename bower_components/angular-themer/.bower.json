@@ -1,0 +1,15 @@
+{
+  "name": "angular-themer",
+  "homepage": "https://github.com/fdomig/angular-themer",
+  "version": "0.2.3",
+  "_release": "0.2.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.3",
+    "commit": "2ff92dcff6862ae4f2a570946330ec557b3a8282"
+  },
+  "_source": "git://github.com/fdomig/angular-themer.git",
+  "_target": "~0.2.3",
+  "_originalSource": "angular-themer",
+  "_direct": true
+}
