@@ -41,11 +41,7 @@
                     items = element.find('li');
                     items.each(function(index){
                         if(index < visibleCount && $(items[index]).is(":hidden")) {
-<<<<<<< HEAD
-                            
-=======
 
->>>>>>> development
                             $(this).addClass('in');
                             if(index + 1 === items.length) {
                                 $('#load-more-button-'+elementId).remove();
@@ -71,11 +67,7 @@
                         if(options.scrollTarget === window) {
                             $(options.scrollTarget).scroll(function() {
                                 if($(options.scrollTarget).scrollTop() + $(options.scrollTarget).height() === $(document).height()) {
-<<<<<<< HEAD
-                                   loadMore();
-=======
                                     loadMore();
->>>>>>> development
                                 }
                             });
                         } else {
