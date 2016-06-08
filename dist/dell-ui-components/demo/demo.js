@@ -59789,6 +59789,8 @@ angular.module('dellUiComponents').config(function () {
           if (backDirection) {
             indexOffset = -1;
           } else if (!tabInContext) {
+            //If next is pressed what is the last visible tab? Set that as tabInContext
+            console.log('>>>>>>>>> ', tabs, homePosition, leftPosition);
           }
           leftPosition = parseInt(element.css('left'));
           if (!leftMostTab) {
@@ -60227,9 +60229,16 @@ angular.module('dellUiComponents').config(function () {
       '</ul>'
     ].join('\n');
     templates.mobileCountDown = ['<span><span class=\'hours\'></span>&nbsp;:&nbsp;<span class=\'minutes\'>&nbsp;:&nbsp;</span>&nbsp;:&nbsp;<span class=\'seconds\'></span>&nbsp;|</span>'].join('\n');
-    $('#desktopCountDown').append(templates.desktopCountDown);
-    $('#mobileCountDown').append(templates.mobileCountDown);
+    if (!$.trim($('#desktopCountDown').html())) {
+      $('#desktopCountDown').append(templates.desktopCountDown);
+    }
+    if (!$.trim($('#mobileCountDown').html())) {
+      $('#mobileCountDown').append(templates.mobileCountDown);
+    }
+    /* $('#desktopCountDown').append(templates.desktopCountDown);
+         $('#mobileCountDown').append(templates.mobileCountDown);*/
     return this.each(function () {
+      console.log('this', this);
       new $.dellUIsiteWideMessaging(this);
       var options = $.dellUIsiteWideMessaging.defaultOptions, breakpoint = function () {
           var window_size = $(window).width(), breakpoint = {
@@ -60361,10 +60370,11 @@ angular.module('dellUiComponents').config(function () {
       // initializes clock based on message ID in view and deadline set it view
       initializeClock(message.id, deadline);
       // These conditions load the original content based on data attributes that are populated by designer in the view
-      if (desktopText !== '' && !breakpoint().isXS) {
+      //console.log("html?", !$.trim($(".fragment-title").html()));
+      if (desktopText !== '' && !$.trim($('.site-wide-messaging-text').html()) && !breakpoint().isXS) {
         $('.site-wide-messaging-text').append(desktopText);
       }
-      if (mobileText !== '' && breakpoint().isXS) {
+      if (mobileText !== '' && !$.trim($('.site-wide-messaging-text').html()) && breakpoint().isXS) {
         $('.site-wide-messaging-text').append(mobileText);
       }
       if (cta === '') {
@@ -60591,7 +60601,7 @@ angular.module('dellUiComponents').directive('defaultFooter', function () {
     }
   };
 });
-angular.module('dellUiComponents').directive('siteWideMessaging', function () {
+angular.module('dellUiComponents', []).directive('siteWideMessaging', function () {
   return {
     restrict: 'C',
     link: function ($scope, $element, $attributes, controller) {
@@ -60605,26 +60615,6 @@ angular.module('dellUiComponents').directive('siteWideMessaging', function () {
     }
   };
 });
-angular.module('demo').controller('siteWideMessagingCtrl', [
-  '$scope',
-  '$rootScope',
-  function ($scope, $rootScope) {
-  }
-]);
-angular.module('demo').controller('siteWideMessagingPLayDemoCtrl', [
-  '$scope',
-  '$rootScope',
-  '$sce',
-  function ($scope, $rootScope, $sce) {
-  }
-]);
-angular.module('demo').controller('siteWideMessagingGuideDemoCtrl', [
-  '$scope',
-  '$rootScope',
-  '$sce',
-  function ($scope, $rootScope, $sce) {
-  }
-]);
 //asumes that angular-ui-bootstrap is loaded
 angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition']).controller('CarouselController', [
   '$scope',
@@ -62788,6 +62778,26 @@ angular.module('demo').filter('_.str', function () {
     }
   };
 });
+angular.module('demo').controller('siteWideMessagingCtrl', [
+  '$scope',
+  '$rootScope',
+  function ($scope, $rootScope) {
+  }
+]);
+angular.module('demo').controller('siteWideMessagingPLayDemoCtrl', [
+  '$scope',
+  '$rootScope',
+  '$sce',
+  function ($scope, $rootScope, $sce) {
+  }
+]);
+angular.module('demo').controller('siteWideMessagingGuideDemoCtrl', [
+  '$scope',
+  '$rootScope',
+  '$sce',
+  function ($scope, $rootScope, $sce) {
+  }
+]);
 angular.module('demo').controller('ratingsAndReviewsCtrl', [
   '$scope',
   '$rootScope',
@@ -63199,7 +63209,7 @@ angular.module('dellUiComponents').run([
     $templateCache.put('components/search-and-navigation/demo-search-and-navigation.html', '<section ng-controller=searchAndNavigationCtrl id=search-and-navigation-html-example><div class=container><h2>Search-And-Filtering Demo</h2><div><div data-ng-app data-ng-controller=myCheckboxCtrl><div class=row><h2>Filtering</h2></div><div class=row><h3>Filter by checkbox</h3></div><div class=row id=filter-checkbox><div class="pull-left col-sm-3 col-xs-12"><p>Narrow your search by screen size</p><label class=pull-left ng-repeat="c in classes"><input type=checkbox ng-model=selected[c]> <span>{{c}}</span></label></div><div class="col-sm-9 col-xs-12"><div class="pull-left searchCard text-center well-gray" ng-repeat="card in cards | filter:showCards"><h3>{{card.name}}</h3><em>{{card.size}}</em><br><em>{{card.price}}</em></div></div></div></div><hr><div data-ng-app data-ng-controller=myDDCtrl><div class=row><h3>Filter by dropdown</h3></div><div class=row id=filter-drop><div class="pull-left col-sm-3 col-xs-12"><p class="text-left top-padding-5">Screen size:</p><select ng-model=screenSize ng-options="item.size for item in filterOptions.sizes"><option value="" selected>-- Select your Size --</option></select><div><p class="text-left top-padding-5">Price:</p><select ng-model=priceRange ng-options="item.pricerange for item in filterOptions.prices"><option value="" selected>-- Select your Range --</option></select></div></div><div class="col-sm-9 col-xs-12"><div class="pull-left searchCard text-center well-gray" ng-repeat="item in data | filter:screenSize | filter:priceRange"><h3>{{item.name}}</h3><em>{{item.size}}</em><br><em>{{item.pricerange}}</em></div></div></div></div></div></div></section>');
     $templateCache.put('components/site-wide-messaging/demo-guide-site-wide-messaging.html', '<section ng-controller=siteWideMessagingGuideDemoCtrl id=site-wide-messaging-guide-demo><div class=container><h2>Site-Wide-Messaging Guide</h2><div></div></div></section>');
     $templateCache.put('components/site-wide-messaging/demo-play-site-wide-messaging.html', '<section ng-controller=siteWideMessagingPLayDemoCtrl id=site-wide-messaging-play-demo><div class=container><h2>Site-Wide-Messaging Builder</h2><div></div></div></section>');
-    $templateCache.put('components/site-wide-messaging/demo-site-wide-messaging.html', '<section ng-controller=siteWideMessagingCtrl id=site-wide-messaging-html-example><div class=container><h2>Site-Wide-Messaging Demo</h2><div class=row><div class=col-md-9><div equalizer=group class="equalize well well-white text-gray-medium well-white-stroke"><div class="center-component component-code" id=site-wide-messaging-code><div class="site-wide-messaging well-gray-light" id=siteWideMessage data-counter-deadline="August 30 2016 09:47:00 GMT-05:00" data-desktop-original-text="Members get twice the discount on all PCs, plus an extra 15% off XPS PCs with coupon code 150FFXPS. Ends 10/13/2015." data-desktop-replacement-text="This is desktop replacement text" data-mobile-original-text="Get 15% off all XPS PCs with coupon code 150FFXPS until midnight." data-mobile-replacement-text="This is mobile replacement text" data-cta="Shop PCs" data-optional-cta="Shop XPS" data-optional-cta-mobile=false data-optional-image=components/site-wide-messaging/xps_8900.png><ul class=list-inline><li class="col-lg-10 col-md-10 col-sm-10"><div class=site-wide-messaging-product-image><img alt="XPS 8900"></div><div class=site-wide-messaging-copy><span class=mobile-countdown id=mobileCountDown></span> <span class=site-wide-messaging-text></span> <a href=javascript:; id=cta></a> <span class="site-wide-messaging-cta-optional text-blue">|&nbsp;<a href=javascript:;></a></span></div></li><li class="col-lg-2 col-md-2 col-sm-2 desktop-countdown" id=desktopCountDown></li></ul></div></div><div class=col-xs-12><hr class="rule-break hr-gray-light"><h5 class=fragment-title>Site-wide Messaging</h5><div class=description>Use for the time sensitive promotions on dell.com.</div></div></div></div><div class=col-md-3><div class=well>sidebar</div></div></div></div></section>');
+    $templateCache.put('components/site-wide-messaging/demo-site-wide-messaging.html', '<section ng-controller=siteWideMessagingCtrl id=site-wide-messaging-html-example><div class=container><h2>Site-Wide-Messaging Demo</h2><div class=row><div class=col-md-9><div equalizer=group class="equalize well well-white text-gray-medium well-white-stroke"><div><div class="site-wide-messaging well-gray-light" id=siteWideMessage data-counter-deadline="August 30 2016 09:47:00 GMT-05:00" data-desktop-original-text="Members get twice the discount on all PCs, plus an extra 15% off XPS PCs with coupon code 150FFXPS. Ends 10/13/2015." data-desktop-replacement-text="This is desktop replacement text" data-mobile-original-text="Get 15% off all XPS PCs with coupon code 150FFXPS until midnight." data-mobile-replacement-text="This is mobile replacement text" data-cta="Shop PCs" data-optional-cta="Shop XPS" data-optional-cta-mobile=false data-optional-image=components/site-wide-messaging/xps_8900.png><ul class=list-inline><li class="col-lg-10 col-md-10 col-sm-10"><div class=site-wide-messaging-product-image><img alt="XPS 8900"></div><div class=site-wide-messaging-copy><span class=mobile-countdown id=mobileCountDown></span> <span class=site-wide-messaging-text></span> <a href=javascript:; id=cta></a> <span class="site-wide-messaging-cta-optional text-blue">|&nbsp;<a href=javascript:;></a></span></div></li><li class="col-lg-2 col-md-2 col-sm-2 desktop-countdown" id=desktopCountDown></li></ul></div></div><div class=col-xs-12><hr class="rule-break hr-gray-light"><h5 class=fragment-title>Site-wide Messaging</h5><div class=description>Use for the time sensitive promotions on dell.com.</div></div></div></div><div class=col-md-3><div class=well>sidebar</div></div></div></div></section>');
     $templateCache.put('components/standard-buttons/demo-play-standard-buttons.html', '<section ng-controller=standardButtonsPLayDemoCtrl id=standard-buttons-play-demo><div class=container><h2>Standard-Buttons Builder</h2><div></div></div></section>');
     $templateCache.put('components/standard-buttons/demo-standard-buttons.html', '<section ng-controller=standardButtonsCtrl id=standard-buttons-html-example><div class=container><h2 class=bottom-offset-20>Standard-Buttons Demo</h2><div class=bottom-offset-30><h4>Primary Non-Purchase</h4><a class="btn btn-primary" href=javascript:;>Primary</a> </div><div class=bottom-offset-30><h4>Primary Non-Purchase disabled</h4><a class="btn btn-primary disabled" href=javascript:;>Primary</a> </div><hr><div class=bottom-offset-30><h4>Primary Purchase</h4><a class="btn btn-success" href=javascript:;>Purchase</a> </div><div class=bottom-offset-30><h4>Primary Purchase disabled</h4><a class="btn btn-success disabled" href=javascript:;>Purchase</a> </div><hr><div class=bottom-offset-30><h4>Secondary or General Use</h4><a class="btn btn-default" href=javascript:;>General Use</a> </div><div class=bottom-offset-30><h4>Secondary or General Use disabled</h4><a class="btn btn-default disabled" href=javascript:;>General Use</a> </div><hr><div class=bottom-offset-30><h4>Primary link</h4><a class="btn btn-link" href=javascript:;>Link</a> </div><div class=bottom-offset-30><h4>Primary link disabled</h4><a class="btn btn-link disabled" href=javascript:;>Link</a> </div></div></section>');
     $templateCache.put('components/tables-uber/demo-play-tables-uber.html', '<section ng-controller=tablesUberPLayDemoCtrl id=tables-uber-play-demo><div class=container><h2>Tables-Uber Builder</h2><div></div></div></section>');

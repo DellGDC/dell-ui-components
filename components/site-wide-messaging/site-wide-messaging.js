@@ -1,4 +1,4 @@
-angular.module('dellUiComponents')
+angular.module('dellUiComponents', [])
     .directive('siteWideMessaging', function(){
         return {
             restrict: 'C',

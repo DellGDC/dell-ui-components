@@ -22115,6 +22115,8 @@ angular.module('dellUiComponents').config(function () {
           if (backDirection) {
             indexOffset = -1;
           } else if (!tabInContext) {
+            //If next is pressed what is the last visible tab? Set that as tabInContext
+            console.log('>>>>>>>>> ', tabs, homePosition, leftPosition);
           }
           leftPosition = parseInt(element.css('left'));
           if (!leftMostTab) {
@@ -22553,9 +22555,16 @@ angular.module('dellUiComponents').config(function () {
       '</ul>'
     ].join('\n');
     templates.mobileCountDown = ['<span><span class=\'hours\'></span>&nbsp;:&nbsp;<span class=\'minutes\'>&nbsp;:&nbsp;</span>&nbsp;:&nbsp;<span class=\'seconds\'></span>&nbsp;|</span>'].join('\n');
-    $('#desktopCountDown').append(templates.desktopCountDown);
-    $('#mobileCountDown').append(templates.mobileCountDown);
+    if (!$.trim($('#desktopCountDown').html())) {
+      $('#desktopCountDown').append(templates.desktopCountDown);
+    }
+    if (!$.trim($('#mobileCountDown').html())) {
+      $('#mobileCountDown').append(templates.mobileCountDown);
+    }
+    /* $('#desktopCountDown').append(templates.desktopCountDown);
+         $('#mobileCountDown').append(templates.mobileCountDown);*/
     return this.each(function () {
+      console.log('this', this);
       new $.dellUIsiteWideMessaging(this);
       var options = $.dellUIsiteWideMessaging.defaultOptions, breakpoint = function () {
           var window_size = $(window).width(), breakpoint = {
@@ -22687,10 +22696,11 @@ angular.module('dellUiComponents').config(function () {
       // initializes clock based on message ID in view and deadline set it view
       initializeClock(message.id, deadline);
       // These conditions load the original content based on data attributes that are populated by designer in the view
-      if (desktopText !== '' && !breakpoint().isXS) {
+      //console.log("html?", !$.trim($(".fragment-title").html()));
+      if (desktopText !== '' && !$.trim($('.site-wide-messaging-text').html()) && !breakpoint().isXS) {
         $('.site-wide-messaging-text').append(desktopText);
       }
-      if (mobileText !== '' && breakpoint().isXS) {
+      if (mobileText !== '' && !$.trim($('.site-wide-messaging-text').html()) && breakpoint().isXS) {
         $('.site-wide-messaging-text').append(mobileText);
       }
       if (cta === '') {
@@ -22917,7 +22927,7 @@ angular.module('dellUiComponents').directive('defaultFooter', function () {
     }
   };
 });
-angular.module('dellUiComponents').directive('siteWideMessaging', function () {
+angular.module('dellUiComponents', []).directive('siteWideMessaging', function () {
   return {
     restrict: 'C',
     link: function ($scope, $element, $attributes, controller) {
@@ -22931,26 +22941,6 @@ angular.module('dellUiComponents').directive('siteWideMessaging', function () {
     }
   };
 });
-angular.module('demo').controller('siteWideMessagingCtrl', [
-  '$scope',
-  '$rootScope',
-  function ($scope, $rootScope) {
-  }
-]);
-angular.module('demo').controller('siteWideMessagingPLayDemoCtrl', [
-  '$scope',
-  '$rootScope',
-  '$sce',
-  function ($scope, $rootScope, $sce) {
-  }
-]);
-angular.module('demo').controller('siteWideMessagingGuideDemoCtrl', [
-  '$scope',
-  '$rootScope',
-  '$sce',
-  function ($scope, $rootScope, $sce) {
-  }
-]);
 //asumes that angular-ui-bootstrap is loaded
 angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition']).controller('CarouselController', [
   '$scope',

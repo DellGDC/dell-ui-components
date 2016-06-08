@@ -76,10 +76,18 @@
             "<span><span class='hours'></span>&nbsp;:&nbsp;<span class='minutes'>&nbsp;:&nbsp;</span>&nbsp;:&nbsp;<span class='seconds'></span>&nbsp;|</span>"
         ].join("\n");
 
-        $('#desktopCountDown').append(templates.desktopCountDown);
-        $('#mobileCountDown').append(templates.mobileCountDown);
+        if (!$.trim($("#desktopCountDown").html())){
+            $('#desktopCountDown').append(templates.desktopCountDown);
+        }
+        if (!$.trim($("#mobileCountDown").html())){
+            $('#mobileCountDown').append(templates.mobileCountDown);
+        }
+
+        /* $('#desktopCountDown').append(templates.desktopCountDown);
+         $('#mobileCountDown').append(templates.mobileCountDown);*/
 
         return this.each(function () {
+            console.log("this", this);
             (new $.dellUIsiteWideMessaging(this));
             var options = $.dellUIsiteWideMessaging.defaultOptions,
                 breakpoint = function () {
@@ -225,11 +233,11 @@
             initializeClock(message.id, deadline);
 
             // These conditions load the original content based on data attributes that are populated by designer in the view
-
-            if ((desktopText !== '') && !breakpoint().isXS) {
+            //console.log("html?", !$.trim($(".fragment-title").html()));
+            if ((desktopText !== '' && !$.trim($(".site-wide-messaging-text").html()) && !breakpoint().isXS)) {
                 $('.site-wide-messaging-text').append(desktopText);
             }
-            if ((mobileText !== '') && breakpoint().isXS) {
+            if ((mobileText !== '' && !$.trim($(".site-wide-messaging-text").html())) && breakpoint().isXS) {
                 $('.site-wide-messaging-text').append(mobileText);
             }
             if (cta === '') {
@@ -295,3 +303,4 @@
     };
 
 })(jQuery);
+
