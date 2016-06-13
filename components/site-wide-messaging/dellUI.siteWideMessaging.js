@@ -79,7 +79,7 @@
         $('#desktopCountDown').append(templates.desktopCountDown);
         $('#mobileCountDown').append(templates.mobileCountDown);
 
-        return this.each(function () {
+        return this.each(function (event) {
             (new $.dellUIsiteWideMessaging(this));
             var options = $.dellUIsiteWideMessaging.defaultOptions,
                 breakpoint = function () {
@@ -107,6 +107,7 @@
                     return breakpoint;
 
                 },
+
             // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
                 writeDesktopTxt = function () {
                     //checks to see if deadline is met and loads replacement text
@@ -124,6 +125,8 @@
                                 'width': '78px'
                             }
                         );
+                    event.stopPropagation();
+
                 },
             // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
                 writeMobileTxt = function () {
@@ -146,6 +149,8 @@
                                 'width': '0'
                             }
                         );
+                    event.stopPropagation();
+
                 },
                 getTimeRemaining = function (endtime) {
                     var t = Date.parse(endtime) - Date.parse(new Date());
@@ -264,7 +269,10 @@
             }
             var breakUpdate1 = breakpoint().isXS;
             // if not XS - this calculates window size and  loads the right text on breakpoint transition
+
             if (breakUpdate1 === false) {
+                event.stopPropagation();
+
                 $(window).resize(function () {
                     breakpoint();
                     var breakUpdate2 = breakpoint().isXS;
@@ -278,6 +286,7 @@
             }
             // if is XS - this calculates window size and  loads the right text on breakpoint transition
             if (breakUpdate1 === true) {
+                event.stopPropagation();
                 $(window).resize(function () {
                     breakpoint();
                     var breakUpdate2 = breakpoint().isXS;
@@ -286,11 +295,9 @@
                         writeDesktopTxt();
                     } else {
                         writeMobileTxt();
-
                     }
                 });
             }
-
         });
     };
 

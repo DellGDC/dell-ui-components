@@ -60229,16 +60229,9 @@ angular.module('dellUiComponents').config(function () {
       '</ul>'
     ].join('\n');
     templates.mobileCountDown = ['<span><span class=\'hours\'></span>&nbsp;:&nbsp;<span class=\'minutes\'>&nbsp;:&nbsp;</span>&nbsp;:&nbsp;<span class=\'seconds\'></span>&nbsp;|</span>'].join('\n');
-    if (!$.trim($('#desktopCountDown').html())) {
-      $('#desktopCountDown').append(templates.desktopCountDown);
-    }
-    if (!$.trim($('#mobileCountDown').html())) {
-      $('#mobileCountDown').append(templates.mobileCountDown);
-    }
-    /* $('#desktopCountDown').append(templates.desktopCountDown);
-         $('#mobileCountDown').append(templates.mobileCountDown);*/
-    return this.each(function () {
-      console.log('this', this);
+    $('#desktopCountDown').append(templates.desktopCountDown);
+    $('#mobileCountDown').append(templates.mobileCountDown);
+    return this.each(function (event) {
       new $.dellUIsiteWideMessaging(this);
       var options = $.dellUIsiteWideMessaging.defaultOptions, breakpoint = function () {
           var window_size = $(window).width(), breakpoint = {
@@ -60278,6 +60271,7 @@ angular.module('dellUiComponents').config(function () {
             'visibility': 'visible',
             'width': '78px'
           });
+          event.stopPropagation();
         },
         // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
         writeMobileTxt = function () {
@@ -60298,6 +60292,7 @@ angular.module('dellUiComponents').config(function () {
             'visibility': 'hidden',
             'width': '0'
           });
+          event.stopPropagation();
         }, getTimeRemaining = function (endtime) {
           var t = Date.parse(endtime) - Date.parse(new Date());
           var seconds = Math.floor(t / 1000 % 60);
@@ -60370,11 +60365,10 @@ angular.module('dellUiComponents').config(function () {
       // initializes clock based on message ID in view and deadline set it view
       initializeClock(message.id, deadline);
       // These conditions load the original content based on data attributes that are populated by designer in the view
-      //console.log("html?", !$.trim($(".fragment-title").html()));
-      if (desktopText !== '' && !$.trim($('.site-wide-messaging-text').html()) && !breakpoint().isXS) {
+      if (desktopText !== '' && !breakpoint().isXS) {
         $('.site-wide-messaging-text').append(desktopText);
       }
-      if (mobileText !== '' && !$.trim($('.site-wide-messaging-text').html()) && breakpoint().isXS) {
+      if (mobileText !== '' && breakpoint().isXS) {
         $('.site-wide-messaging-text').append(mobileText);
       }
       if (cta === '') {
@@ -60407,6 +60401,7 @@ angular.module('dellUiComponents').config(function () {
       var breakUpdate1 = breakpoint().isXS;
       // if not XS - this calculates window size and  loads the right text on breakpoint transition
       if (breakUpdate1 === false) {
+        event.stopPropagation();
         $(window).resize(function () {
           breakpoint();
           var breakUpdate2 = breakpoint().isXS;
@@ -60420,6 +60415,7 @@ angular.module('dellUiComponents').config(function () {
       }
       // if is XS - this calculates window size and  loads the right text on breakpoint transition
       if (breakUpdate1 === true) {
+        event.stopPropagation();
         $(window).resize(function () {
           breakpoint();
           var breakUpdate2 = breakpoint().isXS;
@@ -60601,20 +60597,25 @@ angular.module('dellUiComponents').directive('defaultFooter', function () {
     }
   };
 });
-angular.module('dellUiComponents', []).directive('siteWideMessaging', function () {
-  return {
-    restrict: 'C',
-    link: function ($scope, $element, $attributes, controller) {
-      var options = {};
-      if ($attributes.datafile) {
-        options.datafile = $attributes.datafile;
+angular.module('dellUiComponents', []).directive('siteWideMessaging', [
+  '$timeout',
+  function ($timeout) {
+    return {
+      restrict: 'C',
+      link: function ($scope, $element, $attributes, controller) {
+        var options = {};
+        $timeout(function () {
+          if ($attributes.datafile) {
+            options.datafile = $attributes.datafile;
+          }
+          if ($(window).resize) {
+            $element.dellUIsiteWideMessaging(options);
+          }
+        }, 500);
       }
-      if ($(window).resize) {
-        $element.dellUIsiteWideMessaging(options);
-      }
-    }
-  };
-});
+    };
+  }
+]);
 //asumes that angular-ui-bootstrap is loaded
 angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition']).controller('CarouselController', [
   '$scope',
