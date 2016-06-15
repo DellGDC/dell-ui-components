@@ -394,6 +394,15 @@ fieldset[disabled] a.btn.btn-primary {
 .carousel {
   padding: 0 40px 30px 40px;
 }
+.carousel .jumbotron {
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0;
+}
+.carousel .jumbotron .well {
+  top: 0;
+  margin: 20px auto 0 20px;
+}
 .carousel .well-banner {
   max-height: 65%;
   max-width: 40%;

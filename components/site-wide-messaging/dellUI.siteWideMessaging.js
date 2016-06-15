@@ -76,10 +76,18 @@
             "<span><span class='hours'></span>&nbsp;:&nbsp;<span class='minutes'>&nbsp;:&nbsp;</span>&nbsp;:&nbsp;<span class='seconds'></span>&nbsp;|</span>"
         ].join("\n");
 
-        $('#desktopCountDown').append(templates.desktopCountDown);
-        $('#mobileCountDown').append(templates.mobileCountDown);
+        if (!$.trim($("#desktopCountDown").html())){
+            $('#desktopCountDown').append(templates.desktopCountDown);
+        }
+        if (!$.trim($("#mobileCountDown").html())){
+            $('#mobileCountDown').append(templates.mobileCountDown);
+        }
 
-        return this.each(function (event) {
+        /* $('#desktopCountDown').append(templates.desktopCountDown);
+         $('#mobileCountDown').append(templates.mobileCountDown);*/
+
+        return this.each(function () {
+            console.log("this", this);
             (new $.dellUIsiteWideMessaging(this));
             var options = $.dellUIsiteWideMessaging.defaultOptions,
                 breakpoint = function () {
@@ -107,7 +115,6 @@
                     return breakpoint;
 
                 },
-
             // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
                 writeDesktopTxt = function () {
                     //checks to see if deadline is met and loads replacement text
@@ -125,8 +132,6 @@
                                 'width': '78px'
                             }
                         );
-                    event.stopPropagation();
-
                 },
             // detects breakpoint and whether there is post-deadline replacement text and loads appropriate text
                 writeMobileTxt = function () {
@@ -149,8 +154,6 @@
                                 'width': '0'
                             }
                         );
-                    event.stopPropagation();
-
                 },
                 getTimeRemaining = function (endtime) {
                     var t = Date.parse(endtime) - Date.parse(new Date());
@@ -230,11 +233,11 @@
             initializeClock(message.id, deadline);
 
             // These conditions load the original content based on data attributes that are populated by designer in the view
-
-            if ((desktopText !== '') && !breakpoint().isXS) {
+            //console.log("html?", !$.trim($(".fragment-title").html()));
+            if ((desktopText !== '' || !$.trim($(".site-wide-messaging-text").html()) && !breakpoint().isXS)) {
                 $('.site-wide-messaging-text').append(desktopText);
             }
-            if ((mobileText !== '') && breakpoint().isXS) {
+            if ((mobileText !== '' || !$.trim($(".site-wide-messaging-text").html())) && breakpoint().isXS) {
                 $('.site-wide-messaging-text').append(mobileText);
             }
             if (cta === '') {
@@ -269,10 +272,7 @@
             }
             var breakUpdate1 = breakpoint().isXS;
             // if not XS - this calculates window size and  loads the right text on breakpoint transition
-
             if (breakUpdate1 === false) {
-                event.stopPropagation();
-
                 $(window).resize(function () {
                     breakpoint();
                     var breakUpdate2 = breakpoint().isXS;
@@ -286,7 +286,6 @@
             }
             // if is XS - this calculates window size and  loads the right text on breakpoint transition
             if (breakUpdate1 === true) {
-                event.stopPropagation();
                 $(window).resize(function () {
                     breakpoint();
                     var breakUpdate2 = breakpoint().isXS;
@@ -295,9 +294,11 @@
                         writeDesktopTxt();
                     } else {
                         writeMobileTxt();
+
                     }
                 });
             }
+
         });
     };
 
