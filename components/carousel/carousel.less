@@ -3,6 +3,16 @@
  *------------------------------------------------------------------------------------------
  */
 .carousel {
+    .jumbotron {
+        padding-left: 0;
+        padding-right: 0;
+        border-radius: 0;
+        .well {
+            top: 0;
+            margin: 20px auto 0 20px;
+        }
+    }
+
     .well-banner {
         max-height: 65%;
         max-width: 40%;
@@ -40,6 +50,7 @@
         .carousel-inner {
             padding: 10px 40px 30px 40px;
             overflow: inherit;
+
         }
         .carousel-control {
             position: absolute;
@@ -326,14 +337,6 @@
         }
     }
 
-    .item,
-    .carousel-inner .item {
-        margin-left: 10px;
-        margin-right: 10px;
-
-    }
-
-
     .carousel-indicators li {
         width: 14px;
         height: 6px;
@@ -405,6 +408,11 @@
     -ms-touch-action: pan-y;
     touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
+
+    .item {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 
 .slick-list {
@@ -479,5 +487,3 @@
     height: auto;
     border: 1px solid transparent;
 }
-
-

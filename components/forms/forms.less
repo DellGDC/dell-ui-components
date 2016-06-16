@@ -220,13 +220,14 @@
             }
             &:hover,
             &:focus
-            &:active, {
+            &:active {
                 background: @dell-highlight-blue;
             }
         }
     }
     input[type="checkbox"] {
         vertical-align: middle;
+        top:0;
     }
     .ms-no-results {
         display: none;
@@ -864,9 +865,9 @@
         table {
             border: 0;
         }
-        .datepicker-days, 
-        .datepicker-months, 
-        .datepicker-years, 
+        .datepicker-days,
+        .datepicker-months,
+        .datepicker-years,
         .datepicker-decades {
             thead > tr:first-child > th {
                 &:hover {
@@ -893,7 +894,7 @@
                 color: #fff;
             }
             .prev {
-                
+
                 -webkit-border-radius: @border-radius-small 0 0 @border-radius-small;
                 -moz-border-radius:    @border-radius-small 0 0 @border-radius-small;
                 border-radius:         @border-radius-small 0 0 @border-radius-small;

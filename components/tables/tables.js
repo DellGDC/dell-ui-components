@@ -28,10 +28,10 @@ angular.module('dellUiComponents')
                                 "next": "Next&nbsp;<span aria-hidden=\"true\" class=\"icon-ui-arrowright\"><\/span>",
                                 "previous": "<span aria-hidden=\"true\" class=\"icon-ui-arrowleft\"><\/span>&nbsp;Previous"
                             }
-                        }
+                        },
+                        retrieve: true
                     });
                     new $.fn.dataTable.FixedHeader( table );
-
                 });
             }
         };
@@ -43,24 +43,22 @@ angular.module('dellUiComponents')
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
 
-                    var table = $('.table-column').DataTable({
-                        scrollY:        "300px",
-                        scrollX:        true,
-                        scrollCollapse: true,
-                        paging:         false,
+                var table = $element.DataTable({
+                    scrollY:        "300px",
+                    scrollX:        true,
+                    scrollCollapse: true,
+                    paging:         false,
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
 
-                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                });
 
-                    });
+                //change the position of the sorting toggle arrows
+                table.columns().iterator( 'column', function (ctx, idx) {
+                    $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                });
 
-                    //change the position of the sorting toggle arrows
-                    table.columns().iterator( 'column', function (ctx, idx) {
-                        $( table.column(idx).header() ).append('<span class="sort-icon"/>');
-                    });
-
-
-
-                    new $.fn.dataTable.FixedColumns( table );
+                new $.fn.dataTable.FixedColumns( table );
 
                 // change positioning of search bar
                 $element.each(function(){
@@ -92,19 +90,20 @@ angular.module('dellUiComponents')
             restrict: 'C',
             link: function($scope, $element, iAttrs, controller ) {
 
-                    var table = $('table.responsive-data-table').DataTable( {
-                        dom: 'C<"clear">lfrtip',
-                        displayLength: 5,
-                        paging: false,
-                        scrollY:"300px",
-                        scrollX: true,
-                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
-                    });
+                var table = $element.DataTable( {
+                    dom: 'C<"clear">lfrtip',
+                    displayLength: 5,
+                    paging: false,
+                    scrollY:"300px",
+                    scrollX: true,
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
+                });
 
-                    //change the position of the sorting toggle arrows
-                    table.columns().iterator( 'column', function (ctx, idx) {
-                        $( table.column(idx).header() ).append('<span class="sort-icon"/>');
-                    });
+                //change the position of the sorting toggle arrows
+                table.columns().iterator( 'column', function (ctx, idx) {
+                    $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                });
 
                 // change positioning of search bar
                 $element.each(function(){
@@ -156,51 +155,52 @@ angular.module('dellUiComponents')
                         '</table>';
                 }
 
-                    var table = $('table.table-complex').DataTable( {
-                        "ajax": "../components/tables/data.json",
-                        "columns": [
-                            {
-                                "className":      'details-control',
-                                "orderable":      false,
-                                "data":           null,
-                                "defaultContent": ''
-                            },
-                            { "data": "name" },
-                            { "data": "position" },
-                            { "data": "office" },
-                            { "data": "salary" }
-                        ],
-                        "order": [[1, 'asc']],
-                        dom: 'C<"clear">lfrtip',
-                        displayLength: 5,
-                        paging: false,
-                        scrollY:"300px",
-                        scrollX: true,
-                        'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                var table = $element.DataTable( {
+                    "ajax": "../components/tables/data.json",
+                    "columns": [
+                        {
+                            "className":      'details-control',
+                            "orderable":      false,
+                            "data":           null,
+                            "defaultContent": ''
+                        },
+                        { "data": "name" },
+                        { "data": "position" },
+                        { "data": "office" },
+                        { "data": "salary" }
+                    ],
+                    "order": [[1, 'asc']],
+                    dom: 'C<"clear">lfrtip',
+                    displayLength: 5,
+                    paging: false,
+                    scrollY:"300px",
+                    scrollX: true,
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
 
-                    });
+                });
 
-                    //change the position of the sorting toggle arrows
-                    table.columns().iterator( 'column', function (ctx, idx) {
-                        $( table.column(idx).header() ).append('<span class="sort-icon"/>');
-                    });
+                //change the position of the sorting toggle arrows
+                table.columns().iterator( 'column', function (ctx, idx) {
+                    $( table.column(idx).header() ).append('<span class="sort-icon"/>');
+                });
 
-                    // Add event listener for opening and closing details
-                    $('.table-complex tbody').on('click', 'td.details-control', function () {
-                        var tr = $(this).closest('tr');
-                        var row = table.row( tr );
+                // Add event listener for opening and closing details
+                $('.table-complex tbody').on('click', 'td.details-control', function () {
+                    var tr = $(this).closest('tr');
+                    var row = table.row( tr );
 
-                        if ( row.child.isShown() ) {
-                            // This row is already open - close it
-                            row.child.hide();
-                            tr.removeClass('shown');
-                        }
-                        else {
-                            // Open this row
-                            row.child( format(row.data()) ).show();
-                            tr.addClass('shown');
-                        }
-                    });
+                    if ( row.child.isShown() ) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                    }
+                    else {
+                        // Open this row
+                        row.child( format(row.data()) ).show();
+                        tr.addClass('shown');
+                    }
+                });
 
                 // change positioning of search bar
                 $element.each(function(){
@@ -246,7 +246,6 @@ angular.module('dellUiComponents')
             }
         };
     });
-
 
 
 

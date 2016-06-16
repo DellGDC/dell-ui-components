@@ -1,63 +1,50 @@
-<!-- <section>
-
+<section ng-controller="bannerCtrl">
     <div class="container">
-        <h2>Banners</h2>
+        <div class="">
+            <h2>Banners (Jumbotron)</h2>
+        </div>
     </div>
-        <div class="container-fluid">
-            <div class="banner">
-                <div class="img-responsive-constrained">
-                    <img src="http://placehold.it/1400x472" alt="1400x472" class="img-responsive">
-                </div>
-                <div class="banner-inside pull-left">
-                    <h5 class="hidden-xs hidden-sm">Sample event title</h5>
-                    <h2 class="hidden-xs text-blue">Sample Headline ipsum dolor.
-                    </h2>
-                    <p>
-                        Mauris in ultricies leo, fermentum consectetur ligula hoppen santorum.
-                    </p>
-                    <p class="visible-lg-block">
-                        <small>Sample Legal text for placement only.</small>
-                    </p>
-                    <p>
-                        <a href="javascript:;" class="btn btn-primary pull-left hidden-xs">Sample CTA</a>
-                        <a href="javascript:;" class="pull-left visible-xs">Sample CTA</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-</section> -->
 
-<section>
-        <div class="container">
-            <div class="">
-                <h2>Banners (Jumbotron)</h2>
-            </div>
-        </div>
-        <a href="javascript:;" class="jumbotron">
-        <!-- <div class="jumbotron"> -->
-                <img src="http://placehold.it/1400x472.png" alt="1400x472" class="img-responsive">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-4">
-                            <div class="well">
-                                <h5 class="hidden-xs hidden-sm">Sample event title</h5>
-                                <h2 class="hidden-xs hidden-sm text-blue">Sample Headline ipsum dolor.</h2>
-                                <p>Mauris in ultricies leo, fermentum consectetur ligula hoppen santorum.</p>
-                                <p class="visible-lg">
-                                    <small>Sample Legal text for placement only.</small>
-                                </p>
-                                <p>
-                                    <a href="javascript:;" class="btn btn-primary pull-left hidden-xs">Sample CTA</a>
-                                    <a href="javascript:;" class="pull-left visible-xs">Sample CTA</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>        
-        <!-- </div> -->
+    <div class="jumbotron">
+        <a href="javascript:alert('hello');">
+            <img src="http://placehold.it/3000x1011.png" alt=" ideal image size is 1400x472" class="img-responsive">
         </a>
+        <div class="container">
+            <div class="row">
+                <a href="javascript:alert('hello');">
+                    <div class="well">
+                        <h5>Sample event title</h5>
+                        <h2>Headline lorem ipsum dolor sit amet orc.</h2>
+                        <p>Subhead lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in purus sed dolor posuerat.</p>
+                        <p>
+                            <small>Sample Legal text for placement only.</small>
+                        </p>
+                        <p>
+                            <a href="javascript:;" class="btn btn-primary hidden-xs hidden-sm">Sample CTA</a>
+                            <a href="javascript:;" class="visible-xs visible-sm">Sample CTA</a>
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 well well-berry">
+        place holder text to show another element below the banner
+    </div>
+
+    <div ng-init="initOptions()" class="container">
+        <h5>Optional event title and legal statement cannot appear at the same time</h5>
+        <label class="radio-inline">
+            <input type="radio" name="bannerOptions" id="none" value="none" checked> No options
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="bannerOptions" id="eventTitle" value="eventTitle"> Show optional event title
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="bannerOptions" id="legal" value="legal"> Show optional legal
+        </label>
+    </div>
+
+
 </section>
-
-
-
-

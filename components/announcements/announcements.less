@@ -14,16 +14,16 @@ blockquote {
         background: url('announcements/dell-advantage-star.svg') no-repeat;
         background-size: 30px 30px;
         float: left;
-
-        &.pull-right {
-            display: block;
-            width: 40px;
-            height: 40px;
-            margin-right: -51px;
-            margin-top: 2px;
-            background-size: 30px 30px;
-            float: right;
-        }
+    }
+    .blockquote-dell-advantage-right {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin-right: -56px;
+        margin-top: 2px;
+        background: url('http://localhost:9002/components/announcements/dell-advantage-star.svg') no-repeat;
+        background-size: 30px 30px;
+        float: right;
     }
 
     .blockquote-dell-dpa {
@@ -35,23 +35,37 @@ blockquote {
         background: url('announcements/dell-preferred-account.svg') no-repeat;
         background-size: 35px 35px;
         float: left;
+    }
 
-        &.pull-right {
-            display: block;
-            width: 40px;
-            height: 40px;
-            margin-right: -50px;
-            margin-top: -5px;
-            background: url('announcements/dell-preferred-account.svg') no-repeat;
-            background-size: 35px 35px;
-            float: left;
-        }
+    .blockquote-dell-dpa-right {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin-right: -53px;
+        margin-top: -5px;
+        background: url('announcements/dell-preferred-account.svg') no-repeat;
+        background-size: 35px 35px;
+        float: right;
     }
 
     &.blockquote-icon {
         border: none;
         padding-left: 56px !important;
         overflow: hidden;
+        &.pull-right {
+            border-left: 0;
+            border-right: 10px solid #aaa;
+            width: 100%;
+            padding-right: 56px;
+            border-right: 0;
+        }
+    }
+
+    &.blockquote-icon-right {
+        border: none;
+        padding-right: 65px !important;
+        overflow: hidden;
+        padding-top: 15px;
         &.pull-right {
             border-left: 0;
             border-right: 10px solid #aaa;
@@ -88,8 +102,11 @@ blockquote {
 
 
 .well {
-    overflow: hidden;
     blockquote {
+        .h1, .h2, .h3, .h4, .h5 h1, h2, h3, h4, h5 {
+            color: @dell-gray-dark !important;
+        }
+
         .blockquote-dell-dpa {
             display: block;
             width: 40px;
@@ -120,20 +137,26 @@ blockquote {
             background: url('announcements/dell-advantage-star.svg') no-repeat;
             background-size: 30px 30px;
             float: left;
-
-            &.pull-right {
-                display: block;
-                width: 40px;
-                height: 40px;
-                margin-right: -51px;
-                margin-top: 2px;
-                background-size: 30px 30px;
-                float: right;
-            }
+        }
+        .blockquote-dell-advantage-right {
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin-right: -56px;
+            margin-top: 2px;
+            background: url('http://localhost:9002/components/announcements/dell-advantage-star.svg') no-repeat;
+            background-size: 30px 30px;
+            float: right;
         }
         &.blockquote-icon {
             border: none;
             padding-left: 65px !important;
+            overflow: hidden;
+            padding-top: 15px;
+        }
+        &.blockquote-icon-right {
+            border: none;
+            padding-right: 65px !important;
             overflow: hidden;
             padding-top: 15px;
             &.pull-right {
@@ -146,7 +169,6 @@ blockquote {
         }
     }
 }
-
 
 
 

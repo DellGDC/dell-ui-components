@@ -43,9 +43,6 @@
                 span {
                     font-weight: bold;
                 }
-//                #gradient > .vertical(@dell-gray, @dell-gray);
-                // TODO: need to remove the #gradient with .vertical to background: @dell-highlight-blue;
-                // Not sure what this means.
 
                 background: @dell-highlight-blue;
 
@@ -71,17 +68,6 @@
 
             }
 
-            &:first-child {
-//                .border-left-radius(@border-radius-base);
-                // New style does not have this rounding corner radius
-            }
-
-            &:last-child {
-//                .border-right-radius(@border-radius-base);
-                // New style does not have this rounding corner radius
-
-            }
-
             &:hover {
                 text-decoration: none;
             }
@@ -102,7 +88,6 @@
     &:hover,
     .open > .dropdown-toggle.btn-progress {
         background: white none repeat scroll 0 0;
-        //margin-right: 10px; removed because it causes jump on hover
     }
 
 }
@@ -139,8 +124,20 @@
 
 
 .progress-counter {
-    margin-left: 15px;
+    margin-left: 0;
+    margin-bottom: 0;
     width: 4%;
+    top: -1px;
+    text-align: center;
+    right: 0;
+    position: absolute;
+    background: @white;
+    opacity: .8;
+    border: 1px solid #ccc;
+    .h1, .h2, .h3, .h4, .h5 h1, h2, h3, h4, h5 {
+        margin: 0;
+        opacity: 1;
+    }
 }
 
 
@@ -149,6 +146,9 @@
         .bar span {
             display: none;
         }
+    }
+    .btn {
+        padding: 1px 5px;
     }
 }
 
@@ -164,4 +164,16 @@
     position: relative;
     -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+
+.interactive-progress-bar .btn-group {
+    .btn {
+        margin-left:5px;
+    }
+}
+
+.interactive-progress-bar .progress {
+    position: relative;
+    overflow: hidden;
 }

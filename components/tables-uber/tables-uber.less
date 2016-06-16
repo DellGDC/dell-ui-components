@@ -56,7 +56,7 @@ div.dataTables_paginate {
         width: 135px !important;
         vertical-align: top;
         margin-right: 10px;
-        height: 30px;
+        height: 34px;
         line-height: 30px;
         padding: 3px 5px;
     }
@@ -68,9 +68,11 @@ div.dataTables_paginate {
         margin-bottom: 0;
         vertical-align: middle;
         text-align: left;
+        top: 3px;
         float: left;
         width: auto;
         padding: 9px 5px 9px 0;
+        position: relative;
     }
 }
 
@@ -113,8 +115,9 @@ div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
 
     }
 
-    select.form-control {
+    select.form-control.input-sm {
         width: 50px !important;
+        height: 34px !important;
     }
 
 
@@ -142,17 +145,21 @@ div.dataTables_filter i.icon-small-magnifying-glass.text-blue {
 
 }
 
-input.form-control.input-sm.col-xs-12.col-sm-4 {
-    height: 31px !important;
+@media (max-width: 320px) {
+    .dt-form-inline .form-control {
+        display: inline-block;
+        width: 90px !important;
+        vertical-align: top;
+        margin-right: 10px;
+        height: 34px;
+        line-height: 30px;
+        padding: 3px 5px;
+    }
 }
 
 .ColVis_Button i.glyphicon.glyphicon-option-horizontal.text-blue {
     padding-top: 3px;
 }
-
-
-
-
 
 
 //change position of sorting icon css
@@ -230,3 +237,65 @@ div.DTCR_pointer {
     background-color:#0259C4;
     z-index:201
 }
+
+
+select.form-control.input-sm {
+    height: 34px !important;
+    font-size: 14px !important;
+}
+
+
+.input-sm {
+    height: 34px;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 1px;
+}
+
+
+.paginate_button {
+    >.page-link {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 400;
+        text-align: center;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        color: #00618f;
+        background-color: #eee;
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.428571429;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+
+.dataTables_paginate .pagination {
+    > li {
+        > a {
+            border: 1px solid #ccc;
+            color: #00618f;
+            background-color: #eee;
+            &:hover {
+                color: #00618f;
+                background: #dadada!important;
+                border: 1px solid #adadad;
+            }
+        }
+        &.disabled a {
+            background-color: #eee;
+            border: 1px solid #ccc;
+            color: #007db8;
+            opacity: .65;
+        }
+    }
+}
+
+

@@ -10,6 +10,8 @@
             </h3>
 
             <div class="bottom-offset-60">
+                <!-- ===== NOTE: If the DataTable is placed within a .well, you will need to apply the class="overflow-hidden" to the div with the .well ========  -->
+                <!--<div class="well well-gray-very-light-stroke overflow-hidden"> -->
                 <form class="dt-form-inline" role="form">
                     <div class="form-group pull-left">
                         <label for="expand-details" class="control-label">Bulk actions</label>
@@ -25,7 +27,8 @@
                     </div>
                 </form>
 
-                <table id="table-expandable" class="table table-striped table-hover table-expandable-row table-pagination table-editable nowrap compact" data-datafile="components/tables-uber/data-responsive.json">
+                <!-- NOTE: you wil need to relink the data-datafile="/wp-content/uploads/2016/01/data-responsive.json" to your local reference -->
+                <table class="table table-striped table-hover table-expandable-row table-pagination table-editable nowrap compact" data-datafile="components/tables-uber/data-responsive.json">
                     <thead>
                     <tr>
                         <th><input name="select_all" value="1" type="checkbox"></th>
@@ -36,18 +39,17 @@
                     </tr>
                     </thead>
                 </table>
+                <!--</div>-->
             </div>
 
-            <h3 class="bottom-offset-20 top-offset-60">
-                Data Tables - Responsive Collapsing Column
-            </h3>
-
             <div class="bottom-offset-60">
+                <!-- ===== NOTE: If the DataTable is placed within a .well, you will need to apply the class="overflow-hidden" to the div with the .well ========  -->
+                <!--<div class="well well-gray-very-light-stroke overflow-hidden"> -->
                 <form class="dt-form-inline" role="form">
                     <div class="form-group pull-left">
-                        <label for="collapse-columns" class="control-label">Bulk actions</label>
+                        <label for="expand-details-1" class="control-label">Bulk actions</label>
                         <div class="form-group">
-                            <select class="form-control" id="collapse-columns">
+                            <select class="form-control" id="expand-details-1">
                                 <option disabled selected> choose option </option>
                                 <option> Export </option>
                                 <option> Delete </option>
@@ -58,28 +60,148 @@
                     </div>
                 </form>
 
-                <table id="table-uber" class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile="components/tables-uber/dataColumn.json">
+                <!-- NOTE: you wil need to relink the data-datafile="/wp-content/uploads/2016/01/data-responsive.json" to your local reference -->
+                <table class="table table-striped table-hover table-expandable-row table-pagination table-editable nowrap compact" data-datafile="components/tables-uber/data-responsive.json">
                     <thead>
                     <tr>
-                        <th>
-                            <span><input name="select_all" value="1" type="checkbox"></span>
-                        </th>
-                        <th>Company name</th>
-                        <th>Solution name</th>
-                        <th>Solution ID</th>
-                        <th>Owner</th>
-                        <th>Last edited</th>
-                        <th>List price</th>
-                        <th>Customer number</th>
-                        <th>Quote number</th>
-                        <th>Status</th>
+                        <th><input name="select_all" value="1" type="checkbox"></th>
+                        <th class="truncate">Company name</th>
+                        <th class="truncate">Solution ID</th>
+                        <th class="truncate">List price</th>
+                        <th class="truncate">Quote number</th>
                     </tr>
                     </thead>
                 </table>
+                <!--</div>-->
             </div>
 
+            <h3 class="bottom-offset-20 top-offset-60">
+                Data Tables - Responsive Collapsing Column
+            </h3>
+
+            <div class="bottom-offset-60">
+                <!-- ===== NOTE: If the DataTable is placed within a .well, you will need to apply the class="overflow-hidden" to the div with the .well ========  -->
+                <div class="well well-gray-very-light-stroke overflow-hidden">
+                    <form class="dt-form-inline" role="form">
+                        <div class="form-group pull-left">
+                            <label for="collapse-columns-2" class="control-label">Bulk actions</label>
+                            <div class="form-group">
+                                <select class="form-control" id="collapse-columns-2">
+                                    <option disabled selected> choose option </option>
+                                    <option> Export </option>
+                                    <option> Delete </option>
+                                    <option> Add to group </option>
+                                    <option> Remove from group </option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- NOTE: you wil need to relink the data-datafile="/wp-content/uploads/2016/01/dataColumn.json" to your local reference -->
+                    <table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile="components/tables-uber/dataColumn.json">
+                        <thead>
+                        <tr>
+                            <th>
+                                <span><input name="select_all" value="1" type="checkbox"></span>
+                            </th>
+                            <th>Company name</th>
+                            <th>Solution name</th>
+                            <th>Solution ID</th>
+                            <th>Owner</th>
+                            <th>Last edited</th>
+                            <th>List price</th>
+                            <th>Customer number</th>
+                            <th>Quote number</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
 
             <hr/>
+
+            <div class="bottom-offset-60">
+                <!-- ===== NOTE: If the DataTable is placed within a .well, you will need to apply the class="overflow-hidden" to the div with the .well ========  -->
+                <div class="well well-gray-very-light-stroke overflow-hidden">
+                    <form class="dt-form-inline" role="form">
+                        <div class="form-group pull-left">
+                            <label for="collapse-columns-3" class="control-label">Bulk actions</label>
+                            <div class="form-group">
+                                <select class="form-control" id="collapse-columns-3">
+                                    <option disabled selected> choose option </option>
+                                    <option> Export </option>
+                                    <option> Delete </option>
+                                    <option> Add to group </option>
+                                    <option> Remove from group </option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- NOTE: you wil need to relink the data-datafile="/wp-content/uploads/2016/01//dataColumn.json" to your local reference -->
+                    <table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile="components/tables-uber/dataColumn.json">
+                        <thead>
+                        <tr>
+                            <th>
+                                <span><input name="select_all" value="1" type="checkbox"></span>
+                            </th>
+                            <th>Company name</th>
+                            <th>Solution name</th>
+                            <th>Solution ID</th>
+                            <th>Owner</th>
+                            <th>Last edited</th>
+                            <th>List price</th>
+                            <th>Customer number</th>
+                            <th>Quote number</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+            <hr/>
+
+            <div class="bottom-offset-60">
+                <!-- ===== NOTE: If the DataTable is placed within a .well, you will need to apply the class="overflow-hidden" to the div with the .well ========  -->
+                <div class="well well-gray-very-light-stroke overflow-hidden">
+                    <form class="dt-form-inline" role="form">
+                        <div class="form-group pull-left">
+                            <label for="collapse-columns" class="control-label">Bulk actions</label>
+                            <div class="form-group">
+                                <select class="form-control" id="collapse-columns">
+                                    <option disabled selected> choose option </option>
+                                    <option> Export </option>
+                                    <option> Delete </option>
+                                    <option> Add to group </option>
+                                    <option> Remove from group </option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- NOTE: you wil need to relink the data-datafile="/wp-content/uploads/2016/01//dataColumn.json" to your local reference -->
+                    <table class="table table-striped table-hover table-responsive-columns table-pagination table-editable" data-datafile="components/tables-uber/dataColumn.json">
+                        <thead>
+                        <tr>
+                            <th>
+                                <span><input name="select_all" value="1" type="checkbox"></span>
+                            </th>
+                            <th>Company name</th>
+                            <th>Solution name</th>
+                            <th>Solution ID</th>
+                            <th>Owner</th>
+                            <th>Last edited</th>
+                            <th>List price</th>
+                            <th>Customer number</th>
+                            <th>Quote number</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
 
         </div>
     </div>

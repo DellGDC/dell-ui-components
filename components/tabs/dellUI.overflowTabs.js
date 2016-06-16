@@ -111,7 +111,7 @@
 
                     } else if(!tabInContext) {
                         //If next is pressed what is the last visible tab? Set that as tabInContext
-                        //console.log(">>>>>>>>> ",tabs,homePosition,leftPosition);
+                        console.log(">>>>>>>>> ",tabs,homePosition,leftPosition);
                     }
 
 

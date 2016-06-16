@@ -1,0 +1,69 @@
+<section ng-controller="siteWideMessagingCtrl" id="site-wide-messaging-html-example">
+
+    <div class="container">
+        <h2>Site-Wide-Messaging Demo</h2>
+        <div class="row">
+            <div class="col-md-9">
+
+                <div equalizer="group" class="equalize well well-white text-gray-medium well-white-stroke">
+                    <div>
+                        <!-- code example for site-wide messaging-->
+                        <!--
+                             * Use the data attributes to set text content and image.
+                             * Counter deadline is required.
+                             * Original text for mobile and desktop is required.
+                             * CTA is required.
+                             * All other data fields are optional. To opt out, leave no characters or spaces within the quotes.
+                             * The timer is removed but the component remains if replacement text is set for both mobile and desktop. If no replacement text is set for mobile or desktop,
+                               then the entire component will be removed from the page when the deadline is reached.
+                             * Central Daylight Savings Time = GMT-05:00
+                             * Central Standard Time =  GMT-06:00
+                         -->
+                        <div class=" site-wide-messaging well-gray-light" id="siteWideMessage"
+                             data-counter-deadline="August 30 2016 09:47:00 GMT-05:00"
+                             data-desktop-original-text="Members get twice the discount on all PCs, plus an extra 15% off XPS PCs with coupon code 150FFXPS. Ends 10/13/2015."
+                             data-desktop-replacement-text="This is desktop replacement text"
+                             data-mobile-original-text="Get 15% off all XPS PCs with coupon code 150FFXPS until midnight."
+                             data-mobile-replacement-text="This is mobile replacement text"
+                             data-cta="Shop PCs"
+                             data-optional-cta="Shop XPS"
+                             data-optional-cta-mobile="false"
+                             data-optional-image="components/site-wide-messaging/xps_8900.png">
+
+                            <ul class="list-inline" >
+                                <li class="col-lg-10 col-md-10 col-sm-10">
+                                    <div class="site-wide-messaging-product-image"><img  alt="XPS 8900" /></div>
+                                    <div class="site-wide-messaging-copy">
+                                        <span class="mobile-countdown" id="mobileCountDown"></span>
+                                        <span class="site-wide-messaging-text"></span>
+                                        <a href="javascript:;" id="cta"></a>
+                                        <span class="site-wide-messaging-cta-optional text-blue">|&nbsp;<a href="javascript:;"></a></span>
+                                    </div>
+                                </li>
+                                <li class="col-lg-2 col-md-2 col-sm-2 desktop-countdown " id="desktopCountDown">
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <!-- end of code example -->
+                    </div>
+                    <div class="col-xs-12">
+                        <hr class="rule-break hr-gray-light">
+                        <h5 class="fragment-title">Site-wide Messaging</h5>
+                        <div class="description">Use for the time sensitive promotions on dell.com. </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="well"> sidebar </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</section>

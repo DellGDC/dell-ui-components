@@ -59,95 +59,90 @@ angular.module('dellUiComponents')
                     // `d` is the original data object for the row
                     //TODO we can't really do this. We can't hard code labels like "Company Name". The column names need to come from a configuration file. The HTML also needs to come from a template file.
                     return  '<row>'+
-                                '<div class="row">'+
-                                    '<div class="col-xs-12">'+
-                                        //repeated herders visible in XS only
-                                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
-                                            '<p class="text-gray-medium small">Company Name</p>'+
-                                            '<p>'+d.Company_name+'</p>' +
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
-                                            '<p class="text-gray-medium small">Solution ID</p>'+
-                                            '<p><a href="javascript:;" class="btn-link">'+d.Solution_ID+'</a></p>' +
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
-                                            '<p class="text-gray-medium small">List Price</p>'+
-                                            '<p>'+d.List_price+'</p>' +
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
-                                            '<p class="text-gray-medium small">Quote Number</p>'+
-                                            '<p><a href="javascript:;" class="btn-link">'+d.Quote_number+'</a></p>' +
-                                        '</div>'+
-                                        '<div class="row">'+
-                                            '<div class="col-xs-12 visible-xs-block">'+
-                                                '<hr class="hr-gray top-offset-10">'+
-                                            '</div>'+
-                                        '</div>'+
+                        '<div class="row">'+
+                        '<div class="col-xs-12">'+
+                        //repeated herders visible in XS only
+                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
+                        '<p class="text-gray-medium small">Company Name</p>'+
+                        '<p>'+d.Company_name+'</p>' +
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
+                        '<p class="text-gray-medium small">Solution ID</p>'+
+                        '<p><a href="javascript:;" class="btn-link">'+d.Solution_ID+'</a></p>' +
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
+                        '<p class="text-gray-medium small">List Price</p>'+
+                        '<p>'+d.List_price+'</p>' +
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3 visible-xs-block">'+
+                        '<p class="text-gray-medium small">Quote Number</p>'+
+                        '<p><a href="javascript:;" class="btn-link">'+d.Quote_number+'</a></p>' +
+                        '</div>'+
+                        '<div class="row">'+
+                        '<div class="col-xs-12 visible-xs-block">'+
+                        '<hr class="hr-gray top-offset-10">'+
+                        '</div>'+
+                        '</div>'+
 
+                        '<div class="col-xs-12">'+
+                        '<h3 class="text-blue">Account Details</h3>'+
+                        '</div>'+
 
-                                        '<div class="col-xs-12">'+
-                                            '<h3 class="text-blue">Account Details</h3>'+
-                                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3">' +
+                        '<p class="text-gray-medium small">Contact Number</p>'+
+                        '<p>'+d.Contact_number+'</p>'+
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3">' +
+                        '<p class="text-gray-medium small">Extension</p>'+
+                        '<p>'+d.Extension+'</p>'+
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3">'+
+                        '<p class="text-gray-medium small">Customer Since</p>'+
+                        '<p>'+d.Customer_since+'</p>' +
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3">'+
+                        '<p class="text-gray-medium small">Location</p>'+
+                        '<p>'+d.Location+'</p>' +
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3">'+
+                        '<p class="text-gray-medium small">Owner</p>'+
+                        '<p><a href="javascript:;" class="btn-link">'+d.Owner+'</a></p>' +
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3">'+
+                        '<p class="text-gray-medium small">Last Edited</p>'+
+                        '<p>'+d.Last_edited+'</p>' +
+                        '</div>'+
+                        '<div class="col-xs-6 col-sm-3">'+
+                        '<p class="text-gray-medium small">Customer Number</p>'+
+                        '<p><a href="javascript:;" class="btn-link">'+d.Customer_number+'</a></p>' +
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '<div class="row">'+
+                        '<div class="col-xs-12">'+
+                        '<hr class="hr-gray top-offset-10">'+
+                        '</div>'+
+                        '</div>'+
 
+                        '<div class="row">'+
 
-                                        '<div class="col-xs-6 col-sm-3">' +
-                                            '<p class="text-gray-medium small">Contact Number</p>'+
-                                            '<p>'+d.Contact_number+'</p>'+
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3">' +
-                                            '<p class="text-gray-medium small">Extension</p>'+
-                                            '<p>'+d.Extension+'</p>'+
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3">'+
-                                            '<p class="text-gray-medium small">Customer Since</p>'+
-                                            '<p>'+d.Customer_since+'</p>' +
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3">'+
-                                            '<p class="text-gray-medium small">Location</p>'+
-                                            '<p>'+d.Location+'</p>' +
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3">'+
-                                            '<p class="text-gray-medium small">Owner</p>'+
-                                            '<p><a href="javascript:;" class="btn-link">'+d.Owner+'</a></p>' +
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3">'+
-                                            '<p class="text-gray-medium small">Last Edited</p>'+
-                                            '<p>'+d.Last_edited+'</p>' +
-                                        '</div>'+
-                                        '<div class="col-xs-6 col-sm-3">'+
-                                            '<p class="text-gray-medium small">Customer Number</p>'+
-                                            '<p><a href="javascript:;" class="btn-link">'+d.Customer_number+'</a></p>' +
-                                        '</div>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="row">'+
-                                    '<div class="col-xs-12">'+
-                                        '<hr class="hr-gray top-offset-10">'+
-                                    '</div>'+
-                                '</div>'+
+                        '<div class="col-xs-12">'+
+                        '<h3 class="text-blue col-xs-12">Additional Notes</h3>'+
+                        '</div>'+
 
-                                '<div class="row">'+
-
-                                    '<div class="col-xs-12">'+
-                                        '<h3 class="text-blue col-xs-12">Additional Notes</h3>'+
-                                    '</div>'+
-
-                                    '<div class="col-xs-12">'+
-                                        '<div class="col-xs-6">'+
-                                            '<p class="text-gray-medium small">Purchase Details</p>'+
-                                            '<p>'+d.Purchase_details+'</p>' +
-                                        '</div>'+
-                                        '<div class="col-xs-6">'+
-                                            '<p class=" text-gray-medium small">Sales Notes</p>'+
-                                            '<p>'+d.Sales_notes+'</p>'+
-                                        '</div>'+
-                                    '</div>'+
-                                '</div>'+
-                            '</row>';
-
+                        '<div class="col-xs-12">'+
+                        '<div class="col-xs-6">'+
+                        '<p class="text-gray-medium small">Purchase Details</p>'+
+                        '<p>'+d.Purchase_details+'</p>' +
+                        '</div>'+
+                        '<div class="col-xs-6">'+
+                        '<p class=" text-gray-medium small">Sales Notes</p>'+
+                        '<p>'+d.Sales_notes+'</p>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</row>';
                 }
-
-
 
                 // Array holding selected row IDs
                 var rows_selected = [];
@@ -206,11 +201,12 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
 
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
 
                 });
 
-                 //change the position of the sorting toggle arrows
+                //change the position of the sorting toggle arrows
                 table.columns().iterator( 'column', function (ctx, idx) {
                     $( table.column(idx).header() ).append('<span class="sort-icon"/>');
                 });
@@ -356,7 +352,7 @@ angular.module('dellUiComponents')
 
                 });
 
-             }
+            }
         };
     })
 
@@ -409,7 +405,7 @@ angular.module('dellUiComponents')
                 // Array holding selected row IDs
                 var rows_selected = [];
                 var tableData;
-                var table = $('#table-uber').DataTable({
+                var table = $element.DataTable({
                     "ajax": datafile,
                     'columnDefs': [{
                         'targets': 0,
@@ -488,7 +484,8 @@ angular.module('dellUiComponents')
                         //console.log('i was sorted');
                     },
                     'responsive': true,
-                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' }
+                    'oLanguage': { "sSearch": '<i class="icon-small-magnifying-glass text-blue"></i>' },
+                    retrieve: true
                 });
 
                 //change the position of the sorting toggle arrows
@@ -626,12 +623,10 @@ angular.module('dellUiComponents')
                     var search_label = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] label');
                     search_label.addClass('hide-text');
 
-
                     // SEARCH - Add the placeholder for Search and Turn this into in-line form control
                     var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
                     search_input.attr('placeholder', 'Search');
                     search_input.addClass('form-control col-xs-12 col-sm-4');
-
 
                     // LENGTH - Inline-Form control
                     // code below for select
@@ -643,7 +638,6 @@ angular.module('dellUiComponents')
             }
         };
     });
-
 
 
 
