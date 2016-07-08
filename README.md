@@ -175,6 +175,13 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
+**1.0.20** - July 8, 2016:
+  Updated build, minor fixes, minor padding adjustment for carousel hero banner component
+
+
+### Older versions:
+
+```
 **1.0.19** - June 15, 2016:
   - fixes for Data-tables displaying multiple tables on a page
   - build a carousel with inserted Jumbotron hero banner
@@ -182,9 +189,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   - DataTables: Adjusted the headers to 14 px, adjusted the search and input boxes to 34px height, adjusted the input search font to 14px
 
 
-### Older versions:
-
-```
 **1.0.18** - April 5, 2016:
   - fixes for popovers so it stays pen when clicked inside of open popover
   - fixes for Show Password in an email input
