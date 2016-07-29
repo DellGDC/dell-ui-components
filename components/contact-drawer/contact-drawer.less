@@ -9,9 +9,9 @@
 	top: @contact-drawer-distance-top;
 	right: -245px;
 	width: @contact-drawer-width;
-	-webkit-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000); 
-	-moz-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000); 
-	-o-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+	-webkit-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	-moz-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000);
+	-o-transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000);
 	transition: all @contact-drawer-open-speed cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
 
 	&.open {
@@ -22,7 +22,7 @@
 		height: 33px;
 		position: absolute;
 		left: -69px;
-		top: 36px;
+		top: 65px;
 		cursor: pointer;
 		background: @contact-drawer-cta-color;
 		color: #ffffff;
@@ -55,10 +55,16 @@
 			background:  @contact-drawer-cta-color;
 			height: @contact-drawer-height;
 			position: absolute;
-			top: 0px;
-			left: 0px;
+			top: 29px;
+			left: 0;
 		}
-
 	}
+    .close {
+        top: 35px;
+        right: 15px;
+        position: relative;
+        font-size: 30px;
+        font-weight: normal;
+    }
 }
 
