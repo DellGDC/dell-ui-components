@@ -18,22 +18,39 @@
 		right: 0px !important;
 	}
 	.contact-drawer-cta {
-		max-width: 150px;
-		height: 33px;
-		position: absolute;
-		left: -69px;
-		top: 65px;
+        width: 35px;
+        height: 115px;
+        position: absolute;
+        left: -33px;
+        top: 30px;
 		cursor: pointer;
 		background: @contact-drawer-cta-color;
 		color: #ffffff;
-		-webkit-transform: rotate(-90deg);
-		-ms-transform: rotate(-90deg);
-		transform: rotate(-90deg);
+		//-webkit-transform: rotate(-90deg);
+		//-ms-transform: rotate(-90deg);
+		//transform: rotate(-90deg);
 		padding: 5px 10px;
 		font-size: 18px;
 		line-height: 22px;
 		font-family:  @contact-drawer-cta-font-family;
 	}
+
+    .contact-drawer-cta-90 {
+        width: 150px;
+        height: 30px;
+        position: absolute;
+        left: -59px;
+        top: 20px;
+        cursor: pointer;
+        color: #ffffff;
+        -webkit-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        padding: 5px 10px;
+        font-size: 18px;
+        line-height: 22px;
+        font-family:  @contact-drawer-cta-font-family;
+    }
 	.contact-drawer-panel {
 		border: 1px solid @dell-gray-very-light;
 		border-top: 1px solid @dell-gray-light;
@@ -55,7 +72,7 @@
 			background:  @contact-drawer-cta-color;
 			height: @contact-drawer-height;
 			position: absolute;
-			top: 29px;
+			top: 30px;
 			left: 0;
 		}
 	}
