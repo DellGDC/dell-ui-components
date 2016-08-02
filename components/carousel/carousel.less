@@ -370,6 +370,10 @@
             border-radius: 2px;
             border: none;
             background: #cccccc;
+            &:active,
+            &:hover{
+                background: #cce5f1;
+            }
         }
         > .slick-active > button{
             background: #444444;
@@ -461,9 +465,15 @@
 .slick-slide {
     display: none;
     float: left;
-
     height: 100%;
     min-height: 1px;
+    h5 {
+        color: @link-color;
+        &:hover,
+        &:active {
+            color: @link-hover-color;
+        }
+    }
 }
 [dir='rtl'] .slick-slide {
     float: right;
