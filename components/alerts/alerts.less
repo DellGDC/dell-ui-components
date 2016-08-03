@@ -49,7 +49,7 @@
         padding-left: 15px;
         padding-top: 5px;
     }
-    
+
 }
 
 // added new alert-collapsible class to address different style of "dismissible alert" that is dell specific
@@ -58,7 +58,7 @@
         position: relative;
         top: -8px;
         right: -27px;
-        color: inherit;        
+        color: inherit;
     }
     &.alert-error,
     &.alert-warning {
@@ -84,6 +84,13 @@
     }
     .close {
         opacity: 0.55;
+        &:focus,
+        &:hover {
+            text-decoration: none;
+            cursor: pointer;
+            opacity: .8;
+            filter: alpha(opacity=80);
+        }
     }
 
     &.collapsed {
@@ -107,9 +114,4 @@
 
 }
 
-
-// removed .alert-dismissable .close because it is no differnet that native bootstrap - bo - 4/9/2015
-
-
-// removed block dell-alerts because it is no differnet that native bootstrap - bo - 4/9/2015
 
