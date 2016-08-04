@@ -7,10 +7,14 @@
 
     p {
         font-size: @font-size-base;
+        color: @dell-gray-dark;
     }
     p small {
         font-size: 85%;
         line-height: 15px;
+    }
+    &:hover {
+        text-decoration: none !important;
     }
 
     margin: 0 auto 20px auto;
@@ -28,6 +32,7 @@
         position: absolute;
         top: 20px;
         max-width: 500px;
+
     }
 
 
@@ -223,8 +228,8 @@
     a:not(.btn) {
         padding-top:0;
         padding-bottom:0;
-        h5 {
-            color: @text-color !important;
+        h5, h2 {
+            color: @dell-blue !important;
         }
         &:hover {
             text-decoration: none !important;
