@@ -4235,6 +4235,12 @@ select.form-control.input-sm {
     background: #cce5f1;
     text-decoration: none;
   }
+  .nav-tabs-overflow-container > div.prev a i.icon-ui-arrowright,
+  .nav-tabs-overflow-container > div.next a i.icon-ui-arrowright,
+  .nav-tabs-overflow-container > div.prev a i.icon-ui-arrowleft,
+  .nav-tabs-overflow-container > div.next a i.icon-ui-arrowleft {
+    text-decoration: none !important;
+  }
   .nav-tabs-overflow-container > div.prev.disabled a,
   .nav-tabs-overflow-container > div.next.disabled a {
     color: #aaaaaa;
@@ -4242,6 +4248,7 @@ select.form-control.input-sm {
   .nav-tabs-overflow-container > div.prev.disabled a:hover,
   .nav-tabs-overflow-container > div.next.disabled a:hover {
     background: #ffffff;
+    text-decoration: none;
   }
   .nav-tabs-overflow-container > div.prev {
     left: 0;
@@ -4874,6 +4881,17 @@ select.form-control.input-sm {
   .nav-tabs-centered > .active > a:focus {
     border-bottom-color: #007db8;
   }
+}
+.nav-tabs-overflow-container > div.prev a:hover,
+.nav-tabs-overflow-container > div.next a:hover,
+.nav-tabs-overflow-container > div.prev a:active,
+.nav-tabs-overflow-container > div.next a:active {
+  background: #CCE5F1;
+  text-decoration: none !important;
+}
+.nav-tabs-overflow-container > i.icon-ui-arrowleft,
+.nav-tabs-overflow-container > i.icon-ui-arrowright {
+  text-decoration: none !important;
 }
 /*
  * Tooltips component theme overrides
