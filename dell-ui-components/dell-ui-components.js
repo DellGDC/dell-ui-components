@@ -23452,6 +23452,9 @@ angular.module('dellUiComponents').directive('equalizeHeight', [
     this.listen('.contact-drawer-cta', 'click', function (e) {
       $(e.currentTarget).parent().toggleClass('open');
     });
+    this.listen('.close', 'click', function (e) {
+      $(e.currentTarget).parent().toggleClass('open');
+    });
   });
 }(jQuery, Eve));
 angular.module('dellUiComponents').directive('contentGallery', [

@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Components v1.0.20 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.21 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -83,6 +83,13 @@
 }
 .alert-collapsible .close {
   opacity: 0.55;
+}
+.alert-collapsible .close:focus,
+.alert-collapsible .close:hover {
+  text-decoration: none;
+  cursor: pointer;
+  opacity: .8;
+  filter: alpha(opacity=80);
 }
 .alert-collapsible.collapsed:before,
 .alert-collapsible.collapsed .close,
@@ -709,6 +716,10 @@ fieldset[disabled] a.btn.btn-primary {
   border: none;
   background: #cccccc;
 }
+.carousel .slick-dots button:active,
+.carousel .slick-dots button:hover {
+  background: #cce5f1;
+}
 .carousel .slick-dots > .slick-active > button {
   background: #444444;
   width: 14px;
@@ -791,6 +802,13 @@ fieldset[disabled] a.btn.btn-primary {
   float: left;
   height: 100%;
   min-height: 1px;
+}
+.slick-slide h5 {
+  color: #007db8;
+}
+.slick-slide h5:hover,
+.slick-slide h5:active {
+  color: #005a85;
 }
 [dir='rtl'] .slick-slide {
   float: right;
@@ -2940,6 +2958,10 @@ input:focus + [role="modal"] {
   widows: 100%;
   height: 700px;
 }
+/* pager fixes */
+.pager li a:hover {
+  background: #dadada !important;
+}
 /*
  * Popovers component theme overrides
  *------------------------------------------------------------------------------------------
@@ -4211,6 +4233,13 @@ select.form-control.input-sm {
   .nav-tabs-overflow-container > div.prev a:active,
   .nav-tabs-overflow-container > div.next a:active {
     background: #cce5f1;
+    text-decoration: none;
+  }
+  .nav-tabs-overflow-container > div.prev a i.icon-ui-arrowright,
+  .nav-tabs-overflow-container > div.next a i.icon-ui-arrowright,
+  .nav-tabs-overflow-container > div.prev a i.icon-ui-arrowleft,
+  .nav-tabs-overflow-container > div.next a i.icon-ui-arrowleft {
+    text-decoration: none !important;
   }
   .nav-tabs-overflow-container > div.prev.disabled a,
   .nav-tabs-overflow-container > div.next.disabled a {
@@ -4219,6 +4248,7 @@ select.form-control.input-sm {
   .nav-tabs-overflow-container > div.prev.disabled a:hover,
   .nav-tabs-overflow-container > div.next.disabled a:hover {
     background: #ffffff;
+    text-decoration: none;
   }
   .nav-tabs-overflow-container > div.prev {
     left: 0;
@@ -4852,6 +4882,17 @@ select.form-control.input-sm {
     border-bottom-color: #007db8;
   }
 }
+.nav-tabs-overflow-container > div.prev a:hover,
+.nav-tabs-overflow-container > div.next a:hover,
+.nav-tabs-overflow-container > div.prev a:active,
+.nav-tabs-overflow-container > div.next a:active {
+  background: #CCE5F1;
+  text-decoration: none !important;
+}
+.nav-tabs-overflow-container > i.icon-ui-arrowleft,
+.nav-tabs-overflow-container > i.icon-ui-arrowright {
+  text-decoration: none !important;
+}
 /*
  * Tooltips component theme overrides
  *------------------------------------------------------------------------------------------
@@ -5202,10 +5243,6 @@ a.hide-expanded.collapsed {
   margin-top: -5px;
   margin-bottom: -5px;
 }
-h5,
-p {
-  color: #444444;
-}
 @media (max-width: 767px) {
   .detail-links li {
     width: 100%;
@@ -5403,10 +5440,14 @@ p {
 }
 .jumbotron p {
   font-size: 14px;
+  color: #444444;
 }
 .jumbotron p small {
   font-size: 85%;
   line-height: 15px;
+}
+.jumbotron:hover {
+  text-decoration: none !important;
 }
 .jumbotron .well {
   margin: 20px auto 0 15px;
@@ -5590,8 +5631,9 @@ p {
   padding-bottom: 0;
   display: block;
 }
-.jumbotron a:not(.btn) h5 {
-  color: #444444 !important;
+.jumbotron a:not(.btn) h5,
+.jumbotron a:not(.btn) h2 {
+  color: #007db8 !important;
 }
 .jumbotron a:not(.btn):hover {
   text-decoration: none !important;
@@ -5616,13 +5658,26 @@ p {
   right: 0px !important;
 }
 .contact-drawer .contact-drawer-cta {
-  max-width: 150px;
-  height: 33px;
+  width: 35px;
+  height: 115px;
   position: absolute;
-  left: -69px;
-  top: 36px;
+  left: -33px;
+  top: 30px;
   cursor: pointer;
   background: #007db8;
+  color: #ffffff;
+  padding: 5px 10px;
+  font-size: 18px;
+  line-height: 22px;
+  font-family: 'Trebuchet MS', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', Gulim, 'Roboto', 'Segoe UI', 'Helvetica Neue', Tahoma, 'Arial Unicode', sans-serif;
+}
+.contact-drawer .contact-drawer-cta-90 {
+  width: 150px;
+  height: 30px;
+  position: absolute;
+  left: -59px;
+  top: 20px;
+  cursor: pointer;
   color: #ffffff;
   -webkit-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
@@ -5654,8 +5709,15 @@ p {
   background: #007db8;
   height: 262px;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 30px;
+  left: 0;
+}
+.contact-drawer .close {
+  top: 35px;
+  right: 15px;
+  position: relative;
+  font-size: 19px;
+  font-weight: bold;
 }
 /*
  * Anchored_nav component theme overrides
@@ -5694,6 +5756,7 @@ p {
 .nav-anchored > li > a:focus {
   border-color: transparent !important;
   background-color: transparent !important;
+  color: #007db8;
 }
 .nav-anchored > li:hover {
   background: #cce5f1;
@@ -5714,6 +5777,7 @@ p {
   margin-left: -1px;
   padding: 10px 15px;
   width: 100%;
+  color: #444444;
 }
 .nav-anchored > li.active > a:hover,
 .nav-anchored > li.active > a:focus {
@@ -5721,9 +5785,6 @@ p {
   margin-left: -1px;
   padding: 10px 15px;
   background: none;
-}
-.nav-anchored > li.active > a:hover {
-  color: #444444;
 }
 .nav-anchored > li.active > a:visited {
   background: none;

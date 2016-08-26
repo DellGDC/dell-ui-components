@@ -175,13 +175,18 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.20** - July 8, 2016:
-  Updated build, minor fixes, minor padding adjustment for carousel hero banner component
+**1.0.21** - August 26, 2016:
+  Updated build, minor fixes,
+  global underline for anchor links
 
 
 ### Older versions:
 
 ```
+
+**1.0.20** - July 8, 2016:
+  Updated build, minor fixes, minor padding adjustment for carousel hero banner component
+
 **1.0.19** - June 15, 2016:
   - fixes for Data-tables displaying multiple tables on a page
   - build a carousel with inserted Jumbotron hero banner
