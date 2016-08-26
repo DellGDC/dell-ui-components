@@ -33,11 +33,16 @@
                     text-decoration: none;
 
                 }
+                i.icon-ui-arrowright,
+                i.icon-ui-arrowleft {
+                    text-decoration: none !important;
+                }
             }
             &.disabled a {
                 color:@dell-gray;
                 &:hover {
                     background:@body-bg;
+                    text-decoration: none;
                 }
             }
             position:absolute;
@@ -463,7 +468,6 @@
                         }
                     }
                 }
-
             }
         }
 
@@ -715,4 +719,16 @@
   }
 }
 
+//
+.nav-tabs-overflow-container > div.prev a:hover,
+.nav-tabs-overflow-container > div.next a:hover,
+.nav-tabs-overflow-container > div.prev a:active,
+.nav-tabs-overflow-container > div.next a:active {
+    background: #CCE5F1;
+    text-decoration: none !important;
+}
 
+.nav-tabs-overflow-container > i.icon-ui-arrowleft,
+.nav-tabs-overflow-container > i.icon-ui-arrowright {
+    text-decoration: none !important;
+}

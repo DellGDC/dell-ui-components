@@ -4233,6 +4233,7 @@ select.form-control.input-sm {
   .nav-tabs-overflow-container > div.prev a:active,
   .nav-tabs-overflow-container > div.next a:active {
     background: #cce5f1;
+    text-decoration: none;
   }
   .nav-tabs-overflow-container > div.prev.disabled a,
   .nav-tabs-overflow-container > div.next.disabled a {
