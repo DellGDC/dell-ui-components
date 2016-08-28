@@ -23,6 +23,7 @@
     "angular-bootstrap": "~0.10",
     "less.js": "~2",
     "bootstrap-table": "~1.7.0",
-    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37",
+    "ngMask": "angular-mask#^3.1.1"
   }
 }

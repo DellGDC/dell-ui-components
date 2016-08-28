@@ -3,10 +3,6 @@
  *------------------------------------------------------------------------------------------
  */
 
-
-
-
-
 .show-hide-password {
     .checkbox,
     .radio {
@@ -785,14 +781,14 @@
 
 
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }
 
 
@@ -918,7 +914,7 @@
                 &:hover {
                     background: @dell-highlight-blue;
                     color: @text-color;
-                     &.active {
+                    &.active {
                         color: @white;
                     }
                 }
@@ -940,8 +936,91 @@
 }
 
 
+/*
+ * Place all NEW form overrides below
+ *------------------------------------------------------------------------------------------
+ */
+
+
+form {
+    label {
+        padding: 10px 2px 0 0;
+        margin-bottom: 2px;
+        margin-top: 2px;
+        color: @dell-gray-medium;
+        &.show-collapsed,
+        &.hide-expanded{
+            //margin-top: -10px;
+            margin-bottom: 2px !important;
+            padding-top: 5px !important;
+            padding-bottom: 2px !important;
+            color: @dell-blue !important;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    form {
+        label {
+            &.show-collapsed,
+            &.hide-expanded{
+                margin-top: -10px !important;
+                margin-bottom: 0 !important;
+                color: #007db8 !important;
+            }
+        }
+    }
+}
 
 
 
+.form-compressed [class^=col-] {
+    padding-bottom: 0 !important;
+}
+
+.form-compressed .row {
+    margin-bottom: 0 !important;
+}
+
+.help-ext {
+    margin-left: 0 !important;
+}
+
+.validation-invalid {
+    font-size: 12px;
+    color: @dell-red-dark;
+    padding: 5px 0 0 0;
+    margin: 0;
+}
+
+.validation-valid {
+    display: none;
+}
 
 
+.has-error .form-control {
+    background: @dell-alert-yellow;
+    border: 1px solid @dell-red-dark !important;
+    -webkit-box-shadow: inset 0 1px 1px #00000013;
+    box-shadow: inset 0 1px 1px #00000013;
+}
+
+.checkbox-ctrl,
+.checkbox-group {
+    .form-control {
+        //background: @dell-alert-yellow;
+        border: 1px transparent;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        .has-error {
+            background: @dell-alert-yellow;
+            border: 1px solid @dell-red-dark !important;
+            -webkit-box-shadow: inset 0 1px 1px #00000013;
+            box-shadow: inset 0 1px 1px #00000013;
+        }
+    }
+}
+
+.label-adjust {
+    margin-top: -7px;
+}
