@@ -626,21 +626,50 @@ angular.module('dellUiComponents')
 
 
             link: function($scope, $element, attributes, controller) {
-
-                $scope.validationmsg = false;
-
-                $scope.checkvalidation = function() {
-                    console.log('**I was clicked');
-
-                    var chkselect = $scope.checkbox;
-                    if(chkselect.checked ){
-                        console.log('+++++marked=====');
-                        $($element).addClass('marked');
+                $scope.arrlist = [{
+                    "userid": 1,
+                    "name": "Suresh"
+                }, {
+                    "userid": 2,
+                    "name": "Rohini"
+                }, {
+                    "userid": 3,
+                    "name": "Praveen"
+                }];
+                $scope.checkoptions = function (choice) {
+                    var details = [];
+                    angular.forEach(choice, function (value, key) {
+                        console.log('**I was clicked');
+                        if (choice[key].checked) {
+                            details.push(choice[key].userid);
+                        }
+                    });
+                    if (details.length > 0) {
+                        alert('i was clicked');
                     } else {
-                        console.log('==  not marked ==');
-                        $($element).removeClass('marked');
+                        $scope.msg = 'Please choose an option';
+                        // $scope.msg = 'Selected Values: '+details.toString();
                     }
                 };
+
+
+
+
+
+                // $scope.validationmsg = false;
+                //
+                // $scope.checkvalidation = function() {
+                //     console.log('**I was clicked');
+                //
+                //     var chkselect = $scope.checkbox;
+                //     if((chkselect).getAttribute('checked')){
+                //         console.log('+++++marked=====');
+                //         $($element).addClass('marked');
+                //     } else {
+                //         console.log('==  not marked ==');
+                //         $($element).removeClass('marked');
+                //     }
+                // };
             }
         };
     })

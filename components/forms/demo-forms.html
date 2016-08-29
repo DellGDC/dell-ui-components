@@ -157,16 +157,22 @@
             <div class="row">
                 <div class="col-xs-6 checkbox-group">
                     <!-- checkboxes -->
-                    <div class="group-checkbox" model="one">
+                    <div class="group-checkbox">
                         <label>Select at least one</label>
-                        <label><input type="checkbox" value="1" ng-model="checkbox1" name="one">Section option one</label>
-                        <label><input type="checkbox" value="2" ng-model="checkbox2" name="two">Section option two</label>
-                        <label><input type="checkbox" value="3" ng-model="checkbox3" name="three">Section option three</label>
-                        <label><input type="checkbox" value="4" ng-model="checkbox4" name="four">Section option four</label>
-                        <input type="button" value="Submit" ng-click="checkvalidation();">
+
+                        <div ng-repeat="user in arrlist">
+                            <input type="checkbox" value="{{user.userid}}" ng-model="user.checked" />
+                            <label>{{user.name}}</label>
+                        </div>
+                        <!--<label><input  type="checkbox" value="{{user.userid}}" ng-model="user.checked" name="one">Section option one</label>-->
+                        <!--<label><input  type="checkbox" value="{{user.userid}}" ng-model="user.checked" name="two">Section option two</label>-->
+                        <!--<label><input  type="checkbox" value="{{user.userid}}" ng-model="user.checked" name="three">Section option three</label>-->
+                        <!--<label><input  type="checkbox" value="{{user.userid}}" ng-model="user.checked" name="four">Section option four</label>-->
+                        <input type="button" id="btnClick" value="Submit" ng-click="checkoptions(arrlist)">
 
                         <div class="help-block">
-                            <p ng-show="validationmsg" class="has-error">Please select at least one choice!!!!!!!!!!!!!!!!! <p>
+                            <p ng-show="msg" class="has-error">Please select at least one choice!!!!!!!!!!!!!!!!! <p>
+                            <span style="color:Red">{{msg}}</span>
                         </div>
                     </div>
                     <!-- /checkboxes -->
