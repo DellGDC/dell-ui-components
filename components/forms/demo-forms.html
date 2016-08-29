@@ -164,13 +164,33 @@
                                 <label><input type="checkbox" value="{{user.userid}}" ng-model="user.checked"/>{{user.name}}</label>
                             </div>
                         </div>
-                        <input type="button" id="btnClick" value="Submit" ng-click="checkoptions(arrlist)">
-
-                        <div class="help-block">
-                            <p ng-show="validationmsg" class="has-error">Please select at least one<p>
+                        <div class="has-error">
+                            <p ng-show="validationmsg" class="help-block">Please select at least one<p>
                         </div>
+                        <input type="button" id="btnClick" value="Submit" ng-click="checkoptions(arrlist)">
                     </div>
                     <!-- /checkboxes -->
+                </div>
+                <div class="col-xs-6">
+                    <!-- spin box vertical-->
+                    <form class="form-compressed" role="form">
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-xs-12 col-sm-2 form-label">Spin box vertical</label>
+                                <div class="spinbox"
+                                     data-orient="vertical"
+                                     data-spinmin="0"
+                                     data-spindefault="0"
+                                     data-spinmax="30"
+                                     data-spinstep="1"
+                                     data-spinincrease="&lt;i class='icon-ui-plus'&gt;&lt;/i&gt;"
+                                     data-spindecrease="&lt;i class='icon-ui-minus'&gt;&lt;/i&gt;"
+                                     data-spinname="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /spin box vertical-->
                 </div>
             </div>
 

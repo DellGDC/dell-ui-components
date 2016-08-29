@@ -660,7 +660,7 @@ angular.module('dellUiComponents')
             transclude: true,
             template: '<div><div>' +
             '<label class="form-control"><input type="checkbox" ng-model="checkbox" name="chkselct">Agree Terms and Conditions</label>'+
-            '</div><div class="has-error"><input type="button" value="Submit" ng-click="checkvalidation();" /></div><p ng-show="validationmsg" class="help-block">Please select Checkbox</p></div>',
+            '</div><div class="has-error"><p ng-show="validationmsg" class="help-block">Please select Checkbox</p></div><input class="top-offset-10" type="button" value="Submit" ng-click="checkvalidation();" /></div>',
 
 
             link: function($scope, $element, attributes, controller) {
