@@ -617,24 +617,17 @@ angular.module('dellUiComponents')
 
         return {
             restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-            // scope: {
-            //     checkbox: '=model'
-            // },
-            // replace: true,
-            // transclude: true,
-            // template:'',
-
 
             link: function($scope, $element, attributes, controller) {
                 $scope.arrlist = [{
                     "userid": 1,
-                    "name": "Suresh"
+                    "name": "Option one: laptop"
                 }, {
                     "userid": 2,
-                    "name": "Rohini"
+                    "name": "Option two: mobile phone"
                 }, {
                     "userid": 3,
-                    "name": "Praveen"
+                    "name": "Option three: tablet"
                 }];
                 $scope.checkoptions = function (choice) {
                     var details = [];
@@ -653,25 +646,6 @@ angular.module('dellUiComponents')
                         // $scope.msg = 'Selected Values: '+details.toString();
                     }
                 };
-
-
-
-
-
-                // $scope.validationmsg = false;
-                //
-                // $scope.checkvalidation = function() {
-                //     console.log('**I was clicked');
-                //
-                //     var chkselect = $scope.checkbox;
-                //     if((chkselect).getAttribute('checked')){
-                //         console.log('+++++marked=====');
-                //         $($element).addClass('marked');
-                //     } else {
-                //         console.log('==  not marked ==');
-                //         $($element).removeClass('marked');
-                //     }
-                // };
             }
         };
     })
@@ -686,7 +660,7 @@ angular.module('dellUiComponents')
             transclude: true,
             template: '<div><div>' +
             '<label class="form-control"><input type="checkbox" ng-model="checkbox" name="chkselct">Agree Terms and Conditions</label>'+
-            '</div><div class="has-error"><p ng-show="validationmsg" class="help-block">Please select Checkbox</p></div><input type="button" value="Submit" ng-click="checkvalidation();" /></div>',
+            '</div><div class="has-error"><input type="button" value="Submit" ng-click="checkvalidation();" /></div><p ng-show="validationmsg" class="help-block">Please select Checkbox</p></div>',
 
 
             link: function($scope, $element, attributes, controller) {

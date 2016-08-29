@@ -158,20 +158,16 @@
                 <div class="col-xs-6 checkbox-group">
                     <!-- checkboxes -->
                     <div class="group-checkbox">
-                        <label>Select at least one</label>
-
-                        <div ng-repeat="user in arrlist">
-                            <input type="checkbox" value="{{user.userid}}" ng-model="user.checked" />
-                            <label>{{user.name}}</label>
+                        <label>Select at least one device</label>
+                        <div class="error-box">
+                            <div ng-repeat="user in arrlist">
+                                <label><input type="checkbox" value="{{user.userid}}" ng-model="user.checked"/>{{user.name}}</label>
+                            </div>
                         </div>
-                        <!--<label><input  type="checkbox" value="{{user.userid}}" ng-model="user.checked" name="one">Section option one</label>-->
-                        <!--<label><input  type="checkbox" value="{{user.userid}}" ng-model="user.checked" name="two">Section option two</label>-->
-                        <!--<label><input  type="checkbox" value="{{user.userid}}" ng-model="user.checked" name="three">Section option three</label>-->
-                        <!--<label><input  type="checkbox" value="{{user.userid}}" ng-model="user.checked" name="four">Section option four</label>-->
                         <input type="button" id="btnClick" value="Submit" ng-click="checkoptions(arrlist)">
 
                         <div class="help-block">
-                            <p ng-show="validationmsg" class="has-error">Please select at least one choice!!!!!!!!!!!!!!!!! <p>
+                            <p ng-show="validationmsg" class="has-error">Please select at least one<p>
                         </div>
                     </div>
                     <!-- /checkboxes -->
