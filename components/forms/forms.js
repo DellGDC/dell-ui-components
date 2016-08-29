@@ -1,7 +1,7 @@
 /*
  * Created by Clint_Batte on 3/24/2015.
  */
-angular.module('dellUiComponents', ['ngMask'])
+angular.module('dellUiComponents')
 
     .directive('msCheckbox', function() {
         return {
@@ -58,21 +58,6 @@ angular.module('dellUiComponents', ['ngMask'])
             restrict: 'AEC', // E = Element, A = Attribute, C = Class, M = Comment
             link: function($scope, element, attributes, controller) {
 
-                //$(element).blur(function () {
-                //    var string1 = $(element).val();
-                //    if (string1.indexOf("@") === -1){
-                //        $(element).addClass('alert alert-warning');
-                //        $(element).tooltip({
-                //            title: "Please input a valid email address!"
-                //        });
-                //    //$(element).blur();
-                //    } else {
-                //        $(element).removeClass('alert alert-warning');
-                //        $(element).tooltip('disable');
-                //    }
-                //});
-
-
                 $(element).on('keyup',function () {
                     var string1 = $(element).val();
                     var regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm;
@@ -93,10 +78,6 @@ angular.module('dellUiComponents', ['ngMask'])
             }
         };
     })
-
-
-
-
 
     .directive('showHidePassword', function() {
         return {
@@ -636,34 +617,28 @@ angular.module('dellUiComponents', ['ngMask'])
 
         return {
             restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-            scope: {
-                checkbox: '=model'
-            },
+            // scope: {
+            //     checkbox: '=model'
+            // },
             // replace: true,
             // transclude: true,
-            template:'',
+            // template:'',
 
 
             link: function($scope, $element, attributes, controller) {
 
                 $scope.validationmsg = false;
 
-                $scope.checkValidation = function() {
+                $scope.checkvalidation = function() {
+                    console.log('**I was clicked');
 
                     var chkselect = $scope.checkbox;
-                    if(chkselect === false || chkselect === undefined) {
-                        console.log('*********** > 1');
-                        $scope.validationmsg = true;
-                        $($element).addClass('has-error');
-
-                        // $scope.validatingMsg = false;
-                        // $($element).removeClass('has-error');
+                    if(chkselect.checked ){
+                        console.log('+++++marked=====');
+                        $($element).addClass('marked');
                     } else {
-                        console.log('*********** < 1 ******************');
-                        $scope.validationmsg = false;
-                        $($element).removeClass('has-error');
-                        // $scope.validatingMsg = true;
-                        // $($element).addClass('has-error');
+                        console.log('==  not marked ==');
+                        $($element).removeClass('marked');
                     }
                 };
             }

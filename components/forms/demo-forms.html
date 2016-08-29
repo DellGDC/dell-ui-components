@@ -157,13 +157,13 @@
             <div class="row">
                 <div class="col-xs-6 checkbox-group">
                     <!-- checkboxes -->
-                    <div class="group-checkbox">
+                    <div class="group-checkbox" model="one">
                         <label>Select at least one</label>
-                        <label><input type="checkbox" ng-model="one" name="??">Section option one</label>
-                        <label><input type="checkbox" ng-model="two" name="??">Section option two</label>
-                        <label><input type="checkbox" ng-model="three" name="??">Section option three</label>
-                        <label><input type="checkbox" ng-model="four" name="??">Section option four</label>
-                        <input type="button" value="Submit" ng-click="checkValidation();">
+                        <label><input type="checkbox" value="1" ng-model="checkbox1" name="one">Section option one</label>
+                        <label><input type="checkbox" value="2" ng-model="checkbox2" name="two">Section option two</label>
+                        <label><input type="checkbox" value="3" ng-model="checkbox3" name="three">Section option three</label>
+                        <label><input type="checkbox" value="4" ng-model="checkbox4" name="four">Section option four</label>
+                        <input type="button" value="Submit" ng-click="checkvalidation();">
 
                         <div class="help-block">
                             <p ng-show="validationmsg" class="has-error">Please select at least one choice!!!!!!!!!!!!!!!!! <p>
