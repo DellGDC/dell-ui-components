@@ -645,9 +645,11 @@ angular.module('dellUiComponents')
                         }
                     });
                     if (details.length > 0) {
-                        alert('i was clicked');
+                        $scope.validationmsg = false;
+                        $($element).removeClass('has-error');
                     } else {
-                        $scope.msg = 'Please choose an option';
+                        $($element).addClass('has-error');
+                        $scope.validationmsg = true;
                         // $scope.msg = 'Selected Values: '+details.toString();
                     }
                 };
