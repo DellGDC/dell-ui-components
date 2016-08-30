@@ -99,17 +99,19 @@ angular.module('dellUiComponents')
         return {
             restrict: 'A',
             require: 'ngModel',
+            templateUrl: '',
+            scope: {},
             link: function ($scope, $element, attrs, controller) {
                 $($element).inputmask('(999)-999-9999');
-                // $scope.errorMessage = false;
+                $('p.help-block').hide();
 
                 $($element).bind('blur', function () {
                     if ($($element).inputmask("isComplete")) {
                         $($element.parent()).removeClass('has-error');
-                        // $scope.errorMessage = true;
+                        $($element.parent()).find('p.help-block').hide();
                     } else {
                         $($element.parent()).addClass('has-error');
-                        // $scope.errorMessage = false;
+                        $($element.parent()).find('p.help-block').show();
                     }
 
                 });
@@ -120,7 +122,8 @@ angular.module('dellUiComponents')
 
     .directive('phoneExtMask', function() {
         return {
-            restrict: 'ACE',
+            restrict: 'A',
+            require: 'ngModel',
             templateUrl: '',
             scope: {},
                 link: function ($scope, $element, attrs, controller) {
@@ -140,6 +143,32 @@ angular.module('dellUiComponents')
             }
         };
     })
+
+
+    .directive('emailMask', function() {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            templateUrl: '',
+            scope: {},
+            link: function ($scope, $element, attrs, controller) {
+                $($element).inputmask('Regex', { regex: "[a-zA-Z0-9._%-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}" });
+                $('p.help-block').hide();
+
+                $($element).bind('blur', function () {
+                    if ($($element).inputmask("isComplete")) {
+                        $($element.parent()).removeClass('has-error');
+                        $($element.parent()).find('p.help-block').hide();
+
+                    } else {
+                        $($element.parent()).addClass('has-error');
+                        $($element.parent()).find('p.help-block').show();
+                    }
+                });
+            }
+        };
+    })
+
 
     .directive('phoneExtension', function() {
         return {
