@@ -42,7 +42,7 @@ angular.module('dellUiComponents')
                     if (re.test(element)) {
                         $(element).addClass('alert alert-warning');
                         $(element).tooltip({
-                            title: "Please input a valid email address!",
+                            title: "Please input a valid email address!"
                         });
                     } else {
                         //$(this).addClass('alert alert-warning');
@@ -95,17 +95,48 @@ angular.module('dellUiComponents')
         };
     })
 
-    .directive('phoneNumber', function() {
-        // Runs during compile
+    .directive('phoneMask', function() {
         return {
-            restrict: 'C', // E = Element, A = Attribute, C = Class, M = Comment
-            link: function($scope, element, attributes, controller) {
-                //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
-                //TODO use $locale to create mask
-                if ($(element).is('input')) {
-                    $(element).attr('data-inputmask', "'mask': '(999)-999-9999'");
-                    $(element).inputmask();
-                }
+            restrict: 'A',
+            require: 'ngModel',
+            link: function ($scope, $element, attrs, controller) {
+                $($element).inputmask('(999)-999-9999');
+                // $scope.errorMessage = false;
+
+                $($element).bind('blur', function () {
+                    if ($($element).inputmask("isComplete")) {
+                        $($element.parent()).removeClass('has-error');
+                        // $scope.errorMessage = true;
+                    } else {
+                        $($element.parent()).addClass('has-error');
+                        // $scope.errorMessage = false;
+                    }
+
+                });
+            }
+        };
+    })
+
+
+    .directive('phoneExtMask', function() {
+        return {
+            restrict: 'ACE',
+            templateUrl: '',
+            scope: {},
+                link: function ($scope, $element, attrs, controller) {
+                $($element).inputmask('(9999)');
+                $('p.help-block').hide();
+
+                $($element).bind('blur', function () {
+                    if ($($element).inputmask("isComplete")) {
+                        $($element.parent()).removeClass('has-error');
+                        $($element.parent()).find('p.help-block').hide();
+
+                    } else {
+                        $($element.parent()).addClass('has-error');
+                        $($element.parent()).find('p.help-block').show();
+                    }
+                });
             }
         };
     })
