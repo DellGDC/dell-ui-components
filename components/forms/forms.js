@@ -169,6 +169,30 @@ angular.module('dellUiComponents')
         };
     })
 
+    .directive('textInput', function() {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            templateUrl: '',
+            scope: {},
+            link: function ($scope, $element, attrs, controller) {
+                $($element).inputmask('Regex', { regex: "[a-zA-Z0-9._%-]" });
+                $('p.help-block').hide();
+
+                $($element).bind('blur', function () {
+                    if ($($element).inputmask("isComplete")) {
+                        $($element.parent()).removeClass('has-error');
+                        $($element.parent()).find('p.help-block').hide();
+
+                    } else {
+                        $($element.parent()).addClass('has-error');
+                        $($element.parent()).find('p.help-block').show();
+                    }
+                });
+            }
+        };
+    })
+
 
     .directive('phoneExtension', function() {
         return {

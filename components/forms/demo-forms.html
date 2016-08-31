@@ -9,63 +9,63 @@
         <form name="customerForm" ng-submit="submitForm()" novalidate>
             <div class="row">
                 <!-- first name -->
-                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.nameFirst.$invalid && !customerForm.nameFirst.$pristine }">
+                <div class="col-xs-12 col-sm-6">
                     <label>First Name</label>
-                    <input type="text" name="nameFirst" class="form-control" ng-model="name.first" required>
-                    <p ng-show="customerForm.nameFirst.$invalid && !customerForm.nameFirst.$pristine" class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="nameFirst" class="form-control" ng-model="name.first" text-input required>
+                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
                 </div>
 
                 <!-- last name -->
-                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.nameLast.$invalid && !customerForm.nameLast.$pristine }">
+                <div class="col-xs-12 col-sm-6">
                     <label>Last Name</label>
-                    <input type="text" name="nameLast" class="form-control" ng-model="name.last" required >
-                    <p ng-show="customerForm.nameLast.$invalid && !customerForm.nameLast.$pristine" class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="nameLast" class="form-control" ng-model="name.last" text-input required >
+                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
                 </div>
             </div>
 
             <div class="row">
                 <!-- company name -->
-                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.nameCompany.$invalid && !customerForm.nameCompany.$pristine }">
+                <div class="col-xs-12 col-sm-6">
                     <label>Company</label>
-                    <input type="text" name="nameCompany" class="form-control" ng-model="name.company" required>
-                    <p ng-show="customerForm.nameCompany.$invalid && !customerForm.nameCompany.$pristine" class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="nameCompany" class="form-control" ng-model="name.company" text-input required>
+                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
                 </div>
 
                 <!-- account number -->
-                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.accountNumber.$invalid && !customerForm.accountNumber.$pristine }">
+                <div class="col-xs-12 col-sm-6">
                     <label>Account Number</label>
-                    <input type="text" name="accountNumber" class="form-control" ng-model="account.number" required >
-                    <p ng-show="customerForm.accountNumber.$invalid && !customerForm.accountNumber.$pristine" class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="accountNumber" class="form-control" ng-model="account.number" text-input required >
+                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
                 </div>
             </div>
 
             <div class="row">
                 <!-- address field one -->
-                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.addressStreet.$invalid && !customerForm.addressStreet.$pristine }">
+                <div class="col-xs-12 col-sm-6">
                     <label>Street Address</label>
-                    <input type="text" name="addressStreet" class="form-control" ng-model="address.street" required>
-                    <p ng-show="customerForm.addressStreet.$invalid && !customerForm.addressStreet.$pristine" class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="addressStreet" class="form-control" ng-model="address.street" text-input required>
+                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
                 </div>
 
                 <!-- address city -->
-                <div class="col-xs-2" ng-class="{ 'has-error' : customerForm.addressCity.$invalid && !customerForm.addressCity.$pristine }">
+                <div class="col-xs-2">
                     <label>City</label>
-                    <input type="text" name="addressCity" class="form-control" ng-model="address.city" required >
-                    <p ng-show="customerForm.addressCity.$invalid && !customerForm.addressCity.$pristine" class="help-block">"Please enter a city or town"</p>
+                    <input type="text" name="addressCity" class="form-control" ng-model="address.city" text-input required >
+                    <p class="help-block">"Please enter a city or town"</p>
                 </div>
 
                 <!-- address state -->
-                <div class="col-xs-2" ng-class="{ 'has-error' : customerForm.addressState.$invalid && !customerForm.addressState.$pristine }">
+                <div class="col-xs-2">
                     <label>State</label>
-                    <input type="text" name="addressState" class="form-control" ng-model="address.state" required >
-                    <p ng-show="customerForm.addressState.$invalid && !customerForm.addressState.$pristine" class="help-block">"Please select a State"</p>
+                    <input type="text" name="addressState" class="form-control" ng-model="address.state" text-input required >
+                    <p class="help-block">"Please select a State"</p>
                 </div>
 
                 <!-- address zip -->
-                <div class="col-xs-2" ng-class="{ 'has-error' : customerForm.addressZip.$invalid && !customerForm.addressZip.$pristine }">
+                <div class="col-xs-2">
                     <label>Zip Code</label>
                     <input type="text" name="addressZip" class="form-control" ng-model="address.zip" required mask="(99999)" clean="true">
-                    <p ng-show="customerForm.addressZip.$invalid && !customerForm.addressZip.$pristine" class="help-block">"Please enter a zip code"</p>
+                    <p class="help-block">"Please enter a zip code"</p>
                 </div>
             </div>
 
