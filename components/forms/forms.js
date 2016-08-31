@@ -103,15 +103,15 @@ angular.module('dellUiComponents')
             scope: {},
             link: function ($scope, $element, attrs, controller) {
                 $($element).inputmask('(999)-999-9999');
-                $('p.help-block').hide();
+                $('span.help-block').hide();
 
                 $($element).bind('blur', function () {
                     if ($($element).inputmask("isComplete")) {
                         $($element.parent()).removeClass('has-error');
-                        $($element.parent()).find('p.help-block').hide();
+                        $($element.parent()).find('span.help-block').hide();
                     } else {
                         $($element.parent()).addClass('has-error');
-                        $($element.parent()).find('p.help-block').show();
+                        $($element.parent()).find('span.help-block').show();
                     }
 
                 });
@@ -128,16 +128,16 @@ angular.module('dellUiComponents')
             scope: {},
                 link: function ($scope, $element, attrs, controller) {
                 $($element).inputmask('(9999)');
-                $('p.help-block').hide();
+                $('span.help-block').hide();
 
                 $($element).bind('blur', function () {
                     if ($($element).inputmask("isComplete")) {
                         $($element.parent()).removeClass('has-error');
-                        $($element.parent()).find('p.help-block').hide();
+                        $($element.parent()).find('span.help-block').hide();
 
                     } else {
                         $($element.parent()).addClass('has-error');
-                        $($element.parent()).find('p.help-block').show();
+                        $($element.parent()).find('span.help-block').show();
                     }
                 });
             }
@@ -153,40 +153,65 @@ angular.module('dellUiComponents')
             scope: {},
             link: function ($scope, $element, attrs, controller) {
                 $($element).inputmask('Regex', { regex: "[a-zA-Z0-9._%-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}" });
-                $('p.help-block').hide();
+                $('span.help-block').hide();
 
                 $($element).bind('blur', function () {
                     if ($($element).inputmask("isComplete")) {
                         $($element.parent()).removeClass('has-error');
-                        $($element.parent()).find('p.help-block').hide();
+                        $($element.parent()).find('span.help-block').hide();
 
                     } else {
                         $($element.parent()).addClass('has-error');
-                        $($element.parent()).find('p.help-block').show();
+                        $($element.parent()).find('span.help-block').show();
                     }
                 });
             }
         };
     })
 
-    .directive('textInput', function() {
+    .directive('accountInput', function() {
         return {
             restrict: 'A',
             require: 'ngModel',
             templateUrl: '',
             scope: {},
             link: function ($scope, $element, attrs, controller) {
-                $($element).inputmask('Regex', { regex: "[a-zA-Z0-9._%-]" });
-                $('p.help-block').hide();
+                $($element).inputmask('999-99999-999');
+                $('span.help-block').hide();
 
                 $($element).bind('blur', function () {
                     if ($($element).inputmask("isComplete")) {
                         $($element.parent()).removeClass('has-error');
-                        $($element.parent()).find('p.help-block').hide();
+                        $($element.parent()).find('span.help-block').hide();
 
                     } else {
                         $($element.parent()).addClass('has-error');
-                        $($element.parent()).find('p.help-block').show();
+                        $($element.parent()).find('span.help-block').show();
+                    }
+                });
+            }
+        };
+    })
+
+
+    .directive('zipcodeInput', function() {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            templateUrl: '',
+            scope: {},
+            link: function ($scope, $element, attrs, controller) {
+                $($element).inputmask('99999-[9999]');
+                $('span.help-block').hide();
+
+                $($element).bind('blur', function () {
+                    if ($($element).inputmask("isComplete")) {
+                        $($element.parent()).removeClass('has-error');
+                        $($element.parent()).find('span.help-block').hide();
+
+                    } else {
+                        $($element.parent()).addClass('has-error');
+                        $($element.parent()).find('span.help-block').show();
                     }
                 });
             }

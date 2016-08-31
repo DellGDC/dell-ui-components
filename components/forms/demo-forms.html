@@ -9,63 +9,76 @@
         <form name="customerForm" ng-submit="submitForm()" novalidate>
             <div class="row">
                 <!-- first name -->
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.nameFirst.$invalid && !customerForm.nameFirst.$pristine || customerForm.nameFirst.$touched || customerForm.nameFirst.$error.minlength || customerForm.nameFirst.$error.maxlength}">
                     <label>First Name</label>
-                    <input type="text" name="nameFirst" class="form-control" ng-model="name.first" text-input required>
-                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="nameFirst" class="form-control" ng-model="name.first" ng-minlength="2" ng-maxlength="15" required>
+                    <p ng-show="customerForm.nameFirst.$error.required && !customerForm.nameFirst.$pristine || customerForm.nameFirst.$touched"  class="help-block">Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra.</p>
+                    <p ng-show="customerForm.nameFirst.$error.minlength && customerForm.nameFirst.$invalid" class="help-block">Ooooops! Your name is too short!</p>
+                    <p ng-show="customerForm.nameFirst.$error.maxlength && customerForm.nameFirst.$invalid" class="has-error help-block">Ooooops! Your name is too long!</p>
                 </div>
 
                 <!-- last name -->
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.nameLast.$invalid && !customerForm.nameLast.$pristine || customerForm.nameLast.$touched || customerForm.nameLast.$error.minlength || customerForm.nameLast.$error.maxlength}">
                     <label>Last Name</label>
-                    <input type="text" name="nameLast" class="form-control" ng-model="name.last" text-input required >
-                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="nameLast" class="form-control" ng-model="name.last" ng-minlength="2" ng-maxlength="15" required >
+                    <p ng-show="customerForm.nameLast.$error.required && !customerForm.nameLast.$pristine || customerForm.nameLast.$touched"  class="help-block">Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra.</p>
+                    <p ng-show="customerForm.nameLast.$error.minlength && customerForm.nameLast.$invalid" class="help-block">Ooooops! Your name is too short!</p>
+                    <p ng-show="customerForm.nameLast.$error.maxlength && customerForm.nameLast.$invalid" class="has-error help-block">Ooooops! Your name is too long!</p>
                 </div>
             </div>
 
             <div class="row">
                 <!-- company name -->
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.nameCompany.$invalid && !customerForm.nameCompany.$pristine || customerForm.nameCompany.$touched || customerForm.nameCompany.$error.minlength || customerForm.nameCompany.$error.maxlength}">
                     <label>Company</label>
-                    <input type="text" name="nameCompany" class="form-control" ng-model="name.company" text-input required>
-                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="nameCompany" class="form-control" ng-model="name.company" ng-minlength="3" ng-maxlength="15" required>
+                    <p ng-show="customerForm.nameCompany.$error.required && !customerForm.nameCompany.$pristine || customerForm.nameCompany.$touched"  class="help-block">Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra.</p>
+                    <p ng-show="customerForm.nameCompany.$error.minlength && customerForm.nameCompany.$invalid" class="help-block">Ooooops! Your name is too short!</p>
+                    <p ng-show="customerForm.nameCompany.$error.maxlength && customerForm.nameCompany.$invalid" class="has-error help-block">Ooooops! Your name is too long!</p>
                 </div>
 
                 <!-- account number -->
                 <div class="col-xs-12 col-sm-6">
                     <label>Account Number</label>
-                    <input type="text" name="accountNumber" class="form-control" ng-model="account.number" text-input required >
-                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="accountNumber" class="form-control" ng-model="account.number" account-input required placeholder="e.g. 999-99999-999">
+                    <span class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</span>
                 </div>
             </div>
 
             <div class="row">
                 <!-- address field one -->
-                <div class="col-xs-12 col-sm-6">
+                <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.addressStreet.$invalid && !customerForm.addressStreet.$pristine || customerForm.addressStreet.$touched}">
                     <label>Street Address</label>
-                    <input type="text" name="addressStreet" class="form-control" ng-model="address.street" text-input required>
-                    <p class="help-block">"Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra."</p>
+                    <input type="text" name="addressStreet" class="form-control" ng-model="address.street" required>
+                    <p ng-show="customerForm.addressStreet.$invalid && !customerForm.addressStreet.$pristine || customerForm.addressStreet.$touched"  class="help-block">Whoops! I am required! Edit this as alert text as necessary. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam rutrum mi justo, vitae sodales libero commodo faucibus. Nullam tristique pulvinar pharetra.</p>
+                    <!--<p ng-show="customerForm.addressStreet.$error.minlength && customerForm.addressStreet.$invalid" class="help-block">Ooooops! Your name is too short!</p>-->
+                    <!--<p ng-show="customerForm.addressStreet.$error.maxlength && customerForm.addressStreet.$invalid" class="has-error help-block">Ooooops! Your name is too long!</p>-->
                 </div>
 
                 <!-- address city -->
-                <div class="col-xs-2">
+                <div class="col-xs-2" ng-class="{ 'has-error' : customerForm.addressCity.$invalid && !customerForm.addressCity.$pristine || customerForm.addressCity.$touched}">
                     <label>City</label>
-                    <input type="text" name="addressCity" class="form-control" ng-model="address.city" text-input required >
-                    <p class="help-block">"Please enter a city or town"</p>
+                    <input type="text" name="addressCity" class="form-control" ng-model="address.city" ng-minlength="3" ng-maxlength="19" required>
+                    <p ng-show="customerForm.addressCity.$error.required && !customerForm.addressCity.$pristine || customerForm.addressCity.$touched"  class="help-block">Please enter a city</p>
+                    <p ng-show="customerForm.addressCity.$error.minlength && customerForm.addressCity.$invalid" class="help-block">Ooooops! The name is too short!</p>
+                    <p ng-show="customerForm.addressCity.$error.maxlength && customerForm.addressCity.$invalid" class="has-error help-block">Ooooops! The name is too long!</p>
+
                 </div>
 
                 <!-- address state -->
-                <div class="col-xs-2">
+                <div class="col-xs-2"ng-class="{ 'has-error' : customerForm.addressState.$invalid && !customerForm.addressState.$pristine || customerForm.addressState.$touched}">
                     <label>State</label>
-                    <input type="text" name="addressState" class="form-control" ng-model="address.state" text-input required >
-                    <p class="help-block">"Please select a State"</p>
+                    <input type="text" name="addressState" class="form-control" ng-model="address.state" ng-minlength="2" ng-maxlength="19" required >
+                    <p ng-show="customerForm.addressState.$error.required && !customerForm.addressState.$pristine || customerForm.addressState.$touched"  class="help-block">Please enter a State</p>
+                    <p ng-show="customerForm.addressState.$error.minlength && customerForm.addressState.$invalid" class="help-block">Ooooops! The name is too short!</p>
+                    <p ng-show="customerForm.addressState.$error.maxlength && customerForm.addressState.$invalid" class="has-error help-block">Ooooops! The name is too long!</p>
                 </div>
 
                 <!-- address zip -->
                 <div class="col-xs-2">
                     <label>Zip Code</label>
-                    <input type="text" name="addressZip" class="form-control" ng-model="address.zip" required mask="(99999)" clean="true">
-                    <p class="help-block">"Please enter a zip code"</p>
+                    <input type="text" name="addressZip" class="form-control" ng-model="address.zip" zipcode-input placeholder="e.g. 99999-[9999]" required>
+                    <span class="help-block">"Please enter a zip code"</span>
                 </div>
             </div>
 
@@ -74,19 +87,19 @@
                 <div class="col-xs-6 col-sm-3" >
                     <label for="phone1">Phone #</label>
                     <input type="text" id="phone1" class="form-control" ng-model="phone.primary" name="phonePrimary" phone-mask required placeholder="e.g. (555) 111-2222">
-                    <p class="help-block">Please enter a phone number that follows this format: (555) 111-2222</p>
+                    <span class="help-block">Please enter a phone number that follows this format: (555) 111-2222</span>
                 </div>
                 <!--phone ext field-->
                 <div class="col-xs-6 col-sm-3">
                     <label for="ext1">Ext <small>(optional)</small></label>
                     <input type="text" id="ext1" class="form-control" ng-model="extension.ext1"  name="extensionExt1" phone-ext-mask placeholder="ext: (2222)">
-                    <p class="help-block">Please enter an extension that follows this format: ext: (2222)</p>
+                    <span class="help-block">Please enter an extension that follows this format: ext: (2222)</span>
                 </div>
                 <!-- email -->
                 <div class="col-xs-12 col-sm-6" >
                     <label for="email-1">email</label>
                     <input type="text" class="form-control" ng-model="email.primary" name="emailPrimary" required id="email-1" email-mask placeholder="name@something.com" >
-                    <p class="help-block">Please enter a valid email</p>
+                    <span class="help-block">Please enter a valid email</span>
                 </div>
             </div>
 
@@ -105,13 +118,13 @@
                             <div class="col-xs-6 label-adjust">
                                 <label for="phoneAlt2">Alternate Phone #</label>
                                 <input type="text" class="form-control" ng-model="phone.secondary" name="phoneSecondary" phone-mask required id="phoneAlt2" placeholder="e.g. (555) 111-2222">
-                                <p class="help-block">Please enter a phone number that follows this format: (555) 111-2222</p>
+                                <span class="help-block">Please enter a phone number that follows this format: (555) 111-2222</span>
                             </div>
                             <!--phone ext field Alt 2-->
                             <div class="col-xs-6 label-adjust" >
                                 <label for="altExt2">Ext <small>(optional)</small></label>
                                 <input type="text" id="altExt2" class="form-control" ng-model="extension.ext2" name="extensionExt2" phone-ext-mask  placeholder="ext: (2222)" >
-                                <p class="help-block">Please enter an extension that follows this format: ext: (2222)</p>
+                                <span class="help-block">Please enter an extension that follows this format: ext: (2222)</span>
                             </div>
                         </div>
                     </div>
@@ -130,7 +143,7 @@
                             <div class="col-xs-12 label-adjust">
                                 <label for="emailAlt2">email alternative</label>
                                 <input type="text" class="form-control" ng-model="email.secondary" required id="emailAlt2" name="emailSecondary" email-mask placeholder="name@something.com" >
-                                <p class="help-block">Please enter a valid email</p>
+                                <span class="help-block">Please enter a valid email</span>
                             </div>
                         </div>
                     </div>
@@ -336,6 +349,10 @@
 
 
         <!-- +++++++++++++++++++++++++++++++++++ Old work below +++++++++++++++++++++++++++++++++++++++++-->
+
+        <div class="hide">
+
+
         <hr/>
         <h3 class="top-offset-60">individual form controls</h3>
         <hr/>
@@ -1280,6 +1297,9 @@
             </div>
         </div>
 
+
+
+        </div><!-- closing the hide div -->
         <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
         <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
         <p class="top-offset-60 bottom-offset-60">&nbsp;</p>
