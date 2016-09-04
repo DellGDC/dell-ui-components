@@ -45,6 +45,13 @@
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: 'icon-brand';
+  src: url('fonts/icon-brand.eot?48smpd');
+  src: url('fonts/icon-brand.eot?48smpd#iefix') format('embedded-opentype'), url('fonts/icon-brand.ttf?48smpd') format('truetype'), url('fonts/icon-brand.woff?48smpd') format('woff'), url('fonts/icon-brand.svg?48smpd#icon-brand') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;
@@ -9937,6 +9944,51 @@ textarea + .help-block,
 }
 .icon-ui-triangleup:before {
   content: "\e611";
+}
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+  font-family: 'icon-brand';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-brand-alienware,
+.icon-brand-dell,
+.icon-brand-dellemc,
+.icon-brand-delltechnologies,
+.icon-brand-delltechnologiesVert {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icon-brand' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-brand-alienware:before {
+  content: "\e904";
+}
+.icon-brand-dell:before {
+  content: "\e900";
+}
+.icon-brand-dellemc:before {
+  content: "\e901";
+}
+.icon-brand-delltechnologies:before {
+  content: "\e902";
+}
+.icon-brand-delltechnologiesVert:before {
+  content: "\e903";
 }
 [class*=icon-small-favorite] {
   background-image: url("img/dell-glyphons-halflings-multi-color.png");
