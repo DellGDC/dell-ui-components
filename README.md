@@ -175,18 +175,13 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.23** - September 5, 2016:
-  Changed to disable color,
-  validating that the brand Icons are in the build
-
+**1.0.22** - September 5, 2016:
+  fixes to the tab underline,
+  adding in updated brand EMC merger icon font and Alienware font alien icon
 
 ### Older versions:
 
 ```
-
-**1.0.22** - August 31, 2016:
-  Updated build, minor fixes to the tab underline,
-  adding in updated brand EMC merger icon font and Alienware font alien icon
 
 **1.0.21** - August 26, 2016:
   Updated build, minor fixes,
