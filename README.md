@@ -189,7 +189,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   adding in updated brand EMC merger icon font and Alienware font alien icon
 
 
-
 **1.0.21** - August 26, 2016:
   Updated build, minor fixes,
   global underline for anchor links
