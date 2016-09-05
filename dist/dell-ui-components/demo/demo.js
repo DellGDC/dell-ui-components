@@ -60061,6 +60061,7 @@ angular.module('dellUiComponents').config(function () {
     });
   };
 }(jQuery));
+// code below only is to help these render in WordPress
 (function ($) {
   $('[data-target="#truncated-list-sample"] .show-collapsed, [data-target="#truncated-list-sample-expand"] .show-collapsed').click(function (e) {
     $(e.currentTarget).parents('.equalize').height('auto');
