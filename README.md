@@ -175,7 +175,7 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.23** - September 4, 2016:
+**1.0.23** - September 5, 2016:
   Changed to disable color,
   validating that the brand Icons are in the build
 
