@@ -92,7 +92,7 @@
 
 })(jQuery);
 
-
+// code below only is to help these render in WordPress
 
 (function($){
 
