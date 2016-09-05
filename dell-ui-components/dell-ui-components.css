@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Components v1.0.21 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.23 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -3943,7 +3943,7 @@ div.ColVis_catcher {
   z-index: 1101;
 }
 .disabled {
-  color: #999;
+  color: #aaaaaa;
 }
 div.DTE_Inline input {
   border: none;
@@ -4780,10 +4780,24 @@ select.form-control.input-sm {
   margin-right: 0;
   border-radius: 1px;
 }
+.nav-centered > li > a > h4 {
+  color: #007db8;
+}
 .nav-centered > .active > a,
 .nav-centered > .active > a:hover,
 .nav-centered > .active > a:focus {
   border: 1px solid #cccccc;
+}
+.nav-centered > .active > a h3,
+.nav-centered > .active > a:hover h3,
+.nav-centered > .active > a:focus h3,
+.nav-centered > .active > a h4,
+.nav-centered > .active > a:hover h4,
+.nav-centered > .active > a:focus h4,
+.nav-centered > .active > a h5,
+.nav-centered > .active > a:hover h5,
+.nav-centered > .active > a:focus h5 {
+  color: #444444;
 }
 @media (min-width: 768px) {
   .nav-centered > li > a {
@@ -4866,10 +4880,24 @@ select.form-control.input-sm {
   margin-right: 0;
   border-radius: 1px;
 }
+.nav-tabs-centered > li > a > h4 {
+  color: #007db8;
+}
 .nav-tabs-centered > .active > a,
 .nav-tabs-centered > .active > a:hover,
 .nav-tabs-centered > .active > a:focus {
   border: 1px solid #cccccc;
+}
+.nav-tabs-centered > .active > a h3,
+.nav-tabs-centered > .active > a:hover h3,
+.nav-tabs-centered > .active > a:focus h3,
+.nav-tabs-centered > .active > a h4,
+.nav-tabs-centered > .active > a:hover h4,
+.nav-tabs-centered > .active > a:focus h4,
+.nav-tabs-centered > .active > a h5,
+.nav-tabs-centered > .active > a:hover h5,
+.nav-tabs-centered > .active > a:focus h5 {
+  color: #444444;
 }
 @media (min-width: 768px) {
   .nav-tabs-centered > li > a {
@@ -4891,6 +4919,10 @@ select.form-control.input-sm {
 }
 .nav-tabs-overflow-container > i.icon-ui-arrowleft,
 .nav-tabs-overflow-container > i.icon-ui-arrowright {
+  text-decoration: none !important;
+}
+div.next a,
+div.prev a {
   text-decoration: none !important;
 }
 /*

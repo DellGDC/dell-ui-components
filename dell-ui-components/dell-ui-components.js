@@ -22388,6 +22388,11 @@ angular.module('dellUiComponents').config(function () {
   };
 }(jQuery));
 (function ($) {
+  $('[data-target="#truncated-list-sample"] .show-collapsed, [data-target="#truncated-list-sample-expand"] .show-collapsed').click(function (e) {
+    $(e.currentTarget).parents('.equalize').height('auto');
+  });
+}(jQuery));
+(function ($) {
   $.dellUIuniversalFooter = function (el, options) {
     // To avoid scope issues, use 'base' instead of 'this'
     // to reference this class from internal events and functions.
