@@ -91,3 +91,13 @@
     };
 
 })(jQuery);
+
+
+
+(function($){
+
+    $('[data-target="#truncated-list-sample"] .show-collapsed, [data-target="#truncated-list-sample-expand"] .show-collapsed').click(function(e){
+        $(e.currentTarget).parents('.equalize').height('auto');
+    });
+
+})(jQuery);
