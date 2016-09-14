@@ -175,12 +175,15 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.24** - September 6, 2016:
-  minor change to the white wells class
+**1.0.25** - September 14, 2016:
+  Integrating and new release of DELLTechnologies new font ramp Roboto
 
 ### Older versions:
 
 ```
+**1.0.24** - September 6, 2016:
+  minor change to the white wells class
+
 **1.0.23** - September 5, 2016:
   Changed to disable color, validating that the brand Icons are in the build
 
