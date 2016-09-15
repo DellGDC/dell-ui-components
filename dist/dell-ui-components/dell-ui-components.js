@@ -22179,9 +22179,9 @@ angular.module('dellUiComponents').config(function () {
         //compensates for the left arrow that will be added
         element.parent().addClass('nav-tabs-overflow-container');
         //css wrapper for styling
-        element.before('<div class="prev disabled"><a href="javascript:;"><i class="' + options.iconClasses.left + '"></i></a></div>');
+        element.before('<div class="prev disabled"><a href="javascript:;" style="text-decoration: none !important;"><i class="' + options.iconClasses.left + '" ></i></a></div>');
         //left arrow
-        element.after('<div class="next"><a href="javascript:;"><i class="' + options.iconClasses.right + '"></i></a></div>');
+        element.after('<div class="next"><a href="javascript:;" style="text-decoration: none !important;"><i class="' + options.iconClasses.right + '" ></i></a></div>');
         //right arrow
         changeHeight = function (h) {
           if (h) {
@@ -22386,6 +22386,12 @@ angular.module('dellUiComponents').config(function () {
       initGallery();
     });
   };
+}(jQuery));
+// code below only is to help these render in WordPress
+(function ($) {
+  $('[data-target="#truncated-list-sample"] .show-collapsed, [data-target="#truncated-list-sample-expand"] .show-collapsed').click(function (e) {
+    $(e.currentTarget).parents('.equalize').height('auto');
+  });
 }(jQuery));
 (function ($) {
   $.dellUIuniversalFooter = function (el, options) {

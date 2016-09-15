@@ -175,7 +175,7 @@
                         if(!breakpoint().isXS) {
                             element.css('left',leftPosition + "px");
                         }
-                        
+
                     } else {
                         isHome = true;
                     }
@@ -194,8 +194,8 @@
                 element.css("left", homePosition+"px"); //compensates for the left arrow that will be added
 
                 element.parent().addClass('nav-tabs-overflow-container'); //css wrapper for styling
-                element.before('<div class="prev disabled"><a href="javascript:;"><i class="'+options.iconClasses.left+'"></i></a></div>'); //left arrow
-                element.after('<div class="next"><a href="javascript:;"><i class="'+options.iconClasses.right+'"></i></a></div>'); //right arrow
+                element.before('<div class="prev disabled"><a href="javascript:;" style="text-decoration: none !important;"><i class="'+options.iconClasses.left+'" ></i></a></div>'); //left arrow
+                element.after('<div class="next"><a href="javascript:;" style="text-decoration: none !important;"><i class="'+options.iconClasses.right+'" ></i></a></div>'); //right arrow
 
                 changeHeight = function(h){
                     if(h) {

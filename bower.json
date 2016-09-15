@@ -1,7 +1,7 @@
 {
   "name": "delluicomponents",
   "description": "Dell Inc's addition of components to Twitter Bootstrap for dell.com (Based om TWBS 3.3.5)",
-  "version": "1.0.21",
+  "version": "1.0.25",
   "main": "index.html",
   "ignore": [
     "**/.*",
