@@ -175,12 +175,15 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.26** - September 15, 2016:
-  Removing all Museo fonts
+**1.0.27** - September 16, 2016:
+  Reverting the limitation to the strong tag in the core Dell-ui-bootstrap
 
 ### Older versions:
 
 ```
+**1.0.26** - September 15, 2016:
+  Removing all Museo fonts
+
 **1.0.25** - September 14, 2016:
   Integrating and new release of DELLTechnologies new font ramp Roboto
 
