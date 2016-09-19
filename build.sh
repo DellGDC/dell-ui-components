@@ -239,7 +239,7 @@ echo "****************************"
 echo "*** Merging to master... ***"
 echo "****************************"
 echo ""
-exit
+
 git checkout master
 git pull origin master
 git merge -X theirs staging
