@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Components v1.0.27 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.14 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -117,7 +117,7 @@ blockquote .blockquote-dell-advantage {
   height: 40px;
   margin-left: -42px;
   margin-top: 2px;
-  background: url('img/components/announcements/dell-advantage-star.svg') no-repeat;
+  background: url('announcements/dell-advantage-star.svg') no-repeat;
   background-size: 30px 30px;
   float: left;
 }
@@ -137,7 +137,7 @@ blockquote .blockquote-dell-dpa {
   height: 40px;
   margin-left: -45px;
   margin-top: -5px;
-  background: url('img/components/announcements/dell-preferred-account.svg') no-repeat;
+  background: url('announcements/dell-preferred-account.svg') no-repeat;
   background-size: 35px 35px;
   float: left;
 }
@@ -147,7 +147,7 @@ blockquote .blockquote-dell-dpa-right {
   height: 40px;
   margin-right: -53px;
   margin-top: -5px;
-  background: url('img/components/announcements/dell-preferred-account.svg') no-repeat;
+  background: url('announcements/dell-preferred-account.svg') no-repeat;
   background-size: 35px 35px;
   float: right;
 }
@@ -207,7 +207,7 @@ blockquote .blockquote-links li + li::before {
   height: 40px;
   margin-left: -50px;
   margin-top: -5px;
-  background: url('img/components/announcements/dell-preferred-account.svg') no-repeat;
+  background: url('announcements/dell-preferred-account.svg') no-repeat;
   background-size: 35px 35px;
   float: left;
 }
@@ -217,7 +217,7 @@ blockquote .blockquote-links li + li::before {
   height: 40px;
   margin-right: -50px;
   margin-top: -5px;
-  background: url('img/components/announcements/dell-preferred-account.svg') no-repeat;
+  background: url('announcements/dell-preferred-account.svg') no-repeat;
   background-size: 35px 35px;
   float: left;
 }
@@ -227,7 +227,7 @@ blockquote .blockquote-links li + li::before {
   height: 40px;
   margin-left: -45px;
   margin-top: -5px;
-  background: url('img/components/announcements/dell-advantage-star.svg') no-repeat;
+  background: url('announcements/dell-advantage-star.svg') no-repeat;
   background-size: 30px 30px;
   float: left;
 }
@@ -1586,10 +1586,10 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   width: 20px;
   height: 25px;
   content: "\e252";
-  background: url('img/components/forms/multiple-select.png') left top no-repeat;
+  background: url('forms/multiple-select.png') left top no-repeat;
 }
 .ms-choice > div.open {
-  background: url('img/components/forms/multiple-select.png') right top no-repeat;
+  background: url('forms/multiple-select.png') right top no-repeat;
   right: -2px;
 }
 .ms-choice:focus {
@@ -1701,13 +1701,13 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  background: #ffffff url('img/components/forms/multiple-select.png') no-repeat 100% -22px;
-  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #ffffff), color-stop(0.99, #eeeeee));
-  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
-  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
-  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -o-linear-gradient(bottom, #ffffff 85%, #eeeeee 99%);
-  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
-  background: url('img/components/forms/multiple-select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+  background: #ffffff url('forms/multiple-select.png') no-repeat 100% -22px;
+  background: url('forms/multiple-select.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, #ffffff), color-stop(0.99, #eeeeee));
+  background: url('forms/multiple-select.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('forms/multiple-select.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('forms/multiple-select.png') no-repeat 100% -22px, -o-linear-gradient(bottom, #ffffff 85%, #eeeeee 99%);
+  background: url('forms/multiple-select.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+  background: url('forms/multiple-select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
 }
 .ms-search,
 .ms-search input {
@@ -2764,7 +2764,7 @@ footer.navbar.default-footer .navbar.footer-menu .footer-bottom-section .disclai
  *------------------------------------------------------------------------------------------
  */
 [class^=icon-social] {
-  background: url('img/components/icons/social-img/icon-sm-sprite.png') no-repeat top left;
+  background: url('icons/social-img/icon-sm-sprite.png') no-repeat top left;
   width: 24px;
   height: 24px;
   display: block;
@@ -7583,8 +7583,8 @@ masthead .masthead-shadow {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('fonts/fontawesome-webfont.eot?v=4.0.3');
-  src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+  src: url('../fonts/fontawesome-webfont.eot?v=4.0.3');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }

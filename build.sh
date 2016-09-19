@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Step 0, make sure you have the correct environment setup
-DEV_DIRECTORY = C:/git/_duc
-DEV_DIRECTORY_DIST = C:/git/_duc/dist
-PAK_DIRECTORY = C:/git/_duc-package
+DEV_DIRECTORY=C:/git/_duc
+DEV_DIRECTORY_DIST=C:/git/_duc/dist
+PAK_DIRECTORY=C:/git/_duc-package
 
 # Main directory
 if [ ! -d "$DEV_DIRECTORY" ]; then
@@ -57,13 +57,13 @@ start "" http://localhost:9002
 
 #get the users input and wait for a "Good" or a "Bad" response
 echo ""
-echo    "************************************************
+echo    "**************************************************"
 read -p "*** Does the site look alright to you? (y/n):" RESP
-echo    "************************************************
+echo    "**************************************************"
 echo ""
 
 if [ "$RESP" = "y" ]; then
-  # great. moving on.
+  echo ""
 else
   echo ""
   echo "************************"
@@ -88,13 +88,13 @@ git merge development
 start "" http://localhost:9002
 
 echo ""
-echo    "**************************************************
+echo    "**************************************************"
 read -p "*** Does the site look alright to you? (y/n):" RESP
-echo    "**************************************************
+echo    "**************************************************"
 echo ""
 
 if [ "$RESP" = "y" ]; then
-  # great. moving on 
+  echo ""
 else
   echo ""
   echo "************************"
@@ -124,7 +124,7 @@ echo    "**********************************************************"
 echo    ""
 
 if [ "$RESP" = "y" ]; then
-   # great. moving on
+   echo ""
 else
    echo ""
    echo "************************"
@@ -140,7 +140,7 @@ echo "*** Great. Saving changes to the staging branch ***"
 echo "***************************************************"
 echo ""
 
-git add -A && git commit "Added release notes for version $(VERSION)"
+git add -A && git commit -m "Added release notes for version $VERSION"
 git push origin staging
 
 echo ""
@@ -181,7 +181,7 @@ echo    "******************************************"
 echo    ""
 
 if [ "$RESP" = "y" ]; then
-   # great. Moving on
+   echo ""
 else
    echo ""
    echo "************************"
@@ -199,7 +199,7 @@ echo "*** Great. Let's make a save point on staging. ***"
 echo "**************************************************"
 echo ""
 
-git add -A && git commit "Added release notes for version $(VERSION)"
+git add -A && git commit -m "Added release notes for version $VERSION"
 git push origin staging
 
 # Step 9
@@ -222,7 +222,7 @@ echo    "***********************************************************************
 echo    ""
 
 if [ "$RESP" = "y" ]; then
-   # great. Moving on
+   echo ""
 else
    echo ""
    echo "************************"
@@ -239,7 +239,7 @@ echo "****************************"
 echo "*** Merging to master... ***"
 echo "****************************"
 echo ""
-
+exit
 git checkout master
 git pull origin master
 git merge -X theirs staging
@@ -265,7 +265,7 @@ echo ""
 
 cd $PAK_DIRECTORY
 git pull origin package
-git add -A && git commit -m "Package version $(VERSION)"
+git add -A && git commit -m "Package version $VERSION"
 git push origin package
 git tag $VERION
 git push origin $VERSION
@@ -281,13 +281,13 @@ echo ""
 # Step 14
 
 echo    ""
-echo    "**********************************************************************************************************"
+echo    "***************************************"
 read -p "*** Ready to push to Github? (y/n):" RESP
-echo    "**********************************************************************************************************"
+echo    "***************************************"
 echo    ""
 
 if [ "$RESP" = "y" ]; then
-   # great. Moving on
+   echo ""
 else
    echo ""
    echo "************************"
@@ -326,7 +326,6 @@ echo    "*****************************"
 echo    ""
 
 if [ "$RESP" = "y" ]; then
-   # great. Moving on
    start "" https://github.com/DellGDC/dell-ui-components/tree/$VERSION
 else
    echo ""
