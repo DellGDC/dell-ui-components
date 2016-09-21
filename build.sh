@@ -180,6 +180,8 @@ read -p "*** Is that process finished?  (y/n):" RESP
 echo    "******************************************"
 echo    ""
 
+start "" http://staging.delldesignlibrary.com
+
 if [ "$RESP" = "y" ]; then
    echo ""
 else
