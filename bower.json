@@ -1,7 +1,7 @@
 {
   "name": "delluicomponents",
   "description": "Dell Inc's addition of components to Twitter Bootstrap for dell.com (Based om TWBS 3.3.5)",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "main": "index.html",
   "ignore": [
     "**/.*",
@@ -23,6 +23,7 @@
     "angular-bootstrap": "~0.10",
     "less.js": "~2",
     "bootstrap-table": "~1.7.0",
-    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37",
+    "ngMask": "angular-mask#^3.1.1"
   }
 }
