@@ -2779,7 +2779,6 @@ form label.hide-expanded {
 @media (max-width: 767px) {
   form label.show-collapsed,
   form label.hide-expanded {
-    margin-top: -10px !important;
     margin-bottom: 0 !important;
     color: #007db8 !important;
   }
@@ -2842,6 +2841,10 @@ form label.hide-expanded {
 .label-adjust {
   margin-top: -7px;
 }
+/*
+ * /Forms component theme overrides
+ *------------------------------------------------------------------------------------------
+ */
 /*
  * Icons component theme overrides
  *------------------------------------------------------------------------------------------
