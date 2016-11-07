@@ -5,7 +5,6 @@
         <h3>New forms update</h3>
         <hr/>
 
-
         <form class="form-compressed" name="customerForm" ng-submit="submitForm()" novalidate>
             <div class="row">
                 <!-- first name -->
@@ -63,14 +62,6 @@
                 </div>
 
                 <!-- address state -->
-                <!--<div class="col-xs-4 col-sm-2"ng-class="{ 'has-error' : customerForm.addressState.$invalid && !customerForm.addressState.$pristine || customerForm.addressState.$touched}">-->
-                    <!--<label>State</label>-->
-                    <!--<input type="text" name="addressState" class="form-control" ng-model="address.state" ng-minlength="2" ng-maxlength="19" required >-->
-                    <!--<p ng-show="customerForm.addressState.$error.required && !customerForm.addressState.$pristine || customerForm.addressState.$touched"  class="help-block">Please enter a State</p>-->
-                    <!--<p ng-show="customerForm.addressState.$error.minlength && customerForm.addressState.$invalid" class="help-block">Ooooops! The name is too short!</p>-->
-                    <!--<p ng-show="customerForm.addressState.$error.maxlength && customerForm.addressState.$invalid" class="has-error help-block">Ooooops! The name is too long!</p>-->
-                <!--</div>-->
-
                 <div class="col-xs-4 col-sm-2" >
                     <div class="">
                         <label type="text" name="addressState" ng-model="address.state" ng-minlength="2" ng-maxlength="19" required>States</label>
@@ -219,54 +210,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <!-- phone number optional field-->
-                <!--<div class="col-xs-6">-->
-                    <!--<div class="">-->
-                        <!--<a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#phonegroup1">-->
-                            <!--<span><label class="extra-field show-collapsed"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add another phone number</label></span>-->
-                            <!--<span><label class="extra-field hide-expanded"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Remove phone number</label></span>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!--<div id="phonegroup1" class="collapse">-->
-                        <!--<div class="row">-->
-                            <!--&lt;!&ndash; phone number Alt 2 &ndash;&gt;-->
-                            <!--<div class="col-xs-6 label-adjust">-->
-                                <!--<label for="phoneAlt2">Alternate #</label>-->
-                                <!--<input type="text" id="phoneAlt2" class="form-control" ng-model="phone.secondary" name="phoneSecondary" phone-mask required placeholder="e.g. (555) 111-2222">-->
-                                <!--<span class="help-block">Please enter a phone number that follows this format: (555) 111-2222</span>-->
-                            <!--</div>-->
-
-                            <!--&lt;!&ndash;phone ext field Alt 2&ndash;&gt;-->
-                            <!--<div class="col-xs-6 label-adjust" >-->
-                                <!--<label for="altExt2">Ext</label>-->
-                                <!--<input type="text" id="altExt2" class="form-control" ng-model="extension.ext2" name="extensionExt2" phone-ext-mask  placeholder="ext: (2222)" >-->
-                                <!--<span class="help-block">Please enter an extension that follows this format: ext: (2222)</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!-- email optional field-->
-                <div class="col-xs-6">
-                    <!--<div class="">-->
-                        <!--<a href="javascript:;" class="collapsed" data-toggle="collapse" data-target="#emailgroup1">-->
-                            <!--<span><label class="extra-field show-collapsed"><i aria-hidden="true" class="icon-ui-plus"></i>&nbsp;Add another email</label></span>-->
-                            <!--<span><label class="extra-field hide-expanded"><i aria-hidden="true" class="icon-ui-minus"></i>&nbsp;Close additional email</label></span>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!--<div id="emailgroup1" class="collapse">-->
-                        <!--<div class="row">-->
-                            <!--&lt;!&ndash; email Alt 2 &ndash;&gt;-->
-                            <!--<div class="col-xs-12 label-adjust">-->
-                                <!--<label for="emailAlt2">email alternative</label>-->
-                                <!--<input type="text" class="form-control" ng-model="email.secondary" required id="emailAlt2" name="emailSecondary" email-mask placeholder="name@something.com" >-->
-                                <!--<span class="help-block">Please enter a valid email</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                </div>
-            </div>
-
             <hr/>
 
             <!-- checkboxes -->
@@ -326,67 +269,6 @@
                     <!-- /spin box vertical-->
                 </div>
             </div>
-
-
-            <!--<div class="form-group">-->
-                <!--<label for="default-select-state" class="form-label">Standard Select U.S. States</label>-->
-                <!--<select class="form-control select-state" id="default-select-state" ng-model="stateDefault" style="">-->
-                    <!--<option value="" class="">State</option>-->
-                    <!--<option value="AL" class="ng-binding ng-scope">   Alabama</option>-->
-                    <!--<option value="AK" class="ng-binding ng-scope">   Alaska</option>-->
-                    <!--<option value="AZ" class="ng-binding ng-scope">   Arizona</option>-->
-                    <!--<option value="AR" class="ng-binding ng-scope">   Arkansas</option>-->
-                    <!--<option value="CA" class="ng-binding ng-scope">   California</option>-->
-                    <!--<option value="CO" class="ng-binding ng-scope">   Colorado</option>-->
-                    <!--<option value="CT" class="ng-binding ng-scope">   Connecticut</option>-->
-                    <!--<option value="DE" class="ng-binding ng-scope">   Delaware</option>-->
-                    <!--<option value="DC" class="ng-binding ng-scope">   District of Columbia</option>-->
-                    <!--<option value="FL" class="ng-binding ng-scope">   Florida</option>-->
-                    <!--<option value="GA" class="ng-binding ng-scope">   Georgia</option>-->
-                    <!--<option value="HI" class="ng-binding ng-scope">   Hawaii</option>-->
-                    <!--<option value="ID" class="ng-binding ng-scope">   Idaho</option>-->
-                    <!--<option value="IL" class="ng-binding ng-scope">   Illinois</option>-->
-                    <!--<option value="IN" class="ng-binding ng-scope">   Indiana</option>-->
-                    <!--<option value="IA" class="ng-binding ng-scope">   Iowa</option>-->
-                    <!--<option value="KS" class="ng-binding ng-scope">   Kansas</option>-->
-                    <!--<option value="KY" class="ng-binding ng-scope">   Kentucky</option>-->
-                    <!--<option value="LA" class="ng-binding ng-scope">   Louisiana</option>-->
-                    <!--<option value="ME" class="ng-binding ng-scope">   Maine</option>-->
-                    <!--<option value="MD" class="ng-binding ng-scope">   Maryland</option>-->
-                    <!--<option value="MA" class="ng-binding ng-scope">   Massachusetts</option>-->
-                    <!--<option value="MI" class="ng-binding ng-scope">   Michigan</option>-->
-                    <!--<option value="MN" class="ng-binding ng-scope">   Minnesota</option>-->
-                    <!--<option value="MS" class="ng-binding ng-scope">   Mississippi</option>-->
-                    <!--<option value="MO" class="ng-binding ng-scope">   Missouri</option>-->
-                    <!--<option value="MT" class="ng-binding ng-scope">   Montana</option>-->
-                    <!--<option value="NE" class="ng-binding ng-scope">   Nebraska</option>-->
-                    <!--<option value="NV" class="ng-binding ng-scope">   Nevada</option>-->
-                    <!--<option value="NH" class="ng-binding ng-scope">   New Hampshire</option>-->
-                    <!--<option value="NJ" class="ng-binding ng-scope">   New Jersey</option>-->
-                    <!--<option value="NM" class="ng-binding ng-scope">   New Mexico</option>-->
-                    <!--<option value="NY" class="ng-binding ng-scope">   New York</option>-->
-                    <!--<option value="NC" class="ng-binding ng-scope">   North Carolina</option>-->
-                    <!--<option value="ND" class="ng-binding ng-scope">   North Dakota</option>-->
-                    <!--<option value="OH" class="ng-binding ng-scope">   Ohio</option>-->
-                    <!--<option value="OK" class="ng-binding ng-scope">   Oklahoma</option>-->
-                    <!--<option value="OR" class="ng-binding ng-scope">   Oregon</option>-->
-                    <!--<option value="PA" class="ng-binding ng-scope">   Pennsylvania</option>-->
-                    <!--<option value="RI" class="ng-binding ng-scope">   Rhode Island</option>-->
-                    <!--<option value="SC" class="ng-binding ng-scope">   South Carolina</option>-->
-                    <!--<option value="SD" class="ng-binding ng-scope">   South Dakota</option>-->
-                    <!--<option value="TN" class="ng-binding ng-scope">   Tennessee</option>-->
-                    <!--<option value="TX" class="ng-binding ng-scope">   Texas</option>-->
-                    <!--<option value="UT" class="ng-binding ng-scope">   Utah</option>-->
-                    <!--<option value="VA" class="ng-binding ng-scope">   Virginia</option>-->
-                    <!--<option value="WA" class="ng-binding ng-scope">   Washington</option><-->
-                    <!--<option value="WV" class="ng-binding ng-scope">   West Virginia</option>-->
-                    <!--<option value="WI" class="ng-binding ng-scope">   Wisconsin</option>-->
-                    <!--<option value="WY" class="ng-binding ng-scope">   Wyoming</option>-->
-                    <!--<option value="AA" class="ng-binding ng-scope">   Armed Forces-Americas</option>-->
-                    <!--<option value="AE" class="ng-binding ng-scope">   Armed Forces-Europe</option>-->
-                    <!--<option value="AP" class="ng-binding ng-scope">   Armed Forces-Pacific</option-->
-                <!--</select>-->
-            <!--</div>-->
         </form>
 
 
