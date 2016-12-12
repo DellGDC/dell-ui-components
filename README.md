@@ -1,5 +1,7 @@
 
 ##Dell UI Components Bower Package
+>*Our Museo sans for Dell font is approved per our legal contract for web based use. When using the font online or in any way, it is imperative that we take caution to secure the font. More specifically, while a web user’s browser will temporarily download our font to a user’s system to render a page, we must never build materials that allow the users or a third party to access or use our font. The regional brand fonts fall onto the responsibility of each region for procuring the licenses as needed to for coverage, and securing the fonts.*
+
 
 # Installation
 
@@ -176,12 +178,16 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
 
-**1.0.28** - November 2, 2016:
-  Integrating updated forms work
+**1.0.29** - December 12, 2016:
+  Updating fonts to included fonts versions from production including the .eot, .svg, .woff, woff2
 
 ### Older versions:
 
 ```
+
+**1.0.28** - November 2, 2016:
+  Integrating updated forms work
+
 
 **1.0.27** - September 16, 2016:
   Reverting the limitation to the strong tag in the core Dell-ui-bootstrap
