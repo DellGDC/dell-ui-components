@@ -17740,7 +17740,8 @@ p small {
 .text-blue {
   color: #007db8 !important;
 }
-.text-dark-blue {
+.text-dark-blue,
+.text-midnight {
   color: #00447c !important;
 }
 .text-green {
@@ -17752,14 +17753,26 @@ p small {
 .text-red {
   color: #ce1126 !important;
 }
-.text-red-dark {
-  color: #ce1126 !important;
-}
 .text-berry {
   color: #b7295a !important;
 }
 .text-purple {
   color: #6e2585 !important;
+}
+.text-gray {
+  color: #808080 !important;
+}
+.text-carbon {
+  color: #444444 !important;
+}
+.text-granite {
+  color: #aaaaaa !important;
+}
+.text-quartz {
+  color: #eeeeee !important;
+}
+.text-midnight {
+  color: #00447c !important;
 }
 .hr-white {
   border-top: 1px solid #ffffff;

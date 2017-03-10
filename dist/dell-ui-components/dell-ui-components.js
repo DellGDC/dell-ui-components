@@ -22826,19 +22826,6 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
   return {
     restrict: 'AEC',
     link: function ($scope, element, attributes, controller) {
-      //$(element).blur(function () {
-      //    var string1 = $(element).val();
-      //    if (string1.indexOf("@") === -1){
-      //        $(element).addClass('alert alert-warning');
-      //        $(element).tooltip({
-      //            title: "Please input a valid email address!"
-      //        });
-      //    //$(element).blur();
-      //    } else {
-      //        $(element).removeClass('alert alert-warning');
-      //        $(element).tooltip('disable');
-      //    }
-      //});
       $(element).on('keyup', function () {
         var string1 = $(element).val();
         var regex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim;
@@ -22868,17 +22855,104 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       });
     }
   };
-}).directive('phoneNumber', function () {
-  // Runs during compile
+}).directive('phoneMask', function () {
   return {
-    restrict: 'C',
-    link: function ($scope, element, attributes, controller) {
-      //requires https://raw.githubusercontent.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.min.js
-      //TODO use $locale to create mask
-      if ($(element).is('input')) {
-        $(element).attr('data-inputmask', '\'mask\': \'(999)-999-9999\'');
-        $(element).inputmask();
-      }
+    restrict: 'A',
+    require: 'ngModel',
+    templateUrl: '',
+    scope: {},
+    link: function ($scope, $element, attrs, controller) {
+      $($element).inputmask('(999)-999-9999');
+      $('span.help-block').hide();
+      $($element).bind('blur', function () {
+        if ($($element).inputmask('isComplete')) {
+          $($element.parent()).removeClass('has-error');
+          $($element.parent()).find('span.help-block').hide();
+        } else {
+          $($element.parent()).addClass('has-error');
+          $($element.parent()).find('span.help-block').show();
+        }
+      });
+    }
+  };
+}).directive('phoneExtMask', function () {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    templateUrl: '',
+    scope: {},
+    link: function ($scope, $element, attrs, controller) {
+      $($element).inputmask('(9999)');
+      $('span.help-block').hide();
+      $($element).bind('blur', function () {
+        if ($($element).inputmask('isComplete')) {
+          $($element.parent()).removeClass('has-error');
+          $($element.parent()).find('span.help-block').hide();
+        } else {
+          $($element.parent()).addClass('has-error');
+          $($element.parent()).find('span.help-block').show();
+        }
+      });
+    }
+  };
+}).directive('emailMask', function () {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    templateUrl: '',
+    scope: {},
+    link: function ($scope, $element, attrs, controller) {
+      $($element).inputmask('Regex', { regex: '[a-zA-Z0-9._%-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}' });
+      $('span.help-block').hide();
+      $($element).bind('blur', function () {
+        if ($($element).inputmask('isComplete')) {
+          $($element.parent()).removeClass('has-error');
+          $($element.parent()).find('span.help-block').hide();
+        } else {
+          $($element.parent()).addClass('has-error');
+          $($element.parent()).find('span.help-block').show();
+        }
+      });
+    }
+  };
+}).directive('accountInput', function () {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    templateUrl: '',
+    scope: {},
+    link: function ($scope, $element, attrs, controller) {
+      $($element).inputmask('999-99999-999');
+      $('span.help-block').hide();
+      $($element).bind('blur', function () {
+        if ($($element).inputmask('isComplete')) {
+          $($element.parent()).removeClass('has-error');
+          $($element.parent()).find('span.help-block').hide();
+        } else {
+          $($element.parent()).addClass('has-error');
+          $($element.parent()).find('span.help-block').show();
+        }
+      });
+    }
+  };
+}).directive('zipcodeInput', function () {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    templateUrl: '',
+    scope: {},
+    link: function ($scope, $element, attrs, controller) {
+      $($element).inputmask('99999-[9999]');
+      $('span.help-block').hide();
+      $($element).bind('blur', function () {
+        if ($($element).inputmask('isComplete')) {
+          $($element.parent()).removeClass('has-error');
+          $($element.parent()).find('span.help-block').hide();
+        } else {
+          $($element.parent()).addClass('has-error');
+          $($element.parent()).find('span.help-block').show();
+        }
+      });
     }
   };
 }).directive('phoneExtension', function () {
@@ -23315,7 +23389,64 @@ angular.module('dellUiComponents').directive('msCheckbox', function () {
       }
     };
   }
-]);
+]).directive('groupCheckbox', function () {
+  return {
+    restrict: 'C',
+    link: function ($scope, $element, attributes, controller) {
+      $scope.arrlist = [
+        {
+          'userid': 1,
+          'name': 'Option one: laptop'
+        },
+        {
+          'userid': 2,
+          'name': 'Option two: mobile phone'
+        },
+        {
+          'userid': 3,
+          'name': 'Option three: tablet'
+        }
+      ];
+      $scope.checkoptions = function (choice) {
+        var details = [];
+        angular.forEach(choice, function (value, key) {
+          console.log('**I was clicked');
+          if (choice[key].checked) {
+            details.push(choice[key].userid);
+          }
+        });
+        if (details.length > 0) {
+          $scope.validationmsg = false;
+          $($element).removeClass('has-error');
+        } else {
+          $($element).addClass('has-error');
+          $scope.validationmsg = true;  // $scope.msg = 'Selected Values: '+details.toString();
+        }
+      };
+    }
+  };
+}).directive('checkboxCtrl', function () {
+  return {
+    restrict: 'C',
+    scope: { checkbox: '=model' },
+    replace: true,
+    transclude: true,
+    template: '<div><div>' + '<label class="form-control"><input type="checkbox" ng-model="checkbox" name="chkselct">Agree Terms and Conditions</label>' + '</div><div class="has-error"><p ng-show="validationmsg" class="help-block">Please select Checkbox</p></div><input class="top-offset-10" type="button" value="Submit" ng-click="checkvalidation();" /></div>',
+    link: function ($scope, $element, attributes, controller) {
+      $scope.validationmsg = false;
+      $scope.checkvalidation = function () {
+        var chkselct = $scope.checkbox;
+        if (chkselct === false || chkselct === undefined) {
+          $scope.validationmsg = true;
+          $($element).addClass('has-error');
+        } else {
+          $scope.validationmsg = false;
+          $($element).removeClass('has-error');
+        }
+      };
+    }
+  };
+});
 angular.module('dellUiComponents').directive('alertCollapsible', function () {
   return {
     restrict: 'C',
