@@ -44,6 +44,8 @@
                 </div>
             </div>
 
+
+
             <div class="row">
                 <!-- address field one -->
                 <div class="col-xs-12 col-sm-6" ng-class="{ 'has-error' : customerForm.addressStreet.$invalid && !customerForm.addressStreet.$pristine || customerForm.addressStreet.$touched}">
@@ -62,10 +64,14 @@
                 </div>
 
                 <!-- address state -->
-                <div class="col-xs-4 col-sm-2" >
-                    <div class="">
-                        <label type="text" name="addressState" ng-model="address.state" ng-minlength="2" ng-maxlength="19" required>States</label>
-                        <select class="form-control" >
+                <!-- some error here -->
+
+                <div class="col-xs-4 col-sm-2">
+                    <div>
+                        <!--<label type="text" name="addressState" ng-model="address.state" ng-minlength="2" ng-maxlength="19" required>States</label>-->
+                        <label type="text" ng-model="address.state" ng-minlength="2" ng-maxlength="19" required>States</label>
+
+                        <select class="form-control">
                             <option class="text-gray-medium">Choose</option>
                             <option value="AL">   Alabama</option>
                             <option value="AK">   Alaska</option>
@@ -124,6 +130,8 @@
                         <p ng-show="customerForm.addressState.$error.required && !customerForm.addressState.$pristine || customerForm.addressState.$touched"  class="help-block">Please enter a State</p>
                     </div>
                 </div>
+
+                <!-- /some error here -->
 
                 <!-- address zip -->
                 <div class="col-xs-4 col-sm-2">
@@ -272,6 +280,6 @@
         </form>
 
 
-        </div>
+    </div>
 
 </section>
