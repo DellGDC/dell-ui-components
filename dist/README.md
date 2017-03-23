@@ -176,12 +176,15 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
 
-**1.0.28** - November 2, 2016:
-  Integrating updated forms work
+**1.0.29** - March 14, 2016:
+  Updating colors fro Dell/EMC and rechecking APJ font ramp
 
 ### Older versions:
 
 ```
+
+**1.0.28** - November 2, 2016:
+  Integrating updated forms work
 
 **1.0.27** - September 16, 2016:
   Reverting the limitation to the strong tag in the core Dell-ui-bootstrap
