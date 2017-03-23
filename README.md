@@ -177,7 +177,7 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
 
 
 **1.0.29** - March 14, 2016:
-  Updating colors fro Dell/EMC
+  Updating colors fro Dell/EMC and rechecking APJ font ramp
 
 ### Older versions:
 

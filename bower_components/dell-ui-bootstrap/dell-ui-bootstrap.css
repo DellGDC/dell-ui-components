@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Bootstrap v1.2.5 (bower dell-ui-bootstrap)
+ * Dell-UI-Bootstrap v1.2.9 (bower dell-ui-bootstrap)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -10902,14 +10902,14 @@ h6,
   .h4 {
     font-size: 18px;
     line-height: 22px;
-    font-weight: 400;
+    font-weight: 300;
     font-family: Roboto-Regular;
   }
   h5,
   .h5 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
+    font-weight: 300;
     font-family: Roboto-Regular;
   }
   .bold-16 {
@@ -10965,14 +10965,14 @@ h6,
   .h4 {
     font-size: 18px;
     line-height: 22px;
-    font-weight: 400;
+    font-weight: 300;
     font-family: Roboto-Regular;
   }
   h5,
   .h5 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
+    font-weight: 300;
     font-family: Roboto-Regular;
   }
   .bold-16 {
@@ -11028,14 +11028,14 @@ h6,
   .h4 {
     font-size: 16px;
     line-height: 20px;
-    font-weight: 400;
+    font-weight: 300;
     font-family: Roboto-Regular;
   }
   h5,
   .h5 {
     font-size: 14px;
     line-height: 20px;
-    font-weight: 400;
+    font-weight: 300;
     font-family: Roboto-Regular;
   }
   .bold-16 {
@@ -11060,7 +11060,7 @@ h6,
 p small {
   font-size: 85%;
   line-height: 15px;
-  font-weight: 400;
+  font-weight: 300;
   font-family: Roboto-Regular;
 }
 .text-rtl {
@@ -11264,7 +11264,7 @@ p small {
 :lang(zh) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(zh) .text-rtl {
@@ -11468,7 +11468,7 @@ p small {
 :lang(zh-Hans) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(zh-Hans) .text-rtl {
@@ -11672,7 +11672,7 @@ p small {
 :lang(zh-Hant) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(zh-Hant) .text-rtl {
@@ -11876,7 +11876,7 @@ p small {
 :lang(ja) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(ja) .text-rtl {
@@ -12080,7 +12080,7 @@ p small {
 :lang(ko) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(ko) .text-rtl {
@@ -12284,7 +12284,7 @@ p small {
 :lang(hi) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(hi) .text-rtl {
@@ -12488,7 +12488,7 @@ p small {
 :lang(he) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(he) .text-rtl {
@@ -12692,7 +12692,7 @@ p small {
 :lang(th) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(th) .text-rtl {
@@ -12896,7 +12896,7 @@ p small {
 :lang(ta) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(ta) .text-rtl {
@@ -13100,7 +13100,7 @@ p small {
 :lang(te) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(te) .text-rtl {
@@ -13304,7 +13304,7 @@ p small {
 :lang(kn) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(kn) .text-rtl {
@@ -13508,7 +13508,7 @@ p small {
 :lang(ml) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(ml) .text-rtl {
@@ -13712,7 +13712,7 @@ p small {
 :lang(gu) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(gu) .text-rtl {
@@ -13916,7 +13916,7 @@ p small {
 :lang(bn) p small {
   font-size: 85%;
   line-height: 18px;
-  font-weight: 400;
+  font-weight: normal;
   font-family: 'Roboto-Regular', 'Roboto-Light', 'Cordia New', 'Microsoft Sans Serif', 'Utsaah', 'Devanagari MT', 'Nirmala UI', 'Latha', 'InaiMathi', 'Gautami', 'Telugu Sangam MN', 'Tunga', 'Kannada Sangam MN', 'Kartika', 'Malayalam Sangam MN', 'Shruti', 'Nirmala UI', 'Gujarati MT', 'Gujarati Sangam MN', 'Vrinda', 'Bangla Sangam MN', 'Meiryo UI Reg', 'メイリオ Reg', 'MS UI Gothic Reg', 'Hiragino Kaku Gothic Reg', 'ヒラギノ角ゴ Pro W3 Reg', 'Microsoft YaHei', '微软雅黑', 'Hiragino Sans GB', 'Microsoft JhengHei', '微軟正黑體', 'Malgun Gothic', '맑은 고딕', 'Gulim', 'AppleGothic', 'Apple LiGothic', 'LiHei Pro', 'Osaka', 'STHeiti', '华文黑体', 'STXihei', '华文细黑', 'SimHei', '黑体', 'Arial Unicode MS', 'Arial', sans-serif;
 }
 :lang(bn) .text-rtl {
