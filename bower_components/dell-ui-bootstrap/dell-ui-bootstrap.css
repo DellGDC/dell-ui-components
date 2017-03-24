@@ -1,7 +1,7 @@
 /*!
- * Dell-UI-Bootstrap v1.2.9 (bower dell-ui-bootstrap)
+ * Dell-UI-Bootstrap v1.3.0 (bower dell-ui-bootstrap)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
- * Copyright 2015 Dell, Inc.
+ * Copyright 2017 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 @font-face {
@@ -17716,6 +17716,426 @@ p small {
   position: relative;
   color: #ffffff;
   background-color: #00447c;
+  vertical-align: baseline;
+  white-space: nowrap;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+}
+/* dell-highlight-blue */
+.dell-highlight-blue,
+.well-dell-highlight-blue {
+  background-color: #cce5f1;
+  color: #ffffff;
+  border-radius: 0;
+}
+.dell-highlight-blue h2,
+.well-dell-highlight-blue h2,
+.dell-highlight-blue h3,
+.well-dell-highlight-blue h3,
+.dell-highlight-blue h4,
+.well-dell-highlight-blue h4,
+.dell-highlight-blue h5,
+.well-dell-highlight-blue h5,
+.dell-highlight-blue h6,
+.well-dell-highlight-blue h6 {
+  color: #ffffff;
+}
+.dell-highlight-blue .panel-heading,
+.well-dell-highlight-blue .panel-heading {
+  background: #ffffff;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-top-left-radius: 0px;
+  color: #ffffff !important;
+}
+.dell-highlight-blue .panel-heading h2,
+.well-dell-highlight-blue .panel-heading h2,
+.dell-highlight-blue .panel-heading h3,
+.well-dell-highlight-blue .panel-heading h3,
+.dell-highlight-blue .panel-heading h4,
+.well-dell-highlight-blue .panel-heading h4,
+.dell-highlight-blue .panel-heading h5,
+.well-dell-highlight-blue .panel-heading h5,
+.dell-highlight-blue .panel-heading h6,
+.well-dell-highlight-blue .panel-heading h6 {
+  margin: 0;
+  padding-left: 10px;
+}
+.dell-highlight-blue h4.well-title,
+.well-dell-highlight-blue h4.well-title,
+.dell-highlight-blue h4.container-title,
+.well-dell-highlight-blue h4.container-title {
+  display: inline-block;
+  top: -25px;
+  margin-bottom: -20px;
+  padding: 5px 15px;
+  position: relative;
+  color: #ffffff;
+  background-color: #ffffff;
+  vertical-align: baseline;
+  white-space: nowrap;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+}
+.dell-highlight-blue-stroke,
+.well-dell-highlight-blue-stroke,
+.panel-dell-highlight-blue {
+  background-color: #ffffff;
+  color: #444444;
+  border-radius: 0;
+  border: 1px solid #00447c;
+}
+.dell-highlight-blue-stroke h2,
+.well-dell-highlight-blue-stroke h2,
+.panel-dell-highlight-blue h2,
+.dell-highlight-blue-stroke h3,
+.well-dell-highlight-blue-stroke h3,
+.panel-dell-highlight-blue h3,
+.dell-highlight-blue-stroke h4,
+.well-dell-highlight-blue-stroke h4,
+.panel-dell-highlight-blue h4,
+.dell-highlight-blue-stroke h5,
+.well-dell-highlight-blue-stroke h5,
+.panel-dell-highlight-blue h5,
+.dell-highlight-blue-stroke h6,
+.well-dell-highlight-blue-stroke h6,
+.panel-dell-highlight-blue h6 {
+  color: #cce5f1;
+}
+.dell-highlight-blue-stroke .panel-heading,
+.well-dell-highlight-blue-stroke .panel-heading,
+.panel-dell-highlight-blue .panel-heading {
+  background: #cce5f1;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-top-left-radius: 0px;
+  color: #ffffff !important;
+}
+.dell-highlight-blue-stroke .panel-heading h2,
+.well-dell-highlight-blue-stroke .panel-heading h2,
+.panel-dell-highlight-blue .panel-heading h2,
+.dell-highlight-blue-stroke .panel-heading h3,
+.well-dell-highlight-blue-stroke .panel-heading h3,
+.panel-dell-highlight-blue .panel-heading h3,
+.dell-highlight-blue-stroke .panel-heading h4,
+.well-dell-highlight-blue-stroke .panel-heading h4,
+.panel-dell-highlight-blue .panel-heading h4,
+.dell-highlight-blue-stroke .panel-heading h5,
+.well-dell-highlight-blue-stroke .panel-heading h5,
+.panel-dell-highlight-blue .panel-heading h5,
+.dell-highlight-blue-stroke .panel-heading h6,
+.well-dell-highlight-blue-stroke .panel-heading h6,
+.panel-dell-highlight-blue .panel-heading h6 {
+  margin: 0;
+  padding-left: 10px;
+}
+.dell-highlight-blue-stroke h4.well-title,
+.well-dell-highlight-blue-stroke h4.well-title,
+.panel-dell-highlight-blue h4.well-title,
+.dell-highlight-blue-stroke h4.container-title,
+.well-dell-highlight-blue-stroke h4.container-title,
+.panel-dell-highlight-blue h4.container-title {
+  display: inline-block;
+  top: -25px;
+  margin-bottom: -20px;
+  padding: 5px 15px;
+  position: relative;
+  color: #ffffff;
+  background-color: #cce5f1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+}
+/* dell-aqua */
+.dellEMC-aqua,
+.well-dellEMC-aqua {
+  background-color: #3dc6ef;
+  color: #ffffff;
+  border-radius: 0;
+}
+.dellEMC-aqua h2,
+.well-dellEMC-aqua h2,
+.dellEMC-aqua h3,
+.well-dellEMC-aqua h3,
+.dellEMC-aqua h4,
+.well-dellEMC-aqua h4,
+.dellEMC-aqua h5,
+.well-dellEMC-aqua h5,
+.dellEMC-aqua h6,
+.well-dellEMC-aqua h6 {
+  color: #ffffff;
+}
+.dellEMC-aqua .panel-heading,
+.well-dellEMC-aqua .panel-heading {
+  background: #ffffff;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-top-left-radius: 0px;
+  color: #ffffff !important;
+}
+.dellEMC-aqua .panel-heading h2,
+.well-dellEMC-aqua .panel-heading h2,
+.dellEMC-aqua .panel-heading h3,
+.well-dellEMC-aqua .panel-heading h3,
+.dellEMC-aqua .panel-heading h4,
+.well-dellEMC-aqua .panel-heading h4,
+.dellEMC-aqua .panel-heading h5,
+.well-dellEMC-aqua .panel-heading h5,
+.dellEMC-aqua .panel-heading h6,
+.well-dellEMC-aqua .panel-heading h6 {
+  margin: 0;
+  padding-left: 10px;
+}
+.dellEMC-aqua h4.well-title,
+.well-dellEMC-aqua h4.well-title,
+.dellEMC-aqua h4.container-title,
+.well-dellEMC-aqua h4.container-title {
+  display: inline-block;
+  top: -25px;
+  margin-bottom: -20px;
+  padding: 5px 15px;
+  position: relative;
+  color: #ffffff;
+  background-color: #ffffff;
+  vertical-align: baseline;
+  white-space: nowrap;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+}
+.dell-dellEMC-aqua-stroke,
+.well-dellEMC-aqua-stroke,
+.panel-dellEMC-aqua {
+  background-color: #ffffff;
+  color: #444444;
+  border-radius: 0;
+  border: 1px solid #3dc6ef;
+}
+.dell-dellEMC-aqua-stroke h2,
+.well-dellEMC-aqua-stroke h2,
+.panel-dellEMC-aqua h2,
+.dell-dellEMC-aqua-stroke h3,
+.well-dellEMC-aqua-stroke h3,
+.panel-dellEMC-aqua h3,
+.dell-dellEMC-aqua-stroke h4,
+.well-dellEMC-aqua-stroke h4,
+.panel-dellEMC-aqua h4,
+.dell-dellEMC-aqua-stroke h5,
+.well-dellEMC-aqua-stroke h5,
+.panel-dellEMC-aqua h5,
+.dell-dellEMC-aqua-stroke h6,
+.well-dellEMC-aqua-stroke h6,
+.panel-dellEMC-aqua h6 {
+  color: #3dc6ef;
+}
+.dell-dellEMC-aqua-stroke .panel-heading,
+.well-dellEMC-aqua-stroke .panel-heading,
+.panel-dellEMC-aqua .panel-heading {
+  background: #3dc6ef;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-top-left-radius: 0px;
+  color: #ffffff !important;
+}
+.dell-dellEMC-aqua-stroke .panel-heading h2,
+.well-dellEMC-aqua-stroke .panel-heading h2,
+.panel-dellEMC-aqua .panel-heading h2,
+.dell-dellEMC-aqua-stroke .panel-heading h3,
+.well-dellEMC-aqua-stroke .panel-heading h3,
+.panel-dellEMC-aqua .panel-heading h3,
+.dell-dellEMC-aqua-stroke .panel-heading h4,
+.well-dellEMC-aqua-stroke .panel-heading h4,
+.panel-dellEMC-aqua .panel-heading h4,
+.dell-dellEMC-aqua-stroke .panel-heading h5,
+.well-dellEMC-aqua-stroke .panel-heading h5,
+.panel-dellEMC-aqua .panel-heading h5,
+.dell-dellEMC-aqua-stroke .panel-heading h6,
+.well-dellEMC-aqua-stroke .panel-heading h6,
+.panel-dellEMC-aqua .panel-heading h6 {
+  margin: 0;
+  padding-left: 10px;
+}
+.dell-dellEMC-aqua-stroke h4.well-title,
+.well-dellEMC-aqua-stroke h4.well-title,
+.panel-dellEMC-aqua h4.well-title,
+.dell-dellEMC-aqua-stroke h4.container-title,
+.well-dellEMC-aqua-stroke h4.container-title,
+.panel-dellEMC-aqua h4.container-title {
+  display: inline-block;
+  top: -25px;
+  margin-bottom: -20px;
+  padding: 5px 15px;
+  position: relative;
+  color: #ffffff;
+  background-color: #3dc6ef;
+  vertical-align: baseline;
+  white-space: nowrap;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+}
+/* dellEMC-sunbeam */
+.dellEMC-sunbeam,
+.well-dellEMC-sunbeam {
+  background-color: #ffd220;
+  color: #ffffff;
+  border-radius: 0;
+}
+.dellEMC-sunbeam h2,
+.well-dellEMC-sunbeam h2,
+.dellEMC-sunbeam h3,
+.well-dellEMC-sunbeam h3,
+.dellEMC-sunbeam h4,
+.well-dellEMC-sunbeam h4,
+.dellEMC-sunbeam h5,
+.well-dellEMC-sunbeam h5,
+.dellEMC-sunbeam h6,
+.well-dellEMC-sunbeam h6 {
+  color: #ffffff;
+}
+.dellEMC-sunbeam .panel-heading,
+.well-dellEMC-sunbeam .panel-heading {
+  background: #ffffff;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-top-left-radius: 0px;
+  color: #ffffff !important;
+}
+.dellEMC-sunbeam .panel-heading h2,
+.well-dellEMC-sunbeam .panel-heading h2,
+.dellEMC-sunbeam .panel-heading h3,
+.well-dellEMC-sunbeam .panel-heading h3,
+.dellEMC-sunbeam .panel-heading h4,
+.well-dellEMC-sunbeam .panel-heading h4,
+.dellEMC-sunbeam .panel-heading h5,
+.well-dellEMC-sunbeam .panel-heading h5,
+.dellEMC-sunbeam .panel-heading h6,
+.well-dellEMC-sunbeam .panel-heading h6 {
+  margin: 0;
+  padding-left: 10px;
+}
+.dellEMC-sunbeam h4.well-title,
+.well-dellEMC-sunbeam h4.well-title,
+.dellEMC-sunbeam h4.container-title,
+.well-dellEMC-sunbeam h4.container-title {
+  display: inline-block;
+  top: -25px;
+  margin-bottom: -20px;
+  padding: 5px 15px;
+  position: relative;
+  color: #ffffff;
+  background-color: #ffffff;
+  vertical-align: baseline;
+  white-space: nowrap;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+}
+.dellEMC-sunbeam-stroke,
+.well-dellEMC-sunbeam-stroke,
+.panel-dellEMC-sunbeam {
+  background-color: #ffffff;
+  color: #444444;
+  border-radius: 0;
+  border: 1px solid #ffd220;
+}
+.dellEMC-sunbeam-stroke h2,
+.well-dellEMC-sunbeam-stroke h2,
+.panel-dellEMC-sunbeam h2,
+.dellEMC-sunbeam-stroke h3,
+.well-dellEMC-sunbeam-stroke h3,
+.panel-dellEMC-sunbeam h3,
+.dellEMC-sunbeam-stroke h4,
+.well-dellEMC-sunbeam-stroke h4,
+.panel-dellEMC-sunbeam h4,
+.dellEMC-sunbeam-stroke h5,
+.well-dellEMC-sunbeam-stroke h5,
+.panel-dellEMC-sunbeam h5,
+.dellEMC-sunbeam-stroke h6,
+.well-dellEMC-sunbeam-stroke h6,
+.panel-dellEMC-sunbeam h6 {
+  color: #ffd220;
+}
+.dellEMC-sunbeam-stroke .panel-heading,
+.well-dellEMC-sunbeam-stroke .panel-heading,
+.panel-dellEMC-sunbeam .panel-heading {
+  background: #ffd220;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-right-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-top-left-radius: 0px;
+  color: #ffffff !important;
+}
+.dellEMC-sunbeam-stroke .panel-heading h2,
+.well-dellEMC-sunbeam-stroke .panel-heading h2,
+.panel-dellEMC-sunbeam .panel-heading h2,
+.dellEMC-sunbeam-stroke .panel-heading h3,
+.well-dellEMC-sunbeam-stroke .panel-heading h3,
+.panel-dellEMC-sunbeam .panel-heading h3,
+.dellEMC-sunbeam-stroke .panel-heading h4,
+.well-dellEMC-sunbeam-stroke .panel-heading h4,
+.panel-dellEMC-sunbeam .panel-heading h4,
+.dellEMC-sunbeam-stroke .panel-heading h5,
+.well-dellEMC-sunbeam-stroke .panel-heading h5,
+.panel-dellEMC-sunbeam .panel-heading h5,
+.dellEMC-sunbeam-stroke .panel-heading h6,
+.well-dellEMC-sunbeam-stroke .panel-heading h6,
+.panel-dellEMC-sunbeam .panel-heading h6 {
+  margin: 0;
+  padding-left: 10px;
+}
+.dellEMC-sunbeam-stroke h4.well-title,
+.well-dellEMC-sunbeam-stroke h4.well-title,
+.panel-dellEMC-sunbeam h4.well-title,
+.dellEMC-sunbeam-stroke h4.container-title,
+.well-dellEMC-sunbeam-stroke h4.container-title,
+.panel-dellEMC-sunbeam h4.container-title {
+  display: inline-block;
+  top: -25px;
+  margin-bottom: -20px;
+  padding: 5px 15px;
+  position: relative;
+  color: #ffffff;
+  background-color: #ffd220;
   vertical-align: baseline;
   white-space: nowrap;
   -webkit-border-bottom-right-radius: 5px;
