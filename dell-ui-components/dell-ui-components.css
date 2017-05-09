@@ -1,5 +1,5 @@
 /*!
- * Dell-UI-Components v1.0.31 (bower dell-ui-components)
+ * Dell-UI-Components v1.0.32 (bower dell-ui-components)
  * Dell's themed version of Twitter Bootstrap version 3.3.5
  * Copyright 2015 Dell, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
@@ -5937,7 +5937,6 @@ masthead > .navbar {
   header.masthead > .navbar,
   masthead > .navbar {
     height: 50px;
-    margin-left: 15px;
   }
 }
 header.masthead > .navbar a,
@@ -5954,15 +5953,15 @@ masthead > .navbar .navbar-header .navbar-brand {
     height: 50px;
   }
 }
-header.masthead > .navbar .navbar-header .navbar-brand .icon-ui-dell,
-masthead > .navbar .navbar-header .navbar-brand .icon-ui-dell {
+header.masthead > .navbar .navbar-header .navbar-brand .icon-brand-dell,
+masthead > .navbar .navbar-header .navbar-brand .icon-brand-dell {
   position: relative;
   top: -2px;
   font-size: 42px;
 }
 @media (max-width: 767px) {
-  header.masthead > .navbar .navbar-header .navbar-brand .icon-ui-dell,
-  masthead > .navbar .navbar-header .navbar-brand .icon-ui-dell {
+  header.masthead > .navbar .navbar-header .navbar-brand .icon-brand-dell,
+  masthead > .navbar .navbar-header .navbar-brand .icon-brand-dell {
     top: -5px;
     font-size: 30px;
   }
