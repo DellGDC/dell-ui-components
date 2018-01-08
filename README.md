@@ -177,12 +177,49 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.27** - September 16, 2016:
-  Reverting the limitation to the strong tag in the core Dell-ui-bootstrap
+**1.0.34** - January 8, 2018:
+  Integrate new build from Dell-ui-bootstrap...
+  update all dependencies with newbootstrap 3.3.7
+  Edits .alert-danger, .alert-info, .alert-success, .alert-warning color change from #$$$ > @black
+  Alert ul { padding-left: 38px;  }
+  Edits to // added new alert-collapsible class to address different style of "dismissible alert" that is dell specific
+  Added decoration Underline for the "close X"
+  Update all Alert HTML close "x" with "  <button type="button" class="close"><i class="icon-ui-close"></i></button>"
+  adjusted announcements list inline= .list-inline {  margin-left: -5px;  }
+  Anchored Nav adjusted line-height: 11px;
+  Anchored Nav adjusted padding top/bottom on the active Tab
+  Breadcrumbs removed color in the override
+  Breadcrumb, increased the home icon size and adjusted the position
+  Removed all <a href=""></a> button examples in the demo... buttons should all used the <button></button> HTML tag
+  Moved video buttons, help-icon, hot spot to dell-ui-bootstrap core CSS
+  change Announcement  link divider pipe from blue to black
+  Changed the banner "Event title" to black
+  Change <a href></a> tags inside hero banner to <button></button> tags
+  moved Progress bar .btn { padding: 1px 5px;} to be self-contained and not global scope change
+  Update overall mini-button height to 22px
+  FIx Overflow tabs scroll where the last tab was falling out of place
+
 
 ### Older versions:
 
 ```
+**1.0.33** - November 30, 2017:
+  updated Dell-ui-Bootstrap build and integrated this into the core
+
+**1.0.31** - March 25, 2017:
+  Including Dell/EMC colors, correcting failed build
+
+**1.0.30** - March 14, 2017:
+
+**1.0.29** - March 14, 2017:
+  Updating colors fro Dell/EMC and rechecking APJ font ramp
+
+**1.0.28** - November 2, 2016:
+  Integrating updated forms work
+
+**1.0.27** - September 16, 2016:
+  Reverting the limitation to the strong tag in the core Dell-ui-bootstrap
+
 **1.0.26** - September 15, 2016:
   Removing all Museo fonts
 
@@ -212,7 +249,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   - Fixed a dropdown issue with an outer class of .well
   - DataTables: Adjusted the headers to 14 px, adjusted the search and input boxes to 34px height, adjusted the input search font to 14px
 
-
 **1.0.18** - April 5, 2016:
   - fixes for popovers so it stays pen when clicked inside of open popover
   - fixes for Show Password in an email input
@@ -230,8 +266,6 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   - Adding in guides layout for Product Stacks
   - Updated Content teasers with clickable headline and image links
 
-
-
 -1.0.17 - January 21, 2016:
   - Got rid of hard coded reference to demo data in complex table example
 
@@ -245,10 +279,10 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   - Changed demo content for tabs
   - Changed demo code for date selector and fixed minor issues
 -1.0.15 - December 03, 2015:
-  - Removed XS tootip treament
+  - Removed XS tootip treatment
 -1.0.14 - November 30, 2015:
-  - Fixed conflict with overflow tabs and offcanvas
-  - Fixed issue with dropdown progress status hover
+  - Fixed conflict with overflow tabs and off-canvas
+  - Fixed issue with drop-down progress status hover
   - Updated to dell-ui-bootstrap 1.2.5
   - Fixed conflict between overflow tabs and off-canvas
 - 1.0.13 - November 19, 2015:
