@@ -177,7 +177,7 @@ Importantly, grunt-dom-munger uses CSS attribute selectors to manage the parsing
 ### Release notes:
 You can install a specific version with 'bower install dell-ui-components#&lt;version&gt;'
 
-**1.0.34** - January 8, 2018:
+**1.0.33** - January 9, 2018:
   Integrate new build from Dell-ui-bootstrap...
   update all dependencies with newbootstrap 3.3.7
   Edits .alert-danger, .alert-info, .alert-success, .alert-warning color change from #$$$ > @black
@@ -197,13 +197,13 @@ You can install a specific version with 'bower install dell-ui-components#&lt;ve
   Change <a href></a> tags inside hero banner to <button></button> tags
   moved Progress bar .btn { padding: 1px 5px;} to be self-contained and not global scope change
   Update overall mini-button height to 22px
-  FIx Overflow tabs scroll where the last tab was falling out of place
+  Fix Overflow tabs scroll where the last tab was falling out of place
 
 
 ### Older versions:
 
 ```
-**1.0.33** - November 30, 2017:
+**1.0.32** - November 30, 2017:
   updated Dell-ui-Bootstrap build and integrated this into the core
 
 **1.0.31** - March 25, 2017:
